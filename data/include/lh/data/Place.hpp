@@ -12,7 +12,7 @@ public:
 	virtual ~Place();
 
 	virtual void reset() override;
-	void copy(const Place& entity);
+	void copy(const Place& place);
 	virtual void load(const QJsonObject& json) override;
 	virtual void save(QJsonObject& json) const override;
 };

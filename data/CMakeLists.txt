@@ -4,6 +4,7 @@ set(PROJECT_SOURCES
 	include/lh/data/Character.hpp
 	include/lh/data/Entity.hpp
 	include/lh/data/Place.hpp
+	include/lh/data/Placement.hpp
 	include/lh/data/Player.hpp
 	include/lh/data/Project.hpp
 	include/lh/data/UuidPointer.hpp
@@ -12,6 +13,7 @@ set(PROJECT_SOURCES
 	src/data/Character.cpp
 	src/data/Entity.cpp
 	src/data/Place.cpp
+	src/data/Placement.cpp
 	src/data/Player.cpp
 	src/data/Project.cpp
 	src/data/UuidPointer.cpp

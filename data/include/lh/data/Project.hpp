@@ -18,7 +18,7 @@ public:
 	Project(QObject* parent = nullptr);
 	virtual ~Project();
 
-	Q_INVOKABLE void reset();
+	Q_INVOKABLE virtual void reset() override;
 	Q_INVOKABLE void load(const QUrl& url);
 	Q_INVOKABLE void save(const QUrl& url);
 

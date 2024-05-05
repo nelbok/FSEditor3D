@@ -11,6 +11,9 @@ public:
 	Player(Project* project);
 	virtual ~Player();
 
-	void init();
+	virtual void reset() override;
+	void copy(const Player& player);
+	virtual void load(const QJsonObject& json) override;
+	virtual void save(QJsonObject& json) const override;
 };
 } // namespace lh

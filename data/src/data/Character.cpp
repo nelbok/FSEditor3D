@@ -1,24 +1,37 @@
 #include <lh/data/Character.hpp>
+
 #include <lh/io/Json.hpp>
 
 namespace lh {
 Character::Character(Project* project)
-	: Entity(project) {}
+	: Placement(project) {
+	Character::reset();
+}
 
 Character::~Character() {}
 
-void Character::setPosition(const QVector3D& position) {
-	if (_position != position) {
-		_position = position;
-		emit positionUpdated();
-	}
+void Character::reset() {
+	Placement::reset();
+	setHair("brown");
+	setSkin("mistyrose");
+	setClothes("red");
+	setHeight(170);
+	setSpecies(Species::Human);
+	setGender(Gender::Male);
 }
 
-void Character::setCamera(const QVector2D& camera) {
-	if (_camera != camera) {
-		_camera = camera;
-		emit cameraUpdated();
-	}
+void Character::copy(const Character& character) {
+	Placement::copy(character);
+	setHair(character.hair());
+	setSkin(character.skin());
+	setClothes(character.clothes());
+	setHeight(character.height());
+	setSpecies(character.species());
+	setGender(character.gender());
+}
+
+const QColor& Character::hair() const {
+	return _hair;
 }
 
 void Character::setHair(const QColor& hair) {
@@ -28,11 +41,19 @@ void Character::setHair(const QColor& hair) {
 	}
 }
 
+const QColor& Character::skin() const {
+	return _skin;
+}
+
 void Character::setSkin(const QColor& skin) {
 	if (_skin != skin) {
 		_skin = skin;
 		emit skinUpdated();
 	}
+}
+
+const QColor& Character::clothes() const {
+	return _clothes;
 }
 
 void Character::setClothes(const QColor& clothes) {
@@ -42,6 +63,10 @@ void Character::setClothes(const QColor& clothes) {
 	}
 }
 
+quint8 Character::height() const {
+	return _height;
+}
+
 void Character::setHeight(quint8 height) {
 	if (_height != height) {
 		_height = height;
@@ -49,11 +74,19 @@ void Character::setHeight(quint8 height) {
 	}
 }
 
+Character::Species Character::species() const {
+	return _species;
+}
+
 void Character::setSpecies(Species species) {
 	if (_species != species) {
 		_species = species;
 		emit speciesUpdated();
 	}
+}
+
+Character::Gender Character::gender() const {
+	return _gender;
 }
 
 void Character::setGender(Gender gender) {
@@ -65,8 +98,6 @@ void Character::setGender(Gender gender) {
 
 void Character::load(const QJsonObject& json) {
 	Entity::load(json);
-	setPosition(Json::toVector3D(Json::toObject("position", json)));
-	setCamera(Json::toVector2D(Json::toObject("camera", json)));
 	setHair(Json::toColor(Json::toObject("hair", json)));
 	setSkin(Json::toColor(Json::toObject("skin", json)));
 	setClothes(Json::toColor(Json::toObject("clothes", json)));
@@ -77,8 +108,6 @@ void Character::load(const QJsonObject& json) {
 
 void Character::save(QJsonObject& json) const {
 	Entity::save(json);
-	json["position"] = Json::fromVector3D(_position);
-	json["camera"] = Json::fromVector2D(_camera);
 	json["clothes"] = Json::fromColor(_clothes);
 	json["hair"] = Json::fromColor(_hair);
 	json["skin"] = Json::fromColor(_skin);

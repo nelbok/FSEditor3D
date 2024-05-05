@@ -9,10 +9,11 @@ Place::Place(Project* project)
 Place::~Place() {}
 
 void Place::reset() {
+	Entity::reset();
 }
 
-void Place::copy(const Place& entity) {
-	Entity::copy(entity);
+void Place::copy(const Place& place) {
+	Entity::copy(place);
 }
 
 void Place::load(const QJsonObject& json) {

@@ -1,17 +1,13 @@
 #pragma once
 
 #include <QtGui/QColor>
-#include <QtGui/QVector2D>
-#include <QtGui/QVector3D>
 
-#include <lh/data/Entity.hpp>
+#include <lh/data/Placement.hpp>
 
 namespace lh {
 
-class Character : public Entity {
+class Character : public Placement {
 	Q_OBJECT
-	Q_PROPERTY(QVector3D position READ position WRITE setPosition NOTIFY positionUpdated)
-	Q_PROPERTY(QVector2D camera READ camera WRITE setCamera NOTIFY cameraUpdated)
 	Q_PROPERTY(QColor hair READ hair WRITE setHair NOTIFY hairUpdated)
 	Q_PROPERTY(QColor skin READ skin WRITE setSkin NOTIFY skinUpdated)
 	Q_PROPERTY(QColor clothes READ clothes WRITE setClothes NOTIFY clothesUpdated)
@@ -38,46 +34,38 @@ public:
 		Lizard,
 	};
 	Q_ENUM(Species)
+
 	enum class Gender { Male, Female };
 	Q_ENUM(Gender)
 
 	Character(Project* project);
 	virtual ~Character();
 
-	// clang-format off
-	// Position is in centimeters not meters like Eno
-	const QVector3D& position() const { return _position; }
-	void setPosition(const QVector3D& position);
+	virtual void reset() override;
+	void copy(const Character& character);
 
-	const QVector2D& camera() const { return _camera; }
-	void setCamera(const QVector2D& camera);
-
-	const QColor& hair() const { return _hair; }
+	const QColor& hair() const;
 	void setHair(const QColor& hair);
 
-	const QColor& skin() const { return _skin; }
+	const QColor& skin() const;
 	void setSkin(const QColor& skin);
 
-	const QColor& clothes() const { return _clothes; }
+	const QColor& clothes() const;
 	void setClothes(const QColor& clothes);
 
-	// Height is in centimeters not meters like Eno
-	quint8 height() const { return _height; }
+	quint8 height() const;
 	void setHeight(quint8 height);
 
-	Species species() const { return _species; }
+	Species species() const;
 	void setSpecies(Species species);
 
-	Gender gender() const { return _gender; }
+	Gender gender() const;
 	void setGender(Gender gender);
-	// clang-format on
 
 	virtual void load(const QJsonObject& json) override;
 	virtual void save(QJsonObject& json) const override;
 
 private:
-	QVector3D _position{ 0, 0, 0 };
-	QVector2D _camera{ 0, 0 };
 	QColor _hair{};
 	QColor _skin{};
 	QColor _clothes{};
@@ -86,8 +74,6 @@ private:
 	Gender _gender{ Gender::Male };
 
 signals:
-	void positionUpdated();
-	void cameraUpdated();
 	void hairUpdated();
 	void skinUpdated();
 	void clothesUpdated();

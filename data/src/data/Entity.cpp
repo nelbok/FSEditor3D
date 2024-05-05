@@ -48,13 +48,16 @@ void Entity::copy(const Entity& entity) {
 	setName(entity.name());
 }
 
+constexpr auto luuid = "uuid";
+constexpr auto lname = "name";
+
 void Entity::load(const QJsonObject& json) {
-	setUuid(Json::toUuid(Json::toValue("uuid", json)));
-	setName(Json::toString("name", json));
+	setUuid(Json::toUuid(Json::toValue(luuid, json)));
+	setName(Json::toString(lname, json));
 }
 
 void Entity::save(QJsonObject& json) const {
-	json["uuid"] = Json::fromUuid(_uuid);
-	json["name"] = _name;
+	json[luuid] = Json::fromUuid(_uuid);
+	json[lname] = _name;
 }
 } // namespace lh

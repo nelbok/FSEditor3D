@@ -22,10 +22,7 @@ public:
 		assert(getter);
 		assert(signal);
 
-		_connection = QObject::connect(project, signal, project, [this]() {
-			update();
-		});
-		update();
+		init();
 	}
 	virtual ~UuidPointer() {
 		QObject::disconnect(_connection);
@@ -41,11 +38,7 @@ public:
 		this->_getter = right._getter;
 		this->_signal = right._signal;
 
-		QObject::disconnect(_connection);
-		_connection = QObject::connect(_project, _signal, _project, [this]() {
-			update();
-		});
-		update();
+		init();
 	}
 
 	T* operator->() {
@@ -72,20 +65,37 @@ public:
 		return _uuid;
 	}
 
-	void setUuid(const QUuid& uuid) {
-		// FIXME
-		bool changed = false;
-		if (_uuid != uuid) {
-			const std::lock_guard<std::mutex> lock(_mutex);
-			changed = true;
-			_uuid = uuid;
-		}
+	bool setUuid(const QUuid& uuid) {
+		bool changed = _uuid != uuid;
 		if (changed) {
+			{
+				const std::lock_guard<std::mutex> lock(_mutex);
+				_uuid = uuid;
+			}
 			update();
 		}
+		return changed;
+	}
+
+	bool set(T* entity) {
+		bool changed = _entity != entity;
+		if (changed) {
+			const std::lock_guard<std::mutex> lock(_mutex);
+			_uuid = (entity) ? entity->uuid() : QUuid{};
+			_entity = entity;
+		}
+		return changed;
 	}
 
 private:
+	void init() {
+		QObject::disconnect(_connection);
+		_connection = QObject::connect(_project, _signal, _project, [this]() {
+			update();
+		});
+		update();
+	}
+
 	void update() {
 		assert(_project);
 		assert(_getter);

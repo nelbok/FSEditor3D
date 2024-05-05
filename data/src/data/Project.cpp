@@ -32,8 +32,12 @@ Project::~Project() {}
 
 void Project::reset() {
 	Entity::reset();
+	setDefaultPlace(nullptr);
 	cleanPlaces();
 }
+
+constexpr auto ldefaultplaces = "defaultplace";
+constexpr auto lplaces = "places";
 
 void Project::load(const QUrl& url) {
 	QFile file(detail::toPath(url));
@@ -52,8 +56,11 @@ void Project::load(const QUrl& url) {
 	reset();
 	Entity::load(json);
 
+	_defaultPlace.setUuid(Json::toUuid(Json::toValue(ldefaultplaces, json)));
+	emit defaultPlaceUpdated();
+
 	_places.clear();
-	const auto& jsonPlaces = Json::toArray("places", json);
+	const auto& jsonPlaces = Json::toArray(lplaces, json);
 	for (const auto& jsonPlace : jsonPlaces) {
 		assert(jsonPlace.isObject());
 		auto* place = new Place(this);
@@ -75,13 +82,15 @@ void Project::save(const QUrl& url) {
 	QJsonObject json;
 	Entity::save(json);
 
+	json[ldefaultplaces] = Json::fromUuid(_defaultPlace.uuid());
+
 	QJsonArray jsonPlaces;
 	for (auto* place : _places) {
 		QJsonObject jsonPlace;
 		place->save(jsonPlace);
 		jsonPlaces.append(jsonPlace);
 	}
-	json["places"] = jsonPlaces;
+	json[lplaces] = jsonPlaces;
 
 	// Write
 	const auto& data = QJsonDocument(json).toJson();
@@ -105,9 +114,7 @@ Place* Project::defaultPlace() const {
 }
 
 void Project::setDefaultPlace(Place* newPlace) {
-	assert(newPlace);
-	if (_defaultPlace.uuid() != newPlace->uuid()) {
-		_defaultPlace.setUuid(newPlace->uuid());
+	if (_defaultPlace.set(newPlace)) {
 		emit defaultPlaceUpdated();
 	}
 }
