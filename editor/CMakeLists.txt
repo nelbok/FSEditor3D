@@ -1,0 +1,49 @@
+qt_standard_project_setup(REQUIRES 6.5)
+
+set(PROJECT_SOURCES
+	src/main.cpp
+
+	src/Config.hpp.in
+
+	resources/resources.qrc
+)
+set(QML_SOURCES
+	qml/common/LHEColorField.qml
+	qml/common/LHEPositionField.qml
+	qml/common/LHERotationField.qml
+	qml/LHECharacter.qml
+	qml/LHEMenu.qml
+	qml/LHEPlace.qml
+	qml/LHEProject.qml
+	qml/Main.qml
+)
+qt_add_executable(${CLH_EDITOR} ${PROJECT_SOURCES})
+qt_add_qml_module(${CLH_EDITOR} URI ${CLH_EDITOR} VERSION 1.0 QML_FILES ${QML_SOURCES})
+source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" PREFIX "" FILES ${PROJECT_SOURCES} ${QML_SOURCES})
+include_directories(src)
+
+configure_file(src/Config.hpp.in include/Config.hpp)
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/include)
+
+# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
+# If you are developing for iOS or macOS you should consider setting an
+# explicit, fixed bundle identifier manually though.
+set_target_properties(${CLH_EDITOR} PROPERTIES
+	MACOSX_BUNDLE_GUI_IDENTIFIER com.${CENO_ORGANIZATION}.${CLH_EDITOR}
+	MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+	MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+	MACOSX_BUNDLE TRUE
+	WIN32_EXECUTABLE TRUE
+)
+
+target_link_libraries(${CLH_EDITOR} PRIVATE Qt6::Quick Qt6::Quick3D Qt6::Quick3DPhysics ${CLH_DATA})
+
+include(GNUInstallDirs)
+install(TARGETS ${CLH_EDITOR}
+	BUNDLE DESTINATION .
+	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
+if(WIN32)
+	windeployqt(${CLH_EDITOR} QMLDIR "${CMAKE_CURRENT_SOURCE_DIR}/qml")
+endif()

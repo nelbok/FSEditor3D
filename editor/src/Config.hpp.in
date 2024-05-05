@@ -1,0 +1,13 @@
+#pragma once
+
+namespace lh::Config {
+constexpr auto organization = "@FS_ORGANIZATION@";
+constexpr auto copyright = "@FS_COPYRIGHT@";
+constexpr auto year = "@FS_YEAR@";
+
+constexpr auto name = "@LH_EDITOR@";
+constexpr auto version = "@LH_VERSION@";
+constexpr auto github = "@LH_GITHUB@";
+constexpr auto discord = "@LH_DISCORD@";
+constexpr auto twitter = "@LH_TWITTER@";
+} // namespace lh::Config
