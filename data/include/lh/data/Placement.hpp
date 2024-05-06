@@ -6,6 +6,7 @@
 
 namespace lh {
 class Place;
+class Project;
 
 class Placement : public Entity {
 	Q_OBJECT

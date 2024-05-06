@@ -6,8 +6,7 @@
 
 namespace lh {
 void initPlacePointer(UuidPointer<Character>& ptr, Project* project) {
-	assert(false);
-	//ptr.init(project, &Project::characters, &Project::charactersUpdated);
+	ptr.init(project, &Project::characters, &Project::charactersUpdated);
 }
 
 void initPlacePointer(UuidPointer<Place>& ptr, Project* project) {

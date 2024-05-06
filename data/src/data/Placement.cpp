@@ -5,6 +5,8 @@
 #include <lh/data/UuidPointer.hpp>
 #include <lh/io/Json.hpp>
 
+#include "common/Tools.hpp"
+
 namespace lh {
 struct Placement::Impl {
 	QVector3D position{};
@@ -31,6 +33,7 @@ void Placement::copy(const Placement& placement) {
 	Entity::copy(placement);
 	setPosition(placement.position());
 	setRotation(placement.rotation());
+	setPlace(placement.place());
 }
 
 const QVector3D& Placement::position() const {
@@ -38,10 +41,7 @@ const QVector3D& Placement::position() const {
 }
 
 void Placement::setPosition(const QVector3D& position) {
-	if (_impl->position != position) {
-		_impl->position = position;
-		emit positionUpdated();
-	}
+	TOOLS_SETTER(Placement, position);
 }
 
 const QVector3D& Placement::rotation() const {
@@ -49,10 +49,7 @@ const QVector3D& Placement::rotation() const {
 }
 
 void Placement::setRotation(const QVector3D& rotation) {
-	if (_impl->rotation != rotation) {
-		_impl->rotation = rotation;
-		emit rotationUpdated();
-	}
+	TOOLS_SETTER(Placement, rotation);
 }
 
 Place* Placement::place() const {

@@ -2,6 +2,8 @@
 
 #include <lh/io/Json.hpp>
 
+#include "common/Tools.hpp"
+
 namespace lh {
 struct Character::Impl {
 	QColor hair{};
@@ -43,10 +45,7 @@ const QColor& Character::hair() const {
 }
 
 void Character::setHair(const QColor& hair) {
-	if (_impl->hair != hair) {
-		_impl->hair = hair;
-		emit hairUpdated();
-	}
+	TOOLS_SETTER(Character, hair);
 }
 
 const QColor& Character::skin() const {
@@ -54,10 +53,7 @@ const QColor& Character::skin() const {
 }
 
 void Character::setSkin(const QColor& skin) {
-	if (_impl->skin != skin) {
-		_impl->skin = skin;
-		emit skinUpdated();
-	}
+	TOOLS_SETTER(Character, skin);
 }
 
 const QColor& Character::clothes() const {
@@ -65,10 +61,7 @@ const QColor& Character::clothes() const {
 }
 
 void Character::setClothes(const QColor& clothes) {
-	if (_impl->clothes != clothes) {
-		_impl->clothes = clothes;
-		emit clothesUpdated();
-	}
+	TOOLS_SETTER(Character, clothes);
 }
 
 quint8 Character::height() const {
@@ -76,10 +69,7 @@ quint8 Character::height() const {
 }
 
 void Character::setHeight(quint8 height) {
-	if (_impl->height != height) {
-		_impl->height = height;
-		emit heightUpdated();
-	}
+	TOOLS_SETTER(Character, height);
 }
 
 Character::Species Character::species() const {
@@ -87,10 +77,7 @@ Character::Species Character::species() const {
 }
 
 void Character::setSpecies(Species species) {
-	if (_impl->species != species) {
-		_impl->species = species;
-		emit speciesUpdated();
-	}
+	TOOLS_SETTER(Character, species);
 }
 
 Character::Gender Character::gender() const {
@@ -98,10 +85,7 @@ Character::Gender Character::gender() const {
 }
 
 void Character::setGender(Gender gender) {
-	if (_impl->gender != gender) {
-		_impl->gender = gender;
-		emit genderUpdated();
-	}
+	TOOLS_SETTER(Character, gender);
 }
 
 void Character::load(const QJsonObject& json) {

@@ -10,6 +10,8 @@ set(PROJECT_SOURCES
 	include/lh/data/UuidPointer.hpp
 	include/lh/io/Json.hpp
 
+	src/common/Tools.cpp
+	src/common/Tools.hpp
 	src/data/Character.cpp
 	src/data/Entity.cpp
 	src/data/Place.cpp
@@ -20,6 +22,7 @@ set(PROJECT_SOURCES
 	src/io/Json.cpp
 )
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" PREFIX "" FILES ${PROJECT_SOURCES})
+include_directories(src)
 include_directories(.)
 
 qt_add_library(${CLH_DATA} STATIC ${PROJECT_SOURCES})

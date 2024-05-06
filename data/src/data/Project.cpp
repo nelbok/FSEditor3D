@@ -5,26 +5,45 @@
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
 #include <QtCore/QSaveFile>
-#include <QtCore/QUrl>
 
+#include <lh/data/Character.hpp>
 #include <lh/data/Place.hpp>
 #include <lh/data/UuidPointer.hpp>
 #include <lh/io/Json.hpp>
 
+#include "common/Tools.hpp"
+
 namespace lh {
 
 struct Project::Impl {
-	static QString toPath(const QUrl& url) {
-		assert(url.isValid());
-		if (url.isLocalFile())
-			return url.toLocalFile();
-		else
-			return url.toString();
-	}
-
 	UuidPointer<Place> defaultPlace{};
 	QUrl path{};
+	QList<Character*> characters{};
 	QList<Place*> places{};
+
+	template<class TClass>
+	void loadList(Project* project, QList<TClass*>& list, const QString& key, const QJsonObject& json, void (Project::*signal)()) {
+		list.clear();
+		const auto& jsonArray = Json::toArray(key, json);
+		for (const auto& jsonEntity : jsonArray) {
+			assert(jsonEntity.isObject());
+			auto* entity = new TClass(project);
+			entity->load(jsonEntity.toObject());
+			list.append(entity);
+		}
+		emit(project->*signal)();
+	}
+
+	template<class TClass>
+	void saveList(const QList<TClass*>& list, const QString& key, QJsonObject& json) {
+		QJsonArray jsonArray;
+		for (auto* entity : list) {
+			QJsonObject jsonEntity;
+			entity->save(jsonEntity);
+			jsonArray.append(jsonEntity);
+		}
+		json[key] = jsonArray;
+	}
 };
 
 Project::Project(QObject* parent)
@@ -38,14 +57,16 @@ Project::~Project() {}
 void Project::reset() {
 	Entity::reset();
 	setDefaultPlace(nullptr);
+	cleanCharacters();
 	cleanPlaces();
 }
 
 constexpr auto ldefaultplaces = "defaultplace";
+constexpr auto lcharacters = "characters";
 constexpr auto lplaces = "places";
 
 void Project::load(const QUrl& url) {
-	QFile file(Impl::toPath(url));
+	QFile file(Tools::toPath(url));
 	if (!file.open(QIODevice::ReadOnly)) {
 		// ERROR
 		return;
@@ -64,19 +85,12 @@ void Project::load(const QUrl& url) {
 	_impl->defaultPlace.setUuid(Json::toUuid(Json::toValue(ldefaultplaces, json)));
 	emit defaultPlaceUpdated();
 
-	_impl->places.clear();
-	const auto& jsonPlaces = Json::toArray(lplaces, json);
-	for (const auto& jsonPlace : jsonPlaces) {
-		assert(jsonPlace.isObject());
-		auto* place = new Place(this);
-		place->load(jsonPlace.toObject());
-		_impl->places.append(place);
-	}
-	emit placesUpdated();
+	_impl->loadList(this, _impl->characters, lcharacters, json, &Project::charactersUpdated);
+	_impl->loadList(this, _impl->places, lplaces, json, &Project::placesUpdated);
 }
 
 void Project::save(const QUrl& url) {
-	QSaveFile file(Impl::toPath(url));
+	QSaveFile file(Tools::toPath(url));
 	if (!file.open(QIODevice::WriteOnly)) {
 		// ERROR
 		return;
@@ -89,13 +103,8 @@ void Project::save(const QUrl& url) {
 
 	json[ldefaultplaces] = Json::fromUuid(_impl->defaultPlace.uuid());
 
-	QJsonArray jsonPlaces;
-	for (auto* place : _impl->places) {
-		QJsonObject jsonPlace;
-		place->save(jsonPlace);
-		jsonPlaces.append(jsonPlace);
-	}
-	json[lplaces] = jsonPlaces;
+	_impl->saveList(_impl->characters, lcharacters, json);
+	_impl->saveList(_impl->places, lplaces, json);
 
 	// Write
 	const auto& data = QJsonDocument(json).toJson();
@@ -108,10 +117,7 @@ const QUrl& Project::path() const {
 }
 
 void Project::setPath(const QUrl& path) {
-	if (_impl->path != path) {
-		_impl->path = path;
-		emit pathUpdated();
-	}
+	TOOLS_SETTER(Project, path);
 }
 
 Place* Project::defaultPlace() const {
@@ -124,48 +130,51 @@ void Project::setDefaultPlace(Place* newPlace) {
 	}
 }
 
+const QList<Character*>& Project::characters() const {
+	return _impl->characters;
+}
+
+void Project::setCharacters(const QList<Character*>& characters) {
+	TOOLS_SETTER(Project, characters);
+}
+
+Character* Project::createCharacter() {
+	TOOLS_CREATE_ENTITY(Project, characters);
+}
+
+void Project::removeCharacter(Character* character) {
+	TOOLS_REMOVE_ENTITY(Project, character);
+}
+
+Character* Project::duplicateCharacter(Character* character) {
+	TOOLS_DUPLICATE_ENTITY(Project, character);
+}
+
+void Project::cleanCharacters() {
+	TOOLS_CLEAN_ENTITIES(Project, characters);
+}
+
 const QList<Place*>& Project::places() const {
 	return _impl->places;
 }
 
 void Project::setPlaces(const QList<Place*>& places) {
-	if (_impl->places != places) {
-		_impl->places = places;
-		emit placesUpdated();
-	}
+	TOOLS_SETTER(Project, places);
 }
 
 Place* Project::createPlace() {
-	auto* place = new Place(this);
-	place->reset();
-	_impl->places.append(place);
-	emit placesUpdated();
-	return place;
+	TOOLS_CREATE_ENTITY(Project, places);
 }
 
 void Project::removePlace(Place* place) {
-	assert(place);
-	assert(_impl->places.contains(place));
-	_impl->places.removeAll(place);
-	place->deleteLater();
-	emit placesUpdated();
+	TOOLS_REMOVE_ENTITY(Project, place);
 }
 
-Place* Project::duplicatePlace(Place* oldPlace) {
-	auto* newPlace = new Place(this);
-	newPlace->copy(*oldPlace);
-	newPlace->setName(newPlace->name() + "*");
-	_impl->places.append(newPlace);
-	emit placesUpdated();
-	return newPlace;
+Place* Project::duplicatePlace(Place* place) {
+	TOOLS_DUPLICATE_ENTITY(Project, place);
 }
 
 void Project::cleanPlaces() {
-	for (auto* place : _impl->places) {
-		place->reset();
-		place->deleteLater();
-	}
-	_impl->places.clear();
-	emit placesUpdated();
+	TOOLS_CLEAN_ENTITIES(Project, places);
 }
 } // namespace lh

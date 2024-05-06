@@ -5,8 +5,6 @@
 #include <QtCore/QUuid>
 
 namespace lh {
-class Project;
-
 class Entity : public QObject {
 	Q_OBJECT
 	Q_PROPERTY(QUuid uuid READ uuid NOTIFY uuidUpdated)

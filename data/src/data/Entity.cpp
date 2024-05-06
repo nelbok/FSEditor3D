@@ -2,6 +2,8 @@
 
 #include <lh/io/Json.hpp>
 
+#include "common/Tools.hpp"
+
 namespace lh {
 struct Entity::Impl {
 	QUuid uuid{};
@@ -23,17 +25,11 @@ const QString& Entity::name() const {
 }
 
 void Entity::setUuid(const QUuid& uuid) {
-	if (_impl->uuid != uuid) {
-		_impl->uuid = uuid;
-		emit uuidUpdated();
-	}
+	TOOLS_SETTER(Entity, uuid);
 }
 
 void Entity::setName(const QString& name) {
-	if (_impl->name != name) {
-		_impl->name = name;
-		emit nameUpdated();
-	}
+	TOOLS_SETTER(Entity, name);
 }
 
 void Entity::reset() {

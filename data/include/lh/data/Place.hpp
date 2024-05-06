@@ -3,6 +3,7 @@
 #include <lh/data/Entity.hpp>
 
 namespace lh {
+class Project;
 
 class Place : public Entity {
 	Q_OBJECT

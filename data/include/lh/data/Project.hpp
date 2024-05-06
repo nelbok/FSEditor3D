@@ -1,16 +1,19 @@
 #pragma once
 
+#include <QtCore/QList>
 #include <QtCore/QUrl>
 
 #include <lh/data/Entity.hpp>
 
 namespace lh {
+class Character;
 class Place;
 
 class Project : public Entity {
 	Q_OBJECT
 	Q_PROPERTY(QUrl path READ path WRITE setPath NOTIFY pathUpdated)
 	Q_PROPERTY(Place* defaultPlace READ defaultPlace WRITE setDefaultPlace NOTIFY defaultPlaceUpdated)
+	Q_PROPERTY(QList<Character*> characters READ characters WRITE setCharacters NOTIFY charactersUpdated)
 	Q_PROPERTY(QList<Place*> places READ places WRITE setPlaces NOTIFY placesUpdated)
 
 public:
@@ -26,6 +29,14 @@ public:
 
 	Place* defaultPlace() const;
 	void setDefaultPlace(Place* defaultPlace);
+
+	// Characters
+	const QList<Character*>& characters() const;
+	void setCharacters(const QList<Character*>& character);
+	Q_INVOKABLE Character* createCharacter();
+	Q_INVOKABLE void removeCharacter(Character* character);
+	Q_INVOKABLE Character* duplicateCharacter(Character* character);
+	void cleanCharacters();
 
 	// Places
 	const QList<Place*>& places() const;
@@ -47,6 +58,7 @@ private:
 signals:
 	void pathUpdated();
 	void defaultPlaceUpdated();
+	void charactersUpdated();
 	void placesUpdated();
 };
 } // namespace lh
