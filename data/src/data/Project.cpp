@@ -8,24 +8,29 @@
 #include <QtCore/QUrl>
 
 #include <lh/data/Place.hpp>
+#include <lh/data/UuidPointer.hpp>
 #include <lh/io/Json.hpp>
 
 namespace lh {
 
-namespace detail {
-QString toPath(const QUrl& url) {
-	assert(url.isValid());
-	if (url.isLocalFile())
-		return url.toLocalFile();
-	else
-		return url.toString();
-}
-} // namespace detail
+struct Project::Impl {
+	static QString toPath(const QUrl& url) {
+		assert(url.isValid());
+		if (url.isLocalFile())
+			return url.toLocalFile();
+		else
+			return url.toString();
+	}
+
+	UuidPointer<Place> defaultPlace{};
+	QUrl path{};
+	QList<Place*> places{};
+};
 
 Project::Project(QObject* parent)
-	: Entity(this, parent) {
-	_defaultPlace = makePlacePointer(this);
-	Project::reset();
+	: Entity(parent)
+	, _impl{ std::make_unique<Impl>() } {
+	initPlacePointer(_impl->defaultPlace, this);
 }
 
 Project::~Project() {}
@@ -40,7 +45,7 @@ constexpr auto ldefaultplaces = "defaultplace";
 constexpr auto lplaces = "places";
 
 void Project::load(const QUrl& url) {
-	QFile file(detail::toPath(url));
+	QFile file(Impl::toPath(url));
 	if (!file.open(QIODevice::ReadOnly)) {
 		// ERROR
 		return;
@@ -56,22 +61,22 @@ void Project::load(const QUrl& url) {
 	reset();
 	Entity::load(json);
 
-	_defaultPlace.setUuid(Json::toUuid(Json::toValue(ldefaultplaces, json)));
+	_impl->defaultPlace.setUuid(Json::toUuid(Json::toValue(ldefaultplaces, json)));
 	emit defaultPlaceUpdated();
 
-	_places.clear();
+	_impl->places.clear();
 	const auto& jsonPlaces = Json::toArray(lplaces, json);
 	for (const auto& jsonPlace : jsonPlaces) {
 		assert(jsonPlace.isObject());
 		auto* place = new Place(this);
 		place->load(jsonPlace.toObject());
-		_places.append(place);
+		_impl->places.append(place);
 	}
 	emit placesUpdated();
 }
 
 void Project::save(const QUrl& url) {
-	QSaveFile file(detail::toPath(url));
+	QSaveFile file(Impl::toPath(url));
 	if (!file.open(QIODevice::WriteOnly)) {
 		// ERROR
 		return;
@@ -82,10 +87,10 @@ void Project::save(const QUrl& url) {
 	QJsonObject json;
 	Entity::save(json);
 
-	json[ldefaultplaces] = Json::fromUuid(_defaultPlace.uuid());
+	json[ldefaultplaces] = Json::fromUuid(_impl->defaultPlace.uuid());
 
 	QJsonArray jsonPlaces;
-	for (auto* place : _places) {
+	for (auto* place : _impl->places) {
 		QJsonObject jsonPlace;
 		place->save(jsonPlace);
 		jsonPlaces.append(jsonPlace);
@@ -99,48 +104,49 @@ void Project::save(const QUrl& url) {
 }
 
 const QUrl& Project::path() const {
-	return _path;
+	return _impl->path;
 }
 
 void Project::setPath(const QUrl& path) {
-	if (_path != path) {
-		_path = path;
+	if (_impl->path != path) {
+		_impl->path = path;
 		emit pathUpdated();
 	}
 }
 
 Place* Project::defaultPlace() const {
-	return (_defaultPlace.isNull()) ? nullptr : _defaultPlace.get();
+	return (_impl->defaultPlace.isNull()) ? nullptr : _impl->defaultPlace.get();
 }
 
 void Project::setDefaultPlace(Place* newPlace) {
-	if (_defaultPlace.set(newPlace)) {
+	if (_impl->defaultPlace.set(newPlace)) {
 		emit defaultPlaceUpdated();
 	}
 }
 
 const QList<Place*>& Project::places() const {
-	return _places;
+	return _impl->places;
 }
 
 void Project::setPlaces(const QList<Place*>& places) {
-	if (_places != places) {
-		_places = places;
+	if (_impl->places != places) {
+		_impl->places = places;
 		emit placesUpdated();
 	}
 }
 
 Place* Project::createPlace() {
 	auto* place = new Place(this);
-	_places.append(place);
+	place->reset();
+	_impl->places.append(place);
 	emit placesUpdated();
 	return place;
 }
 
 void Project::removePlace(Place* place) {
 	assert(place);
-	assert(_places.contains(place));
-	_places.removeAll(place);
+	assert(_impl->places.contains(place));
+	_impl->places.removeAll(place);
 	place->deleteLater();
 	emit placesUpdated();
 }
@@ -149,18 +155,17 @@ Place* Project::duplicatePlace(Place* oldPlace) {
 	auto* newPlace = new Place(this);
 	newPlace->copy(*oldPlace);
 	newPlace->setName(newPlace->name() + "*");
-	_places.append(newPlace);
+	_impl->places.append(newPlace);
 	emit placesUpdated();
 	return newPlace;
 }
 
 void Project::cleanPlaces() {
-	for (auto* place : _places) {
+	for (auto* place : _impl->places) {
 		place->reset();
 		place->deleteLater();
 	}
-	_places.clear();
+	_impl->places.clear();
 	emit placesUpdated();
 }
-
 } // namespace lh

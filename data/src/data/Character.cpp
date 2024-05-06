@@ -3,10 +3,18 @@
 #include <lh/io/Json.hpp>
 
 namespace lh {
+struct Character::Impl {
+	QColor hair{};
+	QColor skin{};
+	QColor clothes{};
+	quint8 height{};
+	Species species{};
+	Gender gender{};
+};
+
 Character::Character(Project* project)
-	: Placement(project) {
-	Character::reset();
-}
+	: Placement(project)
+	, _impl{ std::make_unique<Impl>() } {}
 
 Character::~Character() {}
 
@@ -31,67 +39,67 @@ void Character::copy(const Character& character) {
 }
 
 const QColor& Character::hair() const {
-	return _hair;
+	return _impl->hair;
 }
 
 void Character::setHair(const QColor& hair) {
-	if (_hair != hair) {
-		_hair = hair;
+	if (_impl->hair != hair) {
+		_impl->hair = hair;
 		emit hairUpdated();
 	}
 }
 
 const QColor& Character::skin() const {
-	return _skin;
+	return _impl->skin;
 }
 
 void Character::setSkin(const QColor& skin) {
-	if (_skin != skin) {
-		_skin = skin;
+	if (_impl->skin != skin) {
+		_impl->skin = skin;
 		emit skinUpdated();
 	}
 }
 
 const QColor& Character::clothes() const {
-	return _clothes;
+	return _impl->clothes;
 }
 
 void Character::setClothes(const QColor& clothes) {
-	if (_clothes != clothes) {
-		_clothes = clothes;
+	if (_impl->clothes != clothes) {
+		_impl->clothes = clothes;
 		emit clothesUpdated();
 	}
 }
 
 quint8 Character::height() const {
-	return _height;
+	return _impl->height;
 }
 
 void Character::setHeight(quint8 height) {
-	if (_height != height) {
-		_height = height;
+	if (_impl->height != height) {
+		_impl->height = height;
 		emit heightUpdated();
 	}
 }
 
 Character::Species Character::species() const {
-	return _species;
+	return _impl->species;
 }
 
 void Character::setSpecies(Species species) {
-	if (_species != species) {
-		_species = species;
+	if (_impl->species != species) {
+		_impl->species = species;
 		emit speciesUpdated();
 	}
 }
 
 Character::Gender Character::gender() const {
-	return _gender;
+	return _impl->gender;
 }
 
 void Character::setGender(Gender gender) {
-	if (_gender != gender) {
-		_gender = gender;
+	if (_impl->gender != gender) {
+		_impl->gender = gender;
 		emit genderUpdated();
 	}
 }
@@ -108,11 +116,11 @@ void Character::load(const QJsonObject& json) {
 
 void Character::save(QJsonObject& json) const {
 	Entity::save(json);
-	json["clothes"] = Json::fromColor(_clothes);
-	json["hair"] = Json::fromColor(_hair);
-	json["skin"] = Json::fromColor(_skin);
-	json["height"] = _height;
-	json["species"] = static_cast<int>(_species);
-	json["gender"] = static_cast<int>(_gender);
+	json["clothes"] = Json::fromColor(_impl->clothes);
+	json["hair"] = Json::fromColor(_impl->hair);
+	json["skin"] = Json::fromColor(_impl->skin);
+	json["height"] = _impl->height;
+	json["species"] = static_cast<int>(_impl->species);
+	json["gender"] = static_cast<int>(_impl->gender);
 }
 } // namespace lh

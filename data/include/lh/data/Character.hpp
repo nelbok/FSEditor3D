@@ -66,12 +66,8 @@ public:
 	virtual void save(QJsonObject& json) const override;
 
 private:
-	QColor _hair{};
-	QColor _skin{};
-	QColor _clothes{};
-	quint8 _height{ 170 };
-	Species _species{ Species::Human };
-	Gender _gender{ Gender::Male };
+	struct Impl;
+	std::unique_ptr<Impl> _impl;
 
 signals:
 	void hairUpdated();

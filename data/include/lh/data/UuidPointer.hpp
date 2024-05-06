@@ -13,59 +13,53 @@ template<class T>
 class UuidPointer {
 public:
 	UuidPointer() {}
-
-	UuidPointer(Project* project, const QList<T*>& (Project::*getter)() const, void (Project::*signal)())
-		: _project(project)
-		, _getter(getter)
-		, _signal(signal) {
-		assert(project);
-		assert(getter);
-		assert(signal);
-
-		init();
-	}
-	virtual ~UuidPointer() {
-		QObject::disconnect(_connection);
-	}
-
-	void operator=(const UuidPointer<T>& right) {
-		assert(right._project);
-		assert(right._getter);
-		assert(right._signal);
-
-		this->_uuid = right._uuid;
-		this->_project = right._project;
-		this->_getter = right._getter;
-		this->_signal = right._signal;
-
-		init();
-	}
+	virtual ~UuidPointer() {}
 
 	T* operator->() {
 		return get();
 	}
 
+	void init(Project* project, const QList<T*>& (Project::*getter)() const, void (Project::*signal)()) {
+		assert(!_project);
+		assert(project);
+		assert(getter);
+		assert(signal);
+
+		_project = project;
+		_getter = getter;
+
+		QObject::connect(project, signal, project, [this]() {
+			update();
+		});
+		update();
+	}
+
 	bool valid() const {
+		assert(_project);
 		const std::lock_guard<std::mutex> lock(_mutex);
 		return _entity != nullptr;
 	}
 
 	bool isNull() const {
+		assert(_project);
 		const std::lock_guard<std::mutex> lock(_mutex);
 		return _uuid.isNull();
 	}
 
 	T* get() const {
+		assert(_project);
 		const std::lock_guard<std::mutex> lock(_mutex);
 		assert(_entity);
 		return _entity;
 	}
 
 	const QUuid& uuid() const {
+		assert(_project);
 		return _uuid;
 	}
 
 	bool setUuid(const QUuid& uuid) {
+		assert(_project);
 		bool changed = _uuid != uuid;
 		if (changed) {
 			{
@@ -78,6 +72,7 @@ public:
 	}
 
 	bool set(T* entity) {
+		assert(_project);
 		bool changed = _entity != entity;
 		if (changed) {
 			const std::lock_guard<std::mutex> lock(_mutex);
@@ -88,14 +83,6 @@ public:
 	}
 
 private:
-	void init() {
-		QObject::disconnect(_connection);
-		_connection = QObject::connect(_project, _signal, _project, [this]() {
-			update();
-		});
-		update();
-	}
-
 	void update() {
 		assert(_project);
 		assert(_getter);
@@ -113,10 +100,9 @@ private:
 	T* _entity{ nullptr };
 	Project* _project{ nullptr };
 	const QList<T*>& (Project::*_getter)() const { nullptr };
-	void (Project::*_signal)(){ nullptr };
 	mutable std::mutex _mutex{};
-	QMetaObject::Connection _connection{};
 };
 
-UuidPointer<class Place> makePlacePointer(Project* project);
+void initPlacePointer(UuidPointer<class Character>& ptr, Project* project);
+void initPlacePointer(UuidPointer<class Place>& ptr, Project* project);
 } // namespace lh

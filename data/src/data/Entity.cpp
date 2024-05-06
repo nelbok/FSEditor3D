@@ -1,40 +1,37 @@
 #include <lh/data/Entity.hpp>
-#include <lh/data/Project.hpp>
+
 #include <lh/io/Json.hpp>
 
 namespace lh {
-Entity::Entity(Project* project)
-	: QObject(project)
-	, _project{ project } {
-	Entity::reset();
-}
+struct Entity::Impl {
+	QUuid uuid{};
+	QString name{};
+};
 
-Entity::Entity(Project* project, QObject* parent)
+Entity::Entity(QObject* parent)
 	: QObject(parent)
-	, _project{ project } {
-	Entity::reset();
-}
+	, _impl{ std::make_unique<Impl>() } {}
 
 Entity::~Entity() {}
 
 const QUuid& Entity::uuid() const {
-	return _uuid;
+	return _impl->uuid;
 }
 
 const QString& Entity::name() const {
-	return _name;
+	return _impl->name;
 }
 
 void Entity::setUuid(const QUuid& uuid) {
-	if (_uuid != uuid) {
-		_uuid = uuid;
+	if (_impl->uuid != uuid) {
+		_impl->uuid = uuid;
 		emit uuidUpdated();
 	}
 }
 
 void Entity::setName(const QString& name) {
-	if (_name != name) {
-		_name = name;
+	if (_impl->name != name) {
+		_impl->name = name;
 		emit nameUpdated();
 	}
 }
@@ -45,6 +42,7 @@ void Entity::reset() {
 }
 
 void Entity::copy(const Entity& entity) {
+	setUuid(QUuid::createUuid());
 	setName(entity.name());
 }
 
@@ -57,7 +55,7 @@ void Entity::load(const QJsonObject& json) {
 }
 
 void Entity::save(QJsonObject& json) const {
-	json[luuid] = Json::fromUuid(_uuid);
-	json[lname] = _name;
+	json[luuid] = Json::fromUuid(_impl->uuid);
+	json[lname] = _impl->name;
 }
 } // namespace lh

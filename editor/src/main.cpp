@@ -22,6 +22,8 @@ int main(int argc, char* argv[]) {
 
 	QScopedPointer<lh::Project> project(new lh::Project);
 
+	project->reset();
+
 	// TMP for TEST
 	auto* p2 = project->createPlace();
 	auto* p3 = project->createPlace();

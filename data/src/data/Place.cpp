@@ -1,10 +1,13 @@
 #include <lh/data/Place.hpp>
 
+#include <lh/data/Project.hpp>
+
 namespace lh {
+struct Place::Impl {};
+
 Place::Place(Project* project)
-	: Entity(project) {
-	reset();
-}
+	: Entity(project)
+	, _impl{ std::make_unique<Impl>() } {}
 
 Place::~Place() {}
 
@@ -23,5 +26,4 @@ void Place::load(const QJsonObject& json) {
 void Place::save(QJsonObject& json) const {
 	Entity::save(json);
 }
-
 } // namespace lh

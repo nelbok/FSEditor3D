@@ -15,5 +15,9 @@ public:
 	void copy(const Place& place);
 	virtual void load(const QJsonObject& json) override;
 	virtual void save(QJsonObject& json) const override;
+
+private:
+	struct Impl;
+	std::unique_ptr<Impl> _impl;
 };
 } // namespace lh

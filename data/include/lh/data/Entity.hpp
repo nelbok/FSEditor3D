@@ -13,8 +13,7 @@ class Entity : public QObject {
 	Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameUpdated)
 
 public:
-	Entity(Project* project);
-	Entity(Project* project, QObject* parent);
+	Entity(QObject* parent = nullptr);
 	virtual ~Entity();
 
 	virtual void reset();
@@ -32,9 +31,8 @@ protected:
 	void setUuid(const QUuid& uuid);
 
 private:
-	Project* _project{ nullptr };
-	QUuid _uuid{};
-	QString _name{};
+	struct Impl;
+	std::unique_ptr<Impl> _impl;
 
 signals:
 	void uuidUpdated();

@@ -3,16 +3,15 @@
 #include <QtCore/QUrl>
 
 #include <lh/data/Entity.hpp>
-#include <lh/data/UuidPointer.hpp>
 
 namespace lh {
 class Place;
 
 class Project : public Entity {
 	Q_OBJECT
-	Q_PROPERTY(const QUrl& path READ path WRITE setPath NOTIFY pathUpdated)
+	Q_PROPERTY(QUrl path READ path WRITE setPath NOTIFY pathUpdated)
 	Q_PROPERTY(Place* defaultPlace READ defaultPlace WRITE setDefaultPlace NOTIFY defaultPlaceUpdated)
-	Q_PROPERTY(const QList<Place*>& places READ places WRITE setPlaces NOTIFY placesUpdated)
+	Q_PROPERTY(QList<Place*> places READ places WRITE setPlaces NOTIFY placesUpdated)
 
 public:
 	Project(QObject* parent = nullptr);
@@ -42,9 +41,8 @@ protected:
 	using Entity::save;
 
 private:
-	QUrl _path{};
-	UuidPointer<Place> _defaultPlace{};
-	QList<Place*> _places{};
+	struct Impl;
+	std::unique_ptr<Impl> _impl;
 
 signals:
 	void pathUpdated();

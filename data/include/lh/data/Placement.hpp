@@ -3,7 +3,6 @@
 #include <QtGui/QVector3D>
 
 #include <lh/data/Entity.hpp>
-#include <lh/data/UuidPointer.hpp>
 
 namespace lh {
 class Place;
@@ -34,9 +33,8 @@ public:
 	virtual void save(QJsonObject& json) const override;
 
 private:
-	QVector3D _position{};
-	QVector3D _rotation{};
-	UuidPointer<Place> _place{};
+	struct Impl;
+	std::unique_ptr<Impl> _impl;
 
 signals:
 	void positionUpdated();

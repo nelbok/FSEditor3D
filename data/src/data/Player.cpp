@@ -1,10 +1,11 @@
 #include <lh/data/Player.hpp>
 
 namespace lh {
+struct Player::Impl {};
+
 Player::Player(Project* project)
-	: Character(project) {
-	Player::reset();
-}
+	: Character(project)
+	, _impl{ std::make_unique<Impl>() } {}
 
 Player::~Player() {}
 
@@ -23,5 +24,4 @@ void Player::load(const QJsonObject& json) {
 void Player::save(QJsonObject& json) const {
 	Character::save(json);
 }
-
 } // namespace lh
