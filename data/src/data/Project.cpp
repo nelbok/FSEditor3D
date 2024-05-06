@@ -7,6 +7,7 @@
 #include <QtCore/QSaveFile>
 
 #include <lh/data/Character.hpp>
+#include <lh/data/Link.hpp>
 #include <lh/data/Place.hpp>
 #include <lh/data/UuidPointer.hpp>
 #include <lh/io/Json.hpp>
@@ -19,6 +20,7 @@ struct Project::Impl {
 	UuidPointer<Place> defaultPlace{};
 	QUrl path{};
 	QList<Character*> characters{};
+	QList<Link*> links{};
 	QList<Place*> places{};
 
 	template<class TClass>
@@ -58,12 +60,14 @@ void Project::reset() {
 	Entity::reset();
 	setDefaultPlace(nullptr);
 	cleanCharacters();
+	cleanLinks();
 	cleanPlaces();
 }
 
-constexpr auto ldefaultplaces = "defaultplace";
-constexpr auto lcharacters = "characters";
-constexpr auto lplaces = "places";
+constexpr auto lDefaultPlaces = "defaultPlace";
+constexpr auto lCharacters = "characters";
+constexpr auto lLinks = "links";
+constexpr auto lPlaces = "places";
 
 void Project::load(const QUrl& url) {
 	QFile file(Tools::toPath(url));
@@ -82,11 +86,12 @@ void Project::load(const QUrl& url) {
 	reset();
 	Entity::load(json);
 
-	_impl->defaultPlace.setUuid(Json::toUuid(Json::toValue(ldefaultplaces, json)));
+	_impl->defaultPlace.setUuid(Json::toUuid(Json::toValue(lDefaultPlaces, json)));
 	emit defaultPlaceUpdated();
 
-	_impl->loadList(this, _impl->characters, lcharacters, json, &Project::charactersUpdated);
-	_impl->loadList(this, _impl->places, lplaces, json, &Project::placesUpdated);
+	_impl->loadList(this, _impl->characters, lCharacters, json, &Project::charactersUpdated);
+	_impl->loadList(this, _impl->links, lLinks, json, &Project::linksUpdated);
+	_impl->loadList(this, _impl->places, lPlaces, json, &Project::placesUpdated);
 }
 
 void Project::save(const QUrl& url) {
@@ -101,10 +106,11 @@ void Project::save(const QUrl& url) {
 	QJsonObject json;
 	Entity::save(json);
 
-	json[ldefaultplaces] = Json::fromUuid(_impl->defaultPlace.uuid());
+	json[lDefaultPlaces] = Json::fromUuid(_impl->defaultPlace.uuid());
 
-	_impl->saveList(_impl->characters, lcharacters, json);
-	_impl->saveList(_impl->places, lplaces, json);
+	_impl->saveList(_impl->characters, lCharacters, json);
+	_impl->saveList(_impl->links, lLinks, json);
+	_impl->saveList(_impl->places, lPlaces, json);
 
 	// Write
 	const auto& data = QJsonDocument(json).toJson();
@@ -124,8 +130,8 @@ Place* Project::defaultPlace() const {
 	return (_impl->defaultPlace.isNull()) ? nullptr : _impl->defaultPlace.get();
 }
 
-void Project::setDefaultPlace(Place* newPlace) {
-	if (_impl->defaultPlace.set(newPlace)) {
+void Project::setDefaultPlace(Place* defaultPlace) {
+	if (_impl->defaultPlace.set(defaultPlace)) {
 		emit defaultPlaceUpdated();
 	}
 }
@@ -152,6 +158,30 @@ Character* Project::duplicateCharacter(Character* character) {
 
 void Project::cleanCharacters() {
 	TOOLS_CLEAN_ENTITIES(Project, characters);
+}
+
+const QList<Link*>& Project::links() const {
+	return _impl->links;
+}
+
+void Project::setLinks(const QList<Link*>& links) {
+	TOOLS_SETTER(Project, links);
+}
+
+Link* Project::createLink() {
+	TOOLS_CREATE_ENTITY(Project, links);
+}
+
+void Project::removeLink(Link* link) {
+	TOOLS_REMOVE_ENTITY(Project, link);
+}
+
+Link* Project::duplicateLink(Link* link) {
+	TOOLS_DUPLICATE_ENTITY(Project, link);
+}
+
+void Project::cleanLinks() {
+	TOOLS_CLEAN_ENTITIES(Project, links);
 }
 
 const QList<Place*>& Project::places() const {

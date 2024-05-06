@@ -7,6 +7,7 @@
 
 namespace lh {
 class Character;
+class Link;
 class Place;
 
 class Project : public Entity {
@@ -14,6 +15,7 @@ class Project : public Entity {
 	Q_PROPERTY(QUrl path READ path WRITE setPath NOTIFY pathUpdated)
 	Q_PROPERTY(Place* defaultPlace READ defaultPlace WRITE setDefaultPlace NOTIFY defaultPlaceUpdated)
 	Q_PROPERTY(QList<Character*> characters READ characters WRITE setCharacters NOTIFY charactersUpdated)
+	Q_PROPERTY(QList<Link*> links READ links WRITE setLinks NOTIFY linksUpdated)
 	Q_PROPERTY(QList<Place*> places READ places WRITE setPlaces NOTIFY placesUpdated)
 
 public:
@@ -38,6 +40,14 @@ public:
 	Q_INVOKABLE Character* duplicateCharacter(Character* character);
 	void cleanCharacters();
 
+	// Links
+	const QList<Link*>& links() const;
+	void setLinks(const QList<Link*>& link);
+	Q_INVOKABLE Link* createLink();
+	Q_INVOKABLE void removeLink(Link* link);
+	Q_INVOKABLE Link* duplicateLink(Link* link);
+	void cleanLinks();
+
 	// Places
 	const QList<Place*>& places() const;
 	void setPlaces(const QList<Place*>& places);
@@ -59,6 +69,7 @@ signals:
 	void pathUpdated();
 	void defaultPlaceUpdated();
 	void charactersUpdated();
+	void linksUpdated();
 	void placesUpdated();
 };
 } // namespace lh

@@ -103,6 +103,7 @@ private:
 	mutable std::mutex _mutex{};
 };
 
-void initPlacePointer(UuidPointer<class Character>& ptr, Project* project);
+void initCharacterPointer(UuidPointer<class Character>& ptr, Project* project);
+void initLinkPointer(UuidPointer<class Link>& ptr, Project* project);
 void initPlacePointer(UuidPointer<class Place>& ptr, Project* project);
 } // namespace lh

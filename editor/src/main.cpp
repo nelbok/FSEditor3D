@@ -3,6 +3,8 @@
 #include <QtGui/QIcon>
 #include <QtQml/QQmlApplicationEngine>
 
+#include <lh/data/Character.hpp>
+#include <lh/data/Link.hpp>
 #include <lh/data/Place.hpp>
 #include <lh/data/Project.hpp>
 
@@ -25,17 +27,29 @@ int main(int argc, char* argv[]) {
 	project->reset();
 
 	// TMP for TEST
+	project->createCharacter()->setName("Character 1");
+	project->createCharacter()->setName("Character 2");
+
+	auto* l1 = project->createCharacter();
+	auto* l2 = project->createCharacter();
+	l1->setName("Link 1");
+	l2->setName("Link 2");
+
+	auto* p1 = project->createPlace();
 	auto* p2 = project->createPlace();
 	auto* p3 = project->createPlace();
-	auto* p4 = project->createPlace();
-	project->setDefaultPlace(p3);
-	p2->setName("AA");
-	p3->setName("BB");
-	p4->setName("CC");
+	p1->setName("Place 1");
+	p2->setName("Place 2");
+	p3->setName("Place3");
+
+	project->setDefaultPlace(p2);
+
 
 	QQmlApplicationEngine engine;
 
 	qmlRegisterSingletonInstance("LHEditor", 1, 0, "MyProject", project.get());
+	qmlRegisterType<lh::Character>("LHEditor", 1, 0, "MyCharacter");
+	qmlRegisterType<lh::Link>("LHEditor", 1, 0, "MyLink");
 	qmlRegisterType<lh::Place>("LHEditor", 1, 0, "MyPlace");
 
 	QObject::connect(

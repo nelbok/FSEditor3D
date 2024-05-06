@@ -88,23 +88,30 @@ void Character::setGender(Gender gender) {
 	TOOLS_SETTER(Character, gender);
 }
 
+constexpr auto lHair = "hair";
+constexpr auto lSkin = "skin";
+constexpr auto lClothes = "clothes";
+constexpr auto lHeight = "height";
+constexpr auto lSpecies = "species";
+constexpr auto lGender = "gender";
+
 void Character::load(const QJsonObject& json) {
-	Entity::load(json);
-	setHair(Json::toColor(Json::toObject("hair", json)));
-	setSkin(Json::toColor(Json::toObject("skin", json)));
-	setClothes(Json::toColor(Json::toObject("clothes", json)));
-	setHeight(Json::toInt("height", json));
-	setSpecies(static_cast<Character::Species>(Json::toInt("species", json)));
-	setGender(static_cast<Character::Gender>(Json::toInt("gender", json)));
+	Placement::load(json);
+	setHair(Json::toColor(Json::toObject(lHair, json)));
+	setSkin(Json::toColor(Json::toObject(lSkin, json)));
+	setClothes(Json::toColor(Json::toObject(lClothes, json)));
+	setHeight(Json::toInt(lHeight, json));
+	setSpecies(static_cast<Character::Species>(Json::toInt(lSpecies, json)));
+	setGender(static_cast<Character::Gender>(Json::toInt(lGender, json)));
 }
 
 void Character::save(QJsonObject& json) const {
-	Entity::save(json);
-	json["clothes"] = Json::fromColor(_impl->clothes);
-	json["hair"] = Json::fromColor(_impl->hair);
-	json["skin"] = Json::fromColor(_impl->skin);
-	json["height"] = _impl->height;
-	json["species"] = static_cast<int>(_impl->species);
-	json["gender"] = static_cast<int>(_impl->gender);
+	Placement::save(json);
+	json[lHair] = Json::fromColor(_impl->hair);
+	json[lSkin] = Json::fromColor(_impl->skin);
+	json[lClothes] = Json::fromColor(_impl->clothes);
+	json[lHeight] = _impl->height;
+	json[lSpecies] = static_cast<int>(_impl->species);
+	json[lGender] = static_cast<int>(_impl->gender);
 }
 } // namespace lh

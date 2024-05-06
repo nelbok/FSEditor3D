@@ -3,6 +3,7 @@ set(CMAKE_DEBUG_POSTFIX _d)
 set(PROJECT_SOURCES
 	include/lh/data/Character.hpp
 	include/lh/data/Entity.hpp
+	include/lh/data/Link.hpp
 	include/lh/data/Place.hpp
 	include/lh/data/Placement.hpp
 	include/lh/data/Player.hpp
@@ -14,6 +15,7 @@ set(PROJECT_SOURCES
 	src/common/Tools.hpp
 	src/data/Character.cpp
 	src/data/Entity.cpp
+	src/data/Link.cpp
 	src/data/Place.cpp
 	src/data/Placement.cpp
 	src/data/Player.cpp

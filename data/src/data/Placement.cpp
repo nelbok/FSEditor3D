@@ -62,22 +62,22 @@ void Placement::setPlace(Place* newPlace) {
 	}
 }
 
-constexpr auto lposition = "position";
-constexpr auto lrotation = "rotation";
-constexpr auto lplace = "place";
+constexpr auto lPosition = "position";
+constexpr auto lRotation = "rotation";
+constexpr auto lPlace = "place";
 
 void Placement::load(const QJsonObject& json) {
 	Entity::load(json);
-	setPosition(Json::toVector3D(Json::toObject(lposition, json)));
-	setRotation(Json::toVector3D(Json::toObject(lrotation, json)));
-	_impl->place.setUuid(Json::toUuid(Json::toValue(lplace, json)));
+	setPosition(Json::toVector3D(Json::toObject(lPosition, json)));
+	setRotation(Json::toVector3D(Json::toObject(lRotation, json)));
+	_impl->place.setUuid(Json::toUuid(Json::toValue(lPlace, json)));
 	emit placeUpdated();
 }
 
 void Placement::save(QJsonObject& json) const {
 	Entity::save(json);
-	json[lposition] = Json::fromVector3D(_impl->position);
-	json[lrotation] = Json::fromVector3D(_impl->rotation);
-	json[lplace] = Json::fromUuid(_impl->place.uuid());
+	json[lPosition] = Json::fromVector3D(_impl->position);
+	json[lRotation] = Json::fromVector3D(_impl->rotation);
+	json[lPlace] = Json::fromUuid(_impl->place.uuid());
 }
 } // namespace lh

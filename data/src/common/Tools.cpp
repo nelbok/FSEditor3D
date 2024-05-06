@@ -1,5 +1,3 @@
-#pragma once
-
 #include "Tools.hpp"
 
 namespace lh::Tools {
