@@ -1,6 +1,8 @@
 qt_standard_project_setup(REQUIRES 6.5)
 
 set(PROJECT_SOURCES
+	src/controllers/About.cpp
+	src/controllers/About.hpp
 	src/main.cpp
 
 	src/Config.hpp.in
@@ -8,18 +10,29 @@ set(PROJECT_SOURCES
 	resources/resources.qrc
 )
 set(QML_SOURCES
+	qml/common/LHEButton.qml
 	qml/common/LHEColorField.qml
+	qml/common/LHEList.qml
+	qml/common/LHEMenuButton.qml
+	qml/common/LHEModule.qml
 	qml/common/LHEPositionField.qml
+	qml/common/LHERectangle.qml
 	qml/common/LHERotationField.qml
-	qml/LHECharacter.qml
-	qml/LHEMenu.qml
-	qml/LHEPlace.qml
-	qml/LHEProject.qml
+	qml/modules/LHECharacters.qml
+	qml/modules/LHELinks.qml
+	qml/modules/LHEMenu.qml
+	qml/modules/LHEPlaces.qml
+	qml/modules/LHEProject.qml
 	qml/Main.qml
 )
+set(QML_SINGLETON
+	qml/style/LHEStyle.qml
+)
+set_source_files_properties(${QML_SINGLETON} PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
+
 qt_add_executable(${CLH_EDITOR} ${PROJECT_SOURCES})
-qt_add_qml_module(${CLH_EDITOR} URI ${CLH_EDITOR} VERSION 1.0 QML_FILES ${QML_SOURCES})
-source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" PREFIX "" FILES ${PROJECT_SOURCES} ${QML_SOURCES})
+qt_add_qml_module(${CLH_EDITOR} URI ${CLH_EDITOR} VERSION 1.0 QML_FILES ${QML_SOURCES} ${QML_SINGLETON})
+source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" PREFIX "" FILES ${PROJECT_SOURCES} ${QML_SOURCES} ${QML_SINGLETON})
 include_directories(src)
 
 configure_file(src/Config.hpp.in include/Config.hpp)

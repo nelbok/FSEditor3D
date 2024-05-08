@@ -9,42 +9,46 @@ Window {
     height: 768
     minimumWidth: 1280
     minimumHeight: 768
-    maximumWidth: 1280
-    maximumHeight: 768
     visible: true
 
     Rectangle {
         anchors.fill: parent
-        color: "#CCCCCC"
+        color: LHEStyle.window.color
 
-        RowLayout {
-            anchors.top: parent.top
+        LHEProject {
+            anchors.top: menu.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.margins: 10
-            spacing: 10
 
-            LHEMenu {
-                id: menuForm
-                myData: MyProject
-            }
+            selected: (menu.selected === LHEMenu.ModuleType.Project)
+        }
 
-            LHEProject {
-                id: projectForm
-                myData: MyProject
-                onCurrentPlaceChanged: (place) => { placeForm.myData = place }
-            }
+        LHEPlaces {
+            anchors.top: menu.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
 
-            LHEPlace {
-                id: placeForm
-                // myData: MyProject.map
-                // onAddNpc: MyProject.addNpc()
-                // onRemoveNpc: (npc) => { if (npc) MyProject.removeNpc(npc) }
-                // onCurrentNpcChanged: (npc) => { npcForm.myData = npc }
-            }
+            selected: (menu.selected === LHEMenu.ModuleType.Places)
+        }
 
-            // LHECharacter {
-            //     id: npcForm
-            // }
+        LHECharacters {
+            anchors.top: menu.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            selected: (menu.selected === LHEMenu.ModuleType.Characters)
+        }
+
+        LHELinks {
+            anchors.top: menu.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            selected: (menu.selected === LHEMenu.ModuleType.Links)
+        }
+
+        LHEMenu {
+            id: menu
+
+            anchors.top: parent.top
+            anchors.topMargin: 10
+            anchors.horizontalCenter: parent.horizontalCenter
         }
     }
 }

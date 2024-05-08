@@ -1,85 +1,61 @@
 import QtQuick
-import QtQuick.Controls.Basic
 import QtQuick.Layouts
+import QtQuick.Controls.Basic
 
-import "common"
 import LHEditor
 
-Rectangle {
-    property MyCharacter myData: null;
+LHEModule {
+    property MyCharacter myData: null
 
     id: root
-    border.color: "black"
-    border.width: 2
-    color: "#6666AA"
-    radius: 5
+    title: qsTr("Characters")
 
-    implicitHeight: layout.implicitHeight + 20
-    implicitWidth: layout.implicitWidth + 20
+    selection: LHEList {
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
 
-    GridLayout {
-        id: layout
-        anchors.fill: parent
-        anchors.margins: 10
-        columns: 2
+        model: (MyProject) ? MyProject.characters : null
+        onCurrentDataChanged: (data) => { root.myData = data }
+    }
 
-        Text {
-            text: "Name:"
-        }
+    placement: ColumnLayout {
         TextField {
             text: (root.myData) ? root.myData.name : "-"
             onEditingFinished: { if (root.myData) root.myData.name = text }
             enabled: root.myData
-        }
-
-        Text {
-            text: "Position:"
         }
         LHEPositionField {
             position: (root.myData) ? root.myData.position : Qt.vector3d(0, 0, 0)
             onPositionEdited: (position) => { if (root.myData) root.myData.position = position }
             enabled: root.myData
         }
-
-        Text {
-            text: "Camera:"
-        }
         LHERotationField {
-            rotation: (root.myData) ? root.myData.camera : Qt.vector2d(0, 0)
+            rotation: (root.myData) ? root.myData.rotation : Qt.vector2d(0, 0)
             onRotationEdited: (rotation) => { if (root.myData) root.myData.camera = rotation }
             enabled: root.myData
         }
+    }
 
-        Text {
-            text: "Hair color:"
-        }
+    partA: ColumnLayout {
         LHEColorField {
             color: (root.myData) ? root.myData.hair : "transparent"
             onColorEdited: (color) => { if (root.myData) root.myData.hair = color }
             enabled: root.myData
-        }
-
-        Text {
-            text: "Skin color:"
         }
         LHEColorField {
             color: (root.myData) ? root.myData.skin : "transparent"
             onColorEdited: (color) => { if (root.myData) root.myData.skin = color }
             enabled: root.myData
         }
-
-        Text {
-            text: "Clothes color:"
-        }
         LHEColorField {
             color: (root.myData) ? root.myData.clothes : "transparent"
             onColorEdited: (color) => { if (root.myData) root.myData.clothes = color }
             enabled: root.myData
         }
+    }
 
-        Text {
-            text: "Height:"
-        }
+    partB: ColumnLayout {
         SpinBox {
             implicitWidth: 200
 
@@ -89,10 +65,6 @@ Rectangle {
             value: (root.myData) ? root.myData.height : 0
             onValueChanged: { if (root.myData) root.myData.height = value }
             enabled: root.myData
-        }
-
-        Text {
-            text: "Species:"
         }
         ComboBox {
             implicitWidth: 200
@@ -119,10 +91,6 @@ Rectangle {
             currentIndex: (root.myData) ? indexOfValue(root.myData.species) : -1
             onCurrentIndexChanged: { if (root.myData) root.myData.species = valueAt(currentIndex) }
             enabled: root.myData
-        }
-
-        Text {
-            text: "Gender:"
         }
         ComboBox {
             implicitWidth: 200
