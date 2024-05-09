@@ -17,7 +17,7 @@ struct Placement::Impl {
 Placement::Placement(Project* project)
 	: Entity(project)
 	, _impl{ std::make_unique<Impl>() } {
-	initPlacePointer(_impl->place, project);
+	initPlacePointer(_impl->place, project, this);
 }
 
 Placement::~Placement() {}
@@ -53,7 +53,7 @@ void Placement::setRotation(const QVector3D& rotation) {
 }
 
 Place* Placement::place() const {
-	return (_impl->place.isNull()) ? nullptr : _impl->place.get();
+	return (_impl->place.valid()) ? _impl->place.get() : nullptr;
 }
 
 void Placement::setPlace(Place* newPlace) {

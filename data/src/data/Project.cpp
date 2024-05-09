@@ -51,7 +51,7 @@ struct Project::Impl {
 Project::Project(QObject* parent)
 	: Entity(parent)
 	, _impl{ std::make_unique<Impl>() } {
-	initPlacePointer(_impl->defaultPlace, this);
+	initPlacePointer(_impl->defaultPlace, this, this);
 }
 
 Project::~Project() {}
@@ -127,7 +127,7 @@ void Project::setPath(const QUrl& path) {
 }
 
 Place* Project::defaultPlace() const {
-	return (_impl->defaultPlace.isNull()) ? nullptr : _impl->defaultPlace.get();
+	return (_impl->defaultPlace.valid()) ? _impl->defaultPlace.get() : nullptr;
 }
 
 void Project::setDefaultPlace(Place* defaultPlace) {

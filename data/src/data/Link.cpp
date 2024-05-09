@@ -11,7 +11,7 @@ struct Link::Impl {
 Link::Link(Project* project)
 	: Placement(project)
 	, _impl{ std::make_unique<Impl>() } {
-	initLinkPointer(_impl->link, project);
+	initLinkPointer(_impl->link, project, this);
 }
 
 Link::~Link() {}
@@ -40,7 +40,7 @@ void Link::save(QJsonObject& json) const {
 }
 
 Link* Link::link() const {
-	return (_impl->link.isNull()) ? nullptr : _impl->link.get();
+	return (_impl->link.valid()) ? _impl->link.get() : nullptr;
 }
 
 void Link::setLink(Link* link) {

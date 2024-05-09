@@ -19,16 +19,17 @@ public:
 		return get();
 	}
 
-	void init(Project* project, const QList<T*>& (Project::*getter)() const, void (Project::*signal)()) {
+	void init(Project* project, const QList<T*>& (Project::*getter)() const, void (Project::*signal)(), QObject* parent) {
 		assert(!_project);
 		assert(project);
 		assert(getter);
 		assert(signal);
+		assert(parent);
 
 		_project = project;
 		_getter = getter;
 
-		QObject::connect(project, signal, project, [this]() {
+		QObject::connect(project, signal, parent, [this]() {
 			update();
 		});
 		update();
@@ -103,7 +104,7 @@ private:
 	mutable std::mutex _mutex{};
 };
 
-void initCharacterPointer(UuidPointer<class Character>& ptr, Project* project);
-void initLinkPointer(UuidPointer<class Link>& ptr, Project* project);
-void initPlacePointer(UuidPointer<class Place>& ptr, Project* project);
+void initCharacterPointer(UuidPointer<class Character>& ptr, Project* project, QObject* parent);
+void initLinkPointer(UuidPointer<class Link>& ptr, Project* project, QObject* parent);
+void initPlacePointer(UuidPointer<class Place>& ptr, Project* project, QObject* parent);
 } // namespace lh
