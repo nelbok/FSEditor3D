@@ -41,8 +41,8 @@ QtObject {
 
     // FOREGROUND
     property QtObject foreground: QtObject {
-        property color normal: "#AA0000"
-        property color placeholder: "#00AAAA"
+        property color normal: "#000000"
+        property color placeholder: "#AAAAAA"
     }
 
     // FONTS

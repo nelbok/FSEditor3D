@@ -9,7 +9,6 @@ LHERectangle {
 
     property Item selection: null
     property Item placement: null
-    property alias ppp: ppp
     property Item partA: null
     property Item partB: null
 
@@ -49,41 +48,28 @@ LHERectangle {
 
         anchors.horizontalCenter: parent.horizontalCenter
 
-        Rectangle {
-            border.color: "red"
-            color: "transparent"
-
+        Item {
             width: 180
             height: 220
 
             children: (root.selection) ? root.selection : []
         }
 
-        Rectangle {
-            id: ppp
-            border.color: "red"
-            color: "transparent"
-
+        Item {
             width: 260
             height: 220
 
             children: (root.placement) ? root.placement : []
         }
 
-        Rectangle {
-            border.color: "red"
-            color: "transparent"
-
+        Item {
             width: 260
             height: 220
 
             children: (root.partA) ? root.partA : []
         }
 
-        Rectangle {
-            border.color: "red"
-            color: "transparent"
-
+        Item {
             width: 260
             height: 220
 

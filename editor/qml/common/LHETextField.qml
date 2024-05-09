@@ -33,6 +33,7 @@ RowLayout {
 
         Layout.preferredWidth: 175
 
-        onEditingFinished: root.editingFinished()
+        onEditingFinished: if (acceptableInput) root.editingFinished()
+        validator: RegularExpressionValidator{ regularExpression: /.+/ }
     }
 }
