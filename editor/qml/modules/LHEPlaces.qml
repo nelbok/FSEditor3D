@@ -19,6 +19,6 @@ LHEModule {
     }
 
     placement: LHEEntity {
-        entity: myData
+        entity: root.myData
     }
 }

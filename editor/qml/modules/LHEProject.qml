@@ -55,16 +55,16 @@ LHEModule {
 
 
     function openDialog(fileMode) {
-        fileDialog.fileMode = fileMode
+        dialog.fileMode = fileMode
         if (MyProject) {
             if (MyProject.path)
-                fileDialog.currentFolder = MyProject.path
+                dialog.currentFolder = MyProject.path
         }
-        fileDialog.open()
+        dialog.open()
     }
 
     FileDialog {
-        id: fileDialog
+        id: dialog
         nameFilters: ["JSON Files (*.json)"]
         onAccepted: {
             switch(fileMode) {

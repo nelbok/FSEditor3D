@@ -19,6 +19,6 @@ LHEModule {
     }
 
     placement: LHEPlacement {
-        placement: myData
+        placement: root.myData
     }
 }

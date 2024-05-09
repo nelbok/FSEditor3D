@@ -1,13 +1,15 @@
 import QtQuick
-import QtQuick.Dialogs
+import QtQuick.Controls.Basic
 import QtQuick.Layouts
 
 import LHEditor
 
 RowLayout {
     property alias name: name.text
-    property alias color: button.color
-    signal colorEdited(color: color)
+    property alias from: spinBox.from
+    property alias to: spinBox.to
+    property alias value: spinBox.value
+    signal valueModified()
 
     id: root
 
@@ -28,17 +30,16 @@ RowLayout {
         font.pointSize: LHEStyle.normalFont.pointSize
     }
 
-    LHEButton {
-        id: button
-
+    SpinBox {
+        id: spinBox
         Layout.preferredWidth: 175
 
-        onClicked: dialog.open()
-    }
+        editable: true
+        palette.text: LHEStyle.foreground.normal
+        font.bold: LHEStyle.normalFont.bold
+        font.italic: LHEStyle.normalFont.italic
+        font.pointSize: LHEStyle.normalFont.pointSize
 
-    ColorDialog {
-        id: dialog
-        selectedColor: root.color
-        onAccepted: root.colorEdited(selectedColor)
+        onValueChanged: root.valueModified()
     }
 }

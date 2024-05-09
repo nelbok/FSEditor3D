@@ -10,7 +10,7 @@ LHERectangle {
     height: 40
 
     border.color: {
-        (mouseArea.containsMouse)
+        (enabled && mouseArea.containsMouse)
                 ? LHEStyle.module.border.colorHover
                 : (selected)
                   ? LHEStyle.module.border.colorSelected

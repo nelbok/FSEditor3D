@@ -18,6 +18,7 @@ set(QML_SOURCES
 	qml/common/LHEMenuButton.qml
 	qml/common/LHEModule.qml
 	qml/common/LHERectangle.qml
+	qml/common/LHESpinBox.qml
 	qml/common/LHETextField.qml
 	qml/common/LHEVector3DField.qml
 	qml/data/LHEEntity.qml

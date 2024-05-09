@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls.Basic
 
 import LHEditor
 
@@ -20,41 +19,39 @@ LHEModule {
     }
 
     placement: LHEPlacement {
-        placement: myData
+        placement: root.myData
     }
 
     partA: ColumnLayout {
+        enabled: root.myData
         LHEColorField {
-            color: (root.myData) ? root.myData.hair : "transparent"
+            name: qsTr("Hair")
+            color: (root.myData) ? root.myData.hair : "gray"
             onColorEdited: (color) => { if (root.myData) root.myData.hair = color }
-            enabled: root.myData
         }
         LHEColorField {
-            color: (root.myData) ? root.myData.skin : "transparent"
+            name: qsTr("Skin")
+            color: (root.myData) ? root.myData.skin : "gray"
             onColorEdited: (color) => { if (root.myData) root.myData.skin = color }
-            enabled: root.myData
         }
         LHEColorField {
-            color: (root.myData) ? root.myData.clothes : "transparent"
+            name: qsTr("Clothes")
+            color: (root.myData) ? root.myData.clothes : "gray"
             onColorEdited: (color) => { if (root.myData) root.myData.clothes = color }
-            enabled: root.myData
         }
     }
 
     partB: ColumnLayout {
-        SpinBox {
-            implicitWidth: 200
-
+        enabled: root.myData
+        LHESpinBox {
+            name: qsTr("Height")
             from: 135
             to: 200
-            editable: true
             value: (root.myData) ? root.myData.height : 0
             onValueChanged: { if (root.myData) root.myData.height = value }
-            enabled: root.myData
         }
         LHEComboBox {
-            name: "Species"
-
+            name: qsTr("Species")
             model: [
                 { value: MyCharacter.Species.Human, text: "Human" },
 
@@ -76,7 +73,7 @@ LHEModule {
             onActivated: { if (root.myData) root.myData.species = valueAt(currentIndex) }
         }
         LHEComboBox {
-            name: "Gender"
+            name: qsTr("Gender")
             model: [
                 { value: MyCharacter.Gender.Male, text: "Male" },
                 { value: MyCharacter.Gender.Female, text: "Female"},
