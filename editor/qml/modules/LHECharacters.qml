@@ -53,21 +53,21 @@ LHEModule {
         LHEComboBox {
             name: qsTr("Species")
             model: [
-                { value: MyCharacter.Species.Human, text: "Human" },
+                { uuid: MyCharacter.Species.Human, name: "Human" },
 
                 // Demi human
-                { value: MyCharacter.Species.Fox, text: "Fox" },
-                { value: MyCharacter.Species.Cat, text: "Cat" },
-                { value: MyCharacter.Species.Dog, text: "Dog" },
-                { value: MyCharacter.Species.Bun, text: "Bun" },
-                { value: MyCharacter.Species.Rat, text: "Rat" },
+                { uuid: MyCharacter.Species.Fox, name: "Fox" },
+                { uuid: MyCharacter.Species.Cat, name: "Cat" },
+                { uuid: MyCharacter.Species.Dog, name: "Dog" },
+                { uuid: MyCharacter.Species.Bun, name: "Bun" },
+                { uuid: MyCharacter.Species.Rat, name: "Rat" },
 
                 // Monster
-                { value: MyCharacter.Species.Goblin, text: "Goblin" },
-                { value: MyCharacter.Species.Ogre, text: "Ogre" },
-                { value: MyCharacter.Species.Orc, text: "Orc" },
-                { value: MyCharacter.Species.Troll, text: "Troll" },
-                { value: MyCharacter.Species.Lizard, text: "Lizard" },
+                { uuid: MyCharacter.Species.Goblin, name: "Goblin" },
+                { uuid: MyCharacter.Species.Ogre, name: "Ogre" },
+                { uuid: MyCharacter.Species.Orc, name: "Orc" },
+                { uuid: MyCharacter.Species.Troll, name: "Troll" },
+                { uuid: MyCharacter.Species.Lizard, name: "Lizard" },
             ]
             currentIndex: { (root.myData) ? indexOfValue(root.myData.species) : -1 }
             onActivated: { if (root.myData) root.myData.species = valueAt(currentIndex) }
@@ -75,8 +75,8 @@ LHEModule {
         LHEComboBox {
             name: qsTr("Gender")
             model: [
-                { value: MyCharacter.Gender.Male, text: "Male" },
-                { value: MyCharacter.Gender.Female, text: "Female"},
+                { uuid: MyCharacter.Gender.Male, name: "Male" },
+                { uuid: MyCharacter.Gender.Female, name: "Female"},
             ]
             currentIndex: (root.myData) ? indexOfValue(root.myData.gender) : -1
             onActivated: { if (root.myData) root.myData.gender = valueAt(currentIndex) }

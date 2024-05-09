@@ -37,11 +37,13 @@ RowLayout {
 
         Layout.preferredWidth: 175
 
-        valueRole: "value"
-        textRole: "text"
+        valueRole: "uuid"
+        textRole: "name"
 
-        palette.text: LHEStyle.foreground.normal
-        palette.buttonText: LHEStyle.foreground.normal
+        palette.text: LHEStyle.foreground.normal // Foreground popup
+        palette.buttonText: LHEStyle.foreground.normal // Foreground text
+        palette.button: (enabled) ? LHEStyle.textfield.color : LHEStyle.textfield.disabled // Background color
+        palette.mid: LHEStyle.textfield.color // Background color when popup shown
         font.bold: LHEStyle.normalFont.bold
         font.italic: LHEStyle.normalFont.italic
         font.pointSize: LHEStyle.normalFont.pointSize

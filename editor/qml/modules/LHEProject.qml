@@ -36,24 +36,6 @@ LHEModule {
         entity: MyProject
     }
 
-    partA: ComboBox {
-        textRole: "name"
-        model: (MyProject) ? MyProject.places : null
-        currentIndex: {
-            if (MyProject)
-                for(var i in MyProject.places)
-                    if (MyProject.places[i].uuid === MyProject.defaultPlace.uuid)
-                        return i;
-            return -1
-        }
-        onCurrentIndexChanged: {
-            var value = valueAt(currentIndex)
-            if (MyProject && value)
-                MyProject.defaultPlace = value
-        }
-    }
-
-
     function openDialog(fileMode) {
         dialog.fileMode = fileMode
         if (MyProject) {

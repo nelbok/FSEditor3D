@@ -58,6 +58,7 @@ ColumnLayout {
                     verticalAlignment: Text.AlignVCenter
                     MouseArea {
                         anchors.fill: parent
+                        preventStealing: true
                         onClicked: list.currentIndex = index
                     }
                 }
@@ -76,6 +77,15 @@ ColumnLayout {
 
             onCurrentIndexChanged: (model) ? root.currentDataChanged(model[currentIndex]) : null
             Component.onCompleted: currentIndex = -1
+
+            MouseArea {
+                anchors.fill: parent
+                propagateComposedEvents: true
+                onClicked: (mouse) => {
+                    list.currentIndex = -1
+                    mouse.accepted = false;
+                }
+            }
         }
     }
 }
