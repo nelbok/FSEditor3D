@@ -22,9 +22,16 @@ LHEEntity {
     }
 
     LHEComboBox {
-        name: "Places"
+        name: qsTr("Place")
         model: (MyProject) ? MyProject.places : null
-        currentIndex: (root.placement && root.placement.place) ? indexOfValue(root.placement.place.uuid) : -1
+        currentIndex: {
+            if (root.placement && root.placement.place)
+                for(var i in MyProject.places) {
+                    if (MyProject.places[i].uuid === root.placement.place.uuid)
+                        return i
+                }
+            return -1
+        }
         onActivated: { if (root.placement) root.placement.place = model[currentIndex] }
     }
 }

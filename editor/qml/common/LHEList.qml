@@ -6,6 +6,9 @@ import LHEditor
 
 ColumnLayout {
     property alias model: list.model
+    signal createClicked()
+    signal removeClicked(data: QtObject)
+    signal duplicateClicked(data: QtObject)
     signal currentDataChanged(data: QtObject)
 
     id: root
@@ -18,14 +21,17 @@ ColumnLayout {
         LHEMenuButton {
             text: qsTr("Add")
             width: 60
+            onClicked: root.createClicked()
         }
         LHEMenuButton {
             text: qsTr("Del")
             width: 60
+            onClicked: root.removeClicked(list.model[list.currentIndex])
         }
         LHEMenuButton {
             text: qsTr("Dup")
             width: 60
+            onClicked: root.duplicateClicked(list.model[list.currentIndex])
         }
     }
 
@@ -68,8 +74,7 @@ ColumnLayout {
             highlight: Item {
                 Rectangle {
                     anchors.fill: parent
-                    anchors.leftMargin: LHEStyle.list.border.width
-                    anchors.rightMargin: LHEStyle.list.border.width
+                    anchors.margins: LHEStyle.list.border.width
 
                     color: LHEStyle.list.highlight
                 }

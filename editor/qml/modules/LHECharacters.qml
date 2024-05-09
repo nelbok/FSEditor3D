@@ -10,11 +10,10 @@ LHEModule {
     title: qsTr("Characters")
 
     selection: LHEList {
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-
         model: (MyProject) ? MyProject.characters : null
+        onCreateClicked: { if (MyProject) MyProject.createCharacter() }
+        onRemoveClicked: (data) => { if (MyProject) MyProject.removeCharacter(data) }
+        onDuplicateClicked: (data) => { if (MyProject) MyProject.duplicateCharacter(data) }
         onCurrentDataChanged: (data) => { root.myData = data }
     }
 
@@ -23,6 +22,7 @@ LHEModule {
     }
 
     partA: ColumnLayout {
+        spacing: 5
         enabled: root.myData
         LHEColorField {
             name: qsTr("Hair")
@@ -42,6 +42,7 @@ LHEModule {
     }
 
     partB: ColumnLayout {
+        spacing: 5
         enabled: root.myData
         LHESpinBox {
             name: qsTr("Height")
@@ -53,21 +54,21 @@ LHEModule {
         LHEComboBox {
             name: qsTr("Species")
             model: [
-                { uuid: MyCharacter.Species.Human, name: "Human" },
+                { uuid: MyCharacter.Species.Human, name: qsTr("Human") },
 
                 // Demi human
-                { uuid: MyCharacter.Species.Fox, name: "Fox" },
-                { uuid: MyCharacter.Species.Cat, name: "Cat" },
-                { uuid: MyCharacter.Species.Dog, name: "Dog" },
-                { uuid: MyCharacter.Species.Bun, name: "Bun" },
-                { uuid: MyCharacter.Species.Rat, name: "Rat" },
+                { uuid: MyCharacter.Species.Fox, name: qsTr("Fox") },
+                { uuid: MyCharacter.Species.Cat, name: qsTr("Cat") },
+                { uuid: MyCharacter.Species.Dog, name: qsTr("Dog") },
+                { uuid: MyCharacter.Species.Bun, name: qsTr("Bun") },
+                { uuid: MyCharacter.Species.Rat, name: qsTr("Rat") },
 
                 // Monster
-                { uuid: MyCharacter.Species.Goblin, name: "Goblin" },
-                { uuid: MyCharacter.Species.Ogre, name: "Ogre" },
-                { uuid: MyCharacter.Species.Orc, name: "Orc" },
-                { uuid: MyCharacter.Species.Troll, name: "Troll" },
-                { uuid: MyCharacter.Species.Lizard, name: "Lizard" },
+                { uuid: MyCharacter.Species.Goblin, name: qsTr("Goblin") },
+                { uuid: MyCharacter.Species.Ogre, name: qsTr("Ogre") },
+                { uuid: MyCharacter.Species.Orc, name: qsTr("Orc") },
+                { uuid: MyCharacter.Species.Troll, name: qsTr("Troll") },
+                { uuid: MyCharacter.Species.Lizard, name: qsTr("Lizard") },
             ]
             currentIndex: { (root.myData) ? indexOfValue(root.myData.species) : -1 }
             onActivated: { if (root.myData) root.myData.species = valueAt(currentIndex) }
@@ -75,8 +76,8 @@ LHEModule {
         LHEComboBox {
             name: qsTr("Gender")
             model: [
-                { uuid: MyCharacter.Gender.Male, name: "Male" },
-                { uuid: MyCharacter.Gender.Female, name: "Female"},
+                { uuid: MyCharacter.Gender.Male, name: qsTr("Male") },
+                { uuid: MyCharacter.Gender.Female, name: qsTr("Female") },
             ]
             currentIndex: (root.myData) ? indexOfValue(root.myData.gender) : -1
             onActivated: { if (root.myData) root.myData.gender = valueAt(currentIndex) }

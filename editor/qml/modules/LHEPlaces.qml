@@ -10,11 +10,10 @@ LHEModule {
     title: qsTr("Places")
 
     selection: LHEList {
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-
         model: (MyProject) ? MyProject.places : null
+        onCreateClicked: { if (MyProject) MyProject.createPlace() }
+        onRemoveClicked: (data) => { if (MyProject) MyProject.removePlace(data) }
+        onDuplicateClicked: (data) => { if (MyProject) MyProject.duplicatePlace(data) }
         onCurrentDataChanged: (data) => { root.myData = data }
     }
 

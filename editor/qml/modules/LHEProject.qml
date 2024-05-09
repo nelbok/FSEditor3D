@@ -10,12 +10,7 @@ LHEModule {
     title: qsTr("Project")
 
     selection: ColumnLayout {
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-
         spacing: 5
-
         LHEMenuButton {
             text: qsTr("New")
             onClicked: MyProject.reset();
@@ -34,6 +29,23 @@ LHEModule {
 
     placement: LHEEntity {
         entity: MyProject
+    }
+
+    partA: ColumnLayout{
+        spacing: 5
+        LHEComboBox {
+            name: qsTr("Default place")
+            model: (MyProject) ? MyProject.places : null
+            currentIndex: {
+                if (MyProject.defaultPlace)
+                    for(var i in MyProject.places) {
+                        if (MyProject.places[i].uuid === MyProject.defaultPlace.uuid)
+                            return i
+                    }
+                return -1
+            }
+            onActivated: { if (MyProject) MyProject.defaultPlace = MyProject.places[currentIndex] }
+        }
     }
 
     function openDialog(fileMode) {
