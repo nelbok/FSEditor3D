@@ -19,19 +19,16 @@ LHEModule {
         LHEMenuButton {
             text: qsTr("New")
             onClicked: MyProject.reset();
-            enabled: MyProject
         }
 
         LHEMenuButton {
             text: qsTr("Load")
             onClicked: openDialog(FileDialog.OpenFile);
-            enabled: MyProject
         }
 
         LHEMenuButton {
             text: qsTr("Save")
             onClicked: openDialog(FileDialog.SaveFile);
-            enabled: MyProject
         }
     }
 
@@ -54,7 +51,6 @@ LHEModule {
             if (MyProject && value)
                 MyProject.defaultPlace = value
         }
-        enabled: MyProject
     }
 
 

@@ -52,11 +52,9 @@ LHEModule {
             onValueChanged: { if (root.myData) root.myData.height = value }
             enabled: root.myData
         }
-        ComboBox {
-            implicitWidth: 200
+        LHEComboBox {
+            name: "Species"
 
-            valueRole: "value"
-            textRole: "text"
             model: [
                 { value: MyCharacter.Species.Human, text: "Human" },
 
@@ -74,22 +72,17 @@ LHEModule {
                 { value: MyCharacter.Species.Troll, text: "Troll" },
                 { value: MyCharacter.Species.Lizard, text: "Lizard" },
             ]
-            currentIndex: (root.myData) ? indexOfValue(root.myData.species) : -1
-            onCurrentIndexChanged: { if (root.myData) root.myData.species = valueAt(currentIndex) }
-            enabled: root.myData
+            currentIndex: { (root.myData) ? indexOfValue(root.myData.species) : -1 }
+            onActivated: { if (root.myData) root.myData.species = valueAt(currentIndex) }
         }
-        ComboBox {
-            implicitWidth: 200
-
-            valueRole: "value"
-            textRole: "text"
+        LHEComboBox {
+            name: "Gender"
             model: [
                 { value: MyCharacter.Gender.Male, text: "Male" },
                 { value: MyCharacter.Gender.Female, text: "Female"},
             ]
             currentIndex: (root.myData) ? indexOfValue(root.myData.gender) : -1
-            onCurrentIndexChanged: { if (root.myData) root.myData.gender = valueAt(currentIndex) }
-            enabled: root.myData
+            onActivated: { if (root.myData) root.myData.gender = valueAt(currentIndex) }
         }
     }
 }

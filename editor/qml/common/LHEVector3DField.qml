@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls.Basic
 import QtQuick.Layouts
 
 import LHEditor
@@ -45,7 +44,7 @@ RowLayout {
 
         Layout.preferredWidth: 55
 
-        horizontalAlignment: TextField.AlignHCenter
+        horizontalAlignment: LHEField.AlignHCenter
         text: root.value.x.toString()
 
         onEditingFinished: if (acceptableInput) func.emit()
@@ -57,7 +56,7 @@ RowLayout {
 
         Layout.preferredWidth: 55
 
-        horizontalAlignment: TextField.AlignHCenter
+        horizontalAlignment: LHEField.AlignHCenter
         text: root.value.y.toString()
 
         onEditingFinished: if (acceptableInput) func.emit()
@@ -69,7 +68,7 @@ RowLayout {
 
         Layout.preferredWidth: 55
 
-        horizontalAlignment: TextField.AlignHCenter
+        horizontalAlignment: LHEField.AlignHCenter
         text: root.value.z.toString()
 
         onEditingFinished: if (acceptableInput) func.emit()

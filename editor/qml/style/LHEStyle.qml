@@ -59,7 +59,7 @@ QtObject {
     property QtObject normalFont: QtObject {
         property bool bold: false
         property bool italic: false
-        property int pointSize: 14 //16
+        property int pointSize: 12 //16
     }
     property QtObject copyrightFont: QtObject {
         property bool bold: false
