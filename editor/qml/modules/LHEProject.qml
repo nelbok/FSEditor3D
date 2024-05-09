@@ -35,7 +35,11 @@ LHEModule {
         }
     }
 
-    placement: ComboBox {
+    placement: LHEEntity {
+        entity: MyProject
+    }
+
+    partA: ComboBox {
         textRole: "name"
         model: (MyProject) ? MyProject.places : null
         currentIndex: {

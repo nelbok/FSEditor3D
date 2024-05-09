@@ -5,9 +5,19 @@ QtObject {
     property QtObject window: QtObject {
         property color color: "#CCCCCC"
     }
+
+    // ITEMS
     property QtObject button: QtObject {
         property color normal: "#6666AA"
         property color menu: "#CCCCCC"
+    }
+    property QtObject textfield: QtObject {
+        property color color: "#CCCCCC"
+        property color disabled: "#999999"
+        property QtObject border: QtObject {
+            property color normal: "#000000"
+            property color selected: "#999999"
+        }
     }
     property QtObject module: QtObject {
         property QtObject border: QtObject {
@@ -28,6 +38,14 @@ QtObject {
         property color color: "#CCCCCC"
         property int radius: 5
     }
+
+    // FOREGROUND
+    property QtObject foreground: QtObject {
+        property color normal: "#AA0000"
+        property color placeholder: "#00AAAA"
+    }
+
+    // FONTS
     property QtObject titleFont: QtObject {
         property bool bold: true
         property bool italic: false

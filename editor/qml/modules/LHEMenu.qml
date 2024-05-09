@@ -28,6 +28,7 @@ LHERectangle {
 
         Text {
             text: MyAbout.name
+            color: LHEStyle.foreground.normal
             font.bold: LHEStyle.titleFont.bold
             font.italic: LHEStyle.titleFont.italic
             font.pointSize: LHEStyle.titleFont.pointSize
@@ -72,6 +73,7 @@ LHERectangle {
                 Layout.fillWidth: true
 
                 text: "Version " + MyAbout.version
+                color: LHEStyle.foreground.normal
                 font.bold: LHEStyle.copyrightFont.bold
                 font.italic: LHEStyle.copyrightFont.italic
                 font.pointSize: LHEStyle.copyrightFont.pointSize
@@ -83,6 +85,7 @@ LHERectangle {
                 Layout.fillWidth: true
 
                 text: MyAbout.copyright
+                color: LHEStyle.foreground.normal
                 font.bold: LHEStyle.copyrightFont.bold
                 font.italic: LHEStyle.copyrightFont.italic
                 font.pointSize: LHEStyle.copyrightFont.pointSize

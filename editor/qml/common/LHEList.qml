@@ -50,6 +50,7 @@ ColumnLayout {
                     anchors.fill: parent
                     text: " " + modelData.name
 
+                    color: LHEStyle.foreground.normal
                     font.bold: LHEStyle.normalFont.bold
                     font.italic: LHEStyle.normalFont.italic
                     font.pointSize: LHEStyle.normalFont.pointSize

@@ -4,7 +4,7 @@ import QtQuick.Layouts
 import LHEditor
 
 LHEModule {
-    property MyPlace current: null
+    property MyPlace myData: null
 
     id: root
     title: qsTr("Places")
@@ -15,10 +15,10 @@ LHEModule {
         anchors.right: parent.right
 
         model: (MyProject) ? MyProject.places : null
-        onCurrentDataChanged: (data) => {
-                                  root.current = data
-                                  var name = (data) ? data.name : "NULL"
-                                  console.log("Place chosen: " + name);
-                              }
+        onCurrentDataChanged: (data) => { root.myData = data }
+    }
+
+    placement: LHEEntity {
+        entity: myData
     }
 }

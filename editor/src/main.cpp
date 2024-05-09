@@ -45,8 +45,10 @@ int main(int argc, char* argv[]) {
 
 	qmlRegisterSingletonInstance("LHEditor", 1, 0, "MyProject", project.get());
 	qmlRegisterType<lh::Character>("LHEditor", 1, 0, "MyCharacter");
+	qmlRegisterType<lh::Entity>("LHEditor", 1, 0, "MyEntity");
 	qmlRegisterType<lh::Link>("LHEditor", 1, 0, "MyLink");
 	qmlRegisterType<lh::Place>("LHEditor", 1, 0, "MyPlace");
+	qmlRegisterType<lh::Placement>("LHEditor", 1, 0, "MyPlacement");
 
 	// LHEditor
 	QScopedPointer<lhe::About> about(new lhe::About);

@@ -35,6 +35,7 @@ LHERectangle {
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
 
+        color: LHEStyle.foreground.normal
         font.bold: LHEStyle.subTitleFont.bold
         font.italic: LHEStyle.subTitleFont.italic
         font.pointSize: LHEStyle.subTitleFont.pointSize

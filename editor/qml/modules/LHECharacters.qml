@@ -19,22 +19,8 @@ LHEModule {
         onCurrentDataChanged: (data) => { root.myData = data }
     }
 
-    placement: ColumnLayout {
-        TextField {
-            text: (root.myData) ? root.myData.name : "-"
-            onEditingFinished: { if (root.myData) root.myData.name = text }
-            enabled: root.myData
-        }
-        LHEPositionField {
-            position: (root.myData) ? root.myData.position : Qt.vector3d(0, 0, 0)
-            onPositionEdited: (position) => { if (root.myData) root.myData.position = position }
-            enabled: root.myData
-        }
-        LHERotationField {
-            rotation: (root.myData) ? root.myData.rotation : Qt.vector2d(0, 0)
-            onRotationEdited: (rotation) => { if (root.myData) root.myData.camera = rotation }
-            enabled: root.myData
-        }
+    placement: LHEPlacement {
+        placement: myData
     }
 
     partA: ColumnLayout {

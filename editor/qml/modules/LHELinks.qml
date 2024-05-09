@@ -4,6 +4,8 @@ import QtQuick.Layouts
 import LHEditor
 
 LHEModule {
+    property MyLink myData: null
+
     id: root
     title: qsTr("Links")
 
@@ -13,9 +15,10 @@ LHEModule {
         anchors.right: parent.right
 
         model: (MyProject) ? MyProject.links : null
-        onCurrentDataChanged: (data) => {
-                                  var name = (data) ? data.name : "NULL"
-                                  console.log("Link chosen: " + name);
-                              }
+        onCurrentDataChanged: (data) => { root.myData = data }
+    }
+
+    placement: LHEPlacement {
+        placement: myData
     }
 }

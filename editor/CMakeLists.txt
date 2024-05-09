@@ -12,12 +12,15 @@ set(PROJECT_SOURCES
 set(QML_SOURCES
 	qml/common/LHEButton.qml
 	qml/common/LHEColorField.qml
+	qml/common/LHEField.qml
 	qml/common/LHEList.qml
 	qml/common/LHEMenuButton.qml
 	qml/common/LHEModule.qml
-	qml/common/LHEPositionField.qml
 	qml/common/LHERectangle.qml
-	qml/common/LHERotationField.qml
+	qml/common/LHETextField.qml
+	qml/common/LHEVector3DField.qml
+	qml/data/LHEEntity.qml
+	qml/data/LHEPlacement.qml
 	qml/modules/LHECharacters.qml
 	qml/modules/LHELinks.qml
 	qml/modules/LHEMenu.qml
