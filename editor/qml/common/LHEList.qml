@@ -26,12 +26,12 @@ ColumnLayout {
         LHEMenuButton {
             text: qsTr("Del")
             width: 60
-            onClicked: root.removeClicked(list.model[list.currentIndex])
+            onClicked: { if (list.model[list.currentIndex]) root.removeClicked(list.model[list.currentIndex]) }
         }
         LHEMenuButton {
             text: qsTr("Dup")
             width: 60
-            onClicked: root.duplicateClicked(list.model[list.currentIndex])
+            onClicked: { if (list.model[list.currentIndex]) root.duplicateClicked(list.model[list.currentIndex]) }
         }
     }
 

@@ -56,7 +56,7 @@ public:
 	Q_INVOKABLE Place* duplicatePlace(Place* place);
 	void cleanPlaces();
 
-protected:
+private:
 	using Entity::copy;
 	using Entity::load;
 	using Entity::save;
