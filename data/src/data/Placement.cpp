@@ -11,13 +11,13 @@ namespace lh {
 struct Placement::Impl {
 	QVector3D position{};
 	QVector3D rotation{};
-	UuidPointer<Place> place{};
+	UuidPointer<Place>* place{ nullptr };
 };
 
 Placement::Placement(Project* project)
 	: Entity(project)
 	, _impl{ std::make_unique<Impl>() } {
-	initPlacePointer(_impl->place, project, this);
+	_impl->place = makePlacePointer(project, this);
 }
 
 Placement::~Placement() {}
@@ -53,11 +53,11 @@ void Placement::setRotation(const QVector3D& rotation) {
 }
 
 Place* Placement::place() const {
-	return (_impl->place.valid()) ? _impl->place.get() : nullptr;
+	return (_impl->place->valid()) ? _impl->place->get() : nullptr;
 }
 
-void Placement::setPlace(Place* newPlace) {
-	if (_impl->place.set(newPlace)) {
+void Placement::setPlace(Place* place) {
+	if (_impl->place->set(place)) {
 		emit placeUpdated();
 	}
 }
@@ -70,7 +70,7 @@ void Placement::load(const QJsonObject& json) {
 	Entity::load(json);
 	setPosition(Json::toVector3D(Json::toObject(lPosition, json)));
 	setRotation(Json::toVector3D(Json::toObject(lRotation, json)));
-	_impl->place.setUuid(Json::toUuid(Json::toValue(lPlace, json)));
+	_impl->place->setUuid(Json::toUuid(Json::toValue(lPlace, json)));
 	emit placeUpdated();
 }
 
@@ -78,6 +78,6 @@ void Placement::save(QJsonObject& json) const {
 	Entity::save(json);
 	json[lPosition] = Json::fromVector3D(_impl->position);
 	json[lRotation] = Json::fromVector3D(_impl->rotation);
-	json[lPlace] = Json::fromUuid(_impl->place.uuid());
+	json[lPlace] = Json::fromUuid(_impl->place->uuid());
 }
 } // namespace lh

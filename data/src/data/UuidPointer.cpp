@@ -6,15 +6,46 @@
 #include <lh/data/Project.hpp>
 
 namespace lh {
-void initCharacterPointer(UuidPointer<Character>& ptr, Project* project, QObject* parent) {
-	ptr.init(project, &Project::characters, &Project::charactersUpdated, parent);
+BasePointer::BasePointer(Project* project, void (Project::*signal)(), QObject* parent)
+	: QObject(parent)
+	, _project{ project } {
+	assert(project);
+	assert(signal);
+
+	QObject::connect(project, signal, this, &BasePointer::update);
 }
 
-void initLinkPointer(UuidPointer<Link>& ptr, Project* link, QObject* parent) {
-	ptr.init(link, &Project::links, &Project::linksUpdated, parent);
+BasePointer::~BasePointer() {}
+
+bool BasePointer::setUuid(const QUuid& uuid) {
+	assert(_project);
+	bool changed = _uuid != uuid;
+	if (changed) {
+		_uuid = uuid;
+		update();
+	}
+	return changed;
 }
 
-void initPlacePointer(UuidPointer<Place>& ptr, Project* project, QObject* parent) {
-	ptr.init(project, &Project::places, &Project::placesUpdated, parent);
+bool BasePointer::isNull() const {
+	assert(_project);
+	return _uuid.isNull();
+}
+
+const QUuid& BasePointer::uuid() const {
+	assert(_project);
+	return _uuid;
+}
+
+UuidPointer<Character>* makeCharacterPointer(Project* project, QObject* parent) {
+	return new UuidPointer<Character>(project, &Project::characters, &Project::charactersUpdated, parent);
+}
+
+UuidPointer<Link>* makeLinkPointer(Project* project, QObject* parent) {
+	return new UuidPointer<Link>(project, &Project::links, &Project::linksUpdated, parent);
+}
+
+UuidPointer<Place>* makePlacePointer(Project* project, QObject* parent) {
+	return new UuidPointer<Place>(project, &Project::places, &Project::placesUpdated, parent);
 }
 } // namespace lh

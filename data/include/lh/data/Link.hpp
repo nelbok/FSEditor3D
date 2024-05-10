@@ -13,11 +13,12 @@ public:
 	Link(Project* project);
 	virtual ~Link();
 
+	virtual void reset() override;
+	void copy(const Link& link);
+
 	Link* link() const;
 	void setLink(Link* link);
 
-	virtual void reset() override;
-	void copy(const Link& link);
 	virtual void load(const QJsonObject& json) override;
 	virtual void save(QJsonObject& json) const override;
 

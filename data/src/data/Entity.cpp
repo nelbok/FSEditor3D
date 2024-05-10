@@ -16,6 +16,16 @@ Entity::Entity(QObject* parent)
 
 Entity::~Entity() {}
 
+void Entity::reset() {
+	setUuid(QUuid::createUuid());
+	setName("Default");
+}
+
+void Entity::copy(const Entity& entity) {
+	setUuid(QUuid::createUuid());
+	setName(entity.name());
+}
+
 const QUuid& Entity::uuid() const {
 	return _impl->uuid;
 }
@@ -30,16 +40,6 @@ void Entity::setUuid(const QUuid& uuid) {
 
 void Entity::setName(const QString& name) {
 	TOOLS_SETTER(Entity, name);
-}
-
-void Entity::reset() {
-	setUuid(QUuid::createUuid());
-	setName("Default");
-}
-
-void Entity::copy(const Entity& entity) {
-	setUuid(QUuid::createUuid());
-	setName(entity.name());
 }
 
 constexpr auto lUuid = "uuid";

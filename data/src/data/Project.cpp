@@ -17,7 +17,7 @@
 namespace lh {
 
 struct Project::Impl {
-	UuidPointer<Place> defaultPlace{};
+	UuidPointer<Place>* defaultPlace{ nullptr };
 	QUrl path{};
 	QList<Character*> characters{};
 	QList<Link*> links{};
@@ -51,7 +51,7 @@ struct Project::Impl {
 Project::Project(QObject* parent)
 	: Entity(parent)
 	, _impl{ std::make_unique<Impl>() } {
-	initPlacePointer(_impl->defaultPlace, this, this);
+	_impl->defaultPlace = makePlacePointer(this, this);
 }
 
 Project::~Project() {}
@@ -86,7 +86,7 @@ void Project::load(const QUrl& url) {
 	reset();
 	Entity::load(json);
 
-	_impl->defaultPlace.setUuid(Json::toUuid(Json::toValue(lDefaultPlaces, json)));
+	_impl->defaultPlace->setUuid(Json::toUuid(Json::toValue(lDefaultPlaces, json)));
 	emit defaultPlaceUpdated();
 
 	_impl->loadList(this, _impl->characters, lCharacters, json, &Project::charactersUpdated);
@@ -106,7 +106,7 @@ void Project::save(const QUrl& url) {
 	QJsonObject json;
 	Entity::save(json);
 
-	json[lDefaultPlaces] = Json::fromUuid(_impl->defaultPlace.uuid());
+	json[lDefaultPlaces] = Json::fromUuid(_impl->defaultPlace->uuid());
 
 	_impl->saveList(_impl->characters, lCharacters, json);
 	_impl->saveList(_impl->links, lLinks, json);
@@ -127,11 +127,11 @@ void Project::setPath(const QUrl& path) {
 }
 
 Place* Project::defaultPlace() const {
-	return (_impl->defaultPlace.valid()) ? _impl->defaultPlace.get() : nullptr;
+	return (_impl->defaultPlace->valid()) ? _impl->defaultPlace->get() : nullptr;
 }
 
 void Project::setDefaultPlace(Place* defaultPlace) {
-	if (_impl->defaultPlace.set(defaultPlace)) {
+	if (_impl->defaultPlace->set(defaultPlace)) {
 		emit defaultPlaceUpdated();
 	}
 }
