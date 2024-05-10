@@ -7,6 +7,9 @@ set(PROJECT_SOURCES
 
 	src/Config.hpp.in
 
+	resources/resource.h
+	resources/logo.ico
+	resources/resources.rc.in
 	resources/resources.qrc
 )
 set(QML_SOURCES
@@ -35,7 +38,14 @@ set(QML_SINGLETON
 )
 set_source_files_properties(${QML_SINGLETON} PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 
-qt_add_executable(${CLH_EDITOR} ${PROJECT_SOURCES})
+configure_file(resources/resources.rc.in resources/resources.rc)
+configure_file(resources/resource.h resources/resource.h COPYONLY)
+configure_file(resources/logo.ico resources/logo.ico COPYONLY)
+set(OTHER_FILES
+	${CMAKE_CURRENT_BINARY_DIR}/resources/resources.rc
+)
+
+qt_add_executable(${CLH_EDITOR} ${PROJECT_SOURCES} ${OTHER_FILES})
 qt_add_qml_module(${CLH_EDITOR} URI ${CLH_EDITOR} VERSION 1.0 QML_FILES ${QML_SOURCES} ${QML_SINGLETON})
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" PREFIX "" FILES ${PROJECT_SOURCES} ${QML_SOURCES} ${QML_SINGLETON})
 include_directories(src)
@@ -47,7 +57,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR}/include)
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
 set_target_properties(${CLH_EDITOR} PROPERTIES
-	MACOSX_BUNDLE_GUI_IDENTIFIER com.${CENO_ORGANIZATION}.${CLH_EDITOR}
+	MACOSX_BUNDLE_GUI_IDENTIFIER com.${FS_ORGANIZATION}.${CLH_EDITOR}
 	MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
 	MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
 	MACOSX_BUNDLE TRUE
