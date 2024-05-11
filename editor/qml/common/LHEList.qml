@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls.Basic
 
-import LHEditor
+import editor
 
 ColumnLayout {
     property alias model: list.model

@@ -1,6 +1,6 @@
 import QtQuick
 
-import LHEditor
+import editor
 
 LHEEntity {
     property MyPlacement placement: null

@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 
-import LHEditor
+import editor
 
 LHEModule {
     property MyCharacter myData: null

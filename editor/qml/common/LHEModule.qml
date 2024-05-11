@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 
-import LHEditor
+import editor
 
 LHERectangle {
     property alias title: title.text

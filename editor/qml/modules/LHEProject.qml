@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls.Basic
 import QtQuick.Dialogs
 
-import LHEditor
+import editor
 
 LHEModule {
     id: root

@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Dialogs
 import QtQuick.Layouts
 
-import LHEditor
+import editor
 
 RowLayout {
     property alias name: name.text

@@ -1,6 +1,6 @@
 import QtQuick
 
-import LHEditor
+import editor
 
 LHERectangle {
     property alias text: label.text

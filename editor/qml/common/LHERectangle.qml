@@ -1,6 +1,6 @@
 import QtQuick
 
-import LHEditor
+import editor
 
 Rectangle {
     border.color: LHEStyle.module.border.colorNormal

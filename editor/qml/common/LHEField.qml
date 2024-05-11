@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls.Basic
 
-import LHEditor
+import editor
 
 TextField {
     color: LHEStyle.foreground.normal

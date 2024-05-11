@@ -51,16 +51,16 @@ int main(int argc, char* argv[]) {
 	project->setDefaultPlace(p2);
 	//-- TMP for TEST
 
-	qmlRegisterSingletonInstance("LHEditor", 1, 0, "MyProject", project.get());
-	qmlRegisterType<lh::Character>("LHEditor", 1, 0, "MyCharacter");
-	qmlRegisterType<lh::Entity>("LHEditor", 1, 0, "MyEntity");
-	qmlRegisterType<lh::Link>("LHEditor", 1, 0, "MyLink");
-	qmlRegisterType<lh::Place>("LHEditor", 1, 0, "MyPlace");
-	qmlRegisterType<lh::Placement>("LHEditor", 1, 0, "MyPlacement");
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyProject", project.get());
+	qmlRegisterType<lh::Character>("editor", 1, 0, "MyCharacter");
+	qmlRegisterType<lh::Entity>("editor", 1, 0, "MyEntity");
+	qmlRegisterType<lh::Link>("editor", 1, 0, "MyLink");
+	qmlRegisterType<lh::Place>("editor", 1, 0, "MyPlace");
+	qmlRegisterType<lh::Placement>("editor", 1, 0, "MyPlacement");
 
 	// LHEditor
 	QScopedPointer<lhe::About> about(new lhe::About);
-	qmlRegisterSingletonInstance("LHEditor", 1, 0, "MyAbout", about.get());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyAbout", about.get());
 
 	QObject::connect(
 		&engine, &QQmlApplicationEngine::objectCreationFailed, &app,
@@ -68,7 +68,7 @@ int main(int argc, char* argv[]) {
 			QCoreApplication::exit(-1);
 		},
 		Qt::QueuedConnection);
-	engine.loadFromModule("LHEditor", "Main");
+	engine.loadFromModule("editor", "Main");
 
 	return app.exec();
 }
