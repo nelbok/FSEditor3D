@@ -1,14 +1,25 @@
 name: Linux compilation
 on: [push]
 jobs:
-  ubuntu-latest:
+  qt6_6:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v3
+      - uses: jurplel/install-qt-action@v3
         with:
           version: '6.6.*'
           modules: qtquick3d qtquick3dphysics qtshadertools
       - run: cmake -B build
-      - run: cmake --build build | tree ${{ github.workspace }}
+      - run: cmake --build build -j
+      - run: ./build/tests/Tests -platform offscreen
+  qt6_5_LTS:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jurplel/install-qt-action@v3
+        with:
+          version: '6.5.*'
+          modules: qtquick3d qtquick3dphysics qtshadertools
+      - run: cmake -B build
+      - run: cmake --build build -j
+      - run: ./build/tests/Tests -platform offscreen
