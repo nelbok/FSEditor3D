@@ -17,6 +17,7 @@ set(QML_SOURCES
 	qml/common/LHEColorField.qml
 	qml/common/LHEComboBox.qml
 	qml/common/LHEField.qml
+	qml/common/LHEIconButton.qml
 	qml/common/LHEList.qml
 	qml/common/LHEMenuButton.qml
 	qml/common/LHEModule.qml

@@ -93,6 +93,27 @@ LHERectangle {
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
             }
+            RowLayout {
+                Layout.alignment: Qt.AlignHCenter
+
+                height: 20
+                spacing: 20
+                LHEIconButton {
+                    imageHeight: 20
+                    source: "qrc:/social/github.svg"
+                    onClicked: Qt.openUrlExternally(MyAbout.github)
+                }
+                LHEIconButton {
+                    imageHeight: 20
+                    source: "qrc:/social/discord.svg"
+                    onClicked: Qt.openUrlExternally(MyAbout.discord)
+                }
+                LHEIconButton {
+                    imageHeight: 20
+                    source: "qrc:/social/twitter.svg"
+                    onClicked: Qt.openUrlExternally(MyAbout.twitter)
+                }
+            }
         }
     }
 }
