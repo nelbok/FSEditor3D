@@ -3,6 +3,8 @@ qt_standard_project_setup(REQUIRES 6.5)
 set(PROJECT_SOURCES
 	src/controllers/About.cpp
 	src/controllers/About.hpp
+	src/controllers/Controller.cpp
+	src/controllers/Controller.hpp
 	src/main.cpp
 
 	src/Config.hpp.in

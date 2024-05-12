@@ -9,7 +9,7 @@
 #include <lh/data/Place.hpp>
 #include <lh/data/Project.hpp>
 
-#include "controllers/About.hpp"
+#include "controllers/Controller.hpp"
 #include "Config.hpp"
 
 int main(int argc, char* argv[]) {
@@ -21,10 +21,13 @@ int main(int argc, char* argv[]) {
 
 	QQmlApplicationEngine engine;
 
-	// LHData
-	QScopedPointer<lh::Project> project(new lh::Project);
-	project->reset();
+	QScopedPointer<lhe::Controller> controller(new lhe::Controller);
+
+	controller->init();
+
 	//-- TMP for TEST
+	auto* project = controller->project();
+
 	auto* p1 = project->createPlace();
 	auto* p2 = project->createPlace();
 	auto* p3 = project->createPlace();
@@ -51,7 +54,8 @@ int main(int argc, char* argv[]) {
 	project->setDefaultPlace(p2);
 	//-- TMP for TEST
 
-	qmlRegisterSingletonInstance("editor", 1, 0, "MyProject", project.get());
+	// LHData
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyProject", controller->project());
 	qmlRegisterType<lh::Character>("editor", 1, 0, "MyCharacter");
 	qmlRegisterType<lh::Entity>("editor", 1, 0, "MyEntity");
 	qmlRegisterType<lh::Link>("editor", 1, 0, "MyLink");
@@ -59,8 +63,7 @@ int main(int argc, char* argv[]) {
 	qmlRegisterType<lh::Placement>("editor", 1, 0, "MyPlacement");
 
 	// LHEditor
-	QScopedPointer<lhe::About> about(new lhe::About);
-	qmlRegisterSingletonInstance("editor", 1, 0, "MyAbout", about.get());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyAbout", controller->about());
 
 	QObject::connect(
 		&engine, &QQmlApplicationEngine::objectCreationFailed, &app,

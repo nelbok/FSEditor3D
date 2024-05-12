@@ -6,6 +6,7 @@ namespace lhe {
 
 About::About(QObject* parent)
 	: QObject(parent) {}
+
 About::~About() {}
 
 QString About::organization() const {
