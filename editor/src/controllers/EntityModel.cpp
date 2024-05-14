@@ -38,8 +38,9 @@ lh::Entity* EntityModel::currentData() const {
 }
 
 void EntityModel::setCurrentData(lh::Entity* currentData) {
-	assert(currentData);
-	if (_currentUuid != currentData->uuid()) {
+	if (currentData) {
+		if (_currentUuid == currentData->uuid())
+			return;
 		for (auto* entity : _model) {
 			if (entity->uuid() == currentData->uuid()) {
 				_currentUuid = currentData->uuid();
@@ -48,11 +49,11 @@ void EntityModel::setCurrentData(lh::Entity* currentData) {
 				return;
 			}
 		}
-		if (!_currentUuid.isNull()) {
-			_currentUuid = QUuid{};
-			emit currentIndexUpdated();
-			emit currentDataUpdated();
-		}
+	}
+	if (!_currentUuid.isNull()) {
+		_currentUuid = QUuid{};
+		emit currentIndexUpdated();
+		emit currentDataUpdated();
 	}
 }
 

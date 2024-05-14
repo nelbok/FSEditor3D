@@ -23,15 +23,16 @@ LHEEntity {
 
     LHEComboBox {
         name: qsTr("Place")
-        model: (MyProject) ? MyProject.places : null
-        currentIndex: {
-            if (root.placement && root.placement.place)
-                for(var i in MyProject.places) {
-                    if (MyProject.places[i].uuid === root.placement.place.uuid)
-                        return i
-                }
-            return -1
+
+        MyEntityModel {
+            id: myModel
+            model: (MyProject) ? MyProject.places : null
+            currentData: (root.placement) ? root.placement.place : null
+            onCurrentDataUpdated: { if (root.placement && root.placement.place !== currentData) root.placement.place = currentData }
         }
-        onActivated: { if (root.placement) root.placement.place = model[currentIndex] }
+
+        model: myModel
+        currentIndex: myModel.currentIndex
+        onActivated: myModel.currentIndex = currentIndex
     }
 }

@@ -35,16 +35,17 @@ LHEModule {
         spacing: 5
         LHEComboBox {
             name: qsTr("Default place")
-            model: (MyProject) ? MyProject.places : null
-            currentIndex: {
-                if (MyProject.defaultPlace)
-                    for(var i in MyProject.places) {
-                        if (MyProject.places[i].uuid === MyProject.defaultPlace.uuid)
-                            return i
-                    }
-                return -1
+
+            MyEntityModel {
+                id: myModel
+                model: (MyProject) ? MyProject.places : null
+                currentData: (MyProject) ? MyProject.defaultPlace : null
+                onCurrentDataUpdated: { if (MyProject && MyProject.defaultPlace !== currentData) MyProject.defaultPlace = currentData }
             }
-            onActivated: { if (MyProject) MyProject.defaultPlace = MyProject.places[currentIndex] }
+
+            model: myModel
+            currentIndex: myModel.currentIndex
+            onActivated: myModel.currentIndex = currentIndex
         }
     }
 

@@ -26,16 +26,17 @@ LHEModule {
         enabled: root.myData
         LHEComboBox {
             name: qsTr("Link")
-            model: (MyProject) ? MyProject.links : null
-            currentIndex: {
-                if (root.myData && root.myData.link)
-                    for(var i in MyProject.links) {
-                        if (MyProject.links[i].uuid === root.myData.link.uuid)
-                            return i
-                    }
-                return -1
+
+            MyEntityModel {
+                id: myModel
+                model: (MyProject) ? MyProject.links : null
+                currentData: (root.myData) ? root.myData.link : null
+                onCurrentDataUpdated: { if (root.myData && root.myData.link !== currentData) root.myData.link = currentData }
             }
-            onActivated: { if (root.myData) root.myData.link = model[currentIndex] }
+
+            model: myModel
+            currentIndex: myModel.currentIndex
+            onActivated: myModel.currentIndex = currentIndex
         }
     }
 }
