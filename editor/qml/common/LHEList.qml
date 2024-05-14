@@ -5,7 +5,7 @@ import QtQuick.Controls.Basic
 import editor
 
 ColumnLayout {
-    property alias model: list.model
+    property alias model: myModel.model
     signal createClicked()
     signal removeClicked(data: QtObject)
     signal duplicateClicked(data: QtObject)
@@ -26,12 +26,12 @@ ColumnLayout {
         LHEMenuButton {
             text: qsTr("Del")
             width: 60
-            onClicked: { if (list.model[list.currentIndex]) root.removeClicked(list.model[list.currentIndex]) }
+            onClicked: { if (myModel.currentData) root.removeClicked(myModel.currentData) }
         }
         LHEMenuButton {
             text: qsTr("Dup")
             width: 60
-            onClicked: { if (list.model[list.currentIndex]) root.duplicateClicked(list.model[list.currentIndex]) }
+            onClicked: { if (myModel.currentData) root.duplicateClicked(myModel.currentData) }
         }
     }
 
@@ -44,17 +44,29 @@ ColumnLayout {
         width: 180
         height: 180
 
+        MyEntityModel {
+            id: myModel
+            onCurrentDataUpdated: { root.currentDataChanged(myModel.currentData) }
+        }
+
         ListView {
             id: list
             anchors.fill: parent
             clip: true
 
+            model: myModel
+            currentIndex: myModel.currentIndex
+
             delegate: Item {
+                required property int index
+                required property string name
+
                 width: list.width
                 height: 30
                 Text {
                     anchors.fill: parent
-                    text: " " + modelData.name
+                    anchors.leftMargin: 10
+                    text: name
 
                     color: LHEStyle.foreground.normal
                     font.bold: LHEStyle.normalFont.bold
@@ -65,7 +77,7 @@ ColumnLayout {
                     MouseArea {
                         anchors.fill: parent
                         preventStealing: true
-                        onClicked: list.currentIndex = index
+                        onClicked: { myModel.currentIndex = index }
                     }
                 }
             }
@@ -80,14 +92,11 @@ ColumnLayout {
                 }
             }
 
-            onCurrentIndexChanged: (model) ? root.currentDataChanged(model[currentIndex]) : null
-            Component.onCompleted: currentIndex = -1
-
             MouseArea {
                 anchors.fill: parent
                 propagateComposedEvents: true
                 onClicked: (mouse) => {
-                    list.currentIndex = -1
+                    myModel.currentIndex = -1
                     mouse.accepted = false;
                 }
             }

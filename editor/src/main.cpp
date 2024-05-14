@@ -1,8 +1,6 @@
-#include <QtGui/QFont>
 #include <QtGui/QGuiApplication>
 #include <QtGui/QIcon>
 #include <QtQml/QQmlApplicationEngine>
-#include <QtQml/QQmlContext>
 
 #include <lh/data/Character.hpp>
 #include <lh/data/Link.hpp>
@@ -10,6 +8,7 @@
 #include <lh/data/Project.hpp>
 
 #include "controllers/Controller.hpp"
+#include "controllers/EntityModel.hpp"
 #include "Config.hpp"
 
 int main(int argc, char* argv[]) {
@@ -64,6 +63,7 @@ int main(int argc, char* argv[]) {
 
 	// LHEditor
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyAbout", controller->about());
+	qmlRegisterType<lhe::EntityModel>("editor", 1, 0, "MyEntityModel");
 
 	QObject::connect(
 		&engine, &QQmlApplicationEngine::objectCreationFailed, &app,

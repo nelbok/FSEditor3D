@@ -5,6 +5,8 @@ set(PROJECT_SOURCES
 	src/controllers/About.hpp
 	src/controllers/Controller.cpp
 	src/controllers/Controller.hpp
+	src/controllers/EntityModel.cpp
+	src/controllers/EntityModel.hpp
 	src/main.cpp
 
 	src/Config.hpp.in
