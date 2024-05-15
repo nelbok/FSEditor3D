@@ -13,8 +13,12 @@ void Controller::init() {
 
 	_about = new About(this);
 	_project = new lh::Project(this);
+	_placeModel = new PlaceModel(this);
 
 	_project->reset();
+
+	// models
+	_placeModel->init(_project);
 }
 
 About* Controller::about() const {
@@ -25,5 +29,10 @@ About* Controller::about() const {
 lh::Project* Controller::project() const {
 	assert(_project);
 	return _project;
+}
+
+PlaceModel* Controller::placeModel() const {
+	assert(_placeModel);
+	return _placeModel;
 }
 } // namespace lhe

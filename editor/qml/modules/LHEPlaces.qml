@@ -9,12 +9,19 @@ LHEModule {
     id: root
     title: qsTr("Places")
 
+    MySelectionManager {
+        id: mng
+        model: MyController.placeModel
+        onCurrentDataChanged: root.myData = currentData
+    }
+
     selection: LHEList {
-        model: (MyProject) ? MyProject.places : null
-        onCreateClicked: { if (MyProject) MyProject.createPlace() }
-        onRemoveClicked: (data) => { if (MyProject) MyProject.removePlace(data) }
-        onDuplicateClicked: (data) => { if (MyProject) MyProject.duplicatePlace(data) }
-        onCurrentDataChanged: (data) => { root.myData = data }
+        model: mng.model
+        currentIndex: mng.currentIndex
+        onItemClicked: (index) => { mng.currentIndex = index }
+        onCreateClicked: { MyProject.createPlace() }
+        onRemoveClicked: { if (mng.currentData) MyProject.removePlace(mng.currentData) }
+        onDuplicateClicked: { if (mng.currentData) MyProject.duplicatePlace(mng.currentData) }
     }
 
     placement: LHEEntity {

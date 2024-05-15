@@ -1,12 +1,16 @@
 qt_standard_project_setup(REQUIRES 6.5)
 
 set(PROJECT_SOURCES
+	src/controllers/models/EntityModel.cpp
+	src/controllers/models/EntityModel.hpp
+	src/controllers/models/PlaceModel.cpp
+	src/controllers/models/PlaceModel.hpp
 	src/controllers/About.cpp
 	src/controllers/About.hpp
 	src/controllers/Controller.cpp
 	src/controllers/Controller.hpp
-	src/controllers/EntityModel.cpp
-	src/controllers/EntityModel.hpp
+	src/controllers/SelectionManager.cpp
+	src/controllers/SelectionManager.hpp
 	src/main.cpp
 
 	src/Config.hpp.in

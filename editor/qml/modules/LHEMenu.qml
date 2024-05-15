@@ -27,7 +27,7 @@ LHERectangle {
         spacing: 41.6
 
         Text {
-            text: MyAbout.name
+            text: MyController.about.name
             color: LHEStyle.foreground.normal
             font.bold: LHEStyle.titleFont.bold
             font.italic: LHEStyle.titleFont.italic
@@ -72,7 +72,7 @@ LHERectangle {
             Text {
                 Layout.fillWidth: true
 
-                text: "Version " + MyAbout.version
+                text: "Version " + MyController.about.version
                 color: LHEStyle.foreground.normal
                 font.bold: LHEStyle.copyrightFont.bold
                 font.italic: LHEStyle.copyrightFont.italic
@@ -84,7 +84,7 @@ LHERectangle {
             Text {
                 Layout.fillWidth: true
 
-                text: MyAbout.copyright
+                text: MyController.about.copyright
                 color: LHEStyle.foreground.normal
                 font.bold: LHEStyle.copyrightFont.bold
                 font.italic: LHEStyle.copyrightFont.italic
@@ -101,17 +101,17 @@ LHERectangle {
                 LHEIconButton {
                     imageHeight: 20
                     source: "qrc:/social/github.svg"
-                    onClicked: Qt.openUrlExternally(MyAbout.github)
+                    onClicked: Qt.openUrlExternally(MyController.about.github)
                 }
                 LHEIconButton {
                     imageHeight: 20
                     source: "qrc:/social/discord.svg"
-                    onClicked: Qt.openUrlExternally(MyAbout.discord)
+                    onClicked: Qt.openUrlExternally(MyController.about.discord)
                 }
                 LHEIconButton {
                     imageHeight: 20
                     source: "qrc:/social/twitter.svg"
-                    onClicked: Qt.openUrlExternally(MyAbout.twitter)
+                    onClicked: Qt.openUrlExternally(MyController.about.twitter)
                 }
             }
         }

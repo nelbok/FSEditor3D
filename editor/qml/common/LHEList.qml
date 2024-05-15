@@ -5,11 +5,12 @@ import QtQuick.Controls.Basic
 import editor
 
 ColumnLayout {
-    property alias model: myModel.model
+    property alias model: list.model
+    property alias currentIndex: list.currentIndex
     signal createClicked()
-    signal removeClicked(data: QtObject)
-    signal duplicateClicked(data: QtObject)
-    signal currentDataChanged(data: QtObject)
+    signal removeClicked()
+    signal duplicateClicked()
+    signal itemClicked(index: int)
 
     id: root
 
@@ -26,12 +27,12 @@ ColumnLayout {
         LHEMenuButton {
             text: qsTr("Del")
             width: 60
-            onClicked: { if (myModel.currentData) root.removeClicked(myModel.currentData) }
+            onClicked: { root.removeClicked() }
         }
         LHEMenuButton {
             text: qsTr("Dup")
             width: 60
-            onClicked: { if (myModel.currentData) root.duplicateClicked(myModel.currentData) }
+            onClicked: { root.duplicateClicked() }
         }
     }
 
@@ -44,18 +45,10 @@ ColumnLayout {
         width: 180
         height: 180
 
-        MyEntityModel {
-            id: myModel
-            onCurrentDataUpdated: { root.currentDataChanged(myModel.currentData) }
-        }
-
         ListView {
             id: list
             anchors.fill: parent
             clip: true
-
-            model: myModel
-            currentIndex: myModel.currentIndex
 
             delegate: Item {
                 required property int index
@@ -77,7 +70,7 @@ ColumnLayout {
                     MouseArea {
                         anchors.fill: parent
                         preventStealing: true
-                        onClicked: { myModel.currentIndex = index }
+                        onClicked: { root.itemClicked(index) }
                     }
                 }
             }
@@ -96,9 +89,9 @@ ColumnLayout {
                 anchors.fill: parent
                 propagateComposedEvents: true
                 onClicked: (mouse) => {
-                    myModel.currentIndex = -1
-                    mouse.accepted = false;
-                }
+                               root.itemClicked(-1)
+                               mouse.accepted = false
+                           }
             }
         }
     }

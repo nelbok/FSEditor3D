@@ -8,7 +8,7 @@
 #include <lh/data/Project.hpp>
 
 #include "controllers/Controller.hpp"
-#include "controllers/EntityModel.hpp"
+#include "controllers/SelectionManager.hpp"
 #include "Config.hpp"
 
 int main(int argc, char* argv[]) {
@@ -62,8 +62,8 @@ int main(int argc, char* argv[]) {
 	qmlRegisterType<lh::Placement>("editor", 1, 0, "MyPlacement");
 
 	// LHEditor
-	qmlRegisterSingletonInstance("editor", 1, 0, "MyAbout", controller->about());
-	qmlRegisterType<lhe::EntityModel>("editor", 1, 0, "MyEntityModel");
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyController", controller.get());
+	qmlRegisterType<lhe::SelectionManager>("editor", 1, 0, "MySelectionManager");
 
 	QObject::connect(
 		&engine, &QQmlApplicationEngine::objectCreationFailed, &app,
