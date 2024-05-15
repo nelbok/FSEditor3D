@@ -9,12 +9,19 @@ LHEModule {
     id: root
     title: qsTr("Links")
 
+    MySelectionManager {
+        id: mng
+        model: MyController.linkModel
+        onCurrentDataChanged: root.myData = currentData
+    }
+
     selection: LHEList {
-        model: (MyProject) ? MyProject.links : null
-        onCreateClicked: { if (MyProject) MyProject.createLink() }
-        onRemoveClicked: (data) => { if (MyProject) MyProject.removeLink(data) }
-        onDuplicateClicked: (data) => { if (MyProject) MyProject.duplicateLink(data) }
-        onCurrentDataChanged: (data) => { root.myData = data }
+        model: mng.model
+        currentIndex: mng.currentIndex
+        onItemClicked: (index) => { mng.currentIndex = index }
+        onCreateClicked: { MyProject.createLink() }
+        onRemoveClicked: { if (mng.currentData) MyProject.removeLink(mng.currentData) }
+        onDuplicateClicked: { if (mng.currentData) MyProject.duplicateLink(mng.currentData) }
     }
 
     placement: LHEPlacement {

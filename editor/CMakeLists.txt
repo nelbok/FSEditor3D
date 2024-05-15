@@ -1,8 +1,12 @@
 qt_standard_project_setup(REQUIRES 6.5)
 
 set(PROJECT_SOURCES
+	src/controllers/models/CharacterModel.cpp
+	src/controllers/models/CharacterModel.hpp
 	src/controllers/models/EntityModel.cpp
 	src/controllers/models/EntityModel.hpp
+	src/controllers/models/LinkModel.cpp
+	src/controllers/models/LinkModel.hpp
 	src/controllers/models/PlaceModel.cpp
 	src/controllers/models/PlaceModel.hpp
 	src/controllers/About.cpp

@@ -9,12 +9,19 @@ LHEModule {
     id: root
     title: qsTr("Characters")
 
+    MySelectionManager {
+        id: mng
+        model: MyController.characterModel
+        onCurrentDataChanged: root.myData = currentData
+    }
+
     selection: LHEList {
-        model: (MyProject) ? MyProject.characters : null
-        onCreateClicked: { if (MyProject) MyProject.createCharacter() }
-        onRemoveClicked: (data) => { if (MyProject) MyProject.removeCharacter(data) }
-        onDuplicateClicked: (data) => { if (MyProject) MyProject.duplicateCharacter(data) }
-        onCurrentDataChanged: (data) => { root.myData = data }
+        model: mng.model
+        currentIndex: mng.currentIndex
+        onItemClicked: (index) => { mng.currentIndex = index }
+        onCreateClicked: { MyProject.createCharacter() }
+        onRemoveClicked: { if (mng.currentData) MyProject.removeCharacter(mng.currentData) }
+        onDuplicateClicked: { if (mng.currentData) MyProject.duplicateCharacter(mng.currentData) }
     }
 
     placement: LHEPlacement {

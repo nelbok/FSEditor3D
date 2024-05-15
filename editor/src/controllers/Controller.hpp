@@ -4,6 +4,8 @@
 
 #include <lh/data/Project.hpp>
 
+#include "models/CharacterModel.hpp"
+#include "models/LinkModel.hpp"
 #include "models/PlaceModel.hpp"
 #include "About.hpp"
 
@@ -12,6 +14,8 @@ class Controller : public QObject {
 	Q_OBJECT
 	Q_PROPERTY(About* about READ about CONSTANT)
 	Q_PROPERTY(lh::Project* project READ project CONSTANT)
+	Q_PROPERTY(CharacterModel* characterModel READ characterModel CONSTANT)
+	Q_PROPERTY(LinkModel* linkModel READ linkModel CONSTANT)
 	Q_PROPERTY(PlaceModel* placeModel READ placeModel CONSTANT)
 
 public:
@@ -22,11 +26,15 @@ public:
 
 	About* about() const;
 	lh::Project* project() const;
+	CharacterModel* characterModel() const;
+	LinkModel* linkModel() const;
 	PlaceModel* placeModel() const;
 
 private:
 	About* _about{ nullptr };
 	lh::Project* _project{ nullptr };
+	CharacterModel* _characterModel{ nullptr };
+	LinkModel* _linkModel{ nullptr };
 	PlaceModel* _placeModel{ nullptr };
 };
 } // namespace lhe

@@ -13,11 +13,15 @@ void Controller::init() {
 
 	_about = new About(this);
 	_project = new lh::Project(this);
+	_characterModel = new CharacterModel(this);
+	_linkModel = new LinkModel(this);
 	_placeModel = new PlaceModel(this);
 
 	_project->reset();
 
 	// models
+	_characterModel->init(_project);
+	_linkModel->init(_project);
 	_placeModel->init(_project);
 }
 
@@ -29,6 +33,16 @@ About* Controller::about() const {
 lh::Project* Controller::project() const {
 	assert(_project);
 	return _project;
+}
+
+CharacterModel* Controller::characterModel() const {
+	assert(_characterModel);
+	return _characterModel;
+}
+
+LinkModel* Controller::linkModel() const {
+	assert(_linkModel);
+	return _linkModel;
 }
 
 PlaceModel* Controller::placeModel() const {
