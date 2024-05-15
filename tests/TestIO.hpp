@@ -2,8 +2,6 @@
 
 #include <QtTest/QtTest>
 
-#include <QTemporaryFile>
-
 #include <lh/data/Link.hpp>
 #include <lh/data/Project.hpp>
 #include <lh/data/Place.hpp>
@@ -32,7 +30,7 @@ struct TestIO {
 private:
 	lh::Project* _p1{ nullptr };
 	lh::Project* _p2{ nullptr };
-	QUrl _path{ "TestIO.json" };
+	QJsonObject _json{};
 
 	void init() {
 		auto* p1 = _p1->createPlace();
@@ -66,11 +64,11 @@ private:
 	}
 
 	void save() {
-		QBENCHMARK_ONCE(_p1->save(_path));
+		QBENCHMARK(_p1->save(_json));
 	}
 
 	void load() {
-		QBENCHMARK_ONCE(_p2->load(_path));
+		QBENCHMARK(_p2->load(_json));
 	}
 
 	void compare() {

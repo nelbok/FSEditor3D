@@ -64,60 +64,6 @@ void Project::reset() {
 	cleanPlaces();
 }
 
-constexpr auto lDefaultPlaces = "defaultPlace";
-constexpr auto lCharacters = "characters";
-constexpr auto lLinks = "links";
-constexpr auto lPlaces = "places";
-
-void Project::load(const QUrl& url) {
-	QFile file(Tools::toPath(url));
-	if (!file.open(QIODevice::ReadOnly)) {
-		// ERROR
-		return;
-	}
-	setPath(url);
-
-	// Read
-	const auto& data = file.readAll();
-	const auto& loadDoc = QJsonDocument::fromJson(data);
-	const auto& json = loadDoc.object();
-
-	// JSON
-	reset();
-	Entity::load(json);
-
-	_impl->defaultPlace->setUuid(Json::toUuid(Json::toValue(lDefaultPlaces, json)));
-	emit defaultPlaceUpdated();
-
-	_impl->loadList(this, _impl->characters, lCharacters, json, &Project::charactersUpdated);
-	_impl->loadList(this, _impl->links, lLinks, json, &Project::linksUpdated);
-	_impl->loadList(this, _impl->places, lPlaces, json, &Project::placesUpdated);
-}
-
-void Project::save(const QUrl& url) {
-	QSaveFile file(Tools::toPath(url));
-	if (!file.open(QIODevice::WriteOnly)) {
-		// ERROR
-		return;
-	}
-	setPath(url);
-
-	// JSON
-	QJsonObject json;
-	Entity::save(json);
-
-	json[lDefaultPlaces] = Json::fromUuid(_impl->defaultPlace->uuid());
-
-	_impl->saveList(_impl->characters, lCharacters, json);
-	_impl->saveList(_impl->links, lLinks, json);
-	_impl->saveList(_impl->places, lPlaces, json);
-
-	// Write
-	const auto& data = QJsonDocument(json).toJson();
-	file.write(data);
-	file.commit();
-}
-
 const QUrl& Project::path() const {
 	return _impl->path;
 }
@@ -206,5 +152,57 @@ Place* Project::duplicatePlace(Place* place) {
 
 void Project::cleanPlaces() {
 	TOOLS_CLEAN_ENTITIES(Project, places);
+}
+
+constexpr auto lDefaultPlaces = "defaultPlace";
+constexpr auto lCharacters = "characters";
+constexpr auto lLinks = "links";
+constexpr auto lPlaces = "places";
+
+void Project::load(const QUrl& url) {
+	QFile file(Tools::toPath(url));
+	if (!file.open(QIODevice::ReadOnly)) {
+		// ERROR
+		return;
+	}
+	setPath(url);
+
+	// Read
+	load(QJsonDocument::fromJson(file.readAll()).object());
+}
+
+void Project::load(const QJsonObject& json) {
+	reset();
+	Entity::load(json);
+
+	_impl->defaultPlace->setUuid(Json::toUuid(Json::toValue(lDefaultPlaces, json)));
+	emit defaultPlaceUpdated();
+
+	_impl->loadList(this, _impl->characters, lCharacters, json, &Project::charactersUpdated);
+	_impl->loadList(this, _impl->links, lLinks, json, &Project::linksUpdated);
+	_impl->loadList(this, _impl->places, lPlaces, json, &Project::placesUpdated);
+}
+
+void Project::save(const QUrl& url) {
+	QSaveFile file(Tools::toPath(url));
+	if (!file.open(QIODevice::WriteOnly)) {
+		// ERROR
+		return;
+	}
+	setPath(url);
+
+	// Write
+	QJsonObject json;
+	save(json);
+	file.write(QJsonDocument(json).toJson());
+	file.commit();
+}
+
+void Project::save(QJsonObject& json) const {
+	Entity::save(json);
+	json[lDefaultPlaces] = Json::fromUuid(_impl->defaultPlace->uuid());
+	_impl->saveList(_impl->characters, lCharacters, json);
+	_impl->saveList(_impl->links, lLinks, json);
+	_impl->saveList(_impl->places, lPlaces, json);
 }
 } // namespace lh

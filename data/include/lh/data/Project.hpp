@@ -23,8 +23,6 @@ public:
 	virtual ~Project();
 
 	Q_INVOKABLE virtual void reset() override;
-	Q_INVOKABLE void load(const QUrl& url);
-	Q_INVOKABLE void save(const QUrl& url);
 
 	const QUrl& path() const;
 	void setPath(const QUrl& path);
@@ -56,10 +54,14 @@ public:
 	Q_INVOKABLE Place* duplicatePlace(Place* place);
 	void cleanPlaces();
 
+	Q_INVOKABLE void load(const QUrl& url);
+	virtual void load(const QJsonObject& json) override;
+
+	Q_INVOKABLE void save(const QUrl& url);
+	virtual void save(QJsonObject& json) const override;
+
 private:
 	using Entity::copy;
-	using Entity::load;
-	using Entity::save;
 
 private:
 	struct Impl;
