@@ -8,6 +8,7 @@ SelectionManager::SelectionManager(QObject* parent)
 SelectionManager::~SelectionManager() {}
 
 int SelectionManager::currentIndex() const {
+	assert(_model);
 	const auto& datas = _model->datas();
 	for (int i = 0; i < datas.size(); ++i) {
 		if (datas.at(i)->uuid() == _currentUuid) {
@@ -18,6 +19,7 @@ int SelectionManager::currentIndex() const {
 }
 
 void SelectionManager::setCurrentIndex(int currentIndex) {
+	assert(_model);
 	const auto& datas = _model->datas();
 	if (0 <= currentIndex && currentIndex < datas.size()) {
 		_currentUuid = datas.at(currentIndex)->uuid();
@@ -28,6 +30,7 @@ void SelectionManager::setCurrentIndex(int currentIndex) {
 }
 
 lh::Entity* SelectionManager::currentData() const {
+	assert(_model);
 	const auto& datas = _model->datas();
 	for (auto* entity : datas) {
 		if (entity->uuid() == _currentUuid) {
@@ -38,6 +41,7 @@ lh::Entity* SelectionManager::currentData() const {
 }
 
 void SelectionManager::setCurrentData(lh::Entity* currentData) {
+	assert(_model);
 	if (currentData) {
 		if (_currentUuid == currentData->uuid())
 			return;

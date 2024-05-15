@@ -36,16 +36,16 @@ LHEModule {
         LHEComboBox {
             name: qsTr("Default place")
 
-            MyEntityModel {
-                id: myModel
-                model: (MyProject) ? MyProject.places : null
-                currentData: (MyProject) ? MyProject.defaultPlace : null
-                onCurrentDataUpdated: { if (MyProject && MyProject.defaultPlace !== currentData) MyProject.defaultPlace = currentData }
+            MySelectionManager {
+                id: mng
+                model: MyController.placeModel
+                currentData: MyProject.defaultPlace
+                onCurrentUpdated: { if (MyProject && MyProject.defaultPlace !== currentData) MyProject.defaultPlace = currentData }
             }
 
-            model: myModel
-            currentIndex: myModel.currentIndex
-            onActivated: myModel.currentIndex = currentIndex
+            model: mng.model
+            currentIndex: mng.currentIndex
+            onActivated: mng.currentIndex = currentIndex
         }
     }
 
