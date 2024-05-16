@@ -50,5 +50,12 @@ Window {
             anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
         }
+
+        LHEToolBar {
+            anchors.top: parent.top
+            anchors.topMargin: 10
+            anchors.right: menu.left
+            anchors.rightMargin: 10
+        }
     }
 }

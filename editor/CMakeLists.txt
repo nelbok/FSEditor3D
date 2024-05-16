@@ -36,6 +36,7 @@ set(QML_SOURCES
 	qml/common/LHERectangle.qml
 	qml/common/LHESpinBox.qml
 	qml/common/LHETextField.qml
+	qml/common/LHEToolButton.qml
 	qml/common/LHEVector3DField.qml
 	qml/data/LHEEntity.qml
 	qml/data/LHEPlacement.qml
@@ -44,6 +45,7 @@ set(QML_SOURCES
 	qml/modules/LHEMenu.qml
 	qml/modules/LHEPlaces.qml
 	qml/modules/LHEProject.qml
+	qml/modules/LHEToolBar.qml
 	qml/Main.qml
 )
 set(QML_SINGLETON

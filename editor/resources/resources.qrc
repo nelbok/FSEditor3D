@@ -7,4 +7,11 @@
         <file alias="github.svg">icons/github.svg</file>
         <file alias="twitter.svg">icons/twitter.svg</file>
     </qresource>
+    <qresource prefix="/tools">
+        <file alias="new.svg">icons/new.svg</file>
+        <file alias="load.svg">icons/load.svg</file>
+        <file alias="save.svg">icons/save.svg</file>
+        <file alias="undo.svg">icons/undo.svg</file>
+        <file alias="redo.svg">icons/redo.svg</file>
+    </qresource>
 </RCC>

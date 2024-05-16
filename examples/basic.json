@@ -1,0 +1,127 @@
+{
+    "characters": [
+        {
+            "clothes": {
+                "a": 255,
+                "b": 0,
+                "g": 0,
+                "r": 255
+            },
+            "gender": 0,
+            "hair": {
+                "a": 255,
+                "b": 42,
+                "g": 42,
+                "r": 165
+            },
+            "height": 170,
+            "name": "Character 1",
+            "place": "{c01693b8-142f-4ec4-8842-0d38e5ce5d6f}",
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "skin": {
+                "a": 255,
+                "b": 225,
+                "g": 228,
+                "r": 255
+            },
+            "species": 0,
+            "uuid": "{6ea7698c-2dbc-410d-b940-80620ef34315}"
+        },
+        {
+            "clothes": {
+                "a": 255,
+                "b": 0,
+                "g": 0,
+                "r": 255
+            },
+            "gender": 0,
+            "hair": {
+                "a": 255,
+                "b": 42,
+                "g": 42,
+                "r": 165
+            },
+            "height": 170,
+            "name": "Character 2",
+            "place": "{49223584-1fca-412b-bb3c-001e51eab9e1}",
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "skin": {
+                "a": 255,
+                "b": 225,
+                "g": 228,
+                "r": 255
+            },
+            "species": 0,
+            "uuid": "{0382f878-bbb4-4337-9ad3-99e71a79fd4d}"
+        }
+    ],
+    "defaultPlace": "{c01693b8-142f-4ec4-8842-0d38e5ce5d6f}",
+    "links": [
+        {
+            "link": "{caf9be33-b457-4fd8-a770-b4c777500f1b}",
+            "name": "Link 1",
+            "place": "{c01693b8-142f-4ec4-8842-0d38e5ce5d6f}",
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "uuid": "{e8c45c0e-67bb-4169-b859-93fe5efc1e2e}"
+        },
+        {
+            "link": "{e8c45c0e-67bb-4169-b859-93fe5efc1e2e}",
+            "name": "Link 2",
+            "place": "{49223584-1fca-412b-bb3c-001e51eab9e1}",
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "uuid": "{caf9be33-b457-4fd8-a770-b4c777500f1b}"
+        }
+    ],
+    "name": "Default",
+    "places": [
+        {
+            "name": "Place 1",
+            "uuid": "{3a850f15-dc92-4bc0-bd79-88d9e052163c}"
+        },
+        {
+            "name": "Place 2",
+            "uuid": "{c01693b8-142f-4ec4-8842-0d38e5ce5d6f}"
+        },
+        {
+            "name": "Place 3",
+            "uuid": "{49223584-1fca-412b-bb3c-001e51eab9e1}"
+        }
+    ],
+    "uuid": "{faae70cf-2506-44e2-8ae5-d0dd2248f377}"
+}
