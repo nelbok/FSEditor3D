@@ -16,7 +16,7 @@ LHERectangle {
 
         LHEToolButton {
             source: "qrc:/tools/new.svg"
-            onClicked: MyProject.reset();
+            onClicked: MyController.reset();
         }
 
         LHEToolButton {
@@ -31,12 +31,12 @@ LHERectangle {
 
         LHEToolButton {
             source: "qrc:/tools/undo.svg"
-            onClicked: console.log("Undo not implemented yet")
+            onClicked: { if (MyController.commands.canUndo) MyController.commands.undo() }
         }
 
         LHEToolButton {
             source: "qrc:/tools/redo.svg"
-            onClicked: console.log("Redo not implemented yet")
+            onClicked: { if (MyController.commands.canRedo) MyController.commands.redo() }
         }
     }
 
@@ -55,10 +55,10 @@ LHERectangle {
         onAccepted: {
             switch(fileMode) {
             case FileDialog.SaveFile:
-                MyProject.save(selectedFile);
+                MyController.save(selectedFile);
                 break;
             case FileDialog.OpenFile:
-                MyProject.load(selectedFile);
+                MyController.load(selectedFile);
                 break;
             default:
                 //Nothing to do

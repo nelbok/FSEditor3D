@@ -22,7 +22,7 @@ public:
 	Project(QObject* parent = nullptr);
 	virtual ~Project();
 
-	Q_INVOKABLE virtual void reset() override;
+	virtual void reset() override;
 
 	const QUrl& path() const;
 	void setPath(const QUrl& path);
@@ -54,10 +54,10 @@ public:
 	Q_INVOKABLE Place* duplicatePlace(Place* place);
 	void cleanPlaces();
 
-	Q_INVOKABLE void load(const QUrl& url);
+	void load(const QUrl& url);
 	virtual void load(const QJsonObject& json) override;
 
-	Q_INVOKABLE void save(const QUrl& url);
+	void save(const QUrl& url);
 	virtual void save(QJsonObject& json) const override;
 
 private:

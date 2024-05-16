@@ -1,6 +1,16 @@
 qt_standard_project_setup(REQUIRES 6.5)
 
 set(PROJECT_SOURCES
+	src/controllers/commands/BaseCommand.cpp
+	src/controllers/commands/BaseCommand.hpp
+	#src/controllers/commands/ContainerCommand.hpp
+	#src/controllers/commands/CreateCommand.hpp
+	#src/controllers/commands/DestroyCommand.hpp
+	src/controllers/commands/EntityCommand.cpp
+	src/controllers/commands/EntityCommand.hpp
+	src/controllers/commands/ProjectCommand.cpp
+	src/controllers/commands/ProjectCommand.hpp
+	src/controllers/commands/ValueCommand.hpp
 	src/controllers/models/CharacterModel.cpp
 	src/controllers/models/CharacterModel.hpp
 	src/controllers/models/EntityModel.cpp
@@ -11,6 +21,8 @@ set(PROJECT_SOURCES
 	src/controllers/models/PlaceModel.hpp
 	src/controllers/About.cpp
 	src/controllers/About.hpp
+	src/controllers/Commands.cpp
+	src/controllers/Commands.hpp
 	src/controllers/Controller.cpp
 	src/controllers/Controller.hpp
 	src/controllers/SelectionManager.cpp
