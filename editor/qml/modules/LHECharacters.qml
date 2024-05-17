@@ -34,17 +34,17 @@ LHEModule {
         LHEColorField {
             name: qsTr("Hair")
             color: (root.myData) ? root.myData.hair : "gray"
-            onColorEdited: (color) => { if (root.myData) root.myData.hair = color }
+            onColorEdited: (color) => { if (root.myData) MyController.characterCommand.setHair(root.myData, color) }
         }
         LHEColorField {
             name: qsTr("Skin")
             color: (root.myData) ? root.myData.skin : "gray"
-            onColorEdited: (color) => { if (root.myData) root.myData.skin = color }
+            onColorEdited: (color) => { if (root.myData) MyController.characterCommand.setSkin(root.myData, color) }
         }
         LHEColorField {
             name: qsTr("Clothes")
             color: (root.myData) ? root.myData.clothes : "gray"
-            onColorEdited: (color) => { if (root.myData) root.myData.clothes = color }
+            onColorEdited: (color) => { if (root.myData) MyController.characterCommand.setClothes(root.myData, color) }
         }
     }
 
@@ -56,7 +56,7 @@ LHEModule {
             from: 135
             to: 200
             value: (root.myData) ? root.myData.height : 0
-            onValueChanged: { if (root.myData) root.myData.height = value }
+            onValueChanged: { if (root.myData) MyController.characterCommand.setHeight(root.myData, value) }
         }
         LHEComboBox {
             name: qsTr("Species")
@@ -78,7 +78,7 @@ LHEModule {
                 { uuid: MyCharacter.Species.Lizard, name: qsTr("Lizard") },
             ]
             currentIndex: { (root.myData) ? indexOfValue(root.myData.species) : -1 }
-            onActivated: { if (root.myData) root.myData.species = valueAt(currentIndex) }
+            onActivated: { if (root.myData) MyController.characterCommand.setSpecies(root.myData, valueAt(currentIndex)) }
         }
         LHEComboBox {
             name: qsTr("Gender")
@@ -87,7 +87,7 @@ LHEModule {
                 { uuid: MyCharacter.Gender.Female, name: qsTr("Female") },
             ]
             currentIndex: (root.myData) ? indexOfValue(root.myData.gender) : -1
-            onActivated: { if (root.myData) root.myData.gender = valueAt(currentIndex) }
+            onActivated: { if (root.myData) MyController.characterCommand.setGender(root.myData, valueAt(currentIndex)) }
         }
     }
 }

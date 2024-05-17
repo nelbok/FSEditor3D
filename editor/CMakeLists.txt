@@ -3,11 +3,21 @@ qt_standard_project_setup(REQUIRES 6.5)
 set(PROJECT_SOURCES
 	src/controllers/commands/BaseCommand.cpp
 	src/controllers/commands/BaseCommand.hpp
+	src/controllers/commands/CharacterCommand.cpp
+	src/controllers/commands/CharacterCommand.hpp
 	#src/controllers/commands/ContainerCommand.hpp
 	#src/controllers/commands/CreateCommand.hpp
 	#src/controllers/commands/DestroyCommand.hpp
 	src/controllers/commands/EntityCommand.cpp
 	src/controllers/commands/EntityCommand.hpp
+	src/controllers/commands/LinkCommand.cpp
+	src/controllers/commands/LinkCommand.hpp
+	src/controllers/commands/PlaceCommand.cpp
+	src/controllers/commands/PlaceCommand.hpp
+	src/controllers/commands/PlacementCommand.cpp
+	src/controllers/commands/PlacementCommand.hpp
+	src/controllers/commands/PlayerCommand.cpp
+	src/controllers/commands/PlayerCommand.hpp
 	src/controllers/commands/ProjectCommand.cpp
 	src/controllers/commands/ProjectCommand.hpp
 	src/controllers/commands/ValueCommand.hpp

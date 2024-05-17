@@ -5,7 +5,9 @@ namespace lhe {
 Controller::Controller(QObject* parent)
 	: QObject(parent) {}
 
-Controller::~Controller() {}
+Controller::~Controller() {
+	reset();
+}
 
 void Controller::init() {
 	assert(!_about);
@@ -16,8 +18,13 @@ void Controller::init() {
 	_project = new lh::Project(this);
 
 	//commands
+	_characterCommand = new CharacterCommand(_commands);
 	_entityCommand = new EntityCommand(_commands);
-	_projectCommand = new ProjectCommand(_commands);
+	_linkCommand = new LinkCommand(_commands);
+	_placeCommand = new PlaceCommand(_commands);
+	_placementCommand = new PlacementCommand(_commands);
+	_playerCommand = new PlayerCommand(_commands);
+	_projectCommand = new ProjectCommand(this);
 
 	//models
 	_characterModel = new CharacterModel(this);
@@ -63,9 +70,34 @@ lh::Project* Controller::project() const {
 
 // commands
 
+CharacterCommand* Controller::characterCommand() const {
+	assert(_characterCommand);
+	return _characterCommand;
+}
+
 EntityCommand* Controller::entityCommand() const {
 	assert(_entityCommand);
 	return _entityCommand;
+}
+
+LinkCommand* Controller::linkCommand() const {
+	assert(_linkCommand);
+	return _linkCommand;
+}
+
+PlaceCommand* Controller::placeCommand() const {
+	assert(_placeCommand);
+	return _placeCommand;
+}
+
+PlacementCommand* Controller::placementCommand() const {
+	assert(_placementCommand);
+	return _placementCommand;
+}
+
+PlayerCommand* Controller::playerCommand() const {
+	assert(_playerCommand);
+	return _playerCommand;
 }
 
 ProjectCommand* Controller::projectCommand() const {

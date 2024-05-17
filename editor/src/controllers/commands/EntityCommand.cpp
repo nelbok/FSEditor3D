@@ -11,7 +11,7 @@ EntityCommand::EntityCommand(Commands* commands)
 	assert(commands);
 }
 
-EntityCommand ::~EntityCommand() {}
+EntityCommand::~EntityCommand() {}
 
 void EntityCommand::setName(lh::Entity* e, const QString& newValue) {
 	addValueCommand(_c, e, &lh::Entity::setName, &lh::Entity::name, newValue);

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <QtCore/QObject>
-#include <QtCore/QString>
 
 #include <lh/data/Entity.hpp>
 

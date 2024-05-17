@@ -38,7 +38,7 @@ LHEModule {
                 id: subMng
                 model: MyController.linkModel
                 currentData: (root.myData) ? root.myData.link : null
-                onCurrentUpdated: { if (root.myData && root.myData.link !== currentData) root.myData.link = currentData }
+                onCurrentUpdated: { if (root.myData && root.myData.link !== currentData) MyController.linkCommand.setLink(root.myData, currentData) }
             }
 
             model: subMng.model

@@ -175,12 +175,12 @@ void Project::load(const QJsonObject& json) {
 	reset();
 	Entity::load(json);
 
-	_impl->defaultPlace->setUuid(Json::toUuid(Json::toValue(lDefaultPlaces, json)));
-	emit defaultPlaceUpdated();
-
 	_impl->loadList(this, _impl->characters, lCharacters, json, &Project::charactersUpdated);
 	_impl->loadList(this, _impl->links, lLinks, json, &Project::linksUpdated);
 	_impl->loadList(this, _impl->places, lPlaces, json, &Project::placesUpdated);
+
+	_impl->defaultPlace->setUuid(Json::toUuid(Json::toValue(lDefaultPlaces, json)));
+	emit defaultPlaceUpdated();
 }
 
 void Project::save(const QUrl& url) {
@@ -200,9 +200,9 @@ void Project::save(const QUrl& url) {
 
 void Project::save(QJsonObject& json) const {
 	Entity::save(json);
-	json[lDefaultPlaces] = Json::fromUuid(_impl->defaultPlace->uuid());
 	_impl->saveList(_impl->characters, lCharacters, json);
 	_impl->saveList(_impl->links, lLinks, json);
 	_impl->saveList(_impl->places, lPlaces, json);
+	json[lDefaultPlaces] = Json::fromUuid(_impl->defaultPlace->uuid());
 }
 } // namespace lh

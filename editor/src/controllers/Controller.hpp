@@ -4,7 +4,12 @@
 
 #include <lh/data/Project.hpp>
 
+#include "commands/CharacterCommand.hpp"
 #include "commands/EntityCommand.hpp"
+#include "commands/LinkCommand.hpp"
+#include "commands/PlaceCommand.hpp"
+#include "commands/PlacementCommand.hpp"
+#include "commands/PlayerCommand.hpp"
 #include "commands/ProjectCommand.hpp"
 
 #include "models/CharacterModel.hpp"
@@ -22,7 +27,12 @@ class Controller : public QObject {
 	Q_PROPERTY(lh::Project* project READ project CONSTANT)
 
 	// commands
+	Q_PROPERTY(CharacterCommand* characterCommand READ characterCommand CONSTANT)
 	Q_PROPERTY(EntityCommand* entityCommand READ entityCommand CONSTANT)
+	Q_PROPERTY(LinkCommand* linkCommand READ linkCommand CONSTANT)
+	Q_PROPERTY(PlaceCommand* placeCommand READ placeCommand CONSTANT)
+	Q_PROPERTY(PlacementCommand* placementCommand READ placementCommand CONSTANT)
+	Q_PROPERTY(PlayerCommand* playerCommand READ playerCommand CONSTANT)
 	Q_PROPERTY(ProjectCommand* projectCommand READ projectCommand CONSTANT)
 
 	// models
@@ -45,7 +55,12 @@ public:
 	lh::Project* project() const;
 
 	// commands
+	CharacterCommand* characterCommand() const;
 	EntityCommand* entityCommand() const;
+	LinkCommand* linkCommand() const;
+	PlaceCommand* placeCommand() const;
+	PlacementCommand* placementCommand() const;
+	PlayerCommand* playerCommand() const;
 	ProjectCommand* projectCommand() const;
 
 	// models
@@ -59,7 +74,12 @@ private:
 	lh::Project* _project{ nullptr };
 
 	// commands
+	CharacterCommand* _characterCommand{ nullptr };
 	EntityCommand* _entityCommand{ nullptr };
+	LinkCommand* _linkCommand{ nullptr };
+	PlaceCommand* _placeCommand{ nullptr };
+	PlacementCommand* _placementCommand{ nullptr };
+	PlayerCommand* _playerCommand{ nullptr };
 	ProjectCommand* _projectCommand{ nullptr };
 
 	// models

@@ -20,7 +20,7 @@ LHEModule {
                 id: mng
                 model: MyController.placeModel
                 currentData: MyProject.defaultPlace
-                onCurrentUpdated: { if (MyProject && MyProject.defaultPlace !== currentData) MyProject.defaultPlace = currentData }
+                onCurrentUpdated: { if (MyProject && MyProject.defaultPlace !== currentData) MyController.projectCommand.setDefaultPlace(currentData) }
             }
 
             model: mng.model
