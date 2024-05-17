@@ -40,6 +40,9 @@ struct Project::Impl {
 	void saveList(const QList<TClass*>& list, const QString& key, QJsonObject& json) {
 		QJsonArray jsonArray;
 		for (auto* entity : list) {
+			if (!entity->isAlive())
+				continue;
+
 			QJsonObject jsonEntity;
 			entity->save(jsonEntity);
 			jsonArray.append(jsonEntity);

@@ -19,9 +19,9 @@ LHEModule {
         model: mng.model
         currentIndex: mng.currentIndex
         onItemClicked: (index) => { mng.currentIndex = index }
-        onCreateClicked: { MyProject.createLink() }
-        onRemoveClicked: { if (mng.currentData) MyProject.removeLink(mng.currentData) }
-        onDuplicateClicked: { if (mng.currentData) MyProject.duplicateLink(mng.currentData) }
+        onCreateClicked: { MyController.projectCommand.createLink() }
+        onRemoveClicked: { if (mng.currentData) MyController.projectCommand.removeLink(mng.currentData) }
+        onDuplicateClicked: { if (mng.currentData) MyController.projectCommand.duplicateLink(mng.currentData) }
     }
 
     placement: LHEPlacement {

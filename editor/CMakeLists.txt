@@ -5,9 +5,8 @@ set(PROJECT_SOURCES
 	src/controllers/commands/BaseCommand.hpp
 	src/controllers/commands/CharacterCommand.cpp
 	src/controllers/commands/CharacterCommand.hpp
-	#src/controllers/commands/ContainerCommand.hpp
-	#src/controllers/commands/CreateCommand.hpp
-	#src/controllers/commands/DestroyCommand.hpp
+	src/controllers/commands/CreateCommand.hpp
+	src/controllers/commands/DuplicateCommand.hpp
 	src/controllers/commands/EntityCommand.cpp
 	src/controllers/commands/EntityCommand.hpp
 	src/controllers/commands/LinkCommand.cpp
@@ -20,6 +19,7 @@ set(PROJECT_SOURCES
 	src/controllers/commands/PlayerCommand.hpp
 	src/controllers/commands/ProjectCommand.cpp
 	src/controllers/commands/ProjectCommand.hpp
+	src/controllers/commands/RemoveCommand.hpp
 	src/controllers/commands/ValueCommand.hpp
 	src/controllers/models/CharacterModel.cpp
 	src/controllers/models/CharacterModel.hpp

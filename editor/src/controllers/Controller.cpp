@@ -27,16 +27,16 @@ void Controller::init() {
 	_projectCommand = new ProjectCommand(this);
 
 	//models
-	_characterModel = new CharacterModel(this);
-	_linkModel = new LinkModel(this);
-	_placeModel = new PlaceModel(this);
+	_characterModel = new CharacterModel(_project, this);
+	_linkModel = new LinkModel(_project, this);
+	_placeModel = new PlaceModel(_project, this);
 
 	reset();
 
 	// models
-	_characterModel->init(_project);
-	_linkModel->init(_project);
-	_placeModel->init(_project);
+	_characterModel->initDatas();
+	_linkModel->initDatas();
+	_placeModel->initDatas();
 }
 
 void Controller::reset() {

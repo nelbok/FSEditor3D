@@ -5,17 +5,19 @@
 
 namespace lhe {
 
-LinkModel::LinkModel(QObject* parent)
-	: EntityModel(parent) {}
+LinkModel::LinkModel(lh::Project* project, QObject* parent)
+	: EntityModel(project, parent) {}
 
 LinkModel::~LinkModel() {}
 
-void LinkModel::init(lh::Project* project) {
-	assert(project);
-	connect(project, &lh::Project::linksUpdated, this, [this, project]() {
-		updateDatas(project->links());
-	});
-	updateDatas(project->links());
+void LinkModel::initDatas() {
+	assert(_project);
+	connect(_project, &lh::Project::linksUpdated, this, &LinkModel::updateDatas);
+}
+
+void LinkModel::updateDatas() {
+	assert(_project);
+	fillDatas(_project->links());
 }
 
 } // namespace lhe

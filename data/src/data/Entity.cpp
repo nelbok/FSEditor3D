@@ -7,6 +7,7 @@
 namespace lh {
 struct Entity::Impl {
 	QUuid uuid{};
+	bool isAlive{ true };
 	QString name{};
 };
 
@@ -30,12 +31,20 @@ const QUuid& Entity::uuid() const {
 	return _impl->uuid;
 }
 
-const QString& Entity::name() const {
-	return _impl->name;
-}
-
 void Entity::setUuid(const QUuid& uuid) {
 	TOOLS_SETTER(Entity, uuid);
+}
+
+bool Entity::isAlive() const {
+	return _impl->isAlive;
+}
+
+void Entity::setIsAlive(bool isAlive) {
+	TOOLS_SETTER(Entity, isAlive);
+}
+
+const QString& Entity::name() const {
+	return _impl->name;
 }
 
 void Entity::setName(const QString& name) {

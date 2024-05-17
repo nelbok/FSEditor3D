@@ -2,8 +2,11 @@
 
 namespace lhe {
 
-EntityModel::EntityModel(QObject* parent)
-	: QAbstractListModel(parent) {}
+EntityModel::EntityModel(lh::Project* project, QObject* parent)
+	: QAbstractListModel(parent)
+	, _project{ project } {
+	assert(_project);
+}
 
 EntityModel::~EntityModel() {}
 

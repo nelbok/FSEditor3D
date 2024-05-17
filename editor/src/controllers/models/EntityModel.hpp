@@ -9,27 +9,35 @@ class EntityModel : public QAbstractListModel {
 	Q_OBJECT
 
 public:
-	EntityModel(QObject* parent = nullptr);
+	EntityModel(lh::Project* project, QObject* parent = nullptr);
 	virtual ~EntityModel();
 
-	virtual void init(lh::Project* project) = 0;
+	virtual void initDatas() = 0;
 	const QList<lh::Entity*>& datas() const;
 
 	virtual int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 	virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
 	virtual QHash<int, QByteArray> roleNames() const override;
 
+protected slots:
+	virtual void updateDatas() = 0;
+	void sortDatas();
+
 protected:
 	template<class T>
-	void updateDatas(const QList<T*>& datas) {
+	void fillDatas(const QList<T*>& datas) {
 		// Disconnect
 		for (auto* entity : _datas) {
+			disconnect(entity, &lh::Entity::isAliveUpdated, this, &EntityModel::updateDatas);
 			disconnect(entity, &lh::Entity::nameUpdated, this, &EntityModel::sortDatas);
 		}
 		_datas.clear();
 
 		// Fill the new model
 		for (auto* entity : datas) {
+			connect(entity, &lh::Entity::isAliveUpdated, this, &EntityModel::updateDatas);
+			if (!entity->isAlive())
+				continue;
 			_datas.append(entity);
 			connect(entity, &lh::Entity::nameUpdated, this, &EntityModel::sortDatas);
 		}
@@ -38,10 +46,7 @@ protected:
 		sortDatas();
 	}
 
-private slots:
-	void sortDatas();
-
-private:
+	lh::Project* _project{ nullptr };
 	QList<lh::Entity*> _datas{};
 };
 

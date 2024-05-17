@@ -5,17 +5,18 @@
 
 namespace lhe {
 
-PlaceModel::PlaceModel(QObject* parent)
-	: EntityModel(parent) {}
+PlaceModel::PlaceModel(lh::Project* project, QObject* parent)
+	: EntityModel(project, parent) {}
 
 PlaceModel::~PlaceModel() {}
 
-void PlaceModel::init(lh::Project* project) {
-	assert(project);
-	connect(project, &lh::Project::placesUpdated, this, [this, project]() {
-		updateDatas(project->places());
-	});
-	updateDatas(project->places());
+void PlaceModel::initDatas() {
+	assert(_project);
+	connect(_project, &lh::Project::placesUpdated, this, &PlaceModel::updateDatas);
 }
 
+void PlaceModel::updateDatas() {
+	assert(_project);
+	fillDatas(_project->places());
+}
 } // namespace lhe

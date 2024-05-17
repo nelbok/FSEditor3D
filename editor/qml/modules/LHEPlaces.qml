@@ -19,9 +19,9 @@ LHEModule {
         model: mng.model
         currentIndex: mng.currentIndex
         onItemClicked: (index) => { mng.currentIndex = index }
-        onCreateClicked: { MyProject.createPlace() }
-        onRemoveClicked: { if (mng.currentData) MyProject.removePlace(mng.currentData) }
-        onDuplicateClicked: { if (mng.currentData) MyProject.duplicatePlace(mng.currentData) }
+        onCreateClicked: { MyController.projectCommand.createPlace() }
+        onRemoveClicked: { if (mng.currentData) MyController.projectCommand.removePlace(mng.currentData) }
+        onDuplicateClicked: { if (mng.currentData) MyController.projectCommand.duplicatePlace(mng.currentData) }
     }
 
     placement: LHEEntity {
