@@ -23,7 +23,6 @@ void Controller::init() {
 	_linkCommand = new LinkCommand(_commands);
 	_placeCommand = new PlaceCommand(_commands);
 	_placementCommand = new PlacementCommand(_commands);
-	_playerCommand = new PlayerCommand(_commands);
 	_projectCommand = new ProjectCommand(this);
 
 	//models
@@ -93,11 +92,6 @@ PlaceCommand* Controller::placeCommand() const {
 PlacementCommand* Controller::placementCommand() const {
 	assert(_placementCommand);
 	return _placementCommand;
-}
-
-PlayerCommand* Controller::playerCommand() const {
-	assert(_playerCommand);
-	return _playerCommand;
 }
 
 ProjectCommand* Controller::projectCommand() const {

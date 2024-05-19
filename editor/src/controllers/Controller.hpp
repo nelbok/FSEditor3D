@@ -9,7 +9,6 @@
 #include "commands/LinkCommand.hpp"
 #include "commands/PlaceCommand.hpp"
 #include "commands/PlacementCommand.hpp"
-#include "commands/PlayerCommand.hpp"
 #include "commands/ProjectCommand.hpp"
 
 #include "models/CharacterModel.hpp"
@@ -32,7 +31,6 @@ class Controller : public QObject {
 	Q_PROPERTY(LinkCommand* linkCommand READ linkCommand CONSTANT)
 	Q_PROPERTY(PlaceCommand* placeCommand READ placeCommand CONSTANT)
 	Q_PROPERTY(PlacementCommand* placementCommand READ placementCommand CONSTANT)
-	Q_PROPERTY(PlayerCommand* playerCommand READ playerCommand CONSTANT)
 	Q_PROPERTY(ProjectCommand* projectCommand READ projectCommand CONSTANT)
 
 	// models
@@ -60,7 +58,6 @@ public:
 	LinkCommand* linkCommand() const;
 	PlaceCommand* placeCommand() const;
 	PlacementCommand* placementCommand() const;
-	PlayerCommand* playerCommand() const;
 	ProjectCommand* projectCommand() const;
 
 	// models
@@ -79,7 +76,6 @@ private:
 	LinkCommand* _linkCommand{ nullptr };
 	PlaceCommand* _placeCommand{ nullptr };
 	PlacementCommand* _placementCommand{ nullptr };
-	PlayerCommand* _playerCommand{ nullptr };
 	ProjectCommand* _projectCommand{ nullptr };
 
 	// models

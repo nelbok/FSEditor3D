@@ -33,25 +33,25 @@ public:
 	// Characters
 	const QList<Character*>& characters() const;
 	void setCharacters(const QList<Character*>& character);
-	Q_INVOKABLE Character* createCharacter();
-	Q_INVOKABLE void removeCharacter(Character* character);
-	Q_INVOKABLE Character* duplicateCharacter(Character* character);
+	Character* createCharacter();
+	void removeCharacter(Character* character);
+	Character* duplicateCharacter(Character* character);
 	void cleanCharacters();
 
 	// Links
 	const QList<Link*>& links() const;
 	void setLinks(const QList<Link*>& link);
-	Q_INVOKABLE Link* createLink();
-	Q_INVOKABLE void removeLink(Link* link);
-	Q_INVOKABLE Link* duplicateLink(Link* link);
+	Link* createLink();
+	void removeLink(Link* link);
+	Link* duplicateLink(Link* link);
 	void cleanLinks();
 
 	// Places
 	const QList<Place*>& places() const;
 	void setPlaces(const QList<Place*>& places);
-	Q_INVOKABLE Place* createPlace();
-	Q_INVOKABLE void removePlace(Place* place);
-	Q_INVOKABLE Place* duplicatePlace(Place* place);
+	Place* createPlace();
+	void removePlace(Place* place);
+	Place* duplicatePlace(Place* place);
 	void cleanPlaces();
 
 	void load(const QUrl& url);

@@ -6,7 +6,6 @@ set(PROJECT_SOURCES
 	include/lh/data/Link.hpp
 	include/lh/data/Place.hpp
 	include/lh/data/Placement.hpp
-	include/lh/data/Player.hpp
 	include/lh/data/Project.hpp
 	include/lh/data/UuidPointer.hpp
 	include/lh/io/Json.hpp
@@ -18,7 +17,6 @@ set(PROJECT_SOURCES
 	src/data/Link.cpp
 	src/data/Place.cpp
 	src/data/Placement.cpp
-	src/data/Player.cpp
 	src/data/Project.cpp
 	src/data/UuidPointer.cpp
 	src/io/Json.cpp

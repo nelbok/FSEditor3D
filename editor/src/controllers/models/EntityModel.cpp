@@ -31,7 +31,7 @@ QVariant EntityModel::data(const QModelIndex& index, int role) const {
 		case rUuid:
 			return _datas.at(index.row())->uuid();
 		default:
-			return {};
+			break;
 	}
 	return {};
 }

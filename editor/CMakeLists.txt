@@ -15,8 +15,6 @@ set(PROJECT_SOURCES
 	src/controllers/commands/PlaceCommand.hpp
 	src/controllers/commands/PlacementCommand.cpp
 	src/controllers/commands/PlacementCommand.hpp
-	src/controllers/commands/PlayerCommand.cpp
-	src/controllers/commands/PlayerCommand.hpp
 	src/controllers/commands/ProjectCommand.cpp
 	src/controllers/commands/ProjectCommand.hpp
 	src/controllers/commands/RemoveCommand.hpp

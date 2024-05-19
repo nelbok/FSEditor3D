@@ -2,10 +2,10 @@
 
 #include <QtTest/QtTest>
 
+#include <lh/data/Character.hpp>
 #include <lh/data/Link.hpp>
 #include <lh/data/Project.hpp>
 #include <lh/data/Place.hpp>
-#include <lh/data/Player.hpp>
 
 struct TestCompare {
 	TestCompare(bool isSame)
@@ -50,11 +50,6 @@ struct TestCompare {
 		QCOMPARE(left->position(), right->position());
 		QCOMPARE(left->rotation(), right->rotation());
 		testUuidPointer(left->place(), right->place());
-	}
-
-	void testPlayer(lh::Player* left, lh::Player* right) {
-		testCharacter(left, right);
-		QFAIL("Not implemented!");
 	}
 
 	void testProject(lh::Project* left, lh::Project* right) {

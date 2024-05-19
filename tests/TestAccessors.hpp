@@ -2,10 +2,10 @@
 
 #include <QtTest/QtTest>
 
+#include <lh/data/Character.hpp>
 #include <lh/data/Link.hpp>
 #include <lh/data/Project.hpp>
 #include <lh/data/Place.hpp>
-#include <lh/data/Player.hpp>
 
 struct TestAccessors {
 	TestAccessors(lh::Project* project)
@@ -103,11 +103,6 @@ private:
 
 		QCOMPARE(metaObject->propertyCount(), 6);
 		QCOMPARE(metaObject->propertyOffset(), 3);
-	}
-
-	void testPlayer(lh::Player* player, const QMetaObject* metaObject) {
-		testCharacter(player, metaObject->superClass());
-		QFAIL("Not implemented!");
 	}
 
 	void testProject(lh::Project* project, const QMetaObject* metaObject) {

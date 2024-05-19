@@ -2,10 +2,10 @@
 
 #include <QtTest/QtTest>
 
+#include <lh/data/Character.hpp>
 #include <lh/data/Link.hpp>
 #include <lh/data/Project.hpp>
 #include <lh/data/Place.hpp>
-#include <lh/data/Player.hpp>
 
 #include "TestCompare.hpp"
 
