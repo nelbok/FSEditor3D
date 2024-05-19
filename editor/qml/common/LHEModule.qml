@@ -5,20 +5,28 @@ import editor
 
 LHERectangle {
     property alias title: title.text
-    property bool selected: false
 
     property Item selection: null
     property Item placement: null
     property Item partA: null
     property Item partB: null
 
-    anchors.topMargin: (selected) ? 10 : -400
+    anchors.topMargin: (enabled) ? 10 : -400
     Behavior on anchors.topMargin {
         NumberAnimation { duration: 300 }
     }
 
     width: 1100
     height: 270
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            // For Shortcut
+            parent.focus = true
+            parent.focus = false
+        }
+    }
 
     Text {
         id: title

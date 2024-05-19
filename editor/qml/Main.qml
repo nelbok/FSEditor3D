@@ -19,28 +19,28 @@ Window {
             anchors.top: menu.bottom
             anchors.horizontalCenter: parent.horizontalCenter
 
-            selected: (menu.selected === LHEMenu.ModuleType.Project)
+            enabled: (menu.selected === LHEMenu.ModuleType.Project)
         }
 
         LHEPlaces {
             anchors.top: menu.bottom
             anchors.horizontalCenter: parent.horizontalCenter
 
-            selected: (menu.selected === LHEMenu.ModuleType.Places)
+            enabled: (menu.selected === LHEMenu.ModuleType.Places)
         }
 
         LHECharacters {
             anchors.top: menu.bottom
             anchors.horizontalCenter: parent.horizontalCenter
 
-            selected: (menu.selected === LHEMenu.ModuleType.Characters)
+            enabled: (menu.selected === LHEMenu.ModuleType.Characters)
         }
 
         LHELinks {
             anchors.top: menu.bottom
             anchors.horizontalCenter: parent.horizontalCenter
 
-            selected: (menu.selected === LHEMenu.ModuleType.Links)
+            enabled: (menu.selected === LHEMenu.ModuleType.Links)
         }
 
         LHEMenu {
