@@ -28,6 +28,7 @@ public:
 	const QString& name() const;
 	void setName(const QString& name);
 
+	const QList<Entity*>& refs() const;
 	void addRef(Entity* ref);
 	void removeRef(Entity* ref);
 	bool hasRef();

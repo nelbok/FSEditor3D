@@ -5,6 +5,7 @@ set(PROJECT_SOURCES
 	TestCompare.hpp
 	TestIO.hpp
 	TestLists.hpp
+	TestRefs.hpp
 	TestSignals.hpp
 
 	Tests.cpp

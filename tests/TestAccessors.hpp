@@ -55,17 +55,21 @@ private:
 		character->setGender(gender);
 		QCOMPARE(character->gender(), gender);
 
-		QCOMPARE(metaObject->propertyCount(), 12);
-		QCOMPARE(metaObject->propertyOffset(), 6);
+		QCOMPARE(metaObject->propertyCount(), 14);
+		QCOMPARE(metaObject->propertyOffset(), 8);
 	}
 
 	void testEntity(lh::Entity* entity, const QMetaObject* metaObject) {
-		QCOMPARE(metaObject->propertyCount(), 3);
+		QCOMPARE(metaObject->propertyCount(), 5);
 		QCOMPARE(metaObject->propertyOffset(), 1);
 
 		const auto name = QString("Test");
 		entity->setName(name);
 		QCOMPARE(entity->name(), name);
+
+		const auto isAlive = false;
+		entity->setIsAlive(isAlive);
+		QCOMPARE(entity->isAlive(), isAlive);
 	}
 
 	void testLink(lh::Link* link, const QMetaObject* metaObject) {
@@ -75,15 +79,15 @@ private:
 		link->setLink(linkA);
 		QCOMPARE(link->link(), linkA);
 
-		QCOMPARE(metaObject->propertyCount(), 7);
-		QCOMPARE(metaObject->propertyOffset(), 6);
+		QCOMPARE(metaObject->propertyCount(), 9);
+		QCOMPARE(metaObject->propertyOffset(), 8);
 	}
 
 	void testPlace(lh::Place* place, const QMetaObject* metaObject) {
 		testEntity(place, metaObject->superClass());
 
-		QCOMPARE(metaObject->propertyCount(), 3);
-		QCOMPARE(metaObject->propertyOffset(), 3);
+		QCOMPARE(metaObject->propertyCount(), 5);
+		QCOMPARE(metaObject->propertyOffset(), 5);
 	}
 
 	void testPlacement(lh::Placement* placement, const QMetaObject* metaObject) {
@@ -101,15 +105,15 @@ private:
 		placement->setPlace(place);
 		QCOMPARE(placement->place(), place);
 
-		QCOMPARE(metaObject->propertyCount(), 6);
-		QCOMPARE(metaObject->propertyOffset(), 3);
+		QCOMPARE(metaObject->propertyCount(), 8);
+		QCOMPARE(metaObject->propertyOffset(), 5);
 	}
 
 	void testProject(lh::Project* project, const QMetaObject* metaObject) {
 		testEntity(project, metaObject->superClass());
 
-		QCOMPARE(metaObject->propertyCount(), 8);
-		QCOMPARE(metaObject->propertyOffset(), 3);
+		QCOMPARE(metaObject->propertyCount(), 10);
+		QCOMPARE(metaObject->propertyOffset(), 5);
 
 		const auto path = QUrl(":/test/img");
 		project->setPath(path);

@@ -52,6 +52,10 @@ void Entity::setName(const QString& name) {
 	TOOLS_SETTER(Entity, name);
 }
 
+const QList<Entity*>& Entity::refs() const {
+	return _impl->refs;
+}
+
 void Entity::addRef(Entity* ref) {
 	assert(ref);
 	assert(!_impl->refs.contains(ref));

@@ -6,6 +6,7 @@
 #include "TestAccessors.hpp"
 #include "TestIO.hpp"
 #include "TestLists.hpp"
+#include "TestRefs.hpp"
 #include "TestSignals.hpp"
 
 class Tests : public QObject {
@@ -43,6 +44,11 @@ private slots:
 	void testLists() {
 		QVERIFY(_project);
 		TestLists(_project).run();
+	}
+
+	void testRefs() {
+		QVERIFY(_project);
+		TestRefs(_project).run();
 	}
 
 	void testSignals() {
