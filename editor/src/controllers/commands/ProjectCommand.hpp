@@ -25,6 +25,10 @@ public:
 	Q_INVOKABLE void removeLink(lh::Link* link);
 	Q_INVOKABLE void duplicateLink(lh::Link* link);
 
+	Q_INVOKABLE void createModel();
+	Q_INVOKABLE void removeModel(lh::Model* model);
+	Q_INVOKABLE void duplicateModel(lh::Model* model);
+
 	Q_INVOKABLE void createPlace();
 	Q_INVOKABLE void removePlace(lh::Place* place);
 	Q_INVOKABLE void duplicatePlace(lh::Place* place);

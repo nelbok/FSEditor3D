@@ -8,6 +8,7 @@
 namespace lh {
 class Character;
 class Link;
+class Model;
 class Place;
 
 class Project : public Entity {
@@ -16,6 +17,7 @@ class Project : public Entity {
 	Q_PROPERTY(Place* defaultPlace READ defaultPlace WRITE setDefaultPlace NOTIFY defaultPlaceUpdated)
 	Q_PROPERTY(QList<Character*> characters READ characters WRITE setCharacters NOTIFY charactersUpdated)
 	Q_PROPERTY(QList<Link*> links READ links WRITE setLinks NOTIFY linksUpdated)
+	Q_PROPERTY(QList<Model*> models READ models WRITE setModels NOTIFY modelsUpdated)
 	Q_PROPERTY(QList<Place*> places READ places WRITE setPlaces NOTIFY placesUpdated)
 
 public:
@@ -46,6 +48,14 @@ public:
 	Link* duplicateLink(Link* link);
 	void cleanLinks();
 
+	// Models
+	const QList<Model*>& models() const;
+	void setModels(const QList<Model*>& models);
+	Model* createModel();
+	void removeModel(Model* model);
+	Model* duplicateModel(Model* model);
+	void cleanModels();
+
 	// Places
 	const QList<Place*>& places() const;
 	void setPlaces(const QList<Place*>& places);
@@ -72,6 +82,7 @@ signals:
 	void defaultPlaceUpdated();
 	void charactersUpdated();
 	void linksUpdated();
+	void modelsUpdated();
 	void placesUpdated();
 };
 } // namespace lh

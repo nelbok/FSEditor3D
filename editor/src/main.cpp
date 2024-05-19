@@ -4,6 +4,7 @@
 
 #include <lh/data/Character.hpp>
 #include <lh/data/Link.hpp>
+#include <lh/data/Model.hpp>
 #include <lh/data/Place.hpp>
 #include <lh/data/Project.hpp>
 
@@ -29,6 +30,7 @@ int main(int argc, char* argv[]) {
 	qmlRegisterType<lh::Character>("editor", 1, 0, "MyCharacter");
 	qmlRegisterType<lh::Entity>("editor", 1, 0, "MyEntity");
 	qmlRegisterType<lh::Link>("editor", 1, 0, "MyLink");
+	qmlRegisterType<lh::Model>("editor", 1, 0, "MyModel");
 	qmlRegisterType<lh::Place>("editor", 1, 0, "MyPlace");
 	qmlRegisterType<lh::Placement>("editor", 1, 0, "MyPlacement");
 

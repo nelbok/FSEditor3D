@@ -22,6 +22,13 @@ Window {
             enabled: (menu.selected === LHEMenu.ModuleType.Project)
         }
 
+        LHEModels {
+            anchors.top: menu.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            enabled: (menu.selected === LHEMenu.ModuleType.Models)
+        }
+
         LHEPlaces {
             anchors.top: menu.bottom
             anchors.horizontalCenter: parent.horizontalCenter

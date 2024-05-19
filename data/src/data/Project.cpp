@@ -8,6 +8,7 @@
 
 #include <lh/data/Character.hpp>
 #include <lh/data/Link.hpp>
+#include <lh/data/Model.hpp>
 #include <lh/data/Place.hpp>
 #include <lh/data/UuidPointer.hpp>
 #include <lh/io/Json.hpp>
@@ -21,6 +22,7 @@ struct Project::Impl {
 	QUrl path{};
 	QList<Character*> characters{};
 	QList<Link*> links{};
+	QList<Model*> models{};
 	QList<Place*> places{};
 
 	template<class TClass>
@@ -64,6 +66,7 @@ void Project::reset() {
 	setDefaultPlace(nullptr);
 	cleanCharacters();
 	cleanLinks();
+	cleanModels();
 	cleanPlaces();
 }
 
@@ -133,6 +136,30 @@ void Project::cleanLinks() {
 	TOOLS_CLEAN_ENTITIES(Project, links);
 }
 
+const QList<Model*>& Project::models() const {
+	return _impl->models;
+}
+
+void Project::setModels(const QList<Model*>& models) {
+	TOOLS_SETTER(Project, models);
+}
+
+Model* Project::createModel() {
+	TOOLS_CREATE_ENTITY(Project, models);
+}
+
+void Project::removeModel(Model* model) {
+	TOOLS_REMOVE_ENTITY(Project, model);
+}
+
+Model* Project::duplicateModel(Model* model) {
+	TOOLS_DUPLICATE_ENTITY(Project, model);
+}
+
+void Project::cleanModels() {
+	TOOLS_CLEAN_ENTITIES(Project, models);
+}
+
 const QList<Place*>& Project::places() const {
 	return _impl->places;
 }
@@ -160,6 +187,7 @@ void Project::cleanPlaces() {
 constexpr auto lDefaultPlaces = "defaultPlace";
 constexpr auto lCharacters = "characters";
 constexpr auto lLinks = "links";
+constexpr auto lModels = "models";
 constexpr auto lPlaces = "places";
 
 void Project::load(const QUrl& url) {
@@ -180,6 +208,7 @@ void Project::load(const QJsonObject& json) {
 
 	_impl->loadList(this, _impl->characters, lCharacters, json, &Project::charactersUpdated);
 	_impl->loadList(this, _impl->links, lLinks, json, &Project::linksUpdated);
+	_impl->loadList(this, _impl->models, lModels, json, &Project::modelsUpdated);
 	_impl->loadList(this, _impl->places, lPlaces, json, &Project::placesUpdated);
 
 	_impl->defaultPlace->setUuid(Json::toUuid(Json::toValue(lDefaultPlaces, json)));
@@ -205,6 +234,7 @@ void Project::save(QJsonObject& json) const {
 	Entity::save(json);
 	_impl->saveList(_impl->characters, lCharacters, json);
 	_impl->saveList(_impl->links, lLinks, json);
+	_impl->saveList(_impl->models, lModels, json);
 	_impl->saveList(_impl->places, lPlaces, json);
 	json[lDefaultPlaces] = Json::fromUuid(_impl->defaultPlace->uuid());
 }

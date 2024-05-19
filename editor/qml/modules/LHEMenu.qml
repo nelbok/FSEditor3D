@@ -6,6 +6,7 @@ import editor
 LHERectangle {
     enum ModuleType {
         Project,
+        Models,
         Places,
         Characters,
         Links,
@@ -24,15 +25,7 @@ LHERectangle {
 
     RowLayout {
         anchors.centerIn: parent
-        spacing: 41.6
-
-        Text {
-            text: MyController.about.name
-            color: LHEStyle.foreground.normal
-            font.bold: LHEStyle.titleFont.bold
-            font.italic: LHEStyle.titleFont.italic
-            font.pointSize: LHEStyle.titleFont.pointSize
-        }
+        spacing: 20
 
         LHEButton {
             id: project
@@ -40,6 +33,14 @@ LHERectangle {
             text: qsTr("Project")
             selected: root.selected === LHEMenu.ModuleType.Project
             onClicked: root.selected = LHEMenu.ModuleType.Project
+        }
+
+        LHEButton {
+            id: models
+
+            text: qsTr("Models")
+            selected: root.selected === LHEMenu.ModuleType.Models
+            onClicked: root.selected = LHEMenu.ModuleType.Models
         }
 
         LHEButton {
@@ -93,8 +94,14 @@ LHERectangle {
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
             }
+        }
+
+        Item {
+            width: 140
+            height: 20
+
             RowLayout {
-                Layout.alignment: Qt.AlignHCenter
+                anchors.horizontalCenter: parent.horizontalCenter
 
                 height: 20
                 spacing: 20

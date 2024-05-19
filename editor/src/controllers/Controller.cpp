@@ -21,6 +21,7 @@ void Controller::init() {
 	_characterCommand = new CharacterCommand(_commands);
 	_entityCommand = new EntityCommand(_commands);
 	_linkCommand = new LinkCommand(_commands);
+	_modelCommand = new ModelCommand(_commands);
 	_placeCommand = new PlaceCommand(_commands);
 	_placementCommand = new PlacementCommand(_commands);
 	_projectCommand = new ProjectCommand(this);
@@ -28,6 +29,7 @@ void Controller::init() {
 	//models
 	_characterModel = new CharacterModel(_project, this);
 	_linkModel = new LinkModel(_project, this);
+	_modelModel = new ModelModel(_project, this);
 	_placeModel = new PlaceModel(_project, this);
 
 	reset();
@@ -35,6 +37,7 @@ void Controller::init() {
 	// models
 	_characterModel->initDatas();
 	_linkModel->initDatas();
+	_modelModel->initDatas();
 	_placeModel->initDatas();
 }
 
@@ -84,6 +87,11 @@ LinkCommand* Controller::linkCommand() const {
 	return _linkCommand;
 }
 
+ModelCommand* Controller::modelCommand() const {
+	assert(_modelCommand);
+	return _modelCommand;
+}
+
 PlaceCommand* Controller::placeCommand() const {
 	assert(_placeCommand);
 	return _placeCommand;
@@ -109,6 +117,11 @@ CharacterModel* Controller::characterModel() const {
 LinkModel* Controller::linkModel() const {
 	assert(_linkModel);
 	return _linkModel;
+}
+
+ModelModel* Controller::modelModel() const {
+	assert(_modelModel);
+	return _modelModel;
 }
 
 PlaceModel* Controller::placeModel() const {

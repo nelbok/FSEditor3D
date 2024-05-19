@@ -7,12 +7,14 @@
 #include "commands/CharacterCommand.hpp"
 #include "commands/EntityCommand.hpp"
 #include "commands/LinkCommand.hpp"
+#include "commands/ModelCommand.hpp"
 #include "commands/PlaceCommand.hpp"
 #include "commands/PlacementCommand.hpp"
 #include "commands/ProjectCommand.hpp"
 
 #include "models/CharacterModel.hpp"
 #include "models/LinkModel.hpp"
+#include "models/ModelModel.hpp"
 #include "models/PlaceModel.hpp"
 
 #include "About.hpp"
@@ -29,6 +31,7 @@ class Controller : public QObject {
 	Q_PROPERTY(CharacterCommand* characterCommand READ characterCommand CONSTANT)
 	Q_PROPERTY(EntityCommand* entityCommand READ entityCommand CONSTANT)
 	Q_PROPERTY(LinkCommand* linkCommand READ linkCommand CONSTANT)
+	Q_PROPERTY(ModelCommand* modelCommand READ modelCommand CONSTANT)
 	Q_PROPERTY(PlaceCommand* placeCommand READ placeCommand CONSTANT)
 	Q_PROPERTY(PlacementCommand* placementCommand READ placementCommand CONSTANT)
 	Q_PROPERTY(ProjectCommand* projectCommand READ projectCommand CONSTANT)
@@ -36,6 +39,7 @@ class Controller : public QObject {
 	// models
 	Q_PROPERTY(CharacterModel* characterModel READ characterModel CONSTANT)
 	Q_PROPERTY(LinkModel* linkModel READ linkModel CONSTANT)
+	Q_PROPERTY(ModelModel* modelModel READ modelModel CONSTANT)
 	Q_PROPERTY(PlaceModel* placeModel READ placeModel CONSTANT)
 
 public:
@@ -56,6 +60,7 @@ public:
 	CharacterCommand* characterCommand() const;
 	EntityCommand* entityCommand() const;
 	LinkCommand* linkCommand() const;
+	ModelCommand* modelCommand() const;
 	PlaceCommand* placeCommand() const;
 	PlacementCommand* placementCommand() const;
 	ProjectCommand* projectCommand() const;
@@ -63,6 +68,7 @@ public:
 	// models
 	CharacterModel* characterModel() const;
 	LinkModel* linkModel() const;
+	ModelModel* modelModel() const;
 	PlaceModel* placeModel() const;
 
 private:
@@ -74,6 +80,7 @@ private:
 	CharacterCommand* _characterCommand{ nullptr };
 	EntityCommand* _entityCommand{ nullptr };
 	LinkCommand* _linkCommand{ nullptr };
+	ModelCommand* _modelCommand{ nullptr };
 	PlaceCommand* _placeCommand{ nullptr };
 	PlacementCommand* _placementCommand{ nullptr };
 	ProjectCommand* _projectCommand{ nullptr };
@@ -81,6 +88,7 @@ private:
 	// models
 	CharacterModel* _characterModel{ nullptr };
 	LinkModel* _linkModel{ nullptr };
+	ModelModel* _modelModel{ nullptr };
 	PlaceModel* _placeModel{ nullptr };
 };
 } // namespace lhe

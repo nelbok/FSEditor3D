@@ -57,6 +57,21 @@ void ProjectCommand::duplicateLink(lh::Link* link) {
 	_cm->add(new DuplicateCommand<lh::Link>(_p, &lh::Project::duplicateLink, &lh::Project::removeLink, link));
 }
 
+void ProjectCommand::createModel() {
+	_cm->add(new CreateCommand<lh::Model>(_p, &lh::Project::createModel, &lh::Project::removeModel));
+}
+
+void ProjectCommand::removeModel(lh::Model* model) {
+	assert(!model->hasRef());
+	_cm->beginList();
+	_cm->add(new RemoveCommand<lh::Model>(_p, &lh::Project::removeModel, model));
+	_cm->endList();
+}
+
+void ProjectCommand::duplicateModel(lh::Model* model) {
+	_cm->add(new DuplicateCommand<lh::Model>(_p, &lh::Project::duplicateModel, &lh::Project::removeModel, model));
+}
+
 void ProjectCommand::createPlace() {
 	_cm->add(new CreateCommand<lh::Place>(_p, &lh::Project::createPlace, &lh::Project::removePlace));
 }

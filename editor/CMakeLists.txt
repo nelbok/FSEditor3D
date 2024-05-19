@@ -11,6 +11,8 @@ set(PROJECT_SOURCES
 	src/controllers/commands/EntityCommand.hpp
 	src/controllers/commands/LinkCommand.cpp
 	src/controllers/commands/LinkCommand.hpp
+	src/controllers/commands/ModelCommand.cpp
+	src/controllers/commands/ModelCommand.hpp
 	src/controllers/commands/PlaceCommand.cpp
 	src/controllers/commands/PlaceCommand.hpp
 	src/controllers/commands/PlacementCommand.cpp
@@ -25,6 +27,8 @@ set(PROJECT_SOURCES
 	src/controllers/models/EntityModel.hpp
 	src/controllers/models/LinkModel.cpp
 	src/controllers/models/LinkModel.hpp
+	src/controllers/models/ModelModel.cpp
+	src/controllers/models/ModelModel.hpp
 	src/controllers/models/PlaceModel.cpp
 	src/controllers/models/PlaceModel.hpp
 	src/controllers/About.cpp
@@ -63,6 +67,7 @@ set(QML_SOURCES
 	qml/modules/LHECharacters.qml
 	qml/modules/LHELinks.qml
 	qml/modules/LHEMenu.qml
+	qml/modules/LHEModels.qml
 	qml/modules/LHEPlaces.qml
 	qml/modules/LHEProject.qml
 	qml/modules/LHEToolBar.qml
