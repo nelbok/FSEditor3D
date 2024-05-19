@@ -6,11 +6,13 @@
 #include <lh/data/Project.hpp>
 
 namespace lh {
-BasePointer::BasePointer(Project* project, void (Project::*signal)(), QObject* parent)
+BasePointer::BasePointer(Project* project, void (Project::*signal)(), Entity* parent)
 	: QObject(parent)
-	, _project{ project } {
+	, _project{ project }
+	, _ref{ parent } {
 	assert(project);
 	assert(signal);
+	assert(parent);
 
 	QObject::connect(project, signal, this, &BasePointer::update);
 }
@@ -37,15 +39,15 @@ const QUuid& BasePointer::uuid() const {
 	return _uuid;
 }
 
-UuidPointer<Character>* makeCharacterPointer(Project* project, QObject* parent) {
+UuidPointer<Character>* makeCharacterPointer(Project* project, Entity* parent) {
 	return new UuidPointer<Character>(project, &Project::characters, &Project::charactersUpdated, parent);
 }
 
-UuidPointer<Link>* makeLinkPointer(Project* project, QObject* parent) {
+UuidPointer<Link>* makeLinkPointer(Project* project, Entity* parent) {
 	return new UuidPointer<Link>(project, &Project::links, &Project::linksUpdated, parent);
 }
 
-UuidPointer<Place>* makePlacePointer(Project* project, QObject* parent) {
+UuidPointer<Place>* makePlacePointer(Project* project, Entity* parent) {
 	return new UuidPointer<Place>(project, &Project::places, &Project::placesUpdated, parent);
 }
 } // namespace lh

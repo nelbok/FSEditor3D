@@ -18,10 +18,13 @@ LHEModule {
     selection: LHEList {
         model: mng.model
         currentIndex: mng.currentIndex
-        onItemClicked: (index) => { mng.currentIndex = index }
+        removeEnabled: mng.currentData && !mng.currentData.hasRef
+        duplicateEnabled: mng.currentData
+
         onCreateClicked: { MyController.projectCommand.createCharacter() }
-        onRemoveClicked: { if (mng.currentData) MyController.projectCommand.removeCharacter(mng.currentData) }
-        onDuplicateClicked: { if (mng.currentData) MyController.projectCommand.duplicateCharacter(mng.currentData) }
+        onRemoveClicked: { MyController.projectCommand.removeCharacter(mng.currentData) }
+        onDuplicateClicked: { MyController.projectCommand.duplicateCharacter(mng.currentData) }
+        onItemClicked: (index) => { mng.currentIndex = index }
     }
 
     placement: LHEPlacement {

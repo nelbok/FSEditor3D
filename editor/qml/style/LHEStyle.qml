@@ -24,6 +24,7 @@ QtObject {
             property color colorNormal: "#000000"
             property color colorHover: "#AAAAAA"
             property color colorSelected: "#999999"
+            property color colorDisabled: "#999999"
             property int width: 2
         }
         property color color: "#6666AA"
@@ -42,6 +43,7 @@ QtObject {
     // FOREGROUND
     property QtObject foreground: QtObject {
         property color normal: "#000000"
+        property color disabled: "#999999"
         property color placeholder: "#AAAAAA"
     }
 

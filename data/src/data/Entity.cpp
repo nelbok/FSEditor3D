@@ -9,6 +9,7 @@ struct Entity::Impl {
 	QUuid uuid{};
 	bool isAlive{ true };
 	QString name{};
+	QList<Entity*> refs{};
 };
 
 Entity::Entity(QObject* parent)
@@ -49,6 +50,24 @@ const QString& Entity::name() const {
 
 void Entity::setName(const QString& name) {
 	TOOLS_SETTER(Entity, name);
+}
+
+void Entity::addRef(Entity* ref) {
+	assert(ref);
+	assert(!_impl->refs.contains(ref));
+	_impl->refs.append(ref);
+	emit hasRefUpdated();
+}
+
+void Entity::removeRef(Entity* ref) {
+	assert(ref);
+	assert(_impl->refs.contains(ref));
+	_impl->refs.removeAll(ref);
+	emit hasRefUpdated();
+}
+
+bool Entity::hasRef() {
+	return !_impl->refs.empty();
 }
 
 constexpr auto lUuid = "uuid";

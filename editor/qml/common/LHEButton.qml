@@ -10,11 +10,10 @@ LHERectangle {
     height: 40
 
     border.color: {
-        (enabled && mouseArea.containsMouse)
-                ? LHEStyle.module.border.colorHover
-                : (selected)
-                  ? LHEStyle.module.border.colorSelected
-                  : LHEStyle.module.border.colorNormal
+        if (!enabled) return LHEStyle.module.border.colorDisabled
+        if (mouseArea.containsMouse) return LHEStyle.module.border.colorHover
+        if (selected) return LHEStyle.module.border.colorSelected;
+        return LHEStyle.module.border.colorNormal
     }
     color: LHEStyle.button.normal
 
@@ -26,7 +25,7 @@ LHERectangle {
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
 
-        color: LHEStyle.foreground.normal
+        color: (enabled) ? LHEStyle.foreground.normal : LHEStyle.foreground.disabled
         font.bold: LHEStyle.normalFont.bold
         font.italic: LHEStyle.normalFont.italic
         font.pointSize: LHEStyle.normalFont.pointSize

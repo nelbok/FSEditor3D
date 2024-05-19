@@ -7,6 +7,10 @@ import editor
 ColumnLayout {
     property alias model: list.model
     property alias currentIndex: list.currentIndex
+    property alias createEnabled: create.enabled
+    property alias removeEnabled: remove.enabled
+    property alias duplicateEnabled: duplicate.enabled
+
     signal createClicked()
     signal removeClicked()
     signal duplicateClicked()
@@ -20,16 +24,19 @@ ColumnLayout {
         spacing: 0
 
         LHEMenuButton {
+            id: create
             text: qsTr("Add")
             width: 60
             onClicked: root.createClicked()
         }
         LHEMenuButton {
+            id: remove
             text: qsTr("Del")
             width: 60
             onClicked: { root.removeClicked() }
         }
         LHEMenuButton {
+            id: duplicate
             text: qsTr("Dup")
             width: 60
             onClicked: { root.duplicateClicked() }

@@ -9,9 +9,9 @@ LHERectangle {
     width: 40
 
     border.color: {
-        (enabled && mouseArea.containsMouse)
-                ? LHEStyle.module.border.colorHover
-                : LHEStyle.module.border.colorNormal
+        if (!enabled) return LHEStyle.module.border.colorDisabled
+        if (mouseArea.containsMouse) return LHEStyle.module.border.colorHover
+        return LHEStyle.module.border.colorNormal
     }
 
     Image {

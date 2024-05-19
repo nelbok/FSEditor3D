@@ -7,9 +7,10 @@
 namespace lh {
 class Entity : public QObject {
 	Q_OBJECT
-	Q_PROPERTY(QUuid uuid READ uuid NOTIFY uuidUpdated)
+	Q_PROPERTY(QUuid uuid READ uuid WRITE setUuid NOTIFY uuidUpdated)
 	Q_PROPERTY(bool isAlive READ isAlive WRITE setIsAlive NOTIFY isAliveUpdated)
 	Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameUpdated)
+	Q_PROPERTY(bool hasRef READ hasRef NOTIFY hasRefUpdated)
 
 public:
 	Entity(QObject* parent = nullptr);
@@ -19,6 +20,7 @@ public:
 	void copy(const Entity& entity);
 
 	const QUuid& uuid() const;
+	void setUuid(const QUuid& uuid);
 
 	bool isAlive() const;
 	void setIsAlive(bool isAlive);
@@ -26,11 +28,12 @@ public:
 	const QString& name() const;
 	void setName(const QString& name);
 
+	void addRef(Entity* ref);
+	void removeRef(Entity* ref);
+	bool hasRef();
+
 	virtual void load(const QJsonObject& json);
 	virtual void save(QJsonObject& json) const;
-
-protected:
-	void setUuid(const QUuid& uuid);
 
 private:
 	struct Impl;
@@ -40,5 +43,6 @@ signals:
 	void uuidUpdated();
 	void isAliveUpdated();
 	void nameUpdated();
+	void hasRefUpdated();
 };
 } // namespace lh

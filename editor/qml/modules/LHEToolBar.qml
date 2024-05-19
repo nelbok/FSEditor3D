@@ -31,11 +31,13 @@ LHERectangle {
 
         LHEToolButton {
             source: "qrc:/tools/undo.svg"
+            enabled: MyController.commands.canUndo
             onClicked: { if (MyController.commands.canUndo) MyController.commands.undo() }
         }
 
         LHEToolButton {
             source: "qrc:/tools/redo.svg"
+            enabled: MyController.commands.canRedo
             onClicked: { if (MyController.commands.canRedo) MyController.commands.redo() }
         }
     }

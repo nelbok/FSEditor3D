@@ -30,7 +30,8 @@ public:
 	Q_INVOKABLE void duplicatePlace(lh::Place* place);
 
 protected:
-	Commands* _c{ nullptr };
+	Controller* _c{ nullptr };
+	Commands* _cm{ nullptr };
 	lh::Project* _p{ nullptr };
 };
 } // namespace lhe

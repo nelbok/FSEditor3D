@@ -18,10 +18,13 @@ LHEModule {
     selection: LHEList {
         model: mng.model
         currentIndex: mng.currentIndex
-        onItemClicked: (index) => { mng.currentIndex = index }
+        removeEnabled: mng.currentData && !mng.currentData.hasRef
+        duplicateEnabled: mng.currentData
+
         onCreateClicked: { MyController.projectCommand.createLink() }
-        onRemoveClicked: { if (mng.currentData) MyController.projectCommand.removeLink(mng.currentData) }
-        onDuplicateClicked: { if (mng.currentData) MyController.projectCommand.duplicateLink(mng.currentData) }
+        onRemoveClicked: { MyController.projectCommand.removeLink(mng.currentData) }
+        onDuplicateClicked: { MyController.projectCommand.duplicateLink(mng.currentData) }
+        onItemClicked: (index) => { mng.currentIndex = index }
     }
 
     placement: LHEPlacement {

@@ -11,52 +11,65 @@ namespace lhe {
 
 ProjectCommand::ProjectCommand(Controller* controller)
 	: QObject(controller)
-	, _c{ controller->commands() }
+	, _c{ controller }
+	, _cm{ controller->commands() }
 	, _p{ controller->project() } {
-	assert(_c);
+	assert(_cm);
 	assert(_p);
 }
 
 ProjectCommand::~ProjectCommand() {}
 
 void ProjectCommand::setDefaultPlace(lh::Place* newValue) {
-	addValueCommand(_c, _p, &lh::Project::setDefaultPlace, &lh::Project::defaultPlace, newValue);
+	addValueCommand(_cm, _p, &lh::Project::setDefaultPlace, &lh::Project::defaultPlace, newValue);
 }
 
 void ProjectCommand::createCharacter() {
-	_c->add(new CreateCommand<lh::Character>(_p, &lh::Project::createCharacter, &lh::Project::removeCharacter));
+	_cm->add(new CreateCommand<lh::Character>(_p, &lh::Project::createCharacter, &lh::Project::removeCharacter));
 }
 
 void ProjectCommand::removeCharacter(lh::Character* character) {
-	_c->add(new RemoveCommand<lh::Character>(_p, &lh::Project::removeCharacter, character));
+	assert(!character->hasRef());
+	_cm->beginList();
+	_c->placementCommand()->setPlace(character, nullptr);
+	_cm->add(new RemoveCommand<lh::Character>(_p, &lh::Project::removeCharacter, character));
+	_cm->endList();
 }
 
 void ProjectCommand::duplicateCharacter(lh::Character* character) {
-	_c->add(new DuplicateCommand<lh::Character>(_p, &lh::Project::duplicateCharacter, &lh::Project::removeCharacter, character));
+	_cm->add(new DuplicateCommand<lh::Character>(_p, &lh::Project::duplicateCharacter, &lh::Project::removeCharacter, character));
 }
 
 void ProjectCommand::createLink() {
-	_c->add(new CreateCommand<lh::Link>(_p, &lh::Project::createLink, &lh::Project::removeLink));
+	_cm->add(new CreateCommand<lh::Link>(_p, &lh::Project::createLink, &lh::Project::removeLink));
 }
 
 void ProjectCommand::removeLink(lh::Link* link) {
-	_c->add(new RemoveCommand<lh::Link>(_p, &lh::Project::removeLink, link));
+	assert(!link->hasRef());
+	_cm->beginList();
+	_c->placementCommand()->setPlace(link, nullptr);
+	_c->linkCommand()->setLink(link, nullptr);
+	_cm->add(new RemoveCommand<lh::Link>(_p, &lh::Project::removeLink, link));
+	_cm->endList();
 }
 
 void ProjectCommand::duplicateLink(lh::Link* link) {
-	_c->add(new DuplicateCommand<lh::Link>(_p, &lh::Project::duplicateLink, &lh::Project::removeLink, link));
+	_cm->add(new DuplicateCommand<lh::Link>(_p, &lh::Project::duplicateLink, &lh::Project::removeLink, link));
 }
 
 void ProjectCommand::createPlace() {
-	_c->add(new CreateCommand<lh::Place>(_p, &lh::Project::createPlace, &lh::Project::removePlace));
+	_cm->add(new CreateCommand<lh::Place>(_p, &lh::Project::createPlace, &lh::Project::removePlace));
 }
 
 void ProjectCommand::removePlace(lh::Place* place) {
-	_c->add(new RemoveCommand<lh::Place>(_p, &lh::Project::removePlace, place));
+	assert(!place->hasRef());
+	_cm->beginList();
+	_cm->add(new RemoveCommand<lh::Place>(_p, &lh::Project::removePlace, place));
+	_cm->endList();
 }
 
 void ProjectCommand::duplicatePlace(lh::Place* place) {
-	_c->add(new DuplicateCommand<lh::Place>(_p, &lh::Project::duplicatePlace, &lh::Project::removePlace, place));
+	_cm->add(new DuplicateCommand<lh::Place>(_p, &lh::Project::duplicatePlace, &lh::Project::removePlace, place));
 }
 
 } // namespace lhe
