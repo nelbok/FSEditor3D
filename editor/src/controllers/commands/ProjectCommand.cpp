@@ -1,9 +1,16 @@
 #include "ProjectCommand.hpp"
 
+#include <lh/data/Character.hpp>
+#include <lh/data/Link.hpp>
+#include <lh/data/Model.hpp>
+#include <lh/data/Place.hpp>
+
 #include "../Commands.hpp"
 #include "../Controller.hpp"
 #include "CreateCommand.hpp"
 #include "DuplicateCommand.hpp"
+#include "LinkCommand.hpp"
+#include "PlacementCommand.hpp"
 #include "RemoveCommand.hpp"
 #include "ValueCommand.hpp"
 

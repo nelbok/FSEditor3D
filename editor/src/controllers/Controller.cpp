@@ -2,130 +2,152 @@
 
 namespace lhe {
 
+struct Controller::Impl {
+	About* about{ nullptr };
+	Commands* commands{ nullptr };
+	lh::Project* project{ nullptr };
+
+	// commands
+	CharacterCommand* characterCommand{ nullptr };
+	EntityCommand* entityCommand{ nullptr };
+	LinkCommand* linkCommand{ nullptr };
+	ModelCommand* modelCommand{ nullptr };
+	PlaceCommand* placeCommand{ nullptr };
+	PlacementCommand* placementCommand{ nullptr };
+	ProjectCommand* projectCommand{ nullptr };
+
+	// models
+	CharacterModel* characterModel{ nullptr };
+	LinkModel* linkModel{ nullptr };
+	ModelModel* modelModel{ nullptr };
+	PlaceModel* placeModel{ nullptr };
+};
+
 Controller::Controller(QObject* parent)
-	: QObject(parent) {}
+	: QObject(parent)
+	, _impl{ std::make_unique<Impl>() } {}
 
 Controller::~Controller() {
 	reset();
 }
 
 void Controller::init() {
-	assert(!_about);
-	assert(!_project);
+	assert(!_impl->about);
+	assert(!_impl->project);
 
-	_about = new About(this);
-	_commands = new Commands(this);
-	_project = new lh::Project(this);
+	_impl->about = new About(this);
+	_impl->commands = new Commands(this);
+	_impl->project = new lh::Project(this);
 
 	//commands
-	_characterCommand = new CharacterCommand(_commands);
-	_entityCommand = new EntityCommand(_commands);
-	_linkCommand = new LinkCommand(_commands);
-	_modelCommand = new ModelCommand(_commands);
-	_placeCommand = new PlaceCommand(_commands);
-	_placementCommand = new PlacementCommand(_commands);
-	_projectCommand = new ProjectCommand(this);
+	_impl->characterCommand = new CharacterCommand(_impl->commands);
+	_impl->entityCommand = new EntityCommand(_impl->commands);
+	_impl->linkCommand = new LinkCommand(_impl->commands);
+	_impl->modelCommand = new ModelCommand(_impl->commands);
+	_impl->placeCommand = new PlaceCommand(_impl->commands);
+	_impl->placementCommand = new PlacementCommand(_impl->commands);
+	_impl->projectCommand = new ProjectCommand(this);
 
 	//models
-	_characterModel = new CharacterModel(_project, this);
-	_linkModel = new LinkModel(_project, this);
-	_modelModel = new ModelModel(_project, this);
-	_placeModel = new PlaceModel(_project, this);
+	_impl->characterModel = new CharacterModel(_impl->project, this);
+	_impl->linkModel = new LinkModel(_impl->project, this);
+	_impl->modelModel = new ModelModel(_impl->project, this);
+	_impl->placeModel = new PlaceModel(_impl->project, this);
 
 	reset();
 
 	// models
-	_characterModel->initDatas();
-	_linkModel->initDatas();
-	_modelModel->initDatas();
-	_placeModel->initDatas();
+	_impl->characterModel->initDatas();
+	_impl->linkModel->initDatas();
+	_impl->modelModel->initDatas();
+	_impl->placeModel->initDatas();
 }
 
 void Controller::reset() {
-	_project->reset();
-	_commands->reset();
+	_impl->project->reset();
+	_impl->commands->reset();
 }
 
 void Controller::load(const QUrl& url) {
 	reset();
-	_project->load(url);
+	_impl->project->load(url);
 }
 
 void Controller::save(const QUrl& url) {
-	_project->save(url);
+	_impl->project->save(url);
 }
 
 About* Controller::about() const {
-	assert(_about);
-	return _about;
+	assert(_impl->about);
+	return _impl->about;
 }
 
 Commands* Controller::commands() const {
-	assert(_commands);
-	return _commands;
+	assert(_impl->commands);
+	return _impl->commands;
 }
 
 lh::Project* Controller::project() const {
-	assert(_project);
-	return _project;
+	assert(_impl->project);
+	return _impl->project;
 }
 
 // commands
 
 CharacterCommand* Controller::characterCommand() const {
-	assert(_characterCommand);
-	return _characterCommand;
+	assert(_impl->characterCommand);
+	return _impl->characterCommand;
 }
 
 EntityCommand* Controller::entityCommand() const {
-	assert(_entityCommand);
-	return _entityCommand;
+	assert(_impl->entityCommand);
+	return _impl->entityCommand;
 }
 
 LinkCommand* Controller::linkCommand() const {
-	assert(_linkCommand);
-	return _linkCommand;
+	assert(_impl->linkCommand);
+	return _impl->linkCommand;
 }
 
 ModelCommand* Controller::modelCommand() const {
-	assert(_modelCommand);
-	return _modelCommand;
+	assert(_impl->modelCommand);
+	return _impl->modelCommand;
 }
 
 PlaceCommand* Controller::placeCommand() const {
-	assert(_placeCommand);
-	return _placeCommand;
+	assert(_impl->placeCommand);
+	return _impl->placeCommand;
 }
 
 PlacementCommand* Controller::placementCommand() const {
-	assert(_placementCommand);
-	return _placementCommand;
+	assert(_impl->placementCommand);
+	return _impl->placementCommand;
 }
 
 ProjectCommand* Controller::projectCommand() const {
-	assert(_projectCommand);
-	return _projectCommand;
+	assert(_impl->projectCommand);
+	return _impl->projectCommand;
 }
 
 // models
 
 CharacterModel* Controller::characterModel() const {
-	assert(_characterModel);
-	return _characterModel;
+	assert(_impl->characterModel);
+	return _impl->characterModel;
 }
 
 LinkModel* Controller::linkModel() const {
-	assert(_linkModel);
-	return _linkModel;
+	assert(_impl->linkModel);
+	return _impl->linkModel;
 }
 
 ModelModel* Controller::modelModel() const {
-	assert(_modelModel);
-	return _modelModel;
+	assert(_impl->modelModel);
+	return _impl->modelModel;
 }
 
 PlaceModel* Controller::placeModel() const {
-	assert(_placeModel);
-	return _placeModel;
+	assert(_impl->placeModel);
+	return _impl->placeModel;
 }
 } // namespace lhe

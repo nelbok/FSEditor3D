@@ -72,23 +72,7 @@ public:
 	PlaceModel* placeModel() const;
 
 private:
-	About* _about{ nullptr };
-	Commands* _commands{ nullptr };
-	lh::Project* _project{ nullptr };
-
-	// commands
-	CharacterCommand* _characterCommand{ nullptr };
-	EntityCommand* _entityCommand{ nullptr };
-	LinkCommand* _linkCommand{ nullptr };
-	ModelCommand* _modelCommand{ nullptr };
-	PlaceCommand* _placeCommand{ nullptr };
-	PlacementCommand* _placementCommand{ nullptr };
-	ProjectCommand* _projectCommand{ nullptr };
-
-	// models
-	CharacterModel* _characterModel{ nullptr };
-	LinkModel* _linkModel{ nullptr };
-	ModelModel* _modelModel{ nullptr };
-	PlaceModel* _placeModel{ nullptr };
+	struct Impl;
+	std::unique_ptr<Impl> _impl;
 };
 } // namespace lhe
