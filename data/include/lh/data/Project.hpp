@@ -1,7 +1,6 @@
 #pragma once
 
 #include <QtCore/QList>
-#include <QtCore/QUrl>
 
 #include <lh/data/Entity.hpp>
 
@@ -13,7 +12,6 @@ class Place;
 
 class Project : public Entity {
 	Q_OBJECT
-	Q_PROPERTY(QUrl path READ path WRITE setPath NOTIFY pathUpdated)
 	Q_PROPERTY(Place* defaultPlace READ defaultPlace WRITE setDefaultPlace NOTIFY defaultPlaceUpdated)
 	Q_PROPERTY(QList<Character*> characters READ characters WRITE setCharacters NOTIFY charactersUpdated)
 	Q_PROPERTY(QList<Link*> links READ links WRITE setLinks NOTIFY linksUpdated)
@@ -25,9 +23,6 @@ public:
 	virtual ~Project();
 
 	virtual void reset() override;
-
-	const QUrl& path() const;
-	void setPath(const QUrl& path);
 
 	Place* defaultPlace() const;
 	void setDefaultPlace(Place* defaultPlace);
@@ -78,7 +73,6 @@ private:
 	std::unique_ptr<Impl> _impl;
 
 signals:
-	void pathUpdated();
 	void defaultPlaceUpdated();
 	void charactersUpdated();
 	void linksUpdated();

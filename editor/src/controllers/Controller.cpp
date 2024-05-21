@@ -4,6 +4,7 @@ namespace lhe {
 
 struct Controller::Impl {
 	About* about{ nullptr };
+	Balsam* balsam{ nullptr };
 	Commands* commands{ nullptr };
 	lh::Project* project{ nullptr };
 
@@ -32,10 +33,10 @@ Controller::~Controller() {
 }
 
 void Controller::init() {
-	assert(!_impl->about);
 	assert(!_impl->project);
 
 	_impl->about = new About(this);
+	_impl->balsam = new Balsam(this);
 	_impl->commands = new Commands(this);
 	_impl->project = new lh::Project(this);
 
@@ -55,6 +56,8 @@ void Controller::init() {
 	_impl->placeModel = new PlaceModel(_impl->project, this);
 
 	reset();
+
+	_impl->balsam->init(_impl->project);
 
 	// models
 	_impl->characterModel->initDatas();
@@ -80,6 +83,11 @@ void Controller::save(const QUrl& url) {
 About* Controller::about() const {
 	assert(_impl->about);
 	return _impl->about;
+}
+
+Balsam* Controller::balsam() const {
+	assert(_impl->balsam);
+	return _impl->balsam;
 }
 
 Commands* Controller::commands() const {

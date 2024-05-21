@@ -4,8 +4,9 @@
 
 #include <lh/data/Character.hpp>
 #include <lh/data/Link.hpp>
-#include <lh/data/Project.hpp>
+#include <lh/data/Model.hpp>
 #include <lh/data/Place.hpp>
+#include <lh/data/Project.hpp>
 
 #include "TestCompare.hpp"
 
@@ -20,6 +21,7 @@ struct TestLists {
 
 		testCharacters();
 		testLinks();
+		testModels();
 		testPlaces();
 	}
 
@@ -58,6 +60,22 @@ private:
 
 		_project->cleanLinks();
 		QVERIFY(_project->links().size() == 0);
+	}
+
+	void testModels() {
+		QVERIFY(_project->models().size() == 0);
+
+		auto* left = _project->createModel();
+		QVERIFY(left);
+
+		auto* right = _project->duplicateModel(left);
+		_compare.testModel(left, right);
+
+		_project->removeModel(left);
+		QVERIFY(_project->models().size() == 1);
+
+		_project->cleanModels();
+		QVERIFY(_project->models().size() == 0);
 	}
 
 	void testPlaces() {

@@ -10,4 +10,6 @@ constexpr auto version = "@LH_VERSION@";
 constexpr auto github = "@LH_GITHUB@";
 constexpr auto discord = "@LH_DISCORD@";
 constexpr auto twitter = "@LH_TWITTER@";
+
+constexpr auto balsam = "@LH_BALSAM@";
 } // namespace lh::Config

@@ -33,13 +33,22 @@ double toDouble(const QString& key, const QJsonObject& json) {
 }
 
 // Qt classes
+QUrl toUrl(const QJsonValue& json) {
+	assert(json.toVariant().isValid());
+	return json.toVariant().toUrl();
+}
+
+QJsonValue fromUrl(const QUrl& value) {
+	return QJsonValue::fromVariant(value);
+}
+
 QUuid toUuid(const QJsonValue& json) {
-	assert(json.isString());
-	return QUuid(json.toString());
+	assert(json.toVariant().isValid());
+	return json.toVariant().toUuid();
 }
 
 QJsonValue fromUuid(const QUuid& value) {
-	return value.toString();
+	return QJsonValue::fromVariant(value);
 }
 
 QColor toColor(const QJsonObject& json) {

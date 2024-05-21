@@ -4,8 +4,9 @@
 
 #include <lh/data/Character.hpp>
 #include <lh/data/Link.hpp>
-#include <lh/data/Project.hpp>
+#include <lh/data/Model.hpp>
 #include <lh/data/Place.hpp>
+#include <lh/data/Project.hpp>
 
 struct TestCompare {
 	TestCompare(bool isSame)
@@ -40,6 +41,13 @@ struct TestCompare {
 		testUuidPointer(left->link(), right->link());
 	}
 
+	void testModel(lh::Model* left, lh::Model* right) {
+		testEntity(left, right);
+
+		QCOMPARE(left->sourcePath(), right->sourcePath());
+		QCOMPARE(left->qmlName(), right->qmlName());
+	}
+
 	void testPlace(lh::Place* left, lh::Place* right) {
 		testEntity(left, right);
 	}
@@ -72,6 +80,15 @@ struct TestCompare {
 			QCOMPARE(ll.size(), rl.size());
 			for (qsizetype i = 0; i < ll.size(); ++i) {
 				testLink(ll.at(i), rl.at(i));
+			}
+		}
+
+		{
+			const auto& ll = left->models();
+			const auto& rl = right->models();
+			QCOMPARE(ll.size(), rl.size());
+			for (qsizetype i = 0; i < ll.size(); ++i) {
+				testModel(ll.at(i), rl.at(i));
 			}
 		}
 

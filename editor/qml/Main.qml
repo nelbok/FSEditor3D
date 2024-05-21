@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Layouts
 
 import editor
 
@@ -11,58 +10,57 @@ Window {
     minimumHeight: 768
     visible: true
 
-    Rectangle {
+    LHEView3D {
         anchors.fill: parent
-        color: LHEStyle.window.color
+    }
 
-        LHEProject {
-            anchors.top: menu.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
+    LHEProject {
+        anchors.top: menu.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
 
-            enabled: (menu.selected === LHEMenu.ModuleType.Project)
-        }
+        enabled: (menu.selected === LHEMenu.ModuleType.Project)
+    }
 
-        LHEModels {
-            anchors.top: menu.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
+    LHEModels {
+        anchors.top: menu.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
 
-            enabled: (menu.selected === LHEMenu.ModuleType.Models)
-        }
+        enabled: (menu.selected === LHEMenu.ModuleType.Models)
+    }
 
-        LHEPlaces {
-            anchors.top: menu.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
+    LHEPlaces {
+        anchors.top: menu.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
 
-            enabled: (menu.selected === LHEMenu.ModuleType.Places)
-        }
+        enabled: (menu.selected === LHEMenu.ModuleType.Places)
+    }
 
-        LHECharacters {
-            anchors.top: menu.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
+    LHECharacters {
+        anchors.top: menu.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
 
-            enabled: (menu.selected === LHEMenu.ModuleType.Characters)
-        }
+        enabled: (menu.selected === LHEMenu.ModuleType.Characters)
+    }
 
-        LHELinks {
-            anchors.top: menu.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
+    LHELinks {
+        anchors.top: menu.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
 
-            enabled: (menu.selected === LHEMenu.ModuleType.Links)
-        }
+        enabled: (menu.selected === LHEMenu.ModuleType.Links)
+    }
 
-        LHEMenu {
-            id: menu
+    LHEMenu {
+        id: menu
 
-            anchors.top: parent.top
-            anchors.topMargin: 10
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
+        anchors.top: parent.top
+        anchors.topMargin: 10
+        anchors.horizontalCenter: parent.horizontalCenter
+    }
 
-        LHEToolBar {
-            anchors.top: parent.top
-            anchors.topMargin: 10
-            anchors.right: menu.left
-            anchors.rightMargin: 10
-        }
+    LHEToolBar {
+        anchors.top: parent.top
+        anchors.topMargin: 10
+        anchors.right: menu.left
+        anchors.rightMargin: 10
     }
 }

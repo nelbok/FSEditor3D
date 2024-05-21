@@ -18,12 +18,14 @@
 #include "models/PlaceModel.hpp"
 
 #include "About.hpp"
+#include "Balsam.hpp"
 #include "Commands.hpp"
 
 namespace lhe {
 class Controller : public QObject {
 	Q_OBJECT
 	Q_PROPERTY(About* about READ about CONSTANT)
+	Q_PROPERTY(Balsam* balsam READ balsam CONSTANT)
 	Q_PROPERTY(Commands* commands READ commands CONSTANT)
 	Q_PROPERTY(lh::Project* project READ project CONSTANT)
 
@@ -53,6 +55,7 @@ public:
 	Q_INVOKABLE void save(const QUrl& url);
 
 	About* about() const;
+	Balsam* balsam() const;
 	Commands* commands() const;
 	lh::Project* project() const;
 

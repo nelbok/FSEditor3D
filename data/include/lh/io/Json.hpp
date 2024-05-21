@@ -3,6 +3,7 @@
 #include <QtCore/QJsonArray>
 #include <QtCore/QJsonObject>
 #include <QtCore/QJsonValue>
+#include <QtCore/QUrl>
 #include <QtCore/QUuid>
 #include <QtCore/QString>
 #include <QtGui/QColor>
@@ -21,6 +22,9 @@ int toInt(const QString& key, const QJsonObject& json);
 double toDouble(const QString& key, const QJsonObject& json);
 
 // Qt classes
+QUrl toUrl(const QJsonValue& json);
+QJsonValue fromUrl(const QUrl& value);
+
 QUuid toUuid(const QJsonValue& json);
 QJsonValue fromUuid(const QUuid& value);
 

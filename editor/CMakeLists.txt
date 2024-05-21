@@ -33,6 +33,8 @@ set(PROJECT_SOURCES
 	src/controllers/models/PlaceModel.hpp
 	src/controllers/About.cpp
 	src/controllers/About.hpp
+	src/controllers/Balsam.cpp
+	src/controllers/Balsam.hpp
 	src/controllers/Commands.cpp
 	src/controllers/Commands.hpp
 	src/controllers/Controller.cpp
@@ -59,6 +61,7 @@ set(QML_SOURCES
 	qml/common/LHEModule.qml
 	qml/common/LHERectangle.qml
 	qml/common/LHESpinBox.qml
+	qml/common/LHEText.qml
 	qml/common/LHETextField.qml
 	qml/common/LHEToolButton.qml
 	qml/common/LHEVector3DField.qml
@@ -71,6 +74,7 @@ set(QML_SOURCES
 	qml/modules/LHEPlaces.qml
 	qml/modules/LHEProject.qml
 	qml/modules/LHEToolBar.qml
+	qml/modules/LHEView3D.qml
 	qml/Main.qml
 )
 set(QML_SINGLETON
@@ -89,6 +93,14 @@ qt_add_executable(${CLH_EDITOR} ${PROJECT_SOURCES} ${OTHER_FILES})
 qt_add_qml_module(${CLH_EDITOR} URI editor VERSION 1.0 QML_FILES ${QML_SOURCES} ${QML_SINGLETON})
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" PREFIX "" FILES ${PROJECT_SOURCES} ${QML_SOURCES} ${QML_SINGLETON})
 include_directories(src)
+
+# Balsam
+get_target_property(BALSAM_LOCATION Qt6::balsam IMPORTED_LOCATION)
+if(WIN32)
+	get_filename_component(LH_BALSAM ${BALSAM_LOCATION} NAME)
+elseif(LINUX)
+	set(LH_BALSAM ${BALSAM_LOCATION})
+endif()
 
 configure_file(src/Config.hpp.in include/Config.hpp)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/include)
@@ -113,5 +125,13 @@ install(TARGETS ${CLH_EDITOR}
 	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 if(WIN32)
-	windeployqt(${CLH_EDITOR} QMLDIR "${CMAKE_CURRENT_SOURCE_DIR}/qml")
+	# Win deploy qt
+	get_target_property(DEPLOYQT Qt6::windeployqt IMPORTED_LOCATION)
+
+	# Deploy Balsam
+	add_custom_command(TARGET ${CLH_EDITOR} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${BALSAM_LOCATION} $<TARGET_FILE_DIR:${CLH_EDITOR}>)
+	add_custom_command(TARGET ${CLH_EDITOR} POST_BUILD COMMAND ${DEPLOYQT} "$<TARGET_FILE_DIR:${CLH_EDITOR}>/${LH_BALSAM}")
+
+	# Deploy editor
+	add_custom_command(TARGET ${CLH_EDITOR} POST_BUILD COMMAND ${DEPLOYQT} --qmldir "${CMAKE_CURRENT_SOURCE_DIR}/qml" "$<TARGET_FILE:${CLH_EDITOR}>")
 endif()

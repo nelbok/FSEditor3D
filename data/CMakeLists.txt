@@ -11,8 +11,7 @@ set(PROJECT_SOURCES
 	include/lh/data/UuidPointer.hpp
 	include/lh/io/Json.hpp
 
-	src/common/Tools.cpp
-	src/common/Tools.hpp
+	src/common/Accessors.hpp
 	src/data/Character.cpp
 	src/data/Entity.cpp
 	src/data/Link.cpp

@@ -4,8 +4,9 @@
 
 #include <lh/data/Character.hpp>
 #include <lh/data/Link.hpp>
-#include <lh/data/Project.hpp>
+#include <lh/data/Model.hpp>
 #include <lh/data/Place.hpp>
+#include <lh/data/Project.hpp>
 
 #include "TestCompare.hpp"
 
@@ -33,6 +34,13 @@ private:
 	QJsonObject _json{};
 
 	void init() {
+		auto* m1 = _p1->createModel();
+		auto* m2 = _p1->createModel();
+		auto* m3 = _p1->createModel();
+		m1->setName("Model 1");
+		m2->setName("Model 2");
+		m3->setName("Model 3");
+
 		auto* p1 = _p1->createPlace();
 		auto* p2 = _p1->createPlace();
 		auto* p3 = _p1->createPlace();

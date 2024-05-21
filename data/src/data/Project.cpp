@@ -13,13 +13,14 @@
 #include <lh/data/UuidPointer.hpp>
 #include <lh/io/Json.hpp>
 
-#include "common/Tools.hpp"
+#include "common/Accessors.hpp"
 
 namespace lh {
 
 struct Project::Impl {
 	UuidPointer<Place>* defaultPlace{ nullptr };
 	QUrl path{};
+	bool isTemp{ true };
 	QList<Character*> characters{};
 	QList<Link*> links{};
 	QList<Model*> models{};
@@ -51,6 +52,14 @@ struct Project::Impl {
 		}
 		json[key] = jsonArray;
 	}
+
+	QString toPath(const QUrl& url) {
+		assert(url.isValid());
+		if (url.isLocalFile())
+			return url.toLocalFile();
+		else
+			return url.toString();
+	}
 };
 
 Project::Project(QObject* parent)
@@ -63,19 +72,13 @@ Project::~Project() {}
 
 void Project::reset() {
 	Entity::reset();
+
+	// Reset datas
 	setDefaultPlace(nullptr);
 	cleanCharacters();
 	cleanLinks();
 	cleanModels();
 	cleanPlaces();
-}
-
-const QUrl& Project::path() const {
-	return _impl->path;
-}
-
-void Project::setPath(const QUrl& path) {
-	TOOLS_SETTER(Project, path);
 }
 
 Place* Project::defaultPlace() const {
@@ -191,12 +194,11 @@ constexpr auto lModels = "models";
 constexpr auto lPlaces = "places";
 
 void Project::load(const QUrl& url) {
-	QFile file(Tools::toPath(url));
+	QFile file(_impl->toPath(url));
 	if (!file.open(QIODevice::ReadOnly)) {
 		// ERROR
 		return;
 	}
-	setPath(url);
 
 	// Read
 	load(QJsonDocument::fromJson(file.readAll()).object());
@@ -216,12 +218,11 @@ void Project::load(const QJsonObject& json) {
 }
 
 void Project::save(const QUrl& url) {
-	QSaveFile file(Tools::toPath(url));
+	QSaveFile file(_impl->toPath(url));
 	if (!file.open(QIODevice::WriteOnly)) {
 		// ERROR
 		return;
 	}
-	setPath(url);
 
 	// Write
 	QJsonObject json;

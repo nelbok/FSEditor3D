@@ -1,7 +1,7 @@
 #pragma once
 
-#include <QtCore/QString>
-#include <QtCore/QUrl>
+#include <QtCore/QObject>
+#include <QtCore/QList>
 
 // Entity macro
 #define TOOLS_SETTER(CLASSNAME, MEMBER) lh::Tools::setter(this, _impl->MEMBER, MEMBER, &CLASSNAME::MEMBER##Updated)
@@ -11,8 +11,6 @@
 #define TOOLS_CLEAN_ENTITIES(CLASSNAME, MEMBER) lh::Tools::cleanEntities(this, _impl->MEMBER, &CLASSNAME::MEMBER##Updated)
 
 namespace lh::Tools {
-QString toPath(const QUrl& url);
-
 // Entity member
 template<class TInstance, class TType>
 void setter(TInstance* instance, TType& member, const TType& value, void (TInstance::*signal)()) {
