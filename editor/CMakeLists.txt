@@ -1,49 +1,55 @@
 qt_standard_project_setup(REQUIRES 6.5)
 
 set(PROJECT_SOURCES
-	src/controllers/commands/BaseCommand.cpp
-	src/controllers/commands/BaseCommand.hpp
-	src/controllers/commands/CharacterCommand.cpp
-	src/controllers/commands/CharacterCommand.hpp
-	src/controllers/commands/CreateCommand.hpp
-	src/controllers/commands/DuplicateCommand.hpp
-	src/controllers/commands/EntityCommand.cpp
-	src/controllers/commands/EntityCommand.hpp
-	src/controllers/commands/LinkCommand.cpp
-	src/controllers/commands/LinkCommand.hpp
-	src/controllers/commands/ModelCommand.cpp
-	src/controllers/commands/ModelCommand.hpp
-	src/controllers/commands/PlaceCommand.cpp
-	src/controllers/commands/PlaceCommand.hpp
-	src/controllers/commands/PlacementCommand.cpp
-	src/controllers/commands/PlacementCommand.hpp
-	src/controllers/commands/ProjectCommand.cpp
-	src/controllers/commands/ProjectCommand.hpp
-	src/controllers/commands/RemoveCommand.hpp
-	src/controllers/commands/ValueCommand.hpp
-	src/controllers/models/CharacterModel.cpp
-	src/controllers/models/CharacterModel.hpp
-	src/controllers/models/EntityModel.cpp
-	src/controllers/models/EntityModel.hpp
-	src/controllers/models/LinkModel.cpp
-	src/controllers/models/LinkModel.hpp
-	src/controllers/models/ModelModel.cpp
-	src/controllers/models/ModelModel.hpp
-	src/controllers/models/PlaceModel.cpp
-	src/controllers/models/PlaceModel.hpp
-	src/controllers/About.cpp
-	src/controllers/About.hpp
-	src/controllers/Balsam.cpp
-	src/controllers/Balsam.hpp
-	src/controllers/Commands.cpp
-	src/controllers/Commands.hpp
-	src/controllers/Controller.cpp
-	src/controllers/Controller.hpp
-	src/controllers/SelectionManager.cpp
-	src/controllers/SelectionManager.hpp
-	src/main.cpp
+	src/commands/BaseCommand.cpp
+	src/commands/BaseCommand.hpp
+	src/commands/CharacterCommand.cpp
+	src/commands/CharacterCommand.hpp
+	src/commands/Commands.cpp
+	src/commands/Commands.hpp
+	src/commands/CreateCommand.hpp
+	src/commands/DuplicateCommand.hpp
+	src/commands/EntityCommand.cpp
+	src/commands/EntityCommand.hpp
+	src/commands/LinkCommand.cpp
+	src/commands/LinkCommand.hpp
+	src/commands/ModelCommand.cpp
+	src/commands/ModelCommand.hpp
+	src/commands/PlaceCommand.cpp
+	src/commands/PlaceCommand.hpp
+	src/commands/PlacementCommand.cpp
+	src/commands/PlacementCommand.hpp
+	src/commands/ProjectCommand.cpp
+	src/commands/ProjectCommand.hpp
+	src/commands/RemoveCommand.hpp
+	src/commands/ValueCommand.hpp
+
+	src/models/CharacterModel.cpp
+	src/models/CharacterModel.hpp
+	src/models/EntityModel.cpp
+	src/models/EntityModel.hpp
+	src/models/LinkModel.cpp
+	src/models/LinkModel.hpp
+	src/models/ModelModel.cpp
+	src/models/ModelModel.hpp
+	src/models/PlaceModel.cpp
+	src/models/PlaceModel.hpp
+
+	src/About.cpp
+	src/About.hpp
+	src/Balsam.cpp
+	src/Balsam.hpp
+	src/CommandsManager.cpp
+	src/CommandsManager.hpp
+	src/Manager.cpp
+	src/Manager.hpp
+	src/ModelsManager.cpp
+	src/ModelsManager.hpp
+	src/SelectionManager.cpp
+	src/SelectionManager.hpp
 
 	src/Config.hpp.in
+	src/main.cpp
 
 	resources/resource.h
 	resources/logo.ico

@@ -18,9 +18,9 @@ LHEModule {
 
             MySelectionManager {
                 id: mng
-                model: MyController.placeModel
+                model: MyModels.placeModel
                 currentData: MyProject.defaultPlace
-                onCurrentUpdated: { if (MyProject && MyProject.defaultPlace !== currentData) MyController.projectCommand.setDefaultPlace(currentData) }
+                onCurrentUpdated: { if (MyProject && MyProject.defaultPlace !== currentData) MyCommands.projectCommand.setDefaultPlace(currentData) }
             }
 
             model: mng.model

@@ -8,8 +8,6 @@ class ListCommand;
 
 class Commands : public QObject {
 	Q_OBJECT
-	Q_PROPERTY(bool canUndo READ canUndo NOTIFY updated)
-	Q_PROPERTY(bool canRedo READ canRedo NOTIFY updated)
 
 public:
 	Commands(QObject* parent = nullptr);
@@ -19,8 +17,8 @@ public:
 
 	bool canUndo() const;
 	bool canRedo() const;
-	Q_INVOKABLE void undo();
-	Q_INVOKABLE void redo();
+	void undo();
+	void redo();
 
 	void beginList();
 	void endList();

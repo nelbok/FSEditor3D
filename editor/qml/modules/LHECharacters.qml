@@ -11,7 +11,7 @@ LHEModule {
 
     MySelectionManager {
         id: mng
-        model: MyController.characterModel
+        model: MyModels.characterModel
         onCurrentDataChanged: root.myData = currentData
     }
 
@@ -21,9 +21,9 @@ LHEModule {
         removeEnabled: mng.currentData && !mng.currentData.hasRef
         duplicateEnabled: mng.currentData
 
-        onCreateClicked: { MyController.projectCommand.createCharacter() }
-        onRemoveClicked: { MyController.projectCommand.removeCharacter(mng.currentData) }
-        onDuplicateClicked: { MyController.projectCommand.duplicateCharacter(mng.currentData) }
+        onCreateClicked: { MyCommands.projectCommand.createCharacter() }
+        onRemoveClicked: { MyCommands.projectCommand.removeCharacter(mng.currentData) }
+        onDuplicateClicked: { MyCommands.projectCommand.duplicateCharacter(mng.currentData) }
         onItemClicked: (index) => { mng.currentIndex = index }
     }
 
@@ -37,17 +37,17 @@ LHEModule {
         LHEColorField {
             name: qsTr("Hair")
             color: (root.myData) ? root.myData.hair : "gray"
-            onColorEdited: (color) => { if (root.myData) MyController.characterCommand.setHair(root.myData, color) }
+            onColorEdited: (color) => { if (root.myData) MyCommands.characterCommand.setHair(root.myData, color) }
         }
         LHEColorField {
             name: qsTr("Skin")
             color: (root.myData) ? root.myData.skin : "gray"
-            onColorEdited: (color) => { if (root.myData) MyController.characterCommand.setSkin(root.myData, color) }
+            onColorEdited: (color) => { if (root.myData) MyCommands.characterCommand.setSkin(root.myData, color) }
         }
         LHEColorField {
             name: qsTr("Clothes")
             color: (root.myData) ? root.myData.clothes : "gray"
-            onColorEdited: (color) => { if (root.myData) MyController.characterCommand.setClothes(root.myData, color) }
+            onColorEdited: (color) => { if (root.myData) MyCommands.characterCommand.setClothes(root.myData, color) }
         }
     }
 
@@ -59,7 +59,7 @@ LHEModule {
             from: 135
             to: 200
             value: (root.myData) ? root.myData.height : 0
-            onValueChanged: { if (root.myData) MyController.characterCommand.setHeight(root.myData, value) }
+            onValueChanged: { if (root.myData) MyCommands.characterCommand.setHeight(root.myData, value) }
         }
         LHEComboBox {
             name: qsTr("Species")
@@ -81,7 +81,7 @@ LHEModule {
                 { uuid: MyCharacter.Species.Lizard, name: qsTr("Lizard") },
             ]
             currentIndex: { (root.myData) ? indexOfValue(root.myData.species) : -1 }
-            onActivated: { if (root.myData) MyController.characterCommand.setSpecies(root.myData, valueAt(currentIndex)) }
+            onActivated: { if (root.myData) MyCommands.characterCommand.setSpecies(root.myData, valueAt(currentIndex)) }
         }
         LHEComboBox {
             name: qsTr("Gender")
@@ -90,7 +90,7 @@ LHEModule {
                 { uuid: MyCharacter.Gender.Female, name: qsTr("Female") },
             ]
             currentIndex: (root.myData) ? indexOfValue(root.myData.gender) : -1
-            onActivated: { if (root.myData) MyController.characterCommand.setGender(root.myData, valueAt(currentIndex)) }
+            onActivated: { if (root.myData) MyCommands.characterCommand.setGender(root.myData, valueAt(currentIndex)) }
         }
     }
 }

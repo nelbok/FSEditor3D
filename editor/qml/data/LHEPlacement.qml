@@ -12,13 +12,13 @@ LHEEntity {
     LHEVector3DField {
         name: qsTr("Position")
         value: (root.placement) ? root.placement.position : Qt.vector3d(0, 0, 0)
-        onEditingFinished: (value) => { if (root.placement) MyController.placementCommand.setPosition(root.placement, value) }
+        onEditingFinished: (value) => { if (root.placement) MyCommands.placementCommand.setPosition(root.placement, value) }
     }
 
     LHEVector3DField {
         name: qsTr("Rotation")
         value: (root.placement) ? root.placement.rotation : Qt.vector3d(0, 0, 0)
-        onEditingFinished: (value) => { if (root.placement) MyController.placementCommand.setRotation(root.placement, value) }
+        onEditingFinished: (value) => { if (root.placement) MyCommands.placementCommand.setRotation(root.placement, value) }
     }
 
     LHEComboBox {
@@ -26,9 +26,9 @@ LHEEntity {
 
         MySelectionManager {
             id: mng
-            model: MyController.placeModel
+            model: MyModels.placeModel
             currentData: (root.placement) ? root.placement.place : null
-            onCurrentUpdated: { if (root.placement && root.placement.place !== currentData) MyController.placementCommand.setPlace(root.placement, currentData) }
+            onCurrentUpdated: { if (root.placement && root.placement.place !== currentData) MyCommands.placementCommand.setPlace(root.placement, currentData) }
         }
 
         model: mng.model

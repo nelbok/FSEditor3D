@@ -11,7 +11,7 @@ LHEModule {
 
     MySelectionManager {
         id: mng
-        model: MyController.placeModel
+        model: MyModels.placeModel
         onCurrentDataChanged: root.myData = currentData
     }
 
@@ -21,9 +21,9 @@ LHEModule {
         removeEnabled: mng.currentData && !mng.currentData.hasRef
         duplicateEnabled: mng.currentData
 
-        onCreateClicked: { MyController.projectCommand.createPlace() }
-        onRemoveClicked: { MyController.projectCommand.removePlace(mng.currentData) }
-        onDuplicateClicked: { MyController.projectCommand.duplicatePlace(mng.currentData) }
+        onCreateClicked: { MyCommands.projectCommand.createPlace() }
+        onRemoveClicked: { MyCommands.projectCommand.removePlace(mng.currentData) }
+        onDuplicateClicked: { MyCommands.projectCommand.duplicatePlace(mng.currentData) }
         onItemClicked: (index) => { mng.currentIndex = index }
     }
 

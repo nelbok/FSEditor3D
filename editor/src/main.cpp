@@ -8,9 +8,11 @@
 #include <lh/data/Place.hpp>
 #include <lh/data/Project.hpp>
 
-#include "controllers/Controller.hpp"
-#include "controllers/SelectionManager.hpp"
 #include "Config.hpp"
+#include "CommandsManager.hpp"
+#include "Manager.hpp"
+#include "ModelsManager.hpp"
+#include "SelectionManager.hpp"
 
 int main(int argc, char* argv[]) {
 	QGuiApplication app(argc, argv);
@@ -21,12 +23,12 @@ int main(int argc, char* argv[]) {
 
 	QQmlApplicationEngine engine;
 
-	QScopedPointer<lhe::Controller> controller(new lhe::Controller);
+	QScopedPointer<lhe::Manager> manager(new lhe::Manager);
 
-	controller->init();
+	manager->init();
 
 	// LHData
-	qmlRegisterSingletonInstance("editor", 1, 0, "MyProject", controller->project());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyProject", manager->project());
 	qmlRegisterType<lh::Character>("editor", 1, 0, "MyCharacter");
 	qmlRegisterType<lh::Entity>("editor", 1, 0, "MyEntity");
 	qmlRegisterType<lh::Link>("editor", 1, 0, "MyLink");
@@ -35,7 +37,9 @@ int main(int argc, char* argv[]) {
 	qmlRegisterType<lh::Placement>("editor", 1, 0, "MyPlacement");
 
 	// LHEditor
-	qmlRegisterSingletonInstance("editor", 1, 0, "MyController", controller.get());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyManager", manager.get());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyCommands", manager->commandsManager());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyModels", manager->modelsManager());
 	qmlRegisterType<lhe::SelectionManager>("editor", 1, 0, "MySelectionManager");
 
 	QObject::connect(

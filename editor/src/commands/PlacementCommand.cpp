@@ -1,6 +1,6 @@
 #include "PlacementCommand.hpp"
 
-#include "../Commands.hpp"
+#include "Commands.hpp"
 #include "ValueCommand.hpp"
 
 namespace lhe {

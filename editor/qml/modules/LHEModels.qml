@@ -12,7 +12,7 @@ LHEModule {
 
     MySelectionManager {
         id: mng
-        model: MyController.modelModel
+        model: MyModels.modelModel
         onCurrentDataChanged: root.myData = currentData
     }
 
@@ -22,9 +22,9 @@ LHEModule {
         removeEnabled: mng.currentData && !mng.currentData.hasRef
         duplicateEnabled: mng.currentData
 
-        onCreateClicked: { MyController.projectCommand.createModel() }
-        onRemoveClicked: { MyController.projectCommand.removeModel(mng.currentData) }
-        onDuplicateClicked: { MyController.projectCommand.duplicateModel(mng.currentData) }
+        onCreateClicked: { MyCommands.projectCommand.createModel() }
+        onRemoveClicked: { MyCommands.projectCommand.removeModel(mng.currentData) }
+        onDuplicateClicked: { MyCommands.projectCommand.duplicateModel(mng.currentData) }
         onItemClicked: (index) => { mng.currentIndex = index }
     }
 
@@ -50,7 +50,7 @@ LHEModule {
     }
 
     Connections {
-        target: MyController.balsam
+        target: MyManager.balsam
         function onErrorOccurred() { message.open() }
     }
 
@@ -65,7 +65,7 @@ LHEModule {
             "PLY (*.ply)",
             "GLTF2 (*.gltf *.glb)",
         ]
-        onAccepted: MyController.balsam.generate(myData, selectedFile)
+        onAccepted: MyManager.balsam.generate(myData, selectedFile)
     }
 
     MessageDialog {

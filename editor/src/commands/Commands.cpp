@@ -1,6 +1,6 @@
 #include "Commands.hpp"
 
-#include "commands/BaseCommand.hpp"
+#include "BaseCommand.hpp"
 
 namespace lhe {
 

@@ -16,7 +16,7 @@ LHERectangle {
 
         LHEToolButton {
             source: "qrc:/tools/new.svg"
-            onClicked: MyController.reset()
+            onClicked: MyManager.reset()
         }
 
         LHEToolButton {
@@ -31,14 +31,14 @@ LHERectangle {
 
         LHEToolButton {
             source: "qrc:/tools/undo.svg"
-            enabled: MyController.commands.canUndo
-            onClicked: MyController.commands.undo()
+            enabled: MyCommands.canUndo
+            onClicked: MyCommands.undo()
         }
 
         LHEToolButton {
             source: "qrc:/tools/redo.svg"
-            enabled: MyController.commands.canRedo
-            onClicked: MyController.commands.redo()
+            enabled: MyCommands.canRedo
+            onClicked: MyCommands.redo()
         }
     }
 
@@ -55,10 +55,10 @@ LHERectangle {
         onAccepted: {
             switch(fileMode) {
             case FileDialog.SaveFile:
-                MyController.save(selectedFile)
+                MyManager.save(selectedFile)
                 break;
             case FileDialog.OpenFile:
-                MyController.load(selectedFile)
+                MyManager.load(selectedFile)
                 break;
             default:
                 //Nothing to do
@@ -78,11 +78,11 @@ LHERectangle {
 
     Shortcut {
         sequences: [ StandardKey.Undo ]
-        onActivated: { if (MyController.commands.canUndo) MyController.commands.undo() }
+        onActivated: { if (MyCommands.canUndo) MyCommands.undo() }
     }
 
     Shortcut {
         sequences: [ StandardKey.Redo ]
-        onActivated: { if (MyController.commands.canRedo) MyController.commands.redo() }
+        onActivated: { if (MyCommands.canRedo) MyCommands.redo() }
     }
 }

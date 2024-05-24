@@ -73,7 +73,7 @@ LHERectangle {
             Text {
                 Layout.fillWidth: true
 
-                text: "Version " + MyController.about.version
+                text: "Version " + MyManager.about.version
                 color: LHEStyle.foreground.normal
                 font.bold: LHEStyle.copyrightFont.bold
                 font.italic: LHEStyle.copyrightFont.italic
@@ -85,7 +85,7 @@ LHERectangle {
             Text {
                 Layout.fillWidth: true
 
-                text: MyController.about.copyright
+                text: MyManager.about.copyright
                 color: LHEStyle.foreground.normal
                 font.bold: LHEStyle.copyrightFont.bold
                 font.italic: LHEStyle.copyrightFont.italic
@@ -108,17 +108,17 @@ LHERectangle {
                 LHEIconButton {
                     imageHeight: 20
                     source: "qrc:/social/github.svg"
-                    onClicked: Qt.openUrlExternally(MyController.about.github)
+                    onClicked: Qt.openUrlExternally(MyManager.about.github)
                 }
                 LHEIconButton {
                     imageHeight: 20
                     source: "qrc:/social/discord.svg"
-                    onClicked: Qt.openUrlExternally(MyController.about.discord)
+                    onClicked: Qt.openUrlExternally(MyManager.about.discord)
                 }
                 LHEIconButton {
                     imageHeight: 20
                     source: "qrc:/social/twitter.svg"
-                    onClicked: Qt.openUrlExternally(MyController.about.twitter)
+                    onClicked: Qt.openUrlExternally(MyManager.about.twitter)
                 }
             }
         }

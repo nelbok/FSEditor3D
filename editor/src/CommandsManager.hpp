@@ -12,24 +12,13 @@
 #include "commands/PlacementCommand.hpp"
 #include "commands/ProjectCommand.hpp"
 
-#include "models/CharacterModel.hpp"
-#include "models/LinkModel.hpp"
-#include "models/ModelModel.hpp"
-#include "models/PlaceModel.hpp"
-
-#include "About.hpp"
-#include "Balsam.hpp"
-#include "Commands.hpp"
-
 namespace lhe {
-class Controller : public QObject {
+class CommandsManager : public QObject {
 	Q_OBJECT
-	Q_PROPERTY(About* about READ about CONSTANT)
-	Q_PROPERTY(Balsam* balsam READ balsam CONSTANT)
-	Q_PROPERTY(Commands* commands READ commands CONSTANT)
-	Q_PROPERTY(lh::Project* project READ project CONSTANT)
 
-	// commands
+	Q_PROPERTY(bool canUndo READ canUndo NOTIFY updated)
+	Q_PROPERTY(bool canRedo READ canRedo NOTIFY updated)
+
 	Q_PROPERTY(CharacterCommand* characterCommand READ characterCommand CONSTANT)
 	Q_PROPERTY(EntityCommand* entityCommand READ entityCommand CONSTANT)
 	Q_PROPERTY(LinkCommand* linkCommand READ linkCommand CONSTANT)
@@ -38,28 +27,18 @@ class Controller : public QObject {
 	Q_PROPERTY(PlacementCommand* placementCommand READ placementCommand CONSTANT)
 	Q_PROPERTY(ProjectCommand* projectCommand READ projectCommand CONSTANT)
 
-	// models
-	Q_PROPERTY(CharacterModel* characterModel READ characterModel CONSTANT)
-	Q_PROPERTY(LinkModel* linkModel READ linkModel CONSTANT)
-	Q_PROPERTY(ModelModel* modelModel READ modelModel CONSTANT)
-	Q_PROPERTY(PlaceModel* placeModel READ placeModel CONSTANT)
-
 public:
-	Controller(QObject* parent = nullptr);
-	virtual ~Controller();
+	CommandsManager(QObject* parent = nullptr);
+	virtual ~CommandsManager();
 
-	void init();
+	void init(lh::Project* project);
+	void reset();
 
-	Q_INVOKABLE void reset();
-	Q_INVOKABLE void load(const QUrl& url);
-	Q_INVOKABLE void save(const QUrl& url);
+	bool canUndo()const;
+	bool canRedo()const;
+	Q_INVOKABLE void undo();
+	Q_INVOKABLE void redo();
 
-	About* about() const;
-	Balsam* balsam() const;
-	Commands* commands() const;
-	lh::Project* project() const;
-
-	// commands
 	CharacterCommand* characterCommand() const;
 	EntityCommand* entityCommand() const;
 	LinkCommand* linkCommand() const;
@@ -68,14 +47,11 @@ public:
 	PlacementCommand* placementCommand() const;
 	ProjectCommand* projectCommand() const;
 
-	// models
-	CharacterModel* characterModel() const;
-	LinkModel* linkModel() const;
-	ModelModel* modelModel() const;
-	PlaceModel* placeModel() const;
-
 private:
 	struct Impl;
 	std::unique_ptr<Impl> _impl;
+
+signals:
+	void updated();
 };
 } // namespace lhe

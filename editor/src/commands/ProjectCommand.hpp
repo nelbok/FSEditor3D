@@ -5,14 +5,14 @@
 #include <lh/data/Project.hpp>
 
 namespace lhe {
+class CommandsManager;
 class Commands;
-class Controller;
 
 class ProjectCommand : public QObject {
 	Q_OBJECT
 
 public:
-	ProjectCommand(Controller* controller);
+	ProjectCommand(lh::Project* project, CommandsManager* mng, Commands* commands);
 	virtual ~ProjectCommand();
 
 	Q_INVOKABLE void setDefaultPlace(lh::Place* defaultPlace);
@@ -34,8 +34,8 @@ public:
 	Q_INVOKABLE void duplicatePlace(lh::Place* place);
 
 protected:
-	Controller* _c{ nullptr };
-	Commands* _cm{ nullptr };
 	lh::Project* _p{ nullptr };
+	CommandsManager* _cm{ nullptr };
+	Commands* _c{ nullptr };
 };
 } // namespace lhe

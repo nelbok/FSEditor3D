@@ -21,6 +21,6 @@ ColumnLayout {
         name: qsTr("Name")
         value: (root.entity) ? root.entity.name : "-"
         placeholder: qsTr("Enter something...")
-        onEditingFinished: { if (root.entity) MyController.entityCommand.setName(root.entity, value) }
+        onEditingFinished: { if (root.entity) MyCommands.entityCommand.setName(root.entity, value) }
     }
 }
