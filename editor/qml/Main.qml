@@ -12,6 +12,8 @@ Window {
 
     LHEView3D {
         anchors.fill: parent
+
+        myData: models.myData
     }
 
     LHEProject {
@@ -22,6 +24,8 @@ Window {
     }
 
     LHEModels {
+        id: models
+
         anchors.top: menu.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 

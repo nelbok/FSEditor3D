@@ -14,6 +14,9 @@ public:
 	ModelCommand(Commands* commands);
 	virtual ~ModelCommand();
 
+	Q_INVOKABLE void setSourcePath(lh::Model* model, const QUrl& sourcePath);
+	Q_INVOKABLE void setQmlName(lh::Model* model, const QString& qmlName);
+
 protected:
 	Commands* _c{ nullptr };
 };

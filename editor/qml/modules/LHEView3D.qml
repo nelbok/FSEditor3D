@@ -2,9 +2,15 @@ import QtQuick
 import QtQuick3D
 import QtQuick3D.Helpers
 
+import editor
+
 // https://doc.qt.io/qt-6/qtquick3dphysics-units.html
 // Qt Quick 3D Unit: cm
 View3D {
+    property MyModel myData: null
+
+    id: view3D
+
     environment: SceneEnvironment {
         clearColor: "skyblue"
         backgroundMode: SceneEnvironment.Color
@@ -26,6 +32,47 @@ View3D {
     }
     WasdController {
         controlledObject: camera
+    }
+
+    Connections {
+        target: myData
+        function onQmlNameUpdated() {
+            load(MyManager.balsam.qmlPath(myData))
+        }
+    }
+
+    property var cpt: null;
+    property var map: null;
+
+    function clean() {
+        if (map) {
+            map.destroy()
+            map = null
+        }
+        if (cpt) {
+            cpt.destroy()
+            cpt = null
+        }
+    }
+
+    function load(url) {
+        clean()
+        cpt = Qt.createComponent(url);
+        if (cpt.status === Component.Ready)
+            finishLoading()
+        else
+            cpt.statusChanged.connect(finishLoading)
+    }
+
+    function finishLoading() {
+        if (cpt.status === Component.Ready) {
+            map = cpt.createObject(view3D.scene);
+            map.scale = Qt.vector3d(100, 100, 100)
+        } else if (cpt.status === Component.Error) {
+            console.log("Error while loading:" + cpt.errorString());
+        } else {
+            console.log("Something wrong...");
+        }
     }
 
     Model {

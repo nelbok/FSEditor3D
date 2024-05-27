@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QtCore/QObject>
+#include <QtCore/QUrl>
 
 #include <lh/data/Project.hpp>
 
@@ -16,6 +17,7 @@ class Manager : public QObject {
 	Q_PROPERTY(About* about READ about CONSTANT)
 	Q_PROPERTY(Balsam* balsam READ balsam CONSTANT)
 	Q_PROPERTY(lh::Project* project READ project CONSTANT)
+	Q_PROPERTY(QUrl path READ path WRITE setPath NOTIFY pathUpdated)
 
 public:
 	Manager(QObject* parent = nullptr);
@@ -31,11 +33,17 @@ public:
 	Balsam* balsam() const;
 	lh::Project* project() const;
 
+	const QUrl& path() const;
+	void setPath(const QUrl& path);
+
 	CommandsManager* commandsManager() const;
 	ModelsManager* modelsManager() const;
 
 private:
 	struct Impl;
 	std::unique_ptr<Impl> _impl;
+
+signals:
+	void pathUpdated();
 };
 } // namespace lhe

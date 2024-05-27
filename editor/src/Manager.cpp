@@ -10,6 +10,8 @@ struct Manager::Impl {
 	Balsam* balsam{ nullptr };
 	lh::Project* project{ nullptr };
 
+	QUrl path{};
+
 	CommandsManager* commandsManager{ nullptr };
 	ModelsManager* modelsManager{ nullptr };
 };
@@ -32,7 +34,8 @@ void Manager::init() {
 	_impl->commandsManager = new CommandsManager(this);
 	_impl->modelsManager = new ModelsManager(this);
 
-	_impl->balsam->init(_impl->project);
+	_impl->balsam->init(this);
+
 	_impl->commandsManager->init(_impl->project);
 	_impl->modelsManager->init(_impl->project);
 
@@ -41,16 +44,19 @@ void Manager::init() {
 
 void Manager::reset() {
 	_impl->project->reset();
+	_impl->balsam->reset();
 	_impl->commandsManager->reset();
 }
 
 void Manager::load(const QUrl& url) {
 	reset();
 	_impl->project->load(url);
+	setPath(url);
 }
 
 void Manager::save(const QUrl& url) {
 	_impl->project->save(url);
+	setPath(url);
 }
 
 About* Manager::about() const {
@@ -66,6 +72,17 @@ Balsam* Manager::balsam() const {
 lh::Project* Manager::project() const {
 	assert(_impl->project);
 	return _impl->project;
+}
+
+const QUrl& Manager::path() const {
+	return _impl->path;
+}
+
+void Manager::setPath(const QUrl& path) {
+	if (_impl->path != path) {
+		_impl->path = path;
+		emit pathUpdated();
+	}
 }
 
 CommandsManager* Manager::commandsManager() const {

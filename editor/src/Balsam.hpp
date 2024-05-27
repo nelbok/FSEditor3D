@@ -5,9 +5,10 @@
 #include <QtCore/QUrl>
 
 #include <lh/data/Model.hpp>
-#include <lh/data/Project.hpp>
 
 namespace lhe {
+class Manager;
+
 class Balsam : public QObject {
 	Q_OBJECT
 
@@ -15,17 +16,22 @@ public:
 	Balsam(QObject* parent = nullptr);
 	virtual ~Balsam();
 
-	void init(lh::Project* project);
+	void init(Manager* manager);
+	void reset();
 
+	Q_INVOKABLE QUrl qmlPath(lh::Model* model);
 	Q_INVOKABLE void generate(lh::Model* model, const QUrl& url);
 
 private slots:
 	void finalize();
+	void updateModelsPath();
 
 private:
-	lh::Project* _project{ nullptr };
+	Manager* _manager{ nullptr };
 	lh::Model* _current{ nullptr };
 	QProcess* _process{ nullptr };
+	QUrl _projectPath{};
+	QUrl _sourcePath{};
 
 signals:
 	void errorOccurred();
