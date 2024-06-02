@@ -11,8 +11,16 @@ class Model : public Entity {
 	Q_OBJECT
 	Q_PROPERTY(QUrl sourcePath READ sourcePath WRITE setSourcePath NOTIFY sourcePathUpdated)
 	Q_PROPERTY(QString qmlName READ qmlName WRITE setQmlName NOTIFY qmlNameUpdated)
+	Q_PROPERTY(Type type READ type WRITE setType NOTIFY typeUpdated)
 
 public:
+	enum class Type {
+		Link,
+		Place,
+		Character,
+	};
+	Q_ENUM(Type)
+
 	Model(Project* project);
 	virtual ~Model();
 
@@ -25,6 +33,9 @@ public:
 	const QString& qmlName() const;
 	void setQmlName(const QString& path);
 
+	Type type() const;
+	void setType(Type type);
+
 	virtual void load(const QJsonObject& json) override;
 	virtual void save(QJsonObject& json) const override;
 
@@ -35,5 +46,6 @@ private:
 signals:
 	void sourcePathUpdated();
 	void qmlNameUpdated();
+	void typeUpdated();
 };
 } // namespace lh

@@ -16,6 +16,7 @@ public:
 
 	Q_INVOKABLE void setSourcePath(lh::Model* model, const QUrl& sourcePath);
 	Q_INVOKABLE void setQmlName(lh::Model* model, const QString& qmlName);
+	Q_INVOKABLE void setType(lh::Model* model, lh::Model::Type type);
 
 protected:
 	Commands* _c{ nullptr };

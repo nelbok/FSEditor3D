@@ -32,8 +32,8 @@ Model* Object::model() const {
 	return (_impl->model->valid()) ? _impl->model->get() : nullptr;
 }
 
-void Object::setModel(Model* link) {
-	if (_impl->model->set(link)) {
+void Object::setModel(Model* model) {
+	if (_impl->model->set(model)) {
 		emit modelUpdated();
 	}
 }

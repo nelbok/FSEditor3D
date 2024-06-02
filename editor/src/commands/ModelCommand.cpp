@@ -21,4 +21,8 @@ void ModelCommand::setQmlName(lh::Model* m, const QString& newValue) {
 	addValueCommand(_c, m, &lh::Model::setQmlName, &lh::Model::qmlName, newValue);
 }
 
+void ModelCommand::setType(lh::Model* m, lh::Model::Type newValue) {
+	addValueCommand(_c, m, &lh::Model::setType, &lh::Model::type, newValue);
+}
+
 } // namespace lhe

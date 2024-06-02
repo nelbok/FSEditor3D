@@ -15,7 +15,7 @@ public:
 	virtual ~Object();
 
 	virtual void reset() override;
-	void copy(const Object& link);
+	void copy(const Object& object);
 
 	Model* model() const;
 	void setModel(Model* model);

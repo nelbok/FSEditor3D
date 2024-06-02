@@ -31,6 +31,22 @@ LHEModule {
     placement: LHEEntity {
         entity: root.myData
 
+        LHEComboBox {
+            name: qsTr("Type")
+            model: [
+                { uuid: MyModel.Type.Character, name: qsTr("Character") },
+                { uuid: MyModel.Type.Link, name: qsTr("Link") },
+                { uuid: MyModel.Type.Place, name: qsTr("Place") },
+            ]
+            currentIndex: (root.myData) ? indexOfValue(root.myData.type) : -1
+            onActivated: { if (root.myData) MyCommands.modelCommand.setType(root.myData, valueAt(currentIndex)) }
+        }
+    }
+
+    partA: ColumnLayout {
+        spacing: 5
+        enabled: root.myData
+
         RowLayout {
             height: 40
 
@@ -43,9 +59,16 @@ LHEModule {
             }
 
             LHEMenuButton {
-                text: qsTr("Choose...")
+                text: (root.myData && root.myData.sourcePath.toString() !== "") ? root.myData.sourcePath : qsTr("Choose...")
+                elide: Text.ElideMiddle
                 onClicked: dialog.open()
             }
+        }
+
+        LHETextField {
+            name: qsTr("QML name")
+            value: (root.myData) ? root.myData.qmlName : "-"
+            enabled: false
         }
     }
 
@@ -70,7 +93,7 @@ LHEModule {
 
     MessageDialog {
         id: message
-         buttons: MessageDialog.Ok
-         text: qsTr("An error occurred while parsing the file.")
-     }
+        buttons: MessageDialog.Ok
+        text: qsTr("An error occurred while parsing the file.")
+    }
 }

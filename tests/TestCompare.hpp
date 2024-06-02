@@ -46,6 +46,7 @@ struct TestCompare {
 
 		QCOMPARE(left->sourcePath(), right->sourcePath());
 		QCOMPARE(left->qmlName(), right->qmlName());
+		QCOMPARE(left->type(), right->type());
 	}
 
 	void testObject(lh::Object* left, lh::Object* right) {

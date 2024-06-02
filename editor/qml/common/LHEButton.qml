@@ -4,6 +4,7 @@ import editor
 
 LHERectangle {
     property alias text: label.text
+    property alias elide: label.elide
     property bool selected: false
     signal clicked()
     width: 120

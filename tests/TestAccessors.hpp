@@ -98,7 +98,11 @@ private:
 		model->setQmlName(name);
 		QCOMPARE(model->qmlName(), name);
 
-		QCOMPARE(metaObject->propertyCount(), 7);
+		const auto type = lh::Model::Type::Link;
+		model->setType(type);
+		QCOMPARE(model->type(), type);
+
+		QCOMPARE(metaObject->propertyCount(), 8);
 		QCOMPARE(metaObject->propertyOffset(), 5);
 	}
 
