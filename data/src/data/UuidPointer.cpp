@@ -2,6 +2,7 @@
 
 #include <lh/data/Character.hpp>
 #include <lh/data/Link.hpp>
+#include <lh/data/Model.hpp>
 #include <lh/data/Place.hpp>
 #include <lh/data/Project.hpp>
 
@@ -45,6 +46,10 @@ UuidPointer<Character>* makeCharacterPointer(Project* project, Entity* parent) {
 
 UuidPointer<Link>* makeLinkPointer(Project* project, Entity* parent) {
 	return new UuidPointer<Link>(project, &Project::links, &Project::linksUpdated, parent);
+}
+
+UuidPointer<Model>* makeModelPointer(Project* project, Entity* parent) {
+	return new UuidPointer<Model>(project, &Project::models, &Project::modelsUpdated, parent);
 }
 
 UuidPointer<Place>* makePlacePointer(Project* project, Entity* parent) {

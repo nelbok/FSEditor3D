@@ -16,12 +16,12 @@ Window {
         myData: {
             if (models.enabled)
                 return models.myData
-            // if (places.enabled && places.myData)
-            //     return places.myData.model
-            // if (characters.enabled && characters.myData)
-            //     return characters.myData.model
-            // if (links.enabled && links.myData)
-            //     return links.myData.model
+            if (places.enabled && places.myData)
+                return places.myData.model
+            if (characters.enabled && characters.myData)
+                return characters.myData.model
+            if (links.enabled && links.myData)
+                return links.myData.model
             return null
         }
     }

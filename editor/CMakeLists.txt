@@ -15,6 +15,8 @@ set(PROJECT_SOURCES
 	src/commands/LinkCommand.hpp
 	src/commands/ModelCommand.cpp
 	src/commands/ModelCommand.hpp
+	src/commands/ObjectCommand.cpp
+	src/commands/ObjectCommand.hpp
 	src/commands/PlaceCommand.cpp
 	src/commands/PlaceCommand.hpp
 	src/commands/PlacementCommand.cpp
@@ -71,8 +73,11 @@ set(QML_SOURCES
 	qml/common/LHETextField.qml
 	qml/common/LHEToolButton.qml
 	qml/common/LHEVector3DField.qml
+
 	qml/data/LHEEntity.qml
+	qml/data/LHEObject.qml
 	qml/data/LHEPlacement.qml
+
 	qml/modules/LHECharacters.qml
 	qml/modules/LHELinks.qml
 	qml/modules/LHEMenu.qml
@@ -81,6 +86,7 @@ set(QML_SOURCES
 	qml/modules/LHEProject.qml
 	qml/modules/LHEToolBar.qml
 	qml/modules/LHEView3D.qml
+
 	qml/Main.qml
 )
 set(QML_SINGLETON

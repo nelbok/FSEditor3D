@@ -8,6 +8,7 @@
 #include "commands/EntityCommand.hpp"
 #include "commands/LinkCommand.hpp"
 #include "commands/ModelCommand.hpp"
+#include "commands/ObjectCommand.hpp"
 #include "commands/PlaceCommand.hpp"
 #include "commands/PlacementCommand.hpp"
 #include "commands/ProjectCommand.hpp"
@@ -23,6 +24,7 @@ class CommandsManager : public QObject {
 	Q_PROPERTY(EntityCommand* entityCommand READ entityCommand CONSTANT)
 	Q_PROPERTY(LinkCommand* linkCommand READ linkCommand CONSTANT)
 	Q_PROPERTY(ModelCommand* modelCommand READ modelCommand CONSTANT)
+	Q_PROPERTY(ObjectCommand* objectCommand READ objectCommand CONSTANT)
 	Q_PROPERTY(PlaceCommand* placeCommand READ placeCommand CONSTANT)
 	Q_PROPERTY(PlacementCommand* placementCommand READ placementCommand CONSTANT)
 	Q_PROPERTY(ProjectCommand* projectCommand READ projectCommand CONSTANT)
@@ -43,6 +45,7 @@ public:
 	EntityCommand* entityCommand() const;
 	LinkCommand* linkCommand() const;
 	ModelCommand* modelCommand() const;
+	ObjectCommand* objectCommand() const;
 	PlaceCommand* placeCommand() const;
 	PlacementCommand* placementCommand() const;
 	ProjectCommand* projectCommand() const;

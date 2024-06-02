@@ -15,7 +15,7 @@ struct Placement::Impl {
 };
 
 Placement::Placement(Project* project)
-	: Entity(project)
+	: Object(project)
 	, _impl{ std::make_unique<Impl>() } {
 	_impl->place = makePlacePointer(project, this);
 }
@@ -23,14 +23,14 @@ Placement::Placement(Project* project)
 Placement::~Placement() {}
 
 void Placement::reset() {
-	Entity::reset();
+	Object::reset();
 	setPosition({ 0, 0, 0 });
 	setRotation({ 0, 0, 0 });
 	setPlace(nullptr);
 }
 
 void Placement::copy(const Placement& placement) {
-	Entity::copy(placement);
+	Object::copy(placement);
 	setPosition(placement.position());
 	setRotation(placement.rotation());
 	setPlace(placement.place());
@@ -67,7 +67,7 @@ constexpr auto lRotation = "rotation";
 constexpr auto lPlace = "place";
 
 void Placement::load(const QJsonObject& json) {
-	Entity::load(json);
+	Object::load(json);
 	setPosition(Json::toVector3D(Json::toObject(lPosition, json)));
 	setRotation(Json::toVector3D(Json::toObject(lRotation, json)));
 	_impl->place->setUuid(Json::toUuid(Json::toValue(lPlace, json)));
@@ -75,7 +75,7 @@ void Placement::load(const QJsonObject& json) {
 }
 
 void Placement::save(QJsonObject& json) const {
-	Entity::save(json);
+	Object::save(json);
 	json[lPosition] = Json::fromVector3D(_impl->position);
 	json[lRotation] = Json::fromVector3D(_impl->rotation);
 	json[lPlace] = Json::fromUuid(_impl->place->uuid());

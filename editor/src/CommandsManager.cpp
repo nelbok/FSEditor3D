@@ -9,6 +9,7 @@ struct CommandsManager::Impl {
 	EntityCommand* entityCommand{ nullptr };
 	LinkCommand* linkCommand{ nullptr };
 	ModelCommand* modelCommand{ nullptr };
+	ObjectCommand* objectCommand{ nullptr };
 	PlaceCommand* placeCommand{ nullptr };
 	PlacementCommand* placementCommand{ nullptr };
 	ProjectCommand* projectCommand{ nullptr };
@@ -33,6 +34,7 @@ void CommandsManager::init(lh::Project* project) {
 	_impl->entityCommand = new EntityCommand(_impl->commands);
 	_impl->linkCommand = new LinkCommand(_impl->commands);
 	_impl->modelCommand = new ModelCommand(_impl->commands);
+	_impl->objectCommand = new ObjectCommand(_impl->commands);
 	_impl->placeCommand = new PlaceCommand(_impl->commands);
 	_impl->placementCommand = new PlacementCommand(_impl->commands);
 	_impl->projectCommand = new ProjectCommand(project, this, _impl->commands);
@@ -78,6 +80,11 @@ LinkCommand* CommandsManager::linkCommand() const {
 ModelCommand* CommandsManager::modelCommand() const {
 	assert(_impl->modelCommand);
 	return _impl->modelCommand;
+}
+
+ObjectCommand* CommandsManager::objectCommand() const {
+	assert(_impl->objectCommand);
+	return _impl->objectCommand;
 }
 
 PlaceCommand* CommandsManager::placeCommand() const {

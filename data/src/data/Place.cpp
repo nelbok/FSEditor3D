@@ -6,24 +6,24 @@ namespace lh {
 struct Place::Impl {};
 
 Place::Place(Project* project)
-	: Entity(project)
+	: Object(project)
 	, _impl{ std::make_unique<Impl>() } {}
 
 Place::~Place() {}
 
 void Place::reset() {
-	Entity::reset();
+	Object::reset();
 }
 
 void Place::copy(const Place& place) {
-	Entity::copy(place);
+	Object::copy(place);
 }
 
 void Place::load(const QJsonObject& json) {
-	Entity::load(json);
+	Object::load(json);
 }
 
 void Place::save(QJsonObject& json) const {
-	Entity::save(json);
+	Object::save(json);
 }
 } // namespace lh

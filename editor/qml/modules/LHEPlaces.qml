@@ -27,7 +27,7 @@ LHEModule {
         onItemClicked: (index) => { mng.currentIndex = index }
     }
 
-    placement: LHEEntity {
-        entity: root.myData
+    placement: LHEObject {
+        object: root.myData
     }
 }

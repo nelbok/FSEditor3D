@@ -2,12 +2,12 @@ import QtQuick
 
 import editor
 
-LHEEntity {
+LHEObject {
     property MyPlacement placement: null
 
     id: root
 
-    entity: placement
+    object: placement
 
     LHEVector3DField {
         name: qsTr("Position")

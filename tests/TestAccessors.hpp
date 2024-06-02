@@ -59,8 +59,8 @@ private:
 		character->setGender(gender);
 		QCOMPARE(character->gender(), gender);
 
-		QCOMPARE(metaObject->propertyCount(), 14);
-		QCOMPARE(metaObject->propertyOffset(), 8);
+		QCOMPARE(metaObject->propertyCount(), 15);
+		QCOMPARE(metaObject->propertyOffset(), 9);
 	}
 
 	void testEntity(lh::Entity* entity, const QMetaObject* metaObject) {
@@ -83,15 +83,12 @@ private:
 		link->setLink(linkA);
 		QCOMPARE(link->link(), linkA);
 
-		QCOMPARE(metaObject->propertyCount(), 9);
-		QCOMPARE(metaObject->propertyOffset(), 8);
+		QCOMPARE(metaObject->propertyCount(), 10);
+		QCOMPARE(metaObject->propertyOffset(), 9);
 	}
 
 	void testModel(lh::Model* model, const QMetaObject* metaObject) {
 		testEntity(model, metaObject->superClass());
-
-		QCOMPARE(metaObject->propertyCount(), 7);
-		QCOMPARE(metaObject->propertyOffset(), 5);
 
 		const auto path = QUrl(":/test/img");
 		model->setSourcePath(path);
@@ -100,17 +97,31 @@ private:
 		const auto name = ":/test/img";
 		model->setQmlName(name);
 		QCOMPARE(model->qmlName(), name);
-	}
 
-	void testPlace(lh::Place* place, const QMetaObject* metaObject) {
-		testEntity(place, metaObject->superClass());
-
-		QCOMPARE(metaObject->propertyCount(), 5);
+		QCOMPARE(metaObject->propertyCount(), 7);
 		QCOMPARE(metaObject->propertyOffset(), 5);
 	}
 
+	void testObject(lh::Object* object, const QMetaObject* metaObject) {
+		testEntity(object, metaObject->superClass());
+
+		auto* model = _project->models().at(0);
+		object->setModel(model);
+		QCOMPARE(object->model(), model);
+
+		QCOMPARE(metaObject->propertyCount(), 6);
+		QCOMPARE(metaObject->propertyOffset(), 5);
+	}
+
+	void testPlace(lh::Place* place, const QMetaObject* metaObject) {
+		testObject(place, metaObject->superClass());
+
+		QCOMPARE(metaObject->propertyCount(), 6);
+		QCOMPARE(metaObject->propertyOffset(), 6);
+	}
+
 	void testPlacement(lh::Placement* placement, const QMetaObject* metaObject) {
-		testEntity(placement, metaObject->superClass());
+		testObject(placement, metaObject->superClass());
 
 		const auto position = QVector3D(0, 0, 0);
 		placement->setPosition(position);
@@ -124,8 +135,8 @@ private:
 		placement->setPlace(place);
 		QCOMPARE(placement->place(), place);
 
-		QCOMPARE(metaObject->propertyCount(), 8);
-		QCOMPARE(metaObject->propertyOffset(), 5);
+		QCOMPARE(metaObject->propertyCount(), 9);
+		QCOMPARE(metaObject->propertyOffset(), 6);
 	}
 
 	void testProject(lh::Project* project, const QMetaObject* metaObject) {

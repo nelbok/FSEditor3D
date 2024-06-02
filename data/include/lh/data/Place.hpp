@@ -1,11 +1,11 @@
 #pragma once
 
-#include <lh/data/Entity.hpp>
+#include <lh/data/Object.hpp>
 
 namespace lh {
 class Project;
 
-class Place : public Entity {
+class Place : public Object {
 	Q_OBJECT
 
 public:

@@ -48,12 +48,18 @@ struct TestCompare {
 		QCOMPARE(left->qmlName(), right->qmlName());
 	}
 
-	void testPlace(lh::Place* left, lh::Place* right) {
+	void testObject(lh::Object* left, lh::Object* right) {
 		testEntity(left, right);
+
+		testUuidPointer(left->model(), right->model());
+	}
+
+	void testPlace(lh::Place* left, lh::Place* right) {
+		testObject(left, right);
 	}
 
 	void testPlacement(lh::Placement* left, lh::Placement* right) {
-		testEntity(left, right);
+		testObject(left, right);
 
 		QCOMPARE(left->position(), right->position());
 		QCOMPARE(left->rotation(), right->rotation());

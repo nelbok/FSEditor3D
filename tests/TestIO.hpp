@@ -47,6 +47,9 @@ private:
 		p1->setName("Place 1");
 		p2->setName("Place 2");
 		p3->setName("Place 3");
+		p1->setModel(m1);
+		p2->setModel(m1);
+		p3->setModel(m1);
 
 		auto* c1 = _p1->createCharacter();
 		auto* c2 = _p1->createCharacter();
@@ -54,6 +57,8 @@ private:
 		c2->setName("Character 2");
 		c1->setPlace(p2);
 		c2->setPlace(p3);
+		c1->setModel(m2);
+		c2->setModel(m2);
 
 		auto* l1 = _p1->createLink();
 		auto* l2 = _p1->createLink();
@@ -63,6 +68,8 @@ private:
 		l2->setLink(l1);
 		l1->setPlace(p2);
 		l2->setPlace(p3);
+		l1->setModel(m3);
+		l2->setModel(m3);
 
 		_p1->setDefaultPlace(p2);
 	}

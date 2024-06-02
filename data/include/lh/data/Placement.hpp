@@ -2,13 +2,13 @@
 
 #include <QtGui/QVector3D>
 
-#include <lh/data/Entity.hpp>
+#include <lh/data/Object.hpp>
 
 namespace lh {
 class Place;
 class Project;
 
-class Placement : public Entity {
+class Placement : public Object {
 	Q_OBJECT
 	Q_PROPERTY(QVector3D position READ position WRITE setPosition NOTIFY positionUpdated)
 	Q_PROPERTY(QVector3D rotation READ rotation WRITE setRotation NOTIFY rotationUpdated)

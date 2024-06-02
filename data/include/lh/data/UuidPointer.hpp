@@ -92,5 +92,6 @@ private:
 
 UuidPointer<class Character>* makeCharacterPointer(Project* project, Entity* parent);
 UuidPointer<class Link>* makeLinkPointer(Project* project, Entity* parent);
+UuidPointer<class Model>* makeModelPointer(Project* project, Entity* parent);
 UuidPointer<class Place>* makePlacePointer(Project* project, Entity* parent);
 } // namespace lh
