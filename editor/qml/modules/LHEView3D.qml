@@ -37,8 +37,17 @@ View3D {
     Connections {
         target: myData
         function onQmlNameUpdated() {
-            load(MyManager.balsam.qmlPath(myData))
+            if (myData.qmlName !== "")
+                load(MyManager.balsam.qmlPath(myData))
+            else
+                clean()
         }
+    }
+    onMyDataChanged: {
+        if (myData && myData.qmlName !== "")
+            load(MyManager.balsam.qmlPath(myData))
+        else
+            clean()
     }
 
     property var cpt: null;

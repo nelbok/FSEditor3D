@@ -13,7 +13,17 @@ Window {
     LHEView3D {
         anchors.fill: parent
 
-        myData: models.myData
+        myData: {
+            if (models.enabled)
+                return models.myData
+            // if (places.enabled && places.myData)
+            //     return places.myData.model
+            // if (characters.enabled && characters.myData)
+            //     return characters.myData.model
+            // if (links.enabled && links.myData)
+            //     return links.myData.model
+            return null
+        }
     }
 
     LHEProject {
@@ -33,6 +43,8 @@ Window {
     }
 
     LHEPlaces {
+        id: places
+
         anchors.top: menu.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
@@ -40,6 +52,8 @@ Window {
     }
 
     LHECharacters {
+        id: characters
+
         anchors.top: menu.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
@@ -47,6 +61,8 @@ Window {
     }
 
     LHELinks {
+        id: links
+
         anchors.top: menu.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
