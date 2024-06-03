@@ -9,7 +9,7 @@ LHEModule {
     id: root
     title: qsTr("Places")
 
-    MySelectionManager {
+    MySelectionWrapper {
         id: mng
         model: MyModels.placeModel
         onCurrentDataChanged: root.myData = currentData
@@ -29,5 +29,8 @@ LHEModule {
 
     placement: LHEObject {
         object: root.myData
+        filters: {
+            "type": MyModel.Type.Place,
+        }
     }
 }

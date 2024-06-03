@@ -16,7 +16,7 @@ LHEModule {
         LHEComboBox {
             name: qsTr("Default place")
 
-            MySelectionManager {
+            MySelectionWrapper {
                 id: mng
                 model: MyModels.placeModel
                 currentData: MyProject.defaultPlace

@@ -4,6 +4,7 @@ import editor
 
 LHEEntity {
     property MyObject object: null
+    property alias filters: proxy.filters
 
     id: root
 
@@ -12,9 +13,14 @@ LHEEntity {
     LHEComboBox {
         name: qsTr("Model")
 
-        MySelectionManager {
+        MyProxyModel {
+            id: proxy
+            sourceModel: MyModels.modelModel
+        }
+
+        MySelectionWrapper {
             id: mng
-            model: MyModels.modelModel
+            model: proxy
             currentData: (root.object) ? root.object.model : null
             onCurrentUpdated: { if (root.object && root.object.model !== currentData) MyCommands.objectCommand.setModel(root.object, currentData) }
         }

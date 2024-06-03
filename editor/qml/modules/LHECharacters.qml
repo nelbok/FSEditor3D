@@ -9,7 +9,7 @@ LHEModule {
     id: root
     title: qsTr("Characters")
 
-    MySelectionManager {
+    MySelectionWrapper {
         id: mng
         model: MyModels.characterModel
         onCurrentDataChanged: root.myData = currentData
@@ -29,6 +29,9 @@ LHEModule {
 
     placement: LHEPlacement {
         placement: root.myData
+        filters: {
+            "type": MyModel.Type.Character,
+        }
     }
 
     partA: ColumnLayout {

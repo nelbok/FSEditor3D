@@ -36,6 +36,10 @@ set(PROJECT_SOURCES
 	src/models/ModelModel.hpp
 	src/models/PlaceModel.cpp
 	src/models/PlaceModel.hpp
+	src/models/ProxyModel.cpp
+	src/models/ProxyModel.hpp
+	src/models/SelectionWrapper.cpp
+	src/models/SelectionWrapper.hpp
 
 	src/About.cpp
 	src/About.hpp
@@ -47,8 +51,6 @@ set(PROJECT_SOURCES
 	src/Manager.hpp
 	src/ModelsManager.cpp
 	src/ModelsManager.hpp
-	src/SelectionManager.cpp
-	src/SelectionManager.hpp
 
 	src/Config.hpp.in
 	src/main.cpp

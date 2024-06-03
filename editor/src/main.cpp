@@ -8,11 +8,12 @@
 #include <lh/data/Place.hpp>
 #include <lh/data/Project.hpp>
 
+#include "models/ProxyModel.hpp"
+#include "models/SelectionWrapper.hpp"
 #include "Config.hpp"
 #include "CommandsManager.hpp"
 #include "Manager.hpp"
 #include "ModelsManager.hpp"
-#include "SelectionManager.hpp"
 
 int main(int argc, char* argv[]) {
 	QGuiApplication app(argc, argv);
@@ -41,7 +42,8 @@ int main(int argc, char* argv[]) {
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyManager", manager.get());
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyCommands", manager->commandsManager());
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyModels", manager->modelsManager());
-	qmlRegisterType<lhe::SelectionManager>("editor", 1, 0, "MySelectionManager");
+	qmlRegisterType<lhe::ProxyModel>("editor", 1, 0, "MyProxyModel");
+	qmlRegisterType<lhe::SelectionWrapper>("editor", 1, 0, "MySelectionWrapper");
 
 	QObject::connect(
 		&engine, &QQmlApplicationEngine::objectCreationFailed, &app,

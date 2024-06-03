@@ -9,7 +9,7 @@ LHEModule {
     id: root
     title: qsTr("Links")
 
-    MySelectionManager {
+    MySelectionWrapper {
         id: mng
         model: MyModels.linkModel
         onCurrentDataChanged: root.myData = currentData
@@ -29,6 +29,9 @@ LHEModule {
 
     placement: LHEPlacement {
         placement: root.myData
+        filters: {
+            "type": MyModel.Type.Link,
+        }
     }
 
     partA: ColumnLayout {
@@ -37,7 +40,7 @@ LHEModule {
         LHEComboBox {
             name: qsTr("Link")
 
-            MySelectionManager {
+            MySelectionWrapper {
                 id: subMng
                 model: MyModels.linkModel
                 currentData: (root.myData) ? root.myData.link : null

@@ -10,7 +10,7 @@ LHEModule {
     id: root
     title: qsTr("Models")
 
-    MySelectionManager {
+    MySelectionWrapper {
         id: mng
         model: MyModels.modelModel
         onCurrentDataChanged: root.myData = currentData

@@ -24,7 +24,7 @@ LHEObject {
     LHEComboBox {
         name: qsTr("Place")
 
-        MySelectionManager {
+        MySelectionWrapper {
             id: mng
             model: MyModels.placeModel
             currentData: (root.placement) ? root.placement.place : null

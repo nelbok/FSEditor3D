@@ -13,7 +13,6 @@ public:
 	virtual ~EntityModel();
 
 	virtual void initDatas() = 0;
-	const QList<lh::Entity*>& datas() const;
 
 	virtual int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 	virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
@@ -28,25 +27,29 @@ protected:
 	void fillDatas(const QList<T*>& datas) {
 		// Disconnect
 		for (auto* entity : _datas) {
-			disconnect(entity, &lh::Entity::isAliveUpdated, this, &EntityModel::updateDatas);
-			disconnect(entity, &lh::Entity::nameUpdated, this, &EntityModel::sortDatas);
+			disconnectData(entity);
 		}
 		_datas.clear();
 
 		// Fill the new model
 		for (auto* entity : datas) {
-			connect(entity, &lh::Entity::isAliveUpdated, this, &EntityModel::updateDatas);
 			if (!entity->isAlive())
 				continue;
+			connectData(entity);
 			_datas.append(entity);
-			connect(entity, &lh::Entity::nameUpdated, this, &EntityModel::sortDatas);
 		}
 
 		// Sort
 		sortDatas();
 	}
 
+	virtual void disconnectData(lh::Entity* entity);
+	virtual void connectData(lh::Entity* entity);
+
+protected:
 	lh::Project* _project{ nullptr };
+
+private:
 	QList<lh::Entity*> _datas{};
 };
 
