@@ -11,6 +11,7 @@ struct Manager::Impl {
 	lh::Project* project{ nullptr };
 
 	QUrl path{};
+	lh::FileManager* fileManager{ nullptr };
 
 	CommandsManager* commandsManager{ nullptr };
 	ModelsManager* modelsManager{ nullptr };
@@ -50,13 +51,34 @@ void Manager::reset() {
 
 void Manager::load(const QUrl& url) {
 	reset();
-	_impl->project->load(url);
+	_impl->fileManager = new lh::FileManager(this);
+	_impl->fileManager->init(_impl->project, lh::FileManager::Type::Load, url);
+	emit beginFileTransaction();
+	connect(_impl->fileManager, &lh::FileManager::finished, this, [this]() {
+		emit endFileTransaction(_impl->fileManager->result());
+		_impl->fileManager->deleteLater();
+	});
+	_impl->fileManager->start();
 	setPath(url);
 }
 
 void Manager::save(const QUrl& url) {
-	_impl->project->save(url);
+	_impl->fileManager = new lh::FileManager(this);
+	_impl->fileManager->init(_impl->project, lh::FileManager::Type::Save, url);
+	emit beginFileTransaction();
+	connect(_impl->fileManager, &lh::FileManager::finished, this, [this]() {
+		emit endFileTransaction(_impl->fileManager->result());
+		_impl->fileManager->deleteLater();
+		_impl->fileManager = nullptr;
+	});
+	_impl->fileManager->start();
 	setPath(url);
+}
+
+void Manager::requestFileTransactionInterruption() {
+	if (_impl->fileManager) {
+		_impl->fileManager->requestInterruption();
+	}
 }
 
 About* Manager::about() const {

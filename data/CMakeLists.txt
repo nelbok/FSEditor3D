@@ -10,6 +10,7 @@ set(PROJECT_SOURCES
 	include/lh/data/Placement.hpp
 	include/lh/data/Project.hpp
 	include/lh/data/UuidPointer.hpp
+	include/lh/io/FileManager.hpp
 	include/lh/io/Json.hpp
 
 	src/common/Accessors.hpp
@@ -22,6 +23,7 @@ set(PROJECT_SOURCES
 	src/data/Placement.cpp
 	src/data/Project.cpp
 	src/data/UuidPointer.cpp
+	src/io/FileManager.cpp
 	src/io/Json.cpp
 )
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" PREFIX "" FILES ${PROJECT_SOURCES})

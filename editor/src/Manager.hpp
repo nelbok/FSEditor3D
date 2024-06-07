@@ -4,6 +4,7 @@
 #include <QtCore/QUrl>
 
 #include <lh/data/Project.hpp>
+#include <lh/io/FileManager.hpp>
 
 #include "About.hpp"
 #include "Balsam.hpp"
@@ -28,6 +29,7 @@ public:
 	Q_INVOKABLE void reset();
 	Q_INVOKABLE void load(const QUrl& url);
 	Q_INVOKABLE void save(const QUrl& url);
+	Q_INVOKABLE void requestFileTransactionInterruption();
 
 	About* about() const;
 	Balsam* balsam() const;
@@ -44,6 +46,8 @@ private:
 	std::unique_ptr<Impl> _impl;
 
 signals:
+	void beginFileTransaction();
+	void endFileTransaction(lh::FileManager::Result result);
 	void pathUpdated();
 };
 } // namespace lhe

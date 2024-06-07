@@ -83,4 +83,22 @@ Window {
         anchors.right: menu.left
         anchors.rightMargin: 10
     }
+
+    Connections {
+        target: MyManager
+        function onBeginFileTransaction() {
+            progress.visible = true
+        }
+        function onEndFileTransaction(result) {
+            progress.visible = false
+            console.log(result)
+        }
+    }
+
+    LHEProgressItem {
+        id: progress
+        anchors.centerIn: parent
+        visible: false
+        onClicked: MyManager.requestFileTransactionInterruption()
+    }
 }

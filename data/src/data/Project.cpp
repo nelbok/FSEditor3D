@@ -1,10 +1,7 @@
 #include <lh/data/Project.hpp>
 
-#include <QtCore/QFile>
-#include <QtCore/QJsonArray>
-#include <QtCore/QJsonDocument>
-#include <QtCore/QJsonObject>
-#include <QtCore/QSaveFile>
+#include <QtCore/QCoreApplication>
+#include <QtCore/QThread>
 
 #include <lh/data/Character.hpp>
 #include <lh/data/Link.hpp>
@@ -26,6 +23,14 @@ struct Project::Impl {
 	QList<Model*> models{};
 	QList<Place*> places{};
 
+	bool isInterruptionRequested(const Project* project) const {
+		auto* thread = project->thread();
+		if (thread != QCoreApplication::instance()->thread()) {
+			return thread->isInterruptionRequested();
+		}
+		return false;
+	}
+
 	template<class TClass>
 	void loadList(Project* project, QList<TClass*>& list, const QString& key, const QJsonObject& json, void (Project::*signal)()) {
 		list.clear();
@@ -35,12 +40,15 @@ struct Project::Impl {
 			auto* entity = new TClass(project);
 			entity->load(jsonEntity.toObject());
 			list.append(entity);
+			if (isInterruptionRequested(project)) {
+				return;
+			}
 		}
 		emit(project->*signal)();
 	}
 
 	template<class TClass>
-	void saveList(const QList<TClass*>& list, const QString& key, QJsonObject& json) {
+	void saveList(const Project* project, const QList<TClass*>& list, const QString& key, QJsonObject& json) const {
 		QJsonArray jsonArray;
 		for (auto* entity : list) {
 			if (!entity->isAlive())
@@ -49,16 +57,11 @@ struct Project::Impl {
 			QJsonObject jsonEntity;
 			entity->save(jsonEntity);
 			jsonArray.append(jsonEntity);
+			if (isInterruptionRequested(project)) {
+				return;
+			}
 		}
 		json[key] = jsonArray;
-	}
-
-	QString toPath(const QUrl& url) {
-		assert(url.isValid());
-		if (url.isLocalFile())
-			return url.toLocalFile();
-		else
-			return url.toString();
 	}
 };
 
@@ -193,17 +196,6 @@ constexpr auto lLinks = "links";
 constexpr auto lModels = "models";
 constexpr auto lPlaces = "places";
 
-void Project::load(const QUrl& url) {
-	QFile file(_impl->toPath(url));
-	if (!file.open(QIODevice::ReadOnly)) {
-		// ERROR
-		return;
-	}
-
-	// Read
-	load(QJsonDocument::fromJson(file.readAll()).object());
-}
-
 void Project::load(const QJsonObject& json) {
 	reset();
 	Entity::load(json);
@@ -217,26 +209,12 @@ void Project::load(const QJsonObject& json) {
 	emit defaultPlaceUpdated();
 }
 
-void Project::save(const QUrl& url) {
-	QSaveFile file(_impl->toPath(url));
-	if (!file.open(QIODevice::WriteOnly)) {
-		// ERROR
-		return;
-	}
-
-	// Write
-	QJsonObject json;
-	save(json);
-	file.write(QJsonDocument(json).toJson());
-	file.commit();
-}
-
 void Project::save(QJsonObject& json) const {
 	Entity::save(json);
-	_impl->saveList(_impl->characters, lCharacters, json);
-	_impl->saveList(_impl->links, lLinks, json);
-	_impl->saveList(_impl->models, lModels, json);
-	_impl->saveList(_impl->places, lPlaces, json);
+	_impl->saveList(this, _impl->characters, lCharacters, json);
+	_impl->saveList(this, _impl->links, lLinks, json);
+	_impl->saveList(this, _impl->models, lModels, json);
+	_impl->saveList(this, _impl->places, lPlaces, json);
 	json[lDefaultPlaces] = Json::fromUuid(_impl->defaultPlace->uuid());
 }
 } // namespace lh

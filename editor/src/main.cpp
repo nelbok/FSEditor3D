@@ -37,6 +37,7 @@ int main(int argc, char* argv[]) {
 	qmlRegisterType<lh::Object>("editor", 1, 0, "MyObject");
 	qmlRegisterType<lh::Place>("editor", 1, 0, "MyPlace");
 	qmlRegisterType<lh::Placement>("editor", 1, 0, "MyPlacement");
+	qmlRegisterType<lh::FileManager>("editor", 1, 0, "MyFileManager");
 
 	// LHEditor
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyManager", manager.get());

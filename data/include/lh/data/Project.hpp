@@ -59,10 +59,7 @@ public:
 	Place* duplicatePlace(Place* place);
 	void cleanPlaces();
 
-	void load(const QUrl& url);
 	virtual void load(const QJsonObject& json) override;
-
-	void save(const QUrl& url);
 	virtual void save(QJsonObject& json) const override;
 
 private:

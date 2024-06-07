@@ -85,6 +85,7 @@ set(QML_SOURCES
 	qml/modules/LHEMenu.qml
 	qml/modules/LHEModels.qml
 	qml/modules/LHEPlaces.qml
+	qml/modules/LHEProgressItem.qml
 	qml/modules/LHEProject.qml
 	qml/modules/LHEToolBar.qml
 	qml/modules/LHEView3D.qml
