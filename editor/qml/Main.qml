@@ -91,14 +91,24 @@ Window {
         }
         function onEndFileTransaction(result) {
             progress.visible = false
-            console.log(result)
+            if (result === MyFileManager.Result.Error) {
+                message.text = qsTr("An error occurred!")
+                message.visible = true;
+            }
         }
     }
 
-    LHEProgressItem {
+    LHEProgressBox {
         id: progress
         anchors.centerIn: parent
         visible: false
         onClicked: MyManager.requestFileTransactionInterruption()
+    }
+
+    LHEMessageBox {
+        id: message
+        anchors.centerIn: parent
+        visible: false
+        onClicked: message.visible = false
     }
 }
