@@ -41,10 +41,15 @@ set(PROJECT_SOURCES
 	src/models/SelectionWrapper.cpp
 	src/models/SelectionWrapper.hpp
 
-	src/About.cpp
-	src/About.hpp
-	src/Balsam.cpp
-	src/Balsam.hpp
+	src/tools/About.cpp
+	src/tools/About.hpp
+	src/tools/Balsam.cpp
+	src/tools/Balsam.hpp
+	src/tools/SaveThread.cpp
+	src/tools/SaveThread.hpp
+	src/tools/Tools.cpp
+	src/tools/Tools.hpp
+
 	src/CommandsManager.cpp
 	src/CommandsManager.hpp
 	src/Manager.cpp

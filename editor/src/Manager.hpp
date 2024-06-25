@@ -6,8 +6,8 @@
 #include <lh/data/Project.hpp>
 #include <lh/io/FileManager.hpp>
 
-#include "About.hpp"
-#include "Balsam.hpp"
+#include "tools/About.hpp"
+#include "tools/Balsam.hpp"
 
 namespace lhe {
 class CommandsManager;
@@ -35,6 +35,8 @@ public:
 	Balsam* balsam() const;
 	lh::Project* project() const;
 
+	const QUrl& tmpPath() const;
+	const QUrl& oldPath() const;
 	const QUrl& path() const;
 	void setPath(const QUrl& path);
 

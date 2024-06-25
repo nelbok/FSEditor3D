@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QtCore/QDeadlineTimer>
 #include <QtCore/QObject>
 #include <QtCore/QUrl>
 
@@ -31,6 +32,9 @@ public:
 
 	Q_INVOKABLE void init(Project* project, Type type, const QUrl& url);
 	Q_INVOKABLE void start();
+	Q_INVOKABLE void wait(QDeadlineTimer deadline = QDeadlineTimer(QDeadlineTimer::Forever));
+	Q_INVOKABLE bool isFinished();
+	Q_INVOKABLE bool isRunning();
 	Q_INVOKABLE Result result() const;
 	Q_INVOKABLE void requestInterruption();
 

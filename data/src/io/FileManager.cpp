@@ -144,6 +144,18 @@ void FileManager::start() {
 	_impl->start();
 }
 
+void FileManager::wait(QDeadlineTimer deadline) {
+	_impl->wait(std::move(deadline));
+}
+
+bool FileManager::isFinished() {
+	return _impl->isFinished();
+}
+
+bool FileManager::isRunning() {
+	return _impl->isRunning();
+}
+
 FileManager::Result FileManager::result() const {
 	return _impl->result();
 }

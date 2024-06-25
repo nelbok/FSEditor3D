@@ -1,5 +1,11 @@
 #include "Manager.hpp"
 
+#include <filesystem>
+
+#include "Config.hpp"
+
+#include "tools/SaveThread.hpp"
+
 #include "CommandsManager.hpp"
 #include "ModelsManager.hpp"
 
@@ -10,8 +16,11 @@ struct Manager::Impl {
 	Balsam* balsam{ nullptr };
 	lh::Project* project{ nullptr };
 
+	QUrl tmpPath{};
+	QUrl oldPath{};
 	QUrl path{};
-	lh::FileManager* fileManager{ nullptr };
+	lh::FileManager* loadThread{ nullptr };
+	lhe::SaveThread* saveThread{ nullptr };
 
 	CommandsManager* commandsManager{ nullptr };
 	ModelsManager* modelsManager{ nullptr };
@@ -45,39 +54,49 @@ void Manager::init() {
 
 void Manager::reset() {
 	_impl->project->reset();
-	_impl->balsam->reset();
 	_impl->commandsManager->reset();
+
+	auto tmp = std::filesystem::temp_directory_path();
+	tmp /= lh::Config::name;
+	tmp /= _impl->project->uuid().toString(QUuid::WithoutBraces).toStdString();
+	tmp /= "";
+	_impl->tmpPath = QUrl::fromLocalFile(QString::fromStdString(tmp.string()));
+	_impl->oldPath = _impl->tmpPath;
+	_impl->path = {};
 }
 
 void Manager::load(const QUrl& url) {
 	reset();
-	_impl->fileManager = new lh::FileManager(this);
-	_impl->fileManager->init(_impl->project, lh::FileManager::Type::Load, url);
-	emit beginFileTransaction();
-	connect(_impl->fileManager, &lh::FileManager::finished, this, [this]() {
-		emit endFileTransaction(_impl->fileManager->result());
-		_impl->fileManager->deleteLater();
-	});
-	_impl->fileManager->start();
 	setPath(url);
+	_impl->loadThread = new lh::FileManager(this);
+	_impl->loadThread->init(_impl->project, lh::FileManager::Type::Load, url);
+	emit beginFileTransaction();
+	connect(_impl->loadThread, &lh::FileManager::finished, this, [this]() {
+		emit endFileTransaction(_impl->loadThread->result());
+		_impl->loadThread->deleteLater();
+	});
+	_impl->loadThread->start();
 }
 
 void Manager::save(const QUrl& url) {
-	_impl->fileManager = new lh::FileManager(this);
-	_impl->fileManager->init(_impl->project, lh::FileManager::Type::Save, url);
-	emit beginFileTransaction();
-	connect(_impl->fileManager, &lh::FileManager::finished, this, [this]() {
-		emit endFileTransaction(_impl->fileManager->result());
-		_impl->fileManager->deleteLater();
-		_impl->fileManager = nullptr;
-	});
-	_impl->fileManager->start();
 	setPath(url);
+	_impl->saveThread = new lhe::SaveThread(this);
+	_impl->saveThread->init();
+	emit beginFileTransaction();
+	connect(_impl->saveThread, &lhe::SaveThread::finished, this, [this]() {
+		//emit endFileTransaction(_impl->saveThread->result());
+		emit endFileTransaction(lh::FileManager::Result::Success);
+		_impl->saveThread->deleteLater();
+		_impl->saveThread = nullptr;
+	});
+	_impl->saveThread->start();
 }
 
 void Manager::requestFileTransactionInterruption() {
-	if (_impl->fileManager) {
-		_impl->fileManager->requestInterruption();
+	if (_impl->loadThread) {
+		_impl->loadThread->requestInterruption();
+	} else if (_impl->saveThread) {
+		_impl->saveThread->requestInterruption();
 	}
 }
 
@@ -96,12 +115,23 @@ lh::Project* Manager::project() const {
 	return _impl->project;
 }
 
+const QUrl& Manager::tmpPath() const {
+	return _impl->tmpPath;
+}
+
+const QUrl& Manager::oldPath() const {
+	return _impl->oldPath;
+}
+
 const QUrl& Manager::path() const {
 	return _impl->path;
 }
 
 void Manager::setPath(const QUrl& path) {
 	if (_impl->path != path) {
+		if (_impl->path.isValid()) {
+			_impl->oldPath = _impl->path;
+		}
 		_impl->path = path;
 		emit pathUpdated();
 	}
