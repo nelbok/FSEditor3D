@@ -62,7 +62,7 @@ void Manager::reset() {
 	tmp /= "";
 	_impl->tmpPath = QUrl::fromLocalFile(QString::fromStdString(tmp.string()));
 	_impl->oldPath = _impl->tmpPath;
-	_impl->path = {};
+	_impl->path = QUrl();
 }
 
 void Manager::load(const QUrl& url) {

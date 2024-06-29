@@ -28,11 +28,13 @@ void ModelModel::updateDatas() {
 }
 
 void ModelModel::disconnectData(lh::Entity* entity) {
+	EntityModel::disconnectData(entity);
 	auto* model = qobject_cast<lh::Model*>(entity);
 	disconnect(model, &lh::Model::typeUpdated, this, &ModelModel::sortDatas);
 }
 
 void ModelModel::connectData(lh::Entity* entity) {
+	EntityModel::connectData(entity);
 	auto* model = qobject_cast<lh::Model*>(entity);
 	connect(model, &lh::Model::typeUpdated, this, &ModelModel::sortDatas);
 }
