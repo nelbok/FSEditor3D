@@ -2,7 +2,7 @@
 
 #include <QtCore/QUuid>
 
-namespace lhe::Tools {
+namespace fse::Tools {
 QString toPath(const QUrl& url) {
 	if (url.isLocalFile())
 		return url.toLocalFile();
@@ -10,7 +10,7 @@ QString toPath(const QUrl& url) {
 		return url.toString();
 }
 
-std::filesystem::path modelPath(const QUrl& projectPath, lh::Model* model) {
+std::filesystem::path modelPath(const QUrl& projectPath, fsd::Model* model) {
 	assert(model);
 
 	auto tmp = std::filesystem::path(Tools::toPath(projectPath).toStdString());
@@ -20,4 +20,4 @@ std::filesystem::path modelPath(const QUrl& projectPath, lh::Model* model) {
 	tmp /= model->uuid().toString(QUuid::WithoutBraces).split("-").at(4).toStdString();
 	return tmp;
 }
-} // namespace lhe::Tools
+} // namespace fse::Tools

@@ -4,13 +4,13 @@
 #include <QtCore/QObject>
 #include <QtCore/QUuid>
 
-#include <lh/data/Entity.hpp>
+#include <fsd/data/Entity.hpp>
 
-namespace lhe {
+namespace fse {
 class SelectionWrapper : public QObject {
 	Q_OBJECT
 	Q_PROPERTY(int currentIndex READ currentIndex WRITE setCurrentIndex NOTIFY currentUpdated)
-	Q_PROPERTY(lh::Entity* currentData READ currentData WRITE setCurrentData NOTIFY currentUpdated)
+	Q_PROPERTY(fsd::Entity* currentData READ currentData WRITE setCurrentData NOTIFY currentUpdated)
 	Q_PROPERTY(QAbstractItemModel* model READ model WRITE setModel NOTIFY modelUpdated)
 
 public:
@@ -20,8 +20,8 @@ public:
 	int currentIndex() const;
 	void setCurrentIndex(int currentIndex);
 
-	lh::Entity* currentData() const;
-	void setCurrentData(lh::Entity* currentData);
+	fsd::Entity* currentData() const;
+	void setCurrentData(fsd::Entity* currentData);
 
 	QAbstractItemModel* model() const;
 	void setModel(QAbstractItemModel* model);
@@ -38,4 +38,4 @@ signals:
 	void modelUpdated();
 };
 
-} // namespace lhe
+} // namespace fse

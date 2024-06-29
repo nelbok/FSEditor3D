@@ -2,7 +2,7 @@
 
 #include <QtCore/QObject>
 
-namespace lhe {
+namespace fse {
 class BaseCommand;
 class ListCommand;
 
@@ -36,4 +36,4 @@ private:
 signals:
 	void updated();
 };
-} // namespace lhe
+} // namespace fse

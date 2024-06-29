@@ -3,7 +3,7 @@
 #include "Commands.hpp"
 #include "ValueCommand.hpp"
 
-namespace lhe {
+namespace fse {
 
 PlaceCommand::PlaceCommand(Commands* commands)
 	: QObject(commands)
@@ -13,4 +13,4 @@ PlaceCommand::PlaceCommand(Commands* commands)
 
 PlaceCommand::~PlaceCommand() {}
 
-} // namespace lhe
+} // namespace fse

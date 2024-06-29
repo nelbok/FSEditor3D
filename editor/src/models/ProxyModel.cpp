@@ -1,6 +1,6 @@
 #include "ProxyModel.hpp"
 
-namespace lhe {
+namespace fse {
 
 ProxyModel::ProxyModel(QObject* parent)
 	: QSortFilterProxyModel(parent) {}
@@ -41,4 +41,4 @@ int ProxyModel::getRole(const QByteArray& name) const {
 	return -1;
 }
 
-} // namespace lhe
+} // namespace fse

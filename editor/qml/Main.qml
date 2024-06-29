@@ -10,7 +10,7 @@ Window {
     minimumHeight: 768
     visible: true
 
-    LHEView3D {
+    FSEView3D {
         anchors.fill: parent
 
         myData: {
@@ -26,50 +26,50 @@ Window {
         }
     }
 
-    LHEProject {
+    FSEProject {
         anchors.top: menu.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
-        enabled: (menu.selected === LHEMenu.ModuleType.Project)
+        enabled: (menu.selected === FSEMenu.ModuleType.Project)
     }
 
-    LHEModels {
+    FSEModels {
         id: models
 
         anchors.top: menu.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
-        enabled: (menu.selected === LHEMenu.ModuleType.Models)
+        enabled: (menu.selected === FSEMenu.ModuleType.Models)
     }
 
-    LHEPlaces {
+    FSEPlaces {
         id: places
 
         anchors.top: menu.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
-        enabled: (menu.selected === LHEMenu.ModuleType.Places)
+        enabled: (menu.selected === FSEMenu.ModuleType.Places)
     }
 
-    LHECharacters {
+    FSECharacters {
         id: characters
 
         anchors.top: menu.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
-        enabled: (menu.selected === LHEMenu.ModuleType.Characters)
+        enabled: (menu.selected === FSEMenu.ModuleType.Characters)
     }
 
-    LHELinks {
+    FSELinks {
         id: links
 
         anchors.top: menu.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
-        enabled: (menu.selected === LHEMenu.ModuleType.Links)
+        enabled: (menu.selected === FSEMenu.ModuleType.Links)
     }
 
-    LHEMenu {
+    FSEMenu {
         id: menu
 
         anchors.top: parent.top
@@ -77,7 +77,7 @@ Window {
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
-    LHEToolBar {
+    FSEToolBar {
         anchors.top: parent.top
         anchors.topMargin: 10
         anchors.right: menu.left
@@ -98,14 +98,14 @@ Window {
         }
     }
 
-    LHEProgressBox {
+    FSEProgressBox {
         id: progress
         anchors.centerIn: parent
         visible: false
         onClicked: MyManager.requestFileTransactionInterruption()
     }
 
-    LHEMessageBox {
+    FSEMessageBox {
         id: message
         anchors.centerIn: parent
         visible: false

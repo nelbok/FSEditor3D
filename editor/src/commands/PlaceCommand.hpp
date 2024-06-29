@@ -2,9 +2,9 @@
 
 #include <QtCore/QObject>
 
-#include <lh/data/Place.hpp>
+#include <fsd/data/Place.hpp>
 
-namespace lhe {
+namespace fse {
 class Commands;
 
 class PlaceCommand : public QObject {
@@ -17,4 +17,4 @@ public:
 protected:
 	Commands* _c{ nullptr };
 };
-} // namespace lhe
+} // namespace fse

@@ -1,18 +1,18 @@
 #include "ModelModel.hpp"
 
-#include <lh/data/Model.hpp>
-#include <lh/data/Project.hpp>
+#include <fsd/data/Model.hpp>
+#include <fsd/data/Project.hpp>
 
-namespace lhe {
+namespace fse {
 
-ModelModel::ModelModel(lh::Project* project, QObject* parent)
+ModelModel::ModelModel(fsd::Project* project, QObject* parent)
 	: EntityModel(project, parent) {}
 
 ModelModel::~ModelModel() {}
 
 void ModelModel::initDatas() {
 	assert(_project);
-	connect(_project, &lh::Project::modelsUpdated, this, &ModelModel::updateDatas);
+	connect(_project, &fsd::Project::modelsUpdated, this, &ModelModel::updateDatas);
 }
 
 QHash<int, QByteArray> ModelModel::roleNames() const {
@@ -27,15 +27,15 @@ void ModelModel::updateDatas() {
 	fillDatas(_project->models());
 }
 
-void ModelModel::disconnectData(lh::Entity* entity) {
+void ModelModel::disconnectData(fsd::Entity* entity) {
 	EntityModel::disconnectData(entity);
-	auto* model = qobject_cast<lh::Model*>(entity);
-	disconnect(model, &lh::Model::typeUpdated, this, &ModelModel::sortDatas);
+	auto* model = qobject_cast<fsd::Model*>(entity);
+	disconnect(model, &fsd::Model::typeUpdated, this, &ModelModel::sortDatas);
 }
 
-void ModelModel::connectData(lh::Entity* entity) {
+void ModelModel::connectData(fsd::Entity* entity) {
 	EntityModel::connectData(entity);
-	auto* model = qobject_cast<lh::Model*>(entity);
-	connect(model, &lh::Model::typeUpdated, this, &ModelModel::sortDatas);
+	auto* model = qobject_cast<fsd::Model*>(entity);
+	connect(model, &fsd::Model::typeUpdated, this, &ModelModel::sortDatas);
 }
-} // namespace lhe
+} // namespace fse

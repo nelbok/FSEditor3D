@@ -1,18 +1,18 @@
 #include "CharacterModel.hpp"
 
-#include <lh/data/Character.hpp>
-#include <lh/data/Project.hpp>
+#include <fsd/data/Character.hpp>
+#include <fsd/data/Project.hpp>
 
-namespace lhe {
+namespace fse {
 
-CharacterModel::CharacterModel(lh::Project* project, QObject* parent)
+CharacterModel::CharacterModel(fsd::Project* project, QObject* parent)
 	: EntityModel(project, parent) {}
 
 CharacterModel::~CharacterModel() {}
 
 void CharacterModel::initDatas() {
 	assert(_project);
-	connect(_project, &lh::Project::charactersUpdated, this, &CharacterModel::updateDatas);
+	connect(_project, &fsd::Project::charactersUpdated, this, &CharacterModel::updateDatas);
 }
 
 void CharacterModel::updateDatas() {
@@ -20,4 +20,4 @@ void CharacterModel::updateDatas() {
 	fillDatas(_project->characters());
 }
 
-} // namespace lhe
+} // namespace fse

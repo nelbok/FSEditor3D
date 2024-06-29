@@ -1,18 +1,18 @@
-#include <lh/data/Project.hpp>
+#include <fsd/data/Project.hpp>
 
 #include <QtCore/QCoreApplication>
 #include <QtCore/QThread>
 
-#include <lh/data/Character.hpp>
-#include <lh/data/Link.hpp>
-#include <lh/data/Model.hpp>
-#include <lh/data/Place.hpp>
-#include <lh/data/UuidPointer.hpp>
-#include <lh/io/Json.hpp>
+#include <fsd/data/Character.hpp>
+#include <fsd/data/Link.hpp>
+#include <fsd/data/Model.hpp>
+#include <fsd/data/Place.hpp>
+#include <fsd/data/UuidPointer.hpp>
+#include <fsd/io/Json.hpp>
 
 #include "common/Accessors.hpp"
 
-namespace lh {
+namespace fsd {
 
 struct Project::Impl {
 	UuidPointer<Place>* defaultPlace{ nullptr };
@@ -217,4 +217,4 @@ void Project::save(QJsonObject& json) const {
 	_impl->saveList(this, _impl->places, lPlaces, json);
 	json[lDefaultPlaces] = Json::fromUuid(_impl->defaultPlace->uuid());
 }
-} // namespace lh
+} // namespace fsd

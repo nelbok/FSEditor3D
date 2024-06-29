@@ -1,11 +1,11 @@
-#include <lh/data/Object.hpp>
+#include <fsd/data/Object.hpp>
 
-#include <lh/data/Model.hpp>
-#include <lh/data/Project.hpp>
-#include <lh/data/UuidPointer.hpp>
-#include <lh/io/Json.hpp>
+#include <fsd/data/Model.hpp>
+#include <fsd/data/Project.hpp>
+#include <fsd/data/UuidPointer.hpp>
+#include <fsd/io/Json.hpp>
 
-namespace lh {
+namespace fsd {
 struct Object::Impl {
 	UuidPointer<Model>* model{ nullptr };
 };
@@ -50,4 +50,4 @@ void Object::save(QJsonObject& json) const {
 	Entity::save(json);
 	json[lModel] = Json::fromUuid(_impl->model->uuid());
 }
-} // namespace lh
+} // namespace fsd

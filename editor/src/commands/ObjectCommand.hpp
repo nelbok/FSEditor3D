@@ -2,9 +2,9 @@
 
 #include <QtCore/QObject>
 
-#include <lh/data/Object.hpp>
+#include <fsd/data/Object.hpp>
 
-namespace lhe {
+namespace fse {
 class Commands;
 
 class ObjectCommand : public QObject {
@@ -14,9 +14,9 @@ public:
 	ObjectCommand(Commands* commands);
 	virtual ~ObjectCommand();
 
-	Q_INVOKABLE void setModel(lh::Object* object, lh::Model* model);
+	Q_INVOKABLE void setModel(fsd::Object* object, fsd::Model* model);
 
 protected:
 	Commands* _c{ nullptr };
 };
-} // namespace lhe
+} // namespace fse

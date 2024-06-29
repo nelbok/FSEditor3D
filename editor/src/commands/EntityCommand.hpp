@@ -2,9 +2,9 @@
 
 #include <QtCore/QObject>
 
-#include <lh/data/Entity.hpp>
+#include <fsd/data/Entity.hpp>
 
-namespace lhe {
+namespace fse {
 class Commands;
 
 class EntityCommand : public QObject {
@@ -14,9 +14,9 @@ public:
 	EntityCommand(Commands* commands);
 	virtual ~EntityCommand();
 
-	Q_INVOKABLE void setName(lh::Entity* entity, const QString& name);
+	Q_INVOKABLE void setName(fsd::Entity* entity, const QString& name);
 
 protected:
 	Commands* _c{ nullptr };
 };
-} // namespace lhe
+} // namespace fse

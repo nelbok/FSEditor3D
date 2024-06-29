@@ -1,17 +1,17 @@
 #pragma once
 
-#include <lh/data/Project.hpp>
+#include <fsd/data/Project.hpp>
 
 #include "BaseCommand.hpp"
 
-namespace lhe {
+namespace fse {
 template<typename TClass>
 class DuplicateCommand : public BaseCommand {
 public:
-	using DuplicateFunc = TClass* (lh::Project::*) (TClass*);
-	using RemoveFunc = void (lh::Project::*)(TClass*);
+	using DuplicateFunc = TClass* (fsd::Project::*) (TClass*);
+	using RemoveFunc = void (fsd::Project::*)(TClass*);
 
-	DuplicateCommand(lh::Project* project, DuplicateFunc duplicate, RemoveFunc remove, TClass* pattern)
+	DuplicateCommand(fsd::Project* project, DuplicateFunc duplicate, RemoveFunc remove, TClass* pattern)
 		: _project{ project }
 		, _duplicate{ duplicate }
 		, _remove{ remove }
@@ -44,10 +44,10 @@ public:
 	}
 
 private:
-	lh::Project* _project{ nullptr };
+	fsd::Project* _project{ nullptr };
 	DuplicateFunc _duplicate{ nullptr };
 	RemoveFunc _remove{ nullptr };
 	TClass* _pattern{ nullptr };
 	TClass* _instance{ nullptr };
 };
-} // namespace lhe
+} // namespace fse

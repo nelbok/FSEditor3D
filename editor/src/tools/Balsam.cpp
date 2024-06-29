@@ -10,9 +10,9 @@
 
 namespace fs = std::filesystem;
 
-namespace lhe {
+namespace fse {
 namespace detail {
-const QUrl& path(lhe::Manager* manager) {
+const QUrl& path(fse::Manager* manager) {
 	if (manager->path().isValid())
 		return manager->path();
 	if (manager->oldPath().isValid())
@@ -37,7 +37,7 @@ void Balsam::init(Manager* manager) {
 	connect(_process, &QProcess::finished, this, &Balsam::finalize);
 }
 
-QUrl Balsam::qmlPath(lh::Model* model) {
+QUrl Balsam::qmlPath(fsd::Model* model) {
 	assert(model);
 	assert(model->qmlName() != "");
 
@@ -46,7 +46,7 @@ QUrl Balsam::qmlPath(lh::Model* model) {
 	return QUrl::fromLocalFile(QString::fromStdString(tmp.string()));
 }
 
-void Balsam::generate(lh::Model* model, const QUrl& url) {
+void Balsam::generate(fsd::Model* model, const QUrl& url) {
 	assert(model);
 
 	_current = model;
@@ -57,7 +57,7 @@ void Balsam::generate(lh::Model* model, const QUrl& url) {
 	args << QString::fromStdString(Tools::modelPath(detail::path(_manager), model).string());
 	args << Tools::toPath(url);
 
-	_process->start(lh::Config::balsam, args);
+	_process->start(fsd::Config::balsam, args);
 }
 
 void Balsam::finalize() {
@@ -70,4 +70,4 @@ void Balsam::finalize() {
 		emit errorOccurred();
 	}
 }
-} // namespace lhe
+} // namespace fse

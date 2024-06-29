@@ -66,40 +66,40 @@ set(PROJECT_SOURCES
 	resources/resources.qrc
 )
 set(QML_SOURCES
-	qml/common/LHEButton.qml
-	qml/common/LHEColorField.qml
-	qml/common/LHEComboBox.qml
-	qml/common/LHEField.qml
-	qml/common/LHEIconButton.qml
-	qml/common/LHEList.qml
-	qml/common/LHEMenuButton.qml
-	qml/common/LHEModule.qml
-	qml/common/LHERectangle.qml
-	qml/common/LHESpinBox.qml
-	qml/common/LHEText.qml
-	qml/common/LHETextField.qml
-	qml/common/LHEToolButton.qml
-	qml/common/LHEVector3DField.qml
+	qml/common/FSEButton.qml
+	qml/common/FSEColorField.qml
+	qml/common/FSEComboBox.qml
+	qml/common/FSEField.qml
+	qml/common/FSEIconButton.qml
+	qml/common/FSEList.qml
+	qml/common/FSEMenuButton.qml
+	qml/common/FSEModule.qml
+	qml/common/FSERectangle.qml
+	qml/common/FSESpinBox.qml
+	qml/common/FSEText.qml
+	qml/common/FSETextField.qml
+	qml/common/FSEToolButton.qml
+	qml/common/FSEVector3DField.qml
 
-	qml/data/LHEEntity.qml
-	qml/data/LHEObject.qml
-	qml/data/LHEPlacement.qml
+	qml/data/FSEEntity.qml
+	qml/data/FSEObject.qml
+	qml/data/FSEPlacement.qml
 
-	qml/modules/LHECharacters.qml
-	qml/modules/LHELinks.qml
-	qml/modules/LHEMenu.qml
-	qml/modules/LHEMessageBox.qml
-	qml/modules/LHEModels.qml
-	qml/modules/LHEPlaces.qml
-	qml/modules/LHEProgressBox.qml
-	qml/modules/LHEProject.qml
-	qml/modules/LHEToolBar.qml
-	qml/modules/LHEView3D.qml
+	qml/modules/FSECharacters.qml
+	qml/modules/FSELinks.qml
+	qml/modules/FSEMenu.qml
+	qml/modules/FSEMessageBox.qml
+	qml/modules/FSEModels.qml
+	qml/modules/FSEPlaces.qml
+	qml/modules/FSEProgressBox.qml
+	qml/modules/FSEProject.qml
+	qml/modules/FSEToolBar.qml
+	qml/modules/FSEView3D.qml
 
 	qml/Main.qml
 )
 set(QML_SINGLETON
-	qml/style/LHEStyle.qml
+	qml/style/FSEStyle.qml
 )
 set_source_files_properties(${QML_SINGLETON} PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 
@@ -110,17 +110,17 @@ set(OTHER_FILES
 	${CMAKE_CURRENT_BINARY_DIR}/resources/resources.rc
 )
 
-qt_add_executable(${CLH_EDITOR} ${PROJECT_SOURCES} ${OTHER_FILES})
-qt_add_qml_module(${CLH_EDITOR} URI editor VERSION 1.0 QML_FILES ${QML_SOURCES} ${QML_SINGLETON})
+qt_add_executable(${CFS_EDITOR} ${PROJECT_SOURCES} ${OTHER_FILES})
+qt_add_qml_module(${CFS_EDITOR} URI editor VERSION 1.0 QML_FILES ${QML_SOURCES} ${QML_SINGLETON})
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" PREFIX "" FILES ${PROJECT_SOURCES} ${QML_SOURCES} ${QML_SINGLETON})
 include_directories(src)
 
 # Balsam
 get_target_property(BALSAM_LOCATION Qt6::balsam IMPORTED_LOCATION)
 if(WIN32)
-	get_filename_component(LH_BALSAM ${BALSAM_LOCATION} NAME)
+	get_filename_component(FS_BALSAM ${BALSAM_LOCATION} NAME)
 elseif(LINUX)
-	set(LH_BALSAM ${BALSAM_LOCATION})
+	set(FS_BALSAM ${BALSAM_LOCATION})
 endif()
 
 configure_file(src/Config.hpp.in include/Config.hpp)
@@ -129,18 +129,18 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR}/include)
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
-set_target_properties(${CLH_EDITOR} PROPERTIES
-	MACOSX_BUNDLE_GUI_IDENTIFIER com.${FS_ORGANIZATION}.${CLH_EDITOR}
+set_target_properties(${CFS_EDITOR} PROPERTIES
+	MACOSX_BUNDLE_GUI_IDENTIFIER com.${FS_ORGANIZATION}.${CFS_EDITOR}
 	MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
 	MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
 	MACOSX_BUNDLE TRUE
 	WIN32_EXECUTABLE TRUE
 )
 
-target_link_libraries(${CLH_EDITOR} PRIVATE Qt6::Quick Qt6::Quick3D Qt6::Quick3DPhysics ${CLH_DATA})
+target_link_libraries(${CFS_EDITOR} PRIVATE Qt6::Quick Qt6::Quick3D Qt6::Quick3DPhysics ${CFS_DATA})
 
 include(GNUInstallDirs)
-install(TARGETS ${CLH_EDITOR}
+install(TARGETS ${CFS_EDITOR}
 	BUNDLE DESTINATION .
 	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
@@ -150,9 +150,9 @@ if(WIN32)
 	get_target_property(DEPLOYQT Qt6::windeployqt IMPORTED_LOCATION)
 
 	# Deploy Balsam
-	add_custom_command(TARGET ${CLH_EDITOR} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${BALSAM_LOCATION} $<TARGET_FILE_DIR:${CLH_EDITOR}>)
-	add_custom_command(TARGET ${CLH_EDITOR} POST_BUILD COMMAND ${DEPLOYQT} "$<TARGET_FILE_DIR:${CLH_EDITOR}>/${LH_BALSAM}")
+	add_custom_command(TARGET ${CFS_EDITOR} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${BALSAM_LOCATION} $<TARGET_FILE_DIR:${CFS_EDITOR}>)
+	add_custom_command(TARGET ${CFS_EDITOR} POST_BUILD COMMAND ${DEPLOYQT} "$<TARGET_FILE_DIR:${CFS_EDITOR}>/${FS_BALSAM}")
 
 	# Deploy editor
-	add_custom_command(TARGET ${CLH_EDITOR} POST_BUILD COMMAND ${DEPLOYQT} --qmldir "${CMAKE_CURRENT_SOURCE_DIR}/qml" "$<TARGET_FILE:${CLH_EDITOR}>")
+	add_custom_command(TARGET ${CFS_EDITOR} POST_BUILD COMMAND ${DEPLOYQT} --qmldir "${CMAKE_CURRENT_SOURCE_DIR}/qml" "$<TARGET_FILE:${CFS_EDITOR}>")
 endif()

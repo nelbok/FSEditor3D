@@ -1,13 +1,13 @@
-#include <lh/data/Placement.hpp>
+#include <fsd/data/Placement.hpp>
 
-#include <lh/data/Place.hpp>
-#include <lh/data/Project.hpp>
-#include <lh/data/UuidPointer.hpp>
-#include <lh/io/Json.hpp>
+#include <fsd/data/Place.hpp>
+#include <fsd/data/Project.hpp>
+#include <fsd/data/UuidPointer.hpp>
+#include <fsd/io/Json.hpp>
 
 #include "common/Accessors.hpp"
 
-namespace lh {
+namespace fsd {
 struct Placement::Impl {
 	QVector3D position{};
 	QVector3D rotation{};
@@ -80,4 +80,4 @@ void Placement::save(QJsonObject& json) const {
 	json[lRotation] = Json::fromVector3D(_impl->rotation);
 	json[lPlace] = Json::fromUuid(_impl->place->uuid());
 }
-} // namespace lh
+} // namespace fsd

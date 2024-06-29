@@ -1,17 +1,17 @@
 qt_standard_project_setup(REQUIRES 6.5)
 set(CMAKE_DEBUG_POSTFIX _d)
 set(PROJECT_SOURCES
-	include/lh/data/Character.hpp
-	include/lh/data/Entity.hpp
-	include/lh/data/Link.hpp
-	include/lh/data/Model.hpp
-	include/lh/data/Object.hpp
-	include/lh/data/Place.hpp
-	include/lh/data/Placement.hpp
-	include/lh/data/Project.hpp
-	include/lh/data/UuidPointer.hpp
-	include/lh/io/FileManager.hpp
-	include/lh/io/Json.hpp
+	include/fsd/data/Character.hpp
+	include/fsd/data/Entity.hpp
+	include/fsd/data/Link.hpp
+	include/fsd/data/Model.hpp
+	include/fsd/data/Object.hpp
+	include/fsd/data/Place.hpp
+	include/fsd/data/Placement.hpp
+	include/fsd/data/Project.hpp
+	include/fsd/data/UuidPointer.hpp
+	include/fsd/io/FileManager.hpp
+	include/fsd/io/Json.hpp
 
 	src/common/Accessors.hpp
 	src/data/Character.cpp
@@ -30,7 +30,7 @@ source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" PREFIX "" FILES ${PROJECT_SOURCE
 include_directories(src)
 include_directories(.)
 
-qt_add_library(${CLH_DATA} STATIC ${PROJECT_SOURCES})
+qt_add_library(${CFS_DATA} STATIC ${PROJECT_SOURCES})
 
-target_include_directories(${CLH_DATA} PUBLIC include)
-target_link_libraries(${CLH_DATA} PRIVATE Qt6::Core Qt6::Gui)
+target_include_directories(${CFS_DATA} PUBLIC include)
+target_link_libraries(${CFS_DATA} PRIVATE Qt6::Core Qt6::Gui)

@@ -1,6 +1,6 @@
 #include "SelectionWrapper.hpp"
 
-namespace lhe {
+namespace fse {
 
 SelectionWrapper::SelectionWrapper(QObject* parent)
 	: QObject(parent) {}
@@ -30,19 +30,19 @@ void SelectionWrapper::setCurrentIndex(int currentIndex) {
 	emit currentUpdated();
 }
 
-lh::Entity* SelectionWrapper::currentData() const {
+fsd::Entity* SelectionWrapper::currentData() const {
 	assert(_model);
 	for (int i = 0; i < _model->rowCount(); ++i) {
 		const auto& index = _model->index(i, 0);
 		if (_model->data(index, getRole("uuid")) == _currentUuid) {
-			return _model->data(index, getRole("entity")).value<lh::Entity*>();
+			return _model->data(index, getRole("entity")).value<fsd::Entity*>();
 		}
 	}
 
 	return nullptr;
 }
 
-void SelectionWrapper::setCurrentData(lh::Entity* currentData) {
+void SelectionWrapper::setCurrentData(fsd::Entity* currentData) {
 	assert(_model);
 	if (_model && currentData) {
 		if (_currentUuid == currentData->uuid())
@@ -90,4 +90,4 @@ int SelectionWrapper::getRole(const QByteArray& name) const {
 	return -1;
 }
 
-} // namespace lhe
+} // namespace fse

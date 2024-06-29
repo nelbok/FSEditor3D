@@ -1,15 +1,15 @@
 #pragma once
 
-namespace lh::Config {
+namespace fsd::Config {
 constexpr auto organization = "@FS_ORGANIZATION@";
 constexpr auto copyright = "@FS_COPYRIGHT@";
 constexpr auto year = "@FS_YEAR@";
 
-constexpr auto name = "@LH_EDITOR@";
-constexpr auto version = "@LH_VERSION@";
-constexpr auto github = "@LH_GITHUB@";
-constexpr auto discord = "@LH_DISCORD@";
-constexpr auto twitter = "@LH_TWITTER@";
+constexpr auto name = "@FS_EDITOR@";
+constexpr auto version = "@FS_VERSION@";
+constexpr auto github = "@FS_GITHUB@";
+constexpr auto discord = "@FS_DISCORD@";
+constexpr auto twitter = "@FS_TWITTER@";
 
-constexpr auto balsam = "@LH_BALSAM@";
-} // namespace lh::Config
+constexpr auto balsam = "@FS_BALSAM@";
+} // namespace fsd::Config

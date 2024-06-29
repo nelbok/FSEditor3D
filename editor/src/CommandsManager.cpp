@@ -2,7 +2,7 @@
 
 #include "commands/Commands.hpp"
 
-namespace lhe {
+namespace fse {
 struct CommandsManager::Impl {
 	Commands* commands{ nullptr };
 	CharacterCommand* characterCommand{ nullptr };
@@ -23,7 +23,7 @@ CommandsManager::~CommandsManager() {
 	reset();
 }
 
-void CommandsManager::init(lh::Project* project) {
+void CommandsManager::init(fsd::Project* project) {
 	assert(project);
 
 	_impl->commands = new Commands(this);
@@ -101,4 +101,4 @@ ProjectCommand* CommandsManager::projectCommand() const {
 	assert(_impl->projectCommand);
 	return _impl->projectCommand;
 }
-} // namespace lhe
+} // namespace fse

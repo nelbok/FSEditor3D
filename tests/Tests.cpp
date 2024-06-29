@@ -1,7 +1,7 @@
 #include <QtCore/QCoreApplication>
 #include <QtTest/QtTest>
 
-#include <lh/data/Project.hpp>
+#include <fsd/data/Project.hpp>
 
 #include "TestAccessors.hpp"
 #include "TestIO.hpp"
@@ -17,7 +17,7 @@ public:
 	virtual ~Tests() = default;
 
 private:
-	lh::Project* _project = nullptr;
+	fsd::Project* _project = nullptr;
 
 private slots:
 	// Only once
@@ -26,7 +26,7 @@ private slots:
 	// For each tests
 	void init() {
 		QVERIFY(!_project);
-		_project = new lh::Project(this);
+		_project = new fsd::Project(this);
 	}
 
 	void testAccessors() {
@@ -36,7 +36,7 @@ private slots:
 
 	void testIO() {
 		QVERIFY(_project);
-		auto* dummy = new lh::Project(this);
+		auto* dummy = new fsd::Project(this);
 		TestIO(_project, dummy).run();
 		dummy->deleteLater();
 	}

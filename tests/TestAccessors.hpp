@@ -2,14 +2,14 @@
 
 #include <QtTest/QtTest>
 
-#include <lh/data/Character.hpp>
-#include <lh/data/Link.hpp>
-#include <lh/data/Model.hpp>
-#include <lh/data/Place.hpp>
-#include <lh/data/Project.hpp>
+#include <fsd/data/Character.hpp>
+#include <fsd/data/Link.hpp>
+#include <fsd/data/Model.hpp>
+#include <fsd/data/Place.hpp>
+#include <fsd/data/Project.hpp>
 
 struct TestAccessors {
-	TestAccessors(lh::Project* project)
+	TestAccessors(fsd::Project* project)
 		: _project{ project } {}
 
 	virtual ~TestAccessors() = default;
@@ -30,9 +30,9 @@ struct TestAccessors {
 	}
 
 private:
-	lh::Project* _project{ nullptr };
+	fsd::Project* _project{ nullptr };
 
-	void testCharacter(lh::Character* character, const QMetaObject* metaObject) {
+	void testCharacter(fsd::Character* character, const QMetaObject* metaObject) {
 		testPlacement(character, metaObject->superClass());
 
 		const auto hair = QColor("blue");
@@ -51,11 +51,11 @@ private:
 		character->setHeight(height);
 		QCOMPARE(character->height(), height);
 
-		const auto species = lh::Character::Species::Bun;
+		const auto species = fsd::Character::Species::Bun;
 		character->setSpecies(species);
 		QCOMPARE(character->species(), species);
 
-		const auto gender = lh::Character::Gender::Female;
+		const auto gender = fsd::Character::Gender::Female;
 		character->setGender(gender);
 		QCOMPARE(character->gender(), gender);
 
@@ -63,7 +63,7 @@ private:
 		QCOMPARE(metaObject->propertyOffset(), 9);
 	}
 
-	void testEntity(lh::Entity* entity, const QMetaObject* metaObject) {
+	void testEntity(fsd::Entity* entity, const QMetaObject* metaObject) {
 		QCOMPARE(metaObject->propertyCount(), 5);
 		QCOMPARE(metaObject->propertyOffset(), 1);
 
@@ -76,7 +76,7 @@ private:
 		QCOMPARE(entity->isAlive(), isAlive);
 	}
 
-	void testLink(lh::Link* link, const QMetaObject* metaObject) {
+	void testLink(fsd::Link* link, const QMetaObject* metaObject) {
 		testPlacement(link, metaObject->superClass());
 
 		auto* linkA = _project->links().at(0);
@@ -87,7 +87,7 @@ private:
 		QCOMPARE(metaObject->propertyOffset(), 9);
 	}
 
-	void testModel(lh::Model* model, const QMetaObject* metaObject) {
+	void testModel(fsd::Model* model, const QMetaObject* metaObject) {
 		testEntity(model, metaObject->superClass());
 
 		const auto path = QUrl(":/test/img");
@@ -98,7 +98,7 @@ private:
 		model->setQmlName(name);
 		QCOMPARE(model->qmlName(), name);
 
-		const auto type = lh::Model::Type::Link;
+		const auto type = fsd::Model::Type::Link;
 		model->setType(type);
 		QCOMPARE(model->type(), type);
 
@@ -106,7 +106,7 @@ private:
 		QCOMPARE(metaObject->propertyOffset(), 5);
 	}
 
-	void testObject(lh::Object* object, const QMetaObject* metaObject) {
+	void testObject(fsd::Object* object, const QMetaObject* metaObject) {
 		testEntity(object, metaObject->superClass());
 
 		auto* model = _project->models().at(0);
@@ -117,14 +117,14 @@ private:
 		QCOMPARE(metaObject->propertyOffset(), 5);
 	}
 
-	void testPlace(lh::Place* place, const QMetaObject* metaObject) {
+	void testPlace(fsd::Place* place, const QMetaObject* metaObject) {
 		testObject(place, metaObject->superClass());
 
 		QCOMPARE(metaObject->propertyCount(), 6);
 		QCOMPARE(metaObject->propertyOffset(), 6);
 	}
 
-	void testPlacement(lh::Placement* placement, const QMetaObject* metaObject) {
+	void testPlacement(fsd::Placement* placement, const QMetaObject* metaObject) {
 		testObject(placement, metaObject->superClass());
 
 		const auto position = QVector3D(0, 0, 0);
@@ -143,7 +143,7 @@ private:
 		QCOMPARE(metaObject->propertyOffset(), 6);
 	}
 
-	void testProject(lh::Project* project, const QMetaObject* metaObject) {
+	void testProject(fsd::Project* project, const QMetaObject* metaObject) {
 		testEntity(project, metaObject->superClass());
 
 		QCOMPARE(metaObject->propertyCount(), 10);

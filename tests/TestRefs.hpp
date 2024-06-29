@@ -2,13 +2,13 @@
 
 #include <QtTest/QtTest>
 
-#include <lh/data/Character.hpp>
-#include <lh/data/Link.hpp>
-#include <lh/data/Project.hpp>
-#include <lh/data/Place.hpp>
+#include <fsd/data/Character.hpp>
+#include <fsd/data/Link.hpp>
+#include <fsd/data/Project.hpp>
+#include <fsd/data/Place.hpp>
 
 struct TestRefs {
-	TestRefs(lh::Project* project)
+	TestRefs(fsd::Project* project)
 		: _project{ project } {}
 
 	virtual ~TestRefs() = default;
@@ -21,12 +21,12 @@ struct TestRefs {
 	}
 
 private:
-	lh::Project* _project{ nullptr };
-	lh::Model* _model{ nullptr };
-	lh::Place* _place{ nullptr };
-	lh::Character* _character{ nullptr };
-	lh::Link* _linkA{ nullptr };
-	lh::Link* _linkB{ nullptr };
+	fsd::Project* _project{ nullptr };
+	fsd::Model* _model{ nullptr };
+	fsd::Place* _place{ nullptr };
+	fsd::Character* _character{ nullptr };
+	fsd::Link* _linkA{ nullptr };
+	fsd::Link* _linkB{ nullptr };
 
 	void init() {
 		_model = _project->createModel();

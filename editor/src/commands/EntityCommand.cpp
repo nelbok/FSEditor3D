@@ -3,7 +3,7 @@
 #include "Commands.hpp"
 #include "ValueCommand.hpp"
 
-namespace lhe {
+namespace fse {
 
 EntityCommand::EntityCommand(Commands* commands)
 	: QObject(commands)
@@ -13,8 +13,8 @@ EntityCommand::EntityCommand(Commands* commands)
 
 EntityCommand::~EntityCommand() {}
 
-void EntityCommand::setName(lh::Entity* e, const QString& newValue) {
-	addValueCommand(_c, e, &lh::Entity::setName, &lh::Entity::name, newValue);
+void EntityCommand::setName(fsd::Entity* e, const QString& newValue) {
+	addValueCommand(_c, e, &fsd::Entity::setName, &fsd::Entity::name, newValue);
 }
 
-} // namespace lhe
+} // namespace fse

@@ -2,9 +2,9 @@
 
 #include <QtCore/QThread>
 
-#include <lh/io/FileManager.hpp>
+#include <fsd/io/FileManager.hpp>
 
-namespace lhe {
+namespace fse {
 class Manager;
 
 class SaveThread : public QThread {
@@ -22,7 +22,7 @@ protected:
 	virtual void run() override;
 
 private:
-	lh::FileManager* _fileManager{ nullptr };
+	fsd::FileManager* _fileManager{ nullptr };
 	Manager* _manager{ nullptr };
 };
-} // namespace lhe
+} // namespace fse

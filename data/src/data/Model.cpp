@@ -1,11 +1,11 @@
-#include <lh/data/Model.hpp>
+#include <fsd/data/Model.hpp>
 
-#include <lh/data/Project.hpp>
-#include <lh/io/Json.hpp>
+#include <fsd/data/Project.hpp>
+#include <fsd/io/Json.hpp>
 
 #include "common/Accessors.hpp"
 
-namespace lh {
+namespace fsd {
 struct Model::Impl {
 	QUrl sourcePath{};
 	QString qmlName{};
@@ -74,4 +74,4 @@ void Model::save(QJsonObject& json) const {
 	json[lQmlName] = _impl->qmlName;
 	json[lType] = static_cast<int>(_impl->type);
 }
-} // namespace lh
+} // namespace fsd

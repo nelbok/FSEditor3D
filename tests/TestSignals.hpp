@@ -2,13 +2,13 @@
 
 #include <QtTest/QtTest>
 
-#include <lh/data/Character.hpp>
-#include <lh/data/Link.hpp>
-#include <lh/data/Project.hpp>
-#include <lh/data/Place.hpp>
+#include <fsd/data/Character.hpp>
+#include <fsd/data/Link.hpp>
+#include <fsd/data/Project.hpp>
+#include <fsd/data/Place.hpp>
 
 struct TestSignals {
-	TestSignals(lh::Project* project)
+	TestSignals(fsd::Project* project)
 		: _project{ project } {}
 
 	virtual ~TestSignals() = default;
@@ -20,5 +20,5 @@ struct TestSignals {
 	}
 
 private:
-	lh::Project* _project{ nullptr };
+	fsd::Project* _project{ nullptr };
 };

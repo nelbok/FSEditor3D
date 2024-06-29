@@ -3,7 +3,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 
-namespace lhe {
+namespace fse {
 
 class About : public QObject {
 	Q_OBJECT
@@ -29,4 +29,4 @@ public:
 	QString discord() const;
 	QString twitter() const;
 };
-} // namespace lhe
+} // namespace fse

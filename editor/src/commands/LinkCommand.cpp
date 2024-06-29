@@ -3,7 +3,7 @@
 #include "Commands.hpp"
 #include "ValueCommand.hpp"
 
-namespace lhe {
+namespace fse {
 
 LinkCommand::LinkCommand(Commands* commands)
 	: QObject(commands)
@@ -13,8 +13,8 @@ LinkCommand::LinkCommand(Commands* commands)
 
 LinkCommand::~LinkCommand() {}
 
-void LinkCommand::setLink(lh::Link* l, lh::Link* newValue) {
-	addValueCommand(_c, l, &lh::Link::setLink, &lh::Link::link, newValue);
+void LinkCommand::setLink(fsd::Link* l, fsd::Link* newValue) {
+	addValueCommand(_c, l, &fsd::Link::setLink, &fsd::Link::link, newValue);
 }
 
-} // namespace lhe
+} // namespace fse

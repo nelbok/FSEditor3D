@@ -1,8 +1,8 @@
-#include <lh/data/Place.hpp>
+#include <fsd/data/Place.hpp>
 
-#include <lh/data/Project.hpp>
+#include <fsd/data/Project.hpp>
 
-namespace lh {
+namespace fsd {
 struct Place::Impl {};
 
 Place::Place(Project* project)
@@ -26,4 +26,4 @@ void Place::load(const QJsonObject& json) {
 void Place::save(QJsonObject& json) const {
 	Object::save(json);
 }
-} // namespace lh
+} // namespace fsd

@@ -2,7 +2,7 @@
 
 #include "BaseCommand.hpp"
 
-namespace lhe {
+namespace fse {
 class Commands;
 
 template<typename TClass, typename TFunc, typename TType>
@@ -48,4 +48,4 @@ void addValueCommand(Commands* commands, TClass* instance, TSetter setter, TGett
 		commands->add(new ValueCommand(instance, setter, oldValue, newValue));
 	}
 }
-} // namespace lhe
+} // namespace fse

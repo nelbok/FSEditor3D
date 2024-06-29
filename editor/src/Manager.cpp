@@ -9,18 +9,18 @@
 #include "CommandsManager.hpp"
 #include "ModelsManager.hpp"
 
-namespace lhe {
+namespace fse {
 
 struct Manager::Impl {
 	About* about{ nullptr };
 	Balsam* balsam{ nullptr };
-	lh::Project* project{ nullptr };
+	fsd::Project* project{ nullptr };
 
 	QUrl tmpPath{};
 	QUrl oldPath{};
 	QUrl path{};
-	lh::FileManager* loadThread{ nullptr };
-	lhe::SaveThread* saveThread{ nullptr };
+	fsd::FileManager* loadThread{ nullptr };
+	fse::SaveThread* saveThread{ nullptr };
 
 	CommandsManager* commandsManager{ nullptr };
 	ModelsManager* modelsManager{ nullptr };
@@ -39,7 +39,7 @@ void Manager::init() {
 
 	_impl->about = new About(this);
 	_impl->balsam = new Balsam(this);
-	_impl->project = new lh::Project(this);
+	_impl->project = new fsd::Project(this);
 
 	_impl->commandsManager = new CommandsManager(this);
 	_impl->modelsManager = new ModelsManager(this);
@@ -57,7 +57,7 @@ void Manager::reset() {
 	_impl->commandsManager->reset();
 
 	auto tmp = std::filesystem::temp_directory_path();
-	tmp /= lh::Config::name;
+	tmp /= fsd::Config::name;
 	tmp /= _impl->project->uuid().toString(QUuid::WithoutBraces).toStdString();
 	tmp /= "";
 	_impl->tmpPath = QUrl::fromLocalFile(QString::fromStdString(tmp.string()));
@@ -68,10 +68,10 @@ void Manager::reset() {
 void Manager::load(const QUrl& url) {
 	reset();
 	setPath(url);
-	_impl->loadThread = new lh::FileManager(this);
-	_impl->loadThread->init(_impl->project, lh::FileManager::Type::Load, url);
+	_impl->loadThread = new fsd::FileManager(this);
+	_impl->loadThread->init(_impl->project, fsd::FileManager::Type::Load, url);
 	emit beginFileTransaction();
-	connect(_impl->loadThread, &lh::FileManager::finished, this, [this]() {
+	connect(_impl->loadThread, &fsd::FileManager::finished, this, [this]() {
 		emit endFileTransaction(_impl->loadThread->result());
 		_impl->loadThread->deleteLater();
 	});
@@ -80,12 +80,12 @@ void Manager::load(const QUrl& url) {
 
 void Manager::save(const QUrl& url) {
 	setPath(url);
-	_impl->saveThread = new lhe::SaveThread(this);
+	_impl->saveThread = new fse::SaveThread(this);
 	_impl->saveThread->init();
 	emit beginFileTransaction();
-	connect(_impl->saveThread, &lhe::SaveThread::finished, this, [this]() {
+	connect(_impl->saveThread, &fse::SaveThread::finished, this, [this]() {
 		//emit endFileTransaction(_impl->saveThread->result());
-		emit endFileTransaction(lh::FileManager::Result::Success);
+		emit endFileTransaction(fsd::FileManager::Result::Success);
 		_impl->saveThread->deleteLater();
 		_impl->saveThread = nullptr;
 	});
@@ -110,7 +110,7 @@ Balsam* Manager::balsam() const {
 	return _impl->balsam;
 }
 
-lh::Project* Manager::project() const {
+fsd::Project* Manager::project() const {
 	assert(_impl->project);
 	return _impl->project;
 }
@@ -146,4 +146,4 @@ ModelsManager* Manager::modelsManager() const {
 	assert(_impl->modelsManager);
 	return _impl->modelsManager;
 }
-} // namespace lhe
+} // namespace fse

@@ -2,14 +2,14 @@
 
 #include <QtCore/QAbstractListModel>
 
-#include <lh/data/Project.hpp>
+#include <fsd/data/Project.hpp>
 
-namespace lhe {
+namespace fse {
 class EntityModel : public QAbstractListModel {
 	Q_OBJECT
 
 public:
-	EntityModel(lh::Project* project, QObject* parent = nullptr);
+	EntityModel(fsd::Project* project, QObject* parent = nullptr);
 	virtual ~EntityModel();
 
 	virtual void initDatas() = 0;
@@ -43,14 +43,14 @@ protected:
 		sortDatas();
 	}
 
-	virtual void disconnectData(lh::Entity* entity);
-	virtual void connectData(lh::Entity* entity);
+	virtual void disconnectData(fsd::Entity* entity);
+	virtual void connectData(fsd::Entity* entity);
 
 protected:
-	lh::Project* _project{ nullptr };
+	fsd::Project* _project{ nullptr };
 
 private:
-	QList<lh::Entity*> _datas{};
+	QList<fsd::Entity*> _datas{};
 };
 
-} // namespace lhe
+} // namespace fse

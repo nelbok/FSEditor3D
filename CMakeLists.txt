@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.27)
 
 include(cmake/defines.cmake)
 
-project(${CLH_EDITOR} VERSION ${LH_VERSION} LANGUAGES CXX)
+project(${CFS_EDITOR} VERSION ${FS_VERSION} LANGUAGES CXX)
 
 include(cmake/common.cmake)
 
@@ -15,4 +15,4 @@ add_subdirectory(data)
 add_subdirectory(editor)
 add_subdirectory(tests)
 
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${CLH_EDITOR})
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${CFS_EDITOR})

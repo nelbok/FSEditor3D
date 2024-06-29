@@ -8,7 +8,7 @@
 
 namespace fs = std::filesystem;
 
-namespace lhe {
+namespace fse {
 SaveThread::SaveThread(Manager* manager)
 	: QThread(manager)
 	, _manager{ manager } {}
@@ -17,8 +17,8 @@ SaveThread::~SaveThread() {}
 
 void SaveThread::init() {
 	assert(!_fileManager);
-	_fileManager = new lh::FileManager(this);
-	_fileManager->init(_manager->project(), lh::FileManager::Type::Save, _manager->path());
+	_fileManager = new fsd::FileManager(this);
+	_fileManager->init(_manager->project(), fsd::FileManager::Type::Save, _manager->path());
 }
 
 void SaveThread::run() {
@@ -44,4 +44,4 @@ void SaveThread::run() {
 	}
 }
 
-} // namespace lhe
+} // namespace fse

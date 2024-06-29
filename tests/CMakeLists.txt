@@ -17,7 +17,7 @@ add_test(NAME Tests COMMAND Tests)
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" PREFIX "" FILES ${PROJECT_SOURCES})
 include_directories(.)
 
-target_link_libraries(Tests PRIVATE Qt6::Core Qt6::Gui Qt6::Test ${CLH_DATA})
+target_link_libraries(Tests PRIVATE Qt6::Core Qt6::Gui Qt6::Test ${CFS_DATA})
 if(WIN32)
         windeployqt(Tests)
 endif()

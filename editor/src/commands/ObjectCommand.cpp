@@ -3,7 +3,7 @@
 #include "Commands.hpp"
 #include "ValueCommand.hpp"
 
-namespace lhe {
+namespace fse {
 
 ObjectCommand::ObjectCommand(Commands* commands)
 	: QObject(commands)
@@ -13,8 +13,8 @@ ObjectCommand::ObjectCommand(Commands* commands)
 
 ObjectCommand::~ObjectCommand() {}
 
-void ObjectCommand::setModel(lh::Object* o, lh::Model* newValue) {
-	addValueCommand(_c, o, &lh::Object::setModel, &lh::Object::model, newValue);
+void ObjectCommand::setModel(fsd::Object* o, fsd::Model* newValue) {
+	addValueCommand(_c, o, &fsd::Object::setModel, &fsd::Object::model, newValue);
 }
 
-} // namespace lhe
+} // namespace fse

@@ -1,18 +1,18 @@
 #include "LinkModel.hpp"
 
-#include <lh/data/Link.hpp>
-#include <lh/data/Project.hpp>
+#include <fsd/data/Link.hpp>
+#include <fsd/data/Project.hpp>
 
-namespace lhe {
+namespace fse {
 
-LinkModel::LinkModel(lh::Project* project, QObject* parent)
+LinkModel::LinkModel(fsd::Project* project, QObject* parent)
 	: EntityModel(project, parent) {}
 
 LinkModel::~LinkModel() {}
 
 void LinkModel::initDatas() {
 	assert(_project);
-	connect(_project, &lh::Project::linksUpdated, this, &LinkModel::updateDatas);
+	connect(_project, &fsd::Project::linksUpdated, this, &LinkModel::updateDatas);
 }
 
 void LinkModel::updateDatas() {
@@ -20,4 +20,4 @@ void LinkModel::updateDatas() {
 	fillDatas(_project->links());
 }
 
-} // namespace lhe
+} // namespace fse

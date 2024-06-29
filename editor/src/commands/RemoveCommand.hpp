@@ -1,16 +1,16 @@
 #pragma once
 
-#include <lh/data/Project.hpp>
+#include <fsd/data/Project.hpp>
 
 #include "BaseCommand.hpp"
 
-namespace lhe {
+namespace fse {
 template<typename TClass>
 class RemoveCommand : public BaseCommand {
 public:
-	using RemoveFunc = void (lh::Project::*)(TClass*);
+	using RemoveFunc = void (fsd::Project::*)(TClass*);
 
-	RemoveCommand(lh::Project* project, RemoveFunc remove, TClass* instance)
+	RemoveCommand(fsd::Project* project, RemoveFunc remove, TClass* instance)
 		: _project{ project }
 		, _remove{ remove }
 		, _instance{ instance } {
@@ -37,8 +37,8 @@ public:
 	}
 
 private:
-	lh::Project* _project{ nullptr };
+	fsd::Project* _project{ nullptr };
 	RemoveFunc _remove{ nullptr };
 	TClass* _instance{ nullptr };
 };
-} // namespace lhe
+} // namespace fse

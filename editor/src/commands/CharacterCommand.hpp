@@ -2,9 +2,9 @@
 
 #include <QtCore/QObject>
 
-#include <lh/data/Character.hpp>
+#include <fsd/data/Character.hpp>
 
-namespace lhe {
+namespace fse {
 class Commands;
 
 class CharacterCommand : public QObject {
@@ -14,14 +14,14 @@ public:
 	CharacterCommand(Commands* commands);
 	virtual ~CharacterCommand();
 
-	Q_INVOKABLE void setHair(lh::Character* character, const QColor& hair);
-	Q_INVOKABLE void setSkin(lh::Character* character, const QColor& skin);
-	Q_INVOKABLE void setClothes(lh::Character* character, const QColor& clothes);
-	Q_INVOKABLE void setHeight(lh::Character* character, quint8 height);
-	Q_INVOKABLE void setSpecies(lh::Character* character, lh::Character::Species species);
-	Q_INVOKABLE void setGender(lh::Character* character, lh::Character::Gender gender);
+	Q_INVOKABLE void setHair(fsd::Character* character, const QColor& hair);
+	Q_INVOKABLE void setSkin(fsd::Character* character, const QColor& skin);
+	Q_INVOKABLE void setClothes(fsd::Character* character, const QColor& clothes);
+	Q_INVOKABLE void setHeight(fsd::Character* character, quint8 height);
+	Q_INVOKABLE void setSpecies(fsd::Character* character, fsd::Character::Species species);
+	Q_INVOKABLE void setGender(fsd::Character* character, fsd::Character::Gender gender);
 
 protected:
 	Commands* _c{ nullptr };
 };
-} // namespace lhe
+} // namespace fse

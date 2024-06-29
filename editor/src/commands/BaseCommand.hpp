@@ -2,7 +2,7 @@
 
 #include <QtCore/QObject>
 
-namespace lhe {
+namespace fse {
 
 class BaseCommand : public QObject {
 	Q_OBJECT
@@ -16,4 +16,4 @@ public:
 	virtual void finalize() {}
 	virtual void clean() {}
 };
-} // namespace lhe
+} // namespace fse

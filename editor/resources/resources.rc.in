@@ -60,8 +60,8 @@ IDI_ICON1               ICON                    "logo.ico"
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION @LH_VERSION_RC@
- PRODUCTVERSION @LH_VERSION_RC@
+ FILEVERSION @FS_VERSION_RC@
+ PRODUCTVERSION @FS_VERSION_RC@
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -78,12 +78,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "@FS_ORGANIZATION@"
             VALUE "FileDescription", "Game editor 3D / Visual tour 3D"
-            VALUE "FileVersion", "@LH_VERSION@"
+            VALUE "FileVersion", "@FS_VERSION@"
             VALUE "InternalName", "resources.rc"
             VALUE "LegalCopyright", "@FS_COPYRIGHT@"
-            VALUE "OriginalFilename", "@CLH_EDITOR@.exe"
-            VALUE "ProductName", "@LH_EDITOR@"
-            VALUE "ProductVersion", "@LH_VERSION@"
+            VALUE "OriginalFilename", "@CFS_EDITOR@.exe"
+            VALUE "ProductName", "@FS_EDITOR@"
+            VALUE "ProductVersion", "@FS_VERSION@"
         END
     END
     BLOCK "VarFileInfo"

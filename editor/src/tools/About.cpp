@@ -2,7 +2,7 @@
 
 #include "Config.hpp"
 
-namespace lhe {
+namespace fse {
 
 About::About(QObject* parent)
 	: QObject(parent) {}
@@ -10,34 +10,34 @@ About::About(QObject* parent)
 About::~About() {}
 
 QString About::organization() const {
-	return lh::Config::organization;
+	return fsd::Config::organization;
 }
 
 QString About::copyright() const {
-	return lh::Config::copyright;
+	return fsd::Config::copyright;
 }
 
 QString About::year() const {
-	return lh::Config::year;
+	return fsd::Config::year;
 }
 
 QString About::name() const {
-	return lh::Config::name;
+	return fsd::Config::name;
 }
 
 QString About::version() const {
-	return lh::Config::version;
+	return fsd::Config::version;
 }
 
 QString About::github() const {
-	return lh::Config::github;
+	return fsd::Config::github;
 }
 
 QString About::discord() const {
-	return lh::Config::discord;
+	return fsd::Config::discord;
 }
 
 QString About::twitter() const {
-	return lh::Config::twitter;
+	return fsd::Config::twitter;
 }
-} // namespace lhe
+} // namespace fse

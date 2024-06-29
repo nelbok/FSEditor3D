@@ -3,7 +3,7 @@
 #include "Commands.hpp"
 #include "ValueCommand.hpp"
 
-namespace lhe {
+namespace fse {
 
 ModelCommand::ModelCommand(Commands* commands)
 	: QObject(commands)
@@ -13,16 +13,16 @@ ModelCommand::ModelCommand(Commands* commands)
 
 ModelCommand::~ModelCommand() {}
 
-void ModelCommand::setSourcePath(lh::Model* m, const QUrl& newValue) {
-	addValueCommand(_c, m, &lh::Model::setSourcePath, &lh::Model::sourcePath, newValue);
+void ModelCommand::setSourcePath(fsd::Model* m, const QUrl& newValue) {
+	addValueCommand(_c, m, &fsd::Model::setSourcePath, &fsd::Model::sourcePath, newValue);
 }
 
-void ModelCommand::setQmlName(lh::Model* m, const QString& newValue) {
-	addValueCommand(_c, m, &lh::Model::setQmlName, &lh::Model::qmlName, newValue);
+void ModelCommand::setQmlName(fsd::Model* m, const QString& newValue) {
+	addValueCommand(_c, m, &fsd::Model::setQmlName, &fsd::Model::qmlName, newValue);
 }
 
-void ModelCommand::setType(lh::Model* m, lh::Model::Type newValue) {
-	addValueCommand(_c, m, &lh::Model::setType, &lh::Model::type, newValue);
+void ModelCommand::setType(fsd::Model* m, fsd::Model::Type newValue) {
+	addValueCommand(_c, m, &fsd::Model::setType, &fsd::Model::type, newValue);
 }
 
-} // namespace lhe
+} // namespace fse

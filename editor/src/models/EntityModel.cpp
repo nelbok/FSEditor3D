@@ -1,8 +1,8 @@
 #include "EntityModel.hpp"
 
-namespace lhe {
+namespace fse {
 
-EntityModel::EntityModel(lh::Project* project, QObject* parent)
+EntityModel::EntityModel(fsd::Project* project, QObject* parent)
 	: QAbstractListModel(parent)
 	, _project{ project } {
 	assert(_project);
@@ -41,20 +41,20 @@ QHash<int, QByteArray> EntityModel::roleNames() const {
 
 void EntityModel::sortDatas() {
 	beginResetModel();
-	std::sort(_datas.begin(), _datas.end(), [](lh::Entity* p1, lh::Entity* p2) {
+	std::sort(_datas.begin(), _datas.end(), [](fsd::Entity* p1, fsd::Entity* p2) {
 		return p1->name().toLower() < p2->name().toLower();
 	});
 	endResetModel();
 }
 
-void EntityModel::disconnectData(lh::Entity* entity) {
-	disconnect(entity, &lh::Entity::isAliveUpdated, this, &EntityModel::updateDatas);
-	disconnect(entity, &lh::Entity::nameUpdated, this, &EntityModel::sortDatas);
+void EntityModel::disconnectData(fsd::Entity* entity) {
+	disconnect(entity, &fsd::Entity::isAliveUpdated, this, &EntityModel::updateDatas);
+	disconnect(entity, &fsd::Entity::nameUpdated, this, &EntityModel::sortDatas);
 }
 
-void EntityModel::connectData(lh::Entity* entity) {
-	connect(entity, &lh::Entity::isAliveUpdated, this, &EntityModel::updateDatas);
-	connect(entity, &lh::Entity::nameUpdated, this, &EntityModel::sortDatas);
+void EntityModel::connectData(fsd::Entity* entity) {
+	connect(entity, &fsd::Entity::isAliveUpdated, this, &EntityModel::updateDatas);
+	connect(entity, &fsd::Entity::nameUpdated, this, &EntityModel::sortDatas);
 }
 
-} // namespace lhe
+} // namespace fse

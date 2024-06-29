@@ -2,7 +2,7 @@
 
 #include <QtCore/QSortFilterProxyModel>
 
-namespace lhe {
+namespace fse {
 class ProxyModel : public QSortFilterProxyModel {
 	Q_OBJECT
 	Q_PROPERTY(QVariantMap filters READ filters WRITE setFilters NOTIFY filtersUpdated)
@@ -27,4 +27,4 @@ signals:
 	void filtersUpdated();
 };
 
-} // namespace lhe
+} // namespace fse

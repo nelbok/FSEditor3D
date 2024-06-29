@@ -2,7 +2,7 @@
 
 #include <QtCore/QObject>
 
-#include <lh/data/Project.hpp>
+#include <fsd/data/Project.hpp>
 
 #include "commands/CharacterCommand.hpp"
 #include "commands/EntityCommand.hpp"
@@ -13,7 +13,7 @@
 #include "commands/PlacementCommand.hpp"
 #include "commands/ProjectCommand.hpp"
 
-namespace lhe {
+namespace fse {
 class CommandsManager : public QObject {
 	Q_OBJECT
 
@@ -33,7 +33,7 @@ public:
 	CommandsManager(QObject* parent = nullptr);
 	virtual ~CommandsManager();
 
-	void init(lh::Project* project);
+	void init(fsd::Project* project);
 	void reset();
 
 	bool canUndo()const;
@@ -57,4 +57,4 @@ private:
 signals:
 	void updated();
 };
-} // namespace lhe
+} // namespace fse

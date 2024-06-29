@@ -2,9 +2,9 @@
 
 #include <QtCore/QObject>
 
-#include <lh/data/Link.hpp>
+#include <fsd/data/Link.hpp>
 
-namespace lhe {
+namespace fse {
 class Commands;
 
 class LinkCommand : public QObject {
@@ -14,9 +14,9 @@ public:
 	LinkCommand(Commands* commands);
 	virtual ~LinkCommand();
 
-	Q_INVOKABLE void setLink(lh::Link* link, lh::Link* otherlink);
+	Q_INVOKABLE void setLink(fsd::Link* link, fsd::Link* otherlink);
 
 protected:
 	Commands* _c{ nullptr };
 };
-} // namespace lhe
+} // namespace fse

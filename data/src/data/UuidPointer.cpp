@@ -1,12 +1,12 @@
-#include <lh/data/UuidPointer.hpp>
+#include <fsd/data/UuidPointer.hpp>
 
-#include <lh/data/Character.hpp>
-#include <lh/data/Link.hpp>
-#include <lh/data/Model.hpp>
-#include <lh/data/Place.hpp>
-#include <lh/data/Project.hpp>
+#include <fsd/data/Character.hpp>
+#include <fsd/data/Link.hpp>
+#include <fsd/data/Model.hpp>
+#include <fsd/data/Place.hpp>
+#include <fsd/data/Project.hpp>
 
-namespace lh {
+namespace fsd {
 BasePointer::BasePointer(Project* project, void (Project::*signal)(), Entity* parent)
 	: QObject(parent)
 	, _project{ project }
@@ -55,4 +55,4 @@ UuidPointer<Model>* makeModelPointer(Project* project, Entity* parent) {
 UuidPointer<Place>* makePlacePointer(Project* project, Entity* parent) {
 	return new UuidPointer<Place>(project, &Project::places, &Project::placesUpdated, parent);
 }
-} // namespace lh
+} // namespace fsd

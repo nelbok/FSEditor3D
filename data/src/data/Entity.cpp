@@ -1,10 +1,10 @@
-#include <lh/data/Entity.hpp>
+#include <fsd/data/Entity.hpp>
 
-#include <lh/io/Json.hpp>
+#include <fsd/io/Json.hpp>
 
 #include "common/Accessors.hpp"
 
-namespace lh {
+namespace fsd {
 struct Entity::Impl {
 	QUuid uuid{};
 	bool isAlive{ true };
@@ -86,4 +86,4 @@ void Entity::save(QJsonObject& json) const {
 	json[lUuid] = Json::fromUuid(_impl->uuid);
 	json[lName] = _impl->name;
 }
-} // namespace lh
+} // namespace fsd

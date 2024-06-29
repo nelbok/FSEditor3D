@@ -1,9 +1,9 @@
-#include <lh/data/Link.hpp>
+#include <fsd/data/Link.hpp>
 
-#include <lh/data/UuidPointer.hpp>
-#include <lh/io/Json.hpp>
+#include <fsd/data/UuidPointer.hpp>
+#include <fsd/io/Json.hpp>
 
-namespace lh {
+namespace fsd {
 struct Link::Impl {
 	UuidPointer<Link>* link{ nullptr };
 };
@@ -48,4 +48,4 @@ void Link::save(QJsonObject& json) const {
 	Placement::save(json);
 	json[lLink] = Json::fromUuid(_impl->link->uuid());
 }
-} // namespace lh
+} // namespace fsd

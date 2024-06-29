@@ -5,9 +5,9 @@
 #include <QtCore/QString>
 #include <QtCore/QUrl>
 
-#include <lh/data/Model.hpp>
+#include <fsd/data/Model.hpp>
 
-namespace lhe::Tools {
+namespace fse::Tools {
 QString toPath(const QUrl& url);
-std::filesystem::path modelPath(const QUrl& projectPath, lh::Model* model);
-} // namespace lhe::Tools
+std::filesystem::path modelPath(const QUrl& projectPath, fsd::Model* model);
+} // namespace fse::Tools

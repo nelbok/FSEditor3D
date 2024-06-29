@@ -2,11 +2,11 @@
 
 #include <QtTest/QtTest>
 
-#include <lh/data/Character.hpp>
-#include <lh/data/Link.hpp>
-#include <lh/data/Model.hpp>
-#include <lh/data/Place.hpp>
-#include <lh/data/Project.hpp>
+#include <fsd/data/Character.hpp>
+#include <fsd/data/Link.hpp>
+#include <fsd/data/Model.hpp>
+#include <fsd/data/Place.hpp>
+#include <fsd/data/Project.hpp>
 
 struct TestCompare {
 	TestCompare(bool isSame)
@@ -14,7 +14,7 @@ struct TestCompare {
 
 	virtual ~TestCompare() = default;
 
-	void testCharacter(lh::Character* left, lh::Character* right) {
+	void testCharacter(fsd::Character* left, fsd::Character* right) {
 		testPlacement(left, right);
 
 		QCOMPARE(left->hair(), right->hair());
@@ -25,7 +25,7 @@ struct TestCompare {
 		QCOMPARE(left->gender(), right->gender());
 	}
 
-	void testEntity(lh::Entity* left, lh::Entity* right) {
+	void testEntity(fsd::Entity* left, fsd::Entity* right) {
 		if (_isSame) {
 			QCOMPARE(left->uuid(), right->uuid());
 			QCOMPARE(left->name(), right->name());
@@ -35,13 +35,13 @@ struct TestCompare {
 		}
 	}
 
-	void testLink(lh::Link* left, lh::Link* right) {
+	void testLink(fsd::Link* left, fsd::Link* right) {
 		testPlacement(left, right);
 
 		testUuidPointer(left->link(), right->link());
 	}
 
-	void testModel(lh::Model* left, lh::Model* right) {
+	void testModel(fsd::Model* left, fsd::Model* right) {
 		testEntity(left, right);
 
 		QCOMPARE(left->sourcePath(), right->sourcePath());
@@ -49,17 +49,17 @@ struct TestCompare {
 		QCOMPARE(left->type(), right->type());
 	}
 
-	void testObject(lh::Object* left, lh::Object* right) {
+	void testObject(fsd::Object* left, fsd::Object* right) {
 		testEntity(left, right);
 
 		testUuidPointer(left->model(), right->model());
 	}
 
-	void testPlace(lh::Place* left, lh::Place* right) {
+	void testPlace(fsd::Place* left, fsd::Place* right) {
 		testObject(left, right);
 	}
 
-	void testPlacement(lh::Placement* left, lh::Placement* right) {
+	void testPlacement(fsd::Placement* left, fsd::Placement* right) {
 		testObject(left, right);
 
 		QCOMPARE(left->position(), right->position());
@@ -67,7 +67,7 @@ struct TestCompare {
 		testUuidPointer(left->place(), right->place());
 	}
 
-	void testProject(lh::Project* left, lh::Project* right) {
+	void testProject(fsd::Project* left, fsd::Project* right) {
 		testEntity(left, right);
 
 		testUuidPointer(left->defaultPlace(), right->defaultPlace());
@@ -109,7 +109,7 @@ struct TestCompare {
 		}
 	}
 
-	void testUuidPointer(lh::Entity* left, lh::Entity* right) {
+	void testUuidPointer(fsd::Entity* left, fsd::Entity* right) {
 		bool isLeftValid = left != nullptr;
 		bool isRightValid = right != nullptr;
 		QCOMPARE(isLeftValid, isRightValid);

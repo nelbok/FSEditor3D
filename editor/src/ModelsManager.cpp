@@ -1,6 +1,6 @@
 #include "ModelsManager.hpp"
 
-namespace lhe {
+namespace fse {
 
 struct ModelsManager::Impl {
 	CharacterModel* characterModel{ nullptr };
@@ -16,7 +16,7 @@ ModelsManager::ModelsManager(QObject* parent)
 ModelsManager::~ModelsManager() {
 }
 
-void ModelsManager::init(lh::Project* project) {
+void ModelsManager::init(fsd::Project* project) {
 	assert(project);
 
 	_impl->characterModel = new CharacterModel(project, this);
@@ -49,4 +49,4 @@ PlaceModel* ModelsManager::placeModel() const {
 	assert(_impl->placeModel);
 	return _impl->placeModel;
 }
-} // namespace lhe
+} // namespace fse

@@ -2,14 +2,14 @@
 
 #include <QtCore/QObject>
 
-#include <lh/data/Project.hpp>
+#include <fsd/data/Project.hpp>
 
 #include "models/CharacterModel.hpp"
 #include "models/LinkModel.hpp"
 #include "models/ModelModel.hpp"
 #include "models/PlaceModel.hpp"
 
-namespace lhe {
+namespace fse {
 class ModelsManager : public QObject {
 	Q_OBJECT
 	Q_PROPERTY(CharacterModel* characterModel READ characterModel CONSTANT)
@@ -21,7 +21,7 @@ public:
 	ModelsManager(QObject* parent = nullptr);
 	virtual ~ModelsManager();
 
-	void init(lh::Project* project);
+	void init(fsd::Project* project);
 
 	CharacterModel* characterModel() const;
 	LinkModel* linkModel() const;
@@ -32,4 +32,4 @@ private:
 	struct Impl;
 	std::unique_ptr<Impl> _impl;
 };
-} // namespace lhe
+} // namespace fse

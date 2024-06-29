@@ -1,4 +1,4 @@
-#include <lh/io/FileManager.hpp>
+#include <fsd/io/FileManager.hpp>
 
 #include <QtCore/QCoreApplication>
 #include <QtCore/QFile>
@@ -8,9 +8,9 @@
 #include <QtCore/QThread>
 #include <QtCore/QUrl>
 
-#include <lh/data/Project.hpp>
+#include <fsd/data/Project.hpp>
 
-namespace lh {
+namespace fsd {
 
 class FileManager::Impl : public QThread {
 public:
@@ -163,4 +163,4 @@ FileManager::Result FileManager::result() const {
 void FileManager::requestInterruption() {
 	_impl->requestInterruption();
 }
-} // namespace lh
+} // namespace fsd

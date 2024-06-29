@@ -2,7 +2,7 @@
 
 #include "BaseCommand.hpp"
 
-namespace lhe {
+namespace fse {
 
 class ListCommand : public BaseCommand {
 public:
@@ -139,4 +139,4 @@ void Commands::clear(QList<BaseCommand*>& commands) {
 	commands.clear();
 }
 
-} // namespace lhe
+} // namespace fse

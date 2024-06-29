@@ -1,6 +1,6 @@
 #include "BaseCommand.hpp"
 
-namespace lhe {
+namespace fse {
 BaseCommand::BaseCommand(QObject* parent)
 	: QObject(parent) {}
-} // namespace lhe
+} // namespace fse

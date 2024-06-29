@@ -1,10 +1,10 @@
-#include <lh/data/Character.hpp>
+#include <fsd/data/Character.hpp>
 
-#include <lh/io/Json.hpp>
+#include <fsd/io/Json.hpp>
 
 #include "common/Accessors.hpp"
 
-namespace lh {
+namespace fsd {
 struct Character::Impl {
 	QColor hair{};
 	QColor skin{};
@@ -114,4 +114,4 @@ void Character::save(QJsonObject& json) const {
 	json[lSpecies] = static_cast<int>(_impl->species);
 	json[lGender] = static_cast<int>(_impl->gender);
 }
-} // namespace lh
+} // namespace fsd

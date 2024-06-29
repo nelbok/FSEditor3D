@@ -1,17 +1,17 @@
 #pragma once
 
-#include <lh/data/Project.hpp>
+#include <fsd/data/Project.hpp>
 
 #include "BaseCommand.hpp"
 
-namespace lhe {
+namespace fse {
 template<typename TClass>
 class CreateCommand : public BaseCommand {
 public:
-	using CreateFunc = TClass* (lh::Project::*) ();
-	using RemoveFunc = void (lh::Project::*)(TClass*);
+	using CreateFunc = TClass* (fsd::Project::*) ();
+	using RemoveFunc = void (fsd::Project::*)(TClass*);
 
-	CreateCommand(lh::Project* project, CreateFunc create, RemoveFunc remove)
+	CreateCommand(fsd::Project* project, CreateFunc create, RemoveFunc remove)
 		: _project{ project }
 		, _create{ create }
 		, _remove{ remove } {
@@ -42,9 +42,9 @@ public:
 	}
 
 private:
-	lh::Project* _project{ nullptr };
+	fsd::Project* _project{ nullptr };
 	CreateFunc _create{ nullptr };
 	RemoveFunc _remove{ nullptr };
 	TClass* _instance{ nullptr };
 };
-} // namespace lhe
+} // namespace fse

@@ -2,16 +2,16 @@
 
 #include <QtTest/QtTest>
 
-#include <lh/data/Character.hpp>
-#include <lh/data/Link.hpp>
-#include <lh/data/Model.hpp>
-#include <lh/data/Place.hpp>
-#include <lh/data/Project.hpp>
+#include <fsd/data/Character.hpp>
+#include <fsd/data/Link.hpp>
+#include <fsd/data/Model.hpp>
+#include <fsd/data/Place.hpp>
+#include <fsd/data/Project.hpp>
 
 #include "TestCompare.hpp"
 
 struct TestIO {
-	TestIO(lh::Project* p1, lh::Project* p2)
+	TestIO(fsd::Project* p1, fsd::Project* p2)
 		: _p1{ p1 }
 		, _p2{ p2 } {}
 
@@ -29,8 +29,8 @@ struct TestIO {
 	}
 
 private:
-	lh::Project* _p1{ nullptr };
-	lh::Project* _p2{ nullptr };
+	fsd::Project* _p1{ nullptr };
+	fsd::Project* _p2{ nullptr };
 	QJsonObject _json{};
 
 	void init() {

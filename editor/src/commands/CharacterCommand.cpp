@@ -3,7 +3,7 @@
 #include "Commands.hpp"
 #include "ValueCommand.hpp"
 
-namespace lhe {
+namespace fse {
 
 CharacterCommand::CharacterCommand(Commands* commands)
 	: QObject(commands)
@@ -13,28 +13,28 @@ CharacterCommand::CharacterCommand(Commands* commands)
 
 CharacterCommand::~CharacterCommand() {}
 
-void CharacterCommand::setHair(lh::Character* c, const QColor& newValue) {
-	addValueCommand(_c, c, &lh::Character::setHair, &lh::Character::hair, newValue);
+void CharacterCommand::setHair(fsd::Character* c, const QColor& newValue) {
+	addValueCommand(_c, c, &fsd::Character::setHair, &fsd::Character::hair, newValue);
 }
 
-void CharacterCommand::setSkin(lh::Character* c, const QColor& newValue) {
-	addValueCommand(_c, c, &lh::Character::setSkin, &lh::Character::skin, newValue);
+void CharacterCommand::setSkin(fsd::Character* c, const QColor& newValue) {
+	addValueCommand(_c, c, &fsd::Character::setSkin, &fsd::Character::skin, newValue);
 }
 
-void CharacterCommand::setClothes(lh::Character* c, const QColor& newValue) {
-	addValueCommand(_c, c, &lh::Character::setClothes, &lh::Character::clothes, newValue);
+void CharacterCommand::setClothes(fsd::Character* c, const QColor& newValue) {
+	addValueCommand(_c, c, &fsd::Character::setClothes, &fsd::Character::clothes, newValue);
 }
 
-void CharacterCommand::setHeight(lh::Character* c, quint8 newValue) {
-	addValueCommand(_c, c, &lh::Character::setHeight, &lh::Character::height, newValue);
+void CharacterCommand::setHeight(fsd::Character* c, quint8 newValue) {
+	addValueCommand(_c, c, &fsd::Character::setHeight, &fsd::Character::height, newValue);
 }
 
-void CharacterCommand::setSpecies(lh::Character* c, lh::Character::Species newValue) {
-	addValueCommand(_c, c, &lh::Character::setSpecies, &lh::Character::species, newValue);
+void CharacterCommand::setSpecies(fsd::Character* c, fsd::Character::Species newValue) {
+	addValueCommand(_c, c, &fsd::Character::setSpecies, &fsd::Character::species, newValue);
 }
 
-void CharacterCommand::setGender(lh::Character* c, lh::Character::Gender newValue) {
-	addValueCommand(_c, c, &lh::Character::setGender, &lh::Character::gender, newValue);
+void CharacterCommand::setGender(fsd::Character* c, fsd::Character::Gender newValue) {
+	addValueCommand(_c, c, &fsd::Character::setGender, &fsd::Character::gender, newValue);
 }
 
-} // namespace lhe
+} // namespace fse
