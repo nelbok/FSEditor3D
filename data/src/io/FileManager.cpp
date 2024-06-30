@@ -1,5 +1,7 @@
 #include <fsd/io/FileManager.hpp>
 
+#include <exception>
+
 #include <QtCore/QCoreApplication>
 #include <QtCore/QFile>
 #include <QtCore/QJsonDocument>
@@ -113,7 +115,16 @@ private:
 
 		// Read project
 		_project->blockSignals(true);
-		_project->load(QJsonDocument::fromJson(file.readAll()).object());
+		try {
+			const auto& document = QJsonDocument::fromJson(file.readAll());
+			if (document.isNull()) {
+				throw std::exception("Invalid document");
+			}
+			_project->load(document.object());
+		} catch (...) {
+			_project->reset();
+			_result = Result::Error;
+		}
 		file.close();
 
 		if (isInterruptionRequested()) {

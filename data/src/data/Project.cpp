@@ -36,7 +36,9 @@ struct Project::Impl {
 		list.clear();
 		const auto& jsonArray = Json::toArray(key, json);
 		for (const auto& jsonEntity : jsonArray) {
-			assert(jsonEntity.isObject());
+			if (!jsonEntity.isObject()) {
+				throw std::exception("JSON isn't an object");
+			}
 			auto* entity = new TClass(project);
 			entity->load(jsonEntity.toObject());
 			list.append(entity);
