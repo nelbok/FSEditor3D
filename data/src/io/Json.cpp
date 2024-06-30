@@ -1,47 +1,47 @@
 #include <fsd/io/Json.hpp>
 
-#include <exception>
+#include <stdexcept>
 
 namespace fsd::Json {
 // Common
 QJsonValue toValue(const QString& key, const QJsonObject& json) {
 	if (!json.contains(key)) {
-		throw std::exception("JSON doesn't contain the key");
+		throw std::runtime_error("JSON doesn't contain the key");
 	}
 	return json[key];
 }
 
 QJsonObject toObject(const QString& key, const QJsonObject& json) {
 	if (!json.contains(key)) {
-		throw std::exception("JSON doesn't contain the key or the value isn't an object");
+		throw std::runtime_error("JSON doesn't contain the key or the value isn't an object");
 	}
 	return json[key].toObject();
 }
 
 QJsonArray toArray(const QString& key, const QJsonObject& json) {
 	if (!json.contains(key)) {
-		throw std::exception("JSON doesn't contain the key or the value isn't an array");
+		throw std::runtime_error("JSON doesn't contain the key or the value isn't an array");
 	}
 	return json[key].toArray();
 }
 
 QString toString(const QString& key, const QJsonObject& json) {
 	if (!json.contains(key)) {
-		throw std::exception("JSON doesn't contain the key or the value isn't a string");
+		throw std::runtime_error("JSON doesn't contain the key or the value isn't a string");
 	}
 	return json[key].toString();
 }
 
 int toInt(const QString& key, const QJsonObject& json) {
 	if (!json.contains(key)) {
-		throw std::exception("JSON doesn't contain the key or the value isn't an integer");
+		throw std::runtime_error("JSON doesn't contain the key or the value isn't an integer");
 	}
 	return json[key].toInt();
 }
 
 double toDouble(const QString& key, const QJsonObject& json) {
 	if (!json.contains(key)) {
-		throw std::exception("JSON doesn't contain the key or the value isn't a double");
+		throw std::runtime_error("JSON doesn't contain the key or the value isn't a double");
 	}
 	return json[key].toDouble();
 }
@@ -49,7 +49,7 @@ double toDouble(const QString& key, const QJsonObject& json) {
 // Qt classes
 QUrl toUrl(const QJsonValue& json) {
 	if (!json.toVariant().isValid()) {
-		throw std::exception("JSON isn't a valid url");
+		throw std::runtime_error("JSON isn't a valid url");
 	}
 	assert(json.toVariant().isValid());
 	return json.toVariant().toUrl();

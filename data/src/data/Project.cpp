@@ -1,5 +1,7 @@
 #include <fsd/data/Project.hpp>
 
+#include <stdexcept>
+
 #include <QtCore/QCoreApplication>
 #include <QtCore/QThread>
 
@@ -37,7 +39,7 @@ struct Project::Impl {
 		const auto& jsonArray = Json::toArray(key, json);
 		for (const auto& jsonEntity : jsonArray) {
 			if (!jsonEntity.isObject()) {
-				throw std::exception("JSON isn't an object");
+				throw std::runtime_error("JSON isn't an object");
 			}
 			auto* entity = new TClass(project);
 			entity->load(jsonEntity.toObject());

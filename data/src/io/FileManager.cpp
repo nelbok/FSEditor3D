@@ -1,6 +1,6 @@
 #include <fsd/io/FileManager.hpp>
 
-#include <exception>
+#include <stdexcept>
 
 #include <QtCore/QCoreApplication>
 #include <QtCore/QFile>
@@ -118,7 +118,7 @@ private:
 		try {
 			const auto& document = QJsonDocument::fromJson(file.readAll());
 			if (document.isNull()) {
-				throw std::exception("Invalid document");
+				throw std::runtime_error("Invalid document");
 			}
 			_project->load(document.object());
 		} catch (...) {
