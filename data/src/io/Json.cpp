@@ -12,38 +12,45 @@ QJsonValue toValue(const QString& key, const QJsonObject& json) {
 }
 
 QJsonObject toObject(const QString& key, const QJsonObject& json) {
-	if (!json.contains(key)) {
+	if (!json.contains(key) || !json[key].isObject()) {
 		throw std::runtime_error("JSON doesn't contain the key or the value isn't an object");
 	}
 	return json[key].toObject();
 }
 
 QJsonArray toArray(const QString& key, const QJsonObject& json) {
-	if (!json.contains(key)) {
+	if (!json.contains(key) || !json[key].isArray()) {
 		throw std::runtime_error("JSON doesn't contain the key or the value isn't an array");
 	}
 	return json[key].toArray();
 }
 
 QString toString(const QString& key, const QJsonObject& json) {
-	if (!json.contains(key)) {
+	if (!json.contains(key) || !json[key].isString()) {
 		throw std::runtime_error("JSON doesn't contain the key or the value isn't a string");
 	}
 	return json[key].toString();
 }
 
 int toInt(const QString& key, const QJsonObject& json) {
-	if (!json.contains(key)) {
+	if (!json.contains(key) || !json[key].isDouble()) {
 		throw std::runtime_error("JSON doesn't contain the key or the value isn't an integer");
 	}
 	return json[key].toInt();
 }
 
 double toDouble(const QString& key, const QJsonObject& json) {
-	if (!json.contains(key)) {
+	if (!json.contains(key) || !json[key].isDouble()) {
 		throw std::runtime_error("JSON doesn't contain the key or the value isn't a double");
 	}
 	return json[key].toDouble();
+}
+
+bool toBool(const QString& key, const QJsonObject& json) {
+	if (!json.contains(key) || !json[key].toBool()) {
+		throw std::runtime_error("JSON doesn't contain the key or the value isn't a bool");
+	}
+	return json[key].toBool();
 }
 
 // Qt classes

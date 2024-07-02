@@ -5,8 +5,8 @@
 
 namespace fse {
 
-class About : public QObject {
-	Q_OBJECT
+class About {
+	Q_GADGET
 	Q_PROPERTY(QString organization READ organization CONSTANT)
 	Q_PROPERTY(QString copyright READ copyright CONSTANT)
 	Q_PROPERTY(QString year READ year CONSTANT)
@@ -17,9 +17,6 @@ class About : public QObject {
 	Q_PROPERTY(QString twitter READ twitter CONSTANT)
 
 public:
-	About(QObject* parent = nullptr);
-	virtual ~About();
-
 	QString organization() const;
 	QString copyright() const;
 	QString year() const;

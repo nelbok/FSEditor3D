@@ -3,12 +3,6 @@
 #include "Config.hpp"
 
 namespace fse {
-
-About::About(QObject* parent)
-	: QObject(parent) {}
-
-About::~About() {}
-
 QString About::organization() const {
 	return fsd::Config::organization;
 }

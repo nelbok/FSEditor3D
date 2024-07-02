@@ -20,6 +20,7 @@ QJsonArray toArray(const QString& key, const QJsonObject& json);
 QString toString(const QString& key, const QJsonObject& json);
 int toInt(const QString& key, const QJsonObject& json);
 double toDouble(const QString& key, const QJsonObject& json);
+bool toBool(const QString& key, const QJsonObject& json);
 
 // Qt classes
 QUrl toUrl(const QJsonValue& json);
