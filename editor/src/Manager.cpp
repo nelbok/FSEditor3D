@@ -12,8 +12,9 @@
 namespace fse {
 
 struct Manager::Impl {
-	About* about{ nullptr };
+	About about;
 	Balsam* balsam{ nullptr };
+	Style style;
 	fsd::Project* project{ nullptr };
 
 	QUrl tmpPath{};
@@ -37,7 +38,6 @@ Manager::~Manager() {
 void Manager::init() {
 	assert(!_impl->project);
 
-	_impl->about = new About(this);
 	_impl->balsam = new Balsam(this);
 	_impl->project = new fsd::Project(this);
 
@@ -100,14 +100,17 @@ void Manager::requestFileTransactionInterruption() {
 	}
 }
 
-About* Manager::about() const {
-	assert(_impl->about);
+const About& Manager::about() const {
 	return _impl->about;
 }
 
 Balsam* Manager::balsam() const {
 	assert(_impl->balsam);
 	return _impl->balsam;
+}
+
+const Style& Manager::style() const {
+	return _impl->style;
 }
 
 fsd::Project* Manager::project() const {

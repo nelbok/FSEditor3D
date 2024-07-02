@@ -8,6 +8,7 @@
 
 #include "tools/About.hpp"
 #include "tools/Balsam.hpp"
+#include "tools/Style.hpp"
 
 namespace fse {
 class CommandsManager;
@@ -15,8 +16,9 @@ class ModelsManager;
 
 class Manager : public QObject {
 	Q_OBJECT
-	Q_PROPERTY(About* about READ about CONSTANT)
+	Q_PROPERTY(About about READ about CONSTANT)
 	Q_PROPERTY(Balsam* balsam READ balsam CONSTANT)
+	Q_PROPERTY(Style style READ style CONSTANT)
 	Q_PROPERTY(fsd::Project* project READ project CONSTANT)
 	Q_PROPERTY(QUrl path READ path WRITE setPath NOTIFY pathUpdated)
 
@@ -31,8 +33,9 @@ public:
 	Q_INVOKABLE void save(const QUrl& url);
 	Q_INVOKABLE void requestFileTransactionInterruption();
 
-	About* about() const;
+	const About& about() const;
 	Balsam* balsam() const;
+	const Style& style() const;
 	fsd::Project* project() const;
 
 	const QUrl& tmpPath() const;

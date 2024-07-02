@@ -44,10 +44,10 @@ ColumnLayout {
     }
 
     Rectangle {
-        border.color: FSEStyle.list.border.color
-        border.width: FSEStyle.list.border.width
-        color: FSEStyle.list.color
-        radius: FSEStyle.list.radius
+        border.color: MyManager.style.list.border.normal
+        border.width: MyManager.style.list.border.width
+        color: MyManager.style.list.normal
+        radius: MyManager.style.list.radius
 
         width: 180
         height: 180
@@ -68,10 +68,10 @@ ColumnLayout {
                     anchors.leftMargin: 10
                     text: name
 
-                    color: FSEStyle.foreground.normal
-                    font.bold: FSEStyle.normalFont.bold
-                    font.italic: FSEStyle.normalFont.italic
-                    font.pointSize: FSEStyle.normalFont.pointSize
+                    color: MyManager.style.foreground.normal
+                    font.bold: MyManager.style.normalFont.bold
+                    font.italic: MyManager.style.normalFont.italic
+                    font.pointSize: MyManager.style.normalFont.pointSize
 
                     verticalAlignment: Text.AlignVCenter
                     MouseArea {
@@ -86,9 +86,9 @@ ColumnLayout {
             highlight: Item {
                 Rectangle {
                     anchors.fill: parent
-                    anchors.margins: FSEStyle.list.border.width
+                    anchors.margins: MyManager.style.list.border.width
 
-                    color: FSEStyle.list.highlight
+                    color: MyManager.style.list.selected
                 }
             }
 

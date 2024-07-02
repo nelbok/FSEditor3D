@@ -28,14 +28,14 @@ RowLayout {
         Layout.preferredWidth: 175
 
         editable: true
-        palette.text: FSEStyle.foreground.normal
-        palette.base: FSEStyle.textfield.color // Background color
-        palette.button: FSEStyle.textfield.disabled // Background color disabled & border color
-        palette.mid: FSEStyle.textfield.disabled // Indicator color disabled
+        palette.text: MyManager.style.foreground.normal
+        palette.base: MyManager.style.textfield.color // Background color
+        palette.button: MyManager.style.textfield.disabled // Background color disabled & border color
+        palette.mid: MyManager.style.textfield.disabled // Indicator color disabled
         palette.highlight: "transparent"
-        font.bold: FSEStyle.normalFont.bold
-        font.italic: FSEStyle.normalFont.italic
-        font.pointSize: FSEStyle.normalFont.pointSize
+        font.bold: MyManager.style.normalFont.bold
+        font.italic: MyManager.style.normalFont.italic
+        font.pointSize: MyManager.style.normalFont.pointSize
 
         onValueChanged: root.valueModified()
     }

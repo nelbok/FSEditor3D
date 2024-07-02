@@ -42,10 +42,10 @@ FSERectangle {
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
 
-        color: FSEStyle.foreground.normal
-        font.bold: FSEStyle.subTitleFont.bold
-        font.italic: FSEStyle.subTitleFont.italic
-        font.pointSize: FSEStyle.subTitleFont.pointSize
+        color: MyManager.style.foreground.normal
+        font.bold: MyManager.style.subTitleFont.bold
+        font.italic: MyManager.style.subTitleFont.italic
+        font.pointSize: MyManager.style.subTitleFont.pointSize
     }
 
     RowLayout {

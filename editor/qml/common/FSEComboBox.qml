@@ -33,13 +33,13 @@ RowLayout {
         valueRole: "uuid"
         textRole: "name"
 
-        palette.text: FSEStyle.foreground.normal // Foreground popup
-        palette.buttonText: FSEStyle.foreground.normal // Foreground text
-        palette.button: (enabled) ? FSEStyle.textfield.color : FSEStyle.textfield.disabled // Background color
-        palette.mid: FSEStyle.textfield.color // Background color when popup shown
-        font.bold: FSEStyle.normalFont.bold
-        font.italic: FSEStyle.normalFont.italic
-        font.pointSize: FSEStyle.normalFont.pointSize
+        palette.text: MyManager.style.foreground.normal // Foreground popup
+        palette.buttonText: MyManager.style.foreground.normal // Foreground text
+        palette.button: (enabled) ? MyManager.style.textfield.color : MyManager.style.textfield.disabled // Background color
+        palette.mid: MyManager.style.textfield.color // Background color when popup shown
+        font.bold: MyManager.style.normalFont.bold
+        font.italic: MyManager.style.normalFont.italic
+        font.pointSize: MyManager.style.normalFont.pointSize
 
         onActivated: root.activated()
     }

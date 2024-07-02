@@ -47,6 +47,8 @@ set(PROJECT_SOURCES
 	src/tools/Balsam.hpp
 	src/tools/SaveThread.cpp
 	src/tools/SaveThread.hpp
+	src/tools/Style.cpp
+	src/tools/Style.hpp
 	src/tools/Tools.cpp
 	src/tools/Tools.hpp
 
