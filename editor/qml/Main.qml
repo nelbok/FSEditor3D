@@ -24,13 +24,15 @@ Window {
                 return links.myData.model
             return null
         }
+
+        enabled: !(progress.visible || message.visible)
     }
 
     FSEProject {
         anchors.top: menu.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
-        enabled: (menu.selected === FSEMenu.ModuleType.Project)
+        enabled: (menu.selected === FSEMenu.ModuleType.Project) && !(progress.visible || message.visible)
     }
 
     FSEModels {
@@ -39,7 +41,7 @@ Window {
         anchors.top: menu.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
-        enabled: (menu.selected === FSEMenu.ModuleType.Models)
+        enabled: (menu.selected === FSEMenu.ModuleType.Models) && !(progress.visible || message.visible)
     }
 
     FSEPlaces {
@@ -48,7 +50,7 @@ Window {
         anchors.top: menu.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
-        enabled: (menu.selected === FSEMenu.ModuleType.Places)
+        enabled: (menu.selected === FSEMenu.ModuleType.Places) && !(progress.visible || message.visible)
     }
 
     FSECharacters {
@@ -57,7 +59,7 @@ Window {
         anchors.top: menu.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
-        enabled: (menu.selected === FSEMenu.ModuleType.Characters)
+        enabled: (menu.selected === FSEMenu.ModuleType.Characters) && !(progress.visible || message.visible)
     }
 
     FSELinks {
@@ -66,7 +68,7 @@ Window {
         anchors.top: menu.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
-        enabled: (menu.selected === FSEMenu.ModuleType.Links)
+        enabled: (menu.selected === FSEMenu.ModuleType.Links) && !(progress.visible || message.visible)
     }
 
     FSEMenu {
@@ -75,6 +77,8 @@ Window {
         anchors.top: parent.top
         anchors.topMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
+
+        enabled: !(progress.visible || message.visible)
     }
 
     FSEToolBar {
@@ -82,6 +86,8 @@ Window {
         anchors.topMargin: 10
         anchors.right: menu.left
         anchors.rightMargin: 10
+
+        enabled: !(progress.visible || message.visible)
     }
 
     Connections {

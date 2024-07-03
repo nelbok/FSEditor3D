@@ -5,12 +5,12 @@
 namespace fse {
 class Manager;
 
-class SaveThread : public FileThread {
+class LoadThread : public FileThread {
 	Q_OBJECT
 
 public:
-	SaveThread(Manager* manager);
-	virtual ~SaveThread();
+	LoadThread(Manager* manager);
+	virtual ~LoadThread();
 
 protected:
 	virtual void run() override;

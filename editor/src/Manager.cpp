@@ -4,6 +4,7 @@
 
 #include "Config.hpp"
 
+#include "tools/LoadThread.hpp"
 #include "tools/SaveThread.hpp"
 
 #include "CommandsManager.hpp"
@@ -20,11 +21,25 @@ struct Manager::Impl {
 	QUrl tmpPath{};
 	QUrl oldPath{};
 	QUrl path{};
-	fsd::FileManager* loadThread{ nullptr };
-	fse::SaveThread* saveThread{ nullptr };
+	fse::FileThread* fileThread{ nullptr };
 
 	CommandsManager* commandsManager{ nullptr };
 	ModelsManager* modelsManager{ nullptr };
+
+	template<class T>
+	void manageFile(Manager* manager, const QUrl& url) {
+		static_assert(std::is_base_of<fse::FileThread, T>::value, "T must inherit from fse::FileThread");
+		manager->setPath(url);
+		fileThread = new T(manager);
+		fileThread->init();
+		emit manager->beginFileTransaction();
+		manager->connect(fileThread, &T::finished, manager, [this, manager]() {
+			emit manager->endFileTransaction(fileThread->result());
+			fileThread->deleteLater();
+			fileThread = nullptr;
+		});
+		fileThread->start();
+	}
 };
 
 Manager::Manager(QObject* parent)
@@ -67,37 +82,16 @@ void Manager::reset() {
 
 void Manager::load(const QUrl& url) {
 	reset();
-	setPath(url);
-	_impl->loadThread = new fsd::FileManager(this);
-	_impl->loadThread->init(_impl->project, fsd::FileManager::Type::Load, url);
-	emit beginFileTransaction();
-	connect(_impl->loadThread, &fsd::FileManager::finished, this, [this]() {
-		emit endFileTransaction(_impl->loadThread->result());
-		_impl->loadThread->deleteLater();
-	});
-	_impl->loadThread->start();
+	_impl->manageFile<fse::LoadThread>(this, url);
 }
 
 void Manager::save(const QUrl& url) {
-	setPath(url);
-	_impl->saveThread = new fse::SaveThread(this);
-	_impl->saveThread->init();
-	emit beginFileTransaction();
-	connect(_impl->saveThread, &fse::SaveThread::finished, this, [this]() {
-		//emit endFileTransaction(_impl->saveThread->result());
-		emit endFileTransaction(fsd::FileManager::Result::Success);
-		_impl->saveThread->deleteLater();
-		_impl->saveThread = nullptr;
-	});
-	_impl->saveThread->start();
+	_impl->manageFile<fse::SaveThread>(this, url);
 }
 
 void Manager::requestFileTransactionInterruption() {
-	if (_impl->loadThread) {
-		_impl->loadThread->requestInterruption();
-	} else if (_impl->saveThread) {
-		_impl->saveThread->requestInterruption();
-	}
+	assert(_impl->fileThread);
+	_impl->fileThread->requestInterruption();
 }
 
 const About& Manager::about() const {

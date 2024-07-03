@@ -47,7 +47,7 @@ double toDouble(const QString& key, const QJsonObject& json) {
 }
 
 bool toBool(const QString& key, const QJsonObject& json) {
-	if (!json.contains(key) || !json[key].toBool()) {
+	if (!json.contains(key) || !json[key].isBool()) {
 		throw std::runtime_error("JSON doesn't contain the key or the value isn't a bool");
 	}
 	return json[key].toBool();

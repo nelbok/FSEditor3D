@@ -45,6 +45,10 @@ set(PROJECT_SOURCES
 	src/tools/About.hpp
 	src/tools/Balsam.cpp
 	src/tools/Balsam.hpp
+	src/tools/FileThread.cpp
+	src/tools/FileThread.hpp
+	src/tools/LoadThread.cpp
+	src/tools/LoadThread.hpp
 	src/tools/SaveThread.cpp
 	src/tools/SaveThread.hpp
 	src/tools/Style.cpp
