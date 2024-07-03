@@ -11,12 +11,12 @@ FSERectangle {
     height: 40
 
     border.color: {
-        if (!enabled) return MyManager.style.module.border.disabled
-        if (mouseArea.containsMouse) return MyManager.style.module.border.hovered
-        if (selected) return MyManager.style.module.border.selected;
-        return MyManager.style.module.border.normal
+        if (!enabled) return MyStyles.current.module.border.disabled
+        if (mouseArea.containsMouse) return MyStyles.current.module.border.hovered
+        if (selected) return MyStyles.current.module.border.selected;
+        return MyStyles.current.module.border.normal
     }
-    color: MyManager.style.button.normal
+    color: MyStyles.current.button.normal
 
     Text {
         id: label
@@ -26,10 +26,10 @@ FSERectangle {
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
 
-        color: (enabled) ? MyManager.style.foreground.normal : MyManager.style.foreground.disabled
-        font.bold: MyManager.style.normalFont.bold
-        font.italic: MyManager.style.normalFont.italic
-        font.pointSize: MyManager.style.normalFont.pointSize
+        color: (enabled) ? MyStyles.current.foreground.normal : MyStyles.current.foreground.disabled
+        font.bold: MyStyles.current.normalFont.bold
+        font.italic: MyStyles.current.normalFont.italic
+        font.pointSize: MyStyles.current.normalFont.pointSize
     }
     MouseArea {
         id: mouseArea

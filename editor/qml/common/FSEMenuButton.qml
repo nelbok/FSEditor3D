@@ -6,5 +6,5 @@ FSEButton {
     width: 175
     height: 40
 
-    color: MyManager.style.button.alternative
+    color: MyStyles.current.button.alternative
 }

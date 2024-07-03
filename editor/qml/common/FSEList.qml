@@ -44,10 +44,10 @@ ColumnLayout {
     }
 
     Rectangle {
-        border.color: MyManager.style.list.border.normal
-        border.width: MyManager.style.list.border.width
-        color: MyManager.style.list.normal
-        radius: MyManager.style.list.radius
+        border.color: MyStyles.current.list.border.normal
+        border.width: MyStyles.current.list.border.width
+        color: MyStyles.current.list.normal
+        radius: MyStyles.current.list.radius
 
         width: 180
         height: 180
@@ -68,10 +68,10 @@ ColumnLayout {
                     anchors.leftMargin: 10
                     text: name
 
-                    color: MyManager.style.foreground.normal
-                    font.bold: MyManager.style.normalFont.bold
-                    font.italic: MyManager.style.normalFont.italic
-                    font.pointSize: MyManager.style.normalFont.pointSize
+                    color: MyStyles.current.foreground.normal
+                    font.bold: MyStyles.current.normalFont.bold
+                    font.italic: MyStyles.current.normalFont.italic
+                    font.pointSize: MyStyles.current.normalFont.pointSize
 
                     verticalAlignment: Text.AlignVCenter
                     MouseArea {
@@ -86,9 +86,9 @@ ColumnLayout {
             highlight: Item {
                 Rectangle {
                     anchors.fill: parent
-                    anchors.margins: MyManager.style.list.border.width
+                    anchors.margins: MyStyles.current.list.border.width
 
-                    color: MyManager.style.list.selected
+                    color: MyStyles.current.list.selected
                 }
             }
 

@@ -5,7 +5,7 @@
 #include <fsd/data/Model.hpp>
 #include <fsd/data/Place.hpp>
 
-#include "../CommandsManager.hpp"
+#include "managers/CommandsManager.hpp"
 #include "CreateCommand.hpp"
 #include "Commands.hpp"
 #include "DuplicateCommand.hpp"

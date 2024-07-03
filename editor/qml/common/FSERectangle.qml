@@ -3,8 +3,8 @@ import QtQuick
 import editor
 
 Rectangle {
-    border.color: MyManager.style.module.border.normal
-    border.width: MyManager.style.module.border.width
-    color: MyManager.style.module.normal
-    radius: MyManager.style.module.radius
+    border.color: MyStyles.current.module.border.normal
+    border.width: MyStyles.current.module.border.width
+    color: MyStyles.current.module.normal
+    radius: MyStyles.current.module.radius
 }

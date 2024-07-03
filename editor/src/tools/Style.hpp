@@ -101,7 +101,7 @@ class Style {
 	Q_GADGET
 	Q_PROPERTY(Color window MEMBER window)
 	Q_PROPERTY(Color button MEMBER button)
-	Q_PROPERTY(Color foreground MEMBER button)
+	Q_PROPERTY(Color foreground MEMBER foreground)
 
 	Q_PROPERTY(Rectangle textfield MEMBER textfield)
 	Q_PROPERTY(Rectangle module MEMBER module)

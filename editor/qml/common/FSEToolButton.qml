@@ -9,9 +9,9 @@ FSERectangle {
     width: 40
 
     border.color: {
-        if (!enabled) return MyManager.style.module.border.disabled
-        if (mouseArea.containsMouse) return MyManager.style.module.border.hovered
-        return MyManager.style.module.border.normal
+        if (!enabled) return MyStyles.current.module.border.disabled
+        if (mouseArea.containsMouse) return MyStyles.current.module.border.hovered
+        return MyStyles.current.module.border.normal
     }
 
     Image {

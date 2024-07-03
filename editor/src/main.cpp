@@ -1,3 +1,4 @@
+#include <QtCore/QCommandLineParser>
 #include <QtGui/QGuiApplication>
 #include <QtGui/QIcon>
 #include <QtQml/QQmlApplicationEngine>
@@ -8,26 +9,42 @@
 #include <fsd/data/Place.hpp>
 #include <fsd/data/Project.hpp>
 
+#include "managers/CommandsManager.hpp"
+#include "managers/ModelsManager.hpp"
+#include "managers/StylesManager.hpp"
 #include "models/ProxyModel.hpp"
 #include "models/SelectionWrapper.hpp"
 #include "Config.hpp"
-#include "CommandsManager.hpp"
 #include "Manager.hpp"
-#include "ModelsManager.hpp"
 
-int main(int argc, char* argv[]) {
-	QGuiApplication app(argc, argv);
+void initApp(QGuiApplication& app) {
 	app.setOrganizationName(fsd::Config::organization);
 	app.setApplicationName(fsd::Config::name);
 	app.setApplicationVersion(fsd::Config::version);
 	app.setWindowIcon(QIcon(":/logo/logo.png"));
+}
 
-	QQmlApplicationEngine engine;
+bool initParser(const QGuiApplication& app, fse::Manager* manager) {
+	QCommandLineParser parser;
+	parser.setApplicationDescription(fsd::Config::name);
+	parser.addHelpOption();
+	parser.addVersionOption();
 
-	QScopedPointer<fse::Manager> manager(new fse::Manager);
+	QCommandLineOption generateStyleOption({ "s", "generate-style" }, "Generate an empty style json file");
+	parser.addOption(generateStyleOption);
 
-	manager->init();
+	// Process the actual command line arguments given by the user
+	parser.process(app);
 
+	if (parser.isSet(generateStyleOption)) {
+		manager->stylesManager()->createJson();
+		return false;
+	}
+
+	return true;
+}
+
+void initRegister(fse::Manager* manager) {
 	// FSData
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyProject", manager->project());
 	qmlRegisterType<fsd::Character>("editor", 1, 0, "MyCharacter");
@@ -40,11 +57,28 @@ int main(int argc, char* argv[]) {
 	qmlRegisterType<fsd::FileManager>("editor", 1, 0, "MyFileManager");
 
 	// FSEditor
-	qmlRegisterSingletonInstance("editor", 1, 0, "MyManager", manager.get());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyManager", manager);
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyCommands", manager->commandsManager());
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyModels", manager->modelsManager());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyStyles", manager->stylesManager());
 	qmlRegisterType<fse::ProxyModel>("editor", 1, 0, "MyProxyModel");
 	qmlRegisterType<fse::SelectionWrapper>("editor", 1, 0, "MySelectionWrapper");
+}
+
+int main(int argc, char* argv[]) {
+	QGuiApplication app(argc, argv);
+	initApp(app);
+
+	QScopedPointer<fse::Manager> manager(new fse::Manager);
+	manager->init();
+
+	if (!initParser(app, manager.get())) {
+		return 0;
+	}
+
+	QQmlApplicationEngine engine;
+
+	initRegister(manager.get());
 
 	QObject::connect(
 		&engine, &QQmlApplicationEngine::objectCreationFailed, &app,

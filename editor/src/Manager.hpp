@@ -13,12 +13,12 @@
 namespace fse {
 class CommandsManager;
 class ModelsManager;
+class StylesManager;
 
 class Manager : public QObject {
 	Q_OBJECT
 	Q_PROPERTY(About about READ about CONSTANT)
 	Q_PROPERTY(Balsam* balsam READ balsam CONSTANT)
-	Q_PROPERTY(Style style READ style CONSTANT)
 	Q_PROPERTY(fsd::Project* project READ project CONSTANT)
 	Q_PROPERTY(QUrl path READ path WRITE setPath NOTIFY pathUpdated)
 
@@ -35,7 +35,6 @@ public:
 
 	const About& about() const;
 	Balsam* balsam() const;
-	const Style& style() const;
 	fsd::Project* project() const;
 
 	const QUrl& tmpPath() const;
@@ -45,6 +44,7 @@ public:
 
 	CommandsManager* commandsManager() const;
 	ModelsManager* modelsManager() const;
+	StylesManager* stylesManager() const;
 
 private:
 	struct Impl;

@@ -26,6 +26,13 @@ set(PROJECT_SOURCES
 	src/commands/RemoveCommand.hpp
 	src/commands/ValueCommand.hpp
 
+	src/managers/CommandsManager.cpp
+	src/managers/CommandsManager.hpp
+	src/managers/ModelsManager.cpp
+	src/managers/ModelsManager.hpp
+	src/managers/StylesManager.cpp
+	src/managers/StylesManager.hpp
+
 	src/models/CharacterModel.cpp
 	src/models/CharacterModel.hpp
 	src/models/EntityModel.cpp
@@ -56,15 +63,10 @@ set(PROJECT_SOURCES
 	src/tools/Tools.cpp
 	src/tools/Tools.hpp
 
-	src/CommandsManager.cpp
-	src/CommandsManager.hpp
-	src/Manager.cpp
-	src/Manager.hpp
-	src/ModelsManager.cpp
-	src/ModelsManager.hpp
-
 	src/Config.hpp.in
 	src/main.cpp
+	src/Manager.cpp
+	src/Manager.hpp
 
 	resources/resource.h
 	resources/logo.ico
@@ -104,10 +106,6 @@ set(QML_SOURCES
 
 	qml/Main.qml
 )
-set(QML_SINGLETON
-	qml/style/FSEStyle.qml
-)
-set_source_files_properties(${QML_SINGLETON} PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 
 configure_file(resources/resources.rc.in resources/resources.rc)
 configure_file(resources/resource.h resources/resource.h COPYONLY)

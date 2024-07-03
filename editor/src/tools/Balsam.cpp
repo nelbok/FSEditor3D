@@ -5,7 +5,7 @@
 #include "tools/Tools.hpp"
 
 #include "Config.hpp"
-#include "CommandsManager.hpp"
+#include "managers/CommandsManager.hpp"
 #include "Manager.hpp"
 
 namespace fs = std::filesystem;

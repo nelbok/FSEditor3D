@@ -74,10 +74,10 @@ FSERectangle {
                 Layout.fillWidth: true
 
                 text: "Version " + MyManager.about.version
-                color: MyManager.style.foreground.normal
-                font.bold: MyManager.style.copyrightFont.bold
-                font.italic: MyManager.style.copyrightFont.italic
-                font.pointSize: MyManager.style.copyrightFont.pointSize
+                color: MyStyles.current.foreground.normal
+                font.bold: MyStyles.current.copyrightFont.bold
+                font.italic: MyStyles.current.copyrightFont.italic
+                font.pointSize: MyStyles.current.copyrightFont.pointSize
 
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
@@ -86,10 +86,10 @@ FSERectangle {
                 Layout.fillWidth: true
 
                 text: MyManager.about.copyright
-                color: MyManager.style.foreground.normal
-                font.bold: MyManager.style.copyrightFont.bold
-                font.italic: MyManager.style.copyrightFont.italic
-                font.pointSize: MyManager.style.copyrightFont.pointSize
+                color: MyStyles.current.foreground.normal
+                font.bold: MyStyles.current.copyrightFont.bold
+                font.italic: MyStyles.current.copyrightFont.italic
+                font.pointSize: MyStyles.current.copyrightFont.pointSize
 
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter

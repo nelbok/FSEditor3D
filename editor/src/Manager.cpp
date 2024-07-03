@@ -4,18 +4,18 @@
 
 #include "Config.hpp"
 
+#include "managers/CommandsManager.hpp"
+#include "managers/ModelsManager.hpp"
+#include "managers/StylesManager.hpp"
+
 #include "tools/LoadThread.hpp"
 #include "tools/SaveThread.hpp"
-
-#include "CommandsManager.hpp"
-#include "ModelsManager.hpp"
 
 namespace fse {
 
 struct Manager::Impl {
 	About about;
 	Balsam* balsam{ nullptr };
-	Style style;
 	fsd::Project* project{ nullptr };
 
 	QUrl tmpPath{};
@@ -25,6 +25,7 @@ struct Manager::Impl {
 
 	CommandsManager* commandsManager{ nullptr };
 	ModelsManager* modelsManager{ nullptr };
+	StylesManager* stylesManager{ nullptr };
 
 	template<class T>
 	void manageFile(Manager* manager, const QUrl& url) {
@@ -58,11 +59,13 @@ void Manager::init() {
 
 	_impl->commandsManager = new CommandsManager(this);
 	_impl->modelsManager = new ModelsManager(this);
+	_impl->stylesManager = new StylesManager(this);
 
 	_impl->balsam->init(this);
 
 	_impl->commandsManager->init(_impl->project);
 	_impl->modelsManager->init(_impl->project);
+	_impl->stylesManager->init();
 
 	reset();
 }
@@ -103,10 +106,6 @@ Balsam* Manager::balsam() const {
 	return _impl->balsam;
 }
 
-const Style& Manager::style() const {
-	return _impl->style;
-}
-
 fsd::Project* Manager::project() const {
 	assert(_impl->project);
 	return _impl->project;
@@ -142,5 +141,10 @@ CommandsManager* Manager::commandsManager() const {
 ModelsManager* Manager::modelsManager() const {
 	assert(_impl->modelsManager);
 	return _impl->modelsManager;
+}
+
+StylesManager* Manager::stylesManager() const {
+	assert(_impl->stylesManager);
+	return _impl->stylesManager;
 }
 } // namespace fse

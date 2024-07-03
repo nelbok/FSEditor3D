@@ -14,4 +14,7 @@
         <file alias="undo.svg">icons/undo.svg</file>
         <file alias="redo.svg">icons/redo.svg</file>
     </qresource>
+    <qresource prefix="/styles">
+        <file alias="basic.json">styles/basic.json</file>
+    </qresource>
 </RCC>
