@@ -7,7 +7,7 @@
 namespace fse {
 class StylesManager : public QObject {
 	Q_OBJECT
-	Q_PROPERTY(Style current READ current NOTIFY currentUpdated)
+	Q_PROPERTY(const Style& current READ current NOTIFY currentUpdated)
 
 public:
 	StylesManager(QObject* parent = nullptr);

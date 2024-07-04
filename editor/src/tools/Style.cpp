@@ -15,15 +15,6 @@ QJsonObject save(const T& object) {
 }
 } // namespace detail
 
-Color& Color::operator=(const Color& other) {
-	this->normal = other.normal;
-	this->alternative = other.alternative;
-	this->selected = other.selected;
-	this->hovered = other.hovered;
-	this->disabled = other.disabled;
-	return *this;
-}
-
 constexpr auto lNormal = "normal";
 constexpr auto lAlternative = "alternative";
 constexpr auto lSelected = "selected";
@@ -54,12 +45,6 @@ bool operator==(const Color& l, const Color& r) {
 	return l.normal == r.normal && l.alternative == r.alternative && l.selected == r.selected && l.hovered == r.hovered && l.disabled == r.disabled;
 }
 
-Border& Border::operator=(const Border& other) {
-	Color::operator=(other);
-	this->width = other.width;
-	return *this;
-}
-
 constexpr auto lWidth = "width";
 
 void Border::load(const QJsonObject& json) {
@@ -78,13 +63,6 @@ bool operator!=(const Border& l, const Border& r) {
 
 bool operator==(const Border& l, const Border& r) {
 	return *reinterpret_cast<const Color*>(&l) == *reinterpret_cast<const Color*>(&r) && l.width == r.width;
-}
-
-Rectangle& Rectangle::operator=(const Rectangle& other) {
-	Color::operator=(other);
-	this->border = other.border;
-	this->radius = other.radius;
-	return *this;
 }
 
 constexpr auto lBorder = "border";
@@ -110,13 +88,6 @@ bool operator==(const Rectangle& l, const Rectangle& r) {
 	return *reinterpret_cast<const Color*>(&l) == *reinterpret_cast<const Color*>(&r) && l.border == r.border && l.radius == r.radius;
 }
 
-Font& Font::operator=(const Font& other) {
-	this->bold = other.bold;
-	this->italic = other.italic;
-	this->pointSize = other.pointSize;
-	return *this;
-}
-
 bool operator!=(const Font& l, const Font& r) {
 	return !(l == r);
 }
@@ -139,23 +110,6 @@ void Font::save(QJsonObject& json) const {
 	json[lBold] = bold;
 	json[lItalic] = italic;
 	json[lPointSize] = pointSize;
-}
-
-Style& Style::operator=(const Style& other) {
-	this->window = other.window;
-	this->button = other.button;
-	this->foreground = other.foreground;
-
-	this->textfield = other.textfield;
-	this->module = other.module;
-	this->list = other.list;
-
-	this->titleFont = other.titleFont;
-	this->subTitleFont = other.subTitleFont;
-	this->normalFont = other.normalFont;
-	this->copyrightFont = other.copyrightFont;
-
-	return *this;
 }
 
 constexpr auto lWindow = "window";

@@ -17,7 +17,7 @@ class StylesManager;
 
 class Manager : public QObject {
 	Q_OBJECT
-	Q_PROPERTY(About about READ about CONSTANT)
+	Q_PROPERTY(const About& about READ about CONSTANT)
 	Q_PROPERTY(Balsam* balsam READ balsam CONSTANT)
 	Q_PROPERTY(fsd::Project* project READ project CONSTANT)
 	Q_PROPERTY(QUrl path READ path WRITE setPath NOTIFY pathUpdated)

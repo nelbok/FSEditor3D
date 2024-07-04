@@ -19,8 +19,6 @@ public:
 	Color() = default;
 	virtual ~Color() = default;
 
-	Color& operator=(const Color& other);
-
 	virtual void load(const QJsonObject& json);
 	virtual void save(QJsonObject& json) const;
 
@@ -42,8 +40,6 @@ public:
 	Border() = default;
 	virtual ~Border() = default;
 
-	Border& operator=(const Border& other);
-
 	virtual void load(const QJsonObject& json) override;
 	virtual void save(QJsonObject& json) const override;
 
@@ -55,14 +51,12 @@ bool operator==(const Border& l, const Border& r);
 
 class Rectangle : public Color {
 	Q_GADGET
-	Q_PROPERTY(Border border MEMBER border)
+	Q_PROPERTY(const Border& border MEMBER border)
 	Q_PROPERTY(int radius MEMBER radius)
 
 public:
 	Rectangle() = default;
 	virtual ~Rectangle() = default;
-
-	Rectangle& operator=(const Rectangle& other);
 
 	virtual void load(const QJsonObject& json) override;
 	virtual void save(QJsonObject& json) const override;
@@ -84,8 +78,6 @@ public:
 	Font() = default;
 	virtual ~Font() = default;
 
-	Font& operator=(const Font& other);
-
 	virtual void load(const QJsonObject& json);
 	virtual void save(QJsonObject& json) const;
 
@@ -99,24 +91,22 @@ bool operator==(const Font& l, const Font& r);
 
 class Style {
 	Q_GADGET
-	Q_PROPERTY(Color window MEMBER window)
-	Q_PROPERTY(Color button MEMBER button)
-	Q_PROPERTY(Color foreground MEMBER foreground)
+	Q_PROPERTY(const Color& window MEMBER window)
+	Q_PROPERTY(const Color& button MEMBER button)
+	Q_PROPERTY(const Color& foreground MEMBER foreground)
 
-	Q_PROPERTY(Rectangle textfield MEMBER textfield)
-	Q_PROPERTY(Rectangle module MEMBER module)
-	Q_PROPERTY(Rectangle list MEMBER list)
+	Q_PROPERTY(const Rectangle& textfield MEMBER textfield)
+	Q_PROPERTY(const Rectangle& module MEMBER module)
+	Q_PROPERTY(const Rectangle& list MEMBER list)
 
-	Q_PROPERTY(Font titleFont MEMBER titleFont)
-	Q_PROPERTY(Font subTitleFont MEMBER subTitleFont)
-	Q_PROPERTY(Font normalFont MEMBER normalFont)
-	Q_PROPERTY(Font copyrightFont MEMBER copyrightFont)
+	Q_PROPERTY(const Font& titleFont MEMBER titleFont)
+	Q_PROPERTY(const Font& subTitleFont MEMBER subTitleFont)
+	Q_PROPERTY(const Font& normalFont MEMBER normalFont)
+	Q_PROPERTY(const Font& copyrightFont MEMBER copyrightFont)
 
 public:
 	Style() = default;
 	virtual ~Style() = default;
-
-	Style& operator=(const Style& other);
 
 	virtual void load(const QJsonObject& json);
 	virtual void save(QJsonObject& json) const;
