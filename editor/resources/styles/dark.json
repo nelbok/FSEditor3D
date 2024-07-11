@@ -1,16 +1,16 @@
 {
 	"button": {
-		"alternative": "#ffcccccc",
+		"alternative": "#ff222222",
 		"disabled": "#ff5a075a",
 		"hovered": "#ff5a075a",
-		"normal": "#ff6666bb",
+		"normal": "#ff000000",
 		"selected": "#ff5a075a"
 	},
 	"foreground": {
-		"alternative": "#ffaaaaaa",
-		"disabled": "#ff999999",
+		"alternative": "#ff444444",
+		"disabled": "#ff555555",
 		"hovered": "#ff5a075a",
-		"normal": "#ff000000",
+		"normal": "#ffeeeeee",
 		"selected": "#ff5a075a"
 	},
 	"list": {
@@ -19,29 +19,29 @@
 			"alternative": "#ff5a075a",
 			"disabled": "#ff5a075a",
 			"hovered": "#ff5a075a",
-			"normal": "#ff000000",
+			"normal": "#ffeeeeee",
 			"selected": "#ff5a075a",
 			"width": 2
 		},
 		"disabled": "#ff5a075a",
 		"hovered": "#ff5a075a",
-		"normal": "#ffcccccc",
+		"normal": "#ff222222",
 		"radius": 5,
-		"selected": "#ff999999"
+		"selected": "#ff555555"
 	},
 	"module": {
 		"alternative": "#ff5a075a",
 		"border": {
 			"alternative": "#ff5a075a",
-			"disabled": "#ff999999",
-			"hovered": "#ffaaaaaa",
-			"normal": "#ff000000",
-			"selected": "#ff999999",
+			"disabled": "#ff555555",
+			"hovered": "#ff444444",
+			"normal": "#ffffffff",
+			"selected": "#ff555555",
 			"width": 2
 		},
 		"disabled": "#ff5a075a",
 		"hovered": "#ff5a075a",
-		"normal": "#ff6666bb",
+		"normal": "#ff000000",
 		"radius": 5,
 		"selected": "#ff5a075a"
 	},
@@ -51,13 +51,13 @@
 			"alternative": "#ff5a075a",
 			"disabled": "#ff5a075a",
 			"hovered": "#ff5a075a",
-			"normal": "#ff000000",
-			"selected": "#ff999999",
+			"normal": "#ffeeeeee",
+			"selected": "#ff555555",
 			"width": 0
 		},
-		"disabled": "#ff999999",
+		"disabled": "#ff555555",
 		"hovered": "#ff5a075a",
-		"normal": "#ffcccccc",
+		"normal": "#ff222222",
 		"radius": 0,
 		"selected": "#ff5a075a"
 	},
@@ -65,7 +65,7 @@
 		"alternative": "#ff5a075a",
 		"disabled": "#ff5a075a",
 		"hovered": "#ff5a075a",
-		"normal": "#ffcccccc",
+		"normal": "#ff222222",
 		"selected": "#ff5a075a"
 	},
 	"copyrightFont": {
@@ -88,13 +88,13 @@
 		"italic": false,
 		"pointSize": 23
 	},
-	"newFile": "newFile",
-	"loadFile": "loadFile",
-	"saveFile": "saveFile",
-	"undo": "undo",
-	"redo": "redo",
-	"settings": "settings",
-	"github": "github",
-	"discord": "discord",
-	"twitter": "twitter"
+	"newFile": "newFile-invert",
+	"loadFile": "loadFile-invert",
+	"saveFile": "saveFile-invert",
+	"undo": "undo-invert",
+	"redo": "redo-invert",
+	"settings": "settings-invert",
+	"github": "github-invert",
+	"discord": "discord-invert",
+	"twitter": "twitter-invert"
 }

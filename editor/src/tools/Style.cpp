@@ -22,11 +22,11 @@ constexpr auto lHovered = "hovered";
 constexpr auto lDisabled = "disabled";
 
 void Color::load(const QJsonObject& json) {
-	normal = Json::toColor(Json::toObject(lNormal, json));
-	alternative = Json::toColor(Json::toObject(lAlternative, json));
-	selected = Json::toColor(Json::toObject(lSelected, json));
-	hovered = Json::toColor(Json::toObject(lHovered, json));
-	disabled = Json::toColor(Json::toObject(lDisabled, json));
+	normal = Json::toColor(Json::toValue(lNormal, json));
+	alternative = Json::toColor(Json::toValue(lAlternative, json));
+	selected = Json::toColor(Json::toValue(lSelected, json));
+	hovered = Json::toColor(Json::toValue(lHovered, json));
+	disabled = Json::toColor(Json::toValue(lDisabled, json));
 }
 
 void Color::save(QJsonObject& json) const {
@@ -120,10 +120,23 @@ constexpr auto lTextfield = "textfield";
 constexpr auto lModule = "module";
 constexpr auto lList = "list";
 
+// Fonts
 constexpr auto lTitleFont = "titleFont";
 constexpr auto lSubTitleFont = "subTitleFont";
 constexpr auto lNormalFont = "normalFont";
 constexpr auto lCopyrightFont = "copyrightFont";
+
+// Icons
+constexpr auto lNewFile = "newFile";
+constexpr auto lLoadFile = "loadFile";
+constexpr auto lSaveFile = "saveFile";
+constexpr auto lUndo = "undo";
+constexpr auto lRedo = "redo";
+constexpr auto lSettings = "settings";
+
+constexpr auto lGithub = "github";
+constexpr auto lDiscord = "discord";
+constexpr auto lTwitter = "twitter";
 
 void Style::load(const QJsonObject& json) {
 	window.load(Json::toObject(lWindow, json));
@@ -134,10 +147,23 @@ void Style::load(const QJsonObject& json) {
 	module.load(Json::toObject(lModule, json));
 	list.load(Json::toObject(lList, json));
 
+	// Fonts
 	titleFont.load(Json::toObject(lTitleFont, json));
 	subTitleFont.load(Json::toObject(lSubTitleFont, json));
 	normalFont.load(Json::toObject(lNormalFont, json));
 	copyrightFont.load(Json::toObject(lCopyrightFont, json));
+
+	// Icons
+	newFile = Json::toString(lNewFile, json);
+	loadFile = Json::toString(lLoadFile, json);
+	saveFile = Json::toString(lSaveFile, json);
+	undo = Json::toString(lUndo, json);
+	redo = Json::toString(lRedo, json);
+	settings = Json::toString(lSettings, json);
+
+	github = Json::toString(lGithub, json);
+	discord = Json::toString(lDiscord, json);
+	twitter = Json::toString(lTwitter, json);
 }
 
 void Style::save(QJsonObject& json) const {
@@ -149,9 +175,22 @@ void Style::save(QJsonObject& json) const {
 	json[lModule] = detail::save(module);
 	json[lList] = detail::save(list);
 
+	// Fonts
 	json[lTitleFont] = detail::save(titleFont);
 	json[lSubTitleFont] = detail::save(subTitleFont);
 	json[lNormalFont] = detail::save(normalFont);
 	json[lCopyrightFont] = detail::save(copyrightFont);
+
+	// Icons
+	json[lNewFile] = newFile;
+	json[lLoadFile] = loadFile;
+	json[lSaveFile] = saveFile;
+	json[lUndo] = undo;
+	json[lRedo] = redo;
+	json[lSettings] = settings;
+
+	json[lGithub] = github;
+	json[lDiscord] = discord;
+	json[lTwitter] = twitter;
 }
 } // namespace fse

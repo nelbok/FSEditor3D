@@ -101,6 +101,7 @@ set(QML_SOURCES
 	qml/modules/FSEPlaces.qml
 	qml/modules/FSEProgressBox.qml
 	qml/modules/FSEProject.qml
+	qml/modules/FSESettings.qml
 	qml/modules/FSEToolBar.qml
 	qml/modules/FSEView3D.qml
 

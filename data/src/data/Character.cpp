@@ -97,9 +97,9 @@ constexpr auto lGender = "gender";
 
 void Character::load(const QJsonObject& json) {
 	Placement::load(json);
-	setHair(Json::toColor(Json::toObject(lHair, json)));
-	setSkin(Json::toColor(Json::toObject(lSkin, json)));
-	setClothes(Json::toColor(Json::toObject(lClothes, json)));
+	setHair(Json::toColor(Json::toValue(lHair, json)));
+	setSkin(Json::toColor(Json::toValue(lSkin, json)));
+	setClothes(Json::toColor(Json::toValue(lClothes, json)));
 	setHeight(Json::toInt(lHeight, json));
 	setSpecies(static_cast<Character::Species>(Json::toInt(lSpecies, json)));
 	setGender(static_cast<Character::Gender>(Json::toInt(lGender, json)));

@@ -10,6 +10,7 @@ FSERectangle {
         Places,
         Characters,
         Links,
+        Settings,
         None
     }
     property int selected: FSEMenu.ModuleType.None
@@ -107,17 +108,17 @@ FSERectangle {
                 spacing: 20
                 FSEIconButton {
                     imageHeight: 20
-                    source: "qrc:/social/github.svg"
+                    source: "qrc:/social/" + MyStyles.current.github + ".svg"
                     onClicked: Qt.openUrlExternally(MyManager.about.github)
                 }
                 FSEIconButton {
                     imageHeight: 20
-                    source: "qrc:/social/discord.svg"
+                    source: "qrc:/social/" + MyStyles.current.discord + ".svg"
                     onClicked: Qt.openUrlExternally(MyManager.about.discord)
                 }
                 FSEIconButton {
                     imageHeight: 20
-                    source: "qrc:/social/twitter.svg"
+                    source: "qrc:/social/" + MyStyles.current.twitter + ".svg"
                     onClicked: Qt.openUrlExternally(MyManager.about.twitter)
                 }
             }

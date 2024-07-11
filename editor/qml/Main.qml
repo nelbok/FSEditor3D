@@ -71,6 +71,14 @@ Window {
         enabled: (menu.selected === FSEMenu.ModuleType.Links) && !(progress.visible || message.visible)
     }
 
+    FSESettings {
+        id: settings
+
+        anchors.centerIn: parent
+
+        visible: (menu.selected === FSEMenu.ModuleType.Settings) && !(progress.visible || message.visible)
+    }
+
     FSEMenu {
         id: menu
 
@@ -88,6 +96,9 @@ Window {
         anchors.rightMargin: 10
 
         enabled: !(progress.visible || message.visible)
+
+        onSettingsClicked: menu.selected = (menu.selected === FSEMenu.ModuleType.Settings) ? FSEMenu.ModuleType.None : FSEMenu.ModuleType.Settings
+
     }
 
     Connections {

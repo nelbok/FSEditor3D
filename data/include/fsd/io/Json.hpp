@@ -29,8 +29,8 @@ QJsonValue fromUrl(const QUrl& value);
 QUuid toUuid(const QJsonValue& json);
 QJsonValue fromUuid(const QUuid& value);
 
-QColor toColor(const QJsonObject& json);
-QJsonObject fromColor(const QColor& value);
+QColor toColor(const QJsonValue& json);
+QJsonValue fromColor(const QColor& value);
 
 QVector2D toVector2D(const QJsonObject& json);
 QJsonObject fromVector2D(const QVector2D& value);

@@ -5,9 +5,11 @@ import QtQuick.Dialogs
 import editor
 
 FSERectangle {
+    signal settingsClicked
+
     id: root
     width: 50
-    height: 230
+    height: 275
 
     ColumnLayout {
         anchors.fill: parent
@@ -15,30 +17,35 @@ FSERectangle {
         spacing: 5
 
         FSEToolButton {
-            source: "qrc:/tools/new.svg"
+            source: "qrc:/tools/" + MyStyles.current.newFile + ".svg"
             onClicked: MyManager.reset()
         }
 
         FSEToolButton {
-            source: "qrc:/tools/load.svg"
+            source: "qrc:/tools/" + MyStyles.current.loadFile + ".svg"
             onClicked: openDialog(FileDialog.OpenFile)
         }
 
         FSEToolButton {
-            source: "qrc:/tools/save.svg"
+            source: "qrc:/tools/" + MyStyles.current.saveFile + ".svg"
             onClicked: openDialog(FileDialog.SaveFile)
         }
 
         FSEToolButton {
-            source: "qrc:/tools/undo.svg"
+            source: "qrc:/tools/" + MyStyles.current.undo + ".svg"
             enabled: MyCommands.canUndo
             onClicked: MyCommands.undo()
         }
 
         FSEToolButton {
-            source: "qrc:/tools/redo.svg"
+            source: "qrc:/tools/" + MyStyles.current.redo + ".svg"
             enabled: MyCommands.canRedo
             onClicked: MyCommands.redo()
+        }
+
+        FSEToolButton {
+            source: "qrc:/tools/" + MyStyles.current.settings + ".svg"
+            onClicked: root.settingsClicked()
         }
     }
 

@@ -3,7 +3,7 @@
 		"alternative": "#ffcccccc",
 		"disabled": "#ff5a075a",
 		"hovered": "#ff5a075a",
-		"normal": "#ff6666bb",
+		"normal": "#ffeeeeee",
 		"selected": "#ff5a075a"
 	},
 	"foreground": {
@@ -41,7 +41,7 @@
 		},
 		"disabled": "#ff5a075a",
 		"hovered": "#ff5a075a",
-		"normal": "#ff6666bb",
+		"normal": "#ffeeeeee",
 		"radius": 5,
 		"selected": "#ff5a075a"
 	},

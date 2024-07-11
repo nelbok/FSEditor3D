@@ -4,17 +4,29 @@
     </qresource>
     <qresource prefix="/social">
         <file alias="discord.svg">icons/discord.svg</file>
+        <file alias="discord-invert.svg">icons/discord-invert.svg</file>
         <file alias="github.svg">icons/github.svg</file>
+        <file alias="github-invert.svg">icons/github-invert.svg</file>
         <file alias="twitter.svg">icons/twitter.svg</file>
+        <file alias="twitter-invert.svg">icons/twitter-invert.svg</file>
     </qresource>
     <qresource prefix="/tools">
-        <file alias="new.svg">icons/new.svg</file>
-        <file alias="load.svg">icons/load.svg</file>
-        <file alias="save.svg">icons/save.svg</file>
+        <file alias="newFile.svg">icons/newFile.svg</file>
+        <file alias="newFile-invert.svg">icons/newFile-invert.svg</file>
+        <file alias="loadFile.svg">icons/loadFile.svg</file>
+        <file alias="loadFile-invert.svg">icons/loadFile-invert.svg</file>
+        <file alias="saveFile.svg">icons/saveFile.svg</file>
+        <file alias="saveFile-invert.svg">icons/saveFile-invert.svg</file>
         <file alias="undo.svg">icons/undo.svg</file>
+        <file alias="undo-invert.svg">icons/undo-invert.svg</file>
         <file alias="redo.svg">icons/redo.svg</file>
+        <file alias="redo-invert.svg">icons/redo-invert.svg</file>
+        <file alias="settings.svg">icons/settings.svg</file>
+        <file alias="settings-invert.svg">icons/settings-invert.svg</file>
     </qresource>
     <qresource prefix="/styles">
         <file alias="basic.json">styles/basic.json</file>
+        <file alias="dark.json">styles/dark.json</file>
+        <file alias="light.json">styles/light.json</file>
     </qresource>
 </RCC>

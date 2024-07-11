@@ -58,7 +58,6 @@ QUrl toUrl(const QJsonValue& json) {
 	if (!json.toVariant().isValid()) {
 		throw std::runtime_error("JSON isn't a valid url");
 	}
-	assert(json.toVariant().isValid());
 	return json.toVariant().toUrl();
 }
 
@@ -67,7 +66,9 @@ QJsonValue fromUrl(const QUrl& value) {
 }
 
 QUuid toUuid(const QJsonValue& json) {
-	assert(json.toVariant().isValid());
+	if (!json.toVariant().isValid()) {
+		throw std::runtime_error("JSON isn't a valid uuid");
+	}
 	return json.toVariant().toUuid();
 }
 
@@ -75,22 +76,15 @@ QJsonValue fromUuid(const QUuid& value) {
 	return QJsonValue::fromVariant(value);
 }
 
-QColor toColor(const QJsonObject& json) {
-	return {
-		toInt("r", json),
-		toInt("g", json),
-		toInt("b", json),
-		toInt("a", json),
-	};
+QColor toColor(const QJsonValue& json) {
+	if (!json.isString()) {
+		throw std::runtime_error("JSON isn't a valid color");
+	}
+	return { json.toString() };
 }
 
-QJsonObject fromColor(const QColor& value) {
-	QJsonObject json;
-	json["a"] = value.alpha();
-	json["r"] = value.red();
-	json["g"] = value.green();
-	json["b"] = value.blue();
-	return json;
+QJsonValue fromColor(const QColor& value) {
+	return { value.name(QColor::HexArgb) };
 }
 
 QVector2D toVector2D(const QJsonObject& json) {

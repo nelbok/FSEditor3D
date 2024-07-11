@@ -3,6 +3,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QJsonObject>
 #include <QtCore/QString>
+#include <QtCore/QUuid>
 #include <QtGui/QColor>
 
 namespace fse {
@@ -99,10 +100,23 @@ class Style {
 	Q_PROPERTY(const Rectangle& module MEMBER module)
 	Q_PROPERTY(const Rectangle& list MEMBER list)
 
+	// Fonts
 	Q_PROPERTY(const Font& titleFont MEMBER titleFont)
 	Q_PROPERTY(const Font& subTitleFont MEMBER subTitleFont)
 	Q_PROPERTY(const Font& normalFont MEMBER normalFont)
 	Q_PROPERTY(const Font& copyrightFont MEMBER copyrightFont)
+
+	// Icons
+	Q_PROPERTY(QString newFile MEMBER newFile)
+	Q_PROPERTY(QString loadFile MEMBER loadFile)
+	Q_PROPERTY(QString saveFile MEMBER saveFile)
+	Q_PROPERTY(QString undo MEMBER undo)
+	Q_PROPERTY(QString redo MEMBER redo)
+	Q_PROPERTY(QString settings MEMBER settings)
+
+	Q_PROPERTY(QString github MEMBER github)
+	Q_PROPERTY(QString discord MEMBER discord)
+	Q_PROPERTY(QString twitter MEMBER twitter)
 
 public:
 	Style() = default;
@@ -119,9 +133,22 @@ public:
 	Rectangle module;
 	Rectangle list;
 
+	// Fonts
 	Font titleFont;
 	Font subTitleFont;
 	Font normalFont;
 	Font copyrightFont;
+
+	// Icons
+	QString newFile;
+	QString loadFile;
+	QString saveFile;
+	QString undo;
+	QString redo;
+	QString settings;
+
+	QString github;
+	QString discord;
+	QString twitter;
 };
 } // namespace fse
