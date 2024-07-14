@@ -33,10 +33,15 @@ RowLayout {
         valueRole: "uuid"
         textRole: "name"
 
+        // FIXME: Colors for hovered item in the popup
+
         palette.text: MyStyles.current.foreground.normal // Foreground popup
         palette.buttonText: MyStyles.current.foreground.normal // Foreground text
-        palette.button: (enabled) ? MyStyles.current.textfield.color : MyStyles.current.textfield.disabled // Background color
-        palette.mid: MyStyles.current.textfield.color // Background color when popup shown
+        palette.button: (enabled) ? MyStyles.current.textfield.normal : MyStyles.current.textfield.disabled // Background color
+        palette.mid: MyStyles.current.textfield.normal // Button background color when popup shown
+        palette.window: MyStyles.current.textfield.normal // Popup background color
+        palette.dark: MyStyles.current.foreground.normal // Foreground indicator
+
         font.bold: MyStyles.current.normalFont.bold
         font.italic: MyStyles.current.normalFont.italic
         font.pointSize: MyStyles.current.normalFont.pointSize

@@ -28,11 +28,14 @@ RowLayout {
         Layout.preferredWidth: 175
 
         editable: true
-        palette.text: MyStyles.current.foreground.normal
-        palette.base: MyStyles.current.textfield.color // Background color
+
+        palette.text: MyStyles.current.foreground.normal // Foreground text
+        palette.base: MyStyles.current.textfield.normal // Background color
         palette.button: MyStyles.current.textfield.disabled // Background color disabled & border color
+        palette.buttonText : MyStyles.current.foreground.normal // Indicator color enabled
         palette.mid: MyStyles.current.textfield.disabled // Indicator color disabled
         palette.highlight: "transparent"
+
         font.bold: MyStyles.current.normalFont.bold
         font.italic: MyStyles.current.normalFont.italic
         font.pointSize: MyStyles.current.normalFont.pointSize
