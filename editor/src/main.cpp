@@ -12,6 +12,7 @@
 #include "managers/CommandsManager.hpp"
 #include "managers/ModelsManager.hpp"
 #include "managers/StylesManager.hpp"
+#include "managers/TranslationsManager.hpp"
 #include "models/ProxyModel.hpp"
 #include "models/SelectionWrapper.hpp"
 #include "Config.hpp"
@@ -61,6 +62,7 @@ void initRegister(fse::Manager* manager) {
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyCommands", manager->commandsManager());
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyModels", manager->modelsManager());
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyStyles", manager->stylesManager());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyTranslations", manager->translationsManager());
 	qmlRegisterType<fse::ProxyModel>("editor", 1, 0, "MyProxyModel");
 	qmlRegisterType<fse::SelectionWrapper>("editor", 1, 0, "MySelectionWrapper");
 }
@@ -79,6 +81,9 @@ int main(int argc, char* argv[]) {
 	QQmlApplicationEngine engine;
 
 	initRegister(manager.get());
+
+	// Translations
+	QObject::connect(manager->translationsManager(), &fse::TranslationsManager::currentUpdated, &engine, &QQmlApplicationEngine::retranslate);
 
 	QObject::connect(
 		&engine, &QQmlApplicationEngine::objectCreationFailed, &app,

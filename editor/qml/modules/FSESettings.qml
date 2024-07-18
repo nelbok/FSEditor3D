@@ -19,14 +19,24 @@ FSERectangle {
             Layout.alignment: Qt.AlignTop
 
             FSEComboBox {
-                name: qsTr("Gender")
+                name: qsTr("Theme")
                 model: [
                     { uuid: 0, name: qsTr("Basic") },
                     { uuid: 1, name: qsTr("Dark") },
                     { uuid: 2, name: qsTr("Light") },
                 ]
-                currentIndex: MyStyles.index
+                Component.onCompleted: currentIndex = MyStyles.index
                 onActivated: MyStyles.index = currentIndex
+            }
+
+            FSEComboBox {
+                name: qsTr("Language")
+                model: [
+                    { uuid: "en", name: qsTr("English") },
+                    { uuid: "fr", name: qsTr("French") },
+                ]
+                Component.onCompleted: currentIndex = indexOfValue(MyTranslations.current)
+                onActivated: MyTranslations.current = valueAt(currentIndex)
             }
         }
 

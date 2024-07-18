@@ -25,7 +25,7 @@ struct StylesManager::Impl {
 			style.load(document.object());
 			styles.append(std::move(style));
 			return true;
-		} catch (const std::exception& e) {
+		} catch (const std::exception&) {
 			return false;
 		}
 	}

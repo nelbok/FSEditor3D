@@ -8,12 +8,12 @@
 
 #include "tools/About.hpp"
 #include "tools/Balsam.hpp"
-#include "tools/Style.hpp"
 
 namespace fse {
 class CommandsManager;
 class ModelsManager;
 class StylesManager;
+class TranslationsManager;
 
 class Manager : public QObject {
 	Q_OBJECT
@@ -45,6 +45,7 @@ public:
 	CommandsManager* commandsManager() const;
 	ModelsManager* modelsManager() const;
 	StylesManager* stylesManager() const;
+	TranslationsManager* translationsManager() const;
 
 private:
 	struct Impl;

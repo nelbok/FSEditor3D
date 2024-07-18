@@ -32,6 +32,8 @@ set(PROJECT_SOURCES
 	src/managers/ModelsManager.hpp
 	src/managers/StylesManager.cpp
 	src/managers/StylesManager.hpp
+	src/managers/TranslationsManager.cpp
+	src/managers/TranslationsManager.hpp
 
 	src/models/CharacterModel.cpp
 	src/models/CharacterModel.hpp
@@ -108,15 +110,23 @@ set(QML_SOURCES
 	qml/Main.qml
 )
 
+set(TRANSLATION_FILES
+    translations/app_en.ts
+    translations/app_fr.ts
+)
+
 configure_file(resources/resources.rc.in resources/resources.rc)
 configure_file(resources/resource.h resources/resource.h COPYONLY)
 configure_file(resources/logo.ico resources/logo.ico COPYONLY)
+
 set(OTHER_FILES
 	${CMAKE_CURRENT_BINARY_DIR}/resources/resources.rc
 )
 
 qt_add_executable(${CFS_EDITOR} ${PROJECT_SOURCES} ${OTHER_FILES})
 qt_add_qml_module(${CFS_EDITOR} URI editor VERSION 1.0 QML_FILES ${QML_SOURCES} ${QML_SINGLETON})
+qt_add_translations(${CFS_EDITOR} TS_FILES ${TRANSLATION_FILES} RESOURCE_PREFIX "/translations")
+
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" PREFIX "" FILES ${PROJECT_SOURCES} ${QML_SOURCES} ${QML_SINGLETON})
 include_directories(src)
 

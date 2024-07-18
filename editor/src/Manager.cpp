@@ -7,6 +7,7 @@
 #include "managers/CommandsManager.hpp"
 #include "managers/ModelsManager.hpp"
 #include "managers/StylesManager.hpp"
+#include "managers/TranslationsManager.hpp"
 
 #include "tools/LoadThread.hpp"
 #include "tools/SaveThread.hpp"
@@ -26,6 +27,7 @@ struct Manager::Impl {
 	CommandsManager* commandsManager{ nullptr };
 	ModelsManager* modelsManager{ nullptr };
 	StylesManager* stylesManager{ nullptr };
+	TranslationsManager* translationsManager{ nullptr };
 
 	template<class T>
 	void manageFile(Manager* manager, const QUrl& url) {
@@ -60,12 +62,14 @@ void Manager::init() {
 	_impl->commandsManager = new CommandsManager(this);
 	_impl->modelsManager = new ModelsManager(this);
 	_impl->stylesManager = new StylesManager(this);
+	_impl->translationsManager = new TranslationsManager(this);
 
 	_impl->balsam->init(this);
 
 	_impl->commandsManager->init(_impl->project);
 	_impl->modelsManager->init(_impl->project);
 	_impl->stylesManager->init();
+	_impl->translationsManager->init();
 
 	reset();
 }
@@ -146,5 +150,10 @@ ModelsManager* Manager::modelsManager() const {
 StylesManager* Manager::stylesManager() const {
 	assert(_impl->stylesManager);
 	return _impl->stylesManager;
+}
+
+TranslationsManager* Manager::translationsManager() const {
+	assert(_impl->translationsManager);
+	return _impl->translationsManager;
 }
 } // namespace fse

@@ -6,8 +6,8 @@ project(${CFS_EDITOR} VERSION ${FS_VERSION} LANGUAGES CXX)
 
 include(cmake/common.cmake)
 
-find_package(QT NAMES Qt6 REQUIRED COMPONENTS Quick Quick3D Quick3DPhysics Test)
-find_package(Qt6 REQUIRED COMPONENTS Quick Quick3D Quick3DPhysics Test)
+find_package(QT NAMES Qt6 REQUIRED COMPONENTS Quick Quick3D Quick3DPhysics Test LinguistTools)
+find_package(Qt6 REQUIRED COMPONENTS Quick Quick3D Quick3DPhysics Test LinguistTools)
 
 include(cmake/deployqt.cmake)
 
