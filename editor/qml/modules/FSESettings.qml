@@ -21,12 +21,12 @@ FSERectangle {
             FSEComboBox {
                 name: qsTr("Theme")
                 model: [
-                    { uuid: 0, name: qsTr("Basic") },
-                    { uuid: 1, name: qsTr("Dark") },
-                    { uuid: 2, name: qsTr("Light") },
+                    { uuid: "basic", name: qsTr("Basic") },
+                    { uuid: "dark", name: qsTr("Dark") },
+                    { uuid: "light", name: qsTr("Light") },
                 ]
-                Component.onCompleted: currentIndex = MyStyles.index
-                onActivated: MyStyles.index = currentIndex
+                Component.onCompleted: currentIndex = indexOfValue(MyStyles.current)
+                onActivated: MyStyles.current = valueAt(currentIndex)
             }
 
             FSEComboBox {

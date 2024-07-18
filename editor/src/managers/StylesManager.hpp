@@ -7,9 +7,8 @@
 namespace fse {
 class StylesManager : public QObject {
 	Q_OBJECT
-	Q_PROPERTY(int index READ index WRITE setIndex NOTIFY indexUpdated)
-	Q_PROPERTY(const Style& current READ current NOTIFY currentUpdated)
-	Q_PROPERTY(QList<Style> styles READ styles CONSTANT)
+	Q_PROPERTY(const QString& current READ current WRITE setCurrent NOTIFY currentUpdated)
+	Q_PROPERTY(const Style& style READ style NOTIFY currentUpdated)
 
 public:
 	StylesManager(QObject* parent = nullptr);
@@ -18,18 +17,16 @@ public:
 	void init();
 	void createJson() const;
 
-	int index() const;
-	void setIndex(int index);
+	const QString& current() const;
+	void setCurrent(const QString& current);
 
-	const Style& current() const;
-	const QList<Style>& styles() const;
+	const Style& style() const;
 
 private:
 	struct Impl;
 	std::unique_ptr<Impl> _impl;
 
 signals:
-	void indexUpdated();
 	void currentUpdated();
 };
 } // namespace fse

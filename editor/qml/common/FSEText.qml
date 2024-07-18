@@ -5,8 +5,8 @@ import editor
 Text {
     horizontalAlignment: Text.AlignRight
 
-    color: MyStyles.current.foreground.normal
-    font.bold: MyStyles.current.normalFont.bold
-    font.italic: MyStyles.current.normalFont.italic
-    font.pointSize: MyStyles.current.normalFont.pointSize
+    color: MyStyles.style.foreground.normal
+    font.bold: MyStyles.style.normalFont.bold
+    font.italic: MyStyles.style.normalFont.italic
+    font.pointSize: MyStyles.style.normalFont.pointSize
 }

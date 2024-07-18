@@ -29,16 +29,16 @@ RowLayout {
 
         editable: true
 
-        palette.text: MyStyles.current.foreground.normal // Foreground text
-        palette.base: MyStyles.current.textfield.normal // Background color
-        palette.button: MyStyles.current.textfield.disabled // Background color disabled & border color
-        palette.buttonText : MyStyles.current.foreground.normal // Indicator color enabled
-        palette.mid: MyStyles.current.textfield.disabled // Indicator color disabled
+        palette.text: MyStyles.style.foreground.normal // Foreground text
+        palette.base: MyStyles.style.textfield.normal // Background color
+        palette.button: MyStyles.style.textfield.disabled // Background color disabled & border color
+        palette.buttonText : MyStyles.style.foreground.normal // Indicator color enabled
+        palette.mid: MyStyles.style.textfield.disabled // Indicator color disabled
         palette.highlight: "transparent"
 
-        font.bold: MyStyles.current.normalFont.bold
-        font.italic: MyStyles.current.normalFont.italic
-        font.pointSize: MyStyles.current.normalFont.pointSize
+        font.bold: MyStyles.style.normalFont.bold
+        font.italic: MyStyles.style.normalFont.italic
+        font.pointSize: MyStyles.style.normalFont.pointSize
 
         onValueChanged: root.valueModified()
     }

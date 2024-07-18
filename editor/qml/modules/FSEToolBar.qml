@@ -17,34 +17,34 @@ FSERectangle {
         spacing: 5
 
         FSEToolButton {
-            source: "qrc:/tools/" + MyStyles.current.newFile + ".svg"
+            source: "qrc:/tools/" + MyStyles.style.newFile + ".svg"
             onClicked: MyManager.reset()
         }
 
         FSEToolButton {
-            source: "qrc:/tools/" + MyStyles.current.loadFile + ".svg"
+            source: "qrc:/tools/" + MyStyles.style.loadFile + ".svg"
             onClicked: openDialog(FileDialog.OpenFile)
         }
 
         FSEToolButton {
-            source: "qrc:/tools/" + MyStyles.current.saveFile + ".svg"
+            source: "qrc:/tools/" + MyStyles.style.saveFile + ".svg"
             onClicked: openDialog(FileDialog.SaveFile)
         }
 
         FSEToolButton {
-            source: "qrc:/tools/" + MyStyles.current.undo + ".svg"
+            source: "qrc:/tools/" + MyStyles.style.undo + ".svg"
             enabled: MyCommands.canUndo
             onClicked: MyCommands.undo()
         }
 
         FSEToolButton {
-            source: "qrc:/tools/" + MyStyles.current.redo + ".svg"
+            source: "qrc:/tools/" + MyStyles.style.redo + ".svg"
             enabled: MyCommands.canRedo
             onClicked: MyCommands.redo()
         }
 
         FSEToolButton {
-            source: "qrc:/tools/" + MyStyles.current.settings + ".svg"
+            source: "qrc:/tools/" + MyStyles.style.settings + ".svg"
             onClicked: root.settingsClicked()
         }
     }

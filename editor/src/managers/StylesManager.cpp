@@ -8,11 +8,11 @@
 namespace fse {
 
 struct StylesManager::Impl {
-	qsizetype index{ -1 };
-	QList<Style> styles;
+	Style style;
+	QString current{ "basic" };
 
-	bool loadStyle(const QString& path) {
-		QFile file(path);
+	void loadStyle() {
+		QFile file(QString(":/styles/%1.json").arg(current));
 
 		if (!file.open(QIODevice::ReadOnly)) {
 			assert(!"Style not found");
@@ -21,12 +21,9 @@ struct StylesManager::Impl {
 		try {
 			const auto& document = QJsonDocument::fromJson(file.readAll());
 			assert(!document.isNull());
-			Style style;
 			style.load(document.object());
-			styles.append(std::move(style));
-			return true;
 		} catch (const std::exception&) {
-			return false;
+			style = Style{};
 		}
 	}
 };
@@ -38,17 +35,7 @@ StylesManager::StylesManager(QObject* parent)
 StylesManager::~StylesManager() {}
 
 void StylesManager::init() {
-	// FIXME: Manage errors
-	_impl->loadStyle(":/styles/basic.json");
-	_impl->loadStyle(":/styles/dark.json");
-	_impl->loadStyle(":/styles/light.json");
-
-	// Default weird style
-	if (_impl->styles.empty()) {
-		_impl->styles.append(Style{});
-	}
-
-	setIndex(0);
+	_impl->loadStyle();
 }
 
 void StylesManager::createJson() const {
@@ -63,25 +50,19 @@ void StylesManager::createJson() const {
 	file.commit();
 }
 
-int StylesManager::index() const {
-	assert(_impl->index != -1);
-	return _impl->index;
+const QString& StylesManager::current() const {
+	return _impl->current;
 }
-void StylesManager::setIndex(int index) {
-	if (_impl->index != index) {
-		_impl->index = index;
-		emit indexUpdated();
+
+void StylesManager::setCurrent(const QString& current) {
+	if (_impl->current != current) {
+		_impl->current = current;
+		_impl->loadStyle();
 		emit currentUpdated();
 	}
 }
 
-const Style& StylesManager::current() const {
-	assert(0 <= _impl->index && _impl->index < _impl->styles.count());
-	return _impl->styles.at(_impl->index);
-}
-
-const QList<Style>& StylesManager::styles() const {
-	assert(!_impl->styles.empty());
-	return _impl->styles;
+const Style& StylesManager::style() const {
+	return _impl->style;
 }
 } // namespace fse

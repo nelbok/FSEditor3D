@@ -75,10 +75,10 @@ FSERectangle {
                 Layout.fillWidth: true
 
                 text: "Version " + MyManager.about.version
-                color: MyStyles.current.foreground.normal
-                font.bold: MyStyles.current.copyrightFont.bold
-                font.italic: MyStyles.current.copyrightFont.italic
-                font.pointSize: MyStyles.current.copyrightFont.pointSize
+                color: MyStyles.style.foreground.normal
+                font.bold: MyStyles.style.copyrightFont.bold
+                font.italic: MyStyles.style.copyrightFont.italic
+                font.pointSize: MyStyles.style.copyrightFont.pointSize
 
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
@@ -87,10 +87,10 @@ FSERectangle {
                 Layout.fillWidth: true
 
                 text: MyManager.about.copyright
-                color: MyStyles.current.foreground.normal
-                font.bold: MyStyles.current.copyrightFont.bold
-                font.italic: MyStyles.current.copyrightFont.italic
-                font.pointSize: MyStyles.current.copyrightFont.pointSize
+                color: MyStyles.style.foreground.normal
+                font.bold: MyStyles.style.copyrightFont.bold
+                font.italic: MyStyles.style.copyrightFont.italic
+                font.pointSize: MyStyles.style.copyrightFont.pointSize
 
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
@@ -108,17 +108,17 @@ FSERectangle {
                 spacing: 20
                 FSEIconButton {
                     imageHeight: 20
-                    source: "qrc:/social/" + MyStyles.current.github + ".svg"
+                    source: "qrc:/social/" + MyStyles.style.github + ".svg"
                     onClicked: Qt.openUrlExternally(MyManager.about.github)
                 }
                 FSEIconButton {
                     imageHeight: 20
-                    source: "qrc:/social/" + MyStyles.current.discord + ".svg"
+                    source: "qrc:/social/" + MyStyles.style.discord + ".svg"
                     onClicked: Qt.openUrlExternally(MyManager.about.discord)
                 }
                 FSEIconButton {
                     imageHeight: 20
-                    source: "qrc:/social/" + MyStyles.current.twitter + ".svg"
+                    source: "qrc:/social/" + MyStyles.style.twitter + ".svg"
                     onClicked: Qt.openUrlExternally(MyManager.about.twitter)
                 }
             }

@@ -35,16 +35,16 @@ RowLayout {
 
         // FIXME: Colors for hovered item in the popup
 
-        palette.text: MyStyles.current.foreground.normal // Foreground popup
-        palette.buttonText: MyStyles.current.foreground.normal // Foreground text
-        palette.button: (enabled) ? MyStyles.current.textfield.normal : MyStyles.current.textfield.disabled // Background color
-        palette.mid: MyStyles.current.textfield.normal // Button background color when popup shown
-        palette.window: MyStyles.current.textfield.normal // Popup background color
-        palette.dark: MyStyles.current.foreground.normal // Foreground indicator
+        palette.text: MyStyles.style.foreground.normal // Foreground popup
+        palette.buttonText: MyStyles.style.foreground.normal // Foreground text
+        palette.button: (enabled) ? MyStyles.style.textfield.normal : MyStyles.style.textfield.disabled // Background color
+        palette.mid: MyStyles.style.textfield.normal // Button background color when popup shown
+        palette.window: MyStyles.style.textfield.normal // Popup background color
+        palette.dark: MyStyles.style.foreground.normal // Foreground indicator
 
-        font.bold: MyStyles.current.normalFont.bold
-        font.italic: MyStyles.current.normalFont.italic
-        font.pointSize: MyStyles.current.normalFont.pointSize
+        font.bold: MyStyles.style.normalFont.bold
+        font.italic: MyStyles.style.normalFont.italic
+        font.pointSize: MyStyles.style.normalFont.pointSize
 
         onActivated: root.activated()
     }
