@@ -33,11 +33,11 @@ FSEModule {
 
         FSEComboBox {
             name: qsTr("Type")
-            model: [
-                { uuid: MyModel.Type.Character, name: qsTr("Character") },
-                { uuid: MyModel.Type.Link, name: qsTr("Link") },
-                { uuid: MyModel.Type.Place, name: qsTr("Place") },
-            ]
+            model: ListModel {
+                ListElement { uuid: MyModel.Type.Character; name: qsTr("Character") }
+                ListElement { uuid: MyModel.Type.Link; name: qsTr("Link") }
+                ListElement { uuid: MyModel.Type.Place; name: qsTr("Place") }
+            }
             currentIndex: (root.myData) ? indexOfValue(root.myData.type) : -1
             onActivated: { if (root.myData) MyCommands.modelCommand.setType(root.myData, valueAt(currentIndex)) }
         }

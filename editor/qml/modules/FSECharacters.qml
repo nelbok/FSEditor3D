@@ -66,32 +66,32 @@ FSEModule {
         }
         FSEComboBox {
             name: qsTr("Species")
-            model: [
-                { uuid: MyCharacter.Species.Human, name: qsTr("Human") },
+            model: ListModel {
+                ListElement { uuid: MyCharacter.Species.Human; name: qsTr("Human") }
 
                 // Demi human
-                { uuid: MyCharacter.Species.Fox, name: qsTr("Fox") },
-                { uuid: MyCharacter.Species.Cat, name: qsTr("Cat") },
-                { uuid: MyCharacter.Species.Dog, name: qsTr("Dog") },
-                { uuid: MyCharacter.Species.Bun, name: qsTr("Bun") },
-                { uuid: MyCharacter.Species.Rat, name: qsTr("Rat") },
+                ListElement { uuid: MyCharacter.Species.Fox; name: qsTr("Fox") }
+                ListElement { uuid: MyCharacter.Species.Cat; name: qsTr("Cat") }
+                ListElement { uuid: MyCharacter.Species.Dog; name: qsTr("Dog") }
+                ListElement { uuid: MyCharacter.Species.Bun; name: qsTr("Bun") }
+                ListElement { uuid: MyCharacter.Species.Rat; name: qsTr("Rat") }
 
                 // Monster
-                { uuid: MyCharacter.Species.Goblin, name: qsTr("Goblin") },
-                { uuid: MyCharacter.Species.Ogre, name: qsTr("Ogre") },
-                { uuid: MyCharacter.Species.Orc, name: qsTr("Orc") },
-                { uuid: MyCharacter.Species.Troll, name: qsTr("Troll") },
-                { uuid: MyCharacter.Species.Lizard, name: qsTr("Lizard") },
-            ]
+                ListElement { uuid: MyCharacter.Species.Goblin; name: qsTr("Goblin") }
+                ListElement { uuid: MyCharacter.Species.Ogre; name: qsTr("Ogre") }
+                ListElement { uuid: MyCharacter.Species.Orc; name: qsTr("Orc") }
+                ListElement { uuid: MyCharacter.Species.Troll; name: qsTr("Troll") }
+                ListElement { uuid: MyCharacter.Species.Lizard; name: qsTr("Lizard") }
+            }
             currentIndex: { (root.myData) ? indexOfValue(root.myData.species) : -1 }
             onActivated: { if (root.myData) MyCommands.characterCommand.setSpecies(root.myData, valueAt(currentIndex)) }
         }
         FSEComboBox {
             name: qsTr("Gender")
-            model: [
-                { uuid: MyCharacter.Gender.Male, name: qsTr("Male") },
-                { uuid: MyCharacter.Gender.Female, name: qsTr("Female") },
-            ]
+            model: ListModel {
+                ListElement { uuid: MyCharacter.Gender.Male; name: qsTr("Male") }
+                ListElement { uuid: MyCharacter.Gender.Female; name: qsTr("Female") }
+            }
             currentIndex: (root.myData) ? indexOfValue(root.myData.gender) : -1
             onActivated: { if (root.myData) MyCommands.characterCommand.setGender(root.myData, valueAt(currentIndex)) }
         }
