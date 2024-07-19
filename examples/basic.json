@@ -1,22 +1,13 @@
 {
     "characters": [
         {
-            "clothes": {
-                "a": 255,
-                "b": 0,
-                "g": 0,
-                "r": 255
-            },
+            "clothes": "#ffff0000",
             "gender": 0,
-            "hair": {
-                "a": 255,
-                "b": 42,
-                "g": 42,
-                "r": 165
-            },
+            "hair": "#ffa52a2a",
             "height": 170,
-            "name": "Character 1",
-            "place": "{c01693b8-142f-4ec4-8842-0d38e5ce5d6f}",
+            "model": "b95cf6d6-6a59-4524-8379-9d5cb047ad40",
+            "name": "Character A",
+            "place": "9042bf72-b5ae-4d38-913e-ea34f11ed8a8",
             "position": {
                 "x": 0,
                 "y": 0,
@@ -27,32 +18,18 @@
                 "y": 0,
                 "z": 0
             },
-            "skin": {
-                "a": 255,
-                "b": 225,
-                "g": 228,
-                "r": 255
-            },
+            "skin": "#ffffe4e1",
             "species": 0,
-            "uuid": "{6ea7698c-2dbc-410d-b940-80620ef34315}"
+            "uuid": "0c07dee1-70f8-408b-8aa3-8f951abb114f"
         },
         {
-            "clothes": {
-                "a": 255,
-                "b": 0,
-                "g": 0,
-                "r": 255
-            },
-            "gender": 0,
-            "hair": {
-                "a": 255,
-                "b": 42,
-                "g": 42,
-                "r": 165
-            },
-            "height": 170,
-            "name": "Character 2",
-            "place": "{49223584-1fca-412b-bb3c-001e51eab9e1}",
+            "clothes": "#ffff0000",
+            "gender": 1,
+            "hair": "#ffa52a2a",
+            "height": 165,
+            "model": "b95cf6d6-6a59-4524-8379-9d5cb047ad40",
+            "name": "Character B",
+            "place": "9042bf72-b5ae-4d38-913e-ea34f11ed8a8",
             "position": {
                 "x": 0,
                 "y": 0,
@@ -63,22 +40,18 @@
                 "y": 0,
                 "z": 0
             },
-            "skin": {
-                "a": 255,
-                "b": 225,
-                "g": 228,
-                "r": 255
-            },
+            "skin": "#ffffe4e1",
             "species": 0,
-            "uuid": "{0382f878-bbb4-4337-9ad3-99e71a79fd4d}"
+            "uuid": "5f1c1d25-dc63-4ac6-a776-5311b996bf7d"
         }
     ],
-    "defaultPlace": "{c01693b8-142f-4ec4-8842-0d38e5ce5d6f}",
+    "defaultPlace": "00000000-0000-0000-0000-000000000000",
     "links": [
         {
-            "link": "{caf9be33-b457-4fd8-a770-b4c777500f1b}",
-            "name": "Link 1",
-            "place": "{c01693b8-142f-4ec4-8842-0d38e5ce5d6f}",
+            "link": "2be77406-c07f-4601-9b3d-17776d569d1a",
+            "model": "da9a64ae-a9df-4712-a9a8-5ab7f8795483",
+            "name": "Portal A",
+            "place": "9042bf72-b5ae-4d38-913e-ea34f11ed8a8",
             "position": {
                 "x": 0,
                 "y": 0,
@@ -89,12 +62,13 @@
                 "y": 0,
                 "z": 0
             },
-            "uuid": "{e8c45c0e-67bb-4169-b859-93fe5efc1e2e}"
+            "uuid": "91beda3c-d55a-4796-93fb-d3104a8fe0cd"
         },
         {
-            "link": "{e8c45c0e-67bb-4169-b859-93fe5efc1e2e}",
-            "name": "Link 2",
-            "place": "{49223584-1fca-412b-bb3c-001e51eab9e1}",
+            "link": "91beda3c-d55a-4796-93fb-d3104a8fe0cd",
+            "model": "da9a64ae-a9df-4712-a9a8-5ab7f8795483",
+            "name": "Portal B",
+            "place": "8399ddbc-d0f4-448e-824c-71a21888e51e",
             "position": {
                 "x": 0,
                 "y": 0,
@@ -105,23 +79,51 @@
                 "y": 0,
                 "z": 0
             },
-            "uuid": "{caf9be33-b457-4fd8-a770-b4c777500f1b}"
+            "uuid": "2be77406-c07f-4601-9b3d-17776d569d1a"
         }
     ],
-    "name": "Default",
+    "models": [
+        {
+            "name": "Place Model 1",
+            "qmlName": "",
+            "sourcePath": "",
+            "type": 1,
+            "uuid": "439dc25b-122a-4e96-81ec-8a024511dc3c"
+        },
+        {
+            "name": "Place Model 2",
+            "qmlName": "",
+            "sourcePath": "",
+            "type": 1,
+            "uuid": "9087460b-766a-4fed-af5c-51bb2e3023d3"
+        },
+        {
+            "name": "Basic Character",
+            "qmlName": "",
+            "sourcePath": "",
+            "type": 2,
+            "uuid": "b95cf6d6-6a59-4524-8379-9d5cb047ad40"
+        },
+        {
+            "name": "Portal",
+            "qmlName": "",
+            "sourcePath": "",
+            "type": 0,
+            "uuid": "da9a64ae-a9df-4712-a9a8-5ab7f8795483"
+        }
+    ],
+    "name": "Basic",
     "places": [
         {
+            "model": "439dc25b-122a-4e96-81ec-8a024511dc3c",
             "name": "Place 1",
-            "uuid": "{3a850f15-dc92-4bc0-bd79-88d9e052163c}"
+            "uuid": "9042bf72-b5ae-4d38-913e-ea34f11ed8a8"
         },
         {
+            "model": "9087460b-766a-4fed-af5c-51bb2e3023d3",
             "name": "Place 2",
-            "uuid": "{c01693b8-142f-4ec4-8842-0d38e5ce5d6f}"
-        },
-        {
-            "name": "Place 3",
-            "uuid": "{49223584-1fca-412b-bb3c-001e51eab9e1}"
+            "uuid": "8399ddbc-d0f4-448e-824c-71a21888e51e"
         }
     ],
-    "uuid": "{faae70cf-2506-44e2-8ae5-d0dd2248f377}"
+    "uuid": "a0b346f4-8bb4-4c7f-8ca7-404857e62810"
 }

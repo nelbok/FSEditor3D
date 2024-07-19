@@ -37,6 +37,12 @@ void SaveThread::run() {
 			_result = fsd::FileManager::Result::Canceled;
 			break;
 		}
+
+		// No source, no copy
+		if (model->qmlName() == "") {
+			continue;
+		}
+
 		const auto& oldPath = Tools::modelPath(_manager->oldPath(), model);
 		const auto& newPath = Tools::modelPath(_manager->path(), model);
 		if (fs::exists(oldPath)) {
