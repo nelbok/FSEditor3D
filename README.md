@@ -1,9 +1,13 @@
-# LH Editor 3D
+# Foxxy Soft Editor 3D
 
 ## About
 
 Create a project with multiple maps.
-More informations later.
+- Using Balsam to convert 3D models into QML file
+- One model can be used for one of more places, characters or links
+- Links are used to have a connection between places
+- Characters can be anything put in a place
+- JSON is the file format
 
 ## Requirements
 
