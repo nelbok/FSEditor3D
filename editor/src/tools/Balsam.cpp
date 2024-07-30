@@ -20,7 +20,32 @@ const QUrl& path(fse::Manager* manager) {
 	assert(manager->tmpPath().isValid());
 	return manager->tmpPath();
 }
+
+fs::path searchQmlPath(fse::Manager* manager, fsd::Model* model) {
+	const auto& modelPath = Tools::modelPath(detail::path(manager), model);
+	if (!fs::exists(modelPath))
+		return {};
+
+	for (const auto& dir_entry : fs::directory_iterator(modelPath)) {
+		if (dir_entry.is_regular_file()) {
+			const auto& path = dir_entry.path();
+			if (path.extension() == ".qml") {
+				return path;
+			}
+		}
+	}
+	return {};
+}
+
+fs::path searchQmlFile(fse::Manager* manager, fsd::Model* model) {
+	const auto& path = detail::searchQmlPath(manager, model);
+	if (path.empty()) {
+		return {};
+	}
+	return path.filename();
+}
 } // namespace detail
+
 Balsam::Balsam(QObject* parent)
 	: QObject(parent) {}
 
@@ -52,6 +77,12 @@ void Balsam::generate(fsd::Model* model, const QUrl& url) {
 	_current = model;
 	_sourcePath = url;
 
+	// Verify that there are no other qml file
+	const auto& qmlFile = detail::searchQmlPath(_manager, _current);
+	if (!qmlFile.empty() && fs::exists(qmlFile)) {
+		fs::remove(qmlFile);
+	}
+
 	QStringList args;
 	args << "--outputPath";
 	args << QString::fromStdString(Tools::modelPath(detail::path(_manager), model).string());
@@ -62,10 +93,9 @@ void Balsam::generate(fsd::Model* model, const QUrl& url) {
 
 void Balsam::finalize() {
 	if (_process->exitStatus() == QProcess::NormalExit && _process->exitCode() == 0) {
-		const auto qmlName = fs::path(Tools::toPath(_sourcePath).toStdString()).stem().string() + ".qml";
 		const auto& mc = _manager->commandsManager()->modelCommand();
 		mc->setSourcePath(_current, _sourcePath);
-		mc->setQmlName(_current, QString::fromStdString(qmlName));
+		mc->setQmlName(_current, QString::fromStdString(detail::searchQmlFile(_manager, _current).string()));
 	} else {
 		emit errorOccurred();
 	}

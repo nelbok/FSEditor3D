@@ -67,6 +67,10 @@ View3D {
     function load(url) {
         clean()
         cpt = Qt.createComponent(url);
+
+        if (cpt.status === Component.Error)
+            console.log("Error while loading:" + cpt.errorString());
+
         if (cpt.status === Component.Ready)
             finishLoading()
         else
