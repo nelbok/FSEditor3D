@@ -36,9 +36,9 @@ public:
 			if (_type == Type::Load) {
 				emit _project->nameUpdated();
 				emit _project->defaultPlaceUpdated();
-				emit _project->charactersUpdated();
 				emit _project->linksUpdated();
 				emit _project->modelsUpdated();
+				emit _project->objectsUpdated();
 				emit _project->placesUpdated();
 			}
 			disconnect(this, &QThread::finished, QCoreApplication::instance(), nullptr);

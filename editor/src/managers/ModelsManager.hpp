@@ -4,17 +4,17 @@
 
 #include <fsd/data/Project.hpp>
 
-#include "models/CharacterModel.hpp"
 #include "models/LinkModel.hpp"
 #include "models/ModelModel.hpp"
+#include "models/ObjectModel.hpp"
 #include "models/PlaceModel.hpp"
 
 namespace fse {
 class ModelsManager : public QObject {
 	Q_OBJECT
-	Q_PROPERTY(CharacterModel* characterModel READ characterModel CONSTANT)
 	Q_PROPERTY(LinkModel* linkModel READ linkModel CONSTANT)
 	Q_PROPERTY(ModelModel* modelModel READ modelModel CONSTANT)
+	Q_PROPERTY(ObjectModel* objectModel READ objectModel CONSTANT)
 	Q_PROPERTY(PlaceModel* placeModel READ placeModel CONSTANT)
 
 public:
@@ -23,9 +23,9 @@ public:
 
 	void init(fsd::Project* project);
 
-	CharacterModel* characterModel() const;
 	LinkModel* linkModel() const;
 	ModelModel* modelModel() const;
+	ObjectModel* objectModel() const;
 	PlaceModel* placeModel() const;
 
 private:

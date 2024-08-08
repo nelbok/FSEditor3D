@@ -13,8 +13,4 @@ ObjectCommand::ObjectCommand(Commands* commands)
 
 ObjectCommand::~ObjectCommand() {}
 
-void ObjectCommand::setModel(fsd::Object* o, fsd::Model* newValue) {
-	addValueCommand(_c, o, &fsd::Object::setModel, &fsd::Object::model, newValue);
-}
-
 } // namespace fse

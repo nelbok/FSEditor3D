@@ -3,12 +3,12 @@
 #include "EntityModel.hpp"
 
 namespace fse {
-class CharacterModel : public EntityModel {
+class ObjectModel : public EntityModel {
 	Q_OBJECT
 
 public:
-	CharacterModel(fsd::Project* project, QObject* parent = nullptr);
-	virtual ~CharacterModel();
+	ObjectModel(fsd::Project* project, QObject* parent = nullptr);
+	virtual ~ObjectModel();
 
 	virtual void initDatas() override;
 

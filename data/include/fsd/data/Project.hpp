@@ -5,17 +5,17 @@
 #include <fsd/data/Entity.hpp>
 
 namespace fsd {
-class Character;
 class Link;
 class Model;
+class Object;
 class Place;
 
 class Project : public Entity {
 	Q_OBJECT
 	Q_PROPERTY(Place* defaultPlace READ defaultPlace WRITE setDefaultPlace NOTIFY defaultPlaceUpdated)
-	Q_PROPERTY(QList<Character*> characters READ characters WRITE setCharacters NOTIFY charactersUpdated)
 	Q_PROPERTY(QList<Link*> links READ links WRITE setLinks NOTIFY linksUpdated)
 	Q_PROPERTY(QList<Model*> models READ models WRITE setModels NOTIFY modelsUpdated)
+	Q_PROPERTY(QList<Object*> objects READ objects WRITE setObjects NOTIFY objectsUpdated)
 	Q_PROPERTY(QList<Place*> places READ places WRITE setPlaces NOTIFY placesUpdated)
 
 public:
@@ -26,14 +26,6 @@ public:
 
 	Place* defaultPlace() const;
 	void setDefaultPlace(Place* defaultPlace);
-
-	// Characters
-	const QList<Character*>& characters() const;
-	void setCharacters(const QList<Character*>& character);
-	Character* createCharacter();
-	void removeCharacter(Character* character);
-	Character* duplicateCharacter(Character* character);
-	void cleanCharacters();
 
 	// Links
 	const QList<Link*>& links() const;
@@ -50,6 +42,14 @@ public:
 	void removeModel(Model* model);
 	Model* duplicateModel(Model* model);
 	void cleanModels();
+
+	// Objects
+	const QList<Object*>& objects() const;
+	void setObjects(const QList<Object*>& object);
+	Object* createObject();
+	void removeObject(Object* object);
+	Object* duplicateObject(Object* object);
+	void cleanObjects();
 
 	// Places
 	const QList<Place*>& places() const;
@@ -71,9 +71,9 @@ private:
 
 signals:
 	void defaultPlaceUpdated();
-	void charactersUpdated();
 	void linksUpdated();
 	void modelsUpdated();
+	void objectsUpdated();
 	void placesUpdated();
 };
 } // namespace fsd

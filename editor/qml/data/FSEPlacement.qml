@@ -1,13 +1,15 @@
 import QtQuick
+import QtQuick.Layouts
 
 import editor
 
-FSEObject {
+ColumnLayout {
     property MyPlacement placement: null
 
     id: root
 
-    object: placement
+    spacing: 5
+    enabled: root.placement
 
     FSEVector3DField {
         name: qsTr("Position")

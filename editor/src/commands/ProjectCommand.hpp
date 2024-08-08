@@ -17,10 +17,6 @@ public:
 
 	Q_INVOKABLE void setDefaultPlace(fsd::Place* defaultPlace);
 
-	Q_INVOKABLE void createCharacter();
-	Q_INVOKABLE void removeCharacter(fsd::Character* character);
-	Q_INVOKABLE void duplicateCharacter(fsd::Character* character);
-
 	Q_INVOKABLE void createLink();
 	Q_INVOKABLE void removeLink(fsd::Link* link);
 	Q_INVOKABLE void duplicateLink(fsd::Link* link);
@@ -28,6 +24,10 @@ public:
 	Q_INVOKABLE void createModel();
 	Q_INVOKABLE void removeModel(fsd::Model* model);
 	Q_INVOKABLE void duplicateModel(fsd::Model* model);
+
+	Q_INVOKABLE void createObject();
+	Q_INVOKABLE void removeObject(fsd::Object* object);
+	Q_INVOKABLE void duplicateObject(fsd::Object* object);
 
 	Q_INVOKABLE void createPlace();
 	Q_INVOKABLE void removePlace(fsd::Place* place);

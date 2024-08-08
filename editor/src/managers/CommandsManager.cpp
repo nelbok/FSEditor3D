@@ -5,7 +5,6 @@
 namespace fse {
 struct CommandsManager::Impl {
 	Commands* commands{ nullptr };
-	CharacterCommand* characterCommand{ nullptr };
 	EntityCommand* entityCommand{ nullptr };
 	LinkCommand* linkCommand{ nullptr };
 	ModelCommand* modelCommand{ nullptr };
@@ -13,6 +12,7 @@ struct CommandsManager::Impl {
 	PlaceCommand* placeCommand{ nullptr };
 	PlacementCommand* placementCommand{ nullptr };
 	ProjectCommand* projectCommand{ nullptr };
+	ShapeCommand* shapeCommand{ nullptr };
 };
 
 CommandsManager::CommandsManager(QObject* parent)
@@ -30,7 +30,6 @@ void CommandsManager::init(fsd::Project* project) {
 	connect(_impl->commands, &Commands::updated, this, &CommandsManager::updated);
 
 	//commands
-	_impl->characterCommand = new CharacterCommand(_impl->commands);
 	_impl->entityCommand = new EntityCommand(_impl->commands);
 	_impl->linkCommand = new LinkCommand(_impl->commands);
 	_impl->modelCommand = new ModelCommand(_impl->commands);
@@ -38,6 +37,7 @@ void CommandsManager::init(fsd::Project* project) {
 	_impl->placeCommand = new PlaceCommand(_impl->commands);
 	_impl->placementCommand = new PlacementCommand(_impl->commands);
 	_impl->projectCommand = new ProjectCommand(project, this, _impl->commands);
+	_impl->shapeCommand = new ShapeCommand(_impl->commands);
 
 	reset();
 }
@@ -60,11 +60,6 @@ void CommandsManager::undo() {
 
 void CommandsManager::redo() {
 	_impl->commands->redo();
-}
-
-CharacterCommand* CommandsManager::characterCommand() const {
-	assert(_impl->characterCommand);
-	return _impl->characterCommand;
 }
 
 EntityCommand* CommandsManager::entityCommand() const {
@@ -100,5 +95,10 @@ PlacementCommand* CommandsManager::placementCommand() const {
 ProjectCommand* CommandsManager::projectCommand() const {
 	assert(_impl->projectCommand);
 	return _impl->projectCommand;
+}
+
+ShapeCommand* CommandsManager::shapeCommand() const {
+	assert(_impl->shapeCommand);
+	return _impl->shapeCommand;
 }
 } // namespace fse

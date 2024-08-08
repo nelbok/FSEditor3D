@@ -1,8 +1,8 @@
 #include <fsd/data/UuidPointer.hpp>
 
-#include <fsd/data/Character.hpp>
 #include <fsd/data/Link.hpp>
 #include <fsd/data/Model.hpp>
+#include <fsd/data/Object.hpp>
 #include <fsd/data/Place.hpp>
 #include <fsd/data/Project.hpp>
 
@@ -40,16 +40,16 @@ const QUuid& BasePointer::uuid() const {
 	return _uuid;
 }
 
-UuidPointer<Character>* makeCharacterPointer(Project* project, Entity* parent) {
-	return new UuidPointer<Character>(project, &Project::characters, &Project::charactersUpdated, parent);
-}
-
 UuidPointer<Link>* makeLinkPointer(Project* project, Entity* parent) {
 	return new UuidPointer<Link>(project, &Project::links, &Project::linksUpdated, parent);
 }
 
 UuidPointer<Model>* makeModelPointer(Project* project, Entity* parent) {
 	return new UuidPointer<Model>(project, &Project::models, &Project::modelsUpdated, parent);
+}
+
+UuidPointer<Object>* makeObjectPointer(Project* project, Entity* parent) {
+	return new UuidPointer<Object>(project, &Project::objects, &Project::objectsUpdated, parent);
 }
 
 UuidPointer<Place>* makePlacePointer(Project* project, Entity* parent) {

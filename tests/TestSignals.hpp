@@ -2,8 +2,8 @@
 
 #include <QtTest/QtTest>
 
-#include <fsd/data/Character.hpp>
 #include <fsd/data/Link.hpp>
+#include <fsd/data/Object.hpp>
 #include <fsd/data/Project.hpp>
 #include <fsd/data/Place.hpp>
 

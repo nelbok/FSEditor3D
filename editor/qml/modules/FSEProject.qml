@@ -7,7 +7,7 @@ FSEModule {
     id: root
     title: qsTr("Project")
 
-    placement: FSEEntity {
+    entity: FSEEntity {
         entity: MyProject
     }
 

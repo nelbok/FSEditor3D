@@ -3,9 +3,9 @@
 namespace fse {
 
 struct ModelsManager::Impl {
-	CharacterModel* characterModel{ nullptr };
 	LinkModel* linkModel{ nullptr };
 	ModelModel* modelModel{ nullptr };
+	ObjectModel* objectModel{ nullptr };
 	PlaceModel* placeModel{ nullptr };
 };
 
@@ -19,20 +19,15 @@ ModelsManager::~ModelsManager() {
 void ModelsManager::init(fsd::Project* project) {
 	assert(project);
 
-	_impl->characterModel = new CharacterModel(project, this);
+	_impl->objectModel = new ObjectModel(project, this);
 	_impl->linkModel = new LinkModel(project, this);
 	_impl->modelModel = new ModelModel(project, this);
 	_impl->placeModel = new PlaceModel(project, this);
 
-	_impl->characterModel->initDatas();
+	_impl->objectModel->initDatas();
 	_impl->linkModel->initDatas();
 	_impl->modelModel->initDatas();
 	_impl->placeModel->initDatas();
-}
-
-CharacterModel* ModelsManager::characterModel() const {
-	assert(_impl->characterModel);
-	return _impl->characterModel;
 }
 
 LinkModel* ModelsManager::linkModel() const {
@@ -43,6 +38,11 @@ LinkModel* ModelsManager::linkModel() const {
 ModelModel* ModelsManager::modelModel() const {
 	assert(_impl->modelModel);
 	return _impl->modelModel;
+}
+
+ObjectModel* ModelsManager::objectModel() const {
+	assert(_impl->objectModel);
+	return _impl->objectModel;
 }
 
 PlaceModel* ModelsManager::placeModel() const {

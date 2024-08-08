@@ -18,8 +18,8 @@ Window {
                 return models.myData
             if (places.enabled && places.myData)
                 return places.myData.model
-            if (characters.enabled && characters.myData)
-                return characters.myData.model
+            if (objects.enabled && objects.myData)
+                return objects.myData.model
             if (links.enabled && links.myData)
                 return links.myData.model
             return null
@@ -53,13 +53,13 @@ Window {
         enabled: (menu.selected === FSEMenu.ModuleType.Places) && !(progress.visible || message.visible)
     }
 
-    FSECharacters {
-        id: characters
+    FSEObjects {
+        id: objects
 
         anchors.top: menu.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
-        enabled: (menu.selected === FSEMenu.ModuleType.Characters) && !(progress.visible || message.visible)
+        enabled: (menu.selected === FSEMenu.ModuleType.Objects) && !(progress.visible || message.visible)
     }
 
     FSELinks {

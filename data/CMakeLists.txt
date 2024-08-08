@@ -1,7 +1,6 @@
 qt_standard_project_setup(REQUIRES 6.5)
 set(CMAKE_DEBUG_POSTFIX _d)
 set(PROJECT_SOURCES
-	include/fsd/data/Character.hpp
 	include/fsd/data/Entity.hpp
 	include/fsd/data/Link.hpp
 	include/fsd/data/Model.hpp
@@ -9,12 +8,12 @@ set(PROJECT_SOURCES
 	include/fsd/data/Place.hpp
 	include/fsd/data/Placement.hpp
 	include/fsd/data/Project.hpp
+	include/fsd/data/Shape.hpp
 	include/fsd/data/UuidPointer.hpp
 	include/fsd/io/FileManager.hpp
 	include/fsd/io/Json.hpp
 
 	src/common/Accessors.hpp
-	src/data/Character.cpp
 	src/data/Entity.cpp
 	src/data/Link.cpp
 	src/data/Model.cpp
@@ -22,6 +21,7 @@ set(PROJECT_SOURCES
 	src/data/Place.cpp
 	src/data/Placement.cpp
 	src/data/Project.cpp
+	src/data/Shape.cpp
 	src/data/UuidPointer.cpp
 	src/io/FileManager.cpp
 	src/io/Json.cpp

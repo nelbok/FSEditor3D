@@ -6,24 +6,24 @@ namespace fsd {
 struct Place::Impl {};
 
 Place::Place(Project* project)
-	: Object(project)
+	: Shape(project)
 	, _impl{ std::make_unique<Impl>() } {}
 
 Place::~Place() {}
 
 void Place::reset() {
-	Object::reset();
+	Shape::reset();
 }
 
 void Place::copy(const Place& place) {
-	Object::copy(place);
+	Shape::copy(place);
 }
 
 void Place::load(const QJsonObject& json) {
-	Object::load(json);
+	Shape::load(json);
 }
 
 void Place::save(QJsonObject& json) const {
-	Object::save(json);
+	Shape::save(json);
 }
 } // namespace fsd

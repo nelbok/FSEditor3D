@@ -4,14 +4,14 @@ import QtQuick.Layouts
 import editor
 
 FSEModule {
-    property MyPlace myData: null
+    property MyObject myData: null
 
     id: root
-    title: qsTr("Places")
+    title: qsTr("Objects")
 
     MySelectionWrapper {
         id: mng
-        model: MyModels.placeModel
+        model: MyModels.objectModel
         onCurrentDataChanged: root.myData = currentData
     }
 
@@ -21,16 +21,20 @@ FSEModule {
         removeEnabled: mng.currentData && !mng.currentData.hasRef
         duplicateEnabled: mng.currentData
 
-        onCreateClicked: { MyCommands.projectCommand.createPlace() }
-        onRemoveClicked: { MyCommands.projectCommand.removePlace(mng.currentData) }
-        onDuplicateClicked: { MyCommands.projectCommand.duplicatePlace(mng.currentData) }
+        onCreateClicked: { MyCommands.projectCommand.createObject() }
+        onRemoveClicked: { MyCommands.projectCommand.removeObject(mng.currentData) }
+        onDuplicateClicked: { MyCommands.projectCommand.duplicateObject(mng.currentData) }
         onItemClicked: (index) => { mng.currentIndex = index }
     }
 
     entity: FSEShape {
         shape: root.myData
         filters: {
-            "type": MyModel.Type.Place,
+            "type": MyModel.Type.Object,
         }
+    }
+
+    partA: FSEPlacement {
+        placement: root.myData
     }
 }

@@ -2,9 +2,9 @@
 
 #include <QtTest/QtTest>
 
-#include <fsd/data/Character.hpp>
 #include <fsd/data/Link.hpp>
 #include <fsd/data/Model.hpp>
+#include <fsd/data/Object.hpp>
 #include <fsd/data/Place.hpp>
 #include <fsd/data/Project.hpp>
 
@@ -19,9 +19,9 @@ struct TestLists {
 	void run() {
 		QVERIFY(_project);
 
-		testCharacters();
 		testLinks();
 		testModels();
+		testObjects();
 		testPlaces();
 	}
 
@@ -30,22 +30,6 @@ private:
 	TestCompare _compare{ false };
 
 	// LISTS
-	void testCharacters() {
-		QVERIFY(_project->characters().size() == 0);
-
-		auto* left = _project->createCharacter();
-		QVERIFY(left);
-
-		auto* right = _project->duplicateCharacter(left);
-		_compare.testCharacter(left, right);
-
-		_project->removeCharacter(left);
-		QVERIFY(_project->characters().size() == 1);
-
-		_project->cleanCharacters();
-		QVERIFY(_project->characters().size() == 0);
-	}
-
 	void testLinks() {
 		QVERIFY(_project->links().size() == 0);
 
@@ -76,6 +60,22 @@ private:
 
 		_project->cleanModels();
 		QVERIFY(_project->models().size() == 0);
+	}
+
+	void testObjects() {
+		QVERIFY(_project->objects().size() == 0);
+
+		auto* left = _project->createObject();
+		QVERIFY(left);
+
+		auto* right = _project->duplicateObject(left);
+		_compare.testObject(left, right);
+
+		_project->removeObject(left);
+		QVERIFY(_project->objects().size() == 1);
+
+		_project->cleanObjects();
+		QVERIFY(_project->objects().size() == 0);
 	}
 
 	void testPlaces() {

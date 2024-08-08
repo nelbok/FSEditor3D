@@ -1,11 +1,11 @@
 #pragma once
 
-#include <fsd/data/Object.hpp>
+#include <fsd/data/Shape.hpp>
 
 namespace fsd {
 class Project;
 
-class Place : public Object {
+class Place : public Shape {
 	Q_OBJECT
 
 public:

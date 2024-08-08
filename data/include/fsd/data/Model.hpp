@@ -17,7 +17,7 @@ public:
 	enum class Type {
 		Link,
 		Place,
-		Character,
+		Object,
 	};
 	Q_ENUM(Type)
 

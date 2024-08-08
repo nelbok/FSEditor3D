@@ -2,129 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US">
 <context>
-    <name>FSECharacters</name>
-    <message>
-        <location filename="../qml/modules/FSECharacters.qml" line="10"/>
-        <location filename="../../build/editor/editor/qml/modules/FSECharacters.qml" line="10"/>
-        <source>Characters</source>
-        <translation>Characters</translation>
-    </message>
-    <message>
-        <location filename="../qml/modules/FSECharacters.qml" line="41"/>
-        <location filename="../../build/editor/editor/qml/modules/FSECharacters.qml" line="41"/>
-        <source>Hair</source>
-        <translation>Hair</translation>
-    </message>
-    <message>
-        <location filename="../qml/modules/FSECharacters.qml" line="46"/>
-        <location filename="../../build/editor/editor/qml/modules/FSECharacters.qml" line="46"/>
-        <source>Skin</source>
-        <translation>Skin</translation>
-    </message>
-    <message>
-        <location filename="../qml/modules/FSECharacters.qml" line="51"/>
-        <location filename="../../build/editor/editor/qml/modules/FSECharacters.qml" line="51"/>
-        <source>Clothes</source>
-        <translation>Clothes</translation>
-    </message>
-    <message>
-        <location filename="../qml/modules/FSECharacters.qml" line="61"/>
-        <location filename="../../build/editor/editor/qml/modules/FSECharacters.qml" line="61"/>
-        <source>Height</source>
-        <translation>Height</translation>
-    </message>
-    <message>
-        <location filename="../qml/modules/FSECharacters.qml" line="68"/>
-        <location filename="../../build/editor/editor/qml/modules/FSECharacters.qml" line="68"/>
-        <source>Species</source>
-        <translation>Species</translation>
-    </message>
-    <message>
-        <location filename="../qml/modules/FSECharacters.qml" line="70"/>
-        <location filename="../../build/editor/editor/qml/modules/FSECharacters.qml" line="70"/>
-        <source>Human</source>
-        <translation>Human</translation>
-    </message>
-    <message>
-        <location filename="../qml/modules/FSECharacters.qml" line="73"/>
-        <location filename="../../build/editor/editor/qml/modules/FSECharacters.qml" line="73"/>
-        <source>Fox</source>
-        <translation>Fox</translation>
-    </message>
-    <message>
-        <location filename="../qml/modules/FSECharacters.qml" line="74"/>
-        <location filename="../../build/editor/editor/qml/modules/FSECharacters.qml" line="74"/>
-        <source>Cat</source>
-        <translation>Cat</translation>
-    </message>
-    <message>
-        <location filename="../qml/modules/FSECharacters.qml" line="75"/>
-        <location filename="../../build/editor/editor/qml/modules/FSECharacters.qml" line="75"/>
-        <source>Dog</source>
-        <translation>Dog</translation>
-    </message>
-    <message>
-        <location filename="../qml/modules/FSECharacters.qml" line="76"/>
-        <location filename="../../build/editor/editor/qml/modules/FSECharacters.qml" line="76"/>
-        <source>Bun</source>
-        <translation>Bun</translation>
-    </message>
-    <message>
-        <location filename="../qml/modules/FSECharacters.qml" line="77"/>
-        <location filename="../../build/editor/editor/qml/modules/FSECharacters.qml" line="77"/>
-        <source>Rat</source>
-        <translation>Rat</translation>
-    </message>
-    <message>
-        <location filename="../qml/modules/FSECharacters.qml" line="80"/>
-        <location filename="../../build/editor/editor/qml/modules/FSECharacters.qml" line="80"/>
-        <source>Goblin</source>
-        <translation>Goblin</translation>
-    </message>
-    <message>
-        <location filename="../qml/modules/FSECharacters.qml" line="81"/>
-        <location filename="../../build/editor/editor/qml/modules/FSECharacters.qml" line="81"/>
-        <source>Ogre</source>
-        <translation>Ogre</translation>
-    </message>
-    <message>
-        <location filename="../qml/modules/FSECharacters.qml" line="82"/>
-        <location filename="../../build/editor/editor/qml/modules/FSECharacters.qml" line="82"/>
-        <source>Orc</source>
-        <translation>Orc</translation>
-    </message>
-    <message>
-        <location filename="../qml/modules/FSECharacters.qml" line="83"/>
-        <location filename="../../build/editor/editor/qml/modules/FSECharacters.qml" line="83"/>
-        <source>Troll</source>
-        <translation>Troll</translation>
-    </message>
-    <message>
-        <location filename="../qml/modules/FSECharacters.qml" line="84"/>
-        <location filename="../../build/editor/editor/qml/modules/FSECharacters.qml" line="84"/>
-        <source>Lizard</source>
-        <translation>Lizard</translation>
-    </message>
-    <message>
-        <location filename="../qml/modules/FSECharacters.qml" line="90"/>
-        <location filename="../../build/editor/editor/qml/modules/FSECharacters.qml" line="90"/>
-        <source>Gender</source>
-        <translation>Gender</translation>
-    </message>
-    <message>
-        <location filename="../qml/modules/FSECharacters.qml" line="92"/>
-        <location filename="../../build/editor/editor/qml/modules/FSECharacters.qml" line="92"/>
-        <source>Male</source>
-        <translation>Male</translation>
-    </message>
-    <message>
-        <location filename="../qml/modules/FSECharacters.qml" line="93"/>
-        <location filename="../../build/editor/editor/qml/modules/FSECharacters.qml" line="93"/>
-        <source>Female</source>
-        <translation>Female</translation>
-    </message>
-</context>
-<context>
     <name>FSEEntity</name>
     <message>
         <location filename="../qml/data/FSEEntity.qml" line="15"/>
@@ -148,8 +25,8 @@
         <translation>Links</translation>
     </message>
     <message>
-        <location filename="../qml/modules/FSELinks.qml" line="41"/>
-        <location filename="../../build/editor/editor/qml/modules/FSELinks.qml" line="41"/>
+        <location filename="../qml/modules/FSELinks.qml" line="45"/>
+        <location filename="../../build/editor/editor/qml/modules/FSELinks.qml" line="45"/>
         <source>Link</source>
         <translation>Link</translation>
     </message>
@@ -198,8 +75,8 @@
     <message>
         <location filename="../qml/modules/FSEMenu.qml" line="58"/>
         <location filename="../../build/editor/editor/qml/modules/FSEMenu.qml" line="58"/>
-        <source>Characters</source>
-        <translation>Characters</translation>
+        <source>Objects</source>
+        <translation>Objects</translation>
     </message>
     <message>
         <location filename="../qml/modules/FSEMenu.qml" line="66"/>
@@ -226,26 +103,26 @@
         <translation>Models</translation>
     </message>
     <message>
-        <location filename="../qml/modules/FSEModels.qml" line="35"/>
-        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="35"/>
+        <location filename="../qml/modules/FSEModels.qml" line="40"/>
+        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="40"/>
         <source>Type</source>
         <translation>Type</translation>
     </message>
     <message>
-        <location filename="../qml/modules/FSEModels.qml" line="37"/>
-        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="37"/>
-        <source>Character</source>
-        <translation>Character</translation>
+        <location filename="../qml/modules/FSEModels.qml" line="42"/>
+        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="42"/>
+        <source>Object</source>
+        <translation>Object</translation>
     </message>
     <message>
-        <location filename="../qml/modules/FSEModels.qml" line="38"/>
-        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="38"/>
+        <location filename="../qml/modules/FSEModels.qml" line="43"/>
+        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="43"/>
         <source>Link</source>
         <translation>Link</translation>
     </message>
     <message>
-        <location filename="../qml/modules/FSEModels.qml" line="39"/>
-        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="39"/>
+        <location filename="../qml/modules/FSEModels.qml" line="44"/>
+        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="44"/>
         <source>Place</source>
         <translation>Place</translation>
     </message>
@@ -275,31 +152,31 @@
     </message>
 </context>
 <context>
-    <name>FSEObject</name>
+    <name>FSEObjects</name>
     <message>
-        <location filename="../qml/data/FSEObject.qml" line="14"/>
-        <location filename="../../build/editor/editor/qml/data/FSEObject.qml" line="14"/>
-        <source>Model</source>
-        <translation>Model</translation>
+        <location filename="../qml/modules/FSEObjects.qml" line="10"/>
+        <location filename="../../build/editor/editor/qml/modules/FSEObjects.qml" line="10"/>
+        <source>Objects</source>
+        <translation>Objects</translation>
     </message>
 </context>
 <context>
     <name>FSEPlacement</name>
     <message>
-        <location filename="../qml/data/FSEPlacement.qml" line="13"/>
-        <location filename="../../build/editor/editor/qml/data/FSEPlacement.qml" line="13"/>
+        <location filename="../qml/data/FSEPlacement.qml" line="15"/>
+        <location filename="../../build/editor/editor/qml/data/FSEPlacement.qml" line="15"/>
         <source>Position</source>
         <translation>Position</translation>
     </message>
     <message>
-        <location filename="../qml/data/FSEPlacement.qml" line="19"/>
-        <location filename="../../build/editor/editor/qml/data/FSEPlacement.qml" line="19"/>
+        <location filename="../qml/data/FSEPlacement.qml" line="21"/>
+        <location filename="../../build/editor/editor/qml/data/FSEPlacement.qml" line="21"/>
         <source>Rotation</source>
         <translation>Rotation</translation>
     </message>
     <message>
-        <location filename="../qml/data/FSEPlacement.qml" line="25"/>
-        <location filename="../../build/editor/editor/qml/data/FSEPlacement.qml" line="25"/>
+        <location filename="../qml/data/FSEPlacement.qml" line="27"/>
+        <location filename="../../build/editor/editor/qml/data/FSEPlacement.qml" line="27"/>
         <source>Place</source>
         <translation>Place</translation>
     </message>
@@ -404,6 +281,15 @@
         <location filename="../../build/editor/editor/qml/modules/FSESettings.qml" line="57"/>
         <source>Example C</source>
         <translation>Example C</translation>
+    </message>
+</context>
+<context>
+    <name>FSEShape</name>
+    <message>
+        <location filename="../qml/data/FSEShape.qml" line="14"/>
+        <location filename="../../build/editor/editor/qml/data/FSEShape.qml" line="14"/>
+        <source>Model</source>
+        <translation>Model</translation>
     </message>
 </context>
 <context>

@@ -2,13 +2,13 @@
 
 #include <QtGui/QVector3D>
 
-#include <fsd/data/Object.hpp>
+#include <fsd/data/Shape.hpp>
 
 namespace fsd {
 class Place;
 class Project;
 
-class Placement : public Object {
+class Placement : public Shape {
 	Q_OBJECT
 	Q_PROPERTY(QVector3D position READ position WRITE setPosition NOTIFY positionUpdated)
 	Q_PROPERTY(QVector3D rotation READ rotation WRITE setRotation NOTIFY rotationUpdated)

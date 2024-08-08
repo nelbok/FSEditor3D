@@ -7,7 +7,7 @@ FSERectangle {
     property alias title: title.text
 
     property Item selection: null
-    property Item placement: null
+    property Item entity: null
     property Item partA: null
     property Item partB: null
 
@@ -67,7 +67,7 @@ FSERectangle {
             width: 260
             height: 220
 
-            children: (root.placement) ? root.placement : []
+            children: (root.entity) ? root.entity : []
         }
 
         Item {

@@ -8,7 +8,7 @@ FSERectangle {
         Project,
         Models,
         Places,
-        Characters,
+        Objects,
         Links,
         Settings,
         None
@@ -53,11 +53,11 @@ FSERectangle {
         }
 
         FSEButton {
-            id: characters
+            id: objects
 
-            text: qsTr("Characters")
-            selected: root.selected === FSEMenu.ModuleType.Characters
-            onClicked: root.selected = FSEMenu.ModuleType.Characters
+            text: qsTr("Objects")
+            selected: root.selected === FSEMenu.ModuleType.Objects
+            onClicked: root.selected = FSEMenu.ModuleType.Objects
         }
 
         FSEButton {

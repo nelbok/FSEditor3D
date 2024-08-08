@@ -2,9 +2,9 @@
 
 #include <QtTest/QtTest>
 
-#include <fsd/data/Character.hpp>
 #include <fsd/data/Link.hpp>
 #include <fsd/data/Model.hpp>
+#include <fsd/data/Object.hpp>
 #include <fsd/data/Place.hpp>
 #include <fsd/data/Project.hpp>
 
@@ -13,17 +13,6 @@ struct TestCompare {
 		: _isSame{ isSame } {}
 
 	virtual ~TestCompare() = default;
-
-	void testCharacter(fsd::Character* left, fsd::Character* right) {
-		testPlacement(left, right);
-
-		QCOMPARE(left->hair(), right->hair());
-		QCOMPARE(left->skin(), right->skin());
-		QCOMPARE(left->clothes(), right->clothes());
-		QCOMPARE(left->height(), right->height());
-		QCOMPARE(left->species(), right->species());
-		QCOMPARE(left->gender(), right->gender());
-	}
 
 	void testEntity(fsd::Entity* left, fsd::Entity* right) {
 		if (_isSame) {
@@ -50,21 +39,25 @@ struct TestCompare {
 	}
 
 	void testObject(fsd::Object* left, fsd::Object* right) {
-		testEntity(left, right);
-
-		testUuidPointer(left->model(), right->model());
+		testPlacement(left, right);
 	}
 
 	void testPlace(fsd::Place* left, fsd::Place* right) {
-		testObject(left, right);
+		testShape(left, right);
 	}
 
 	void testPlacement(fsd::Placement* left, fsd::Placement* right) {
-		testObject(left, right);
+		testShape(left, right);
 
 		QCOMPARE(left->position(), right->position());
 		QCOMPARE(left->rotation(), right->rotation());
 		testUuidPointer(left->place(), right->place());
+	}
+
+	void testShape(fsd::Shape* left, fsd::Shape* right) {
+		testEntity(left, right);
+
+		testUuidPointer(left->model(), right->model());
 	}
 
 	void testProject(fsd::Project* left, fsd::Project* right) {
@@ -73,11 +66,11 @@ struct TestCompare {
 		testUuidPointer(left->defaultPlace(), right->defaultPlace());
 
 		{
-			const auto& ll = left->characters();
-			const auto& rl = right->characters();
+			const auto& ll = left->objects();
+			const auto& rl = right->objects();
 			QCOMPARE(ll.size(), rl.size());
 			for (qsizetype i = 0; i < ll.size(); ++i) {
-				testCharacter(ll.at(i), rl.at(i));
+				testObject(ll.at(i), rl.at(i));
 			}
 		}
 

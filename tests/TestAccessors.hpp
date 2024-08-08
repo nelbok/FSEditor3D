@@ -2,9 +2,9 @@
 
 #include <QtTest/QtTest>
 
-#include <fsd/data/Character.hpp>
 #include <fsd/data/Link.hpp>
 #include <fsd/data/Model.hpp>
+#include <fsd/data/Object.hpp>
 #include <fsd/data/Place.hpp>
 #include <fsd/data/Project.hpp>
 
@@ -17,51 +17,20 @@ struct TestAccessors {
 	void run() {
 		QVERIFY(_project);
 		_project->reset();
-		auto* character = _project->createCharacter();
 		auto* link = _project->createLink();
 		auto* model = _project->createModel();
 		auto* place = _project->createPlace();
+		auto* object = _project->createObject();
 
-		testCharacter(character, character->metaObject());
 		testLink(link, link->metaObject());
 		testModel(model, model->metaObject());
+		testObject(object, object->metaObject());
 		testPlace(place, place->metaObject());
 		testProject(_project, _project->metaObject());
 	}
 
 private:
 	fsd::Project* _project{ nullptr };
-
-	void testCharacter(fsd::Character* character, const QMetaObject* metaObject) {
-		testPlacement(character, metaObject->superClass());
-
-		const auto hair = QColor("blue");
-		character->setHair(hair);
-		QCOMPARE(character->hair(), hair);
-
-		const auto skin = QColor("white");
-		character->setSkin(skin);
-		QCOMPARE(character->skin(), skin);
-
-		const auto clothes = QColor("red");
-		character->setClothes(clothes);
-		QCOMPARE(character->clothes(), clothes);
-
-		const auto height = 177;
-		character->setHeight(height);
-		QCOMPARE(character->height(), height);
-
-		const auto species = fsd::Character::Species::Bun;
-		character->setSpecies(species);
-		QCOMPARE(character->species(), species);
-
-		const auto gender = fsd::Character::Gender::Female;
-		character->setGender(gender);
-		QCOMPARE(character->gender(), gender);
-
-		QCOMPARE(metaObject->propertyCount(), 15);
-		QCOMPARE(metaObject->propertyOffset(), 9);
-	}
 
 	void testEntity(fsd::Entity* entity, const QMetaObject* metaObject) {
 		QCOMPARE(metaObject->propertyCount(), 5);
@@ -107,25 +76,21 @@ private:
 	}
 
 	void testObject(fsd::Object* object, const QMetaObject* metaObject) {
-		testEntity(object, metaObject->superClass());
+		testPlacement(object, metaObject->superClass());
 
-		auto* model = _project->models().at(0);
-		object->setModel(model);
-		QCOMPARE(object->model(), model);
-
-		QCOMPARE(metaObject->propertyCount(), 6);
-		QCOMPARE(metaObject->propertyOffset(), 5);
+		QCOMPARE(metaObject->propertyCount(), 9);
+		QCOMPARE(metaObject->propertyOffset(), 9);
 	}
 
 	void testPlace(fsd::Place* place, const QMetaObject* metaObject) {
-		testObject(place, metaObject->superClass());
+		testShape(place, metaObject->superClass());
 
 		QCOMPARE(metaObject->propertyCount(), 6);
 		QCOMPARE(metaObject->propertyOffset(), 6);
 	}
 
 	void testPlacement(fsd::Placement* placement, const QMetaObject* metaObject) {
-		testObject(placement, metaObject->superClass());
+		testShape(placement, metaObject->superClass());
 
 		const auto position = QVector3D(0, 0, 0);
 		placement->setPosition(position);
@@ -143,6 +108,17 @@ private:
 		QCOMPARE(metaObject->propertyOffset(), 6);
 	}
 
+	void testShape(fsd::Shape* shape, const QMetaObject* metaObject) {
+		testEntity(shape, metaObject->superClass());
+
+		auto* model = _project->models().at(0);
+		shape->setModel(model);
+		QCOMPARE(shape->model(), model);
+
+		QCOMPARE(metaObject->propertyCount(), 6);
+		QCOMPARE(metaObject->propertyOffset(), 5);
+	}
+
 	void testProject(fsd::Project* project, const QMetaObject* metaObject) {
 		testEntity(project, metaObject->superClass());
 
@@ -153,9 +129,9 @@ private:
 		project->setDefaultPlace(place);
 		QCOMPARE(project->defaultPlace(), place);
 
-		QCOMPARE(project->characters().count(), 1);
 		QCOMPARE(project->links().count(), 1);
 		QCOMPARE(project->models().count(), 1);
+		QCOMPARE(project->objects().count(), 1);
 		QCOMPARE(project->places().count(), 1);
 	}
 };

@@ -14,8 +14,6 @@ public:
 	ObjectCommand(Commands* commands);
 	virtual ~ObjectCommand();
 
-	Q_INVOKABLE void setModel(fsd::Object* object, fsd::Model* model);
-
 protected:
 	Commands* _c{ nullptr };
 };

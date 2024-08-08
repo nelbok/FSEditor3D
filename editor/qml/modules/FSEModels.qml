@@ -28,24 +28,24 @@ FSEModule {
         onItemClicked: (index) => { mng.currentIndex = index }
     }
 
-    placement: FSEEntity {
+    entity: FSEEntity {
         entity: root.myData
+    }
+
+    partA: ColumnLayout {
+        spacing: 5
+        enabled: root.myData
 
         FSEComboBox {
             name: qsTr("Type")
             model: ListModel {
-                ListElement { uuid: MyModel.Type.Character; name: qsTr("Character") }
+                ListElement { uuid: MyModel.Type.Object; name: qsTr("Object") }
                 ListElement { uuid: MyModel.Type.Link; name: qsTr("Link") }
                 ListElement { uuid: MyModel.Type.Place; name: qsTr("Place") }
             }
             currentIndex: (root.myData) ? indexOfValue(root.myData.type) : -1
             onActivated: { if (root.myData) MyCommands.modelCommand.setType(root.myData, valueAt(currentIndex)) }
         }
-    }
-
-    partA: ColumnLayout {
-        spacing: 5
-        enabled: root.myData
 
         RowLayout {
             height: 40

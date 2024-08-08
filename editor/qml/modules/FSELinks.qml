@@ -27,14 +27,18 @@ FSEModule {
         onItemClicked: (index) => { mng.currentIndex = index }
     }
 
-    placement: FSEPlacement {
-        placement: root.myData
+    entity: FSEShape {
+        shape: root.myData
         filters: {
             "type": MyModel.Type.Link,
         }
     }
 
-    partA: ColumnLayout {
+    partA: FSEPlacement {
+        placement: root.myData
+    }
+
+    partB: ColumnLayout {
         spacing: 5
         enabled: root.myData
         FSEComboBox {

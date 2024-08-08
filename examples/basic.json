@@ -1,10 +1,6 @@
 {
-    "characters": [
+    "objects": [
         {
-            "clothes": "#ffff0000",
-            "gender": 0,
-            "hair": "#ffa52a2a",
-            "height": 170,
             "model": "b95cf6d6-6a59-4524-8379-9d5cb047ad40",
             "name": "Character A",
             "place": "9042bf72-b5ae-4d38-913e-ea34f11ed8a8",
@@ -18,15 +14,9 @@
                 "y": 0,
                 "z": 0
             },
-            "skin": "#ffffe4e1",
-            "species": 0,
             "uuid": "0c07dee1-70f8-408b-8aa3-8f951abb114f"
         },
         {
-            "clothes": "#ffff0000",
-            "gender": 1,
-            "hair": "#ffa52a2a",
-            "height": 165,
             "model": "b95cf6d6-6a59-4524-8379-9d5cb047ad40",
             "name": "Character B",
             "place": "9042bf72-b5ae-4d38-913e-ea34f11ed8a8",
@@ -40,12 +30,10 @@
                 "y": 0,
                 "z": 0
             },
-            "skin": "#ffffe4e1",
-            "species": 0,
             "uuid": "5f1c1d25-dc63-4ac6-a776-5311b996bf7d"
         }
     ],
-    "defaultPlace": "00000000-0000-0000-0000-000000000000",
+    "defaultPlace": "9042bf72-b5ae-4d38-913e-ea34f11ed8a8",
     "links": [
         {
             "link": "2be77406-c07f-4601-9b3d-17776d569d1a",

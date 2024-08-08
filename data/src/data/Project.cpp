@@ -5,9 +5,9 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QThread>
 
-#include <fsd/data/Character.hpp>
 #include <fsd/data/Link.hpp>
 #include <fsd/data/Model.hpp>
+#include <fsd/data/Object.hpp>
 #include <fsd/data/Place.hpp>
 #include <fsd/data/UuidPointer.hpp>
 #include <fsd/io/Json.hpp>
@@ -20,9 +20,9 @@ struct Project::Impl {
 	UuidPointer<Place>* defaultPlace{ nullptr };
 	QUrl path{};
 	bool isTemp{ true };
-	QList<Character*> characters{};
 	QList<Link*> links{};
 	QList<Model*> models{};
+	QList<Object*> objects{};
 	QList<Place*> places{};
 
 	bool isInterruptionRequested(const Project* project) const {
@@ -82,9 +82,9 @@ void Project::reset() {
 
 	// Reset datas
 	setDefaultPlace(nullptr);
-	cleanCharacters();
 	cleanLinks();
 	cleanModels();
+	cleanObjects();
 	cleanPlaces();
 }
 
@@ -96,30 +96,6 @@ void Project::setDefaultPlace(Place* defaultPlace) {
 	if (_impl->defaultPlace->set(defaultPlace)) {
 		emit defaultPlaceUpdated();
 	}
-}
-
-const QList<Character*>& Project::characters() const {
-	return _impl->characters;
-}
-
-void Project::setCharacters(const QList<Character*>& characters) {
-	TOOLS_SETTER(Project, characters);
-}
-
-Character* Project::createCharacter() {
-	TOOLS_CREATE_ENTITY(Project, characters);
-}
-
-void Project::removeCharacter(Character* character) {
-	TOOLS_REMOVE_ENTITY(Project, character);
-}
-
-Character* Project::duplicateCharacter(Character* character) {
-	TOOLS_DUPLICATE_ENTITY(Project, character);
-}
-
-void Project::cleanCharacters() {
-	TOOLS_CLEAN_ENTITIES(Project, characters);
 }
 
 const QList<Link*>& Project::links() const {
@@ -170,6 +146,30 @@ void Project::cleanModels() {
 	TOOLS_CLEAN_ENTITIES(Project, models);
 }
 
+const QList<Object*>& Project::objects() const {
+	return _impl->objects;
+}
+
+void Project::setObjects(const QList<Object*>& objects) {
+	TOOLS_SETTER(Project, objects);
+}
+
+Object* Project::createObject() {
+	TOOLS_CREATE_ENTITY(Project, objects);
+}
+
+void Project::removeObject(Object* object) {
+	TOOLS_REMOVE_ENTITY(Project, object);
+}
+
+Object* Project::duplicateObject(Object* object) {
+	TOOLS_DUPLICATE_ENTITY(Project, object);
+}
+
+void Project::cleanObjects() {
+	TOOLS_CLEAN_ENTITIES(Project, objects);
+}
+
 const QList<Place*>& Project::places() const {
 	return _impl->places;
 }
@@ -195,18 +195,18 @@ void Project::cleanPlaces() {
 }
 
 constexpr auto lDefaultPlaces = "defaultPlace";
-constexpr auto lCharacters = "characters";
 constexpr auto lLinks = "links";
 constexpr auto lModels = "models";
+constexpr auto lObjects = "objects";
 constexpr auto lPlaces = "places";
 
 void Project::load(const QJsonObject& json) {
 	reset();
 	Entity::load(json);
 
-	_impl->loadList(this, _impl->characters, lCharacters, json, &Project::charactersUpdated);
 	_impl->loadList(this, _impl->links, lLinks, json, &Project::linksUpdated);
 	_impl->loadList(this, _impl->models, lModels, json, &Project::modelsUpdated);
+	_impl->loadList(this, _impl->objects, lObjects, json, &Project::objectsUpdated);
 	_impl->loadList(this, _impl->places, lPlaces, json, &Project::placesUpdated);
 
 	_impl->defaultPlace->setUuid(Json::toUuid(Json::toValue(lDefaultPlaces, json)));
@@ -215,9 +215,9 @@ void Project::load(const QJsonObject& json) {
 
 void Project::save(QJsonObject& json) const {
 	Entity::save(json);
-	_impl->saveList(this, _impl->characters, lCharacters, json);
 	_impl->saveList(this, _impl->links, lLinks, json);
 	_impl->saveList(this, _impl->models, lModels, json);
+	_impl->saveList(this, _impl->objects, lObjects, json);
 	_impl->saveList(this, _impl->places, lPlaces, json);
 	json[lDefaultPlaces] = Json::fromUuid(_impl->defaultPlace->uuid());
 }

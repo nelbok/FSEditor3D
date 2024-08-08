@@ -3,12 +3,12 @@ import QtQuick
 import editor
 
 FSEEntity {
-    property MyObject object: null
+    property MyShape shape: null
     property alias filters: proxy.filters
 
     id: root
 
-    entity: object
+    entity: shape
 
     FSEComboBox {
         name: qsTr("Model")
@@ -21,8 +21,8 @@ FSEEntity {
         MySelectionWrapper {
             id: mng
             model: proxy
-            currentData: (root.object) ? root.object.model : null
-            onCurrentUpdated: { if (root.object && root.object.model !== currentData) MyCommands.objectCommand.setModel(root.object, currentData) }
+            currentData: (root.shape) ? root.shape.model : null
+            onCurrentUpdated: { if (root.shape && root.shape.model !== currentData) MyCommands.shapeCommand.setModel(root.shape, currentData) }
         }
 
         model: mng.model

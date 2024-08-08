@@ -2,9 +2,9 @@
 
 #include <QtTest/QtTest>
 
-#include <fsd/data/Character.hpp>
 #include <fsd/data/Link.hpp>
 #include <fsd/data/Model.hpp>
+#include <fsd/data/Object.hpp>
 #include <fsd/data/Place.hpp>
 #include <fsd/data/Project.hpp>
 
@@ -51,14 +51,14 @@ private:
 		p2->setModel(m1);
 		p3->setModel(m1);
 
-		auto* c1 = _p1->createCharacter();
-		auto* c2 = _p1->createCharacter();
-		c1->setName("Character 1");
-		c2->setName("Character 2");
-		c1->setPlace(p2);
-		c2->setPlace(p3);
-		c1->setModel(m2);
-		c2->setModel(m2);
+		auto* o1 = _p1->createObject();
+		auto* o2 = _p1->createObject();
+		o1->setName("Object 1");
+		o2->setName("Object 2");
+		o1->setPlace(p2);
+		o2->setPlace(p3);
+		o1->setModel(m2);
+		o2->setModel(m2);
 
 		auto* l1 = _p1->createLink();
 		auto* l2 = _p1->createLink();

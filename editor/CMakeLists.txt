@@ -3,8 +3,6 @@ qt_standard_project_setup(REQUIRES 6.5)
 set(PROJECT_SOURCES
 	src/commands/BaseCommand.cpp
 	src/commands/BaseCommand.hpp
-	src/commands/CharacterCommand.cpp
-	src/commands/CharacterCommand.hpp
 	src/commands/Commands.cpp
 	src/commands/Commands.hpp
 	src/commands/CreateCommand.hpp
@@ -24,6 +22,8 @@ set(PROJECT_SOURCES
 	src/commands/ProjectCommand.cpp
 	src/commands/ProjectCommand.hpp
 	src/commands/RemoveCommand.hpp
+	src/commands/ShapeCommand.cpp
+	src/commands/ShapeCommand.hpp
 	src/commands/ValueCommand.hpp
 
 	src/managers/CommandsManager.cpp
@@ -35,14 +35,14 @@ set(PROJECT_SOURCES
 	src/managers/TranslationsManager.cpp
 	src/managers/TranslationsManager.hpp
 
-	src/models/CharacterModel.cpp
-	src/models/CharacterModel.hpp
 	src/models/EntityModel.cpp
 	src/models/EntityModel.hpp
 	src/models/LinkModel.cpp
 	src/models/LinkModel.hpp
 	src/models/ModelModel.cpp
 	src/models/ModelModel.hpp
+	src/models/ObjectModel.cpp
+	src/models/ObjectModel.hpp
 	src/models/PlaceModel.cpp
 	src/models/PlaceModel.hpp
 	src/models/ProxyModel.cpp
@@ -92,14 +92,14 @@ set(QML_SOURCES
 	qml/common/FSEVector3DField.qml
 
 	qml/data/FSEEntity.qml
-	qml/data/FSEObject.qml
 	qml/data/FSEPlacement.qml
+	qml/data/FSEShape.qml
 
-	qml/modules/FSECharacters.qml
 	qml/modules/FSELinks.qml
 	qml/modules/FSEMenu.qml
 	qml/modules/FSEMessageBox.qml
 	qml/modules/FSEModels.qml
+	qml/modules/FSEObjects.qml
 	qml/modules/FSEPlaces.qml
 	qml/modules/FSEProgressBox.qml
 	qml/modules/FSEProject.qml

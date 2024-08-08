@@ -1,8 +1,8 @@
 #include "ProjectCommand.hpp"
 
-#include <fsd/data/Character.hpp>
 #include <fsd/data/Link.hpp>
 #include <fsd/data/Model.hpp>
+#include <fsd/data/Object.hpp>
 #include <fsd/data/Place.hpp>
 
 #include "managers/CommandsManager.hpp"
@@ -32,22 +32,6 @@ void ProjectCommand::setDefaultPlace(fsd::Place* newValue) {
 	addValueCommand(_c, _p, &fsd::Project::setDefaultPlace, &fsd::Project::defaultPlace, newValue);
 }
 
-void ProjectCommand::createCharacter() {
-	_c->add(new CreateCommand<fsd::Character>(_p, &fsd::Project::createCharacter, &fsd::Project::removeCharacter));
-}
-
-void ProjectCommand::removeCharacter(fsd::Character* character) {
-	assert(!character->hasRef());
-	_c->beginList();
-	_cm->placementCommand()->setPlace(character, nullptr);
-	_c->add(new RemoveCommand<fsd::Character>(_p, &fsd::Project::removeCharacter, character));
-	_c->endList();
-}
-
-void ProjectCommand::duplicateCharacter(fsd::Character* character) {
-	_c->add(new DuplicateCommand<fsd::Character>(_p, &fsd::Project::duplicateCharacter, &fsd::Project::removeCharacter, character));
-}
-
 void ProjectCommand::createLink() {
 	_c->add(new CreateCommand<fsd::Link>(_p, &fsd::Project::createLink, &fsd::Project::removeLink));
 }
@@ -63,6 +47,22 @@ void ProjectCommand::removeLink(fsd::Link* link) {
 
 void ProjectCommand::duplicateLink(fsd::Link* link) {
 	_c->add(new DuplicateCommand<fsd::Link>(_p, &fsd::Project::duplicateLink, &fsd::Project::removeLink, link));
+}
+
+void ProjectCommand::createObject() {
+	_c->add(new CreateCommand<fsd::Object>(_p, &fsd::Project::createObject, &fsd::Project::removeObject));
+}
+
+void ProjectCommand::removeObject(fsd::Object* object) {
+	assert(!object->hasRef());
+	_c->beginList();
+	_cm->placementCommand()->setPlace(object, nullptr);
+	_c->add(new RemoveCommand<fsd::Object>(_p, &fsd::Project::removeObject, object));
+	_c->endList();
+}
+
+void ProjectCommand::duplicateObject(fsd::Object* object) {
+	_c->add(new DuplicateCommand<fsd::Object>(_p, &fsd::Project::duplicateObject, &fsd::Project::removeObject, object));
 }
 
 void ProjectCommand::createModel() {
