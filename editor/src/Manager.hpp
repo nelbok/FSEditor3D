@@ -33,6 +33,8 @@ public:
 	Q_INVOKABLE void save(const QUrl& url);
 	Q_INVOKABLE void requestFileTransactionInterruption();
 
+	Q_INVOKABLE void setClipboardText(const QString& text);
+
 	const About& about() const;
 	Balsam* balsam() const;
 	fsd::Project* project() const;

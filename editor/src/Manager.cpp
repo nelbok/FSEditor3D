@@ -2,6 +2,9 @@
 
 #include <filesystem>
 
+#include <QtGui/QGuiApplication>
+#include <QtGui/QClipboard>
+
 #include "Config.hpp"
 
 #include "managers/CommandsManager.hpp"
@@ -99,6 +102,10 @@ void Manager::save(const QUrl& url) {
 void Manager::requestFileTransactionInterruption() {
 	assert(_impl->fileThread);
 	_impl->fileThread->requestInterruption();
+}
+
+void Manager::setClipboardText(const QString& text) {
+	qApp->clipboard()->setText(text);
 }
 
 const About& Manager::about() const {

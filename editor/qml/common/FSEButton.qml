@@ -22,9 +22,12 @@ FSERectangle {
         id: label
 
         anchors.fill: parent
+        anchors.leftMargin: 5
+        anchors.rightMargin: 5
 
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
+        elide: Text.ElideMiddle
 
         color: (enabled) ? MyStyles.style.foreground.normal : MyStyles.style.foreground.disabled
         font.bold: MyStyles.style.normalFont.bold

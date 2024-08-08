@@ -60,7 +60,6 @@ FSEModule {
 
             FSEMenuButton {
                 text: (root.myData && root.myData.sourcePath.toString() !== "") ? root.myData.sourcePath : qsTr("Choose...")
-                elide: Text.ElideMiddle
                 onClicked: dialog.open()
             }
         }
