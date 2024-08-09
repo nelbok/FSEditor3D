@@ -135,7 +135,7 @@ const QUrl& Manager::path() const {
 }
 
 void Manager::setPath(const QUrl& path) {
-	if (_impl->path != path) {
+	if (_impl->path != path || _impl->oldPath != path) {
 		if (_impl->path.isValid()) {
 			_impl->oldPath = _impl->path;
 		}

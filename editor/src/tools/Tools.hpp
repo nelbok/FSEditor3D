@@ -9,5 +9,6 @@
 
 namespace fse::Tools {
 QString toPath(const QUrl& url);
-std::filesystem::path modelPath(const QUrl& projectPath, fsd::Model* model);
+std::filesystem::path projectPath(const QUrl& path);
+std::filesystem::path modelPath(const QUrl& path, fsd::Model* model);
 } // namespace fse::Tools

@@ -30,6 +30,10 @@ void SaveThread::run() {
 		return;
 	}
 
+	if (Tools::projectPath(_manager->oldPath()) == Tools::projectPath(_manager->path())) {
+		return;
+	}
+
 	// FIXME: Could be dangerous if too much files or symbolic links
 	// Copy models
 	for (auto* model : _manager->project()->models()) {
@@ -46,7 +50,12 @@ void SaveThread::run() {
 		const auto& oldPath = Tools::modelPath(_manager->oldPath(), model);
 		const auto& newPath = Tools::modelPath(_manager->path(), model);
 		if (fs::exists(oldPath)) {
-			fs::copy(oldPath, newPath, fs::copy_options::recursive);
+			try {
+				fs::copy(oldPath, newPath, fs::copy_options::recursive);
+			} catch (...) {
+				_result = fsd::FileManager::Result::Error;
+				break;
+			}
 		} else {
 			_result = fsd::FileManager::Result::Error;
 			break;
