@@ -14,6 +14,10 @@ View3D {
     environment: SceneEnvironment {
         clearColor: "skyblue"
         backgroundMode: SceneEnvironment.Color
+
+        InfiniteGrid {
+            gridInterval: 100 // 1meter
+        }
     }
 
     // A light like the sun
@@ -85,17 +89,6 @@ View3D {
             console.log("Error while loading:" + cpt.errorString());
         } else {
             console.log("Something wrong...");
-        }
-    }
-
-    Model {
-        id: myDebug
-        visible: true
-        position: Qt.vector3d(0, -100, 0)
-        scale: Qt.vector3d(10,1,10)
-        source: "#Cube"
-        materials: DefaultMaterial {
-            diffuseColor: "green"
         }
     }
 }
