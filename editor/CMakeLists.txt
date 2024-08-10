@@ -109,6 +109,8 @@ set(QML_SOURCES
 	qml/modules/FSEToolBar.qml
 	qml/modules/FSEView3D.qml
 
+	qml/scripts/ModelLoader.js
+
 	qml/Main.qml
 )
 

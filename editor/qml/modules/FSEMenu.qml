@@ -9,7 +9,7 @@ FSERectangle {
 
     MouseArea {
         anchors.fill: parent
-        onClicked: MySelection.current = MySelection.Type.None
+        onClicked: MySelection.currentType = MySelection.Type.None
     }
 
     RowLayout {
@@ -18,32 +18,32 @@ FSERectangle {
 
         FSEButton {
             text: qsTr("Project")
-            selected: MySelection.current === MySelection.Type.Project
-            onClicked: MySelection.current = MySelection.Type.Project
+            selected: MySelection.currentType === MySelection.Type.Project
+            onClicked: MySelection.currentType = MySelection.Type.Project
         }
 
         FSEButton {
             text: qsTr("Models")
-            selected: MySelection.current === MySelection.Type.Models
-            onClicked: MySelection.current = MySelection.Type.Models
+            selected: MySelection.currentType === MySelection.Type.Models
+            onClicked: MySelection.currentType = MySelection.Type.Models
         }
 
         FSEButton {
             text: qsTr("Places")
-            selected: MySelection.current === MySelection.Type.Places
-            onClicked: MySelection.current = MySelection.Type.Places
+            selected: MySelection.currentType === MySelection.Type.Places
+            onClicked: MySelection.currentType = MySelection.Type.Places
         }
 
         FSEButton {
             text: qsTr("Objects")
-            selected: MySelection.current === MySelection.Type.Objects
-            onClicked: MySelection.current = MySelection.Type.Objects
+            selected: MySelection.currentType === MySelection.Type.Objects
+            onClicked: MySelection.currentType = MySelection.Type.Objects
         }
 
         FSEButton {
             text: qsTr("Links")
-            selected: MySelection.current === MySelection.Type.Links
-            onClicked: MySelection.current = MySelection.Type.Links
+            selected: MySelection.currentType === MySelection.Type.Links
+            onClicked: MySelection.currentType = MySelection.Type.Links
         }
 
         ColumnLayout {

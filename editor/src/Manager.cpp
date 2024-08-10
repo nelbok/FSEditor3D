@@ -74,7 +74,6 @@ void Manager::init() {
 
 	_impl->commandsManager->init(_impl->project);
 	_impl->modelsManager->init(_impl->project);
-	_impl->selectionManager->init(_impl->project);
 	_impl->stylesManager->init();
 	_impl->translationsManager->init();
 

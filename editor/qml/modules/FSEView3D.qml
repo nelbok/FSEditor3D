@@ -2,13 +2,13 @@ import QtQuick
 import QtQuick3D
 import QtQuick3D.Helpers
 
+import "../scripts/ModelLoader.js" as MyLoader
+
 import editor
 
 // https://doc.qt.io/qt-6/qtquick3dphysics-units.html
 // Qt Quick 3D Unit: cm
 View3D {
-    property MyModel myData: null
-
     id: view3D
 
     environment: SceneEnvironment {
@@ -39,56 +39,15 @@ View3D {
     }
 
     Connections {
-        target: myData
-        function onQmlNameUpdated() {
-            if (myData.qmlName !== "")
-                load(MyManager.balsam.qmlPath(myData))
+        target: MySelection
+        function onMainModelUpdated() {
+            var model = MySelection.mainModel
+            if (model && model.qmlName !== "")
+                MyLoader.load(MyManager.balsam.qmlPath(model))
             else
-                clean()
-        }
-    }
-    onMyDataChanged: {
-        if (myData && myData.qmlName !== "")
-            load(MyManager.balsam.qmlPath(myData))
-        else
-            clean()
-    }
-
-    property var cpt: null;
-    property var map: null;
-
-    function clean() {
-        if (map) {
-            map.destroy()
-            map = null
-        }
-        if (cpt) {
-            cpt.destroy()
-            cpt = null
+                MyLoader.clean()
         }
     }
 
-    function load(url) {
-        clean()
-        cpt = Qt.createComponent(url);
-
-        if (cpt.status === Component.Error)
-            console.log("Error while loading:" + cpt.errorString());
-
-        if (cpt.status === Component.Ready)
-            finishLoading()
-        else
-            cpt.statusChanged.connect(finishLoading)
-    }
-
-    function finishLoading() {
-        if (cpt.status === Component.Ready) {
-            map = cpt.createObject(view3D.scene);
-            map.scale = Qt.vector3d(100, 100, 100)
-        } else if (cpt.status === Component.Error) {
-            console.log("Error while loading:" + cpt.errorString());
-        } else {
-            console.log("Something wrong...");
-        }
-    }
+    Component.onCompleted: MyLoader.setScene(view3D.scene)
 }
