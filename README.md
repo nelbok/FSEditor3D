@@ -2,11 +2,11 @@
 
 ## About
 
-Create a project with multiple maps.
+Create a project with multiple places and a starting place.
 - Using Balsam to convert 3D models into QML file
-- One model can be used for one of more places, characters or links
+- One model can be used for one of more places, objects or links
 - Links are used to have a connection between places
-- Characters can be anything put in a place
+- Objects can be anything put in a place
 - JSON is the file format
 
 ## Requirements
