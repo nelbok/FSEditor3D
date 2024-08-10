@@ -81,6 +81,7 @@ void Manager::init() {
 }
 
 void Manager::reset() {
+	_impl->selectionManager->reset();
 	_impl->project->reset();
 	_impl->commandsManager->reset();
 

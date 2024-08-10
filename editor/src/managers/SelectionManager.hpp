@@ -33,6 +33,8 @@ public:
 	SelectionManager(QObject* parent = nullptr);
 	virtual ~SelectionManager();
 
+	void reset();
+
 	Type currentType() const;
 	void setCurrentType(const Type current);
 
