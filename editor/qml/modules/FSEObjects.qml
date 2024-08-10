@@ -4,15 +4,16 @@ import QtQuick.Layouts
 import editor
 
 FSEModule {
-    property MyObject myData: null
+    property MyObject myData: MySelection.currentObject
 
+    // FIXME: FSEModule doesn't work if we don't have id: root here...
     id: root
     title: qsTr("Objects")
 
     MySelectionWrapper {
         id: mng
         model: MyModels.objectModel
-        onCurrentDataChanged: root.myData = currentData
+        onCurrentDataChanged: MySelection.currentObject = currentData
     }
 
     selection: FSEList {

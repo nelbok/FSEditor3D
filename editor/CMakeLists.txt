@@ -30,6 +30,8 @@ set(PROJECT_SOURCES
 	src/managers/CommandsManager.hpp
 	src/managers/ModelsManager.cpp
 	src/managers/ModelsManager.hpp
+	src/managers/SelectionManager.cpp
+	src/managers/SelectionManager.hpp
 	src/managers/StylesManager.cpp
 	src/managers/StylesManager.hpp
 	src/managers/TranslationsManager.cpp

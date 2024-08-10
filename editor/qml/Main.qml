@@ -3,7 +3,6 @@ import QtQuick
 import editor
 
 Window {
-    id: root
     width: 1280
     height: 768
     minimumWidth: 1280
@@ -15,13 +14,13 @@ Window {
 
         myData: {
             if (models.enabled)
-                return models.myData
-            if (places.enabled && places.myData)
-                return places.myData.model
-            if (objects.enabled && objects.myData)
-                return objects.myData.model
-            if (links.enabled && links.myData)
-                return links.myData.model
+                return MySelection.currentModel
+            if (places.enabled && MySelection.currentPlace)
+                return MySelection.currentPlace.model
+            if (objects.enabled && MySelection.currentObject)
+                return MySelection.currentObject.model
+            if (links.enabled && MySelection.currentLink)
+                return MySelection.currentLink.model
             return null
         }
 
@@ -32,7 +31,7 @@ Window {
         anchors.top: menu.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
-        enabled: (menu.selected === FSEMenu.ModuleType.Project) && !(progress.visible || message.visible)
+        enabled: (MySelection.current === MySelection.Type.Project) && !(progress.visible || message.visible)
     }
 
     FSEModels {
@@ -41,7 +40,7 @@ Window {
         anchors.top: menu.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
-        enabled: (menu.selected === FSEMenu.ModuleType.Models) && !(progress.visible || message.visible)
+        enabled: (MySelection.current === MySelection.Type.Models) && !(progress.visible || message.visible)
     }
 
     FSEPlaces {
@@ -50,7 +49,7 @@ Window {
         anchors.top: menu.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
-        enabled: (menu.selected === FSEMenu.ModuleType.Places) && !(progress.visible || message.visible)
+        enabled: (MySelection.current === MySelection.Type.Places) && !(progress.visible || message.visible)
     }
 
     FSEObjects {
@@ -59,7 +58,7 @@ Window {
         anchors.top: menu.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
-        enabled: (menu.selected === FSEMenu.ModuleType.Objects) && !(progress.visible || message.visible)
+        enabled: (MySelection.current === MySelection.Type.Objects) && !(progress.visible || message.visible)
     }
 
     FSELinks {
@@ -68,7 +67,7 @@ Window {
         anchors.top: menu.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
-        enabled: (menu.selected === FSEMenu.ModuleType.Links) && !(progress.visible || message.visible)
+        enabled: (MySelection.current === MySelection.Type.Links) && !(progress.visible || message.visible)
     }
 
     FSESettings {
@@ -76,7 +75,7 @@ Window {
 
         anchors.centerIn: parent
 
-        visible: (menu.selected === FSEMenu.ModuleType.Settings) && !(progress.visible || message.visible)
+        visible: (MySelection.current === MySelection.Type.Settings) && !(progress.visible || message.visible)
     }
 
     FSEMenu {
@@ -97,7 +96,7 @@ Window {
 
         enabled: !(progress.visible || message.visible)
 
-        onSettingsClicked: menu.selected = (menu.selected === FSEMenu.ModuleType.Settings) ? FSEMenu.ModuleType.None : FSEMenu.ModuleType.Settings
+        onSettingsClicked: MySelection.current = (MySelection.current === MySelection.Type.Settings) ? MySelection.Type.None : MySelection.Type.Settings
 
     }
 

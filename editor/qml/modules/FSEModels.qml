@@ -5,15 +5,16 @@ import QtQuick.Dialogs
 import editor
 
 FSEModule {
-    property MyModel myData: null
+    property MyModel myData: MySelection.currentModel
 
+    // FIXME: FSEModule doesn't work if we don't have id: root here...
     id: root
     title: qsTr("Models")
 
     MySelectionWrapper {
         id: mng
         model: MyModels.modelModel
-        onCurrentDataChanged: root.myData = currentData
+        onCurrentDataChanged: MySelection.currentModel = currentData
     }
 
     selection: FSEList {

@@ -4,24 +4,12 @@ import QtQuick.Layouts
 import editor
 
 FSERectangle {
-    enum ModuleType {
-        Project,
-        Models,
-        Places,
-        Objects,
-        Links,
-        Settings,
-        None
-    }
-    property int selected: FSEMenu.ModuleType.None
-
-    id: root
     width: 1100
     height: 50
 
     MouseArea {
         anchors.fill: parent
-        onClicked: root.selected = FSEMenu.ModuleType.None
+        onClicked: MySelection.current = MySelection.Type.None
     }
 
     RowLayout {
@@ -29,43 +17,33 @@ FSERectangle {
         spacing: 20
 
         FSEButton {
-            id: project
-
             text: qsTr("Project")
-            selected: root.selected === FSEMenu.ModuleType.Project
-            onClicked: root.selected = FSEMenu.ModuleType.Project
+            selected: MySelection.current === MySelection.Type.Project
+            onClicked: MySelection.current = MySelection.Type.Project
         }
 
         FSEButton {
-            id: models
-
             text: qsTr("Models")
-            selected: root.selected === FSEMenu.ModuleType.Models
-            onClicked: root.selected = FSEMenu.ModuleType.Models
+            selected: MySelection.current === MySelection.Type.Models
+            onClicked: MySelection.current = MySelection.Type.Models
         }
 
         FSEButton {
-            id: places
-
             text: qsTr("Places")
-            selected: root.selected === FSEMenu.ModuleType.Places
-            onClicked: root.selected = FSEMenu.ModuleType.Places
+            selected: MySelection.current === MySelection.Type.Places
+            onClicked: MySelection.current = MySelection.Type.Places
         }
 
         FSEButton {
-            id: objects
-
             text: qsTr("Objects")
-            selected: root.selected === FSEMenu.ModuleType.Objects
-            onClicked: root.selected = FSEMenu.ModuleType.Objects
+            selected: MySelection.current === MySelection.Type.Objects
+            onClicked: MySelection.current = MySelection.Type.Objects
         }
 
         FSEButton {
-            id: links
-
             text: qsTr("Links")
-            selected: root.selected === FSEMenu.ModuleType.Links
-            onClicked: root.selected = FSEMenu.ModuleType.Links
+            selected: MySelection.current === MySelection.Type.Links
+            onClicked: MySelection.current = MySelection.Type.Links
         }
 
         ColumnLayout {

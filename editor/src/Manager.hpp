@@ -12,6 +12,7 @@
 namespace fse {
 class CommandsManager;
 class ModelsManager;
+class SelectionManager;
 class StylesManager;
 class TranslationsManager;
 
@@ -46,6 +47,7 @@ public:
 
 	CommandsManager* commandsManager() const;
 	ModelsManager* modelsManager() const;
+	SelectionManager* selectionManager() const;
 	StylesManager* stylesManager() const;
 	TranslationsManager* translationsManager() const;
 

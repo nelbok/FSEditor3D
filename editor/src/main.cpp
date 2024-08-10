@@ -11,6 +11,7 @@
 
 #include "managers/CommandsManager.hpp"
 #include "managers/ModelsManager.hpp"
+#include "managers/SelectionManager.hpp"
 #include "managers/StylesManager.hpp"
 #include "managers/TranslationsManager.hpp"
 #include "models/ProxyModel.hpp"
@@ -61,6 +62,7 @@ void initRegister(fse::Manager* manager) {
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyManager", manager);
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyCommands", manager->commandsManager());
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyModels", manager->modelsManager());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MySelection", manager->selectionManager());
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyStyles", manager->stylesManager());
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyTranslations", manager->translationsManager());
 	qmlRegisterType<fse::ProxyModel>("editor", 1, 0, "MyProxyModel");
