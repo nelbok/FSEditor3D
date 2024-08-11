@@ -11,15 +11,15 @@ class Model : public Entity {
 	Q_OBJECT
 	Q_PROPERTY(QUrl sourcePath READ sourcePath WRITE setSourcePath NOTIFY sourcePathUpdated)
 	Q_PROPERTY(QString qmlName READ qmlName WRITE setQmlName NOTIFY qmlNameUpdated)
-	Q_PROPERTY(Type type READ type WRITE setType NOTIFY typeUpdated)
+	Q_PROPERTY(ModelType modelType READ modelType WRITE setModelType NOTIFY modelTypeUpdated)
 
 public:
-	enum class Type {
+	enum class ModelType {
 		Link,
 		Place,
 		Object,
 	};
-	Q_ENUM(Type)
+	Q_ENUM(ModelType)
 
 	Model(Project* project);
 	virtual ~Model();
@@ -33,8 +33,8 @@ public:
 	const QString& qmlName() const;
 	void setQmlName(const QString& path);
 
-	Type type() const;
-	void setType(Type type);
+	ModelType modelType() const;
+	void setModelType(ModelType type);
 
 	virtual void load(const QJsonObject& json) override;
 	virtual void save(QJsonObject& json) const override;
@@ -46,6 +46,6 @@ private:
 signals:
 	void sourcePathUpdated();
 	void qmlNameUpdated();
-	void typeUpdated();
+	void modelTypeUpdated();
 };
 } // namespace fsd

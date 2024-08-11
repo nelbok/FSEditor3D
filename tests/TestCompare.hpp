@@ -35,7 +35,7 @@ struct TestCompare {
 
 		QCOMPARE(left->sourcePath(), right->sourcePath());
 		QCOMPARE(left->qmlName(), right->qmlName());
-		QCOMPARE(left->type(), right->type());
+		QCOMPARE(left->modelType(), right->modelType());
 	}
 
 	void testObject(fsd::Object* left, fsd::Object* right) {

@@ -21,8 +21,8 @@ void ModelCommand::setQmlName(fsd::Model* m, const QString& newValue) {
 	addValueCommand(_c, m, &fsd::Model::setQmlName, &fsd::Model::qmlName, newValue);
 }
 
-void ModelCommand::setType(fsd::Model* m, fsd::Model::Type newValue) {
-	addValueCommand(_c, m, &fsd::Model::setType, &fsd::Model::type, newValue);
+void ModelCommand::setModelType(fsd::Model* m, fsd::Model::ModelType newValue) {
+	addValueCommand(_c, m, &fsd::Model::setModelType, &fsd::Model::modelType, newValue);
 }
 
 } // namespace fse

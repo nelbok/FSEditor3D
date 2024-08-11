@@ -9,7 +9,7 @@ namespace fsd {
 struct Model::Impl {
 	QUrl sourcePath{};
 	QString qmlName{};
-	Type type{};
+	ModelType modelType{};
 };
 
 Model::Model(Project* project)
@@ -23,14 +23,14 @@ void Model::reset() {
 	Entity::reset();
 	setSourcePath({});
 	setQmlName({});
-	setType(Type::Place);
+	setModelType(ModelType::Place);
 }
 
 void Model::copy(const Model& model) {
 	Entity::copy(model);
 	setSourcePath(model.sourcePath());
 	setQmlName(model.qmlName());
-	setType(model.type());
+	setModelType(model.modelType());
 }
 
 const QUrl& Model::sourcePath() const {
@@ -49,29 +49,29 @@ void Model::setQmlName(const QString& qmlName) {
 	TOOLS_SETTER(Model, qmlName);
 }
 
-Model::Type Model::type() const {
-	return _impl->type;
+Model::ModelType Model::modelType() const {
+	return _impl->modelType;
 }
 
-void Model::setType(Type type) {
-	TOOLS_SETTER(Model, type);
+void Model::setModelType(ModelType modelType) {
+	TOOLS_SETTER(Model, modelType);
 }
 
 constexpr auto lSourcePath = "sourcePath";
 constexpr auto lQmlName = "qmlName";
-constexpr auto lType = "type";
+constexpr auto lModelType = "modelType";
 
 void Model::load(const QJsonObject& json) {
 	Entity::load(json);
 	setSourcePath(Json::toUrl(Json::toValue(lSourcePath, json)));
 	setQmlName(Json::toString(lQmlName, json));
-	setType(static_cast<Model::Type>(Json::toInt(lType, json)));
+	setModelType(static_cast<Model::ModelType>(Json::toInt(lModelType, json)));
 }
 
 void Model::save(QJsonObject& json) const {
 	Entity::save(json);
 	json[lSourcePath] = Json::fromUrl(_impl->sourcePath);
 	json[lQmlName] = _impl->qmlName;
-	json[lType] = static_cast<int>(_impl->type);
+	json[lModelType] = static_cast<int>(_impl->modelType);
 }
 } // namespace fsd

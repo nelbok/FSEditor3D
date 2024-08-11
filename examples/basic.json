@@ -75,28 +75,28 @@
             "name": "Place Model 1",
             "qmlName": "",
             "sourcePath": "",
-            "type": 1,
+            "modelType": 1,
             "uuid": "439dc25b-122a-4e96-81ec-8a024511dc3c"
         },
         {
             "name": "Place Model 2",
             "qmlName": "",
             "sourcePath": "",
-            "type": 1,
+            "modelType": 1,
             "uuid": "9087460b-766a-4fed-af5c-51bb2e3023d3"
         },
         {
             "name": "Basic Character",
             "qmlName": "",
             "sourcePath": "",
-            "type": 2,
+            "modelType": 2,
             "uuid": "b95cf6d6-6a59-4524-8379-9d5cb047ad40"
         },
         {
             "name": "Portal",
             "qmlName": "",
             "sourcePath": "",
-            "type": 0,
+            "modelType": 0,
             "uuid": "da9a64ae-a9df-4712-a9a8-5ab7f8795483"
         }
     ],

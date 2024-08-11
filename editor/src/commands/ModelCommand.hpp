@@ -16,7 +16,7 @@ public:
 
 	Q_INVOKABLE void setSourcePath(fsd::Model* model, const QUrl& sourcePath);
 	Q_INVOKABLE void setQmlName(fsd::Model* model, const QString& qmlName);
-	Q_INVOKABLE void setType(fsd::Model* model, fsd::Model::Type type);
+	Q_INVOKABLE void setModelType(fsd::Model* model, fsd::Model::ModelType type);
 
 protected:
 	Commands* _c{ nullptr };

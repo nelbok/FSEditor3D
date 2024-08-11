@@ -67,9 +67,9 @@ private:
 		model->setQmlName(name);
 		QCOMPARE(model->qmlName(), name);
 
-		const auto type = fsd::Model::Type::Link;
-		model->setType(type);
-		QCOMPARE(model->type(), type);
+		const auto modelType = fsd::Model::ModelType::Link;
+		model->setModelType(modelType);
+		QCOMPARE(model->modelType(), modelType);
 
 		QCOMPARE(metaObject->propertyCount(), 8);
 		QCOMPARE(metaObject->propertyOffset(), 5);

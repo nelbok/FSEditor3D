@@ -31,7 +31,7 @@ FSEModule {
     entity: FSEShape {
         shape: root.myData
         filters: {
-            "type": MyModel.Type.Place,
+            "modelType": MyModel.ModelType.Place,
         }
     }
 }

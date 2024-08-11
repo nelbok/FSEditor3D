@@ -18,7 +18,7 @@ void ModelModel::initDatas() {
 QHash<int, QByteArray> ModelModel::roleNames() const {
 	QHash<int, QByteArray> roles = EntityModel::roleNames();
 	qsizetype i = roles.size();
-	roles[i + 1] = "type";
+	roles[i + 1] = "modelType";
 	return roles;
 }
 
@@ -30,12 +30,12 @@ void ModelModel::updateDatas() {
 void ModelModel::disconnectData(fsd::Entity* entity) {
 	EntityModel::disconnectData(entity);
 	auto* model = qobject_cast<fsd::Model*>(entity);
-	disconnect(model, &fsd::Model::typeUpdated, this, &ModelModel::sortDatas);
+	disconnect(model, &fsd::Model::modelTypeUpdated, this, &ModelModel::sortDatas);
 }
 
 void ModelModel::connectData(fsd::Entity* entity) {
 	EntityModel::connectData(entity);
 	auto* model = qobject_cast<fsd::Model*>(entity);
-	connect(model, &fsd::Model::typeUpdated, this, &ModelModel::sortDatas);
+	connect(model, &fsd::Model::modelTypeUpdated, this, &ModelModel::sortDatas);
 }
 } // namespace fse
