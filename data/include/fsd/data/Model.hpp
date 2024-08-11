@@ -16,8 +16,8 @@ class Model : public Entity {
 public:
 	enum class ModelType {
 		Link,
-		Place,
 		Object,
+		Place,
 	};
 	Q_ENUM(ModelType)
 
@@ -35,6 +35,8 @@ public:
 
 	ModelType modelType() const;
 	void setModelType(ModelType type);
+
+	virtual Type type() const override;
 
 	virtual void load(const QJsonObject& json) override;
 	virtual void save(QJsonObject& json) const override;

@@ -57,6 +57,10 @@ void Model::setModelType(ModelType modelType) {
 	TOOLS_SETTER(Model, modelType);
 }
 
+Model::Type Model::type() const {
+	return Type::Model;
+}
+
 constexpr auto lSourcePath = "sourcePath";
 constexpr auto lQmlName = "qmlName";
 constexpr auto lModelType = "modelType";

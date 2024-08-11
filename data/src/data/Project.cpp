@@ -194,6 +194,10 @@ void Project::cleanPlaces() {
 	TOOLS_CLEAN_ENTITIES(Project, places);
 }
 
+Project::Type Project::type() const {
+	return Type::Project;
+}
+
 constexpr auto lDefaultPlaces = "defaultPlace";
 constexpr auto lLinks = "links";
 constexpr auto lModels = "models";

@@ -11,8 +11,18 @@ class Entity : public QObject {
 	Q_PROPERTY(bool isAlive READ isAlive WRITE setIsAlive NOTIFY isAliveUpdated)
 	Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameUpdated)
 	Q_PROPERTY(bool hasRef READ hasRef NOTIFY hasRefUpdated)
+	Q_PROPERTY(Type type READ type CONSTANT)
 
 public:
+	enum class Type {
+		Link,
+		Model,
+		Object,
+		Place,
+		Project,
+	};
+	Q_ENUM(Type)
+
 	Entity(QObject* parent = nullptr);
 	virtual ~Entity();
 
@@ -32,6 +42,8 @@ public:
 	void addRef(Entity* ref);
 	void removeRef(Entity* ref);
 	bool hasRef();
+
+	virtual Type type() const = 0;
 
 	virtual void load(const QJsonObject& json);
 	virtual void save(QJsonObject& json) const;

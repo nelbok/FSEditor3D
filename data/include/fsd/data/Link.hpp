@@ -19,6 +19,8 @@ public:
 	Link* link() const;
 	void setLink(Link* link);
 
+	virtual Type type() const override;
+
 	virtual void load(const QJsonObject& json) override;
 	virtual void save(QJsonObject& json) const override;
 

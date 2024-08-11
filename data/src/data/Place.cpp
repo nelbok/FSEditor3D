@@ -19,6 +19,10 @@ void Place::copy(const Place& place) {
 	Shape::copy(place);
 }
 
+Place::Type Place::type() const {
+	return Type::Place;
+}
+
 void Place::load(const QJsonObject& json) {
 	Shape::load(json);
 }

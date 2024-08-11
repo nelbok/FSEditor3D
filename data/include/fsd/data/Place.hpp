@@ -14,6 +14,9 @@ public:
 
 	virtual void reset() override;
 	void copy(const Place& place);
+
+	virtual Type type() const override;
+
 	virtual void load(const QJsonObject& json) override;
 	virtual void save(QJsonObject& json) const override;
 

@@ -36,6 +36,10 @@ void Link::setLink(Link* link) {
 	}
 }
 
+Link::Type Link::type() const {
+	return Type::Link;
+}
+
 constexpr auto lLink = "link";
 
 void Link::load(const QJsonObject& json) {

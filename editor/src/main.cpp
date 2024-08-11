@@ -49,13 +49,16 @@ bool initParser(const QGuiApplication& app, fse::Manager* manager) {
 void initRegister(fse::Manager* manager) {
 	// FSData
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyProject", manager->project());
-	qmlRegisterType<fsd::Entity>("editor", 1, 0, "MyEntity");
+
+	qmlRegisterUncreatableType<fsd::Entity>("editor", 1, 0, "MyEntity", "Attempt to create an Entity");
+	qmlRegisterUncreatableType<fsd::Placement>("editor", 1, 0, "MyPlacement", "Attempt to create a Placement");
+	qmlRegisterUncreatableType<fsd::Shape>("editor", 1, 0, "MyShape", "Attempt to create a Shape");
+
 	qmlRegisterType<fsd::Link>("editor", 1, 0, "MyLink");
 	qmlRegisterType<fsd::Model>("editor", 1, 0, "MyModel");
 	qmlRegisterType<fsd::Object>("editor", 1, 0, "MyObject");
 	qmlRegisterType<fsd::Place>("editor", 1, 0, "MyPlace");
-	qmlRegisterType<fsd::Placement>("editor", 1, 0, "MyPlacement");
-	qmlRegisterType<fsd::Shape>("editor", 1, 0, "MyShape");
+
 	qmlRegisterType<fsd::FileManager>("editor", 1, 0, "MyFileManager");
 
 	// FSEditor

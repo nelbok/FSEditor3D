@@ -33,9 +33,6 @@ private:
 	fsd::Project* _project{ nullptr };
 
 	void testEntity(fsd::Entity* entity, const QMetaObject* metaObject) {
-		QCOMPARE(metaObject->propertyCount(), 5);
-		QCOMPARE(metaObject->propertyOffset(), 1);
-
 		const auto name = QString("Test");
 		entity->setName(name);
 		QCOMPARE(entity->name(), name);
@@ -43,6 +40,9 @@ private:
 		const auto isAlive = false;
 		entity->setIsAlive(isAlive);
 		QCOMPARE(entity->isAlive(), isAlive);
+
+		QCOMPARE(metaObject->propertyCount(), 6);
+		QCOMPARE(metaObject->propertyOffset(), 1);
 	}
 
 	void testLink(fsd::Link* link, const QMetaObject* metaObject) {
@@ -52,8 +52,8 @@ private:
 		link->setLink(linkA);
 		QCOMPARE(link->link(), linkA);
 
-		QCOMPARE(metaObject->propertyCount(), 10);
-		QCOMPARE(metaObject->propertyOffset(), 9);
+		QCOMPARE(metaObject->propertyCount(), 11);
+		QCOMPARE(metaObject->propertyOffset(), 10);
 	}
 
 	void testModel(fsd::Model* model, const QMetaObject* metaObject) {
@@ -71,22 +71,22 @@ private:
 		model->setModelType(modelType);
 		QCOMPARE(model->modelType(), modelType);
 
-		QCOMPARE(metaObject->propertyCount(), 8);
-		QCOMPARE(metaObject->propertyOffset(), 5);
+		QCOMPARE(metaObject->propertyCount(), 9);
+		QCOMPARE(metaObject->propertyOffset(), 6);
 	}
 
 	void testObject(fsd::Object* object, const QMetaObject* metaObject) {
 		testPlacement(object, metaObject->superClass());
 
-		QCOMPARE(metaObject->propertyCount(), 9);
-		QCOMPARE(metaObject->propertyOffset(), 9);
+		QCOMPARE(metaObject->propertyCount(), 10);
+		QCOMPARE(metaObject->propertyOffset(), 10);
 	}
 
 	void testPlace(fsd::Place* place, const QMetaObject* metaObject) {
 		testShape(place, metaObject->superClass());
 
-		QCOMPARE(metaObject->propertyCount(), 6);
-		QCOMPARE(metaObject->propertyOffset(), 6);
+		QCOMPARE(metaObject->propertyCount(), 7);
+		QCOMPARE(metaObject->propertyOffset(), 7);
 	}
 
 	void testPlacement(fsd::Placement* placement, const QMetaObject* metaObject) {
@@ -104,8 +104,8 @@ private:
 		placement->setPlace(place);
 		QCOMPARE(placement->place(), place);
 
-		QCOMPARE(metaObject->propertyCount(), 9);
-		QCOMPARE(metaObject->propertyOffset(), 6);
+		QCOMPARE(metaObject->propertyCount(), 10);
+		QCOMPARE(metaObject->propertyOffset(), 7);
 	}
 
 	void testShape(fsd::Shape* shape, const QMetaObject* metaObject) {
@@ -115,15 +115,12 @@ private:
 		shape->setModel(model);
 		QCOMPARE(shape->model(), model);
 
-		QCOMPARE(metaObject->propertyCount(), 6);
-		QCOMPARE(metaObject->propertyOffset(), 5);
+		QCOMPARE(metaObject->propertyCount(), 7);
+		QCOMPARE(metaObject->propertyOffset(), 6);
 	}
 
 	void testProject(fsd::Project* project, const QMetaObject* metaObject) {
 		testEntity(project, metaObject->superClass());
-
-		QCOMPARE(metaObject->propertyCount(), 10);
-		QCOMPARE(metaObject->propertyOffset(), 5);
 
 		auto* place = _project->places().at(0);
 		project->setDefaultPlace(place);
@@ -133,5 +130,8 @@ private:
 		QCOMPARE(project->models().count(), 1);
 		QCOMPARE(project->objects().count(), 1);
 		QCOMPARE(project->places().count(), 1);
+
+		QCOMPARE(metaObject->propertyCount(), 11);
+		QCOMPARE(metaObject->propertyOffset(), 6);
 	}
 };

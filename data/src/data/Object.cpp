@@ -19,6 +19,10 @@ void Object::copy(const Object& object) {
 	Placement::copy(object);
 }
 
+Object::Type Object::type() const {
+	return Type::Object;
+}
+
 void Object::load(const QJsonObject& json) {
 	Placement::load(json);
 }
