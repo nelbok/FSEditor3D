@@ -10,23 +10,13 @@ FSEModule {
     id: root
     title: qsTr("Objects")
 
-    MySelectionWrapper {
-        id: mng
-        model: MyModels.objectModel
-        project: MyProject
-        onCurrentDataChanged: MySelection.currentObject = currentData
-    }
-
     selection: FSEList {
-        model: mng.model
-        currentIndex: mng.currentIndex
-        removeEnabled: mng.currentData && !mng.currentData.hasRef
-        duplicateEnabled: mng.currentData
+        model: MyModels.objectModel
 
         onCreateClicked: { MyCommands.projectCommand.createObject() }
         onRemoveClicked: { MyCommands.projectCommand.removeObject(mng.currentData) }
         onDuplicateClicked: { MyCommands.projectCommand.duplicateObject(mng.currentData) }
-        onItemClicked: (index) => { mng.currentIndex = index }
+        onCurrentDataChanged: (currentData) => { MySelection.currentObject = currentData }
     }
 
     entity: FSEShape {

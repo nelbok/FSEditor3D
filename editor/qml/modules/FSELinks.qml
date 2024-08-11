@@ -10,23 +10,13 @@ FSEModule {
     id: root
     title: qsTr("Links")
 
-    MySelectionWrapper {
-        id: mng
-        model: MyModels.linkModel
-        project: MyProject
-        onCurrentDataChanged: MySelection.currentLink = currentData
-    }
-
     selection: FSEList {
-        model: mng.model
-        currentIndex: mng.currentIndex
-        removeEnabled: mng.currentData && !mng.currentData.hasRef
-        duplicateEnabled: mng.currentData
+        model: MyModels.linkModel
 
         onCreateClicked: { MyCommands.projectCommand.createLink() }
         onRemoveClicked: { MyCommands.projectCommand.removeLink(mng.currentData) }
         onDuplicateClicked: { MyCommands.projectCommand.duplicateLink(mng.currentData) }
-        onItemClicked: (index) => { mng.currentIndex = index }
+        onCurrentDataChanged: (currentData) => { MySelection.currentLink = currentData }
     }
 
     entity: FSEShape {

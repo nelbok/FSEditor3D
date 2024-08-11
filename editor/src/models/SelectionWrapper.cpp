@@ -8,8 +8,7 @@ SelectionWrapper::SelectionWrapper(QObject* parent)
 SelectionWrapper::~SelectionWrapper() {}
 
 int SelectionWrapper::currentIndex() const {
-	assert(_model);
-	if (!_model || !_currentData)
+	if (!_model || !_project || !_currentData)
 		return -1;
 
 	// Protection
@@ -37,15 +36,15 @@ void SelectionWrapper::setCurrentIndex(int currentIndex) {
 }
 
 fsd::Entity* SelectionWrapper::currentData() const {
-	assert(_model);
-	assert(_project);
+	if (!_model || !_project || !_currentData)
+		return nullptr;
 
 	// Protection
-	if (_project->entities().contains(_currentData)) {
-		return _currentData;
+	if (!_project->entities().contains(_currentData)) {
+		return nullptr;
 	}
 
-	return nullptr;
+	return _currentData;
 }
 
 void SelectionWrapper::setCurrentData(fsd::Entity* currentData) {

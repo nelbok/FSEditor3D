@@ -5,20 +5,22 @@ import QtQuick.Controls.Basic
 import editor
 
 ColumnLayout {
-    property alias model: list.model
-    property alias currentIndex: list.currentIndex
-    property alias createEnabled: create.enabled
-    property alias removeEnabled: remove.enabled
-    property alias duplicateEnabled: duplicate.enabled
+    property alias model: mng.model
 
     signal createClicked()
     signal removeClicked()
     signal duplicateClicked()
-    signal itemClicked(index: int)
+    signal currentDataChanged(currentData: MyEntity)
 
     id: root
 
     spacing: 0
+
+    MySelectionWrapper {
+        id: mng
+        project: MyProject
+        onCurrentDataChanged: { root.currentDataChanged(currentData) }
+    }
 
     RowLayout {
         spacing: 0
@@ -34,12 +36,16 @@ ColumnLayout {
             text: qsTr("Del")
             width: 60
             onClicked: { root.removeClicked() }
+
+            enabled: mng.currentData && !mng.currentData.hasRef
         }
         FSEMenuButton {
             id: duplicate
             text: qsTr("Dup")
             width: 60
             onClicked: { root.duplicateClicked() }
+
+            enabled: mng.currentData
         }
     }
 
@@ -56,6 +62,9 @@ ColumnLayout {
             id: list
             anchors.fill: parent
             clip: true
+
+            model: mng.model
+            currentIndex: mng.currentIndex
 
             delegate: Item {
                 required property int index
@@ -77,7 +86,7 @@ ColumnLayout {
                     MouseArea {
                         anchors.fill: parent
                         preventStealing: true
-                        onClicked: { root.itemClicked(index) }
+                        onClicked: { mng.currentIndex = index }
                     }
                 }
             }
@@ -96,7 +105,7 @@ ColumnLayout {
                 anchors.fill: parent
                 propagateComposedEvents: true
                 onClicked: (mouse) => {
-                               root.itemClicked(-1)
+                               mng.currentIndex = -1
                                mouse.accepted = false
                            }
             }
