@@ -13,6 +13,7 @@ FSEModule {
     MySelectionWrapper {
         id: mng
         model: MyModels.linkModel
+        project: MyProject
         onCurrentDataChanged: MySelection.currentLink = currentData
     }
 
@@ -48,6 +49,7 @@ FSEModule {
             MySelectionWrapper {
                 id: subMng
                 model: MyModels.linkModel
+                project: MyProject
                 currentData: (root.myData) ? root.myData.link : null
                 onCurrentUpdated: { if (root.myData && root.myData.link !== currentData) MyCommands.linkCommand.setLink(root.myData, currentData) }
             }

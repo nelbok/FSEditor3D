@@ -13,6 +13,7 @@ FSEModule {
     MySelectionWrapper {
         id: mng
         model: MyModels.placeModel
+        project: MyProject
         onCurrentDataChanged: MySelection.currentPlace = currentData
     }
 

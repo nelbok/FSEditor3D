@@ -19,6 +19,7 @@ FSEModule {
             MySelectionWrapper {
                 id: mng
                 model: MyModels.placeModel
+                project: MyProject
                 currentData: MyProject.defaultPlace
                 onCurrentUpdated: { if (MyProject && MyProject.defaultPlace !== currentData) MyCommands.projectCommand.setDefaultPlace(currentData) }
             }

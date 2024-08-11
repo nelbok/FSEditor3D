@@ -13,6 +13,7 @@ FSEModule {
     MySelectionWrapper {
         id: mng
         model: MyModels.objectModel
+        project: MyProject
         onCurrentDataChanged: MySelection.currentObject = currentData
     }
 

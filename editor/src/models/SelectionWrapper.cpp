@@ -9,11 +9,16 @@ SelectionWrapper::~SelectionWrapper() {}
 
 int SelectionWrapper::currentIndex() const {
 	assert(_model);
-	if (!_model)
+	if (!_model || !_currentData)
 		return -1;
 
+	// Protection
+	if (!_project->entities().contains(_currentData)) {
+		return -1;
+	}
+
 	for (int i = 0; i < _model->rowCount(); ++i) {
-		if (_model->data(_model->index(i, 0), getRole("uuid")) == _currentUuid) {
+		if (_model->data(_model->index(i, 0), getRole("uuid")) == _currentData->uuid()) {
 			return i;
 		}
 	}
@@ -22,21 +27,22 @@ int SelectionWrapper::currentIndex() const {
 
 void SelectionWrapper::setCurrentIndex(int currentIndex) {
 	assert(_model);
+	assert(_project);
 	if (0 <= currentIndex && currentIndex < _model->rowCount()) {
-		_currentUuid = _model->data(_model->index(currentIndex, 0), getRole("uuid")).toUuid();
+		_currentData = _model->data(_model->index(currentIndex, 0), getRole("entity")).value<fsd::Entity*>();
 	} else {
-		_currentUuid = QUuid{};
+		_currentData = nullptr;
 	}
 	emit currentUpdated();
 }
 
 fsd::Entity* SelectionWrapper::currentData() const {
 	assert(_model);
-	for (int i = 0; i < _model->rowCount(); ++i) {
-		const auto& index = _model->index(i, 0);
-		if (_model->data(index, getRole("uuid")) == _currentUuid) {
-			return _model->data(index, getRole("entity")).value<fsd::Entity*>();
-		}
+	assert(_project);
+
+	// Protection
+	if (_project->entities().contains(_currentData)) {
+		return _currentData;
 	}
 
 	return nullptr;
@@ -44,19 +50,9 @@ fsd::Entity* SelectionWrapper::currentData() const {
 
 void SelectionWrapper::setCurrentData(fsd::Entity* currentData) {
 	assert(_model);
-	if (_model && currentData) {
-		if (_currentUuid == currentData->uuid())
-			return;
-		for (int i = 0; i < _model->rowCount(); ++i) {
-			if (_model->data(_model->index(i, 0), getRole("uuid")) == currentData->uuid()) {
-				_currentUuid = currentData->uuid();
-				emit currentUpdated();
-				return;
-			}
-		}
-	}
-	if (!_currentUuid.isNull()) {
-		_currentUuid = QUuid{};
+	assert(_project);
+	if (_currentData != currentData) {
+		_currentData = currentData;
 		emit currentUpdated();
 	}
 }
@@ -75,6 +71,17 @@ void SelectionWrapper::setModel(QAbstractItemModel* model) {
 			connect(model, &QAbstractItemModel::modelReset, this, &SelectionWrapper::currentUpdated);
 		}
 		emit modelUpdated();
+	}
+}
+
+fsd::Project* SelectionWrapper::project() const {
+	return _project;
+}
+
+void SelectionWrapper::setProject(fsd::Project* project) {
+	if (_project != project) {
+		_project = project;
+		emit projectUpdated();
 	}
 }
 
