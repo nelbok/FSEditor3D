@@ -108,17 +108,6 @@ private:
 		QCOMPARE(metaObject->propertyOffset(), 7);
 	}
 
-	void testShape(fsd::Shape* shape, const QMetaObject* metaObject) {
-		testEntity(shape, metaObject->superClass());
-
-		auto* model = _project->models().at(0);
-		shape->setModel(model);
-		QCOMPARE(shape->model(), model);
-
-		QCOMPARE(metaObject->propertyCount(), 7);
-		QCOMPARE(metaObject->propertyOffset(), 6);
-	}
-
 	void testProject(fsd::Project* project, const QMetaObject* metaObject) {
 		testEntity(project, metaObject->superClass());
 
@@ -130,8 +119,20 @@ private:
 		QCOMPARE(project->models().count(), 1);
 		QCOMPARE(project->objects().count(), 1);
 		QCOMPARE(project->places().count(), 1);
+		QCOMPARE(project->entities().count(), 4);
 
-		QCOMPARE(metaObject->propertyCount(), 11);
+		QCOMPARE(metaObject->propertyCount(), 12);
+		QCOMPARE(metaObject->propertyOffset(), 6);
+	}
+
+	void testShape(fsd::Shape* shape, const QMetaObject* metaObject) {
+		testEntity(shape, metaObject->superClass());
+
+		auto* model = _project->models().at(0);
+		shape->setModel(model);
+		QCOMPARE(shape->model(), model);
+
+		QCOMPARE(metaObject->propertyCount(), 7);
 		QCOMPARE(metaObject->propertyOffset(), 6);
 	}
 };

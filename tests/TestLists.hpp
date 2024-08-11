@@ -32,6 +32,7 @@ private:
 	// LISTS
 	void testLinks() {
 		QVERIFY(_project->links().size() == 0);
+		QVERIFY(_project->entities().size() == 0);
 
 		auto* left = _project->createLink();
 		QVERIFY(left);
@@ -41,13 +42,16 @@ private:
 
 		_project->removeLink(left);
 		QVERIFY(_project->links().size() == 1);
+		QVERIFY(_project->entities().size() == 1);
 
 		_project->cleanLinks();
 		QVERIFY(_project->links().size() == 0);
+		QVERIFY(_project->entities().size() == 0);
 	}
 
 	void testModels() {
 		QVERIFY(_project->models().size() == 0);
+		QVERIFY(_project->entities().size() == 0);
 
 		auto* left = _project->createModel();
 		QVERIFY(left);
@@ -57,13 +61,16 @@ private:
 
 		_project->removeModel(left);
 		QVERIFY(_project->models().size() == 1);
+		QVERIFY(_project->entities().size() == 1);
 
 		_project->cleanModels();
 		QVERIFY(_project->models().size() == 0);
+		QVERIFY(_project->entities().size() == 0);
 	}
 
 	void testObjects() {
 		QVERIFY(_project->objects().size() == 0);
+		QVERIFY(_project->entities().size() == 0);
 
 		auto* left = _project->createObject();
 		QVERIFY(left);
@@ -73,13 +80,16 @@ private:
 
 		_project->removeObject(left);
 		QVERIFY(_project->objects().size() == 1);
+		QVERIFY(_project->entities().size() == 1);
 
 		_project->cleanObjects();
 		QVERIFY(_project->objects().size() == 0);
+		QVERIFY(_project->entities().size() == 0);
 	}
 
 	void testPlaces() {
 		QVERIFY(_project->places().size() == 0);
+		QVERIFY(_project->entities().size() == 0);
 
 		auto* left = _project->createPlace();
 		QVERIFY(left);
@@ -89,8 +99,10 @@ private:
 
 		_project->removePlace(left);
 		QVERIFY(_project->places().size() == 1);
+		QVERIFY(_project->entities().size() == 1);
 
 		_project->cleanPlaces();
 		QVERIFY(_project->places().size() == 0);
+		QVERIFY(_project->entities().size() == 0);
 	}
 };

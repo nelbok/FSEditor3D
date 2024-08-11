@@ -65,41 +65,11 @@ struct TestCompare {
 
 		testUuidPointer(left->defaultPlace(), right->defaultPlace());
 
-		{
-			const auto& ll = left->objects();
-			const auto& rl = right->objects();
-			QCOMPARE(ll.size(), rl.size());
-			for (qsizetype i = 0; i < ll.size(); ++i) {
-				testObject(ll.at(i), rl.at(i));
-			}
-		}
-
-		{
-			const auto& ll = left->links();
-			const auto& rl = right->links();
-			QCOMPARE(ll.size(), rl.size());
-			for (qsizetype i = 0; i < ll.size(); ++i) {
-				testLink(ll.at(i), rl.at(i));
-			}
-		}
-
-		{
-			const auto& ll = left->models();
-			const auto& rl = right->models();
-			QCOMPARE(ll.size(), rl.size());
-			for (qsizetype i = 0; i < ll.size(); ++i) {
-				testModel(ll.at(i), rl.at(i));
-			}
-		}
-
-		{
-			const auto& ll = left->places();
-			const auto& rl = right->places();
-			QCOMPARE(ll.size(), rl.size());
-			for (qsizetype i = 0; i < ll.size(); ++i) {
-				testPlace(ll.at(i), rl.at(i));
-			}
-		}
+		testProjectList(left->objects(), right->objects(), &TestCompare::testObject);
+		testProjectList(left->links(), right->links(), &TestCompare::testLink);
+		testProjectList(left->models(), right->models(), &TestCompare::testModel);
+		testProjectList(left->places(), right->places(), &TestCompare::testPlace);
+		testProjectList(left->entities(), right->entities(), &TestCompare::testEntity);
 	}
 
 	void testUuidPointer(fsd::Entity* left, fsd::Entity* right) {
@@ -108,6 +78,20 @@ struct TestCompare {
 		QCOMPARE(isLeftValid, isRightValid);
 		if (isLeftValid && isRightValid)
 			QCOMPARE(left->uuid(), right->uuid());
+	}
+
+private:
+	template<class TClass>
+	void testProjectList(QList<TClass*> left, QList<TClass*> right, void (TestCompare::*func)(TClass*, TClass*)) {
+		auto compare = [](TClass* a, TClass* b) {
+			return a->uuid() < b->uuid();
+		};
+		std::sort(left.begin(), left.end(), compare);
+		std::sort(right.begin(), right.end(), compare);
+		QCOMPARE(left.size(), right.size());
+		for (qsizetype i = 0; i < left.size(); ++i) {
+			(this->*func)(left.at(i), right.at(i));
+		}
 	}
 
 private:

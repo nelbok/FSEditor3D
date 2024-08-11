@@ -5,9 +5,9 @@
 
 // Entity macro
 #define TOOLS_SETTER(CLASSNAME, MEMBER) fsd::Tools::setter(this, _impl->MEMBER, MEMBER, &CLASSNAME::MEMBER##Updated)
-#define TOOLS_CREATE_ENTITY(CLASSNAME, MEMBER) return fsd::Tools::createEntity(this, _impl->MEMBER, &CLASSNAME::MEMBER##Updated)
+#define TOOLS_CREATE_ENTITY(CLASSNAME, MEMBER) auto* entity = fsd::Tools::createEntity(this, _impl->MEMBER, &CLASSNAME::MEMBER##Updated)
 #define TOOLS_REMOVE_ENTITY(CLASSNAME, VALUE) fsd::Tools::removeEntity(this, _impl->VALUE##s, VALUE, &CLASSNAME::VALUE##sUpdated)
-#define TOOLS_DUPLICATE_ENTITY(CLASSNAME, VALUE) return fsd::Tools::duplicateEntity(this, _impl->VALUE##s, VALUE, &CLASSNAME::VALUE##sUpdated)
+#define TOOLS_DUPLICATE_ENTITY(CLASSNAME, VALUE) auto* entity = fsd::Tools::duplicateEntity(this, _impl->VALUE##s, VALUE, &CLASSNAME::VALUE##sUpdated)
 #define TOOLS_CLEAN_ENTITIES(CLASSNAME, MEMBER) fsd::Tools::cleanEntities(this, _impl->MEMBER, &CLASSNAME::MEMBER##Updated)
 
 namespace fsd::Tools {

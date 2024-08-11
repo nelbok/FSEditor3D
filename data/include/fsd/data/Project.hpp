@@ -13,6 +13,7 @@ class Place;
 class Project : public Entity {
 	Q_OBJECT
 	Q_PROPERTY(Place* defaultPlace READ defaultPlace WRITE setDefaultPlace NOTIFY defaultPlaceUpdated)
+	Q_PROPERTY(QList<Entity*> entities READ entities NOTIFY entitiesUpdated)
 	Q_PROPERTY(QList<Link*> links READ links WRITE setLinks NOTIFY linksUpdated)
 	Q_PROPERTY(QList<Model*> models READ models WRITE setModels NOTIFY modelsUpdated)
 	Q_PROPERTY(QList<Object*> objects READ objects WRITE setObjects NOTIFY objectsUpdated)
@@ -26,6 +27,8 @@ public:
 
 	Place* defaultPlace() const;
 	void setDefaultPlace(Place* defaultPlace);
+
+	const QList<Entity*>& entities() const;
 
 	// Links
 	const QList<Link*>& links() const;
@@ -67,12 +70,17 @@ public:
 private:
 	using Entity::copy;
 
+	void addEntity(Entity* entity);
+	void removeEntity(Entity* entity);
+	void rebuildEntities();
+
 private:
 	struct Impl;
 	std::unique_ptr<Impl> _impl;
 
 signals:
 	void defaultPlaceUpdated();
+	void entitiesUpdated();
 	void linksUpdated();
 	void modelsUpdated();
 	void objectsUpdated();
