@@ -72,9 +72,6 @@ Window {
         anchors.rightMargin: 10
 
         enabled: !(progress.visible || message.visible)
-
-        onSettingsClicked: MySelection.currentType = (MySelection.currentType === MySelection.Type.Settings) ? MySelection.Type.None : MySelection.Type.Settings
-
     }
 
     Connections {

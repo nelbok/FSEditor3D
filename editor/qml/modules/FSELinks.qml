@@ -4,10 +4,6 @@ import QtQuick.Layouts
 import editor
 
 FSEModule {
-    property MyLink myData: MySelection.currentLink
-
-    // FIXME: FSEModule doesn't work if we don't have id: root here...
-    id: root
     title: qsTr("Links")
 
     selection: FSEList {
@@ -20,33 +16,36 @@ FSEModule {
     }
 
     entity: FSEShape {
-        shape: root.myData
+        shape: MySelection.currentLink
         filters: {
             "modelType": MyModel.ModelType.Link,
         }
     }
 
     partA: FSEPlacement {
-        placement: root.myData
+        placement: MySelection.currentLink
     }
 
     partB: ColumnLayout {
         spacing: 5
-        enabled: root.myData
+        enabled: MySelection.currentLink
         FSEComboBox {
             name: qsTr("Link")
 
             MySelectionWrapper {
-                id: subMng
+                id: mng
                 model: MyModels.linkModel
                 project: MyProject
-                currentData: (root.myData) ? root.myData.link : null
-                onCurrentUpdated: { if (root.myData && root.myData.link !== currentData) MyCommands.linkCommand.setLink(root.myData, currentData) }
+                currentData: (MySelection.currentLink) ? MySelection.currentLink.link : null
+                onCurrentUpdated: {
+                    if (MySelection.currentLink && MySelection.currentLink.link !== currentData)
+                        MyCommands.linkCommand.setLink(MySelection.currentLink, currentData)
+                }
             }
 
-            model: subMng.model
-            currentIndex: subMng.currentIndex
-            onActivated: subMng.currentIndex = currentIndex
+            model: mng.model
+            currentIndex: mng.currentIndex
+            onActivated: mng.currentIndex = currentIndex
         }
     }
 }

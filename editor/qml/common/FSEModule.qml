@@ -6,10 +6,10 @@ import editor
 FSERectangle {
     property alias title: title.text
 
-    property Item selection: null
-    property Item entity: null
-    property Item partA: null
-    property Item partB: null
+    property alias selection: selection.children
+    property alias entity: entity.children
+    property alias partA: partA.children
+    property alias partB: partB.children
 
     anchors.topMargin: (enabled) ? 10 : -400
     Behavior on anchors.topMargin {
@@ -57,31 +57,31 @@ FSERectangle {
         anchors.horizontalCenter: parent.horizontalCenter
 
         Item {
+            id: selection
+
             width: 180
             height: 220
-
-            children: (root.selection) ? root.selection : []
         }
 
         Item {
+            id: entity
+
             width: 260
             height: 220
-
-            children: (root.entity) ? root.entity : []
         }
 
         Item {
+            id: partA
+
             width: 260
             height: 220
-
-            children: (root.partA) ? root.partA : []
         }
 
         Item {
+            id: partB
+
             width: 260
             height: 220
-
-            children: (root.partB) ? root.partB : []
         }
     }
 }

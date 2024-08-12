@@ -5,10 +5,6 @@ import QtQuick.Dialogs
 import editor
 
 FSEModule {
-    property MyModel myData: MySelection.currentModel
-
-    // FIXME: FSEModule doesn't work if we don't have id: root here...
-    id: root
     title: qsTr("Models")
 
     selection: FSEList {
@@ -21,12 +17,12 @@ FSEModule {
     }
 
     entity: FSEEntity {
-        entity: root.myData
+        entity: MySelection.currentModel
     }
 
     partA: ColumnLayout {
         spacing: 5
-        enabled: root.myData
+        enabled: MySelection.currentModel
 
         FSEComboBox {
             name: qsTr("Type")
@@ -35,8 +31,11 @@ FSEModule {
                 ListElement { uuid: MyModel.ModelType.Link; name: qsTr("Link") }
                 ListElement { uuid: MyModel.ModelType.Place; name: qsTr("Place") }
             }
-            currentIndex: (root.myData) ? indexOfValue(root.myData.modelType) : -1
-            onActivated: { if (root.myData) MyCommands.modelCommand.setModelType(root.myData, valueAt(currentIndex)) }
+            currentIndex: (MySelection.currentModel) ? indexOfValue(MySelection.currentModel.modelType) : -1
+            onActivated: {
+                if (MySelection.currentModel)
+                    MyCommands.modelCommand.setModelType(MySelection.currentModel, valueAt(currentIndex))
+            }
         }
 
         RowLayout {
@@ -51,14 +50,14 @@ FSEModule {
             }
 
             FSEMenuButton {
-                text: (root.myData && root.myData.sourcePath.toString() !== "") ? root.myData.sourcePath : qsTr("Choose...")
+                text: (MySelection.currentModel && MySelection.currentModel.sourcePath.toString() !== "") ? MySelection.currentModel.sourcePath : qsTr("Choose...")
                 onClicked: dialog.open()
             }
         }
 
         FSETextField {
             name: qsTr("QML name")
-            value: (root.myData) ? root.myData.qmlName : "-"
+            value: (MySelection.currentModel) ? MySelection.currentModel.qmlName : "-"
             enabled: false
         }
     }

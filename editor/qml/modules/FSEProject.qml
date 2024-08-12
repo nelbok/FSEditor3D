@@ -4,7 +4,6 @@ import QtQuick.Layouts
 import editor
 
 FSEModule {
-    id: root
     title: qsTr("Project")
 
     entity: FSEEntity {
@@ -21,7 +20,10 @@ FSEModule {
                 model: MyModels.placeModel
                 project: MyProject
                 currentData: MyProject.defaultPlace
-                onCurrentUpdated: { if (MyProject && MyProject.defaultPlace !== currentData) MyCommands.projectCommand.setDefaultPlace(currentData) }
+                onCurrentUpdated: {
+                    if (MyProject && MyProject.defaultPlace !== currentData)
+                        MyCommands.projectCommand.setDefaultPlace(currentData)
+                }
             }
 
             model: mng.model

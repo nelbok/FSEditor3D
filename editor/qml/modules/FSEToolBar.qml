@@ -5,9 +5,6 @@ import QtQuick.Dialogs
 import editor
 
 FSERectangle {
-    signal settingsClicked
-
-    id: root
     width: 50
     height: 275
 
@@ -45,7 +42,9 @@ FSERectangle {
 
         FSEToolButton {
             source: "qrc:/tools/" + MyStyles.style.settings + ".svg"
-            onClicked: root.settingsClicked()
+            onClicked: {
+                MySelection.currentType = (MySelection.currentType === MySelection.Type.Settings) ? MySelection.Type.None : MySelection.Type.Settings
+            }
         }
     }
 

@@ -4,10 +4,6 @@ import QtQuick.Layouts
 import editor
 
 FSEModule {
-    property MyPlace myData: MySelection.currentPlace
-
-    // FIXME: FSEModule doesn't work if we don't have id: root here...
-    id: root
     title: qsTr("Places")
 
     selection: FSEList {
@@ -20,7 +16,7 @@ FSEModule {
     }
 
     entity: FSEShape {
-        shape: root.myData
+        shape: MySelection.currentPlace
         filters: {
             "modelType": MyModel.ModelType.Place,
         }
