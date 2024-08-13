@@ -2,7 +2,7 @@
 
 #include <QtCore/QList>
 
-#include <fsd/data/Entity.hpp>
+#include <fsd/data/Geometry.hpp>
 
 namespace fsd {
 class Link;
@@ -10,7 +10,7 @@ class Model;
 class Object;
 class Place;
 
-class Project : public Entity {
+class Project : public Geometry {
 	Q_OBJECT
 	Q_PROPERTY(Place* defaultPlace READ defaultPlace WRITE setDefaultPlace NOTIFY defaultPlaceUpdated)
 	Q_PROPERTY(QList<Entity*> entities READ entities NOTIFY entitiesUpdated)

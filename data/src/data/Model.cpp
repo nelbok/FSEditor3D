@@ -13,21 +13,21 @@ struct Model::Impl {
 };
 
 Model::Model(Project* project)
-	: Entity(project)
+	: Geometry(project)
 	, _impl{ std::make_unique<Impl>() } {
 }
 
 Model::~Model() {}
 
 void Model::reset() {
-	Entity::reset();
+	Geometry::reset();
 	setSourcePath({});
 	setQmlName({});
 	setModelType(ModelType::Place);
 }
 
 void Model::copy(const Model& model) {
-	Entity::copy(model);
+	Geometry::copy(model);
 	setSourcePath(model.sourcePath());
 	setQmlName(model.qmlName());
 	setModelType(model.modelType());
@@ -66,14 +66,14 @@ constexpr auto lQmlName = "qmlName";
 constexpr auto lModelType = "modelType";
 
 void Model::load(const QJsonObject& json) {
-	Entity::load(json);
+	Geometry::load(json);
 	setSourcePath(Json::toUrl(Json::toValue(lSourcePath, json)));
 	setQmlName(Json::toString(lQmlName, json));
 	setModelType(static_cast<Model::ModelType>(Json::toInt(lModelType, json)));
 }
 
 void Model::save(QJsonObject& json) const {
-	Entity::save(json);
+	Geometry::save(json);
 	json[lSourcePath] = Json::fromUrl(_impl->sourcePath);
 	json[lQmlName] = _impl->qmlName;
 	json[lModelType] = static_cast<int>(_impl->modelType);

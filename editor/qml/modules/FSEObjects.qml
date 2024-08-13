@@ -10,8 +10,8 @@ FSEModule {
         model: MyModels.objectModel
 
         onCreateClicked: { MyCommands.projectCommand.createObject() }
-        onRemoveClicked: { MyCommands.projectCommand.removeObject(mng.currentData) }
-        onDuplicateClicked: { MyCommands.projectCommand.duplicateObject(mng.currentData) }
+        onRemoveClicked: { MyCommands.projectCommand.removeObject(MySelection.currentObject) }
+        onDuplicateClicked: { MyCommands.projectCommand.duplicateObject(MySelection.currentObject) }
         onCurrentDataChanged: (currentData) => { MySelection.currentObject = currentData }
     }
 

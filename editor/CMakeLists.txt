@@ -9,6 +9,8 @@ set(PROJECT_SOURCES
 	src/commands/DuplicateCommand.hpp
 	src/commands/EntityCommand.cpp
 	src/commands/EntityCommand.hpp
+	src/commands/GeometryCommand.cpp
+	src/commands/GeometryCommand.hpp
 	src/commands/LinkCommand.cpp
 	src/commands/LinkCommand.hpp
 	src/commands/ModelCommand.cpp
@@ -91,9 +93,11 @@ set(QML_SOURCES
 	qml/common/FSEText.qml
 	qml/common/FSETextField.qml
 	qml/common/FSEToolButton.qml
+	qml/common/FSETransformNode.qml
 	qml/common/FSEVector3DField.qml
 
 	qml/data/FSEEntity.qml
+	qml/data/FSEGeometry.qml
 	qml/data/FSEPlacement.qml
 	qml/data/FSEShape.qml
 

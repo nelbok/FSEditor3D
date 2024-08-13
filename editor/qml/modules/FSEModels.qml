@@ -11,8 +11,8 @@ FSEModule {
         model: MyModels.modelModel
 
         onCreateClicked: { MyCommands.projectCommand.createModel() }
-        onRemoveClicked: { MyCommands.projectCommand.removeModel(mng.currentData) }
-        onDuplicateClicked: { MyCommands.projectCommand.duplicateModel(mng.currentData) }
+        onRemoveClicked: { MyCommands.projectCommand.removeModel(MySelection.currentModel) }
+        onDuplicateClicked: { MyCommands.projectCommand.duplicateModel(MySelection.currentModel) }
         onCurrentDataChanged: (currentData) => { MySelection.currentModel = currentData }
     }
 
@@ -20,7 +20,11 @@ FSEModule {
         entity: MySelection.currentModel
     }
 
-    partA: ColumnLayout {
+    partA: FSEGeometry {
+        geometry: MySelection.currentModel
+    }
+
+    partB: ColumnLayout {
         spacing: 5
         enabled: MySelection.currentModel
 

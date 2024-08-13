@@ -45,6 +45,25 @@ private:
 		QCOMPARE(metaObject->propertyOffset(), 1);
 	}
 
+	void testGeometry(fsd::Geometry* geometry, const QMetaObject* metaObject) {
+		testEntity(geometry, metaObject->superClass());
+
+		const auto position = QVector3D(0, 0, 0);
+		geometry->setPosition(position);
+		QCOMPARE(geometry->position(), position);
+
+		const auto rotation = QVector3D(0, 0, 0);
+		geometry->setRotation(rotation);
+		QCOMPARE(geometry->rotation(), rotation);
+
+		const auto scale = QVector3D(0, 0, 0);
+		geometry->setScale(scale);
+		QCOMPARE(geometry->scale(), scale);
+
+		QCOMPARE(metaObject->propertyCount(), 9);
+		QCOMPARE(metaObject->propertyOffset(), 6);
+	}
+
 	void testLink(fsd::Link* link, const QMetaObject* metaObject) {
 		testPlacement(link, metaObject->superClass());
 
@@ -52,12 +71,12 @@ private:
 		link->setLink(linkA);
 		QCOMPARE(link->link(), linkA);
 
-		QCOMPARE(metaObject->propertyCount(), 11);
-		QCOMPARE(metaObject->propertyOffset(), 10);
+		QCOMPARE(metaObject->propertyCount(), 12);
+		QCOMPARE(metaObject->propertyOffset(), 11);
 	}
 
 	void testModel(fsd::Model* model, const QMetaObject* metaObject) {
-		testEntity(model, metaObject->superClass());
+		testGeometry(model, metaObject->superClass());
 
 		const auto path = QUrl(":/test/img");
 		model->setSourcePath(path);
@@ -71,45 +90,37 @@ private:
 		model->setModelType(modelType);
 		QCOMPARE(model->modelType(), modelType);
 
-		QCOMPARE(metaObject->propertyCount(), 9);
-		QCOMPARE(metaObject->propertyOffset(), 6);
+		QCOMPARE(metaObject->propertyCount(), 12);
+		QCOMPARE(metaObject->propertyOffset(), 9);
 	}
 
 	void testObject(fsd::Object* object, const QMetaObject* metaObject) {
 		testPlacement(object, metaObject->superClass());
 
-		QCOMPARE(metaObject->propertyCount(), 10);
-		QCOMPARE(metaObject->propertyOffset(), 10);
+		QCOMPARE(metaObject->propertyCount(), 11);
+		QCOMPARE(metaObject->propertyOffset(), 11);
 	}
 
 	void testPlace(fsd::Place* place, const QMetaObject* metaObject) {
 		testShape(place, metaObject->superClass());
 
-		QCOMPARE(metaObject->propertyCount(), 7);
-		QCOMPARE(metaObject->propertyOffset(), 7);
+		QCOMPARE(metaObject->propertyCount(), 10);
+		QCOMPARE(metaObject->propertyOffset(), 10);
 	}
 
 	void testPlacement(fsd::Placement* placement, const QMetaObject* metaObject) {
 		testShape(placement, metaObject->superClass());
 
-		const auto position = QVector3D(0, 0, 0);
-		placement->setPosition(position);
-		QCOMPARE(placement->position(), position);
-
-		const auto rotation = QVector3D(0, 0, 0);
-		placement->setRotation(rotation);
-		QCOMPARE(placement->rotation(), rotation);
-
 		auto* place = _project->places().at(0);
 		placement->setPlace(place);
 		QCOMPARE(placement->place(), place);
 
-		QCOMPARE(metaObject->propertyCount(), 10);
-		QCOMPARE(metaObject->propertyOffset(), 7);
+		QCOMPARE(metaObject->propertyCount(), 11);
+		QCOMPARE(metaObject->propertyOffset(), 10);
 	}
 
 	void testProject(fsd::Project* project, const QMetaObject* metaObject) {
-		testEntity(project, metaObject->superClass());
+		testGeometry(project, metaObject->superClass());
 
 		auto* place = _project->places().at(0);
 		project->setDefaultPlace(place);
@@ -121,18 +132,18 @@ private:
 		QCOMPARE(project->places().count(), 1);
 		QCOMPARE(project->entities().count(), 4);
 
-		QCOMPARE(metaObject->propertyCount(), 12);
-		QCOMPARE(metaObject->propertyOffset(), 6);
+		QCOMPARE(metaObject->propertyCount(), 15);
+		QCOMPARE(metaObject->propertyOffset(), 9);
 	}
 
 	void testShape(fsd::Shape* shape, const QMetaObject* metaObject) {
-		testEntity(shape, metaObject->superClass());
+		testGeometry(shape, metaObject->superClass());
 
 		auto* model = _project->models().at(0);
 		shape->setModel(model);
 		QCOMPARE(shape->model(), model);
 
-		QCOMPARE(metaObject->propertyCount(), 7);
-		QCOMPARE(metaObject->propertyOffset(), 6);
+		QCOMPARE(metaObject->propertyCount(), 10);
+		QCOMPARE(metaObject->propertyOffset(), 9);
 	}
 };

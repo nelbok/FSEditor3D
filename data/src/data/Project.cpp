@@ -71,7 +71,7 @@ struct Project::Impl {
 };
 
 Project::Project(QObject* parent)
-	: Entity(parent)
+	: Geometry(parent)
 	, _impl{ std::make_unique<Impl>() } {
 	_impl->defaultPlace = makePlacePointer(this, this);
 }
@@ -79,7 +79,7 @@ Project::Project(QObject* parent)
 Project::~Project() {}
 
 void Project::reset() {
-	Entity::reset();
+	Geometry::reset();
 
 	// Reset datas
 	setDefaultPlace(nullptr);
@@ -239,7 +239,7 @@ constexpr auto lPlaces = "places";
 
 void Project::load(const QJsonObject& json) {
 	reset();
-	Entity::load(json);
+	Geometry::load(json);
 
 	_impl->loadList(this, _impl->links, lLinks, json, &Project::linksUpdated);
 	_impl->loadList(this, _impl->models, lModels, json, &Project::modelsUpdated);
@@ -253,7 +253,7 @@ void Project::load(const QJsonObject& json) {
 }
 
 void Project::save(QJsonObject& json) const {
-	Entity::save(json);
+	Geometry::save(json);
 	_impl->saveList(this, _impl->links, lLinks, json);
 	_impl->saveList(this, _impl->models, lModels, json);
 	_impl->saveList(this, _impl->objects, lObjects, json);

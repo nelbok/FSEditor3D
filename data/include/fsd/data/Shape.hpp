@@ -1,12 +1,12 @@
 #pragma once
 
-#include <fsd/data/Entity.hpp>
+#include <fsd/data/Geometry.hpp>
 
 namespace fsd {
 class Model;
 class Project;
 
-class Shape : public Entity {
+class Shape : public Geometry {
 	Q_OBJECT
 	Q_PROPERTY(Model* model READ model WRITE setModel NOTIFY modelUpdated)
 

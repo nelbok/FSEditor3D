@@ -2,6 +2,7 @@ qt_standard_project_setup(REQUIRES 6.5)
 set(CMAKE_DEBUG_POSTFIX _d)
 set(PROJECT_SOURCES
 	include/fsd/data/Entity.hpp
+	include/fsd/data/Geometry.hpp
 	include/fsd/data/Link.hpp
 	include/fsd/data/Model.hpp
 	include/fsd/data/Object.hpp
@@ -15,6 +16,7 @@ set(PROJECT_SOURCES
 
 	src/common/Accessors.hpp
 	src/data/Entity.cpp
+	src/data/Geometry.cpp
 	src/data/Link.cpp
 	src/data/Model.cpp
 	src/data/Object.cpp

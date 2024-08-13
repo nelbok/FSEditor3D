@@ -49,5 +49,8 @@ View3D {
         }
     }
 
-    Component.onCompleted: MyLoader.setScene(view3D.scene)
+    Component.onCompleted: {
+        MyLoader.setScene(view3D.scene)
+        MyLoader.init()
+    }
 }

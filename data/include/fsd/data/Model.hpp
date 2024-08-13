@@ -2,12 +2,12 @@
 
 #include <QtCore/QUrl>
 
-#include <fsd/data/Entity.hpp>
+#include <fsd/data/Geometry.hpp>
 
 namespace fsd {
 class Project;
 
-class Model : public Entity {
+class Model : public Geometry {
 	Q_OBJECT
 	Q_PROPERTY(QUrl sourcePath READ sourcePath WRITE setSourcePath NOTIFY sourcePathUpdated)
 	Q_PROPERTY(QString qmlName READ qmlName WRITE setQmlName NOTIFY qmlNameUpdated)

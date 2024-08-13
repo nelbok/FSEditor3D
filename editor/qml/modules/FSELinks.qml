@@ -10,8 +10,8 @@ FSEModule {
         model: MyModels.linkModel
 
         onCreateClicked: { MyCommands.projectCommand.createLink() }
-        onRemoveClicked: { MyCommands.projectCommand.removeLink(mng.currentData) }
-        onDuplicateClicked: { MyCommands.projectCommand.duplicateLink(mng.currentData) }
+        onRemoveClicked: { MyCommands.projectCommand.removeLink(MySelection.currentLink) }
+        onDuplicateClicked: { MyCommands.projectCommand.duplicateLink(MySelection.currentLink) }
         onCurrentDataChanged: (currentData) => { MySelection.currentLink = currentData }
     }
 

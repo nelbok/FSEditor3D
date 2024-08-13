@@ -6,6 +6,7 @@ namespace fse {
 struct CommandsManager::Impl {
 	Commands* commands{ nullptr };
 	EntityCommand* entityCommand{ nullptr };
+	GeometryCommand* geometryCommand{ nullptr };
 	LinkCommand* linkCommand{ nullptr };
 	ModelCommand* modelCommand{ nullptr };
 	ObjectCommand* objectCommand{ nullptr };
@@ -31,6 +32,7 @@ void CommandsManager::init(fsd::Project* project) {
 
 	//commands
 	_impl->entityCommand = new EntityCommand(_impl->commands);
+	_impl->geometryCommand = new GeometryCommand(_impl->commands);
 	_impl->linkCommand = new LinkCommand(_impl->commands);
 	_impl->modelCommand = new ModelCommand(_impl->commands);
 	_impl->objectCommand = new ObjectCommand(_impl->commands);
@@ -65,6 +67,11 @@ void CommandsManager::redo() {
 EntityCommand* CommandsManager::entityCommand() const {
 	assert(_impl->entityCommand);
 	return _impl->entityCommand;
+}
+
+GeometryCommand* CommandsManager::geometryCommand() const {
+	assert(_impl->geometryCommand);
+	return _impl->geometryCommand;
 }
 
 LinkCommand* CommandsManager::linkCommand() const {

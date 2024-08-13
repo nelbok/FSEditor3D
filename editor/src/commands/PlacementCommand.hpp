@@ -14,8 +14,6 @@ public:
 	PlacementCommand(Commands* commands);
 	virtual ~PlacementCommand();
 
-	Q_INVOKABLE void setPosition(fsd::Placement* placement, const QVector3D& position);
-	Q_INVOKABLE void setRotation(fsd::Placement* placement, const QVector3D& rotation);
 	Q_INVOKABLE void setPlace(fsd::Placement* placement, fsd::Place* place);
 
 protected:

@@ -10,8 +10,8 @@ FSEModule {
         model: MyModels.placeModel
 
         onCreateClicked: { MyCommands.projectCommand.createPlace() }
-        onRemoveClicked: { MyCommands.projectCommand.removePlace(mng.currentData) }
-        onDuplicateClicked: { MyCommands.projectCommand.duplicatePlace(mng.currentData) }
+        onRemoveClicked: { MyCommands.projectCommand.removePlace(MySelection.currentPlace) }
+        onDuplicateClicked: { MyCommands.projectCommand.duplicatePlace(MySelection.currentPlace) }
         onCurrentDataChanged: (currentData) => { MySelection.currentPlace = currentData }
     }
 
@@ -20,5 +20,9 @@ FSEModule {
         filters: {
             "modelType": MyModel.ModelType.Place,
         }
+    }
+
+    partA: FSEGeometry {
+        geometry: MySelection.currentPlace
     }
 }

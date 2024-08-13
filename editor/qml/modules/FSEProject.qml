@@ -10,7 +10,11 @@ FSEModule {
         entity: MyProject
     }
 
-    partA: ColumnLayout{
+    partA: FSEGeometry {
+        geometry: MyProject
+    }
+
+    partB: ColumnLayout{
         spacing: 5
         FSEComboBox {
             name: qsTr("Default place")

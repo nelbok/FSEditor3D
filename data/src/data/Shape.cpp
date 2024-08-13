@@ -11,7 +11,7 @@ struct Shape::Impl {
 };
 
 Shape::Shape(Project* project)
-	: Entity(project)
+	: Geometry(project)
 	, _impl{ std::make_unique<Impl>() } {
 	_impl->model = makeModelPointer(project, this);
 }
@@ -19,12 +19,12 @@ Shape::Shape(Project* project)
 Shape::~Shape() {}
 
 void Shape::reset() {
-	Entity::reset();
+	Geometry::reset();
 	setModel(nullptr);
 }
 
 void Shape::copy(const Shape& shape) {
-	Entity::copy(shape);
+	Geometry::copy(shape);
 	setModel(shape.model());
 }
 
@@ -41,13 +41,13 @@ void Shape::setModel(Model* model) {
 constexpr auto lModel = "model";
 
 void Shape::load(const QJsonObject& json) {
-	Entity::load(json);
+	Geometry::load(json);
 	_impl->model->setUuid(Json::toUuid(Json::toValue(lModel, json)));
 	emit modelUpdated();
 }
 
 void Shape::save(QJsonObject& json) const {
-	Entity::save(json);
+	Geometry::save(json);
 	json[lModel] = Json::fromUuid(_impl->model->uuid());
 }
 } // namespace fsd

@@ -5,6 +5,7 @@
 #include <fsd/data/Project.hpp>
 
 #include "commands/EntityCommand.hpp"
+#include "commands/GeometryCommand.hpp"
 #include "commands/LinkCommand.hpp"
 #include "commands/ModelCommand.hpp"
 #include "commands/ObjectCommand.hpp"
@@ -21,6 +22,7 @@ class CommandsManager : public QObject {
 	Q_PROPERTY(bool canRedo READ canRedo NOTIFY updated)
 
 	Q_PROPERTY(EntityCommand* entityCommand READ entityCommand CONSTANT)
+	Q_PROPERTY(GeometryCommand* geometryCommand READ geometryCommand CONSTANT)
 	Q_PROPERTY(LinkCommand* linkCommand READ linkCommand CONSTANT)
 	Q_PROPERTY(ModelCommand* modelCommand READ modelCommand CONSTANT)
 	Q_PROPERTY(ObjectCommand* objectCommand READ objectCommand CONSTANT)
@@ -42,6 +44,7 @@ public:
 	Q_INVOKABLE void redo();
 
 	EntityCommand* entityCommand() const;
+	GeometryCommand* geometryCommand() const;
 	LinkCommand* linkCommand() const;
 	ModelCommand* modelCommand() const;
 	ObjectCommand* objectCommand() const;
