@@ -93,7 +93,6 @@ set(QML_SOURCES
 	qml/common/FSEText.qml
 	qml/common/FSETextField.qml
 	qml/common/FSEToolButton.qml
-	qml/common/FSETransformNode.qml
 	qml/common/FSEVector3DField.qml
 
 	qml/data/FSEEntity.qml

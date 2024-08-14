@@ -8,11 +8,12 @@ FSEModule {
 
     selection: FSEList {
         model: MyModels.placeModel
+        currentData: MySelection.currentPlace
+        onActivated: MySelection.currentPlace = currentData
 
         onCreateClicked: { MyCommands.projectCommand.createPlace() }
         onRemoveClicked: { MyCommands.projectCommand.removePlace(MySelection.currentPlace) }
         onDuplicateClicked: { MyCommands.projectCommand.duplicatePlace(MySelection.currentPlace) }
-        onCurrentDataChanged: (currentData) => { MySelection.currentPlace = currentData }
     }
 
     entity: FSEShape {

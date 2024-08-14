@@ -16,7 +16,6 @@ FSEGeometry {
         MySelectionWrapper {
             id: mng
             model: MyModels.placeModel
-            project: MyProject
             currentData: (root.placement) ? root.placement.place : null
             onCurrentUpdated: { if (root.placement && root.placement.place !== currentData) MyCommands.placementCommand.setPlace(root.placement, currentData) }
         }

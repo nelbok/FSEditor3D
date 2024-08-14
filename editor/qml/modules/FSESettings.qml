@@ -21,9 +21,9 @@ FSERectangle {
             FSEComboBox {
                 name: qsTr("Theme")
                 model: ListModel {
-                    ListElement { uuid: "basic"; name: qsTr("Basic") }
-                    ListElement { uuid: "dark"; name: qsTr("Dark") }
-                    ListElement { uuid: "light"; name: qsTr("Light") }
+                    ListElement { value: "basic"; name: qsTr("Basic") }
+                    ListElement { value: "dark"; name: qsTr("Dark") }
+                    ListElement { value: "light"; name: qsTr("Light") }
                 }
                 Component.onCompleted: currentIndex = indexOfValue(MyStyles.current)
                 onActivated: MyStyles.current = valueAt(currentIndex)
@@ -32,8 +32,8 @@ FSERectangle {
             FSEComboBox {
                 name: qsTr("Language")
                 model: ListModel {
-                    ListElement { uuid: "en"; name: qsTr("English") }
-                    ListElement { uuid: "fr"; name: qsTr("French") }
+                    ListElement { value: "en"; name: qsTr("English") }
+                    ListElement { value: "fr"; name: qsTr("French") }
                 }
                 Component.onCompleted: currentIndex = indexOfValue(MyTranslations.current)
                 onActivated: MyTranslations.current = valueAt(currentIndex)

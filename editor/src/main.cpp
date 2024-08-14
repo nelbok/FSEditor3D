@@ -51,6 +51,7 @@ void initRegister(fse::Manager* manager) {
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyProject", manager->project());
 
 	qmlRegisterUncreatableType<fsd::Entity>("editor", 1, 0, "MyEntity", "Attempt to create an Entity");
+	qmlRegisterUncreatableType<fsd::Geometry>("editor", 1, 0, "MyGeometry", "Attempt to create a Geometry");
 	qmlRegisterUncreatableType<fsd::Placement>("editor", 1, 0, "MyPlacement", "Attempt to create a Placement");
 	qmlRegisterUncreatableType<fsd::Shape>("editor", 1, 0, "MyShape", "Attempt to create a Shape");
 

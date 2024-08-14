@@ -8,11 +8,12 @@ FSEModule {
 
     selection: FSEList {
         model: MyModels.linkModel
+        currentData: MySelection.currentLink
+        onActivated: MySelection.currentLink = currentData
 
         onCreateClicked: { MyCommands.projectCommand.createLink() }
         onRemoveClicked: { MyCommands.projectCommand.removeLink(MySelection.currentLink) }
         onDuplicateClicked: { MyCommands.projectCommand.duplicateLink(MySelection.currentLink) }
-        onCurrentDataChanged: (currentData) => { MySelection.currentLink = currentData }
     }
 
     entity: FSEShape {
@@ -35,7 +36,6 @@ FSEModule {
             MySelectionWrapper {
                 id: mng
                 model: MyModels.linkModel
-                project: MyProject
                 currentData: (MySelection.currentLink) ? MySelection.currentLink.link : null
                 onCurrentUpdated: {
                     if (MySelection.currentLink && MySelection.currentLink.link !== currentData)

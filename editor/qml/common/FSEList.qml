@@ -6,11 +6,12 @@ import editor
 
 ColumnLayout {
     property alias model: mng.model
+    property alias currentData: mng.currentData
+    signal activated()
 
     signal createClicked()
     signal removeClicked()
     signal duplicateClicked()
-    signal currentDataChanged(currentData: MyEntity)
 
     id: root
 
@@ -18,8 +19,8 @@ ColumnLayout {
 
     MySelectionWrapper {
         id: mng
-        project: MyProject
-        onCurrentDataChanged: { root.currentDataChanged(currentData) }
+        currentData: root.currentData
+        onCurrentUpdated: { root.activated() }
     }
 
     RowLayout {

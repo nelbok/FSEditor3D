@@ -30,7 +30,7 @@ RowLayout {
 
         Layout.preferredWidth: 175
 
-        valueRole: "uuid"
+        valueRole: "value"
         textRole: "name"
 
         // FIXME: Colors for hovered item in the popup

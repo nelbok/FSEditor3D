@@ -16,6 +16,7 @@ SelectionManager::SelectionManager(QObject* parent)
 SelectionManager::~SelectionManager() {}
 
 void SelectionManager::reset() {
+	setCurrentType(Type::None);
 	setCurrentLink(nullptr);
 	setCurrentModel(nullptr);
 	setCurrentObject(nullptr);

@@ -33,9 +33,9 @@ protected:
 
 		// Fill the new model
 		for (auto* entity : datas) {
+			connectData(entity);
 			if (!entity->isAlive())
 				continue;
-			connectData(entity);
 			_datas.append(entity);
 		}
 

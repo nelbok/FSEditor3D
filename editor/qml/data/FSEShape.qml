@@ -21,7 +21,6 @@ FSEEntity {
         MySelectionWrapper {
             id: mng
             model: proxy
-            project: MyProject
             currentData: (root.shape) ? root.shape.model : null
             onCurrentUpdated: { if (root.shape && root.shape.model !== currentData) MyCommands.shapeCommand.setModel(root.shape, currentData) }
         }

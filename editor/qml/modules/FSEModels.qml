@@ -9,11 +9,12 @@ FSEModule {
 
     selection: FSEList {
         model: MyModels.modelModel
+        currentData: MySelection.currentModel
+        onActivated: MySelection.currentModel = currentData
 
         onCreateClicked: { MyCommands.projectCommand.createModel() }
         onRemoveClicked: { MyCommands.projectCommand.removeModel(MySelection.currentModel) }
         onDuplicateClicked: { MyCommands.projectCommand.duplicateModel(MySelection.currentModel) }
-        onCurrentDataChanged: (currentData) => { MySelection.currentModel = currentData }
     }
 
     entity: FSEEntity {
@@ -31,9 +32,9 @@ FSEModule {
         FSEComboBox {
             name: qsTr("Type")
             model: ListModel {
-                ListElement { uuid: MyModel.ModelType.Object; name: qsTr("Object") }
-                ListElement { uuid: MyModel.ModelType.Link; name: qsTr("Link") }
-                ListElement { uuid: MyModel.ModelType.Place; name: qsTr("Place") }
+                ListElement { value: MyModel.ModelType.Object; name: qsTr("Object") }
+                ListElement { value: MyModel.ModelType.Link; name: qsTr("Link") }
+                ListElement { value: MyModel.ModelType.Place; name: qsTr("Place") }
             }
             currentIndex: (MySelection.currentModel) ? indexOfValue(MySelection.currentModel.modelType) : -1
             onActivated: {
