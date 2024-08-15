@@ -27,6 +27,7 @@ public:
 
 private:
 	int getRole(const QByteArray& name) const;
+	bool hasCurrentSelection() const;
 
 private:
 	fsd::Entity* _currentData{ nullptr };

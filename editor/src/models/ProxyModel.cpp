@@ -1,5 +1,7 @@
 #include "ProxyModel.hpp"
 
+#include "EntityModel.hpp"
+
 namespace fse {
 
 ProxyModel::ProxyModel(QObject* parent)
@@ -22,8 +24,14 @@ void ProxyModel::setFilters(const QVariantMap& filters) {
 bool ProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex& sourceParent) const {
 	const auto& index = sourceModel()->index(sourceRow, 0, sourceParent);
 
+	if (auto* entityModel = qobject_cast<EntityModel*>(sourceModel()); entityModel->hasNoneOption()) {
+		if (auto* entity = index.data(getRole("entity")).value<fsd::Entity*>(); !entity) {
+			return true;
+		}
+	}
+
 	for (auto it = _filters.cbegin(); it != _filters.cend(); ++it) {
-		if (sourceModel()->data(index, getRole(it.key().toUtf8())) != it.value())
+		if (index.data(getRole(it.key().toUtf8())) != it.value())
 			return false;
 	}
 

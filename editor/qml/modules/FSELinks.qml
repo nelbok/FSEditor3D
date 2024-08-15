@@ -35,7 +35,7 @@ FSEModule {
 
             MySelectionWrapper {
                 id: mng
-                model: MyModels.linkModel
+                model: MyModels.linkModelWithNone
                 currentData: (MySelection.currentLink) ? MySelection.currentLink.link : null
                 onCurrentUpdated: {
                     if (MySelection.currentLink && MySelection.currentLink.link !== currentData)

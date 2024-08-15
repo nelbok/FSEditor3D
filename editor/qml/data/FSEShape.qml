@@ -15,7 +15,7 @@ FSEEntity {
 
         MyProxyModel {
             id: proxy
-            sourceModel: MyModels.modelModel
+            sourceModel: MyModels.modelModelWithNone
         }
 
         MySelectionWrapper {

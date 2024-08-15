@@ -17,6 +17,11 @@ class ModelsManager : public QObject {
 	Q_PROPERTY(ObjectModel* objectModel READ objectModel CONSTANT)
 	Q_PROPERTY(PlaceModel* placeModel READ placeModel CONSTANT)
 
+	Q_PROPERTY(LinkModel* linkModelWithNone READ linkModelWithNone CONSTANT)
+	Q_PROPERTY(ModelModel* modelModelWithNone READ modelModelWithNone CONSTANT)
+	Q_PROPERTY(ObjectModel* objectModelWithNone READ objectModelWithNone CONSTANT)
+	Q_PROPERTY(PlaceModel* placeModelWithNone READ placeModelWithNone CONSTANT)
+
 public:
 	ModelsManager(QObject* parent = nullptr);
 	virtual ~ModelsManager();
@@ -27,6 +32,11 @@ public:
 	ModelModel* modelModel() const;
 	ObjectModel* objectModel() const;
 	PlaceModel* placeModel() const;
+
+	LinkModel* linkModelWithNone() const;
+	ModelModel* modelModelWithNone() const;
+	ObjectModel* objectModelWithNone() const;
+	PlaceModel* placeModelWithNone() const;
 
 private:
 	struct Impl;

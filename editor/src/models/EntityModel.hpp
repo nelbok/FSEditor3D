@@ -7,10 +7,14 @@
 namespace fse {
 class EntityModel : public QAbstractListModel {
 	Q_OBJECT
+	Q_PROPERTY(bool hasNoneOption READ hasNoneOption WRITE setHasNoneOption NOTIFY hasNoneOptionUpdated)
 
 public:
 	EntityModel(fsd::Project* project, QObject* parent = nullptr);
 	virtual ~EntityModel();
+
+	bool hasNoneOption() const;
+	void setHasNoneOption(bool hasNoneOption);
 
 	virtual void initDatas() = 0;
 
@@ -27,11 +31,14 @@ protected:
 	void fillDatas(const QList<T*>& datas) {
 		// Disconnect
 		for (auto* entity : _datas) {
-			disconnectData(entity);
+			if (entity)
+				disconnectData(entity);
 		}
 		_datas.clear();
 
 		// Fill the new model
+		if (_hasNoneOption)
+			_datas.append(nullptr);
 		for (auto* entity : datas) {
 			connectData(entity);
 			if (!entity->isAlive())
@@ -51,6 +58,10 @@ protected:
 
 private:
 	QList<fsd::Entity*> _datas{};
+	bool _hasNoneOption{ false };
+
+signals:
+	void hasNoneOptionUpdated();
 };
 
 } // namespace fse

@@ -21,7 +21,7 @@ FSEModule {
 
             MySelectionWrapper {
                 id: mng
-                model: MyModels.placeModel
+                model: MyModels.placeModelWithNone
                 currentData: MyProject.defaultPlace
                 onCurrentUpdated: {
                     if (MyProject && MyProject.defaultPlace !== currentData)

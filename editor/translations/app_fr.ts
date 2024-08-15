@@ -2,6 +2,14 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr_FR">
 <context>
+    <name>EntityModel</name>
+    <message>
+        <location filename="../src/models/EntityModel.cpp" line="51"/>
+        <source>None</source>
+        <translation>Aucun(e)</translation>
+    </message>
+</context>
+<context>
     <name>FSEEntity</name>
     <message>
         <location filename="../qml/data/FSEEntity.qml" line="17"/>
@@ -52,8 +60,8 @@
         <translation>Liens</translation>
     </message>
     <message>
-        <location filename="../qml/modules/FSELinks.qml" line="33"/>
-        <location filename="../../build/editor/editor/qml/modules/FSELinks.qml" line="33"/>
+        <location filename="../qml/modules/FSELinks.qml" line="34"/>
+        <location filename="../../build/editor/editor/qml/modules/FSELinks.qml" line="34"/>
         <source>Link</source>
         <translation>Lien</translation>
     </message>
@@ -61,20 +69,20 @@
 <context>
     <name>FSEList</name>
     <message>
-        <location filename="../qml/common/FSEList.qml" line="30"/>
-        <location filename="../../build/editor/editor/qml/common/FSEList.qml" line="30"/>
+        <location filename="../qml/common/FSEList.qml" line="31"/>
+        <location filename="../../build/editor/editor/qml/common/FSEList.qml" line="31"/>
         <source>Add</source>
         <translation>Ajout</translation>
     </message>
     <message>
-        <location filename="../qml/common/FSEList.qml" line="36"/>
-        <location filename="../../build/editor/editor/qml/common/FSEList.qml" line="36"/>
+        <location filename="../qml/common/FSEList.qml" line="37"/>
+        <location filename="../../build/editor/editor/qml/common/FSEList.qml" line="37"/>
         <source>Del</source>
         <translation>Supp</translation>
     </message>
     <message>
-        <location filename="../qml/common/FSEList.qml" line="44"/>
-        <location filename="../../build/editor/editor/qml/common/FSEList.qml" line="44"/>
+        <location filename="../qml/common/FSEList.qml" line="45"/>
+        <location filename="../../build/editor/editor/qml/common/FSEList.qml" line="45"/>
         <source>Dup</source>
         <translation>Dupp</translation>
     </message>
@@ -130,50 +138,50 @@
         <translation>Modèles</translation>
     </message>
     <message>
-        <location filename="../qml/modules/FSEModels.qml" line="32"/>
-        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="32"/>
+        <location filename="../qml/modules/FSEModels.qml" line="33"/>
+        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="33"/>
         <source>Type</source>
         <translation>Type</translation>
     </message>
     <message>
-        <location filename="../qml/modules/FSEModels.qml" line="34"/>
-        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="34"/>
+        <location filename="../qml/modules/FSEModels.qml" line="35"/>
+        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="35"/>
         <source>Object</source>
         <translation>Objet</translation>
     </message>
     <message>
-        <location filename="../qml/modules/FSEModels.qml" line="35"/>
-        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="35"/>
+        <location filename="../qml/modules/FSEModels.qml" line="36"/>
+        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="36"/>
         <source>Link</source>
         <translation>Lien</translation>
     </message>
     <message>
-        <location filename="../qml/modules/FSEModels.qml" line="36"/>
-        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="36"/>
+        <location filename="../qml/modules/FSEModels.qml" line="37"/>
+        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="37"/>
         <source>Place</source>
         <translation>Lieu</translation>
     </message>
     <message>
-        <location filename="../qml/modules/FSEModels.qml" line="51"/>
-        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="51"/>
+        <location filename="../qml/modules/FSEModels.qml" line="52"/>
+        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="52"/>
         <source>Source</source>
         <translation>Source</translation>
     </message>
     <message>
-        <location filename="../qml/modules/FSEModels.qml" line="57"/>
-        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="57"/>
+        <location filename="../qml/modules/FSEModels.qml" line="58"/>
+        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="58"/>
         <source>Choose...</source>
         <translation>Choisir...</translation>
     </message>
     <message>
-        <location filename="../qml/modules/FSEModels.qml" line="63"/>
-        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="63"/>
+        <location filename="../qml/modules/FSEModels.qml" line="64"/>
+        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="64"/>
         <source>QML name</source>
         <translation>Nom QML</translation>
     </message>
     <message>
-        <location filename="../qml/modules/FSEModels.qml" line="91"/>
-        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="91"/>
+        <location filename="../qml/modules/FSEModels.qml" line="92"/>
+        <location filename="../../build/editor/editor/qml/modules/FSEModels.qml" line="92"/>
         <source>An error occurred while parsing the file.</source>
         <translation>Une erreur est intervenue lors de la lecture du fichier.</translation>
     </message>
@@ -226,7 +234,7 @@
         <location filename="../qml/modules/FSEProject.qml" line="20"/>
         <location filename="../../build/editor/editor/qml/modules/FSEProject.qml" line="20"/>
         <source>Default place</source>
-        <translation>Place par défaut</translation>
+        <translation>Lieu par défaut</translation>
     </message>
 </context>
 <context>

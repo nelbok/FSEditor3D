@@ -1,5 +1,8 @@
 #include "SelectionWrapper.hpp"
 
+#include "EntityModel.hpp"
+#include "ProxyModel.hpp"
+
 namespace fse {
 
 SelectionWrapper::SelectionWrapper(QObject* parent)
@@ -8,7 +11,7 @@ SelectionWrapper::SelectionWrapper(QObject* parent)
 SelectionWrapper::~SelectionWrapper() {}
 
 int SelectionWrapper::currentIndex() const {
-	if (!_model || !_currentData || !_currentData->isAlive())
+	if (!hasCurrentSelection())
 		return -1;
 
 	for (int i = 0; i < _model->rowCount(); ++i) {
@@ -30,7 +33,7 @@ void SelectionWrapper::setCurrentIndex(int currentIndex) {
 }
 
 fsd::Entity* SelectionWrapper::currentData() const {
-	if (!_model || !_currentData || !_currentData->isAlive())
+	if (!hasCurrentSelection())
 		return nullptr;
 
 	return _currentData;
@@ -72,5 +75,23 @@ int SelectionWrapper::getRole(const QByteArray& name) const {
 	assert(false);
 	return -1;
 }
+
+bool SelectionWrapper::hasCurrentSelection() const {
+	if (!_model)
+		return false;
+
+	if (_currentData && _currentData->isAlive())
+		return true;
+
+	if (auto* entityModel = qobject_cast<EntityModel*>(_model))
+		return entityModel->hasNoneOption();
+
+	if (auto* proxyModel = qobject_cast<ProxyModel*>(_model))
+		if (auto* entityModel = qobject_cast<EntityModel*>(proxyModel->sourceModel()))
+			return entityModel->hasNoneOption();
+
+	return false;
+}
+
 
 } // namespace fse
