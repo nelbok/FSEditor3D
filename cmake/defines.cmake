@@ -3,7 +3,7 @@ set(CFS_ORGANIZATION "FoxxySoft")
 string(TIMESTAMP FS_YEAR %Y)
 set(FS_COPYRIGHT "Copyright (C) 2011-${FS_YEAR} ${FS_ORGANIZATION}")
 
-set(FS_VERSION "0.4.2")
+set(FS_VERSION "0.4.3")
 string(REPLACE "." "," FS_VERSION_RC ${FS_VERSION})
 set(CFS_DATA "FSData")
 set(CFS_EDITOR "FSEditor")
