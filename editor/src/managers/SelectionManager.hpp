@@ -33,6 +33,7 @@ public:
 	SelectionManager(QObject* parent = nullptr);
 	virtual ~SelectionManager();
 
+	void init(fsd::Project* project);
 	void reset();
 
 	Type currentType() const;

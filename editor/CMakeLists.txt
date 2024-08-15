@@ -80,6 +80,10 @@ set(PROJECT_SOURCES
 	resources/resources.qrc
 )
 set(QML_SOURCES
+	qml/3d/FSETransformNode.qml
+	qml/3d/FSEView3D.qml
+	qml/3d/ModelLoader.js
+
 	qml/common/FSEButton.qml
 	qml/common/FSEColorField.qml
 	qml/common/FSEComboBox.qml
@@ -110,9 +114,6 @@ set(QML_SOURCES
 	qml/modules/FSEProject.qml
 	qml/modules/FSESettings.qml
 	qml/modules/FSEToolBar.qml
-	qml/modules/FSEView3D.qml
-
-	qml/scripts/ModelLoader.js
 
 	qml/Main.qml
 )

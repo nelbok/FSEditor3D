@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick3D
 import QtQuick3D.Helpers
 
-import "../scripts/ModelLoader.js" as MyLoader
+import "ModelLoader.js" as MyLoader
 
 import editor
 

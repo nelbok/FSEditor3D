@@ -1,8 +1,11 @@
 #include "SelectionManager.hpp"
 
+#include <fsd/data/Project.hpp>
+
 namespace fse {
 struct SelectionManager::Impl {
 	Type currentType{ Type::None };
+	fsd::Project* project{ nullptr };
 	fsd::Link* currentLink{ nullptr };
 	fsd::Model* currentModel{ nullptr };
 	fsd::Object* currentObject{ nullptr };
@@ -14,6 +17,13 @@ SelectionManager::SelectionManager(QObject* parent)
 	, _impl{ std::make_unique<Impl>() } {}
 
 SelectionManager::~SelectionManager() {}
+
+void SelectionManager::init(fsd::Project* project) {
+	assert(!_impl->project);
+	assert(project);
+	_impl->project = project;
+	QObject::connect(project, &fsd::Project::defaultPlaceUpdated, this, &SelectionManager::mainModelUpdated);
+}
 
 void SelectionManager::reset() {
 	setCurrentType(Type::None);
@@ -98,7 +108,14 @@ void SelectionManager::setCurrentPlace(fsd::Place* current) {
 }
 
 fsd::Model* SelectionManager::mainModel() const {
+	assert(_impl->project);
 	switch (_impl->currentType) {
+		case Type::None:
+		case Type::Project:
+			if (auto* place = _impl->project->defaultPlace(); place) {
+				return place->model();
+			}
+			break;
 		case Type::Models:
 			return _impl->currentModel;
 			break;
