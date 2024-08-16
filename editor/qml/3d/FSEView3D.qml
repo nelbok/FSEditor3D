@@ -7,7 +7,7 @@ import "ModelLoader.js" as MyLoader
 import editor
 
 // https://doc.qt.io/qt-6/qtquick3dphysics-units.html
-// Qt Quick 3D Unit: cm
+// Qt Quick 3D Unit: cm Angle: degree
 View3D {
     id: view3D
 
@@ -43,7 +43,7 @@ View3D {
         function onMainModelUpdated() {
             var model = MySelection.mainModel
             if (model && model.qmlName !== "")
-                MyLoader.load(MyManager.balsam.qmlPath(model))
+                MyLoader.load(MyManager.balsam.qmlPath(model), MySelection.mainGeometry)
             else
                 MyLoader.clean()
         }

@@ -118,7 +118,6 @@ fsd::Model* SelectionManager::mainModel() const {
 			break;
 		case Type::Models:
 			return _impl->currentModel;
-			break;
 		case Type::Places:
 			if (_impl->currentPlace)
 				return _impl->currentPlace->model();
@@ -131,6 +130,27 @@ fsd::Model* SelectionManager::mainModel() const {
 			if (_impl->currentLink)
 				return _impl->currentLink->model();
 			break;
+		default:
+			break;
+	}
+
+	return nullptr;
+}
+
+fsd::Geometry* SelectionManager::mainGeometry() const {
+	assert(_impl->project);
+	switch (_impl->currentType) {
+		case Type::None:
+		case Type::Project:
+			return _impl->project;
+		case Type::Models:
+			return _impl->currentModel;
+		case Type::Places:
+			return _impl->currentPlace;
+		case Type::Objects:
+			return _impl->currentObject;
+		case Type::Links:
+			return _impl->currentLink;
 		default:
 			break;
 	}
