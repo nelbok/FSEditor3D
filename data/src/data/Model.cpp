@@ -13,8 +13,11 @@ struct Model::Impl {
 };
 
 Model::Model(Project* project)
-	: Geometry(project)
+	: Geometry(project, project)
 	, _impl{ std::make_unique<Impl>() } {
+	connect(project, &Project::globalPositionUpdated, this, &Model::globalPositionUpdated);
+	connect(project, &Project::globalRotationUpdated, this, &Model::globalRotationUpdated);
+	connect(project, &Project::globalScaleUpdated, this, &Model::globalScaleUpdated);
 }
 
 Model::~Model() {}
@@ -59,6 +62,18 @@ void Model::setModelType(ModelType modelType) {
 
 Model::Type Model::type() const {
 	return Type::Model;
+}
+
+QVector3D Model::globalPosition() const {
+	return Geometry::globalPosition() + project()->globalPosition();
+}
+
+QVector3D Model::globalRotation() const {
+	return Geometry::globalRotation() + project()->globalRotation();
+}
+
+QVector3D Model::globalScale() const {
+	return Geometry::globalScale() * project()->globalScale();
 }
 
 constexpr auto lSourcePath = "sourcePath";

@@ -6,7 +6,7 @@ namespace fsd {
 struct Place::Impl {};
 
 Place::Place(Project* project)
-	: Shape(project)
+	: Shape(project, project)
 	, _impl{ std::make_unique<Impl>() } {}
 
 Place::~Place() {}

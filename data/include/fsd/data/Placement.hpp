@@ -4,14 +4,13 @@
 
 namespace fsd {
 class Place;
-class Project;
 
 class Placement : public Shape {
 	Q_OBJECT
 	Q_PROPERTY(Place* place READ place WRITE setPlace NOTIFY placeUpdated)
 
 public:
-	Placement(Project* project);
+	Placement(Project* project, QObject* parent = nullptr);
 	virtual ~Placement();
 
 	virtual void reset() override;

@@ -48,17 +48,17 @@ private:
 	void testGeometry(fsd::Geometry* geometry, const QMetaObject* metaObject) {
 		testEntity(geometry, metaObject->superClass());
 
-		const auto position = QVector3D(0, 0, 0);
-		geometry->setPosition(position);
-		QCOMPARE(geometry->position(), position);
+		const auto localPosition = QVector3D(0, 0, 0);
+		geometry->setLocalPosition(localPosition);
+		QCOMPARE(geometry->localPosition(), localPosition);
 
-		const auto rotation = QVector3D(0, 0, 0);
-		geometry->setRotation(rotation);
-		QCOMPARE(geometry->rotation(), rotation);
+		const auto localRotation = QVector3D(0, 0, 0);
+		geometry->setLocalRotation(localRotation);
+		QCOMPARE(geometry->localRotation(), localRotation);
 
-		const auto scale = QVector3D(0, 0, 0);
-		geometry->setScale(scale);
-		QCOMPARE(geometry->scale(), scale);
+		const auto localScale = QVector3D(0, 0, 0);
+		geometry->setLocalScale(localScale);
+		QCOMPARE(geometry->localScale(), localScale);
 
 		QCOMPARE(metaObject->propertyCount(), 9);
 		QCOMPARE(metaObject->propertyOffset(), 6);

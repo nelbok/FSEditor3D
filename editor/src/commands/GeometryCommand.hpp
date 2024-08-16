@@ -14,9 +14,9 @@ public:
 	GeometryCommand(Commands* commands);
 	virtual ~GeometryCommand();
 
-	Q_INVOKABLE void setPosition(fsd::Geometry* geometry, const QVector3D& position);
-	Q_INVOKABLE void setRotation(fsd::Geometry* geometry, const QVector3D& rotation);
-	Q_INVOKABLE void setScale(fsd::Geometry* geometry, const QVector3D& scale);
+	Q_INVOKABLE void setLocalPosition(fsd::Geometry* geometry, const QVector3D& localPosition);
+	Q_INVOKABLE void setLocalRotation(fsd::Geometry* geometry, const QVector3D& localRotation);
+	Q_INVOKABLE void setLocalScale(fsd::Geometry* geometry, const QVector3D& localScale);
 
 protected:
 	Commands* _c{ nullptr };

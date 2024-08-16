@@ -13,16 +13,16 @@ GeometryCommand::GeometryCommand(Commands* commands)
 
 GeometryCommand::~GeometryCommand() {}
 
-void GeometryCommand::setPosition(fsd::Geometry* g, const QVector3D& newValue) {
-	addValueCommand(_c, g, &fsd::Geometry::setPosition, &fsd::Geometry::position, newValue);
+void GeometryCommand::setLocalPosition(fsd::Geometry* g, const QVector3D& newValue) {
+	addValueCommand(_c, g, &fsd::Geometry::setLocalPosition, &fsd::Geometry::localPosition, newValue);
 }
 
-void GeometryCommand::setRotation(fsd::Geometry* g, const QVector3D& newValue) {
-	addValueCommand(_c, g, &fsd::Geometry::setRotation, &fsd::Geometry::rotation, newValue);
+void GeometryCommand::setLocalRotation(fsd::Geometry* g, const QVector3D& newValue) {
+	addValueCommand(_c, g, &fsd::Geometry::setLocalRotation, &fsd::Geometry::localRotation, newValue);
 }
 
-void GeometryCommand::setScale(fsd::Geometry* g, const QVector3D& newValue) {
-	addValueCommand(_c, g, &fsd::Geometry::setScale, &fsd::Geometry::scale, newValue);
+void GeometryCommand::setLocalScale(fsd::Geometry* g, const QVector3D& newValue) {
+	addValueCommand(_c, g, &fsd::Geometry::setLocalScale, &fsd::Geometry::localScale, newValue);
 }
 
 } // namespace fse

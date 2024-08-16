@@ -10,7 +10,7 @@ class Model;
 class Object;
 class Place;
 
-class Project : public Geometry {
+class Project final : public Geometry {
 	Q_OBJECT
 	Q_PROPERTY(Place* defaultPlace READ defaultPlace WRITE setDefaultPlace NOTIFY defaultPlaceUpdated)
 	Q_PROPERTY(QList<Entity*> entities READ entities NOTIFY entitiesUpdated)

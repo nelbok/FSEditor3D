@@ -1,5 +1,6 @@
 #include <fsd/data/Link.hpp>
 
+#include <fsd/data/Project.hpp>
 #include <fsd/data/UuidPointer.hpp>
 #include <fsd/io/Json.hpp>
 
@@ -9,7 +10,7 @@ struct Link::Impl {
 };
 
 Link::Link(Project* project)
-	: Placement(project)
+	: Placement(project, project)
 	, _impl{ std::make_unique<Impl>() } {
 	_impl->link = makeLinkPointer(project, this);
 }

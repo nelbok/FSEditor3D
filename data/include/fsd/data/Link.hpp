@@ -3,9 +3,7 @@
 #include <fsd/data/Placement.hpp>
 
 namespace fsd {
-class Project;
-
-class Link : public Placement {
+class Link final : public Placement {
 	Q_OBJECT
 	Q_PROPERTY(Link* link READ link WRITE setLink NOTIFY linkUpdated)
 

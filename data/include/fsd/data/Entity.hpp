@@ -5,6 +5,8 @@
 #include <QtCore/QUuid>
 
 namespace fsd {
+class Project;
+
 class Entity : public QObject {
 	Q_OBJECT
 	Q_PROPERTY(QUuid uuid READ uuid WRITE setUuid NOTIFY uuidUpdated)
@@ -23,8 +25,10 @@ public:
 	};
 	Q_ENUM(Type)
 
-	Entity(QObject* parent = nullptr);
+	Entity(Project* project, QObject* parent = nullptr);
 	virtual ~Entity();
+
+	Project* project() const;
 
 	virtual void reset();
 	void copy(const Entity& entity);

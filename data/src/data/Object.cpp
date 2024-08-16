@@ -1,12 +1,13 @@
 #include <fsd/data/Object.hpp>
 
+#include <fsd/data/Project.hpp>
 #include <fsd/io/Json.hpp>
 
 namespace fsd {
 struct Object::Impl {};
 
 Object::Object(Project* project)
-	: Placement(project)
+	: Placement(project, project)
 	, _impl{ std::make_unique<Impl>() } {}
 
 Object::~Object() {}

@@ -71,7 +71,7 @@ struct Project::Impl {
 };
 
 Project::Project(QObject* parent)
-	: Geometry(parent)
+	: Geometry(this, parent)
 	, _impl{ std::make_unique<Impl>() } {
 	_impl->defaultPlace = makePlacePointer(this, this);
 }
@@ -241,10 +241,11 @@ void Project::load(const QJsonObject& json) {
 	reset();
 	Geometry::load(json);
 
-	_impl->loadList(this, _impl->links, lLinks, json, &Project::linksUpdated);
+	// Ordered to prevent crash related by UuidPointer
 	_impl->loadList(this, _impl->models, lModels, json, &Project::modelsUpdated);
-	_impl->loadList(this, _impl->objects, lObjects, json, &Project::objectsUpdated);
 	_impl->loadList(this, _impl->places, lPlaces, json, &Project::placesUpdated);
+	_impl->loadList(this, _impl->links, lLinks, json, &Project::linksUpdated);
+	_impl->loadList(this, _impl->objects, lObjects, json, &Project::objectsUpdated);
 
 	rebuildEntities();
 
@@ -254,10 +255,10 @@ void Project::load(const QJsonObject& json) {
 
 void Project::save(QJsonObject& json) const {
 	Geometry::save(json);
-	_impl->saveList(this, _impl->links, lLinks, json);
 	_impl->saveList(this, _impl->models, lModels, json);
-	_impl->saveList(this, _impl->objects, lObjects, json);
 	_impl->saveList(this, _impl->places, lPlaces, json);
+	_impl->saveList(this, _impl->links, lLinks, json);
+	_impl->saveList(this, _impl->objects, lObjects, json);
 	json[lDefaultPlaces] = Json::fromUuid(_impl->defaultPlace->uuid());
 }
 

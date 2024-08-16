@@ -5,9 +5,7 @@
 #include <fsd/data/Geometry.hpp>
 
 namespace fsd {
-class Project;
-
-class Model : public Geometry {
+class Model final : public Geometry {
 	Q_OBJECT
 	Q_PROPERTY(QUrl sourcePath READ sourcePath WRITE setSourcePath NOTIFY sourcePathUpdated)
 	Q_PROPERTY(QString qmlName READ qmlName WRITE setQmlName NOTIFY qmlNameUpdated)
@@ -37,6 +35,9 @@ public:
 	void setModelType(ModelType type);
 
 	virtual Type type() const override;
+	virtual QVector3D globalPosition() const override;
+	virtual QVector3D globalRotation() const override;
+	virtual QVector3D globalScale() const override;
 
 	virtual void load(const QJsonObject& json) override;
 	virtual void save(QJsonObject& json) const override;

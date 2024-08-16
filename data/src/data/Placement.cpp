@@ -12,8 +12,8 @@ struct Placement::Impl {
 	UuidPointer<Place>* place{ nullptr };
 };
 
-Placement::Placement(Project* project)
-	: Shape(project)
+Placement::Placement(Project* project, QObject* parent)
+	: Shape(project, parent)
 	, _impl{ std::make_unique<Impl>() } {
 	_impl->place = makePlacePointer(project, this);
 }

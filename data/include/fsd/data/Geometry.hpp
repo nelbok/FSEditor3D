@@ -7,25 +7,32 @@
 namespace fsd {
 class Geometry : public Entity {
 	Q_OBJECT
-	Q_PROPERTY(QVector3D position READ position WRITE setPosition NOTIFY positionUpdated)
-	Q_PROPERTY(QVector3D rotation READ rotation WRITE setRotation NOTIFY rotationUpdated)
-	Q_PROPERTY(QVector3D scale READ scale WRITE setScale NOTIFY scaleUpdated)
+	Q_PROPERTY(QVector3D localPosition READ localPosition WRITE setLocalPosition NOTIFY localPositionUpdated)
+	Q_PROPERTY(QVector3D localRotation READ localRotation WRITE setLocalRotation NOTIFY localRotationUpdated)
+	Q_PROPERTY(QVector3D localScale READ localScale WRITE setLocalScale NOTIFY localScaleUpdated)
+	Q_PROPERTY(QVector3D globalPosition READ globalPosition NOTIFY globalPositionUpdated)
+	Q_PROPERTY(QVector3D globalRotation READ globalRotation NOTIFY globalRotationUpdated)
+	Q_PROPERTY(QVector3D globalScale READ globalScale NOTIFY globalScaleUpdated)
 
 public:
-	Geometry(QObject* parent);
+	Geometry(Project* project, QObject* parent = nullptr);
 	virtual ~Geometry();
 
 	virtual void reset() override;
 	void copy(const Geometry& geometry);
 
-	const QVector3D& position() const;
-	void setPosition(const QVector3D& position);
+	const QVector3D& localPosition() const;
+	void setLocalPosition(const QVector3D& localPosition);
 
-	const QVector3D& rotation() const;
-	void setRotation(const QVector3D& rotation);
+	const QVector3D& localRotation() const;
+	void setLocalRotation(const QVector3D& localRotation);
 
-	const QVector3D& scale() const;
-	void setScale(const QVector3D& scale);
+	const QVector3D& localScale() const;
+	void setLocalScale(const QVector3D& localScale);
+
+	virtual QVector3D globalPosition() const;
+	virtual QVector3D globalRotation() const;
+	virtual QVector3D globalScale() const;
 
 	virtual void load(const QJsonObject& json) override;
 	virtual void save(QJsonObject& json) const override;
@@ -35,8 +42,11 @@ private:
 	std::unique_ptr<Impl> _impl;
 
 signals:
-	void positionUpdated();
-	void rotationUpdated();
-	void scaleUpdated();
+	void localPositionUpdated();
+	void localRotationUpdated();
+	void localScaleUpdated();
+	void globalPositionUpdated();
+	void globalRotationUpdated();
+	void globalScaleUpdated();
 };
 } // namespace fsd

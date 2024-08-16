@@ -112,7 +112,7 @@ fsd::Model* SelectionManager::mainModel() const {
 	switch (_impl->currentType) {
 		case Type::None:
 		case Type::Project:
-			if (auto* place = _impl->project->defaultPlace(); place) {
+			if (auto* place = _impl->project->defaultPlace()) {
 				return place->model();
 			}
 			break;
@@ -142,7 +142,7 @@ fsd::Geometry* SelectionManager::mainGeometry() const {
 	switch (_impl->currentType) {
 		case Type::None:
 		case Type::Project:
-			return _impl->project;
+			return _impl->project->defaultPlace();
 		case Type::Models:
 			return _impl->currentModel;
 		case Type::Places:

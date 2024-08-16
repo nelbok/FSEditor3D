@@ -49,8 +49,8 @@ struct TestCompare {
 	void testPlacement(fsd::Placement* left, fsd::Placement* right) {
 		testShape(left, right);
 
-		QCOMPARE(left->position(), right->position());
-		QCOMPARE(left->rotation(), right->rotation());
+		QCOMPARE(left->localPosition(), right->localPosition());
+		QCOMPARE(left->localRotation(), right->localRotation());
 		testUuidPointer(left->place(), right->place());
 	}
 

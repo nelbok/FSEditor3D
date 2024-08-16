@@ -3,9 +3,7 @@
 #include <fsd/data/Placement.hpp>
 
 namespace fsd {
-class Project;
-
-class Object : public Placement {
+class Object final : public Placement {
 	Q_OBJECT
 
 public:

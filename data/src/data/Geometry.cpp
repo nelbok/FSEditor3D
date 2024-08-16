@@ -6,54 +6,69 @@
 
 namespace fsd {
 struct Geometry::Impl {
-	QVector3D position{};
-	QVector3D rotation{};
-	QVector3D scale{};
+	QVector3D localPosition{};
+	QVector3D localRotation{};
+	QVector3D localScale{};
 };
 
-Geometry::Geometry(QObject* parent)
-	: Entity(parent)
+Geometry::Geometry(fsd::Project* project, QObject* parent)
+	: Entity(project, parent)
 	, _impl{ std::make_unique<Impl>() } {
+	connect(this, &Geometry::localPositionUpdated, this, &Geometry::globalPositionUpdated);
+	connect(this, &Geometry::localRotationUpdated, this, &Geometry::globalRotationUpdated);
+	connect(this, &Geometry::localScaleUpdated, this, &Geometry::globalScaleUpdated);
 }
 
 Geometry::~Geometry() {}
 
 void Geometry::reset() {
 	Entity::reset();
-	setPosition({ 0, 0, 0 });
-	setRotation({ 0, 0, 0 });
-	setScale({ 1, 1, 1 });
+	setLocalPosition({ 0, 0, 0 });
+	setLocalRotation({ 0, 0, 0 });
+	setLocalScale({ 1, 1, 1 });
 }
 
 void Geometry::copy(const Geometry& geometry) {
 	Entity::copy(geometry);
-	setPosition(geometry.position());
-	setRotation(geometry.rotation());
-	setScale(geometry.scale());
+	setLocalPosition(geometry.localPosition());
+	setLocalRotation(geometry.localRotation());
+	setLocalScale(geometry.localScale());
 }
 
-const QVector3D& Geometry::position() const {
-	return _impl->position;
+const QVector3D& Geometry::localPosition() const {
+	return _impl->localPosition;
 }
 
-void Geometry::setPosition(const QVector3D& position) {
-	TOOLS_SETTER(Geometry, position);
+void Geometry::setLocalPosition(const QVector3D& localPosition) {
+	TOOLS_SETTER(Geometry, localPosition);
 }
 
-const QVector3D& Geometry::rotation() const {
-	return _impl->rotation;
+const QVector3D& Geometry::localRotation() const {
+	return _impl->localRotation;
 }
 
-void Geometry::setRotation(const QVector3D& rotation) {
-	TOOLS_SETTER(Geometry, rotation);
+void Geometry::setLocalRotation(const QVector3D& localRotation) {
+	TOOLS_SETTER(Geometry, localRotation);
 }
 
-const QVector3D& Geometry::scale() const {
-	return _impl->scale;
+const QVector3D& Geometry::localScale() const {
+	return _impl->localScale;
 }
 
-void Geometry::setScale(const QVector3D& scale) {
-	TOOLS_SETTER(Geometry, scale);
+void Geometry::setLocalScale(const QVector3D& localScale) {
+	TOOLS_SETTER(Geometry, localScale);
+}
+
+QVector3D Geometry::globalPosition() const {
+	return _impl->localPosition;
+}
+
+QVector3D Geometry::globalRotation() const {
+	return _impl->localRotation;
+}
+
+QVector3D Geometry::globalScale() const {
+	return _impl->localScale;
 }
 
 constexpr auto lPosition = "position";
@@ -62,15 +77,15 @@ constexpr auto lScale = "scale";
 
 void Geometry::load(const QJsonObject& json) {
 	Entity::load(json);
-	setPosition(Json::toVector3D(Json::toObject(lPosition, json)));
-	setRotation(Json::toVector3D(Json::toObject(lRotation, json)));
-	setScale(Json::toVector3D(Json::toObject(lScale, json)));
+	setLocalPosition(Json::toVector3D(Json::toObject(lPosition, json)));
+	setLocalRotation(Json::toVector3D(Json::toObject(lRotation, json)));
+	setLocalScale(Json::toVector3D(Json::toObject(lScale, json)));
 }
 
 void Geometry::save(QJsonObject& json) const {
 	Entity::save(json);
-	json[lPosition] = Json::fromVector3D(_impl->position);
-	json[lRotation] = Json::fromVector3D(_impl->rotation);
-	json[lScale] = Json::fromVector3D(_impl->scale);
+	json[lPosition] = Json::fromVector3D(_impl->localPosition);
+	json[lRotation] = Json::fromVector3D(_impl->localRotation);
+	json[lScale] = Json::fromVector3D(_impl->localScale);
 }
 } // namespace fsd

@@ -10,8 +10,8 @@ struct Shape::Impl {
 	UuidPointer<Model>* model{ nullptr };
 };
 
-Shape::Shape(Project* project)
-	: Geometry(project)
+Shape::Shape(Project* project, QObject* parent)
+	: Geometry(project, parent)
 	, _impl{ std::make_unique<Impl>() } {
 	_impl->model = makeModelPointer(project, this);
 }
@@ -33,16 +33,51 @@ Model* Shape::model() const {
 }
 
 void Shape::setModel(Model* model) {
+	auto* oldModel = this->model();
 	if (_impl->model->set(model)) {
+		if (oldModel) {
+			disconnect(oldModel, &Model::globalPositionUpdated, this, &Shape::globalPositionUpdated);
+			disconnect(oldModel, &Model::globalRotationUpdated, this, &Shape::globalRotationUpdated);
+			disconnect(oldModel, &Model::globalScaleUpdated, this, &Shape::globalScaleUpdated);
+		}
+		if (model) {
+			connect(model, &Model::globalPositionUpdated, this, &Shape::globalPositionUpdated);
+			connect(model, &Model::globalRotationUpdated, this, &Shape::globalRotationUpdated);
+			connect(model, &Model::globalScaleUpdated, this, &Shape::globalScaleUpdated);
+		}
 		emit modelUpdated();
 	}
+}
+
+QVector3D Shape::globalPosition() const {
+	if (auto* model = this->model())
+		return Geometry::globalPosition() + model->globalPosition();
+	return Geometry::globalPosition();
+}
+
+QVector3D Shape::globalRotation() const {
+	if (auto* model = this->model())
+		return Geometry::globalRotation() + model->globalRotation();
+	return Geometry::globalRotation();
+}
+
+QVector3D Shape::globalScale() const {
+	if (auto* model = this->model())
+		return Geometry::globalScale() * model->globalScale();
+	return Geometry::globalScale();
 }
 
 constexpr auto lModel = "model";
 
 void Shape::load(const QJsonObject& json) {
 	Geometry::load(json);
-	_impl->model->setUuid(Json::toUuid(Json::toValue(lModel, json)));
+	if (_impl->model->setUuid(Json::toUuid(Json::toValue(lModel, json)))) {
+		auto* model = _impl->model->get();
+		assert(model);
+		connect(model, &Model::globalPositionUpdated, this, &Shape::globalPositionUpdated);
+		connect(model, &Model::globalRotationUpdated, this, &Shape::globalRotationUpdated);
+		connect(model, &Model::globalScaleUpdated, this, &Shape::globalScaleUpdated);
+	}
 	emit modelUpdated();
 }
 

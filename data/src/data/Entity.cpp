@@ -6,17 +6,25 @@
 
 namespace fsd {
 struct Entity::Impl {
+	Project* project{ nullptr };
 	QUuid uuid{};
 	bool isAlive{ true };
 	QString name{};
 	QList<Entity*> refs{};
 };
 
-Entity::Entity(QObject* parent)
+Entity::Entity(Project* project, QObject* parent)
 	: QObject(parent)
-	, _impl{ std::make_unique<Impl>() } {}
+	, _impl{ std::make_unique<Impl>() } {
+	assert(project);
+	_impl->project = project;
+}
 
 Entity::~Entity() {}
+
+Project* Entity::project() const {
+	return _impl->project;
+}
 
 void Entity::reset() {
 	setUuid(QUuid::createUuid());

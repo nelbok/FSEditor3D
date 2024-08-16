@@ -3,9 +3,7 @@
 #include <fsd/data/Shape.hpp>
 
 namespace fsd {
-class Project;
-
-class Place : public Shape {
+class Place final : public Shape {
 	Q_OBJECT
 
 public:
