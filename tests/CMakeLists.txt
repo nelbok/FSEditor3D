@@ -1,6 +1,8 @@
 qt_standard_project_setup(REQUIRES 6.5)
 
 set(PROJECT_SOURCES
+	Dummy.hpp
+
 	TestAccessors.hpp
 	TestCompare.hpp
 	TestIO.hpp

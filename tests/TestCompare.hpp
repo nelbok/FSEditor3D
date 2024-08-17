@@ -24,6 +24,18 @@ struct TestCompare {
 		}
 	}
 
+	void testGeometry(fsd::Geometry* left, fsd::Geometry* right) {
+		testEntity(left, right);
+
+		QCOMPARE(left->localPosition(), right->localPosition());
+		QCOMPARE(left->localRotation(), right->localRotation());
+		QCOMPARE(left->localScale(), right->localScale());
+
+		QCOMPARE(left->globalPosition(), right->globalPosition());
+		QCOMPARE(left->globalRotation(), right->globalRotation());
+		QCOMPARE(left->globalScale(), right->globalScale());
+	}
+
 	void testLink(fsd::Link* left, fsd::Link* right) {
 		testPlacement(left, right);
 
@@ -31,7 +43,7 @@ struct TestCompare {
 	}
 
 	void testModel(fsd::Model* left, fsd::Model* right) {
-		testEntity(left, right);
+		testGeometry(left, right);
 
 		QCOMPARE(left->sourcePath(), right->sourcePath());
 		QCOMPARE(left->qmlName(), right->qmlName());
@@ -49,19 +61,17 @@ struct TestCompare {
 	void testPlacement(fsd::Placement* left, fsd::Placement* right) {
 		testShape(left, right);
 
-		QCOMPARE(left->localPosition(), right->localPosition());
-		QCOMPARE(left->localRotation(), right->localRotation());
 		testUuidPointer(left->place(), right->place());
 	}
 
 	void testShape(fsd::Shape* left, fsd::Shape* right) {
-		testEntity(left, right);
+		testGeometry(left, right);
 
 		testUuidPointer(left->model(), right->model());
 	}
 
 	void testProject(fsd::Project* left, fsd::Project* right) {
-		testEntity(left, right);
+		testGeometry(left, right);
 
 		testUuidPointer(left->defaultPlace(), right->defaultPlace());
 

@@ -26,7 +26,6 @@ void Model::reset() {
 	Geometry::reset();
 	setSourcePath({});
 	setQmlName({});
-	setModelType(ModelType::Place);
 }
 
 void Model::copy(const Model& model) {
@@ -57,6 +56,8 @@ Model::ModelType Model::modelType() const {
 }
 
 void Model::setModelType(ModelType modelType) {
+	// FIXME: Make it an exception
+	assert(this->modelType() == modelType || !hasRef());
 	TOOLS_SETTER(Model, modelType);
 }
 

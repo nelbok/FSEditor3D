@@ -1,8 +1,7 @@
 #include <QtCore/QCoreApplication>
 #include <QtTest/QtTest>
 
-#include <fsd/data/Project.hpp>
-
+#include "Dummy.hpp"
 #include "TestAccessors.hpp"
 #include "TestIO.hpp"
 #include "TestLists.hpp"
@@ -27,6 +26,7 @@ private slots:
 	void init() {
 		QVERIFY(!_project);
 		_project = new fsd::Project(this);
+		Dummy::build(_project);
 	}
 
 	void testAccessors() {

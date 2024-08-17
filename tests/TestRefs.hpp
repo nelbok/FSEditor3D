@@ -29,35 +29,24 @@ private:
 	fsd::Link* _linkB{ nullptr };
 
 	void init() {
-		_model = _project->createModel();
-		_place = _project->createPlace();
-		_object = _project->createObject();
-		_linkA = _project->createLink();
-		_linkB = _project->createLink();
-
-		_project->setDefaultPlace(_place);
-		_place->setModel(_model);
-		_object->setPlace(_place);
-		_object->setModel(_model);
-		_linkA->setPlace(_place);
-		_linkB->setPlace(_place);
-		_linkA->setModel(_model);
-		_linkB->setModel(_model);
-		_linkA->setLink(_linkB);
-		_linkB->setLink(_linkA);
+		_model = _project->models().at(0);
+		_place = _project->places().at(0);
+		_object = _project->objects().at(0);
+		_linkA = _project->links().at(0);
+		_linkB = _project->links().at(1);
 	}
 
 	void test() {
-		QVERIFY(_project->refs().size() == 0);
-		QVERIFY(_model->refs().size() == 4);
-		QVERIFY(_place->refs().size() == 4);
-		QVERIFY(_object->refs().size() == 0);
-		QVERIFY(_linkA->refs().size() == 1);
-		QVERIFY(_linkB->refs().size() == 1);
+		QCOMPARE(_project->refs().size(), 0);
+		QCOMPARE(_model->refs().size(), 3);
+		QCOMPARE(_place->refs().size(), 1);
+		QCOMPARE(_object->refs().size(), 0);
+		QCOMPARE(_linkA->refs().size(), 1);
+		QCOMPARE(_linkB->refs().size(), 1);
 
 		_linkA->setLink(_linkA);
 
-		QVERIFY(_linkA->refs().size() == 2);
-		QVERIFY(_linkB->refs().size() == 0);
+		QCOMPARE(_linkA->refs().size(), 2);
+		QCOMPARE(_linkB->refs().size(), 0);
 	}
 };

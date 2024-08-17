@@ -33,6 +33,10 @@ Model* Shape::model() const {
 }
 
 void Shape::setModel(Model* model) {
+	// FIXME: Make it an exception
+	assert(!model || (model->modelType() == Model::ModelType::Link && type() == Type::Link) || (model->modelType() == Model::ModelType::Object && type() == Type::Object)
+				 || (model->modelType() == Model::ModelType::Place && type() == Type::Place));
+
 	auto* oldModel = this->model();
 	if (_impl->model->set(model)) {
 		if (oldModel) {

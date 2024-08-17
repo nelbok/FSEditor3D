@@ -16,12 +16,13 @@ struct TestAccessors {
 
 	void run() {
 		QVERIFY(_project);
-		_project->reset();
-		auto* link = _project->createLink();
-		auto* model = _project->createModel();
-		auto* place = _project->createPlace();
-		auto* object = _project->createObject();
 
+		auto* link = _project->links().at(0);
+		auto* model = _project->models().at(0);
+		auto* place = _project->places().at(0);
+		auto* object = _project->objects().at(0);
+
+		// Tests
 		testLink(link, link->metaObject());
 		testModel(model, model->metaObject());
 		testObject(object, object->metaObject());
@@ -48,19 +49,11 @@ private:
 	void testGeometry(fsd::Geometry* geometry, const QMetaObject* metaObject) {
 		testEntity(geometry, metaObject->superClass());
 
-		const auto localPosition = QVector3D(0, 0, 0);
-		geometry->setLocalPosition(localPosition);
-		QCOMPARE(geometry->localPosition(), localPosition);
+		QCOMPARE(geometry->localPosition(), QVector3D(10, 10, 10));
+		QCOMPARE(geometry->localRotation(), QVector3D(10, 10, 10));
+		QCOMPARE(geometry->localScale(), QVector3D(10, 10, 10));
 
-		const auto localRotation = QVector3D(0, 0, 0);
-		geometry->setLocalRotation(localRotation);
-		QCOMPARE(geometry->localRotation(), localRotation);
-
-		const auto localScale = QVector3D(0, 0, 0);
-		geometry->setLocalScale(localScale);
-		QCOMPARE(geometry->localScale(), localScale);
-
-		QCOMPARE(metaObject->propertyCount(), 9);
+		QCOMPARE(metaObject->propertyCount(), 12);
 		QCOMPARE(metaObject->propertyOffset(), 6);
 	}
 
@@ -71,8 +64,8 @@ private:
 		link->setLink(linkA);
 		QCOMPARE(link->link(), linkA);
 
-		QCOMPARE(metaObject->propertyCount(), 12);
-		QCOMPARE(metaObject->propertyOffset(), 11);
+		QCOMPARE(metaObject->propertyCount(), 15);
+		QCOMPARE(metaObject->propertyOffset(), 14);
 	}
 
 	void testModel(fsd::Model* model, const QMetaObject* metaObject) {
@@ -86,26 +79,31 @@ private:
 		model->setQmlName(name);
 		QCOMPARE(model->qmlName(), name);
 
-		const auto modelType = fsd::Model::ModelType::Link;
-		model->setModelType(modelType);
-		QCOMPARE(model->modelType(), modelType);
+		// Use QVERIFY_THROWS_EXCEPTION
+		//const auto modelType = fsd::Model::ModelType::Link;
+		//model->setModelType(modelType);
+		//QCOMPARE(model->modelType(), modelType);
 
-		QCOMPARE(metaObject->propertyCount(), 12);
-		QCOMPARE(metaObject->propertyOffset(), 9);
+		QCOMPARE(model->globalPosition(), QVector3D(20, 20, 20));
+		QCOMPARE(model->globalRotation(), QVector3D(20, 20, 20));
+		QCOMPARE(model->globalScale(), QVector3D(100, 100, 100));
+
+		QCOMPARE(metaObject->propertyCount(), 15);
+		QCOMPARE(metaObject->propertyOffset(), 12);
 	}
 
 	void testObject(fsd::Object* object, const QMetaObject* metaObject) {
 		testPlacement(object, metaObject->superClass());
 
-		QCOMPARE(metaObject->propertyCount(), 11);
-		QCOMPARE(metaObject->propertyOffset(), 11);
+		QCOMPARE(metaObject->propertyCount(), 14);
+		QCOMPARE(metaObject->propertyOffset(), 14);
 	}
 
 	void testPlace(fsd::Place* place, const QMetaObject* metaObject) {
 		testShape(place, metaObject->superClass());
 
-		QCOMPARE(metaObject->propertyCount(), 10);
-		QCOMPARE(metaObject->propertyOffset(), 10);
+		QCOMPARE(metaObject->propertyCount(), 13);
+		QCOMPARE(metaObject->propertyOffset(), 13);
 	}
 
 	void testPlacement(fsd::Placement* placement, const QMetaObject* metaObject) {
@@ -115,8 +113,8 @@ private:
 		placement->setPlace(place);
 		QCOMPARE(placement->place(), place);
 
-		QCOMPARE(metaObject->propertyCount(), 11);
-		QCOMPARE(metaObject->propertyOffset(), 10);
+		QCOMPARE(metaObject->propertyCount(), 14);
+		QCOMPARE(metaObject->propertyOffset(), 13);
 	}
 
 	void testProject(fsd::Project* project, const QMetaObject* metaObject) {
@@ -126,24 +124,35 @@ private:
 		project->setDefaultPlace(place);
 		QCOMPARE(project->defaultPlace(), place);
 
-		QCOMPARE(project->links().count(), 1);
-		QCOMPARE(project->models().count(), 1);
-		QCOMPARE(project->objects().count(), 1);
-		QCOMPARE(project->places().count(), 1);
-		QCOMPARE(project->entities().count(), 4);
+		QCOMPARE(project->links().count(), 2);
+		QCOMPARE(project->models().count(), 3);
+		QCOMPARE(project->objects().count(), 2);
+		QCOMPARE(project->places().count(), 3);
+		QCOMPARE(project->entities().count(), 10);
 
-		QCOMPARE(metaObject->propertyCount(), 15);
-		QCOMPARE(metaObject->propertyOffset(), 9);
+		QCOMPARE(project->globalPosition(), QVector3D(10, 10, 10));
+		QCOMPARE(project->globalRotation(), QVector3D(10, 10, 10));
+		QCOMPARE(project->globalScale(), QVector3D(10, 10, 10));
+
+		QCOMPARE(metaObject->propertyCount(), 18);
+		QCOMPARE(metaObject->propertyOffset(), 12);
 	}
 
 	void testShape(fsd::Shape* shape, const QMetaObject* metaObject) {
 		testGeometry(shape, metaObject->superClass());
 
-		auto* model = _project->models().at(0);
+		// Use QVERIFY_THROWS_EXCEPTION
+		auto* model = shape->model();
+		shape->setModel(nullptr);
+		QCOMPARE(shape->model(), nullptr);
 		shape->setModel(model);
 		QCOMPARE(shape->model(), model);
 
-		QCOMPARE(metaObject->propertyCount(), 10);
-		QCOMPARE(metaObject->propertyOffset(), 9);
+		QCOMPARE(shape->globalPosition(), QVector3D(30, 30, 30));
+		QCOMPARE(shape->globalRotation(), QVector3D(30, 30, 30));
+		QCOMPARE(shape->globalScale(), QVector3D(1000, 1000, 1000));
+
+		QCOMPARE(metaObject->propertyCount(), 13);
+		QCOMPARE(metaObject->propertyOffset(), 12);
 	}
 };
