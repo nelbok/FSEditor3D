@@ -31,6 +31,7 @@ FSEModule {
 
         FSEComboBox {
             name: qsTr("Type")
+            enabled: (MySelection.currentModel) ? !MySelection.currentModel.hasRef : false
             model: ListModel {
                 ListElement { value: MyModel.ModelType.Object; name: qsTr("Object") }
                 ListElement { value: MyModel.ModelType.Link; name: qsTr("Link") }
