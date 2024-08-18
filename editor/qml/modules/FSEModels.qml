@@ -84,7 +84,7 @@ FSEModule {
             "PLY (*.ply)",
             "GLTF2 (*.gltf *.glb)",
         ]
-        onAccepted: MyManager.balsam.generate(myData, selectedFile)
+        onAccepted: MyManager.balsam.generate(MySelection.currentModel, selectedFile)
     }
 
     MessageDialog {

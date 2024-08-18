@@ -17,10 +17,6 @@ class SelectionManager : public QObject {
 	Q_PROPERTY(fsd::Object* currentObject READ currentObject WRITE setCurrentObject NOTIFY currentObjectUpdated)
 	Q_PROPERTY(fsd::Place* currentPlace READ currentPlace WRITE setCurrentPlace NOTIFY currentPlaceUpdated)
 
-	// TMP?
-	Q_PROPERTY(fsd::Model* mainModel READ mainModel NOTIFY mainModelUpdated)
-	Q_PROPERTY(fsd::Geometry* mainGeometry READ mainGeometry NOTIFY mainGeometryUpdated)
-
 public:
 	enum class Type {
 		Project,
@@ -36,7 +32,6 @@ public:
 	SelectionManager(QObject* parent = nullptr);
 	virtual ~SelectionManager();
 
-	void init(fsd::Project* project);
 	void reset();
 
 	Type currentType() const;
@@ -54,13 +49,7 @@ public:
 	fsd::Place* currentPlace() const;
 	void setCurrentPlace(fsd::Place* current);
 
-	fsd::Model* mainModel() const;
-	fsd::Geometry* mainGeometry() const;
-
 private:
-	void disconnect();
-	void connect();
-
 	struct Impl;
 	std::unique_ptr<Impl> _impl;
 
@@ -70,7 +59,5 @@ signals:
 	void currentModelUpdated();
 	void currentObjectUpdated();
 	void currentPlaceUpdated();
-	void mainModelUpdated();
-	void mainGeometryUpdated();
 };
 } // namespace fse

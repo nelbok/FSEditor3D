@@ -9,6 +9,7 @@
 
 #include "managers/CommandsManager.hpp"
 #include "managers/ModelsManager.hpp"
+#include "managers/PreviewManager.hpp"
 #include "managers/SelectionManager.hpp"
 #include "managers/StylesManager.hpp"
 #include "managers/TranslationsManager.hpp"
@@ -30,6 +31,7 @@ struct Manager::Impl {
 
 	CommandsManager* commandsManager{ nullptr };
 	ModelsManager* modelsManager{ nullptr };
+	PreviewManager* previewManager{ nullptr };
 	SelectionManager* selectionManager{ nullptr };
 	StylesManager* stylesManager{ nullptr };
 	TranslationsManager* translationsManager{ nullptr };
@@ -66,6 +68,7 @@ void Manager::init() {
 
 	_impl->commandsManager = new CommandsManager(this);
 	_impl->modelsManager = new ModelsManager(this);
+	_impl->previewManager = new PreviewManager(this);
 	_impl->selectionManager = new SelectionManager(this);
 	_impl->stylesManager = new StylesManager(this);
 	_impl->translationsManager = new TranslationsManager(this);
@@ -74,7 +77,7 @@ void Manager::init() {
 
 	_impl->commandsManager->init(_impl->project);
 	_impl->modelsManager->init(_impl->project);
-	_impl->selectionManager->init(_impl->project);
+	_impl->previewManager->init(_impl->project, _impl->selectionManager);
 	_impl->stylesManager->init();
 	_impl->translationsManager->init();
 
@@ -157,6 +160,11 @@ CommandsManager* Manager::commandsManager() const {
 ModelsManager* Manager::modelsManager() const {
 	assert(_impl->modelsManager);
 	return _impl->modelsManager;
+}
+
+PreviewManager* Manager::previewManager() const {
+	assert(_impl->previewManager);
+	return _impl->previewManager;
 }
 
 SelectionManager* Manager::selectionManager() const {

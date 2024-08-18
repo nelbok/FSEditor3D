@@ -39,11 +39,11 @@ View3D {
     }
 
     Connections {
-        target: MySelection
-        function onMainModelUpdated() {
-            var model = MySelection.mainModel
+        target: MyPreview
+        function onPreviewUpdated() {
+            var model = MyPreview.mainModel
             if (model && model.qmlName !== "")
-                MyLoader.load(MyManager.balsam.qmlPath(model), MySelection.mainGeometry)
+                MyLoader.load(MyManager.balsam.qmlPath(model), MyPreview.mainGeometry)
             else
                 MyLoader.clean()
         }

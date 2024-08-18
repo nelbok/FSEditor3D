@@ -32,6 +32,8 @@ set(PROJECT_SOURCES
 	src/managers/CommandsManager.hpp
 	src/managers/ModelsManager.cpp
 	src/managers/ModelsManager.hpp
+	src/managers/PreviewManager.cpp
+	src/managers/PreviewManager.hpp
 	src/managers/SelectionManager.cpp
 	src/managers/SelectionManager.hpp
 	src/managers/StylesManager.cpp

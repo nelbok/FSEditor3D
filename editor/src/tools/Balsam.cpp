@@ -81,6 +81,7 @@ void Balsam::generate(fsd::Model* model, const QUrl& url) {
 	const auto& qmlFile = detail::searchQmlPath(_manager, _current);
 	if (!qmlFile.empty() && fs::exists(qmlFile)) {
 		fs::remove(qmlFile);
+		_current->setQmlName("");
 	}
 
 	QStringList args;
