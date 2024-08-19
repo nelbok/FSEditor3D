@@ -88,6 +88,7 @@ void Manager::reset() {
 	_impl->selectionManager->reset();
 	_impl->project->reset();
 	_impl->commandsManager->reset();
+	_impl->previewManager->reset();
 
 	auto tmp = std::filesystem::temp_directory_path();
 	tmp /= fsd::Config::name;

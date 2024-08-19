@@ -31,8 +31,12 @@ View3D {
     // Camera with its controller to make it easy to move around the scene
     PerspectiveCamera {
         id: camera
-        position: Qt.vector3d(0, 800, 1000)
-        eulerRotation.x: -30
+
+        position: MyPreview.cameraPosition
+        onPositionChanged: { MyPreview.cameraPosition = position }
+
+        eulerRotation: MyPreview.cameraRotation
+        onEulerRotationChanged: { MyPreview.cameraRotation = eulerRotation }
     }
     WasdController {
         controlledObject: camera
@@ -40,6 +44,12 @@ View3D {
 
     Connections {
         target: MyPreview
+        function onCameraPositionUpdated() {
+            camera.position = MyPreview.cameraPosition
+        }
+        function onCameraRotationUpdated() {
+            camera.eulerRotation = MyPreview.cameraRotation
+        }
         function onPreviewUpdated() {
             MyLoader.load(MyPreview.datas)
         }
