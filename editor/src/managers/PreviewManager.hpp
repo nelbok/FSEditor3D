@@ -38,6 +38,8 @@ public:
 	const QVector3D& cameraRotation() const;
 	void setCameraRotation(const QVector3D& cameraRotation);
 
+	Q_INVOKABLE void centerOnCurrent();
+
 	QList<PreviewData> datas() const;
 
 private:

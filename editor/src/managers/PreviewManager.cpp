@@ -8,6 +8,9 @@
 #include "Manager.hpp"
 
 namespace fse {
+constexpr QVector3D lCameraPosition{ 0, 800, 1000 };
+constexpr QVector3D lCameraRotation{ -30, 0, 0 };
+
 struct PreviewManager::Impl {
 	Manager* manager{ nullptr };
 	QList<QMetaObject::Connection> connections;
@@ -36,8 +39,8 @@ void PreviewManager::init(Manager* manager) {
 }
 
 void PreviewManager::reset() {
-	setCameraPosition({ 0, 800, 1000 });
-	setCameraRotation({ -30, 0, 0 });
+	setCameraPosition(lCameraPosition);
+	setCameraRotation(lCameraRotation);
 }
 
 const QVector3D& PreviewManager::cameraPosition() const {
@@ -60,6 +63,40 @@ void PreviewManager::setCameraRotation(const QVector3D& cameraRotation) {
 		_impl->cameraRotation = cameraRotation;
 		emit cameraRotationUpdated();
 	}
+}
+
+void PreviewManager::centerOnCurrent() {
+	auto position = lCameraPosition;
+
+	const auto& sm = _impl->manager->selectionManager();
+	switch (sm->currentType()) {
+		case SelectionManager::Type::None:
+		case SelectionManager::Type::Project:
+			if (auto* place = _impl->manager->project()->defaultPlace())
+				position += place->globalPosition();
+			break;
+		case SelectionManager::Type::Models:
+			if (sm->currentModel())
+				position += sm->currentModel()->globalPosition();
+			break;
+		case SelectionManager::Type::Places:
+			if (sm->currentPlace())
+				position += sm->currentPlace()->globalPosition();
+			break;
+		case SelectionManager::Type::Objects:
+			if (sm->currentObject())
+				position += sm->currentObject()->globalPosition();
+			break;
+		case SelectionManager::Type::Links:
+			if (sm->currentLink())
+				position += sm->currentLink()->globalPosition();
+			break;
+		default:
+			break;
+	}
+
+	setCameraPosition(position);
+	setCameraRotation(lCameraRotation);
 }
 
 QList<PreviewData> PreviewManager::datas() const {

@@ -74,6 +74,15 @@ Window {
         enabled: !(progress.visible || message.visible)
     }
 
+    FSEPreviewBar {
+        anchors.top: parent.top
+        anchors.topMargin: 10
+        anchors.left: menu.right
+        anchors.leftMargin: 10
+
+        enabled: !(progress.visible || message.visible)
+    }
+
     Connections {
         target: MyManager
         function onBeginFileTransaction() {
