@@ -2,18 +2,39 @@
 .import QtQuick as QtQ
 
 // Global
-var _cptTransform = null
+var _cptTransform = Qt.createComponent("FSETransformNode.qml")
 var _cptModel = null
 var _transforms = []
 var _scene = null
-var _geometryData = null
-
-function init() {
-    _cptTransform = Qt.createComponent("FSETransformNode.qml")
-}
+var _datas = []
+var _index = 0
+var _current = null
+var _progress = false;
 
 function setScene(scene) {
     _scene = scene
+}
+
+function load(datas) {
+    _datas = datas
+    _index = 0
+    if (!_progress)
+        next();
+}
+
+function next() {
+    _progress = true;
+    if (_index == 0) {
+        clean()
+    }
+    if (_index < _datas.length) {
+        _current = _datas[_index]
+        ++_index
+        beginLoading()
+    } else {
+        _progress = false
+        _current = null
+    }
 }
 
 function clean() {
@@ -21,12 +42,11 @@ function clean() {
         _transforms[m].destroy()
     }
     _transforms = []
+    _current = null
 }
 
-function load(url, geometryData) {
-    clean()
-    _cptModel = Qt.createComponent(url)
-    _geometryData = geometryData;
+function beginLoading() {
+    _cptModel = Qt.createComponent(_current.model)
 
     if (_cptModel.status === QtQ.Component.Error)
         console.log("Error while loading:" + _cptModel.errorString())
@@ -40,7 +60,7 @@ function load(url, geometryData) {
 function finishLoading() {
     if (_cptModel.status === QtQ.Component.Ready) {
         var transform = _cptTransform.createObject(_scene)
-        transform.geometry = _geometryData;
+        transform.geometry = _current.geometry;
         _cptModel.createObject(transform)
         _transforms.push(transform)
     } else if (cpt.status === QtQ.Component.Error) {
@@ -50,4 +70,5 @@ function finishLoading() {
     }
     _cptModel.destroy()
     _cptModel = null
+    next()
 }

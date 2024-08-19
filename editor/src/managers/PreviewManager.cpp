@@ -1,11 +1,15 @@
 #include "PreviewManager.hpp"
 
+#include <fsd/data/Model.hpp>
+#include <fsd/data/Project.hpp>
+#include <fsd/data/Shape.hpp>
+
 #include "SelectionManager.hpp"
+#include "Manager.hpp"
 
 namespace fse {
 struct PreviewManager::Impl {
-	fsd::Project* project{ nullptr };
-	SelectionManager* manager{ nullptr };
+	Manager* manager{ nullptr };
 	QList<QMetaObject::Connection> connections;
 };
 
@@ -15,72 +19,69 @@ PreviewManager::PreviewManager(QObject* parent)
 
 PreviewManager::~PreviewManager() {}
 
-void PreviewManager::init(fsd::Project* project, SelectionManager* manager) {
-	assert(!_impl->project);
+void PreviewManager::init(Manager* manager) {
 	assert(!_impl->manager);
 
-	_impl->project = project;
 	_impl->manager = manager;
 
-	QObject::connect(project, &fsd::Project::defaultPlaceUpdated, this, &PreviewManager::previewUpdated);
-	QObject::connect(manager, &SelectionManager::currentTypeUpdated, this, &PreviewManager::updateConnections);
-	QObject::connect(manager, &SelectionManager::currentObjectUpdated, this, &PreviewManager::updateConnections);
-	QObject::connect(manager, &SelectionManager::currentPlaceUpdated, this, &PreviewManager::updateConnections);
-	QObject::connect(manager, &SelectionManager::currentLinkUpdated, this, &PreviewManager::updateConnections);
-	QObject::connect(manager, &SelectionManager::currentModelUpdated, this, &PreviewManager::updateConnections);
+	QObject::connect(manager->project(), &fsd::Project::defaultPlaceUpdated, this, &PreviewManager::previewUpdated);
+	QObject::connect(manager->selectionManager(), &SelectionManager::currentTypeUpdated, this, &PreviewManager::updateConnections);
+	QObject::connect(manager->selectionManager(), &SelectionManager::currentObjectUpdated, this, &PreviewManager::updateConnections);
+	QObject::connect(manager->selectionManager(), &SelectionManager::currentPlaceUpdated, this, &PreviewManager::updateConnections);
+	QObject::connect(manager->selectionManager(), &SelectionManager::currentLinkUpdated, this, &PreviewManager::updateConnections);
+	QObject::connect(manager->selectionManager(), &SelectionManager::currentModelUpdated, this, &PreviewManager::updateConnections);
 
 	updateConnections();
 }
 
-fsd::Geometry* PreviewManager::mainGeometry() const {
-	assert(_impl->project);
-	assert(_impl->manager);
-	switch (_impl->manager->currentType()) {
-		case SelectionManager::Type::None:
-		case SelectionManager::Type::Project:
-			return _impl->project->defaultPlace();
-		case SelectionManager::Type::Models:
-			return _impl->manager->currentModel();
-		case SelectionManager::Type::Places:
-			return _impl->manager->currentPlace();
-		case SelectionManager::Type::Objects:
-			return _impl->manager->currentObject();
-		case SelectionManager::Type::Links:
-			return _impl->manager->currentLink();
-		default:
-			break;
-	}
-	return nullptr;
-}
+QList<PreviewData> PreviewManager::datas() const {
+	QList<PreviewData> datas;
 
-fsd::Model* PreviewManager::mainModel() const {
-	assert(_impl->project);
-	assert(_impl->manager);
-	switch (_impl->manager->currentType()) {
+	const auto& sm = _impl->manager->selectionManager();
+	switch (sm->currentType()) {
 		case SelectionManager::Type::None:
 		case SelectionManager::Type::Project:
-			if (auto* place = _impl->project->defaultPlace()) {
-				return place->model();
+			if (auto* place = _impl->manager->project()->defaultPlace()) {
+				fillDatas(datas, place);
 			}
 			break;
 		case SelectionManager::Type::Models:
-			return _impl->manager->currentModel();
+			fillDatas(datas, sm->currentModel());
+			break;
 		case SelectionManager::Type::Places:
-			if (_impl->manager->currentPlace())
-				return _impl->manager->currentPlace()->model();
+			fillDatas(datas, sm->currentPlace());
 			break;
 		case SelectionManager::Type::Objects:
-			if (_impl->manager->currentObject())
-				return _impl->manager->currentObject()->model();
+			fillDatas(datas, sm->currentObject());
 			break;
 		case SelectionManager::Type::Links:
-			if (_impl->manager->currentLink())
-				return _impl->manager->currentLink()->model();
+			fillDatas(datas, sm->currentLink());
 			break;
 		default:
 			break;
 	}
-	return nullptr;
+
+	return datas;
+}
+
+void PreviewManager::fillDatas(QList<PreviewData>& datas, fsd::Geometry* geometry) const {
+	// Add others entities if needed
+	if (auto* placement = qobject_cast<fsd::Placement*>(geometry)) {
+		fillDatas(datas, placement->place());
+	}
+
+	// Search model for the geometry
+	fsd::Model* model = nullptr;
+	if (auto* shape = qobject_cast<fsd::Shape*>(geometry)) {
+		model = shape->model();
+	} else {
+		model = qobject_cast<fsd::Model*>(geometry);
+	}
+
+	// Add only if there is a valid model
+	if (model && model->qmlName() != "") {
+		datas.append({ geometry, _impl->manager->balsam()->qmlPath(model) });
+	}
 }
 
 void PreviewManager::updateConnections() {
@@ -89,22 +90,23 @@ void PreviewManager::updateConnections() {
 	}
 	_impl->connections.clear();
 
-	switch (_impl->manager->currentType()) {
+	const auto& sm = _impl->manager->selectionManager();
+	switch (sm->currentType()) {
 		case SelectionManager::Type::Models:
-			if (_impl->manager->currentModel())
-				_impl->connections.append(connect(_impl->manager->currentModel(), &fsd::Model::qmlNameUpdated, this, &PreviewManager::previewUpdated));
+			if (sm->currentModel())
+				_impl->connections.append(connect(sm->currentModel(), &fsd::Model::qmlNameUpdated, this, &PreviewManager::previewUpdated));
 			break;
 		case SelectionManager::Type::Places:
-			if (_impl->manager->currentPlace())
-				_impl->connections.append(connect(_impl->manager->currentPlace(), &fsd::Place::modelUpdated, this, &PreviewManager::previewUpdated));
+			if (sm->currentPlace())
+				_impl->connections.append(connect(sm->currentPlace(), &fsd::Place::modelUpdated, this, &PreviewManager::previewUpdated));
 			break;
 		case SelectionManager::Type::Objects:
-			if (_impl->manager->currentObject())
-				_impl->connections.append(connect(_impl->manager->currentObject(), &fsd::Object::modelUpdated, this, &PreviewManager::previewUpdated));
+			if (sm->currentObject())
+				_impl->connections.append(connect(sm->currentObject(), &fsd::Object::modelUpdated, this, &PreviewManager::previewUpdated));
 			break;
 		case SelectionManager::Type::Links:
-			if (_impl->manager->currentLink())
-				_impl->connections.append(connect(_impl->manager->currentLink(), &fsd::Link::modelUpdated, this, &PreviewManager::previewUpdated));
+			if (sm->currentLink())
+				_impl->connections.append(connect(sm->currentLink(), &fsd::Link::modelUpdated, this, &PreviewManager::previewUpdated));
 			break;
 		default:
 			break;

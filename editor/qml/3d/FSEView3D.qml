@@ -41,16 +41,11 @@ View3D {
     Connections {
         target: MyPreview
         function onPreviewUpdated() {
-            var model = MyPreview.mainModel
-            if (model && model.qmlName !== "")
-                MyLoader.load(MyManager.balsam.qmlPath(model), MyPreview.mainGeometry)
-            else
-                MyLoader.clean()
+            MyLoader.load(MyPreview.datas)
         }
     }
 
     Component.onCompleted: {
         MyLoader.setScene(view3D.scene)
-        MyLoader.init()
     }
 }
