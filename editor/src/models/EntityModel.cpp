@@ -78,13 +78,13 @@ void EntityModel::sortDatas() {
 }
 
 void EntityModel::disconnectData(fsd::Entity* entity) {
-	disconnect(entity, &fsd::Entity::isAliveUpdated, this, &EntityModel::updateDatas);
-	disconnect(entity, &fsd::Entity::nameUpdated, this, &EntityModel::sortDatas);
+	QObject::disconnect(entity, &fsd::Entity::isAliveUpdated, this, &EntityModel::updateDatas);
+	QObject::disconnect(entity, &fsd::Entity::nameUpdated, this, &EntityModel::sortDatas);
 }
 
 void EntityModel::connectData(fsd::Entity* entity) {
-	connect(entity, &fsd::Entity::isAliveUpdated, this, &EntityModel::updateDatas);
-	connect(entity, &fsd::Entity::nameUpdated, this, &EntityModel::sortDatas);
+	QObject::connect(entity, &fsd::Entity::isAliveUpdated, this, &EntityModel::updateDatas);
+	QObject::connect(entity, &fsd::Entity::nameUpdated, this, &EntityModel::sortDatas);
 }
 
 } // namespace fse

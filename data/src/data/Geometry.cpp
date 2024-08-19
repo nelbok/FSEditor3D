@@ -14,9 +14,9 @@ struct Geometry::Impl {
 Geometry::Geometry(fsd::Project* project, QObject* parent)
 	: Entity(project, parent)
 	, _impl{ std::make_unique<Impl>() } {
-	connect(this, &Geometry::localPositionUpdated, this, &Geometry::globalPositionUpdated);
-	connect(this, &Geometry::localRotationUpdated, this, &Geometry::globalRotationUpdated);
-	connect(this, &Geometry::localScaleUpdated, this, &Geometry::globalScaleUpdated);
+	QObject::connect(this, &Geometry::localPositionUpdated, this, &Geometry::globalPositionUpdated);
+	QObject::connect(this, &Geometry::localRotationUpdated, this, &Geometry::globalRotationUpdated);
+	QObject::connect(this, &Geometry::localScaleUpdated, this, &Geometry::globalScaleUpdated);
 }
 
 Geometry::~Geometry() {}

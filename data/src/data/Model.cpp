@@ -15,9 +15,9 @@ struct Model::Impl {
 Model::Model(Project* project)
 	: Geometry(project, project)
 	, _impl{ std::make_unique<Impl>() } {
-	connect(project, &Project::globalPositionUpdated, this, &Model::globalPositionUpdated);
-	connect(project, &Project::globalRotationUpdated, this, &Model::globalRotationUpdated);
-	connect(project, &Project::globalScaleUpdated, this, &Model::globalScaleUpdated);
+	QObject::connect(project, &Project::globalPositionUpdated, this, &Model::globalPositionUpdated);
+	QObject::connect(project, &Project::globalRotationUpdated, this, &Model::globalRotationUpdated);
+	QObject::connect(project, &Project::globalScaleUpdated, this, &Model::globalScaleUpdated);
 }
 
 Model::~Model() {}

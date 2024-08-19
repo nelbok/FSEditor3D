@@ -31,7 +31,7 @@ public:
 		_project->setParent(nullptr);
 		_project->moveToThread(this);
 
-		connect(this, &QThread::finished, QCoreApplication::instance(), [this, parent]() {
+		QObject::connect(this, &QThread::finished, QCoreApplication::instance(), [this, parent]() {
 			_project->setParent(parent);
 			if (_type == Type::Load) {
 				emit _project->nameUpdated();
@@ -41,7 +41,7 @@ public:
 				emit _project->objectsUpdated();
 				emit _project->placesUpdated();
 			}
-			disconnect(this, &QThread::finished, QCoreApplication::instance(), nullptr);
+			QObject::disconnect(this, &QThread::finished, QCoreApplication::instance(), nullptr);
 			_project = nullptr;
 			emit _parent->finished();
 		});

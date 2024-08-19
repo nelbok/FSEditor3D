@@ -40,14 +40,14 @@ void Shape::setModel(Model* model) {
 	auto* oldModel = this->model();
 	if (_impl->model->set(model)) {
 		if (oldModel) {
-			disconnect(oldModel, &Model::globalPositionUpdated, this, &Shape::globalPositionUpdated);
-			disconnect(oldModel, &Model::globalRotationUpdated, this, &Shape::globalRotationUpdated);
-			disconnect(oldModel, &Model::globalScaleUpdated, this, &Shape::globalScaleUpdated);
+			QObject::disconnect(oldModel, &Model::globalPositionUpdated, this, &Shape::globalPositionUpdated);
+			QObject::disconnect(oldModel, &Model::globalRotationUpdated, this, &Shape::globalRotationUpdated);
+			QObject::disconnect(oldModel, &Model::globalScaleUpdated, this, &Shape::globalScaleUpdated);
 		}
 		if (model) {
-			connect(model, &Model::globalPositionUpdated, this, &Shape::globalPositionUpdated);
-			connect(model, &Model::globalRotationUpdated, this, &Shape::globalRotationUpdated);
-			connect(model, &Model::globalScaleUpdated, this, &Shape::globalScaleUpdated);
+			QObject::connect(model, &Model::globalPositionUpdated, this, &Shape::globalPositionUpdated);
+			QObject::connect(model, &Model::globalRotationUpdated, this, &Shape::globalRotationUpdated);
+			QObject::connect(model, &Model::globalScaleUpdated, this, &Shape::globalScaleUpdated);
 		}
 		emit modelUpdated();
 	}
@@ -78,9 +78,9 @@ void Shape::load(const QJsonObject& json) {
 	if (_impl->model->setUuid(Json::toUuid(Json::toValue(lModel, json)))) {
 		auto* model = _impl->model->get();
 		assert(model);
-		connect(model, &Model::globalPositionUpdated, this, &Shape::globalPositionUpdated);
-		connect(model, &Model::globalRotationUpdated, this, &Shape::globalRotationUpdated);
-		connect(model, &Model::globalScaleUpdated, this, &Shape::globalScaleUpdated);
+		QObject::connect(model, &Model::globalPositionUpdated, this, &Shape::globalPositionUpdated);
+		QObject::connect(model, &Model::globalRotationUpdated, this, &Shape::globalRotationUpdated);
+		QObject::connect(model, &Model::globalScaleUpdated, this, &Shape::globalScaleUpdated);
 	}
 	emit modelUpdated();
 }

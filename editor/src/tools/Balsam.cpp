@@ -58,8 +58,8 @@ void Balsam::init(Manager* manager) {
 	_manager = manager;
 	_process = new QProcess(this);
 
-	connect(_process, &QProcess::errorOccurred, this, &Balsam::finalize);
-	connect(_process, &QProcess::finished, this, &Balsam::finalize);
+	QObject::connect(_process, &QProcess::errorOccurred, this, &Balsam::finalize);
+	QObject::connect(_process, &QProcess::finished, this, &Balsam::finalize);
 }
 
 QUrl Balsam::qmlPath(fsd::Model* model) {

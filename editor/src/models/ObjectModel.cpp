@@ -12,7 +12,7 @@ ObjectModel::~ObjectModel() {}
 
 void ObjectModel::initDatas() {
 	assert(_project);
-	connect(_project, &fsd::Project::objectsUpdated, this, &ObjectModel::updateDatas);
+	QObject::connect(_project, &fsd::Project::objectsUpdated, this, &ObjectModel::updateDatas);
 }
 
 void ObjectModel::updateDatas() {

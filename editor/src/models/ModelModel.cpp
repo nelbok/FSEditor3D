@@ -12,7 +12,7 @@ ModelModel::~ModelModel() {}
 
 void ModelModel::initDatas() {
 	assert(_project);
-	connect(_project, &fsd::Project::modelsUpdated, this, &ModelModel::updateDatas);
+	QObject::connect(_project, &fsd::Project::modelsUpdated, this, &ModelModel::updateDatas);
 }
 
 QHash<int, QByteArray> ModelModel::roleNames() const {
@@ -30,12 +30,12 @@ void ModelModel::updateDatas() {
 void ModelModel::disconnectData(fsd::Entity* entity) {
 	EntityModel::disconnectData(entity);
 	auto* model = qobject_cast<fsd::Model*>(entity);
-	disconnect(model, &fsd::Model::modelTypeUpdated, this, &ModelModel::sortDatas);
+	QObject::disconnect(model, &fsd::Model::modelTypeUpdated, this, &ModelModel::sortDatas);
 }
 
 void ModelModel::connectData(fsd::Entity* entity) {
 	EntityModel::connectData(entity);
 	auto* model = qobject_cast<fsd::Model*>(entity);
-	connect(model, &fsd::Model::modelTypeUpdated, this, &ModelModel::sortDatas);
+	QObject::connect(model, &fsd::Model::modelTypeUpdated, this, &ModelModel::sortDatas);
 }
 } // namespace fse

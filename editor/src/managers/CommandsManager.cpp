@@ -28,7 +28,7 @@ void CommandsManager::init(fsd::Project* project) {
 	assert(project);
 
 	_impl->commands = new Commands(this);
-	connect(_impl->commands, &Commands::updated, this, &CommandsManager::updated);
+	QObject::connect(_impl->commands, &Commands::updated, this, &CommandsManager::updated);
 
 	//commands
 	_impl->entityCommand = new EntityCommand(_impl->commands);

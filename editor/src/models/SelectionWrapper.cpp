@@ -54,11 +54,11 @@ QAbstractItemModel* SelectionWrapper::model() const {
 void SelectionWrapper::setModel(QAbstractItemModel* model) {
 	if (_model != model) {
 		if (_model) {
-			disconnect(model, &QAbstractItemModel::modelReset, this, &SelectionWrapper::currentUpdated);
+			QObject::disconnect(model, &QAbstractItemModel::modelReset, this, &SelectionWrapper::currentUpdated);
 		}
 		_model = model;
 		if (_model) {
-			connect(model, &QAbstractItemModel::modelReset, this, &SelectionWrapper::currentUpdated);
+			QObject::connect(model, &QAbstractItemModel::modelReset, this, &SelectionWrapper::currentUpdated);
 		}
 		emit modelUpdated();
 	}

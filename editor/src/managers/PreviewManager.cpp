@@ -86,7 +86,7 @@ void PreviewManager::fillDatas(QList<PreviewData>& datas, fsd::Geometry* geometr
 
 void PreviewManager::updateConnections() {
 	for (const auto& connection : _impl->connections) {
-		assert(disconnect(connection));
+		QObject::disconnect(connection);
 	}
 	_impl->connections.clear();
 
@@ -94,19 +94,19 @@ void PreviewManager::updateConnections() {
 	switch (sm->currentType()) {
 		case SelectionManager::Type::Models:
 			if (sm->currentModel())
-				_impl->connections.append(connect(sm->currentModel(), &fsd::Model::qmlNameUpdated, this, &PreviewManager::previewUpdated));
+				_impl->connections.append(QObject::connect(sm->currentModel(), &fsd::Model::qmlNameUpdated, this, &PreviewManager::previewUpdated));
 			break;
 		case SelectionManager::Type::Places:
 			if (sm->currentPlace())
-				_impl->connections.append(connect(sm->currentPlace(), &fsd::Place::modelUpdated, this, &PreviewManager::previewUpdated));
+				_impl->connections.append(QObject::connect(sm->currentPlace(), &fsd::Place::modelUpdated, this, &PreviewManager::previewUpdated));
 			break;
 		case SelectionManager::Type::Objects:
 			if (sm->currentObject())
-				_impl->connections.append(connect(sm->currentObject(), &fsd::Object::modelUpdated, this, &PreviewManager::previewUpdated));
+				_impl->connections.append(QObject::connect(sm->currentObject(), &fsd::Object::modelUpdated, this, &PreviewManager::previewUpdated));
 			break;
 		case SelectionManager::Type::Links:
 			if (sm->currentLink())
-				_impl->connections.append(connect(sm->currentLink(), &fsd::Link::modelUpdated, this, &PreviewManager::previewUpdated));
+				_impl->connections.append(QObject::connect(sm->currentLink(), &fsd::Link::modelUpdated, this, &PreviewManager::previewUpdated));
 			break;
 		default:
 			break;

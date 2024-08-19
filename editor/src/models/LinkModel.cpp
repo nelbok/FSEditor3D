@@ -12,7 +12,7 @@ LinkModel::~LinkModel() {}
 
 void LinkModel::initDatas() {
 	assert(_project);
-	connect(_project, &fsd::Project::linksUpdated, this, &LinkModel::updateDatas);
+	QObject::connect(_project, &fsd::Project::linksUpdated, this, &LinkModel::updateDatas);
 }
 
 void LinkModel::updateDatas() {

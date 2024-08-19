@@ -12,7 +12,7 @@ PlaceModel::~PlaceModel() {}
 
 void PlaceModel::initDatas() {
 	assert(_project);
-	connect(_project, &fsd::Project::placesUpdated, this, &PlaceModel::updateDatas);
+	QObject::connect(_project, &fsd::Project::placesUpdated, this, &PlaceModel::updateDatas);
 }
 
 void PlaceModel::updateDatas() {
