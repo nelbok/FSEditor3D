@@ -24,6 +24,7 @@ class PreviewManager : public QObject {
 	Q_PROPERTY(QVector3D cameraPosition READ cameraPosition WRITE setCameraPosition NOTIFY cameraPositionUpdated)
 	Q_PROPERTY(QVector3D cameraRotation READ cameraRotation WRITE setCameraRotation NOTIFY cameraRotationUpdated)
 
+		Q_PROPERTY(bool areOtherDatasVisible READ areOtherDatasVisible NOTIFY areOtherDatasVisibleUpdated)
 	Q_PROPERTY(bool areOriginsVisible READ areOriginsVisible NOTIFY areOriginsVisibleUpdated)
 
 	Q_PROPERTY(QList<PreviewData> datas READ datas NOTIFY previewUpdated)
@@ -41,9 +42,11 @@ public:
 	const QVector3D& cameraRotation() const;
 	void setCameraRotation(const QVector3D& cameraRotation);
 
+	bool areOtherDatasVisible() const;
 	bool areOriginsVisible() const;
 
 	Q_INVOKABLE void centerOnCurrent();
+	Q_INVOKABLE void switchOtherDatasVisible();
 	Q_INVOKABLE void switchOriginsVisible();
 
 	QList<PreviewData> datas() const;
@@ -62,6 +65,7 @@ signals:
 	void cameraRotationUpdated();
 	void previewUpdated();
 
+	void areOtherDatasVisibleUpdated();
 	void areOriginsVisibleUpdated();
 };
 } // namespace fse

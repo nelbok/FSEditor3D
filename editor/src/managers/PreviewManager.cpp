@@ -16,6 +16,7 @@ struct PreviewManager::Impl {
 	QList<QMetaObject::Connection> connections;
 	QVector3D cameraPosition{};
 	QVector3D cameraRotation{};
+	bool areOtherDatasVisible{ true };
 	bool areOriginsVisible{ false };
 };
 
@@ -66,6 +67,10 @@ void PreviewManager::setCameraRotation(const QVector3D& cameraRotation) {
 	}
 }
 
+bool PreviewManager::areOtherDatasVisible() const {
+	return _impl->areOtherDatasVisible;
+}
+
 bool PreviewManager::areOriginsVisible() const {
 	return _impl->areOriginsVisible;
 }
@@ -102,6 +107,12 @@ void PreviewManager::centerOnCurrent() {
 
 	setCameraPosition(position);
 	setCameraRotation(lCameraRotation);
+}
+
+void PreviewManager::switchOtherDatasVisible() {
+	_impl->areOtherDatasVisible = !_impl->areOtherDatasVisible;
+	emit areOtherDatasVisibleUpdated();
+	emit previewUpdated();
 }
 
 void PreviewManager::switchOriginsVisible() {
@@ -143,14 +154,16 @@ QList<PreviewData> PreviewManager::datas() const {
 }
 
 void PreviewManager::fillDatas(QList<PreviewData>& datas, fsd::Geometry* geometry, bool useRefs) const {
-	// Add others entities if needed
-	if (auto* placement = qobject_cast<fsd::Placement*>(geometry)) {
-		fillDatas(datas, placement->place());
-	}
-	if (useRefs) {
-		for (auto* entity : geometry->refs()) {
-			if (auto* subGeometry = qobject_cast<fsd::Geometry*>(entity))
-				fillDatas(datas, subGeometry);
+	if (_impl->areOtherDatasVisible) {
+		// Add others entities if needed
+		if (auto* placement = qobject_cast<fsd::Placement*>(geometry)) {
+			fillDatas(datas, placement->place());
+		}
+		if (useRefs) {
+			for (auto* entity : geometry->refs()) {
+				if (auto* subGeometry = qobject_cast<fsd::Geometry*>(entity))
+					fillDatas(datas, subGeometry);
+			}
 		}
 	}
 
