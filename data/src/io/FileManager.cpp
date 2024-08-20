@@ -34,12 +34,29 @@ public:
 		QObject::connect(this, &QThread::finished, QCoreApplication::instance(), [this, parent]() {
 			_project->setParent(parent);
 			if (_type == Type::Load) {
+				assert(_project->metaObject()->propertyCount() == 18);
+
+				// Entity
+				emit _project->uuidUpdated();
+				emit _project->isAliveUpdated();
 				emit _project->nameUpdated();
+				emit _project->hasRefUpdated();
+
+				// Geometry
+				emit _project->localPositionUpdated();
+				emit _project->localRotationUpdated();
+				emit _project->localScaleUpdated();
+				emit _project->globalPositionUpdated();
+				emit _project->globalRotationUpdated();
+				emit _project->globalScaleUpdated();
+
+				// Project
 				emit _project->defaultPlaceUpdated();
 				emit _project->linksUpdated();
 				emit _project->modelsUpdated();
 				emit _project->objectsUpdated();
 				emit _project->placesUpdated();
+				emit _project->entitiesUpdated();
 			}
 			QObject::disconnect(this, &QThread::finished, QCoreApplication::instance(), nullptr);
 			_project = nullptr;
