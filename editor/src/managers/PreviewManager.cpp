@@ -16,6 +16,7 @@ struct PreviewManager::Impl {
 	QList<QMetaObject::Connection> connections;
 	QVector3D cameraPosition{};
 	QVector3D cameraRotation{};
+	bool areOriginsVisible{ false };
 };
 
 PreviewManager::PreviewManager(QObject* parent)
@@ -65,6 +66,10 @@ void PreviewManager::setCameraRotation(const QVector3D& cameraRotation) {
 	}
 }
 
+bool PreviewManager::areOriginsVisible() const {
+	return _impl->areOriginsVisible;
+}
+
 void PreviewManager::centerOnCurrent() {
 	auto position = lCameraPosition;
 
@@ -97,6 +102,11 @@ void PreviewManager::centerOnCurrent() {
 
 	setCameraPosition(position);
 	setCameraRotation(lCameraRotation);
+}
+
+void PreviewManager::switchOriginsVisible() {
+	_impl->areOriginsVisible = !_impl->areOriginsVisible;
+	emit areOriginsVisibleUpdated();
 }
 
 QList<PreviewData> PreviewManager::datas() const {

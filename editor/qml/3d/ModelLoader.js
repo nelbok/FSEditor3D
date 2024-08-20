@@ -61,7 +61,7 @@ function finishLoading() {
     if (_cptModel.status === QtQ.Component.Ready) {
         var transform = _cptTransform.createObject(_scene)
         transform.geometry = _current.geometry;
-        _cptModel.createObject(transform)
+        _cptModel.createObject(transform.innerNode)
         _transforms.push(transform)
     } else if (cpt.status === QtQ.Component.Error) {
         console.log("Error while loading:" + _cptModel.errorString())
