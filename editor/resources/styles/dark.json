@@ -94,6 +94,11 @@
 	"undo": "undo-invert",
 	"redo": "redo-invert",
 	"settings": "settings-invert",
+	"centerOn": "centerOn-invert",
+	"originOff": "originOff-invert",
+	"originOn": "originOn-invert",
+	"othersOff": "othersOff-invert",
+	"othersOn": "othersOn-invert",
 	"github": "github-invert",
 	"discord": "discord-invert",
 	"twitter": "twitter-invert"

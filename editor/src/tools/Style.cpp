@@ -134,6 +134,12 @@ constexpr auto lUndo = "undo";
 constexpr auto lRedo = "redo";
 constexpr auto lSettings = "settings";
 
+constexpr auto lCenterOn = "centerOn";
+constexpr auto lOriginOff = "originOff";
+constexpr auto lOriginOn = "originOn";
+constexpr auto lOthersOff = "othersOff";
+constexpr auto lOthersOn = "othersOn";
+
 constexpr auto lGithub = "github";
 constexpr auto lDiscord = "discord";
 constexpr auto lTwitter = "twitter";
@@ -160,6 +166,12 @@ void Style::load(const QJsonObject& json) {
 	undo = Json::toString(lUndo, json);
 	redo = Json::toString(lRedo, json);
 	settings = Json::toString(lSettings, json);
+
+	centerOn = Json::toString(lCenterOn, json);
+	originOff = Json::toString(lOriginOff, json);
+	originOn = Json::toString(lOriginOn, json);
+	othersOff = Json::toString(lOthersOff, json);
+	othersOn = Json::toString(lOthersOn, json);
 
 	github = Json::toString(lGithub, json);
 	discord = Json::toString(lDiscord, json);
@@ -188,6 +200,12 @@ void Style::save(QJsonObject& json) const {
 	json[lUndo] = undo;
 	json[lRedo] = redo;
 	json[lSettings] = settings;
+
+	json[lCenterOn] = centerOn;
+	json[lOriginOff] = originOff;
+	json[lOriginOn] = originOn;
+	json[lOthersOff] = othersOff;
+	json[lOthersOn] = othersOn;
 
 	json[lGithub] = github;
 	json[lDiscord] = discord;

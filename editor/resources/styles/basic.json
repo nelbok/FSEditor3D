@@ -94,6 +94,11 @@
 	"undo": "undo",
 	"redo": "redo",
 	"settings": "settings",
+	"centerOn": "centerOn",
+	"originOff": "originOff",
+	"originOn": "originOn",
+	"othersOff": "othersOff",
+	"othersOn": "othersOn",
 	"github": "github",
 	"discord": "discord",
 	"twitter": "twitter"

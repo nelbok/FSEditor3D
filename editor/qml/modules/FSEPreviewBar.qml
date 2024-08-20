@@ -13,17 +13,17 @@ FSERectangle {
         spacing: 5
 
         FSEToolButton {
-            source: "qrc:/tools/" + MyStyles.style.newFile + ".svg"
+            source: "qrc:/preview/" + MyStyles.style.centerOn + ".svg"
             onClicked: MyPreview.centerOnCurrent()
         }
 
         FSEToolButton {
-            source: "qrc:/tools/" + MyStyles.style.newFile + ".svg"
+            source: "qrc:/preview/" + (MyPreview.areOtherDatasVisible ? MyStyles.style.othersOn : MyStyles.style.othersOff) + ".svg"
             onClicked: MyPreview.switchOtherDatasVisible()
         }
 
         FSEToolButton {
-            source: "qrc:/tools/" + MyStyles.style.newFile + ".svg"
+            source: "qrc:/preview/" + (MyPreview.areOriginsVisible ? MyStyles.style.originOn : MyStyles.style.originOff) + ".svg"
             onClicked: MyPreview.switchOriginsVisible()
         }
     }

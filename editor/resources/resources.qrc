@@ -24,6 +24,18 @@
         <file alias="settings.svg">icons/settings.svg</file>
         <file alias="settings-invert.svg">icons/settings-invert.svg</file>
     </qresource>
+    <qresource prefix="/preview">
+        <file alias="centerOn.svg">icons/centerOn.svg</file>
+        <file alias="centerOn-invert.svg">icons/centerOn-invert.svg</file>
+        <file alias="originOff.svg">icons/originOff.svg</file>
+        <file alias="originOff-invert.svg">icons/originOff-invert.svg</file>
+        <file alias="originOn.svg">icons/originOn.svg</file>
+        <file alias="originOn-invert.svg">icons/originOn-invert.svg</file>
+        <file alias="othersOff.svg">icons/othersOff.svg</file>
+        <file alias="othersOff-invert.svg">icons/othersOff-invert.svg</file>
+        <file alias="othersOn.svg">icons/othersOn.svg</file>
+        <file alias="othersOn-invert.svg">icons/othersOn-invert.svg</file>
+    </qresource>
     <qresource prefix="/styles">
         <file alias="basic.json">styles/basic.json</file>
         <file alias="dark.json">styles/dark.json</file>
