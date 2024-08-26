@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2024 Foxxy Soft.
+ *
+ * The license and distribution terms for this file may be
+ * found in the file LICENSE in this distribution
+ */
+
 #pragma once
 
 #include <fsd/data/Shape.hpp>
@@ -5,8 +12,14 @@
 namespace fsd {
 class Place;
 
+/**
+ * @brief This class add a connection to a place.
+ */
 class Placement : public Shape {
 	Q_OBJECT
+	/**
+	 * @brief The connected place to this entity.
+	 */
 	Q_PROPERTY(Place* place READ place WRITE setPlace NOTIFY placeUpdated)
 
 public:

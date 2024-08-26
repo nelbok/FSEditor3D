@@ -1,8 +1,18 @@
+/*
+ * Copyright (c) 2024 Foxxy Soft.
+ *
+ * The license and distribution terms for this file may be
+ * found in the file LICENSE in this distribution
+ */
+
 #pragma once
 
 #include <fsd/data/Shape.hpp>
 
 namespace fsd {
+/**
+ * @brief Place that contains Links and/or Objects.
+ */
 class Place final : public Shape {
 	Q_OBJECT
 

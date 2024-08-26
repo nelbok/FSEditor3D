@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2024 Foxxy Soft.
+ *
+ * The license and distribution terms for this file may be
+ * found in the file LICENSE in this distribution
+ */
+
 #pragma once
 
 #include <QtCore/QDeadlineTimer>
@@ -7,35 +14,82 @@
 namespace fsd {
 class Project;
 
+/**
+ * @brief Manager for loading or saving a project asynchronously.
+ *
+ * The manager uses JSON for the type file.\n
+ * After initializing the manager and connecting finished() signal, call immediately start() function. \n
+ * All functions can be called inside QML.
+ */
 class FileManager : public QObject {
 	Q_OBJECT
 
 public:
+	/**
+	 * @brief Transaction type.
+	 */
 	enum class Type {
+		/** To save the project */
 		Save,
+		/** To load the project */
 		Load,
+		/** Does nothing */
 		NoType,
 	};
 	Q_ENUM(Type)
 
+	/**
+	 * @brief Transaction result.
+	 */
 	enum class Result {
+		/** The transaction succeeded */
 		Success,
+		/** The transaction has been canceled */
 		Canceled,
+		/** An error occured during the transaction */
 		Error,
+		/** The transaction isn't started */
 		NoResult,
 	};
 	Q_ENUM(Result)
 
 
+	/**
+	 *	@brief Default constructor.
+	 */
 	FileManager(QObject* parent = nullptr);
 	virtual ~FileManager() = default;
 
+	/**
+	 * @brief Init the manager.
+	 * @param[in]	project	Instance of the project
+	 * @param[in]	type		Transaction type
+	 * @param[in]	url			Url of the file on the disk
+	 */
 	Q_INVOKABLE void init(Project* project, Type type, const QUrl& url);
+	/**
+	 * @brief Begins execution of the thread by calling run(). See **QThread::start()**.
+	 */
 	Q_INVOKABLE void start();
+	/**
+	 * @brief Blocks the thread until conditions are met. See **QThread::wait()**.
+	 */
 	Q_INVOKABLE void wait(QDeadlineTimer deadline = QDeadlineTimer(QDeadlineTimer::Forever));
+	/**
+	 * @brief Returns true if the thread is finished; otherwise returns false. See **QThread::isFinished()**.
+	 */
 	Q_INVOKABLE bool isFinished();
+	/**
+	 * @brief Returns true if the thread is running; otherwise returns false. See **QThread::isRunning()**.
+	 */
 	Q_INVOKABLE bool isRunning();
+	/**
+	 * @brief Returns the result of the transaction after finished() signal has been emitted.
+	 */
 	Q_INVOKABLE Result result() const;
+	/**
+	 * @brief Request the interruption of the thread. See **QThread::requestInterruption()**.
+	 */
 	Q_INVOKABLE void requestInterruption();
 
 private:
@@ -43,6 +97,9 @@ private:
 	Impl* _impl{ nullptr };
 
 signals:
+	/**
+	 * @brief This signal is emitted from the associated thread right before it finishes executing. See **QThread::finished()**.
+	 */
 	void finished();
 };
 } // namespace fsd

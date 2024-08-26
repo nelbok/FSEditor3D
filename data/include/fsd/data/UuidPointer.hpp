@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2024 Foxxy Soft.
+ *
+ * The license and distribution terms for this file may be
+ * found in the file LICENSE in this distribution
+ */
+
 #pragma once
 
 #include <QtCore/QObject>
@@ -8,11 +15,18 @@ namespace fsd {
 class Entity;
 class Project;
 
+/**
+ * @brief Base class for UuidPointer.
+ */
 class BasePointer : public QObject {
 	Q_OBJECT
 public:
 	const QUuid& uuid() const;
 	bool setUuid(const QUuid& uuid);
+
+	/**
+   * @brief Return true if uuid is null.
+   */
 	bool isNull() const;
 
 protected slots:
@@ -27,6 +41,17 @@ protected:
 	QUuid _uuid{};
 };
 
+/**
+ * @brief Pointer to value with Uuid as ID
+ * @param T An Entity subclass
+ *
+ * Connect two entities by their Uuid instead of their instance.\n
+ * Use get() to get the instance.\n
+ * Use uuid() to get the uuid.
+ *
+ * Even if the instance is not known at the loading, the pointer will not be destroyed and the uuid will not be updated.\n
+ * Though, if no instance corresponding to the uuid is found, the pointer will not be valid.
+ */
 template<class T>
 class UuidPointer : public BasePointer {
 public:
@@ -41,6 +66,9 @@ public:
 		return get();
 	}
 
+	/**
+   * @brief Return true if the instance is valid. Call this function before trying to get the instance.
+   */
 	bool valid() const {
 		assert(_project);
 		return _entity != nullptr;

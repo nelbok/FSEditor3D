@@ -1,6 +1,7 @@
 set(FS_ORGANIZATION "Foxxy Soft")
 set(CFS_ORGANIZATION "FoxxySoft")
 string(TIMESTAMP FS_YEAR %Y)
+set(FS_DESCRIPTION "Game editor 3D / Visual tour 3D")
 set(FS_COPYRIGHT "Copyright (C) 2011-${FS_YEAR} ${FS_ORGANIZATION}")
 
 set(FS_VERSION "0.4.4")

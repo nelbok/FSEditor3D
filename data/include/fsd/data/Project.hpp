@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2024 Foxxy Soft.
+ *
+ * The license and distribution terms for this file may be
+ * found in the file LICENSE in this distribution
+ */
+
 #pragma once
 
 #include <QtCore/QList>
@@ -10,13 +17,38 @@ class Model;
 class Object;
 class Place;
 
+/**
+ * @brief Start class for a project.
+ *
+ * After creating an instance of Project, calls reset() function.\n
+ * Use create, remove, duplicate methods to manage Link, Model, Object, and Place.\n
+ * Use save(), load() to manage the file serialization, the format file is Json.
+ */
 class Project final : public Geometry {
 	Q_OBJECT
+	/**
+	 * @brief The first place the user will see when loading the project.
+	 */
 	Q_PROPERTY(Place* defaultPlace READ defaultPlace WRITE setDefaultPlace NOTIFY defaultPlaceUpdated)
+	/**
+	 * @brief List of all entities. Link, Model, Object, and Place.
+	 */
 	Q_PROPERTY(QList<Entity*> entities READ entities NOTIFY entitiesUpdated)
+	/**
+	 * @brief List of all links.
+	 */
 	Q_PROPERTY(QList<Link*> links READ links WRITE setLinks NOTIFY linksUpdated)
+	/**
+	 * @brief List of all Models.
+	 */
 	Q_PROPERTY(QList<Model*> models READ models WRITE setModels NOTIFY modelsUpdated)
+	/**
+	 * @brief List of all Objects.
+	 */
 	Q_PROPERTY(QList<Object*> objects READ objects WRITE setObjects NOTIFY objectsUpdated)
+	/**
+	 * @brief List of all Places.
+	 */
 	Q_PROPERTY(QList<Place*> places READ places WRITE setPlaces NOTIFY placesUpdated)
 
 public:
