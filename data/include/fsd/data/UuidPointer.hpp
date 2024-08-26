@@ -11,9 +11,6 @@ class Project;
 class BasePointer : public QObject {
 	Q_OBJECT
 public:
-	BasePointer(Project* project, void (Project::*signal)(), Entity* parent);
-	virtual ~BasePointer();
-
 	const QUuid& uuid() const;
 	bool setUuid(const QUuid& uuid);
 	bool isNull() const;
@@ -22,6 +19,9 @@ protected slots:
 	virtual void update() = 0;
 
 protected:
+	BasePointer(Project* project, void (Project::*signal)(), Entity* parent);
+	virtual ~BasePointer();
+
 	Project* _project{ nullptr };
 	Entity* _ref{ nullptr };
 	QUuid _uuid{};

@@ -25,9 +25,6 @@ public:
 	};
 	Q_ENUM(Type)
 
-	Entity(Project* project, QObject* parent = nullptr);
-	virtual ~Entity();
-
 	Project* project() const;
 
 	virtual void reset();
@@ -51,6 +48,10 @@ public:
 
 	virtual void load(const QJsonObject& json);
 	virtual void save(QJsonObject& json) const;
+
+protected:
+	Entity(Project* project, QObject* parent = nullptr);
+	virtual ~Entity();
 
 private:
 	struct Impl;

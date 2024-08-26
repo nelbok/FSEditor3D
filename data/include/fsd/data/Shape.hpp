@@ -10,9 +10,6 @@ class Shape : public Geometry {
 	Q_PROPERTY(Model* model READ model WRITE setModel NOTIFY modelUpdated)
 
 public:
-	Shape(Project* project, QObject* parent = nullptr);
-	virtual ~Shape();
-
 	virtual void reset() override;
 	void copy(const Shape& shape);
 
@@ -25,6 +22,10 @@ public:
 
 	virtual void load(const QJsonObject& json) override;
 	virtual void save(QJsonObject& json) const override;
+
+protected:
+	Shape(Project* project, QObject* parent = nullptr);
+	virtual ~Shape();
 
 private:
 	struct Impl;

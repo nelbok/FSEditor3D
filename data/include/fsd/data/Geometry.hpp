@@ -15,9 +15,6 @@ class Geometry : public Entity {
 	Q_PROPERTY(QVector3D globalScale READ globalScale NOTIFY globalScaleUpdated)
 
 public:
-	Geometry(Project* project, QObject* parent = nullptr);
-	virtual ~Geometry();
-
 	virtual void reset() override;
 	void copy(const Geometry& geometry);
 
@@ -36,6 +33,10 @@ public:
 
 	virtual void load(const QJsonObject& json) override;
 	virtual void save(QJsonObject& json) const override;
+
+protected:
+	Geometry(Project* project, QObject* parent = nullptr);
+	virtual ~Geometry();
 
 private:
 	struct Impl;
