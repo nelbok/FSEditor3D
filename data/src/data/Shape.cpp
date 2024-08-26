@@ -3,6 +3,7 @@
 #include <fsd/data/Model.hpp>
 #include <fsd/data/Project.hpp>
 #include <fsd/data/UuidPointer.hpp>
+#include <fsd/io/Format.hpp>
 #include <fsd/io/Json.hpp>
 
 namespace fsd {
@@ -71,11 +72,9 @@ QVector3D Shape::globalScale() const {
 	return Geometry::globalScale();
 }
 
-constexpr auto lModel = "model";
-
 void Shape::load(const QJsonObject& json) {
 	Geometry::load(json);
-	if (_impl->model->setUuid(Json::toUuid(Json::toValue(lModel, json)))) {
+	if (_impl->model->setUuid(Json::toUuid(Json::toValue(Format::lModel, json)))) {
 		auto* model = _impl->model->get();
 		assert(model);
 		QObject::connect(model, &Model::globalPositionUpdated, this, &Shape::globalPositionUpdated);
@@ -87,6 +86,6 @@ void Shape::load(const QJsonObject& json) {
 
 void Shape::save(QJsonObject& json) const {
 	Geometry::save(json);
-	json[lModel] = Json::fromUuid(_impl->model->uuid());
+	json[Format::lModel] = Json::fromUuid(_impl->model->uuid());
 }
 } // namespace fsd

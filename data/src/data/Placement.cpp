@@ -3,6 +3,7 @@
 #include <fsd/data/Place.hpp>
 #include <fsd/data/Project.hpp>
 #include <fsd/data/UuidPointer.hpp>
+#include <fsd/io/Format.hpp>
 #include <fsd/io/Json.hpp>
 
 #include "common/Accessors.hpp"
@@ -40,16 +41,14 @@ void Placement::setPlace(Place* place) {
 	}
 }
 
-constexpr auto lPlace = "place";
-
 void Placement::load(const QJsonObject& json) {
 	Shape::load(json);
-	_impl->place->setUuid(Json::toUuid(Json::toValue(lPlace, json)));
+	_impl->place->setUuid(Json::toUuid(Json::toValue(Format::lPlace, json)));
 	emit placeUpdated();
 }
 
 void Placement::save(QJsonObject& json) const {
 	Shape::save(json);
-	json[lPlace] = Json::fromUuid(_impl->place->uuid());
+	json[Format::lPlace] = Json::fromUuid(_impl->place->uuid());
 }
 } // namespace fsd

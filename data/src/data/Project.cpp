@@ -10,6 +10,7 @@
 #include <fsd/data/Object.hpp>
 #include <fsd/data/Place.hpp>
 #include <fsd/data/UuidPointer.hpp>
+#include <fsd/io/Format.hpp>
 #include <fsd/io/Json.hpp>
 
 #include "common/Accessors.hpp"
@@ -231,35 +232,29 @@ Project::Type Project::type() const {
 	return Type::Project;
 }
 
-constexpr auto lDefaultPlaces = "defaultPlace";
-constexpr auto lLinks = "links";
-constexpr auto lModels = "models";
-constexpr auto lObjects = "objects";
-constexpr auto lPlaces = "places";
-
 void Project::load(const QJsonObject& json) {
 	reset();
 	Geometry::load(json);
 
 	// Ordered to prevent crash related by UuidPointer
-	_impl->loadList(this, _impl->models, lModels, json, &Project::modelsUpdated);
-	_impl->loadList(this, _impl->places, lPlaces, json, &Project::placesUpdated);
-	_impl->loadList(this, _impl->links, lLinks, json, &Project::linksUpdated);
-	_impl->loadList(this, _impl->objects, lObjects, json, &Project::objectsUpdated);
+	_impl->loadList(this, _impl->models, Format::lModels, json, &Project::modelsUpdated);
+	_impl->loadList(this, _impl->places, Format::lPlaces, json, &Project::placesUpdated);
+	_impl->loadList(this, _impl->links, Format::lLinks, json, &Project::linksUpdated);
+	_impl->loadList(this, _impl->objects, Format::lObjects, json, &Project::objectsUpdated);
 
 	rebuildEntities();
 
-	_impl->defaultPlace->setUuid(Json::toUuid(Json::toValue(lDefaultPlaces, json)));
+	_impl->defaultPlace->setUuid(Json::toUuid(Json::toValue(Format::lDefaultPlaces, json)));
 	emit defaultPlaceUpdated();
 }
 
 void Project::save(QJsonObject& json) const {
 	Geometry::save(json);
-	_impl->saveList(this, _impl->models, lModels, json);
-	_impl->saveList(this, _impl->places, lPlaces, json);
-	_impl->saveList(this, _impl->links, lLinks, json);
-	_impl->saveList(this, _impl->objects, lObjects, json);
-	json[lDefaultPlaces] = Json::fromUuid(_impl->defaultPlace->uuid());
+	_impl->saveList(this, _impl->models, Format::lModels, json);
+	_impl->saveList(this, _impl->places, Format::lPlaces, json);
+	_impl->saveList(this, _impl->links, Format::lLinks, json);
+	_impl->saveList(this, _impl->objects, Format::lObjects, json);
+	json[Format::lDefaultPlaces] = Json::fromUuid(_impl->defaultPlace->uuid());
 }
 
 void Project::addEntity(Entity* entity) {

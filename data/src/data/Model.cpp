@@ -1,6 +1,7 @@
 #include <fsd/data/Model.hpp>
 
 #include <fsd/data/Project.hpp>
+#include <fsd/io/Format.hpp>
 #include <fsd/io/Json.hpp>
 
 #include "common/Accessors.hpp"
@@ -77,21 +78,17 @@ QVector3D Model::globalScale() const {
 	return Geometry::globalScale() * project()->globalScale();
 }
 
-constexpr auto lSourcePath = "sourcePath";
-constexpr auto lQmlName = "qmlName";
-constexpr auto lModelType = "modelType";
-
 void Model::load(const QJsonObject& json) {
 	Geometry::load(json);
-	setSourcePath(Json::toUrl(Json::toValue(lSourcePath, json)));
-	setQmlName(Json::toString(lQmlName, json));
-	setModelType(static_cast<Model::ModelType>(Json::toInt(lModelType, json)));
+	setSourcePath(Json::toUrl(Json::toValue(Format::lSourcePath, json)));
+	setQmlName(Json::toString(Format::lQmlName, json));
+	setModelType(static_cast<Model::ModelType>(Json::toInt(Format::lModelType, json)));
 }
 
 void Model::save(QJsonObject& json) const {
 	Geometry::save(json);
-	json[lSourcePath] = Json::fromUrl(_impl->sourcePath);
-	json[lQmlName] = _impl->qmlName;
-	json[lModelType] = static_cast<int>(_impl->modelType);
+	json[Format::lSourcePath] = Json::fromUrl(_impl->sourcePath);
+	json[Format::lQmlName] = _impl->qmlName;
+	json[Format::lModelType] = static_cast<int>(_impl->modelType);
 }
 } // namespace fsd

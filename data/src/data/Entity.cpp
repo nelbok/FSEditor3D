@@ -1,5 +1,6 @@
 #include <fsd/data/Entity.hpp>
 
+#include <fsd/io/Format.hpp>
 #include <fsd/io/Json.hpp>
 
 #include "common/Accessors.hpp"
@@ -82,16 +83,13 @@ bool Entity::hasRef() {
 	return !_impl->refs.empty();
 }
 
-constexpr auto lUuid = "uuid";
-constexpr auto lName = "name";
-
 void Entity::load(const QJsonObject& json) {
-	setUuid(Json::toUuid(Json::toValue(lUuid, json)));
-	setName(Json::toString(lName, json));
+	setUuid(Json::toUuid(Json::toValue(Format::lUuid, json)));
+	setName(Json::toString(Format::lName, json));
 }
 
 void Entity::save(QJsonObject& json) const {
-	json[lUuid] = Json::fromUuid(_impl->uuid);
-	json[lName] = _impl->name;
+	json[Format::lUuid] = Json::fromUuid(_impl->uuid);
+	json[Format::lName] = _impl->name;
 }
 } // namespace fsd

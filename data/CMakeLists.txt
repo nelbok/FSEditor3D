@@ -12,6 +12,7 @@ set(PROJECT_SOURCES
 	include/fsd/data/Shape.hpp
 	include/fsd/data/UuidPointer.hpp
 	include/fsd/io/FileManager.hpp
+	include/fsd/io/Format.hpp
 	include/fsd/io/Json.hpp
 
 	src/common/Accessors.hpp

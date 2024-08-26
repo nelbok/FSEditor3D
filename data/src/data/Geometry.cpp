@@ -1,5 +1,6 @@
 #include <fsd/data/Geometry.hpp>
 
+#include <fsd/io/Format.hpp>
 #include <fsd/io/Json.hpp>
 
 #include "common/Accessors.hpp"
@@ -71,21 +72,17 @@ QVector3D Geometry::globalScale() const {
 	return _impl->localScale;
 }
 
-constexpr auto lPosition = "position";
-constexpr auto lRotation = "rotation";
-constexpr auto lScale = "scale";
-
 void Geometry::load(const QJsonObject& json) {
 	Entity::load(json);
-	setLocalPosition(Json::toVector3D(Json::toObject(lPosition, json)));
-	setLocalRotation(Json::toVector3D(Json::toObject(lRotation, json)));
-	setLocalScale(Json::toVector3D(Json::toObject(lScale, json)));
+	setLocalPosition(Json::toVector3D(Json::toObject(Format::lPosition, json)));
+	setLocalRotation(Json::toVector3D(Json::toObject(Format::lRotation, json)));
+	setLocalScale(Json::toVector3D(Json::toObject(Format::lScale, json)));
 }
 
 void Geometry::save(QJsonObject& json) const {
 	Entity::save(json);
-	json[lPosition] = Json::fromVector3D(_impl->localPosition);
-	json[lRotation] = Json::fromVector3D(_impl->localRotation);
-	json[lScale] = Json::fromVector3D(_impl->localScale);
+	json[Format::lPosition] = Json::fromVector3D(_impl->localPosition);
+	json[Format::lRotation] = Json::fromVector3D(_impl->localRotation);
+	json[Format::lScale] = Json::fromVector3D(_impl->localScale);
 }
 } // namespace fsd
