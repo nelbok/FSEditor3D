@@ -77,7 +77,7 @@ BEGIN
         BLOCK "040904b0"
         BEGIN
             VALUE "CompanyName", "@FS_ORGANIZATION@"
-            VALUE "FileDescription", "Game editor 3D / Visual tour 3D"
+            VALUE "FileDescription", "@FS_DESCRIPTION@"
             VALUE "FileVersion", "@FS_VERSION@"
             VALUE "InternalName", "resources.rc"
             VALUE "LegalCopyright", "@FS_COPYRIGHT@"

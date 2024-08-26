@@ -15,6 +15,10 @@ QString About::year() const {
 	return fsd::Config::year;
 }
 
+QString About::description() const {
+	return fsd::Config::description;
+}
+
 QString About::name() const {
 	return fsd::Config::name;
 }

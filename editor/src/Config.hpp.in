@@ -4,6 +4,7 @@ namespace fsd::Config {
 constexpr auto organization = "@FS_ORGANIZATION@";
 constexpr auto copyright = "@FS_COPYRIGHT@";
 constexpr auto year = "@FS_YEAR@";
+constexpr auto description = "@FS_DESCRIPTION@";
 
 constexpr auto name = "@FS_EDITOR@";
 constexpr auto version = "@FS_VERSION@";
