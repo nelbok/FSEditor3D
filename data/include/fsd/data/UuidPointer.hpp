@@ -59,6 +59,7 @@ public:
 		: BasePointer(project, signal, parent)
 		, _getter{ getter } {
 		assert(_getter);
+		static_assert(std::is_base_of<Entity, T>::value, "T must inherit from Entity");
 	}
 	virtual ~UuidPointer() {}
 
