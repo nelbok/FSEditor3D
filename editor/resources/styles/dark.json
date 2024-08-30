@@ -99,6 +99,8 @@
 	"originOn": "originOn-invert",
 	"othersOff": "othersOff-invert",
 	"othersOn": "othersOn-invert",
+	"worldMapOff": "worldMapOff-invert",
+	"worldMapOn": "worldMapOn-invert",
 	"github": "github-invert",
 	"discord": "discord-invert",
 	"twitter": "twitter-invert"

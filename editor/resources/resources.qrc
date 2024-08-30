@@ -35,6 +35,10 @@
         <file alias="othersOff-invert.svg">icons/othersOff-invert.svg</file>
         <file alias="othersOn.svg">icons/othersOn.svg</file>
         <file alias="othersOn-invert.svg">icons/othersOn-invert.svg</file>
+        <file alias="worldMapOff.svg">icons/worldMapOff.svg</file>
+        <file alias="worldMapOff-invert.svg">icons/worldMapOff-invert.svg</file>
+        <file alias="worldMapOn.svg">icons/worldMapOn.svg</file>
+        <file alias="worldMapOn-invert.svg">icons/worldMapOn-invert.svg</file>
     </qresource>
     <qresource prefix="/styles">
         <file alias="basic.json">styles/basic.json</file>

@@ -119,6 +119,8 @@ class Style {
 	Q_PROPERTY(QString originOn MEMBER originOn)
 	Q_PROPERTY(QString othersOff MEMBER othersOff)
 	Q_PROPERTY(QString othersOn MEMBER othersOn)
+	Q_PROPERTY(QString worldMapOff MEMBER worldMapOff)
+	Q_PROPERTY(QString worldMapOn MEMBER worldMapOn)
 
 	Q_PROPERTY(QString github MEMBER github)
 	Q_PROPERTY(QString discord MEMBER discord)
@@ -158,6 +160,8 @@ public:
 	QString originOn;
 	QString othersOff;
 	QString othersOn;
+	QString worldMapOff;
+	QString worldMapOn;
 
 	QString github;
 	QString discord;

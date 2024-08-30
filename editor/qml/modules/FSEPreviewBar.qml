@@ -5,7 +5,7 @@ import editor
 
 FSERectangle {
     width: 50
-    height: 140
+    height: 185
 
     ColumnLayout {
         anchors.fill: parent
@@ -25,6 +25,11 @@ FSERectangle {
         FSEToolButton {
             source: "qrc:/preview/" + (MyPreview.areOriginsVisible ? MyStyles.style.originOn : MyStyles.style.originOff) + ".svg"
             onClicked: MyPreview.switchOriginsVisible()
+        }
+
+        FSEToolButton {
+            source: "qrc:/preview/" + (MyPreview.isWorldMapVisible ? MyStyles.style.worldMapOn : MyStyles.style.worldMapOff) + ".svg"
+            onClicked: MyPreview.switchWorldMapVisible()
         }
     }
 }

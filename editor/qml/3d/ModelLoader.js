@@ -60,7 +60,8 @@ function beginLoading() {
 function finishLoading() {
     if (_cptModel.status === QtQ.Component.Ready) {
         var transform = _cptTransform.createObject(_scene)
-        transform.geometry = _current.geometry;
+        transform.geometry = _current.geometry
+        transform.offset = _current.offset
         _cptModel.createObject(transform.innerNode)
         _transforms.push(transform)
     } else if (cpt.status === QtQ.Component.Error) {

@@ -18,6 +18,7 @@ struct PreviewManager::Impl {
 	QVector3D cameraRotation{};
 	bool areOtherDatasVisible{ true };
 	bool areOriginsVisible{ false };
+	bool isWorldMapVisible{ false };
 };
 
 PreviewManager::PreviewManager(QObject* parent)
@@ -75,6 +76,10 @@ bool PreviewManager::areOriginsVisible() const {
 	return _impl->areOriginsVisible;
 }
 
+bool PreviewManager::isWorldMapVisible() const {
+	return _impl->isWorldMapVisible;
+}
+
 void PreviewManager::centerOnCurrent() {
 	auto position = lCameraPosition;
 
@@ -120,12 +125,27 @@ void PreviewManager::switchOriginsVisible() {
 	emit areOriginsVisibleUpdated();
 }
 
+void PreviewManager::switchWorldMapVisible() {
+	_impl->isWorldMapVisible = !_impl->isWorldMapVisible;
+	emit isWorldMapVisibleUpdated();
+	emit previewUpdated();
+}
+
 QList<PreviewData> PreviewManager::datas() const {
 	QList<PreviewData> datas;
 
 	const auto& sm = _impl->manager->selectionManager();
 	switch (sm->currentType()) {
 		case SelectionManager::Type::None:
+			if (auto* place = _impl->manager->project()->defaultPlace()) {
+				if (_impl->isWorldMapVisible) {
+					QList<fsd::Place*> parsed;
+					fullMapDatas(datas, place, parsed);
+				} else {
+					fillDatas(datas, place, true);
+				}
+			}
+			break;
 		case SelectionManager::Type::Project:
 			if (auto* place = _impl->manager->project()->defaultPlace())
 				fillDatas(datas, place, true);
@@ -153,16 +173,34 @@ QList<PreviewData> PreviewManager::datas() const {
 	return datas;
 }
 
+void PreviewManager::fullMapDatas(QList<PreviewData>& datas, fsd::Place* place, QList<fsd::Place*>& parsed, const QVector3D& offset) const {
+	fillDatas(datas, place, offset, true);
+	parsed.append(place);
+	for (auto* entity : place->refs()) {
+		if (auto* linkA = qobject_cast<fsd::Link*>(entity))
+			if (auto* linkB = linkA->link())
+				if (auto* placeB = linkB->place()) {
+					if (parsed.contains(placeB))
+						continue;
+					fullMapDatas(datas, placeB, parsed, offset + linkA->globalPosition() - linkB->globalPosition());
+				}
+	}
+}
+
 void PreviewManager::fillDatas(QList<PreviewData>& datas, fsd::Geometry* geometry, bool useRefs) const {
+	fillDatas(datas, geometry, { 0, 0, 0 }, useRefs);
+}
+
+void PreviewManager::fillDatas(QList<PreviewData>& datas, fsd::Geometry* geometry, const QVector3D& offset, bool useRefs) const {
 	if (_impl->areOtherDatasVisible) {
 		// Add others entities if needed
 		if (auto* placement = qobject_cast<fsd::Placement*>(geometry)) {
-			fillDatas(datas, placement->place());
+			fillDatas(datas, placement->place(), offset);
 		}
 		if (useRefs) {
 			for (auto* entity : geometry->refs()) {
 				if (auto* subGeometry = qobject_cast<fsd::Geometry*>(entity))
-					fillDatas(datas, subGeometry);
+					fillDatas(datas, subGeometry, offset);
 			}
 		}
 	}
@@ -177,7 +215,7 @@ void PreviewManager::fillDatas(QList<PreviewData>& datas, fsd::Geometry* geometr
 
 	// Add only if there is a valid model
 	if (model && model->qmlName() != "") {
-		datas.append({ geometry, _impl->manager->balsam()->qmlPath(model) });
+		datas.append({ geometry, _impl->manager->balsam()->qmlPath(model), offset });
 	}
 }
 
@@ -190,6 +228,9 @@ void PreviewManager::updateConnections() {
 	const auto& sm = _impl->manager->selectionManager();
 	switch (sm->currentType()) {
 		case SelectionManager::Type::None:
+			_impl->connections.append(QObject::connect(_impl->manager->project(), &fsd::Project::entitiesUpdated, this, &PreviewManager::previewUpdated));
+			_impl->connections.append(QObject::connect(_impl->manager->project(), &fsd::Project::defaultPlaceUpdated, this, &PreviewManager::previewUpdated));
+			break;
 		case SelectionManager::Type::Project:
 			_impl->connections.append(QObject::connect(_impl->manager->project(), &fsd::Project::defaultPlaceUpdated, this, &PreviewManager::previewUpdated));
 			break;

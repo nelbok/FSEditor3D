@@ -139,6 +139,8 @@ constexpr auto lOriginOff = "originOff";
 constexpr auto lOriginOn = "originOn";
 constexpr auto lOthersOff = "othersOff";
 constexpr auto lOthersOn = "othersOn";
+constexpr auto lWorldMapOff = "worldMapOff";
+constexpr auto lWorldMapOn = "worldMapOn";
 
 constexpr auto lGithub = "github";
 constexpr auto lDiscord = "discord";
@@ -172,6 +174,8 @@ void Style::load(const QJsonObject& json) {
 	originOn = Json::toString(lOriginOn, json);
 	othersOff = Json::toString(lOthersOff, json);
 	othersOn = Json::toString(lOthersOn, json);
+	worldMapOff = Json::toString(lWorldMapOff, json);
+	worldMapOn = Json::toString(lWorldMapOn, json);
 
 	github = Json::toString(lGithub, json);
 	discord = Json::toString(lDiscord, json);
@@ -206,6 +210,8 @@ void Style::save(QJsonObject& json) const {
 	json[lOriginOn] = originOn;
 	json[lOthersOff] = othersOff;
 	json[lOthersOn] = othersOn;
+	json[lWorldMapOff] = worldMapOff;
+	json[lWorldMapOn] = worldMapOn;
 
 	json[lGithub] = github;
 	json[lDiscord] = discord;
