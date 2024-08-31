@@ -84,7 +84,7 @@ Window {
     }
 
     Connections {
-        target: MyManager
+        target: MyFile
         function onBeginFileTransaction() {
             progress.visible = true
         }
@@ -101,7 +101,7 @@ Window {
         id: progress
         anchors.centerIn: parent
         visible: false
-        onClicked: MyManager.requestFileTransactionInterruption()
+        onClicked: MyFile.requestFileTransactionInterruption()
     }
 
     FSEMessageBox {

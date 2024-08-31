@@ -2,15 +2,14 @@
 
 #include <filesystem>
 
+#include "managers/FileManager.hpp"
 #include "tools/Tools.hpp"
-
-#include "Manager.hpp"
 
 namespace fs = std::filesystem;
 
 namespace fse {
-LoadThread::LoadThread(Manager* manager)
-	: FileThread(manager) {
+LoadThread::LoadThread(FileManager* manager, fsd::Project* project)
+	: FileThread(manager, project) {
 	_type = fsd::FileManager::Type::Load;
 }
 

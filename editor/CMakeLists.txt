@@ -30,6 +30,8 @@ set(PROJECT_SOURCES
 
 	src/managers/CommandsManager.cpp
 	src/managers/CommandsManager.hpp
+	src/managers/FileManager.cpp
+	src/managers/FileManager.hpp
 	src/managers/ModelsManager.cpp
 	src/managers/ModelsManager.hpp
 	src/managers/PreviewManager.cpp

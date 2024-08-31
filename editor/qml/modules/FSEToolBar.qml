@@ -61,10 +61,10 @@ FSERectangle {
         onAccepted: {
             switch(fileMode) {
             case FileDialog.SaveFile:
-                MyManager.save(selectedFile)
+                MyFile.save(selectedFile)
                 break;
             case FileDialog.OpenFile:
-                MyManager.load(selectedFile)
+                MyFile.load(selectedFile)
                 break;
             default:
                 //Nothing to do

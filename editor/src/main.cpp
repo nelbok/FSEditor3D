@@ -10,6 +10,7 @@
 #include <fsd/data/Project.hpp>
 
 #include "managers/CommandsManager.hpp"
+#include "managers/FileManager.hpp"
 #include "managers/ModelsManager.hpp"
 #include "managers/PreviewManager.hpp"
 #include "managers/SelectionManager.hpp"
@@ -66,6 +67,7 @@ void initRegister(fse::Manager* manager) {
 	// FSEditor
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyManager", manager);
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyCommands", manager->commandsManager());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyFile", manager->fileManager());
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyModels", manager->modelsManager());
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyPreview", manager->previewManager());
 	qmlRegisterSingletonInstance("editor", 1, 0, "MySelection", manager->selectionManager());

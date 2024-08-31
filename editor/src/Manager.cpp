@@ -1,21 +1,15 @@
 #include "Manager.hpp"
 
-#include <filesystem>
-
 #include <QtGui/QGuiApplication>
 #include <QtGui/QClipboard>
 
-#include "Config.hpp"
-
 #include "managers/CommandsManager.hpp"
+#include "managers/FileManager.hpp"
 #include "managers/ModelsManager.hpp"
 #include "managers/PreviewManager.hpp"
 #include "managers/SelectionManager.hpp"
 #include "managers/StylesManager.hpp"
 #include "managers/TranslationsManager.hpp"
-
-#include "tools/LoadThread.hpp"
-#include "tools/SaveThread.hpp"
 
 namespace fse {
 
@@ -24,32 +18,13 @@ struct Manager::Impl {
 	Balsam* balsam{ nullptr };
 	fsd::Project* project{ nullptr };
 
-	QUrl tmpPath{};
-	QUrl oldPath{};
-	QUrl path{};
-	fse::FileThread* fileThread{ nullptr };
-
 	CommandsManager* commandsManager{ nullptr };
+	FileManager* fileManager{ nullptr };
 	ModelsManager* modelsManager{ nullptr };
 	PreviewManager* previewManager{ nullptr };
 	SelectionManager* selectionManager{ nullptr };
 	StylesManager* stylesManager{ nullptr };
 	TranslationsManager* translationsManager{ nullptr };
-
-	template<class T>
-	void manageFile(Manager* manager, const QUrl& url) {
-		static_assert(std::is_base_of<fse::FileThread, T>::value, "T must inherit from fse::FileThread");
-		manager->setPath(url);
-		fileThread = new T(manager);
-		fileThread->init();
-		emit manager->beginFileTransaction();
-		manager->connect(fileThread, &T::finished, manager, [this, manager]() {
-			emit manager->endFileTransaction(fileThread->result());
-			fileThread->deleteLater();
-			fileThread = nullptr;
-		});
-		fileThread->start();
-	}
 };
 
 Manager::Manager(QObject* parent)
@@ -67,15 +42,17 @@ void Manager::init() {
 	_impl->project = new fsd::Project(this);
 
 	_impl->commandsManager = new CommandsManager(this);
+	_impl->fileManager = new FileManager(this);
 	_impl->modelsManager = new ModelsManager(this);
 	_impl->previewManager = new PreviewManager(this);
 	_impl->selectionManager = new SelectionManager(this);
 	_impl->stylesManager = new StylesManager(this);
 	_impl->translationsManager = new TranslationsManager(this);
 
-	_impl->balsam->init(this);
+	_impl->balsam->init(_impl->fileManager, _impl->commandsManager);
 
 	_impl->commandsManager->init(_impl->project);
+	_impl->fileManager->init(this);
 	_impl->modelsManager->init(_impl->project);
 	_impl->previewManager->init(this);
 	_impl->stylesManager->init();
@@ -88,29 +65,8 @@ void Manager::reset() {
 	_impl->selectionManager->reset();
 	_impl->project->reset();
 	_impl->commandsManager->reset();
+	_impl->fileManager->reset();
 	_impl->previewManager->reset();
-
-	auto tmp = std::filesystem::temp_directory_path();
-	tmp /= fsd::Config::name;
-	tmp /= _impl->project->uuid().toString(QUuid::WithoutBraces).toStdString();
-	tmp /= "";
-	_impl->tmpPath = QUrl::fromLocalFile(QString::fromStdString(tmp.string()));
-	_impl->oldPath = _impl->tmpPath;
-	_impl->path = QUrl();
-}
-
-void Manager::load(const QUrl& url) {
-	reset();
-	_impl->manageFile<fse::LoadThread>(this, url);
-}
-
-void Manager::save(const QUrl& url) {
-	_impl->manageFile<fse::SaveThread>(this, url);
-}
-
-void Manager::requestFileTransactionInterruption() {
-	assert(_impl->fileThread);
-	_impl->fileThread->requestInterruption();
 }
 
 void Manager::setClipboardText(const QString& text) {
@@ -131,31 +87,14 @@ fsd::Project* Manager::project() const {
 	return _impl->project;
 }
 
-const QUrl& Manager::tmpPath() const {
-	return _impl->tmpPath;
-}
-
-const QUrl& Manager::oldPath() const {
-	return _impl->oldPath;
-}
-
-const QUrl& Manager::path() const {
-	return _impl->path;
-}
-
-void Manager::setPath(const QUrl& path) {
-	if (_impl->path != path || _impl->oldPath != path) {
-		if (_impl->path.isValid()) {
-			_impl->oldPath = _impl->path;
-		}
-		_impl->path = path;
-		emit pathUpdated();
-	}
-}
-
 CommandsManager* Manager::commandsManager() const {
 	assert(_impl->commandsManager);
 	return _impl->commandsManager;
+}
+
+FileManager* Manager::fileManager() const {
+	assert(_impl->fileManager);
+	return _impl->fileManager;
 }
 
 ModelsManager* Manager::modelsManager() const {

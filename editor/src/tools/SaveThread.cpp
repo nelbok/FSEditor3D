@@ -2,15 +2,14 @@
 
 #include <filesystem>
 
+#include "managers/FileManager.hpp"
 #include "tools/Tools.hpp"
-
-#include "Manager.hpp"
 
 namespace fs = std::filesystem;
 
 namespace fse {
-SaveThread::SaveThread(Manager* manager)
-	: FileThread(manager) {
+SaveThread::SaveThread(FileManager* manager, fsd::Project* project)
+	: FileThread(manager, project) {
 	_type = fsd::FileManager::Type::Save;
 }
 
@@ -36,7 +35,7 @@ void SaveThread::run() {
 
 	// FIXME: Could be dangerous if too much files or symbolic links
 	// Copy models
-	for (auto* model : _manager->project()->models()) {
+	for (auto* model : _project->models()) {
 		if (isInterruptionRequested()) {
 			_result = fsd::FileManager::Result::Canceled;
 			break;

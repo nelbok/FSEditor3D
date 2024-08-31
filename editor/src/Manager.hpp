@@ -4,13 +4,13 @@
 #include <QtCore/QUrl>
 
 #include <fsd/data/Project.hpp>
-#include <fsd/io/FileManager.hpp>
 
 #include "tools/About.hpp"
 #include "tools/Balsam.hpp"
 
 namespace fse {
 class CommandsManager;
+class FileManager;
 class ModelsManager;
 class PreviewManager;
 class SelectionManager;
@@ -22,7 +22,6 @@ class Manager : public QObject {
 	Q_PROPERTY(const About& about READ about CONSTANT)
 	Q_PROPERTY(Balsam* balsam READ balsam CONSTANT)
 	Q_PROPERTY(fsd::Project* project READ project CONSTANT)
-	Q_PROPERTY(QUrl path READ path WRITE setPath NOTIFY pathUpdated)
 
 public:
 	Manager(QObject* parent = nullptr);
@@ -31,22 +30,14 @@ public:
 	void init();
 
 	Q_INVOKABLE void reset();
-	Q_INVOKABLE void load(const QUrl& url);
-	Q_INVOKABLE void save(const QUrl& url);
-	Q_INVOKABLE void requestFileTransactionInterruption();
-
 	Q_INVOKABLE void setClipboardText(const QString& text);
 
 	const About& about() const;
 	Balsam* balsam() const;
 	fsd::Project* project() const;
 
-	const QUrl& tmpPath() const;
-	const QUrl& oldPath() const;
-	const QUrl& path() const;
-	void setPath(const QUrl& path);
-
 	CommandsManager* commandsManager() const;
+	FileManager* fileManager() const;
 	ModelsManager* modelsManager() const;
 	PreviewManager* previewManager() const;
 	SelectionManager* selectionManager() const;
@@ -56,10 +47,5 @@ public:
 private:
 	struct Impl;
 	std::unique_ptr<Impl> _impl;
-
-signals:
-	void beginFileTransaction();
-	void endFileTransaction(fsd::FileManager::Result result);
-	void pathUpdated();
 };
 } // namespace fse

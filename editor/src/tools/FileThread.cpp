@@ -2,15 +2,18 @@
 
 #include <filesystem>
 
+#include "managers/FileManager.hpp"
 #include "tools/Tools.hpp"
 
 #include "Manager.hpp"
 
 namespace fse {
-FileThread::FileThread(Manager* manager)
+FileThread::FileThread(FileManager* manager, fsd::Project* project)
 	: QThread(manager)
+	, _project(project)
 	, _manager{ manager } {
-assert(_manager);
+	assert(_project);
+	assert(_manager);
 }
 
 FileThread::~FileThread() {}
@@ -19,7 +22,7 @@ void FileThread::init() {
 	assert(!_fileManager);
 	assert(_type != fsd::FileManager::Type::NoType);
 	_fileManager = new fsd::FileManager(this);
-	_fileManager->init(_manager->project(), _type, _manager->path());
+	_fileManager->init(_project, _type, _manager->path());
 }
 
 fsd::FileManager::Result FileThread::result() const {

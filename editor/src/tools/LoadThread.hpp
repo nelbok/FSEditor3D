@@ -3,13 +3,11 @@
 #include "FileThread.hpp"
 
 namespace fse {
-class Manager;
-
 class LoadThread : public FileThread {
 	Q_OBJECT
 
 public:
-	LoadThread(Manager* manager);
+	LoadThread(FileManager* manager, fsd::Project* project);
 	virtual ~LoadThread();
 
 protected:

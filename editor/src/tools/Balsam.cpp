@@ -2,17 +2,17 @@
 
 #include <filesystem>
 
+#include "managers/FileManager.hpp"
+#include "managers/CommandsManager.hpp"
 #include "tools/Tools.hpp"
 
 #include "Config.hpp"
-#include "managers/CommandsManager.hpp"
-#include "Manager.hpp"
 
 namespace fs = std::filesystem;
 
 namespace fse {
 namespace detail {
-const QUrl& path(fse::Manager* manager) {
+const QUrl& path(fse::FileManager* manager) {
 	if (manager->path().isValid())
 		return manager->path();
 	if (manager->oldPath().isValid())
@@ -21,7 +21,7 @@ const QUrl& path(fse::Manager* manager) {
 	return manager->tmpPath();
 }
 
-fs::path searchQmlPath(fse::Manager* manager, fsd::Model* model) {
+fs::path searchQmlPath(fse::FileManager* manager, fsd::Model* model) {
 	const auto& modelPath = Tools::modelPath(detail::path(manager), model);
 	if (!fs::exists(modelPath))
 		return {};
@@ -37,7 +37,7 @@ fs::path searchQmlPath(fse::Manager* manager, fsd::Model* model) {
 	return {};
 }
 
-fs::path searchQmlFile(fse::Manager* manager, fsd::Model* model) {
+fs::path searchQmlFile(fse::FileManager* manager, fsd::Model* model) {
 	const auto& path = detail::searchQmlPath(manager, model);
 	if (path.empty()) {
 		return {};
@@ -51,11 +51,13 @@ Balsam::Balsam(QObject* parent)
 
 Balsam::~Balsam() {}
 
-void Balsam::init(Manager* manager) {
+void Balsam::init(FileManager* manager, CommandsManager* commands) {
 	assert(!_manager);
+	assert(!_commands);
 	assert(!_process);
 
 	_manager = manager;
+	_commands = commands;
 	_process = new QProcess(this);
 
 	QObject::connect(_process, &QProcess::errorOccurred, this, &Balsam::finalize);
@@ -94,7 +96,7 @@ void Balsam::generate(fsd::Model* model, const QUrl& url) {
 
 void Balsam::finalize() {
 	if (_process->exitStatus() == QProcess::NormalExit && _process->exitCode() == 0) {
-		const auto& mc = _manager->commandsManager()->modelCommand();
+		const auto& mc = _commands->modelCommand();
 		mc->setSourcePath(_current, _sourcePath);
 		mc->setQmlName(_current, QString::fromStdString(detail::searchQmlFile(_manager, _current).string()));
 	} else {
