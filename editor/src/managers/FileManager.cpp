@@ -17,21 +17,42 @@ struct FileManager::Impl {
 	QUrl oldPath{};
 	QUrl path{};
 	fse::FileThread* fileThread{ nullptr };
+	fsd::FileManager::Result result{ fsd::FileManager::Result::NoResult };
+	FileManager::Status status{ FileManager::Status ::None };
 	Manager* manager{ nullptr };
 
 	template<class T>
-	void manageFile(FileManager* manager, fsd::Project* project, const QUrl& url) {
+	void manageFile(FileManager* mng, fsd::Project* project, const QUrl& url) {
 		static_assert(std::is_base_of<fse::FileThread, T>::value, "T must inherit from fse::FileThread");
-		manager->setPath(url);
-		fileThread = new T(manager, project);
+		mng->setPath(url);
+		fileThread = new T(mng, project);
 		fileThread->init();
-		emit manager->beginFileTransaction();
-		manager->connect(fileThread, &T::finished, manager, [this, manager]() {
-			emit manager->endFileTransaction(fileThread->result());
+		setStatus(mng, FileManager::Status::BeginTransaction);
+		emit mng->beginTransaction();
+		setStatus(mng, FileManager::Status::Processing);
+		mng->connect(fileThread, &T::finished, mng, [this, mng]() {
+			setResult(mng, fileThread->result());
+			setStatus(mng, FileManager::Status::EndTransaction);
+			emit mng->endTransaction();
 			fileThread->deleteLater();
 			fileThread = nullptr;
+			setStatus(mng, FileManager::Status::Stopped);
 		});
 		fileThread->start();
+	}
+
+	void setResult(FileManager* mng, fsd::FileManager::Result r) {
+		if (this->result != r) {
+			this->result = r;
+			emit mng->resultUpdated();
+		}
+	}
+
+	void setStatus(FileManager* mng, FileManager::Status s) {
+		if (this->status != s) {
+			this->status = s;
+			emit mng->statusUpdated();
+		}
 	}
 };
 
@@ -91,5 +112,13 @@ void FileManager::setPath(const QUrl& path) {
 		_impl->path = path;
 		emit pathUpdated();
 	}
+}
+
+fsd::FileManager::Result FileManager::result() const {
+	return _impl->result;
+}
+
+FileManager::Status FileManager::status() const {
+	return _impl->status;
 }
 } // namespace fse
