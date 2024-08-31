@@ -4,6 +4,8 @@
 
 #include <fsd/data/Project.hpp>
 
+#include "managers/ErrorsManager.hpp"
+
 #include "tools/LoadThread.hpp"
 #include "tools/SaveThread.hpp"
 
@@ -27,6 +29,7 @@ struct FileManager::Impl {
 		mng->setPath(url);
 		fileThread = new T(mng, project);
 		fileThread->init();
+		setResult(mng, fsd::FileManager::Result::NoResult);
 		setStatus(mng, FileManager::Status::BeginTransaction);
 		emit mng->beginTransaction();
 		setStatus(mng, FileManager::Status::Processing);
@@ -42,15 +45,18 @@ struct FileManager::Impl {
 	}
 
 	void setResult(FileManager* mng, fsd::FileManager::Result r) {
-		if (this->result != r) {
-			this->result = r;
+		if (result != r) {
+			result = r;
+			if (this->result == fsd::FileManager::Result::Error) {
+				manager->errorsManager()->setType(ErrorsManager::Type::FileError);
+			}
 			emit mng->resultUpdated();
 		}
 	}
 
 	void setStatus(FileManager* mng, FileManager::Status s) {
-		if (this->status != s) {
-			this->status = s;
+		if (status != s) {
+			status = s;
 			emit mng->statusUpdated();
 		}
 	}

@@ -4,6 +4,7 @@
 #include <QtGui/QClipboard>
 
 #include "managers/CommandsManager.hpp"
+#include "managers/ErrorsManager.hpp"
 #include "managers/FileManager.hpp"
 #include "managers/ModelsManager.hpp"
 #include "managers/PreviewManager.hpp"
@@ -19,6 +20,7 @@ struct Manager::Impl {
 	fsd::Project* project{ nullptr };
 
 	CommandsManager* commandsManager{ nullptr };
+	ErrorsManager* errorsManager{ nullptr };
 	FileManager* fileManager{ nullptr };
 	ModelsManager* modelsManager{ nullptr };
 	PreviewManager* previewManager{ nullptr };
@@ -42,6 +44,7 @@ void Manager::init() {
 	_impl->project = new fsd::Project(this);
 
 	_impl->commandsManager = new CommandsManager(this);
+	_impl->errorsManager = new ErrorsManager(this);
 	_impl->fileManager = new FileManager(this);
 	_impl->modelsManager = new ModelsManager(this);
 	_impl->previewManager = new PreviewManager(this);
@@ -90,6 +93,11 @@ fsd::Project* Manager::project() const {
 CommandsManager* Manager::commandsManager() const {
 	assert(_impl->commandsManager);
 	return _impl->commandsManager;
+}
+
+ErrorsManager* Manager::errorsManager() const {
+	assert(_impl->errorsManager);
+	return _impl->errorsManager;
 }
 
 FileManager* Manager::fileManager() const {

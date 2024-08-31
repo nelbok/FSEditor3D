@@ -83,16 +83,6 @@ Window {
         enabled: !(progress.visible || message.visible)
     }
 
-    Connections {
-        target: MyFile
-        function onEndTransaction() {
-            if (MyFile.result === MyFileManager.Result.Error) {
-                message.text = qsTr("An error occurred!")
-                message.visible = true;
-            }
-        }
-    }
-
     FSEProgressBox {
         id: progress
         anchors.centerIn: parent
@@ -103,7 +93,8 @@ Window {
     FSEMessageBox {
         id: message
         anchors.centerIn: parent
-        visible: false
-        onClicked: message.visible = false
+        text: MyErrors.message
+        visible: MyErrors.type !== MyErrors.Type.NoError
+        onClicked: { MyErrors.type = MyErrors.Type.NoError }
     }
 }

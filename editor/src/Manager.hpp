@@ -10,6 +10,7 @@
 
 namespace fse {
 class CommandsManager;
+class ErrorsManager;
 class FileManager;
 class ModelsManager;
 class PreviewManager;
@@ -37,6 +38,7 @@ public:
 	fsd::Project* project() const;
 
 	CommandsManager* commandsManager() const;
+	ErrorsManager* errorsManager() const;
 	FileManager* fileManager() const;
 	ModelsManager* modelsManager() const;
 	PreviewManager* previewManager() const;
