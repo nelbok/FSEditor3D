@@ -4,17 +4,21 @@
 #include <QtCore/QLocale>
 #include <QtCore/QTranslator>
 
+#include "ErrorsManager.hpp"
+
 namespace fse {
 
 struct TranslationsManager::Impl {
 	QTranslator translator;
 	QString current{ "en" };
+	ErrorsManager* manager{ nullptr };
 
 	void installTranslator() {
 		if (translator.load(QLocale(current), "app", "_", ":/translations")) {
 			QCoreApplication::installTranslator(&translator);
 		} else {
 			assert(!"Translation not found");
+			manager->setType(ErrorsManager::Type::TranslatorError);
 		}
 	}
 };
@@ -25,7 +29,9 @@ TranslationsManager::TranslationsManager(QObject* parent)
 
 TranslationsManager::~TranslationsManager() {}
 
-void TranslationsManager::init() {
+void TranslationsManager::init(ErrorsManager* manager) {
+	assert(!_impl->manager);
+	_impl->manager = manager;
 	_impl->installTranslator();
 }
 

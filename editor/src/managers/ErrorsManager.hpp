@@ -13,6 +13,7 @@ public:
 		NoError,
 		FileError,
 		StyleError,
+		TranslatorError,
 	};
 	Q_ENUM(Type)
 

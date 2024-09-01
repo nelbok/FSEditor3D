@@ -59,7 +59,7 @@ void Manager::init() {
 	_impl->modelsManager->init(_impl->project);
 	_impl->previewManager->init(this);
 	_impl->stylesManager->init(_impl->errorsManager);
-	_impl->translationsManager->init();
+	_impl->translationsManager->init(_impl->errorsManager);
 
 	reset();
 }
