@@ -26,6 +26,15 @@ FSERectangle {
         FSEToolButton {
             source: "qrc:/tools/" + MyStyles.style.saveFile + ".svg"
             onClicked: openDialog(FileDialog.SaveFile)
+
+            FSERectangle {
+                anchors.top: parent.top
+                anchors.right: parent.right
+                anchors.margins: -2.5
+                width: 10
+                height:10
+                visible: MyCommands.isModified
+            }
         }
 
         FSEToolButton {

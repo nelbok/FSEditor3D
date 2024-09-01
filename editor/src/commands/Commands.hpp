@@ -14,6 +14,7 @@ public:
 	virtual ~Commands() = default;
 
 	void add(BaseCommand* command);
+	BaseCommand* lastCommandDone() const;
 
 	bool canUndo() const;
 	bool canRedo() const;

@@ -14,6 +14,8 @@ struct CommandsManager::Impl {
 	PlacementCommand* placementCommand{ nullptr };
 	ProjectCommand* projectCommand{ nullptr };
 	ShapeCommand* shapeCommand{ nullptr };
+
+	void* lastCommandSaved{ nullptr };
 };
 
 CommandsManager::CommandsManager(QObject* parent)
@@ -46,6 +48,7 @@ void CommandsManager::init(fsd::Project* project) {
 
 void CommandsManager::reset() {
 	_impl->commands->reset();
+	_impl->lastCommandSaved = nullptr;
 }
 
 bool CommandsManager::canUndo() const {
@@ -62,6 +65,17 @@ void CommandsManager::undo() {
 
 void CommandsManager::redo() {
 	_impl->commands->redo();
+}
+
+bool CommandsManager::isModified() const {
+	return _impl->lastCommandSaved != _impl->commands->lastCommandDone();
+}
+
+void CommandsManager::setIsModified(bool isModified) {
+	if (this->isModified() != isModified) {
+		_impl->lastCommandSaved = (!isModified) ? _impl->commands->lastCommandDone() : nullptr;
+		emit updated();
+	}
 }
 
 EntityCommand* CommandsManager::entityCommand() const {

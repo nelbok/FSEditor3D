@@ -64,6 +64,13 @@ void Commands::add(BaseCommand* command) {
 	internalAdd(command);
 }
 
+BaseCommand* Commands::lastCommandDone() const {
+	if (_undoCommands.isEmpty()) {
+		return nullptr;
+	}
+	return _undoCommands.last();
+}
+
 bool Commands::canUndo() const {
 	return !_undoCommands.isEmpty();
 }

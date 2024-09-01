@@ -20,6 +20,7 @@ class CommandsManager : public QObject {
 
 	Q_PROPERTY(bool canUndo READ canUndo NOTIFY updated)
 	Q_PROPERTY(bool canRedo READ canRedo NOTIFY updated)
+	Q_PROPERTY(bool isModified READ isModified WRITE setIsModified NOTIFY updated)
 
 	Q_PROPERTY(EntityCommand* entityCommand READ entityCommand CONSTANT)
 	Q_PROPERTY(GeometryCommand* geometryCommand READ geometryCommand CONSTANT)
@@ -42,6 +43,9 @@ public:
 	bool canRedo()const;
 	Q_INVOKABLE void undo();
 	Q_INVOKABLE void redo();
+
+	bool isModified() const;
+	void setIsModified(bool isModified);
 
 	EntityCommand* entityCommand() const;
 	GeometryCommand* geometryCommand() const;

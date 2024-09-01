@@ -4,6 +4,7 @@
 
 #include <fsd/data/Project.hpp>
 
+#include "managers/CommandsManager.hpp"
 #include "managers/ErrorsManager.hpp"
 
 #include "tools/LoadThread.hpp"
@@ -90,6 +91,7 @@ void FileManager::load(const QUrl& url) {
 }
 
 void FileManager::save(const QUrl& url) {
+	_impl->manager->commandsManager()->setIsModified(false);
 	_impl->manageFile<fse::SaveThread>(this, _impl->manager->project(), url);
 }
 
