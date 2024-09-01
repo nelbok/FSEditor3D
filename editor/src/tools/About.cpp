@@ -27,6 +27,10 @@ QString About::version() const {
 	return fsd::Config::version;
 }
 
+QString About::qtVersion() const {
+	return qVersion();
+}
+
 QString About::github() const {
 	return fsd::Config::github;
 }

@@ -110,6 +110,9 @@ set(QML_SOURCES
 	qml/data/FSEPlacement.qml
 	qml/data/FSEShape.qml
 
+	qml/modules/settings/FSESettingsAbout.qml
+	qml/modules/settings/FSESettingsInterface.qml
+
 	qml/modules/FSELinks.qml
 	qml/modules/FSEMenu.qml
 	qml/modules/FSEMessageBox.qml

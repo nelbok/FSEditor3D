@@ -4,59 +4,60 @@ import QtQuick.Layouts
 import editor
 
 FSERectangle {
+    enum SettingsType {
+        Interface,
+        About
+    }
+    property int selected: FSESettings.SettingsType.Interface
+
     id: root
+
     width: 800
     height: 600
 
-    RowLayout {
-        spacing: 5
+    FSEButton {
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.topMargin: 10
+        anchors.leftMargin: 10
 
-        anchors.centerIn: root
+        id: intefaceBtn
 
-        ColumnLayout {
-            spacing: 5
+        text: qsTr("Interface")
+        selected: root.selected === FSESettings.SettingsType.Interface
+        onClicked: root.selected = FSESettings.SettingsType.Interface
+    }
 
-            Layout.alignment: Qt.AlignTop
+    FSEButton {
+        anchors.top: parent.top
+        anchors.topMargin: 10
+        anchors.left: intefaceBtn.right
 
-            FSEComboBox {
-                name: qsTr("Theme")
-                model: ListModel {
-                    ListElement { value: "basic"; name: qsTr("Basic") }
-                    ListElement { value: "dark"; name: qsTr("Dark") }
-                    ListElement { value: "light"; name: qsTr("Light") }
-                }
-                Component.onCompleted: currentIndex = indexOfValue(MyStyles.current)
-                onActivated: MyStyles.current = valueAt(currentIndex)
-            }
+        id: aboutBtn
+        text: qsTr("About")
+        selected: root.selected === FSESettings.SettingsType.About
+        onClicked: root.selected = FSESettings.SettingsType.About
+    }
 
-            FSEComboBox {
-                name: qsTr("Language")
-                model: ListModel {
-                    ListElement { value: "en"; name: qsTr("English") }
-                    ListElement { value: "fr"; name: qsTr("French") }
-                }
-                Component.onCompleted: currentIndex = indexOfValue(MyTranslations.current)
-                onActivated: MyTranslations.current = valueAt(currentIndex)
-            }
+    FSERectangle {
+        anchors.top: intefaceBtn.bottom
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottomMargin: 10
+        anchors.leftMargin: 10
+        anchors.rightMargin: 10
+
+        id: content
+
+        FSESettingsInterface {
+            anchors.centerIn: content
+            visible: root.selected === FSESettings.SettingsType.Interface
         }
 
-        ColumnLayout {
-            spacing: 5
-
-            FSETextField {
-                name: qsTr("Example A")
-                value: qsTr("It is an example.")
-            }
-
-            FSESpinBox {
-                name: qsTr("Example B")
-                value: 42
-            }
-
-            FSEVector3DField {
-                name: qsTr("Example C")
-                value: Qt.vector3d(42, 42, 42)
-            }
+        FSESettingsAbout {
+            anchors.centerIn: content
+            visible: root.selected === FSESettings.SettingsType.About
         }
     }
 }
