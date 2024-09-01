@@ -12,6 +12,8 @@ QString ErrorsManager::message() const {
 	switch (_type) {
 		case Type::FileError:
 			return QCoreApplication::translate("ErrorsManager", "An error occured while loading or saving a file.");
+		case Type::StyleError:
+			return QCoreApplication::translate("ErrorsManager", "An error occured while loading the styles.");
 		default:
 			return "";
 	}

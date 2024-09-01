@@ -5,11 +5,14 @@
 #include <QtCore/QSaveFile>
 #include <QtCore/QFile>
 
+#include "ErrorsManager.hpp"
+
 namespace fse {
 
 struct StylesManager::Impl {
 	Style style;
 	QString current{ "basic" };
+	ErrorsManager* manager{ nullptr };
 
 	void loadStyle() {
 		QFile file(QString(":/styles/%1.json").arg(current));
@@ -24,6 +27,10 @@ struct StylesManager::Impl {
 			style.load(document.object());
 		} catch (const std::exception&) {
 			style = Style{};
+			style.foreground.normal = { 0, 0, 0 };
+			style.module.border.normal = { 0, 0, 0 };
+			style.module.border.width = 1;
+			manager->setType(ErrorsManager::Type::StyleError);
 		}
 	}
 };
@@ -34,7 +41,9 @@ StylesManager::StylesManager(QObject* parent)
 
 StylesManager::~StylesManager() {}
 
-void StylesManager::init() {
+void StylesManager::init(ErrorsManager* manager) {
+	assert(!_impl->manager);
+	_impl->manager = manager;
 	_impl->loadStyle();
 }
 

@@ -12,6 +12,7 @@ public:
 	enum class Type {
 		NoError,
 		FileError,
+		StyleError,
 	};
 	Q_ENUM(Type)
 

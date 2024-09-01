@@ -58,7 +58,7 @@ void Manager::init() {
 	_impl->fileManager->init(this);
 	_impl->modelsManager->init(_impl->project);
 	_impl->previewManager->init(this);
-	_impl->stylesManager->init();
+	_impl->stylesManager->init(_impl->errorsManager);
 	_impl->translationsManager->init();
 
 	reset();
