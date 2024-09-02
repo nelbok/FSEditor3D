@@ -1,11 +1,11 @@
-#include "StylesManager.hpp"
+#include <fse/managers/StylesManager.hpp>
 
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
 #include <QtCore/QSaveFile>
 #include <QtCore/QFile>
 
-#include "ErrorsManager.hpp"
+#include <fse/managers/ErrorsManager.hpp>
 
 namespace fse {
 

@@ -1,7 +1,7 @@
-#include "GeometryCommand.hpp"
+#include <fse/commands/GeometryCommand.hpp>
 
-#include "Commands.hpp"
-#include "ValueCommand.hpp"
+#include <fse/commands/Commands.hpp>
+#include <fse/commands/ValueCommand.hpp>
 
 namespace fse {
 

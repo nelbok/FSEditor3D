@@ -1,6 +1,6 @@
-#include "Commands.hpp"
+#include <fse/commands/Commands.hpp>
 
-#include "BaseCommand.hpp"
+#include <fse/commands/BaseCommand.hpp>
 
 namespace fse {
 

@@ -2,7 +2,7 @@
 
 #include <QtCore/QObject>
 
-#include "tools/Style.hpp"
+#include <fse/tools/Style.hpp>
 
 namespace fse {
 class ErrorsManager;

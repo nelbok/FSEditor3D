@@ -1,10 +1,10 @@
-#include "TranslationsManager.hpp"
+#include <fse/managers/TranslationsManager.hpp>
 
 #include <QtCore/QCoreApplication>
 #include <QtCore/QLocale>
 #include <QtCore/QTranslator>
 
-#include "ErrorsManager.hpp"
+#include <fse/managers/ErrorsManager.hpp>
 
 namespace fse {
 

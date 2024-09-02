@@ -1,4 +1,4 @@
-#include "SelectionManager.hpp"
+#include <fse/managers/SelectionManager.hpp>
 
 namespace fse {
 struct SelectionManager::Impl {

@@ -1,4 +1,4 @@
-#include "ModelsManager.hpp"
+#include <fse/managers/ModelsManager.hpp>
 
 namespace fse {
 

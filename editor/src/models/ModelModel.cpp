@@ -1,4 +1,4 @@
-#include "ModelModel.hpp"
+#include <fse/models/ModelModel.hpp>
 
 #include <fsd/data/Model.hpp>
 #include <fsd/data/Project.hpp>

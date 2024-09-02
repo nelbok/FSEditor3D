@@ -1,11 +1,10 @@
-#include "FileThread.hpp"
+#include <fse/tools/FileThread.hpp>
 
 #include <filesystem>
 
-#include "managers/FileManager.hpp"
-#include "tools/Tools.hpp"
-
-#include "Manager.hpp"
+#include <fse/managers/FileManager.hpp>
+#include <fse/tools/Tools.hpp>
+#include <fse/Manager.hpp>
 
 namespace fse {
 FileThread::FileThread(FileManager* manager, fsd::Project* project)

@@ -1,4 +1,4 @@
-#include "ErrorsManager.hpp"
+#include <fse/managers/ErrorsManager.hpp>
 
 #include <QCoreApplication>
 

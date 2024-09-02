@@ -1,9 +1,9 @@
-#include "SaveThread.hpp"
+#include <fse/tools/SaveThread.hpp>
 
 #include <filesystem>
 
-#include "managers/FileManager.hpp"
-#include "tools/Tools.hpp"
+#include <fse/managers/FileManager.hpp>
+#include <fse/tools/Tools.hpp>
 
 namespace fs = std::filesystem;
 

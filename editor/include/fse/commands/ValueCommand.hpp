@@ -1,6 +1,6 @@
 #pragma once
 
-#include "BaseCommand.hpp"
+#include <fse/commands/BaseCommand.hpp>
 
 namespace fse {
 class Commands;

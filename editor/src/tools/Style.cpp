@@ -1,4 +1,4 @@
-#include "Style.hpp"
+#include <fse/tools/Style.hpp>
 
 #include <fsd/io/Json.hpp>
 

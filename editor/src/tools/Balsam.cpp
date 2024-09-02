@@ -1,10 +1,10 @@
-#include "Balsam.hpp"
+#include <fse/tools/Balsam.hpp>
 
 #include <filesystem>
 
-#include "managers/FileManager.hpp"
-#include "managers/CommandsManager.hpp"
-#include "tools/Tools.hpp"
+#include <fse/managers/FileManager.hpp>
+#include <fse/managers/CommandsManager.hpp>
+#include <fse/tools/Tools.hpp>
 
 #include "Config.hpp"
 

@@ -1,18 +1,18 @@
-#include "ProjectCommand.hpp"
+#include <fse/commands/ProjectCommand.hpp>
 
 #include <fsd/data/Link.hpp>
 #include <fsd/data/Model.hpp>
 #include <fsd/data/Object.hpp>
 #include <fsd/data/Place.hpp>
 
-#include "managers/CommandsManager.hpp"
-#include "CreateCommand.hpp"
-#include "Commands.hpp"
-#include "DuplicateCommand.hpp"
-#include "LinkCommand.hpp"
-#include "PlacementCommand.hpp"
-#include "RemoveCommand.hpp"
-#include "ValueCommand.hpp"
+#include <fse/commands/CreateCommand.hpp>
+#include <fse/commands/Commands.hpp>
+#include <fse/commands/DuplicateCommand.hpp>
+#include <fse/commands/LinkCommand.hpp>
+#include <fse/commands/PlacementCommand.hpp>
+#include <fse/commands/RemoveCommand.hpp>
+#include <fse/commands/ValueCommand.hpp>
+#include <fse/managers/CommandsManager.hpp>
 
 namespace fse {
 

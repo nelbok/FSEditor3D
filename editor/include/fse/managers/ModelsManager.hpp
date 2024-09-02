@@ -4,10 +4,10 @@
 
 #include <fsd/data/Project.hpp>
 
-#include "models/LinkModel.hpp"
-#include "models/ModelModel.hpp"
-#include "models/ObjectModel.hpp"
-#include "models/PlaceModel.hpp"
+#include <fse/models/LinkModel.hpp>
+#include <fse/models/ModelModel.hpp>
+#include <fse/models/ObjectModel.hpp>
+#include <fse/models/PlaceModel.hpp>
 
 namespace fse {
 class ModelsManager : public QObject {

@@ -1,84 +1,89 @@
 qt_standard_project_setup(REQUIRES 6.5)
 
 set(PROJECT_SOURCES
-	src/commands/BaseCommand.cpp
-	src/commands/BaseCommand.hpp
-	src/commands/Commands.cpp
-	src/commands/Commands.hpp
-	src/commands/CreateCommand.hpp
-	src/commands/DuplicateCommand.hpp
-	src/commands/EntityCommand.cpp
-	src/commands/EntityCommand.hpp
-	src/commands/GeometryCommand.cpp
-	src/commands/GeometryCommand.hpp
-	src/commands/LinkCommand.cpp
-	src/commands/LinkCommand.hpp
-	src/commands/ModelCommand.cpp
-	src/commands/ModelCommand.hpp
-	src/commands/ObjectCommand.cpp
-	src/commands/ObjectCommand.hpp
-	src/commands/PlaceCommand.cpp
-	src/commands/PlaceCommand.hpp
-	src/commands/PlacementCommand.cpp
-	src/commands/PlacementCommand.hpp
-	src/commands/ProjectCommand.cpp
-	src/commands/ProjectCommand.hpp
-	src/commands/RemoveCommand.hpp
-	src/commands/ShapeCommand.cpp
-	src/commands/ShapeCommand.hpp
-	src/commands/ValueCommand.hpp
+	include/fse/commands/BaseCommand.hpp
+	include/fse/commands/Commands.hpp
+	include/fse/commands/CreateCommand.hpp
+	include/fse/commands/DuplicateCommand.hpp
+	include/fse/commands/EntityCommand.hpp
+	include/fse/commands/GeometryCommand.hpp
+	include/fse/commands/LinkCommand.hpp
+	include/fse/commands/ModelCommand.hpp
+	include/fse/commands/ObjectCommand.hpp
+	include/fse/commands/PlaceCommand.hpp
+	include/fse/commands/PlacementCommand.hpp
+	include/fse/commands/ProjectCommand.hpp
+	include/fse/commands/RemoveCommand.hpp
+	include/fse/commands/ShapeCommand.hpp
+	include/fse/commands/ValueCommand.hpp
 
-	src/managers/CommandsManager.cpp
-	src/managers/CommandsManager.hpp
-	src/managers/ErrorsManager.cpp
-	src/managers/ErrorsManager.hpp
-	src/managers/FileManager.cpp
-	src/managers/FileManager.hpp
-	src/managers/ModelsManager.cpp
-	src/managers/ModelsManager.hpp
-	src/managers/PreviewManager.cpp
-	src/managers/PreviewManager.hpp
-	src/managers/SelectionManager.cpp
-	src/managers/SelectionManager.hpp
-	src/managers/StylesManager.cpp
-	src/managers/StylesManager.hpp
-	src/managers/TranslationsManager.cpp
-	src/managers/TranslationsManager.hpp
+	include/fse/managers/CommandsManager.hpp
+	include/fse/managers/ErrorsManager.hpp
+	include/fse/managers/FileManager.hpp
+	include/fse/managers/ModelsManager.hpp
+	include/fse/managers/PreviewManager.hpp
+	include/fse/managers/SelectionManager.hpp
+	include/fse/managers/StylesManager.hpp
+	include/fse/managers/TranslationsManager.hpp
 
-	src/models/EntityModel.cpp
-	src/models/EntityModel.hpp
-	src/models/LinkModel.cpp
-	src/models/LinkModel.hpp
-	src/models/ModelModel.cpp
-	src/models/ModelModel.hpp
-	src/models/ObjectModel.cpp
-	src/models/ObjectModel.hpp
-	src/models/PlaceModel.cpp
-	src/models/PlaceModel.hpp
-	src/models/ProxyModel.cpp
-	src/models/ProxyModel.hpp
-	src/models/SelectionWrapper.cpp
-	src/models/SelectionWrapper.hpp
+	include/fse/models/EntityModel.hpp
+	include/fse/models/LinkModel.hpp
+	include/fse/models/ModelModel.hpp
+	include/fse/models/ObjectModel.hpp
+	include/fse/models/PlaceModel.hpp
+	include/fse/models/ProxyModel.hpp
+	include/fse/models/SelectionWrapper.hpp
+
+	include/fse/tools/About.hpp
+	include/fse/tools/Balsam.hpp
+	include/fse/tools/FileThread.hpp
+	include/fse/tools/LoadThread.hpp
+	include/fse/tools/SaveThread.hpp
+	include/fse/tools/Style.hpp
+	include/fse/tools/Tools.hpp
+
+	include/fse/Manager.hpp
 
 	src/tools/About.cpp
-	src/tools/About.hpp
 	src/tools/Balsam.cpp
-	src/tools/Balsam.hpp
 	src/tools/FileThread.cpp
-	src/tools/FileThread.hpp
 	src/tools/LoadThread.cpp
-	src/tools/LoadThread.hpp
 	src/tools/SaveThread.cpp
-	src/tools/SaveThread.hpp
 	src/tools/Style.cpp
-	src/tools/Style.hpp
 	src/tools/Tools.cpp
-	src/tools/Tools.hpp
+
+	src/commands/BaseCommand.cpp
+	src/commands/Commands.cpp
+	src/commands/EntityCommand.cpp
+	src/commands/GeometryCommand.cpp
+	src/commands/LinkCommand.cpp
+	src/commands/ModelCommand.cpp
+	src/commands/ObjectCommand.cpp
+	src/commands/PlaceCommand.cpp
+	src/commands/PlacementCommand.cpp
+	src/commands/ProjectCommand.cpp
+	src/commands/ShapeCommand.cpp
+
+	src/managers/CommandsManager.cpp
+	src/managers/ErrorsManager.cpp
+	src/managers/FileManager.cpp
+	src/managers/ModelsManager.cpp
+	src/managers/PreviewManager.cpp
+	src/managers/SelectionManager.cpp
+	src/managers/StylesManager.cpp
+	src/managers/TranslationsManager.cpp
+
+	src/models/EntityModel.cpp
+	src/models/LinkModel.cpp
+	src/models/ModelModel.cpp
+	src/models/ObjectModel.cpp
+	src/models/PlaceModel.cpp
+	src/models/ProxyModel.cpp
+	src/models/SelectionWrapper.cpp
 
 	src/Config.hpp.in
 	src/main.cpp
 	src/Manager.cpp
-	src/Manager.hpp
 
 	resources/resource.h
 	resources/logo.ico
@@ -170,6 +175,7 @@ set_target_properties(${CFS_EDITOR} PROPERTIES
 	WIN32_EXECUTABLE TRUE
 )
 
+target_include_directories(${CFS_EDITOR} PUBLIC include)
 target_link_libraries(${CFS_EDITOR} PRIVATE Qt6::Quick Qt6::Quick3D Qt6::Quick3DPhysics ${CFS_DATA})
 
 include(GNUInstallDirs)

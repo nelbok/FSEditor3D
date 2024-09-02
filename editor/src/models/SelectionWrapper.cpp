@@ -1,7 +1,7 @@
-#include "SelectionWrapper.hpp"
+#include <fse/models/SelectionWrapper.hpp>
 
-#include "EntityModel.hpp"
-#include "ProxyModel.hpp"
+#include <fse/models/EntityModel.hpp>
+#include <fse/models/ProxyModel.hpp>
 
 namespace fse {
 

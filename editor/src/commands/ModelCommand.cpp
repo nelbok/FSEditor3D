@@ -1,7 +1,7 @@
-#include "ModelCommand.hpp"
+#include <fse/commands/ModelCommand.hpp>
 
-#include "Commands.hpp"
-#include "ValueCommand.hpp"
+#include <fse/commands/Commands.hpp>
+#include <fse/commands/ValueCommand.hpp>
 
 namespace fse {
 

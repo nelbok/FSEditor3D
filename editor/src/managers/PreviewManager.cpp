@@ -1,11 +1,11 @@
-#include "PreviewManager.hpp"
+#include <fse/managers/PreviewManager.hpp>
 
 #include <fsd/data/Model.hpp>
 #include <fsd/data/Project.hpp>
 #include <fsd/data/Shape.hpp>
 
-#include "SelectionManager.hpp"
-#include "Manager.hpp"
+#include <fse/managers/SelectionManager.hpp>
+#include <fse/Manager.hpp>
 
 namespace fse {
 constexpr QVector3D lCameraPosition{ 0, 800, 1000 };

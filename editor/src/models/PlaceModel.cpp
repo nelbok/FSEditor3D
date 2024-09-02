@@ -1,4 +1,4 @@
-#include "PlaceModel.hpp"
+#include <fse/models/PlaceModel.hpp>
 
 #include <fsd/data/Place.hpp>
 #include <fsd/data/Project.hpp>

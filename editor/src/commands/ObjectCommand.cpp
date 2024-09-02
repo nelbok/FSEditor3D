@@ -1,7 +1,7 @@
-#include "ObjectCommand.hpp"
+#include <fse/commands/ObjectCommand.hpp>
 
-#include "Commands.hpp"
-#include "ValueCommand.hpp"
+#include <fse/commands/Commands.hpp>
+#include <fse/commands/ValueCommand.hpp>
 
 namespace fse {
 

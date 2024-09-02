@@ -1,6 +1,6 @@
-#include "ProxyModel.hpp"
+#include <fse/models/ProxyModel.hpp>
 
-#include "EntityModel.hpp"
+#include <fse/models/EntityModel.hpp>
 
 namespace fse {
 

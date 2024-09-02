@@ -1,4 +1,4 @@
-#include "EntityModel.hpp"
+#include <fse/models/EntityModel.hpp>
 
 #include <QtCore/QCoreApplication>
 

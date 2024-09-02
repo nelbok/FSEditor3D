@@ -9,18 +9,19 @@
 #include <fsd/data/Place.hpp>
 #include <fsd/data/Project.hpp>
 
-#include "managers/CommandsManager.hpp"
-#include "managers/ErrorsManager.hpp"
-#include "managers/FileManager.hpp"
-#include "managers/ModelsManager.hpp"
-#include "managers/PreviewManager.hpp"
-#include "managers/SelectionManager.hpp"
-#include "managers/StylesManager.hpp"
-#include "managers/TranslationsManager.hpp"
-#include "models/ProxyModel.hpp"
-#include "models/SelectionWrapper.hpp"
+#include <fse/managers/CommandsManager.hpp>
+#include <fse/managers/ErrorsManager.hpp>
+#include <fse/managers/FileManager.hpp>
+#include <fse/managers/ModelsManager.hpp>
+#include <fse/managers/PreviewManager.hpp>
+#include <fse/managers/SelectionManager.hpp>
+#include <fse/managers/StylesManager.hpp>
+#include <fse/managers/TranslationsManager.hpp>
+#include <fse/models/ProxyModel.hpp>
+#include <fse/models/SelectionWrapper.hpp>
+#include <fse/Manager.hpp>
+
 #include "Config.hpp"
-#include "Manager.hpp"
 
 void initApp(QGuiApplication& app) {
 	app.setOrganizationName(fsd::Config::organization);

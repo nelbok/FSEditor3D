@@ -5,8 +5,8 @@
 
 #include <fsd/data/Project.hpp>
 
-#include "tools/About.hpp"
-#include "tools/Balsam.hpp"
+#include <fse/tools/About.hpp>
+#include <fse/tools/Balsam.hpp>
 
 namespace fse {
 class CommandsManager;

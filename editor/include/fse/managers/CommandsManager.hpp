@@ -4,15 +4,15 @@
 
 #include <fsd/data/Project.hpp>
 
-#include "commands/EntityCommand.hpp"
-#include "commands/GeometryCommand.hpp"
-#include "commands/LinkCommand.hpp"
-#include "commands/ModelCommand.hpp"
-#include "commands/ObjectCommand.hpp"
-#include "commands/PlaceCommand.hpp"
-#include "commands/PlacementCommand.hpp"
-#include "commands/ProjectCommand.hpp"
-#include "commands/ShapeCommand.hpp"
+#include <fse/commands/EntityCommand.hpp>
+#include <fse/commands/GeometryCommand.hpp>
+#include <fse/commands/LinkCommand.hpp>
+#include <fse/commands/ModelCommand.hpp>
+#include <fse/commands/ObjectCommand.hpp>
+#include <fse/commands/PlaceCommand.hpp>
+#include <fse/commands/PlacementCommand.hpp>
+#include <fse/commands/ProjectCommand.hpp>
+#include <fse/commands/ShapeCommand.hpp>
 
 namespace fse {
 class CommandsManager : public QObject {

@@ -1,6 +1,6 @@
-#include "CommandsManager.hpp"
+#include <fse/managers/CommandsManager.hpp>
 
-#include "commands/Commands.hpp"
+#include <fse/commands/Commands.hpp>
 
 namespace fse {
 struct CommandsManager::Impl {

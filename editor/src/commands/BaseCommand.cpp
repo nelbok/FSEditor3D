@@ -1,4 +1,4 @@
-#include "BaseCommand.hpp"
+#include <fse/commands/BaseCommand.hpp>
 
 namespace fse {
 BaseCommand::BaseCommand(QObject* parent)

@@ -1,17 +1,16 @@
-#include "FileManager.hpp"
+#include <fse/managers/FileManager.hpp>
 
 #include <filesystem>
 
 #include <fsd/data/Project.hpp>
 
-#include "managers/CommandsManager.hpp"
-#include "managers/ErrorsManager.hpp"
-
-#include "tools/LoadThread.hpp"
-#include "tools/SaveThread.hpp"
+#include <fse/managers/CommandsManager.hpp>
+#include <fse/managers/ErrorsManager.hpp>
+#include <fse/tools/LoadThread.hpp>
+#include <fse/tools/SaveThread.hpp>
+#include <fse/Manager.hpp>
 
 #include "Config.hpp"
-#include "Manager.hpp"
 
 namespace fse {
 

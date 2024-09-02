@@ -1,6 +1,6 @@
 #pragma once
 
-#include "EntityModel.hpp"
+#include <fse/models/EntityModel.hpp>
 
 namespace fse {
 class LinkModel : public EntityModel {

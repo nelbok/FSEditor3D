@@ -1,6 +1,6 @@
 #pragma once
 
-#include "FileThread.hpp"
+#include <fse/tools/FileThread.hpp>
 
 namespace fse {
 class SaveThread : public FileThread {

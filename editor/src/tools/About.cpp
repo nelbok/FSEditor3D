@@ -1,4 +1,4 @@
-#include "About.hpp"
+#include <fse/tools/About.hpp>
 
 #include "Config.hpp"
 

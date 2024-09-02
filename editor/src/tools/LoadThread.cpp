@@ -1,9 +1,9 @@
-#include "LoadThread.hpp"
+#include <fse/tools/LoadThread.hpp>
 
 #include <filesystem>
 
-#include "managers/FileManager.hpp"
-#include "tools/Tools.hpp"
+#include <fse/managers/FileManager.hpp>
+#include <fse/tools/Tools.hpp>
 
 namespace fs = std::filesystem;
 
