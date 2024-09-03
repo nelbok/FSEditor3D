@@ -1,0 +1,14 @@
+name: Windows compilation
+on: [push]
+jobs:
+  qt6_6:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jurplel/install-qt-action@v3
+        with:
+          version: '6.6.*'
+          modules: qtquick3d qtquick3dphysics qtshadertools
+      - run: cmake -B build
+      - run: cmake --build build --config Release -j
+      - run: ./build/tests/Release/Tests.exe
