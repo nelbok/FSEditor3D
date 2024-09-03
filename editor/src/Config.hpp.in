@@ -1,6 +1,6 @@
 #pragma once
 
-namespace fsd::Config {
+namespace fse::Config {
 constexpr auto organization = "@FS_ORGANIZATION@";
 constexpr auto copyright = "@FS_COPYRIGHT@";
 constexpr auto year = "@FS_YEAR@";
@@ -13,4 +13,4 @@ constexpr auto discord = "@FS_DISCORD@";
 constexpr auto twitter = "@FS_TWITTER@";
 
 constexpr auto balsam = "@FS_BALSAM@";
-} // namespace fsd::Config
+} // namespace fse::Config

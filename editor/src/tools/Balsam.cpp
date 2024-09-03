@@ -91,7 +91,7 @@ void Balsam::generate(fsd::Model* model, const QUrl& url) {
 	args << QString::fromStdString(Tools::modelPath(detail::path(_manager), model).string());
 	args << Tools::toPath(url);
 
-	_process->start(fsd::Config::balsam, args);
+	_process->start(fse::Config::balsam, args);
 }
 
 void Balsam::finalize() {

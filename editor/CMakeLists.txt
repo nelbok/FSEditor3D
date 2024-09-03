@@ -42,6 +42,7 @@ set(PROJECT_SOURCES
 	include/fse/tools/Style.hpp
 	include/fse/tools/Tools.hpp
 
+	include/fse/Application.hpp
 	include/fse/Manager.hpp
 
 	src/tools/About.cpp
@@ -81,13 +82,11 @@ set(PROJECT_SOURCES
 	src/models/ProxyModel.cpp
 	src/models/SelectionWrapper.cpp
 
-	src/Config.hpp.in
-	src/main.cpp
+	src/Application.cpp
 	src/Manager.cpp
 
-	resources/resource.h
-	resources/logo.ico
-	resources/resources.rc.in
+	src/Config.hpp.in
+
 	resources/resources.qrc
 )
 set(QML_SOURCES
@@ -132,66 +131,20 @@ set(QML_SOURCES
 
 	qml/Main.qml
 )
-
 set(TRANSLATION_FILES
     translations/app_en.ts
     translations/app_fr.ts
 )
 
-configure_file(resources/resources.rc.in resources/resources.rc)
-configure_file(resources/resource.h resources/resource.h COPYONLY)
-configure_file(resources/logo.ico resources/logo.ico COPYONLY)
-
-set(OTHER_FILES
-	${CMAKE_CURRENT_BINARY_DIR}/resources/resources.rc
-)
-
-qt_add_executable(${CFS_EDITOR} ${PROJECT_SOURCES} ${OTHER_FILES})
-qt_add_qml_module(${CFS_EDITOR} URI editor VERSION 1.0 QML_FILES ${QML_SOURCES})
-qt_add_translations(${CFS_EDITOR} TS_FILES ${TRANSLATION_FILES} RESOURCE_PREFIX "/translations")
-
-source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" PREFIX "" FILES ${PROJECT_SOURCES} ${QML_SOURCES} ${QML_SINGLETON})
-include_directories(src)
-
-# Balsam
-get_target_property(BALSAM_LOCATION Qt6::balsam IMPORTED_LOCATION)
-if(WIN32)
-	get_filename_component(FS_BALSAM ${BALSAM_LOCATION} NAME)
-elseif(LINUX)
-	set(FS_BALSAM ${BALSAM_LOCATION})
-endif()
-
+source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" PREFIX "" FILES ${PROJECT_SOURCES} ${QML_SOURCES})
 configure_file(src/Config.hpp.in include/Config.hpp)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/include)
+include_directories(src)
+include_directories(.)
 
-# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
-# If you are developing for iOS or macOS you should consider setting an
-# explicit, fixed bundle identifier manually though.
-set_target_properties(${CFS_EDITOR} PROPERTIES
-	MACOSX_BUNDLE_GUI_IDENTIFIER com.${FS_ORGANIZATION}.${CFS_EDITOR}
-	MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-	MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-	MACOSX_BUNDLE TRUE
-	WIN32_EXECUTABLE TRUE
-)
+qt_add_library(${CFS_EUI} STATIC ${PROJECT_SOURCES})
+qt_add_qml_module(${CFS_EUI} URI editor VERSION 1.0 QML_FILES ${QML_SOURCES})
+qt_add_translations(${CFS_EUI} TS_FILES ${TRANSLATION_FILES} RESOURCE_PREFIX "/translations")
 
-target_include_directories(${CFS_EDITOR} PUBLIC include)
-target_link_libraries(${CFS_EDITOR} PRIVATE Qt6::Quick Qt6::Quick3D Qt6::Quick3DPhysics ${CFS_DATA})
-
-include(GNUInstallDirs)
-install(TARGETS ${CFS_EDITOR}
-	BUNDLE DESTINATION .
-	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-)
-if(WIN32)
-	# Win deploy qt
-	get_target_property(DEPLOYQT Qt6::windeployqt IMPORTED_LOCATION)
-
-	# Deploy Balsam
-	add_custom_command(TARGET ${CFS_EDITOR} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${BALSAM_LOCATION} $<TARGET_FILE_DIR:${CFS_EDITOR}>)
-	add_custom_command(TARGET ${CFS_EDITOR} POST_BUILD COMMAND ${DEPLOYQT} "$<TARGET_FILE_DIR:${CFS_EDITOR}>/${FS_BALSAM}")
-
-	# Deploy editor
-	add_custom_command(TARGET ${CFS_EDITOR} POST_BUILD COMMAND ${DEPLOYQT} --qmldir "${CMAKE_CURRENT_SOURCE_DIR}/qml" "$<TARGET_FILE:${CFS_EDITOR}>")
-endif()
+target_include_directories(${CFS_EUI} PUBLIC include)
+target_link_libraries(${CFS_EUI} PRIVATE Qt6::Quick Qt6::Quick3D Qt6::Quick3DPhysics ${CFS_DATA})

@@ -76,7 +76,7 @@ void FileManager::init(Manager* manager) {
 
 void FileManager::reset() {
 	auto tmp = std::filesystem::temp_directory_path();
-	tmp /= fsd::Config::name;
+	tmp /= fse::Config::name;
 	tmp /= _impl->manager->project()->uuid().toString(QUuid::WithoutBraces).toStdString();
 	tmp /= "";
 	_impl->tmpPath = QUrl::fromLocalFile(QString::fromStdString(tmp.string()));

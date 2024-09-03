@@ -4,27 +4,27 @@
 
 namespace fse {
 QString About::organization() const {
-	return fsd::Config::organization;
+	return fse::Config::organization;
 }
 
 QString About::copyright() const {
-	return fsd::Config::copyright;
+	return fse::Config::copyright;
 }
 
 QString About::year() const {
-	return fsd::Config::year;
+	return fse::Config::year;
 }
 
 QString About::description() const {
-	return fsd::Config::description;
+	return fse::Config::description;
 }
 
 QString About::name() const {
-	return fsd::Config::name;
+	return fse::Config::name;
 }
 
 QString About::version() const {
-	return fsd::Config::version;
+	return fse::Config::version;
 }
 
 QString About::qtVersion() const {
@@ -32,14 +32,14 @@ QString About::qtVersion() const {
 }
 
 QString About::github() const {
-	return fsd::Config::github;
+	return fse::Config::github;
 }
 
 QString About::discord() const {
-	return fsd::Config::discord;
+	return fse::Config::discord;
 }
 
 QString About::twitter() const {
-	return fsd::Config::twitter;
+	return fse::Config::twitter;
 }
 } // namespace fse
