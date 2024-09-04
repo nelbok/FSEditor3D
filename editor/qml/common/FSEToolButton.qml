@@ -27,6 +27,9 @@ FSERectangle {
 
         anchors.fill: parent
 
+        // Avoid 3D View to catch mouse events
+        preventStealing: true
+
         hoverEnabled: true
         onClicked: (mouse)=> { if (mouse.button === Qt.LeftButton) parent.clicked() }
     }

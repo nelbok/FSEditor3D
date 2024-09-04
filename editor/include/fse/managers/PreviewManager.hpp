@@ -57,10 +57,10 @@ public:
 	QList<PreviewData> datas() const;
 
 private:
-	void fullMapDatas(QList<PreviewData>& datas, fsd::Place* place, QList<fsd::Place*>& parsed, const QVector3D& offset = { 0, 0, 0 }) const;
+	void fullMapDatas(QList<PreviewData>& datas, QList<fsd::Geometry*>& parsed, fsd::Place* place, const QVector3D& offset = { 0, 0, 0 }) const;
 
-	void fillDatas(QList<PreviewData>& datas, fsd::Geometry* geometry, bool useRefs) const;
-	void fillDatas(QList<PreviewData>& datas, fsd::Geometry* geometry, const QVector3D& offset = { 0, 0, 0 }, bool useRefs = false) const;
+	void fillDatas(QList<PreviewData>& datas, QList<fsd::Geometry*>& parsed, fsd::Geometry* geometry, bool useRefs) const;
+	void fillDatas(QList<PreviewData>& datas, QList<fsd::Geometry*>& parsed, fsd::Geometry* geometry, const QVector3D& offset = { 0, 0, 0 }, bool useRefs = false) const;
 
 	struct Impl;
 	std::unique_ptr<Impl> _impl;

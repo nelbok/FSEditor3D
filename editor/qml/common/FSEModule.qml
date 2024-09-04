@@ -21,6 +21,10 @@ FSERectangle {
 
     MouseArea {
         anchors.fill: parent
+
+        // Avoid 3D View to catch mouse events
+        preventStealing: true
+
         onClicked: {
             // For Shortcut
             parent.focus = true

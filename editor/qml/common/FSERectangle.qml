@@ -7,4 +7,11 @@ Rectangle {
     border.width: MyStyles.style.module.border.width
     color: MyStyles.style.module.normal
     radius: MyStyles.style.module.radius
+
+    MouseArea {
+        anchors.fill: parent
+
+        // Avoid 3D View to catch mouse events
+        preventStealing: true
+    }
 }

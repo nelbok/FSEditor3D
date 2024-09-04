@@ -20,6 +20,10 @@ Item {
     }
     MouseArea {
         anchors.fill: parent
+
+        // Avoid 3D View to catch mouse events
+        preventStealing: true
+
         onClicked: (mouse)=> { if (mouse.button === Qt.LeftButton) parent.clicked() }
     }
 }

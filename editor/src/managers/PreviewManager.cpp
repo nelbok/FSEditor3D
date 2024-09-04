@@ -133,38 +133,37 @@ void PreviewManager::switchWorldMapVisible() {
 
 QList<PreviewData> PreviewManager::datas() const {
 	QList<PreviewData> datas;
+	QList<fsd::Geometry*> parsed;
 
 	const auto& sm = _impl->manager->selectionManager();
 	switch (sm->currentType()) {
 		case SelectionManager::Type::None:
 			if (auto* place = _impl->manager->project()->defaultPlace()) {
-				if (_impl->isWorldMapVisible) {
-					QList<fsd::Place*> parsed;
-					fullMapDatas(datas, place, parsed);
-				} else {
-					fillDatas(datas, place, true);
-				}
+				if (_impl->isWorldMapVisible)
+					fullMapDatas(datas, parsed, place);
+				else
+					fillDatas(datas, parsed, place, true);
 			}
 			break;
 		case SelectionManager::Type::Project:
 			if (auto* place = _impl->manager->project()->defaultPlace())
-				fillDatas(datas, place, true);
+				fillDatas(datas, parsed, place, true);
 			break;
 		case SelectionManager::Type::Models:
 			if (sm->currentModel())
-				fillDatas(datas, sm->currentModel());
+				fillDatas(datas, parsed, sm->currentModel());
 			break;
 		case SelectionManager::Type::Places:
 			if (sm->currentPlace())
-				fillDatas(datas, sm->currentPlace(), true);
+				fillDatas(datas, parsed, sm->currentPlace(), true);
 			break;
 		case SelectionManager::Type::Objects:
 			if (sm->currentObject())
-				fillDatas(datas, sm->currentObject());
+				fillDatas(datas, parsed, sm->currentObject());
 			break;
 		case SelectionManager::Type::Links:
 			if (sm->currentLink())
-				fillDatas(datas, sm->currentLink());
+				fillDatas(datas, parsed, sm->currentLink());
 			break;
 		default:
 			break;
@@ -173,34 +172,38 @@ QList<PreviewData> PreviewManager::datas() const {
 	return datas;
 }
 
-void PreviewManager::fullMapDatas(QList<PreviewData>& datas, fsd::Place* place, QList<fsd::Place*>& parsed, const QVector3D& offset) const {
-	fillDatas(datas, place, offset, true);
-	parsed.append(place);
+void PreviewManager::fullMapDatas(QList<PreviewData>& datas, QList<fsd::Geometry*>& parsed, fsd::Place* place, const QVector3D& offset) const {
+	fillDatas(datas, parsed, place, offset, true);
 	for (auto* entity : place->refs()) {
 		if (auto* linkA = qobject_cast<fsd::Link*>(entity))
 			if (auto* linkB = linkA->link())
 				if (auto* placeB = linkB->place()) {
 					if (parsed.contains(placeB))
 						continue;
-					fullMapDatas(datas, placeB, parsed, offset + linkA->globalPosition() - linkB->globalPosition());
+					fullMapDatas(datas, parsed, placeB, offset + linkA->globalPosition() - linkB->globalPosition());
 				}
 	}
 }
 
-void PreviewManager::fillDatas(QList<PreviewData>& datas, fsd::Geometry* geometry, bool useRefs) const {
-	fillDatas(datas, geometry, { 0, 0, 0 }, useRefs);
+void PreviewManager::fillDatas(QList<PreviewData>& datas, QList<fsd::Geometry*>& parsed, fsd::Geometry* geometry, bool useRefs) const {
+	fillDatas(datas, parsed, geometry, { 0, 0, 0 }, useRefs);
 }
 
-void PreviewManager::fillDatas(QList<PreviewData>& datas, fsd::Geometry* geometry, const QVector3D& offset, bool useRefs) const {
+void PreviewManager::fillDatas(QList<PreviewData>& datas, QList<fsd::Geometry*>& parsed, fsd::Geometry* geometry, const QVector3D& offset, bool useRefs) const {
+	if (parsed.contains(geometry)) {
+		return;
+	}
+	parsed.append(geometry);
+
 	if (_impl->areOtherDatasVisible) {
 		// Add others entities if needed
 		if (auto* placement = qobject_cast<fsd::Placement*>(geometry)) {
-			fillDatas(datas, placement->place(), offset);
+			fillDatas(datas, parsed, placement->place(), offset);
 		}
 		if (useRefs) {
 			for (auto* entity : geometry->refs()) {
 				if (auto* subGeometry = qobject_cast<fsd::Geometry*>(entity))
-					fillDatas(datas, subGeometry, offset);
+					fillDatas(datas, parsed, subGeometry, offset);
 			}
 		}
 	}
