@@ -7,7 +7,7 @@
 #include <fsd/data/Project.hpp>
 
 struct Dummy {
-	static void build(fsd::Project* project) {
+	static void build(fsd::Project& project) {
 		[[maybe_unused]] auto* m1 = createModel(project, "Model 1", fsd::Model::ModelType::Place);
 		[[maybe_unused]] auto* m2 = createModel(project, "Model 2", fsd::Model::ModelType::Object);
 		[[maybe_unused]] auto* m3 = createModel(project, "Model 3", fsd::Model::ModelType::Link);
@@ -24,15 +24,15 @@ struct Dummy {
 		l1->setLink(l2);
 		l2->setLink(l1);
 
-		project->setLocalPosition({ 10, 10, 10 });
-		project->setLocalRotation({ 10, 10, 10 });
-		project->setLocalScale({ 10, 10, 10 });
-		project->setDefaultPlace(p1);
+		project.setLocalPosition({ 10, 10, 10 });
+		project.setLocalRotation({ 10, 10, 10 });
+		project.setLocalScale({ 10, 10, 10 });
+		project.setDefaultPlace(p1);
 	}
 
 private:
-	static fsd::Model* createModel(fsd::Project* project, const QString& name, fsd::Model::ModelType type) {
-		auto* m = project->createModel();
+	static fsd::Model* createModel(fsd::Project& project, const QString& name, fsd::Model::ModelType type) {
+		auto* m = project.createModel();
 		m->setName(name);
 		m->setModelType(type);
 		m->setLocalPosition({ 10, 10, 10 });
@@ -41,8 +41,8 @@ private:
 		return m;
 	}
 
-	static fsd::Place* createPlace(fsd::Project* project, const QString& name, fsd::Model* m) {
-		auto* p = project->createPlace();
+	static fsd::Place* createPlace(fsd::Project& project, const QString& name, fsd::Model* m) {
+		auto* p = project.createPlace();
 		p->setName(name);
 		p->setModel(m);
 		p->setLocalPosition({ 10, 10, 10 });
@@ -51,8 +51,8 @@ private:
 		return p;
 	}
 
-	static fsd::Object* createObject(fsd::Project* project, const QString& name, fsd::Model* m, fsd::Place* p) {
-		auto* o = project->createObject();
+	static fsd::Object* createObject(fsd::Project& project, const QString& name, fsd::Model* m, fsd::Place* p) {
+		auto* o = project.createObject();
 		o->setName(name);
 		o->setModel(m);
 		o->setPlace(p);
@@ -62,8 +62,8 @@ private:
 		return o;
 	}
 
-	static fsd::Link* createLink(fsd::Project* project, const QString& name, fsd::Model* m, fsd::Place* p) {
-		auto* l = project->createLink();
+	static fsd::Link* createLink(fsd::Project& project, const QString& name, fsd::Model* m, fsd::Place* p) {
+		auto* l = project.createLink();
 		l->setName(name);
 		l->setModel(m);
 		l->setPlace(p);

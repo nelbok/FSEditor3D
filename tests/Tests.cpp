@@ -1,12 +1,10 @@
-#include <QtCore/QCoreApplication>
 #include <QtTest/QtTest>
 
-#include "Dummy.hpp"
-#include "TestAccessors.hpp"
-#include "TestIO.hpp"
-#include "TestLists.hpp"
-#include "TestRefs.hpp"
-#include "TestSignals.hpp"
+#include "data/TestAccessors.hpp"
+#include "data/TestIO.hpp"
+#include "data/TestLists.hpp"
+#include "data/TestRefs.hpp"
+#include "editor/TestBalsam.hpp"
 
 class Tests : public QObject {
 	Q_OBJECT
@@ -15,53 +13,35 @@ public:
 	Tests() = default;
 	virtual ~Tests() = default;
 
-private:
-	fsd::Project* _project = nullptr;
-
 private slots:
 	// Only once
 	void initTestCase() {}
 
 	// For each tests
-	void init() {
-		QVERIFY(!_project);
-		_project = new fsd::Project(this);
-		Dummy::build(_project);
-	}
+	void init() {}
 
 	void testAccessors() {
-		QVERIFY(_project);
-		TestAccessors(_project).run();
+		TestAccessors().run();
 	}
 
 	void testIO() {
-		QVERIFY(_project);
-		auto* dummy = new fsd::Project(this);
-		TestIO(_project, dummy).run();
-		dummy->deleteLater();
+		TestIO().run();
 	}
 
 	void testLists() {
-		QVERIFY(_project);
-		TestLists(_project).run();
+		TestLists().run();
 	}
 
 	void testRefs() {
-		QVERIFY(_project);
-		TestRefs(_project).run();
+		TestRefs().run();
 	}
 
-	void testSignals() {
-		QVERIFY(_project);
-		TestSignals(_project).run();
+	void testBalsam() {
+		TestBalsam().run();
 	}
 
 	// For each tests
-	void cleanup() {
-		QVERIFY(_project);
-		_project->deleteLater();
-		_project = nullptr;
-	}
+	void cleanup() {}
 
 	// Only once
 	void cleanupTestCase() {}

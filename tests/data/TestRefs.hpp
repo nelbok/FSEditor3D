@@ -2,26 +2,17 @@
 
 #include <QtTest/QtTest>
 
-#include <fsd/data/Link.hpp>
-#include <fsd/data/Object.hpp>
-#include <fsd/data/Project.hpp>
-#include <fsd/data/Place.hpp>
+#include "Dummy.hpp"
 
 struct TestRefs {
-	TestRefs(fsd::Project* project)
-		: _project{ project } {}
-
-	virtual ~TestRefs() = default;
-
 	void run() {
-		QVERIFY(_project);
-
+		Dummy::build(_project);
 		init();
 		test();
 	}
 
 private:
-	fsd::Project* _project{ nullptr };
+	fsd::Project _project;
 	fsd::Model* _model{ nullptr };
 	fsd::Place* _place{ nullptr };
 	fsd::Object* _object{ nullptr };
@@ -29,15 +20,15 @@ private:
 	fsd::Link* _linkB{ nullptr };
 
 	void init() {
-		_model = _project->models().at(0);
-		_place = _project->places().at(0);
-		_object = _project->objects().at(0);
-		_linkA = _project->links().at(0);
-		_linkB = _project->links().at(1);
+		_model = _project.models().at(0);
+		_place = _project.places().at(0);
+		_object = _project.objects().at(0);
+		_linkA = _project.links().at(0);
+		_linkB = _project.links().at(1);
 	}
 
 	void test() {
-		QCOMPARE(_project->refs().size(), 0);
+		QCOMPARE(_project.refs().size(), 0);
 		QCOMPARE(_model->refs().size(), 3);
 		QCOMPARE(_place->refs().size(), 1);
 		QCOMPARE(_object->refs().size(), 0);

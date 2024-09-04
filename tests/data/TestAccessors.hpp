@@ -2,36 +2,27 @@
 
 #include <QtTest/QtTest>
 
-#include <fsd/data/Link.hpp>
-#include <fsd/data/Model.hpp>
-#include <fsd/data/Object.hpp>
-#include <fsd/data/Place.hpp>
-#include <fsd/data/Project.hpp>
+#include "Dummy.hpp"
 
 struct TestAccessors {
-	TestAccessors(fsd::Project* project)
-		: _project{ project } {}
-
-	virtual ~TestAccessors() = default;
-
 	void run() {
-		QVERIFY(_project);
+		Dummy::build(_project);
 
-		auto* link = _project->links().at(0);
-		auto* model = _project->models().at(0);
-		auto* place = _project->places().at(0);
-		auto* object = _project->objects().at(0);
+		auto* link = _project.links().at(0);
+		auto* model = _project.models().at(0);
+		auto* place = _project.places().at(0);
+		auto* object = _project.objects().at(0);
 
 		// Tests
 		testLink(link, link->metaObject());
 		testModel(model, model->metaObject());
 		testObject(object, object->metaObject());
 		testPlace(place, place->metaObject());
-		testProject(_project, _project->metaObject());
+		testProject(&_project, _project.metaObject());
 	}
 
 private:
-	fsd::Project* _project{ nullptr };
+	fsd::Project _project;
 
 	void testEntity(fsd::Entity* entity, const QMetaObject* metaObject) {
 		const auto name = QString("Test");
@@ -60,7 +51,7 @@ private:
 	void testLink(fsd::Link* link, const QMetaObject* metaObject) {
 		testPlacement(link, metaObject->superClass());
 
-		auto* linkA = _project->links().at(0);
+		auto* linkA = _project.links().at(0);
 		link->setLink(linkA);
 		QCOMPARE(link->link(), linkA);
 
@@ -109,7 +100,7 @@ private:
 	void testPlacement(fsd::Placement* placement, const QMetaObject* metaObject) {
 		testShape(placement, metaObject->superClass());
 
-		auto* place = _project->places().at(0);
+		auto* place = _project.places().at(0);
 		placement->setPlace(place);
 		QCOMPARE(placement->place(), place);
 
@@ -120,7 +111,7 @@ private:
 	void testProject(fsd::Project* project, const QMetaObject* metaObject) {
 		testGeometry(project, metaObject->superClass());
 
-		auto* place = _project->places().at(0);
+		auto* place = _project.places().at(0);
 		project->setDefaultPlace(place);
 		QCOMPARE(project->defaultPlace(), place);
 
