@@ -1,25 +1,13 @@
 #pragma once
 
 #include <QtGui/QGuiApplication>
+#include <QtQml/QQmlApplicationEngine>
 
-namespace fse {
+#include <fse/Manager.hpp>
 
-class Application : public QGuiApplication {
-	Q_OBJECT
-
-public:
-	Application(int& argc, char** argv);
-	virtual ~Application();
-
-	void init();
-
-private:
-	void initApp();
-	bool initParser() const;
-	void initRegister() const;
-
-private:
-	struct Impl;
-	std::unique_ptr<Impl> _impl;
-};
-} // namespace fse
+namespace fse::Application {
+void initApp(QGuiApplication& app);
+bool initParser(QGuiApplication& app, Manager& manager);
+void initRegister(Manager& manager);
+void initEngine(QGuiApplication& app, QQmlApplicationEngine& engine, Manager& manager);
+} // namespace fse::Application

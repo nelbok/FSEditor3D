@@ -8,6 +8,8 @@ set(PROJECT_SOURCES
 	data/TestRefs.hpp
 
 	editor/TestBalsam.hpp
+	editor/TestStyles.hpp
+	editor/TestTranslations.hpp
 
 	Dummy.hpp
 	Tests.cpp

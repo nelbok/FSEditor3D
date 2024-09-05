@@ -2,7 +2,6 @@
 
 #include <QtCore/QCommandLineParser>
 #include <QtGui/QIcon>
-#include <QtQml/QQmlApplicationEngine>
 
 #include <fsd/data/Link.hpp>
 #include <fsd/data/Model.hpp>
@@ -20,7 +19,6 @@
 #include <fse/managers/TranslationsManager.hpp>
 #include <fse/models/ProxyModel.hpp>
 #include <fse/models/SelectionWrapper.hpp>
-#include <fse/Manager.hpp>
 
 #include "Config.hpp"
 
@@ -29,58 +27,18 @@ void initResources() {
 	Q_INIT_RESOURCE(resources);
 }
 
-namespace fse {
+namespace fse::Application {
 
-struct Application::Impl {
-	fse::Manager* manager{ nullptr };
-	QQmlApplicationEngine* engine{ nullptr };
-};
-
-Application::Application(int& argc, char** argv)
-	: QGuiApplication(argc, argv)
-	, _impl{ std::make_unique<Impl>() } {}
-
-Application::~Application() {
-	// Delete the engine before QGuiApplication to avoid issue with QSGRenderThread
-	delete _impl->engine;
-	delete _impl->manager;
-}
-
-void Application::init() {
+void initApp(QGuiApplication& app) {
 	::initResources();
-	initApp();
 
-	_impl->manager = new fse::Manager(this);
-	_impl->manager->init();
-
-	if (!initParser()) {
-		return;
-	}
-
-	_impl->engine = new QQmlApplicationEngine(this);
-
-	initRegister();
-
-	// Translations
-	QObject::connect(_impl->manager->translationsManager(), &fse::TranslationsManager::currentUpdated, _impl->engine, &QQmlApplicationEngine::retranslate);
-
-	QObject::connect(
-		_impl->engine, &QQmlApplicationEngine::objectCreationFailed, this,
-		[]() {
-			QCoreApplication::exit(-1);
-		},
-		Qt::QueuedConnection);
-	_impl->engine->loadFromModule("editor", "Main");
+	app.setOrganizationName(fse::Config::organization);
+	app.setApplicationName(fse::Config::name);
+	app.setApplicationVersion(fse::Config::version);
+	app.setWindowIcon(QIcon(":/logo/logo.png"));
 }
 
-void Application::initApp() {
-	setOrganizationName(fse::Config::organization);
-	setApplicationName(fse::Config::name);
-	setApplicationVersion(fse::Config::version);
-	setWindowIcon(QIcon(":/logo/logo.png"));
-}
-
-bool Application::initParser() const {
+bool initParser(QGuiApplication& app, Manager& manager) {
 	QCommandLineParser parser;
 	parser.setApplicationDescription(fse::Config::description);
 	parser.addHelpOption();
@@ -90,19 +48,19 @@ bool Application::initParser() const {
 	parser.addOption(generateStyleOption);
 
 	// Process the actual command line arguments given by the user
-	parser.process(arguments());
+	parser.process(app);
 
 	if (parser.isSet(generateStyleOption)) {
-		_impl->manager->stylesManager()->createJson();
+		manager.stylesManager()->createJson();
 		return false;
 	}
 
 	return true;
 }
 
-void Application::initRegister() const {
+void initRegister(Manager& manager) {
 	// FSData
-	qmlRegisterSingletonInstance("editor", 1, 0, "MyProject", _impl->manager->project());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyProject", manager.project());
 
 	qmlRegisterUncreatableType<fsd::Entity>("editor", 1, 0, "MyEntity", "Attempt to create an Entity");
 	qmlRegisterUncreatableType<fsd::Geometry>("editor", 1, 0, "MyGeometry", "Attempt to create a Geometry");
@@ -117,17 +75,30 @@ void Application::initRegister() const {
 	qmlRegisterType<fsd::FileManager>("editor", 1, 0, "MyFileManager");
 
 	// FSEditor
-	qmlRegisterSingletonInstance("editor", 1, 0, "MyManager", _impl->manager);
-	qmlRegisterSingletonInstance("editor", 1, 0, "MyCommands", _impl->manager->commandsManager());
-	qmlRegisterSingletonInstance("editor", 1, 0, "MyErrors", _impl->manager->errorsManager());
-	qmlRegisterSingletonInstance("editor", 1, 0, "MyFile", _impl->manager->fileManager());
-	qmlRegisterSingletonInstance("editor", 1, 0, "MyModels", _impl->manager->modelsManager());
-	qmlRegisterSingletonInstance("editor", 1, 0, "MyPreview", _impl->manager->previewManager());
-	qmlRegisterSingletonInstance("editor", 1, 0, "MySelection", _impl->manager->selectionManager());
-	qmlRegisterSingletonInstance("editor", 1, 0, "MyStyles", _impl->manager->stylesManager());
-	qmlRegisterSingletonInstance("editor", 1, 0, "MyTranslations", _impl->manager->translationsManager());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyManager", &manager);
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyCommands", manager.commandsManager());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyErrors", manager.errorsManager());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyFile", manager.fileManager());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyModels", manager.modelsManager());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyPreview", manager.previewManager());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MySelection", manager.selectionManager());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyStyles", manager.stylesManager());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyTranslations", manager.translationsManager());
 	qmlRegisterType<fse::ProxyModel>("editor", 1, 0, "MyProxyModel");
 	qmlRegisterType<fse::SelectionWrapper>("editor", 1, 0, "MySelectionWrapper");
 }
 
-} // namespace fse
+void initEngine(QGuiApplication& app, QQmlApplicationEngine& engine, Manager& manager) {
+	// Translations
+	QObject::connect(manager.translationsManager(), &fse::TranslationsManager::currentUpdated, &engine, &QQmlApplicationEngine::retranslate);
+
+	QObject::connect(
+		&engine, &QQmlApplicationEngine::objectCreationFailed, &app,
+		[]() {
+			QCoreApplication::exit(-1);
+		},
+		Qt::QueuedConnection);
+	engine.loadFromModule("editor", "Main");
+}
+
+} // namespace fse::Application

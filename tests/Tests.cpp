@@ -1,10 +1,15 @@
 #include <QtTest/QtTest>
 
+#include <fse/Application.hpp>
+
 #include "data/TestAccessors.hpp"
 #include "data/TestIO.hpp"
 #include "data/TestLists.hpp"
 #include "data/TestRefs.hpp"
+
 #include "editor/TestBalsam.hpp"
+#include "editor/TestStyles.hpp"
+#include "editor/TestTranslations.hpp"
 
 class Tests : public QObject {
 	Q_OBJECT
@@ -15,10 +20,14 @@ public:
 
 private slots:
 	// Only once
-	void initTestCase() {}
+	void initTestCase() {
+		fse::Application::initApp(*qApp);
+	}
 
 	// For each tests
 	void init() {}
+
+	/**	DATA	**/
 
 	void testAccessors() {
 		TestAccessors().run();
@@ -36,8 +45,18 @@ private slots:
 		TestRefs().run();
 	}
 
+	/**	EDITOR	**/
+
 	void testBalsam() {
 		TestBalsam().run();
+	}
+
+	void testStyles() {
+		TestStyles().run();
+	}
+
+	void testTranslations() {
+		TestTranslations().run();
 	}
 
 	// For each tests
