@@ -11,4 +11,6 @@ jobs:
           modules: qtquick3d qtquick3dphysics qtshadertools
       - run: cmake -B build
       - run: cmake --build build --config Release -j
-      - run: ./build/tests/Release/Tests.exe
+      - run: ./build/tests/Release/Tests.exe -o log.txt
+      - run: cat log.txt
+        if: ${{ always() }}
