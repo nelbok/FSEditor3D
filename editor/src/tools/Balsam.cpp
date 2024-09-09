@@ -103,4 +103,14 @@ void Balsam::finalize() {
 		emit errorOccurred();
 	}
 }
+
+QProcess::ProcessError Balsam::error() const {
+	assert(_process);
+	return _process->error();
+}
+
+QProcess::ProcessState Balsam::state() const {
+	assert(_process);
+	return _process->state();
+}
 } // namespace fse
