@@ -19,8 +19,10 @@ public:
 
 	void init(FileManager* manager, CommandsManager* commands);
 
+	QUrl balsamPath() const;
+
 	Q_INVOKABLE QUrl qmlPath(fsd::Model* model);
-	Q_INVOKABLE void generate(fsd::Model* model, const QUrl& url);
+	Q_INVOKABLE void generate(fsd::Model* model, const QUrl& url, QStringList args = {});
 
 	Q_INVOKABLE QProcess::ProcessError error() const;
 	Q_INVOKABLE QProcess::ProcessState state() const;

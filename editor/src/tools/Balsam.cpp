@@ -64,6 +64,10 @@ void Balsam::init(FileManager* manager, CommandsManager* commands) {
 	QObject::connect(_process, &QProcess::finished, this, &Balsam::finalize);
 }
 
+QUrl Balsam::balsamPath() const {
+	return QUrl::fromLocalFile(fse::Config::balsam);
+}
+
 QUrl Balsam::qmlPath(fsd::Model* model) {
 	assert(model);
 	assert(model->qmlName() != "");
@@ -73,7 +77,7 @@ QUrl Balsam::qmlPath(fsd::Model* model) {
 	return QUrl::fromLocalFile(QString::fromStdString(tmp.string()));
 }
 
-void Balsam::generate(fsd::Model* model, const QUrl& url) {
+void Balsam::generate(fsd::Model* model, const QUrl& url, QStringList args) {
 	assert(model);
 
 	_current = model;
@@ -86,7 +90,6 @@ void Balsam::generate(fsd::Model* model, const QUrl& url) {
 		_current->setQmlName("");
 	}
 
-	QStringList args;
 	args << "--outputPath";
 	args << QString::fromStdString(Tools::modelPath(detail::path(_manager), model).string());
 	args << Tools::toPath(url);
