@@ -17,6 +17,7 @@ namespace fse {
 struct Manager::Impl {
 	About about;
 	Balsam* balsam{ nullptr };
+	Settings settings;
 	fsd::Project* project{ nullptr };
 
 	CommandsManager* commandsManager{ nullptr };
@@ -61,6 +62,13 @@ void Manager::init() {
 	_impl->stylesManager->init(_impl->errorsManager);
 	_impl->translationsManager->init(_impl->errorsManager);
 
+	// Settings
+	_impl->settings.init(this);
+	connect(qApp, &QCoreApplication::aboutToQuit, this, [this]() {
+		_impl->settings.save();
+	});
+	_impl->settings.load();
+
 	reset();
 }
 
@@ -83,6 +91,10 @@ const About& Manager::about() const {
 Balsam* Manager::balsam() const {
 	assert(_impl->balsam);
 	return _impl->balsam;
+}
+
+const Settings& Manager::settings() const {
+	return _impl->settings;
 }
 
 fsd::Project* Manager::project() const {

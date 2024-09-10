@@ -7,6 +7,7 @@
 
 #include <fse/tools/About.hpp>
 #include <fse/tools/Balsam.hpp>
+#include <fse/tools/Settings.hpp>
 
 namespace fse {
 class CommandsManager;
@@ -22,6 +23,7 @@ class Manager : public QObject {
 	Q_OBJECT
 	Q_PROPERTY(const About& about READ about CONSTANT)
 	Q_PROPERTY(Balsam* balsam READ balsam CONSTANT)
+	Q_PROPERTY(const Settings& settings READ settings CONSTANT)
 	Q_PROPERTY(fsd::Project* project READ project CONSTANT)
 
 public:
@@ -35,6 +37,7 @@ public:
 
 	const About& about() const;
 	Balsam* balsam() const;
+	const Settings& settings() const;
 	fsd::Project* project() const;
 
 	CommandsManager* commandsManager() const;

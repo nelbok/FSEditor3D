@@ -26,9 +26,9 @@ class PreviewManager : public QObject {
 	Q_PROPERTY(QVector3D cameraPosition READ cameraPosition WRITE setCameraPosition NOTIFY cameraPositionUpdated)
 	Q_PROPERTY(QVector3D cameraRotation READ cameraRotation WRITE setCameraRotation NOTIFY cameraRotationUpdated)
 
-	Q_PROPERTY(bool areOtherDatasVisible READ areOtherDatasVisible NOTIFY areOtherDatasVisibleUpdated)
-	Q_PROPERTY(bool areOriginsVisible READ areOriginsVisible NOTIFY areOriginsVisibleUpdated)
-	Q_PROPERTY(bool isWorldMapVisible READ isWorldMapVisible NOTIFY isWorldMapVisibleUpdated)
+	Q_PROPERTY(bool areOtherDatasVisible READ areOtherDatasVisible WRITE setAreOtherDatasVisible NOTIFY areOtherDatasVisibleUpdated)
+	Q_PROPERTY(bool areOriginsVisible READ areOriginsVisible WRITE setAreOriginsVisible NOTIFY areOriginsVisibleUpdated)
+	Q_PROPERTY(bool isWorldMapVisible READ isWorldMapVisible WRITE setIsWorldMapVisible NOTIFY isWorldMapVisibleUpdated)
 
 	Q_PROPERTY(QList<PreviewData> datas READ datas NOTIFY previewUpdated)
 
@@ -46,8 +46,13 @@ public:
 	void setCameraRotation(const QVector3D& cameraRotation);
 
 	bool areOtherDatasVisible() const;
+	void setAreOtherDatasVisible(bool visible);
+
 	bool areOriginsVisible() const;
+	void setAreOriginsVisible(bool visible);
+
 	bool isWorldMapVisible() const;
+	void setIsWorldMapVisible(bool visible);
 
 	Q_INVOKABLE void centerOnCurrent();
 	Q_INVOKABLE void switchOtherDatasVisible();

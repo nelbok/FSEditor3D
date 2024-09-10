@@ -7,6 +7,8 @@
 #include <fse/managers/SelectionManager.hpp>
 #include <fse/Manager.hpp>
 
+#include "tools/DefaultSettings.hpp"
+
 namespace fse {
 constexpr QVector3D lCameraPosition{ 0, 800, 1000 };
 constexpr QVector3D lCameraRotation{ -30, 0, 0 };
@@ -16,9 +18,9 @@ struct PreviewManager::Impl {
 	QList<QMetaObject::Connection> connections;
 	QVector3D cameraPosition{};
 	QVector3D cameraRotation{};
-	bool areOtherDatasVisible{ true };
-	bool areOriginsVisible{ false };
-	bool isWorldMapVisible{ false };
+	bool areOtherDatasVisible{ fse::DefaultSettings::previewAreOtherDatasVisibleValue };
+	bool areOriginsVisible{ fse::DefaultSettings::previewAreOriginsVisibleValue };
+	bool isWorldMapVisible{ fse::DefaultSettings::previewIsWorldMapVisibleValue };
 };
 
 PreviewManager::PreviewManager(QObject* parent)
@@ -72,8 +74,26 @@ bool PreviewManager::areOtherDatasVisible() const {
 	return _impl->areOtherDatasVisible;
 }
 
+void PreviewManager::setAreOtherDatasVisible(bool visible) {
+	if (_impl->areOtherDatasVisible != visible) {
+		switchOtherDatasVisible();
+	}
+}
+
 bool PreviewManager::areOriginsVisible() const {
 	return _impl->areOriginsVisible;
+}
+
+void PreviewManager::setAreOriginsVisible(bool visible) {
+	if (_impl->areOriginsVisible != visible) {
+		switchOriginsVisible();
+	}
+}
+
+void PreviewManager::setIsWorldMapVisible(bool visible) {
+	if (_impl->isWorldMapVisible != visible) {
+		switchWorldMapVisible();
+	}
 }
 
 bool PreviewManager::isWorldMapVisible() const {

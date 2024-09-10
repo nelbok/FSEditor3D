@@ -6,11 +6,13 @@
 
 #include <fse/managers/ErrorsManager.hpp>
 
+#include "tools/DefaultSettings.hpp"
+
 namespace fse {
 
 struct TranslationsManager::Impl {
 	QTranslator translator;
-	QString current{ "en" };
+	QString current{ DefaultSettings::uiTranslationValue };
 	ErrorsManager* manager{ nullptr };
 
 	void installTranslator() {

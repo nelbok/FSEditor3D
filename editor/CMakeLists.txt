@@ -39,19 +39,12 @@ set(PROJECT_SOURCES
 	include/fse/tools/FileThread.hpp
 	include/fse/tools/LoadThread.hpp
 	include/fse/tools/SaveThread.hpp
+	include/fse/tools/Settings.hpp
 	include/fse/tools/Style.hpp
 	include/fse/tools/Tools.hpp
 
 	include/fse/Application.hpp
 	include/fse/Manager.hpp
-
-	src/tools/About.cpp
-	src/tools/Balsam.cpp
-	src/tools/FileThread.cpp
-	src/tools/LoadThread.cpp
-	src/tools/SaveThread.cpp
-	src/tools/Style.cpp
-	src/tools/Tools.cpp
 
 	src/commands/BaseCommand.cpp
 	src/commands/Commands.cpp
@@ -81,6 +74,16 @@ set(PROJECT_SOURCES
 	src/models/PlaceModel.cpp
 	src/models/ProxyModel.cpp
 	src/models/SelectionWrapper.cpp
+
+	src/tools/About.cpp
+	src/tools/Balsam.cpp
+	src/tools/DefaultSettings.hpp
+	src/tools/FileThread.cpp
+	src/tools/LoadThread.cpp
+	src/tools/SaveThread.cpp
+	src/tools/Settings.cpp
+	src/tools/Style.cpp
+	src/tools/Tools.cpp
 
 	src/Application.cpp
 	src/Manager.cpp

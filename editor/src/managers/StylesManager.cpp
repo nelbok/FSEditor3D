@@ -7,11 +7,13 @@
 
 #include <fse/managers/ErrorsManager.hpp>
 
+#include "tools/DefaultSettings.hpp"
+
 namespace fse {
 
 struct StylesManager::Impl {
 	Style style;
-	QString current{ "basic" };
+	QString current{ DefaultSettings::uiStyleValue };
 	ErrorsManager* manager{ nullptr };
 
 	void loadStyle() {
