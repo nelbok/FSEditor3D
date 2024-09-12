@@ -8,7 +8,7 @@ jobs:
       - uses: jurplel/install-qt-action@v3
         with:
           version: '6.6.*'
-          modules: qtquick3d qtquick3dphysics qtshadertools
+          modules: qtquick3d qtquick3dphysics qtshadertools qtquicktimeline
       - run: cmake -B build
       - run: cmake --build build -j
       - run: ./build/tests/Tests -platform offscreen
@@ -19,7 +19,7 @@ jobs:
       - uses: jurplel/install-qt-action@v3
         with:
           version: '6.5.*'
-          modules: qtquick3d qtquick3dphysics qtshadertools
+          modules: qtquick3d qtquick3dphysics qtshadertools qtquicktimeline
       - run: cmake -B build
       - run: cmake --build build -j
       - run: ./build/tests/Tests -platform offscreen

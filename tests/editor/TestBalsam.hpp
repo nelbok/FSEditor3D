@@ -37,8 +37,6 @@ struct TestBalsam {
 		QCOMPARE(manager.fileManager()->result(), fsd::FileManager::Result::Success);
 		QCOMPARE(manager.fileManager()->path(), QUrl::fromLocalFile(savePath));
 
-		qWarning("Balsam doesn't work on github actions, yet. Skipping...");
-#if 0
 		fsd::Model* model = project->models().at(0);
 
 		balsam->generate(model, QUrl::fromLocalFile(dirPath + "/test.obj"), { "-platform", qApp->platformName() });
@@ -50,6 +48,5 @@ struct TestBalsam {
 
 		QCOMPARE(model->qmlName(), "Test.qml");
 		QVERIFY(QFileInfo::exists(balsam->qmlPath(model).toLocalFile()));
-#endif
 	}
 };

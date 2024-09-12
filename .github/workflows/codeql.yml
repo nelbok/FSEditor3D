@@ -61,7 +61,7 @@ jobs:
     - uses: jurplel/install-qt-action@v3
       with:
         version: '6.6.*'
-        modules: qtquick3d qtquick3dphysics qtshadertools
+        modules: qtquick3d qtquick3dphysics qtshadertools qtquicktimeline
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
