@@ -39,6 +39,8 @@ struct TestBalsam {
 
 		fsd::Model* model = project->models().at(0);
 
+		qWarning(balsam->balsamPath().toLocalFile().toStdString().c_str());
+
 		balsam->generate(model, QUrl::fromLocalFile(dirPath + "/test.obj"), { "-platform", qApp->platformName() });
 		while (balsam->state() != QProcess::NotRunning) {
 			QThread::msleep(100);
