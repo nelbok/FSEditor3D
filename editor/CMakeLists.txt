@@ -1,5 +1,5 @@
 qt_standard_project_setup(REQUIRES 6.5)
-
+set(CMAKE_DEBUG_POSTFIX _d)
 set(PROJECT_SOURCES
 	include/fse/commands/BaseCommand.hpp
 	include/fse/commands/Commands.hpp

@@ -8,18 +8,20 @@ jobs:
       - uses: jurplel/install-qt-action@v3
         with:
           version: '6.6.*'
-          modules: qtquick3d qtquick3dphysics qtshadertools qtquicktimeline
+          arch: 'clang_64'
+          modules: 'qtquick3d qtquick3dphysics qtshadertools qtquicktimeline'
       - run: cmake -B build
-      - run: cmake --build build -j
-      - run: ./build/tests/Tests -platform offscreen
-  qt6_5_LTS:
+      - run: cmake --build build --config Release
+      - run: ./build/tests/tests -platform offscreen
+  qt6_8_LTS:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - uses: jurplel/install-qt-action@v3
         with:
-          version: '6.5.*'
-          modules: qtquick3d qtquick3dphysics qtshadertools qtquicktimeline
+          version: '6.8.*'
+          arch: 'clang_64'
+          modules: 'qtquick3d qtquick3dphysics qtshadertools qtquicktimeline'
       - run: cmake -B build
-      - run: cmake --build build -j
-      - run: ./build/tests/Tests -platform offscreen
+      - run: cmake --build build --config Release
+      - run: ./build/tests/tests -platform offscreen

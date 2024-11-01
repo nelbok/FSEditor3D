@@ -8,9 +8,24 @@ jobs:
       - uses: jurplel/install-qt-action@v3
         with:
           version: '6.6.*'
-          modules: qtquick3d qtquick3dphysics qtshadertools qtquicktimeline
+          arch: 'win64_msvc2019_64'
+          modules: 'qtquick3d qtquick3dphysics qtshadertools qtquicktimeline'
       - run: cmake -B build
-      - run: cmake --build build --config Release -j
-      - run: ./build/tests/Release/Tests.exe -o log.txt
+      - run: cmake --build build --config Release
+      - run: ./build/tests/Release/tests.exe -o log.txt
+      - run: cat log.txt
+        if: ${{ always() }}
+  qt6_8_LTS:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jurplel/install-qt-action@v3
+        with:
+          version: '6.8.*'
+          arch: 'win64_msvc2022_64'
+          modules: 'qtquick3d qtquick3dphysics qtshadertools qtquicktimeline'
+      - run: cmake -B build
+      - run: cmake --build build --config Release
+      - run: ./build/tests/Release/tests.exe -o log.txt
       - run: cat log.txt
         if: ${{ always() }}
