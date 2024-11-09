@@ -52,10 +52,10 @@ class Project final : public Geometry {
 	Q_PROPERTY(QList<Place*> places READ places WRITE setPlaces NOTIFY placesUpdated)
 
 public:
-	Project(QObject* parent = nullptr);
-	virtual ~Project();
+	explicit Project(QObject* parent = nullptr);
+	~Project() override;
 
-	virtual void reset() override;
+	void reset() override;
 
 	Place* defaultPlace() const;
 	void setDefaultPlace(Place* defaultPlace);
@@ -94,10 +94,10 @@ public:
 	Place* duplicatePlace(Place* place);
 	void cleanPlaces();
 
-	virtual Type type() const override;
+	Type type() const override;
 
-	virtual void load(const QJsonObject& json) override;
-	virtual void save(QJsonObject& json) const override;
+	void load(const QJsonObject& json) override;
+	void save(QJsonObject& json) const override;
 
 private:
 	using Entity::copy;

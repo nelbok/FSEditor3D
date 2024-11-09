@@ -11,10 +11,10 @@ class ObjectCommand : public QObject {
 	Q_OBJECT
 
 public:
-	ObjectCommand(Commands* commands);
-	virtual ~ObjectCommand();
+	explicit ObjectCommand(Commands* commands);
+	~ObjectCommand() override;
 
-protected:
+private:
 	Commands* _c{ nullptr };
 };
 } // namespace fse

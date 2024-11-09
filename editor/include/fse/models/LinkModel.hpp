@@ -8,12 +8,12 @@ class LinkModel : public EntityModel {
 
 public:
 	LinkModel(fsd::Project* project, QObject* parent = nullptr);
-	virtual ~LinkModel();
+	~LinkModel() override;
 
-	virtual void initDatas() override;
+	void initDatas() override;
 
 protected:
-	virtual void updateDatas() override;
+	void updateDatas() override;
 };
 
 } // namespace fse

@@ -2,7 +2,7 @@
 
 int main(int argc, char* argv[]) {
 	QGuiApplication app(argc, argv);
-	fse::Application::initApp(app);
+	fse::Application::initApp();
 
 	fse::Manager manager;
 	manager.init();
@@ -16,5 +16,5 @@ int main(int argc, char* argv[]) {
 	fse::Application::initRegister(manager);
 	fse::Application::initEngine(app, engine, manager);
 
-	return app.exec();
+	return QGuiApplication::exec();
 }

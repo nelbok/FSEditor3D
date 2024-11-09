@@ -11,7 +11,7 @@
 
 struct TestBalsam {
 	void run() {
-		const QString dirPath = qApp->applicationDirPath();
+		const QString dirPath = QCoreApplication::applicationDirPath();
 		const QString saveDir = dirPath + "/testsave";
 		const QString savePath = saveDir + "/test.json";
 		const QString mtlPath = dirPath + "/test.mtl";
@@ -32,7 +32,7 @@ struct TestBalsam {
 		manager.fileManager()->save(QUrl::fromLocalFile(savePath));
 		while (manager.fileManager()->status() != fse::FileManager::Status::Stopped) {
 			QThread::msleep(100);
-			qApp->processEvents();
+			QCoreApplication::processEvents();
 		}
 		QCOMPARE(manager.fileManager()->result(), fsd::FileManager::Result::Success);
 		QCOMPARE(manager.fileManager()->path(), QUrl::fromLocalFile(savePath));
@@ -41,10 +41,10 @@ struct TestBalsam {
 
 		qWarning(balsam->balsamPath().toLocalFile().toStdString().c_str());
 
-		balsam->generate(model, QUrl::fromLocalFile(dirPath + "/test.obj"), { "-platform", qApp->platformName() });
+		balsam->generate(model, QUrl::fromLocalFile(dirPath + "/test.obj"), { "-platform", QGuiApplication::platformName() });
 		while (balsam->state() != QProcess::NotRunning) {
 			QThread::msleep(100);
-			qApp->processEvents();
+			QCoreApplication::processEvents();
 		}
 		QCOMPARE(balsam->error(), QProcess::UnknownError);
 

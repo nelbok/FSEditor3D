@@ -14,14 +14,14 @@ class Balsam : public QObject {
 	Q_OBJECT
 
 public:
-	Balsam(QObject* parent = nullptr);
-	virtual ~Balsam();
+	explicit Balsam(QObject* parent = nullptr);
+	~Balsam() override;
 
 	void init(FileManager* manager, CommandsManager* commands);
 
 	QUrl balsamPath() const;
 
-	Q_INVOKABLE QUrl qmlPath(fsd::Model* model);
+	Q_INVOKABLE QUrl qmlPath(const fsd::Model* model) const;
 	Q_INVOKABLE void generate(fsd::Model* model, const QUrl& url, QStringList args = {});
 
 	Q_INVOKABLE QProcess::ProcessError error() const;

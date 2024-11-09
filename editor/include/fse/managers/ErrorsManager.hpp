@@ -17,19 +17,18 @@ public:
 	};
 	Q_ENUM(Type)
 
-	ErrorsManager(QObject* parent = nullptr);
-	virtual ~ErrorsManager();
+	explicit ErrorsManager(QObject* parent = nullptr);
+	~ErrorsManager() override;
 
 	QString message() const;
 
 	Type type() const;
 	void setType(Type type);
 
-	private:
+private:
 	Type _type{ Type::NoError };
 
 signals:
 	void typeUpdated();
-
 };
 } // namespace fse

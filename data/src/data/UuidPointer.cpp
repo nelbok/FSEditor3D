@@ -18,7 +18,7 @@ BasePointer::BasePointer(Project* project, void (Project::*signal)(), Entity* pa
 	QObject::connect(project, signal, this, &BasePointer::update);
 }
 
-BasePointer::~BasePointer() {}
+BasePointer::~BasePointer() = default;
 
 bool BasePointer::setUuid(const QUuid& uuid) {
 	assert(_project);

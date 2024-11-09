@@ -11,7 +11,7 @@ ModelCommand::ModelCommand(Commands* commands)
 	assert(commands);
 }
 
-ModelCommand::~ModelCommand() {}
+ModelCommand::~ModelCommand() = default;
 
 void ModelCommand::setSourcePath(fsd::Model* m, const QUrl& newValue) {
 	addValueCommand(_c, m, &fsd::Model::setSourcePath, &fsd::Model::sourcePath, newValue);

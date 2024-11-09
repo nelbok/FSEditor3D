@@ -13,7 +13,7 @@ public:
 	Q_INVOKABLE void save() const;
 	Q_INVOKABLE void load();
 
-	private:
+private:
 	fse::Manager* _manager{ nullptr };
 };
 } // namespace fse

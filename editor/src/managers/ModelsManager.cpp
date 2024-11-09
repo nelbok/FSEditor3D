@@ -18,8 +18,7 @@ ModelsManager::ModelsManager(QObject* parent)
 	: QObject(parent)
 	, _impl{ std::make_unique<Impl>() } {}
 
-ModelsManager::~ModelsManager() {
-}
+ModelsManager::~ModelsManager() = default;
 
 void ModelsManager::init(fsd::Project* project) {
 	assert(project);

@@ -11,16 +11,16 @@ class EntityModel : public QAbstractListModel {
 
 public:
 	EntityModel(fsd::Project* project, QObject* parent = nullptr);
-	virtual ~EntityModel();
+	~EntityModel() override;
 
 	bool hasNoneOption() const;
 	void setHasNoneOption(bool hasNoneOption);
 
 	virtual void initDatas() = 0;
 
-	virtual int rowCount(const QModelIndex& parent = QModelIndex()) const override;
-	virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
-	virtual QHash<int, QByteArray> roleNames() const override;
+	int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+	QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
+	QHash<int, QByteArray> roleNames() const override;
 
 protected slots:
 	virtual void updateDatas() = 0;

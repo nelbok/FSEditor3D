@@ -22,8 +22,8 @@ public:
 	};
 	Q_ENUM(Status)
 
-	FileManager(QObject* parent = nullptr);
-	virtual ~FileManager();
+	explicit FileManager(QObject* parent = nullptr);
+	~FileManager() override;
 
 	void init(Manager* manager);
 	void reset();

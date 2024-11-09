@@ -33,8 +33,8 @@ class CommandsManager : public QObject {
 	Q_PROPERTY(ShapeCommand* shapeCommand READ shapeCommand CONSTANT)
 
 public:
-	CommandsManager(QObject* parent = nullptr);
-	virtual ~CommandsManager();
+	explicit CommandsManager(QObject* parent = nullptr);
+	~CommandsManager() override;
 
 	void init(fsd::Project* project);
 	void reset();

@@ -11,12 +11,12 @@ class PlacementCommand : public QObject {
 	Q_OBJECT
 
 public:
-	PlacementCommand(Commands* commands);
-	virtual ~PlacementCommand();
+	explicit PlacementCommand(Commands* commands);
+	~PlacementCommand() override;
 
 	Q_INVOKABLE void setPlace(fsd::Placement* placement, fsd::Place* place);
 
-protected:
+private:
 	Commands* _c{ nullptr };
 };
 } // namespace fse

@@ -28,15 +28,14 @@ struct Project::Impl {
 	QList<Place*> places{};
 
 	bool isInterruptionRequested(const Project* project) const {
-		auto* thread = project->thread();
-		if (thread != QCoreApplication::instance()->thread()) {
+		if (const auto* thread = project->thread(); thread != QCoreApplication::instance()->thread()) {
 			return thread->isInterruptionRequested();
 		}
 		return false;
 	}
 
 	template<class TClass>
-	void loadList(Project* project, QList<TClass*>& list, const QString& key, const QJsonObject& json, void (Project::*signal)()) {
+	void loadList(Project* project, QList<TClass*>& list, const QString& key, const QJsonObject& json, void (Project::*signal)()) const {
 		list.clear();
 		const auto& jsonArray = Json::toArray(key, json);
 		for (const auto& jsonEntity : jsonArray) {
@@ -77,7 +76,7 @@ Project::Project(QObject* parent)
 	_impl->defaultPlace = makePlacePointer(this, this);
 }
 
-Project::~Project() {}
+Project::~Project() = default;
 
 void Project::reset() {
 	Geometry::reset();

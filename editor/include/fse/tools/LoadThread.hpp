@@ -8,9 +8,9 @@ class LoadThread : public FileThread {
 
 public:
 	LoadThread(FileManager* manager, fsd::Project* project);
-	virtual ~LoadThread();
+	~LoadThread() override;
 
 protected:
-	virtual void run() override;
+	void run() override;
 };
 } // namespace fse

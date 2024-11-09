@@ -57,8 +57,8 @@ public:
 	/**
 	 *	@brief Default constructor.
 	 */
-	FileManager(QObject* parent = nullptr);
-	virtual ~FileManager() = default;
+	explicit FileManager(QObject* parent = nullptr);
+	~FileManager() override = default;
 
 	/**
 	 * @brief Init the manager.
@@ -78,11 +78,11 @@ public:
 	/**
 	 * @brief Returns true if the thread is finished; otherwise returns false. See **QThread::isFinished()**.
 	 */
-	Q_INVOKABLE bool isFinished();
+	Q_INVOKABLE bool isFinished() const;
 	/**
 	 * @brief Returns true if the thread is running; otherwise returns false. See **QThread::isRunning()**.
 	 */
-	Q_INVOKABLE bool isRunning();
+	Q_INVOKABLE bool isRunning() const;
 	/**
 	 * @brief Returns the result of the transaction after finished() signal has been emitted.
 	 */

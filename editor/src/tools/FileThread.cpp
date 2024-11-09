@@ -15,7 +15,7 @@ FileThread::FileThread(FileManager* manager, fsd::Project* project)
 	assert(_manager);
 }
 
-FileThread::~FileThread() {}
+FileThread::~FileThread() = default;
 
 void FileThread::init() {
 	assert(!_fileManager);

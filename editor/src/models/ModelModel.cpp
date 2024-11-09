@@ -8,7 +8,7 @@ namespace fse {
 ModelModel::ModelModel(fsd::Project* project, QObject* parent)
 	: EntityModel(project, parent) {}
 
-ModelModel::~ModelModel() {}
+ModelModel::~ModelModel() = default;
 
 void ModelModel::initDatas() {
 	assert(_project);
@@ -17,7 +17,7 @@ void ModelModel::initDatas() {
 
 QHash<int, QByteArray> ModelModel::roleNames() const {
 	QHash<int, QByteArray> roles = EntityModel::roleNames();
-	qsizetype i = roles.size();
+	auto i = static_cast<int>(roles.size());
 	roles[i + 1] = "modelType";
 	return roles;
 }
@@ -29,13 +29,13 @@ void ModelModel::updateDatas() {
 
 void ModelModel::disconnectData(fsd::Entity* entity) {
 	EntityModel::disconnectData(entity);
-	auto* model = qobject_cast<fsd::Model*>(entity);
+	const auto* model = qobject_cast<fsd::Model*>(entity);
 	QObject::disconnect(model, &fsd::Model::modelTypeUpdated, this, &ModelModel::sortDatas);
 }
 
 void ModelModel::connectData(fsd::Entity* entity) {
 	EntityModel::connectData(entity);
-	auto* model = qobject_cast<fsd::Model*>(entity);
+	const auto* model = qobject_cast<fsd::Model*>(entity);
 	QObject::connect(model, &fsd::Model::modelTypeUpdated, this, &ModelModel::sortDatas);
 }
 } // namespace fse

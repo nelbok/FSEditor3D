@@ -20,14 +20,14 @@ public:
 		assert(_remove);
 	}
 
-	virtual ~CreateCommand() = default;
+	~CreateCommand() override = default;
 
-	virtual void undo() override {
+	void undo() override {
 		assert(_instance->isAlive());
 		_instance->setIsAlive(false);
 	}
 
-	virtual void redo() override {
+	void redo() override {
 		if (_instance) {
 			assert(!_instance->isAlive());
 			_instance->setIsAlive(true);
@@ -36,7 +36,7 @@ public:
 		}
 	}
 
-	virtual void clean() override {
+	void clean() override {
 		(_project->*_remove)(_instance);
 		_instance = nullptr;
 	}

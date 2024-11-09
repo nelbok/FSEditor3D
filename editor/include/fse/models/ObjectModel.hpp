@@ -8,12 +8,12 @@ class ObjectModel : public EntityModel {
 
 public:
 	ObjectModel(fsd::Project* project, QObject* parent = nullptr);
-	virtual ~ObjectModel();
+	~ObjectModel() override;
 
-	virtual void initDatas() override;
+	void initDatas() override;
 
 protected:
-	virtual void updateDatas() override;
+	void updateDatas() override;
 };
 
 } // namespace fse

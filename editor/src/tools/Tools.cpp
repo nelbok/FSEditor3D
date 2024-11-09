@@ -24,7 +24,7 @@ std::filesystem::path projectPath(const QUrl& path) {
 	return detail::projectPath(path);
 }
 
-std::filesystem::path modelPath(const QUrl& path, fsd::Model* model) {
+std::filesystem::path modelPath(const QUrl& path, const fsd::Model* model) {
 	assert(model);
 	return detail::projectPath(path) / model->uuid().toString(QUuid::WithoutBraces).split("-").at(4).toStdString();
 }

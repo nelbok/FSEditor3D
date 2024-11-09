@@ -6,10 +6,8 @@ namespace fse {
 
 class ListCommand : public BaseCommand {
 public:
-	ListCommand(QObject* parent = nullptr)
-		: BaseCommand(parent) {}
-
-	virtual ~ListCommand() = default;
+	using BaseCommand::BaseCommand;
+	~ListCommand() override = default;
 
 	void add(BaseCommand* command) {
 		_commands.push_back(command);
@@ -19,25 +17,25 @@ public:
 		return _commands.isEmpty();
 	}
 
-	virtual void undo() override {
+	void undo() override {
 		std::for_each(_commands.rbegin(), _commands.rend(), [](BaseCommand* command) {
 			command->undo();
 		});
 	}
 
-	virtual void redo() override {
+	void redo() override {
 		std::for_each(_commands.begin(), _commands.end(), [](BaseCommand* command) {
 			command->redo();
 		});
 	}
 
-	virtual void finalize() override {
+	void finalize() override {
 		std::for_each(_commands.begin(), _commands.end(), [](BaseCommand* command) {
 			command->finalize();
 		});
 	}
 
-	virtual void clean() override {
+	void clean() override {
 		std::for_each(_commands.rbegin(), _commands.rend(), [](BaseCommand* command) {
 			command->clean();
 		});
@@ -139,7 +137,7 @@ void Commands::internalAdd(BaseCommand* command) {
 	emit updated();
 }
 
-void Commands::clear(QList<BaseCommand*>& commands) {
+void Commands::clear(QList<BaseCommand*>& commands) const {
 	for (auto* command : commands) {
 		command->deleteLater();
 	}

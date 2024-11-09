@@ -11,12 +11,12 @@ class LinkCommand : public QObject {
 	Q_OBJECT
 
 public:
-	LinkCommand(Commands* commands);
-	virtual ~LinkCommand();
+	explicit LinkCommand(Commands* commands);
+	~LinkCommand() override;
 
 	Q_INVOKABLE void setLink(fsd::Link* link, fsd::Link* otherlink);
 
-protected:
+private:
 	Commands* _c{ nullptr };
 };
 } // namespace fse

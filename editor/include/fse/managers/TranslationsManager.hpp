@@ -9,8 +9,8 @@ class TranslationsManager : public QObject {
 	Q_PROPERTY(const QString& current READ current WRITE setCurrent NOTIFY currentUpdated)
 
 public:
-	TranslationsManager(QObject* parent = nullptr);
-	virtual ~TranslationsManager();
+	explicit TranslationsManager(QObject* parent = nullptr);
+	~TranslationsManager() override;
 
 	void init(ErrorsManager* manager);
 

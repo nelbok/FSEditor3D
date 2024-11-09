@@ -41,7 +41,7 @@ StylesManager::StylesManager(QObject* parent)
 	: QObject(parent)
 	, _impl{ std::make_unique<Impl>() } {}
 
-StylesManager::~StylesManager() {}
+StylesManager::~StylesManager() = default;
 
 void StylesManager::init(ErrorsManager* manager) {
 	assert(!_impl->manager);

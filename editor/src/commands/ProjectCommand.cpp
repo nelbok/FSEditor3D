@@ -26,7 +26,7 @@ ProjectCommand::ProjectCommand(fsd::Project* project, CommandsManager* mng, Comm
 	assert(_c);
 }
 
-ProjectCommand::~ProjectCommand() {}
+ProjectCommand::~ProjectCommand() = default;
 
 void ProjectCommand::setDefaultPlace(fsd::Place* newValue) {
 	addValueCommand(_c, _p, &fsd::Project::setDefaultPlace, &fsd::Project::defaultPlace, newValue);

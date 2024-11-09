@@ -12,8 +12,8 @@ class ProjectCommand : public QObject {
 	Q_OBJECT
 
 public:
-	ProjectCommand(fsd::Project* project, CommandsManager* mng, Commands* commands);
-	virtual ~ProjectCommand();
+	explicit ProjectCommand(fsd::Project* project, CommandsManager* mng, Commands* commands);
+	~ProjectCommand() override;
 
 	Q_INVOKABLE void setDefaultPlace(fsd::Place* defaultPlace);
 
@@ -33,7 +33,7 @@ public:
 	Q_INVOKABLE void removePlace(fsd::Place* place);
 	Q_INVOKABLE void duplicatePlace(fsd::Place* place);
 
-protected:
+private:
 	fsd::Project* _p{ nullptr };
 	CommandsManager* _cm{ nullptr };
 	Commands* _c{ nullptr };

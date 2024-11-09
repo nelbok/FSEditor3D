@@ -12,8 +12,8 @@ class StylesManager : public QObject {
 	Q_PROPERTY(const Style& style READ style NOTIFY currentUpdated)
 
 public:
-	StylesManager(QObject* parent = nullptr);
-	virtual ~StylesManager();
+	explicit StylesManager(QObject* parent = nullptr);
+	~StylesManager() override;
 
 	void init(ErrorsManager* manager);
 	void createJson() const;

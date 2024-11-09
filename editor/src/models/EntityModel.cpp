@@ -10,7 +10,7 @@ EntityModel::EntityModel(fsd::Project* project, QObject* parent)
 	assert(_project);
 }
 
-EntityModel::~EntityModel() {}
+EntityModel::~EntityModel() = default;
 
 bool EntityModel::hasNoneOption() const {
 	return _hasNoneOption;
@@ -25,7 +25,7 @@ void EntityModel::setHasNoneOption(bool hasNoneOption) {
 }
 
 int EntityModel::rowCount(const QModelIndex&) const {
-	return _datas.size();
+	return static_cast<int>(_datas.size());
 }
 
 constexpr auto lEntity = 0;
@@ -42,8 +42,7 @@ QVariant EntityModel::data(const QModelIndex& index, int role) const {
 		return QVariant::fromValue(entity);
 	}
 
-	const auto& roles = roleNames();
-	if (roles.contains(role)) {
+	if (const auto& roles = roleNames(); roles.contains(role)) {
 		if (entity)
 			return entity->property(roles.value(role));
 		else if (lName) {
@@ -65,7 +64,7 @@ QHash<int, QByteArray> EntityModel::roleNames() const {
 
 void EntityModel::sortDatas() {
 	beginResetModel();
-	std::sort(_datas.begin(), _datas.end(), [](fsd::Entity* p1, fsd::Entity* p2) {
+	std::sort(_datas.begin(), _datas.end(), [](const fsd::Entity* p1, const fsd::Entity* p2) {
 		// hasNoneOption
 		if (!p1)
 			return true;

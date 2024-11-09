@@ -27,13 +27,13 @@ class Manager : public QObject {
 	Q_PROPERTY(fsd::Project* project READ project CONSTANT)
 
 public:
-	Manager(QObject* parent = nullptr);
-	virtual ~Manager();
+	explicit Manager(QObject* parent = nullptr);
+	~Manager() override;
 
 	void init();
 
 	Q_INVOKABLE void reset();
-	Q_INVOKABLE void setClipboardText(const QString& text);
+	Q_INVOKABLE void setClipboardText(const QString& text) const;
 
 	const About& about() const;
 	Balsam* balsam() const;

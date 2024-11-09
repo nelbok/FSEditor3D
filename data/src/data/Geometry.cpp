@@ -20,7 +20,7 @@ Geometry::Geometry(fsd::Project* project, QObject* parent)
 	QObject::connect(this, &Geometry::localScaleUpdated, this, &Geometry::globalScaleUpdated);
 }
 
-Geometry::~Geometry() {}
+Geometry::~Geometry() = default;
 
 void Geometry::reset() {
 	Entity::reset();

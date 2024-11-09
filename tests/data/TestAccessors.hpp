@@ -24,7 +24,7 @@ struct TestAccessors {
 private:
 	fsd::Project _project;
 
-	void testEntity(fsd::Entity* entity, const QMetaObject* metaObject) {
+	void testEntity(fsd::Entity* entity, const QMetaObject* metaObject) const {
 		const auto name = QString("Test");
 		entity->setName(name);
 		QCOMPARE(entity->name(), name);
@@ -37,7 +37,7 @@ private:
 		QCOMPARE(metaObject->propertyOffset(), 1);
 	}
 
-	void testGeometry(fsd::Geometry* geometry, const QMetaObject* metaObject) {
+	void testGeometry(fsd::Geometry* geometry, const QMetaObject* metaObject) const {
 		testEntity(geometry, metaObject->superClass());
 
 		QCOMPARE(geometry->localPosition(), QVector3D(10, 10, 10));
@@ -48,7 +48,7 @@ private:
 		QCOMPARE(metaObject->propertyOffset(), 6);
 	}
 
-	void testLink(fsd::Link* link, const QMetaObject* metaObject) {
+	void testLink(fsd::Link* link, const QMetaObject* metaObject) const {
 		testPlacement(link, metaObject->superClass());
 
 		auto* linkA = _project.links().at(0);
@@ -59,7 +59,7 @@ private:
 		QCOMPARE(metaObject->propertyOffset(), 14);
 	}
 
-	void testModel(fsd::Model* model, const QMetaObject* metaObject) {
+	void testModel(fsd::Model* model, const QMetaObject* metaObject) const {
 		testGeometry(model, metaObject->superClass());
 
 		const auto path = QUrl(":/test/img");
@@ -83,21 +83,21 @@ private:
 		QCOMPARE(metaObject->propertyOffset(), 12);
 	}
 
-	void testObject(fsd::Object* object, const QMetaObject* metaObject) {
+	void testObject(fsd::Object* object, const QMetaObject* metaObject) const {
 		testPlacement(object, metaObject->superClass());
 
 		QCOMPARE(metaObject->propertyCount(), 14);
 		QCOMPARE(metaObject->propertyOffset(), 14);
 	}
 
-	void testPlace(fsd::Place* place, const QMetaObject* metaObject) {
+	void testPlace(fsd::Place* place, const QMetaObject* metaObject) const {
 		testShape(place, metaObject->superClass());
 
 		QCOMPARE(metaObject->propertyCount(), 13);
 		QCOMPARE(metaObject->propertyOffset(), 13);
 	}
 
-	void testPlacement(fsd::Placement* placement, const QMetaObject* metaObject) {
+	void testPlacement(fsd::Placement* placement, const QMetaObject* metaObject) const {
 		testShape(placement, metaObject->superClass());
 
 		auto* place = _project.places().at(0);
@@ -108,7 +108,7 @@ private:
 		QCOMPARE(metaObject->propertyOffset(), 13);
 	}
 
-	void testProject(fsd::Project* project, const QMetaObject* metaObject) {
+	void testProject(fsd::Project* project, const QMetaObject* metaObject) const {
 		testGeometry(project, metaObject->superClass());
 
 		auto* place = _project.places().at(0);
@@ -129,7 +129,7 @@ private:
 		QCOMPARE(metaObject->propertyOffset(), 12);
 	}
 
-	void testShape(fsd::Shape* shape, const QMetaObject* metaObject) {
+	void testShape(fsd::Shape* shape, const QMetaObject* metaObject) const {
 		testGeometry(shape, metaObject->superClass());
 
 		// Use QVERIFY_THROWS_EXCEPTION

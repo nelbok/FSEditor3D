@@ -8,14 +8,14 @@ class ProxyModel : public QSortFilterProxyModel {
 	Q_PROPERTY(QVariantMap filters READ filters WRITE setFilters NOTIFY filtersUpdated)
 
 public:
-	ProxyModel(QObject* parent = nullptr);
-	virtual ~ProxyModel();
+	explicit ProxyModel(QObject* parent = nullptr);
+	~ProxyModel() override;
 
 	const QVariantMap& filters() const;
 	void setFilters(const QVariantMap& filters);
 
 protected:
-	virtual bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
+	bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
 
 private:
 	int getRole(const QByteArray& name) const;

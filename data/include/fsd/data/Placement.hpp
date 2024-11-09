@@ -23,18 +23,20 @@ class Placement : public Shape {
 	Q_PROPERTY(Place* place READ place WRITE setPlace NOTIFY placeUpdated)
 
 public:
-	virtual void reset() override;
+	void reset() override;
 	void copy(const Placement& placement);
 
 	Place* place() const;
 	void setPlace(Place* place);
 
-	virtual void load(const QJsonObject& json) override;
-	virtual void save(QJsonObject& json) const override;
+	void load(const QJsonObject& json) override;
+	void save(QJsonObject& json) const override;
 
 protected:
 	Placement(Project* project, QObject* parent = nullptr);
-	virtual ~Placement();
+	~Placement() override;
+
+	using Shape::copy;
 
 private:
 	struct Impl;

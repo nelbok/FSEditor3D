@@ -29,16 +29,16 @@ void initResources() {
 
 namespace fse::Application {
 
-void initApp(QGuiApplication& app) {
+void initApp() {
 	::initResources();
 
-	app.setOrganizationName(fse::Config::organization);
-	app.setApplicationName(fse::Config::name);
-	app.setApplicationVersion(fse::Config::version);
-	app.setWindowIcon(QIcon(":/logo/logo.png"));
+	QCoreApplication::setOrganizationName(fse::Config::organization);
+	QCoreApplication::setApplicationName(fse::Config::name);
+	QCoreApplication::setApplicationVersion(fse::Config::version);
+	QGuiApplication::setWindowIcon(QIcon(":/logo/logo.png"));
 }
 
-bool initParser(QGuiApplication& app, Manager& manager) {
+bool initParser(const QGuiApplication& app, const Manager& manager) {
 	QCommandLineParser parser;
 	parser.setApplicationDescription(fse::Config::description);
 	parser.addHelpOption();
@@ -88,7 +88,7 @@ void initRegister(Manager& manager) {
 	qmlRegisterType<fse::SelectionWrapper>("editor", 1, 0, "MySelectionWrapper");
 }
 
-void initEngine(QGuiApplication& app, QQmlApplicationEngine& engine, Manager& manager) {
+void initEngine(const QGuiApplication& app, QQmlApplicationEngine& engine, const Manager& manager) {
 	// Translations
 	QObject::connect(manager.translationsManager(), &fse::TranslationsManager::currentUpdated, &engine, &QQmlApplicationEngine::retranslate);
 

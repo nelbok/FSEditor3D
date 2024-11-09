@@ -19,7 +19,7 @@ Placement::Placement(Project* project, QObject* parent)
 	_impl->place = makePlacePointer(project, this);
 }
 
-Placement::~Placement() {}
+Placement::~Placement() = default;
 
 void Placement::reset() {
 	Shape::reset();

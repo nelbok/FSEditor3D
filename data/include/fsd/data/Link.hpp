@@ -24,21 +24,23 @@ class Link final : public Placement {
 	Q_PROPERTY(Link* link READ link WRITE setLink NOTIFY linkUpdated)
 
 public:
-	Link(Project* project);
-	virtual ~Link();
+	explicit Link(Project* project);
+	~Link() override;
 
-	virtual void reset() override;
+	void reset() override;
 	void copy(const Link& link);
 
 	Link* link() const;
 	void setLink(Link* link);
 
-	virtual Type type() const override;
+	Type type() const override;
 
-	virtual void load(const QJsonObject& json) override;
-	virtual void save(QJsonObject& json) const override;
+	void load(const QJsonObject& json) override;
+	void save(QJsonObject& json) const override;
 
 private:
+	using Placement::copy;
+
 	struct Impl;
 	std::unique_ptr<Impl> _impl;
 

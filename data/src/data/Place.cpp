@@ -9,7 +9,7 @@ Place::Place(Project* project)
 	: Shape(project, project)
 	, _impl{ std::make_unique<Impl>() } {}
 
-Place::~Place() {}
+Place::~Place() = default;
 
 void Place::reset() {
 	Shape::reset();

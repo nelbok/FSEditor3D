@@ -66,7 +66,7 @@ FileManager::FileManager(QObject* parent)
 	: QObject(parent)
 	, _impl{ std::make_unique<Impl>() } {}
 
-FileManager::~FileManager() {}
+FileManager::~FileManager() = default;
 
 void FileManager::init(Manager* manager) {
 	assert(!_impl->manager);

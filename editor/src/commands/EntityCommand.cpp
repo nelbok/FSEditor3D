@@ -11,7 +11,7 @@ EntityCommand::EntityCommand(Commands* commands)
 	assert(commands);
 }
 
-EntityCommand::~EntityCommand() {}
+EntityCommand::~EntityCommand() = default;
 
 void EntityCommand::setName(fsd::Entity* e, const QString& newValue) {
 	addValueCommand(_c, e, &fsd::Entity::setName, &fsd::Entity::name, newValue);

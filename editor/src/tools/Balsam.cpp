@@ -12,7 +12,7 @@ namespace fs = std::filesystem;
 
 namespace fse {
 namespace detail {
-const QUrl& path(fse::FileManager* manager) {
+const QUrl& path(const fse::FileManager* manager) {
 	if (manager->path().isValid())
 		return manager->path();
 	if (manager->oldPath().isValid())
@@ -21,7 +21,7 @@ const QUrl& path(fse::FileManager* manager) {
 	return manager->tmpPath();
 }
 
-fs::path searchQmlPath(fse::FileManager* manager, fsd::Model* model) {
+fs::path searchQmlPath(const fse::FileManager* manager, const fsd::Model* model) {
 	const auto& modelPath = Tools::modelPath(detail::path(manager), model);
 	if (!fs::exists(modelPath))
 		return {};
@@ -37,7 +37,7 @@ fs::path searchQmlPath(fse::FileManager* manager, fsd::Model* model) {
 	return {};
 }
 
-fs::path searchQmlFile(fse::FileManager* manager, fsd::Model* model) {
+fs::path searchQmlFile(const fse::FileManager* manager, const fsd::Model* model) {
 	const auto& path = detail::searchQmlPath(manager, model);
 	if (path.empty()) {
 		return {};
@@ -49,7 +49,7 @@ fs::path searchQmlFile(fse::FileManager* manager, fsd::Model* model) {
 Balsam::Balsam(QObject* parent)
 	: QObject(parent) {}
 
-Balsam::~Balsam() {}
+Balsam::~Balsam() = default;
 
 void Balsam::init(FileManager* manager, CommandsManager* commands) {
 	assert(!_manager);
@@ -68,7 +68,7 @@ QUrl Balsam::balsamPath() const {
 	return QUrl::fromLocalFile(fse::Config::balsam);
 }
 
-QUrl Balsam::qmlPath(fsd::Model* model) {
+QUrl Balsam::qmlPath(const fsd::Model* model) const {
 	assert(model);
 	assert(model->qmlName() != "");
 
@@ -84,8 +84,7 @@ void Balsam::generate(fsd::Model* model, const QUrl& url, QStringList args) {
 	_sourcePath = url;
 
 	// Verify that there are no other qml file
-	const auto& qmlFile = detail::searchQmlPath(_manager, _current);
-	if (!qmlFile.empty() && fs::exists(qmlFile)) {
+	if (const auto& qmlFile = detail::searchQmlPath(_manager, _current); !qmlFile.empty() && fs::exists(qmlFile)) {
 		fs::remove(qmlFile);
 		_current->setQmlName("");
 	}

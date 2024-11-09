@@ -13,8 +13,8 @@ class SelectionWrapper : public QObject {
 	Q_PROPERTY(QAbstractItemModel* model READ model WRITE setModel NOTIFY modelUpdated)
 
 public:
-	SelectionWrapper(QObject* parent = nullptr);
-	virtual ~SelectionWrapper();
+	explicit SelectionWrapper(QObject* parent = nullptr);
+	~SelectionWrapper() override;
 
 	int currentIndex() const;
 	void setCurrentIndex(int currentIndex);

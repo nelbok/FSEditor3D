@@ -80,8 +80,8 @@ void Manager::reset() {
 	_impl->previewManager->reset();
 }
 
-void Manager::setClipboardText(const QString& text) {
-	qApp->clipboard()->setText(text);
+void Manager::setClipboardText(const QString& text) const {
+	QGuiApplication::clipboard()->setText(text);
 }
 
 const About& Manager::about() const {

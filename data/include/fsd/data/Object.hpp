@@ -17,18 +17,20 @@ class Object final : public Placement {
 	Q_OBJECT
 
 public:
-	Object(Project* project);
-	virtual ~Object();
+	explicit Object(Project* project);
+	~Object() override;
 
-	virtual void reset() override;
+	void reset() override;
 	void copy(const Object& object);
 
-	virtual Type type() const override;
+	Type type() const override;
 
-	virtual void load(const QJsonObject& json) override;
-	virtual void save(QJsonObject& json) const override;
+	void load(const QJsonObject& json) override;
+	void save(QJsonObject& json) const override;
 
 private:
+	using Placement::copy;
+
 	struct Impl;
 	std::unique_ptr<Impl> _impl;
 };

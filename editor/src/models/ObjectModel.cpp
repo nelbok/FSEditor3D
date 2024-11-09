@@ -8,7 +8,7 @@ namespace fse {
 ObjectModel::ObjectModel(fsd::Project* project, QObject* parent)
 	: EntityModel(project, parent) {}
 
-ObjectModel::~ObjectModel() {}
+ObjectModel::~ObjectModel() = default;
 
 void ObjectModel::initDatas() {
 	assert(_project);

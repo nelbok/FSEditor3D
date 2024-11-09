@@ -17,18 +17,20 @@ class Place final : public Shape {
 	Q_OBJECT
 
 public:
-	Place(Project* project);
-	virtual ~Place();
+	explicit Place(Project* project);
+	~Place() override;
 
-	virtual void reset() override;
+	void reset() override;
 	void copy(const Place& place);
 
-	virtual Type type() const override;
+	Type type() const override;
 
-	virtual void load(const QJsonObject& json) override;
-	virtual void save(QJsonObject& json) const override;
+	void load(const QJsonObject& json) override;
+	void save(QJsonObject& json) const override;
 
 private:
+	using Shape::copy;
+
 	struct Impl;
 	std::unique_ptr<Impl> _impl;
 };

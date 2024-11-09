@@ -11,6 +11,6 @@ PlaceCommand::PlaceCommand(Commands* commands)
 	assert(commands);
 }
 
-PlaceCommand::~PlaceCommand() {}
+PlaceCommand::~PlaceCommand() = default;
 
 } // namespace fse

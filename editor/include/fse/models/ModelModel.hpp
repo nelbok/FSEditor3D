@@ -8,17 +8,17 @@ class ModelModel : public EntityModel {
 
 public:
 	ModelModel(fsd::Project* project, QObject* parent = nullptr);
-	virtual ~ModelModel();
+	~ModelModel() override;
 
-	virtual void initDatas() override;
+	void initDatas() override;
 
-	virtual QHash<int, QByteArray> roleNames() const override;
+	QHash<int, QByteArray> roleNames() const override;
 
 protected:
-	virtual void updateDatas() override;
+	void updateDatas() override;
 
-	virtual void disconnectData(fsd::Entity* entity) override;
-	virtual void connectData(fsd::Entity* entity) override;
+	void disconnectData(fsd::Entity* entity) override;
+	void connectData(fsd::Entity* entity) override;
 };
 
 } // namespace fse

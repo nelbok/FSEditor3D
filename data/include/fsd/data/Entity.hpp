@@ -73,7 +73,7 @@ public:
 	const QList<Entity*>& refs() const;
 	void addRef(Entity* ref);
 	void removeRef(Entity* ref);
-	bool hasRef();
+	bool hasRef() const;
 
 	virtual Type type() const = 0;
 
@@ -82,7 +82,7 @@ public:
 
 protected:
 	Entity(Project* project, QObject* parent = nullptr);
-	virtual ~Entity();
+	~Entity() override;
 
 private:
 	struct Impl;

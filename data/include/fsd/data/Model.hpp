@@ -44,10 +44,10 @@ public:
 	};
 	Q_ENUM(ModelType)
 
-	Model(Project* project);
-	virtual ~Model();
+	explicit Model(Project* project);
+	~Model() override;
 
-	virtual void reset() override;
+	void reset() override;
 	void copy(const Model& model);
 
 	const QUrl& sourcePath() const;
@@ -59,15 +59,17 @@ public:
 	ModelType modelType() const;
 	void setModelType(ModelType type);
 
-	virtual Type type() const override;
-	virtual QVector3D globalPosition() const override;
-	virtual QVector3D globalRotation() const override;
-	virtual QVector3D globalScale() const override;
+	Type type() const override;
+	QVector3D globalPosition() const override;
+	QVector3D globalRotation() const override;
+	QVector3D globalScale() const override;
 
-	virtual void load(const QJsonObject& json) override;
-	virtual void save(QJsonObject& json) const override;
+	void load(const QJsonObject& json) override;
+	void save(QJsonObject& json) const override;
 
 private:
+	using Geometry::copy;
+
 	struct Impl;
 	std::unique_ptr<Impl> _impl;
 

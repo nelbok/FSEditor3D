@@ -10,8 +10,8 @@ class Commands : public QObject {
 	Q_OBJECT
 
 public:
-	Commands(QObject* parent = nullptr);
-	virtual ~Commands() = default;
+	explicit Commands(QObject* parent = nullptr);
+	~Commands() override = default;
 
 	void add(BaseCommand* command);
 	BaseCommand* lastCommandDone() const;
@@ -28,7 +28,7 @@ public:
 
 private:
 	void internalAdd(BaseCommand* command);
-	void clear(QList<BaseCommand*>& commands);
+	void clear(QList<BaseCommand*>& commands) const;
 
 	QList<BaseCommand*> _undoCommands{};
 	QList<BaseCommand*> _redoCommands{};

@@ -13,7 +13,7 @@ SelectionManager::SelectionManager(QObject* parent)
 	: QObject(parent)
 	, _impl{ std::make_unique<Impl>() } {}
 
-SelectionManager::~SelectionManager() {}
+SelectionManager::~SelectionManager() = default;
 
 void SelectionManager::reset() {
 	setCurrentType(Type::None);

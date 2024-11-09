@@ -33,8 +33,8 @@ class PreviewManager : public QObject {
 	Q_PROPERTY(QList<PreviewData> datas READ datas NOTIFY previewUpdated)
 
 public:
-	PreviewManager(QObject* parent = nullptr);
-	virtual ~PreviewManager();
+	explicit PreviewManager(QObject* parent = nullptr);
+	~PreviewManager() override;
 
 	void init(Manager* manager);
 	void reset();

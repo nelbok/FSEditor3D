@@ -6,7 +6,7 @@ namespace fse {
 ErrorsManager::ErrorsManager(QObject* parent)
 	: QObject(parent) {}
 
-ErrorsManager::~ErrorsManager() {}
+ErrorsManager::~ErrorsManager() = default;
 
 QString ErrorsManager::message() const {
 	switch (_type) {

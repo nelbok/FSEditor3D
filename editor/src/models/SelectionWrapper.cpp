@@ -8,7 +8,7 @@ namespace fse {
 SelectionWrapper::SelectionWrapper(QObject* parent)
 	: QObject(parent) {}
 
-SelectionWrapper::~SelectionWrapper() {}
+SelectionWrapper::~SelectionWrapper() = default;
 
 int SelectionWrapper::currentIndex() const {
 	if (!hasCurrentSelection())
@@ -83,11 +83,11 @@ bool SelectionWrapper::hasCurrentSelection() const {
 	if (_currentData && _currentData->isAlive())
 		return true;
 
-	if (auto* entityModel = qobject_cast<EntityModel*>(_model))
+	if (const auto* entityModel = qobject_cast<EntityModel*>(_model))
 		return entityModel->hasNoneOption();
 
-	if (auto* proxyModel = qobject_cast<ProxyModel*>(_model))
-		if (auto* entityModel = qobject_cast<EntityModel*>(proxyModel->sourceModel()))
+	if (const auto* proxyModel = qobject_cast<ProxyModel*>(_model))
+		if (const auto* entityModel = qobject_cast<EntityModel*>(proxyModel->sourceModel()))
 			return entityModel->hasNoneOption();
 
 	return false;

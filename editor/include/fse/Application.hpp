@@ -6,8 +6,8 @@
 #include <fse/Manager.hpp>
 
 namespace fse::Application {
-void initApp(QGuiApplication& app);
-bool initParser(QGuiApplication& app, Manager& manager);
+void initApp();
+bool initParser(const QGuiApplication& app, const Manager& manager);
 void initRegister(Manager& manager);
-void initEngine(QGuiApplication& app, QQmlApplicationEngine& engine, Manager& manager);
+void initEngine(const QGuiApplication& app, QQmlApplicationEngine& engine, const Manager& manager);
 } // namespace fse::Application

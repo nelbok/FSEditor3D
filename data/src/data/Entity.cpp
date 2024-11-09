@@ -21,7 +21,7 @@ Entity::Entity(Project* project, QObject* parent)
 	_impl->project = project;
 }
 
-Entity::~Entity() {}
+Entity::~Entity() = default;
 
 Project* Entity::project() const {
 	return _impl->project;
@@ -79,7 +79,7 @@ void Entity::removeRef(Entity* ref) {
 	emit hasRefUpdated();
 }
 
-bool Entity::hasRef() {
+bool Entity::hasRef() const {
 	return !_impl->refs.empty();
 }
 

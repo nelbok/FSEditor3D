@@ -23,8 +23,8 @@ class ModelsManager : public QObject {
 	Q_PROPERTY(PlaceModel* placeModelWithNone READ placeModelWithNone CONSTANT)
 
 public:
-	ModelsManager(QObject* parent = nullptr);
-	virtual ~ModelsManager();
+	explicit ModelsManager(QObject* parent = nullptr);
+	~ModelsManager() override;
 
 	void init(fsd::Project* project);
 

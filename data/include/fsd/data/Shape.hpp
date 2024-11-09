@@ -25,22 +25,24 @@ class Shape : public Geometry {
 	Q_PROPERTY(Model* model READ model WRITE setModel NOTIFY modelUpdated)
 
 public:
-	virtual void reset() override;
+	void reset() override;
 	void copy(const Shape& shape);
 
 	Model* model() const;
 	void setModel(Model* model);
 
-	virtual QVector3D globalPosition() const override;
-	virtual QVector3D globalRotation() const override;
-	virtual QVector3D globalScale() const override;
+	QVector3D globalPosition() const override;
+	QVector3D globalRotation() const override;
+	QVector3D globalScale() const override;
 
-	virtual void load(const QJsonObject& json) override;
-	virtual void save(QJsonObject& json) const override;
+	void load(const QJsonObject& json) override;
+	void save(QJsonObject& json) const override;
 
 protected:
 	Shape(Project* project, QObject* parent = nullptr);
-	virtual ~Shape();
+	~Shape() override;
+
+	using Geometry::copy;
 
 private:
 	struct Impl;

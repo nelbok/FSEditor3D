@@ -8,9 +8,9 @@ class SaveThread : public FileThread {
 
 public:
 	SaveThread(FileManager* manager, fsd::Project* project);
-	virtual ~SaveThread();
+	~SaveThread() override;
 
 protected:
-	virtual void run() override;
+	void run() override;
 };
 } // namespace fse

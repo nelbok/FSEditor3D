@@ -11,6 +11,6 @@ ObjectCommand::ObjectCommand(Commands* commands)
 	assert(commands);
 }
 
-ObjectCommand::~ObjectCommand() {}
+ObjectCommand::~ObjectCommand() = default;
 
 } // namespace fse

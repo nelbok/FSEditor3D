@@ -11,7 +11,7 @@ LinkCommand::LinkCommand(Commands* commands)
 	assert(commands);
 }
 
-LinkCommand::~LinkCommand() {}
+LinkCommand::~LinkCommand() = default;
 
 void LinkCommand::setLink(fsd::Link* l, fsd::Link* newValue) {
 	addValueCommand(_c, l, &fsd::Link::setLink, &fsd::Link::link, newValue);

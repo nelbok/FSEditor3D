@@ -16,54 +16,57 @@ class Tests : public QObject {
 
 public:
 	Tests() = default;
-	virtual ~Tests() = default;
+	~Tests() override = default;
 
 private slots:
-	// Only once
-	void initTestCase() {
-		fse::Application::initApp(*qApp);
+	void initTestCase() const {
+		// Only once
+		fse::Application::initApp();
 	}
 
-	// For each tests
-	void init() {}
+	void init() const {
+		// For each tests
+	}
 
 	/**	DATA	**/
 
-	void testAccessors() {
+	void testAccessors() const {
 		TestAccessors().run();
 	}
 
-	void testIO() {
+	void testIO() const {
 		TestIO().run();
 	}
 
-	void testLists() {
+	void testLists() const {
 		TestLists().run();
 	}
 
-	void testRefs() {
+	void testRefs() const {
 		TestRefs().run();
 	}
 
 	/**	EDITOR	**/
 
-	void testBalsam() {
+	void testBalsam() const {
 		TestBalsam().run();
 	}
 
-	void testStyles() {
+	void testStyles() const {
 		TestStyles().run();
 	}
 
-	void testTranslations() {
+	void testTranslations() const {
 		TestTranslations().run();
 	}
 
-	// For each tests
-	void cleanup() {}
+	void cleanup() const {
+		// For each tests
+	}
 
-	// Only once
-	void cleanupTestCase() {}
+	void cleanupTestCase() const {
+		// Only once
+	}
 };
 
 QTEST_MAIN(Tests)

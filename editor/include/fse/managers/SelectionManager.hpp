@@ -29,8 +29,8 @@ public:
 	};
 	Q_ENUM(Type)
 
-	SelectionManager(QObject* parent = nullptr);
-	virtual ~SelectionManager();
+	explicit SelectionManager(QObject* parent = nullptr);
+	~SelectionManager() override;
 
 	void reset();
 

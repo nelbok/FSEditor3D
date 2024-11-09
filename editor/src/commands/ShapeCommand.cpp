@@ -11,7 +11,7 @@ ShapeCommand::ShapeCommand(Commands* commands)
 	assert(commands);
 }
 
-ShapeCommand::~ShapeCommand() {}
+ShapeCommand::~ShapeCommand() = default;
 
 void ShapeCommand::setModel(fsd::Shape* s, fsd::Model* newValue) {
 	addValueCommand(_c, s, &fsd::Shape::setModel, &fsd::Shape::model, newValue);

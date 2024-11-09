@@ -29,7 +29,7 @@ TranslationsManager::TranslationsManager(QObject* parent)
 	: QObject(parent)
 	, _impl{ std::make_unique<Impl>() } {}
 
-TranslationsManager::~TranslationsManager() {}
+TranslationsManager::~TranslationsManager() = default;
 
 void TranslationsManager::init(ErrorsManager* manager) {
 	assert(!_impl->manager);

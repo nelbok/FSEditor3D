@@ -14,13 +14,13 @@ public:
 		, _oldValue{ oldValue }
 		, _newValue{ newValue } {}
 
-	virtual ~LazyValueCommand() = default;
+	~LazyValueCommand() override = default;
 
-	virtual void undo() override {
+	void undo() override {
 		(_instance->*_setter)(_oldValue);
 	}
 
-	virtual void redo() override {
+	void redo() override {
 		(_instance->*_setter)(_newValue);
 	}
 
@@ -38,7 +38,7 @@ public:
 		: LazyValueCommand<TClass, TFunc, TType>{ instance, setter, oldValue, newValue } {
 		assert(oldValue != newValue);
 	}
-	virtual ~ValueCommand() = default;
+	~ValueCommand() override = default;
 };
 
 template<typename TClass, typename TSetter, typename TGetter, typename TType>

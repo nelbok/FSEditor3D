@@ -16,7 +16,7 @@ Link::Link(Project* project)
 	_impl->link = makeLinkPointer(project, this);
 }
 
-Link::~Link() {}
+Link::~Link() = default;
 
 void Link::reset() {
 	Placement::reset();

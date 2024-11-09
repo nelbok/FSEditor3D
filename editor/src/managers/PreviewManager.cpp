@@ -27,7 +27,7 @@ PreviewManager::PreviewManager(QObject* parent)
 	: QObject(parent)
 	, _impl{ std::make_unique<Impl>() } {}
 
-PreviewManager::~PreviewManager() {}
+PreviewManager::~PreviewManager() = default;
 
 void PreviewManager::init(Manager* manager) {
 	assert(!_impl->manager);
@@ -103,11 +103,10 @@ bool PreviewManager::isWorldMapVisible() const {
 void PreviewManager::centerOnCurrent() {
 	auto position = lCameraPosition;
 
-	const auto& sm = _impl->manager->selectionManager();
-	switch (sm->currentType()) {
+	switch (const auto& sm = _impl->manager->selectionManager(); sm->currentType()) {
 		case SelectionManager::Type::None:
 		case SelectionManager::Type::Project:
-			if (auto* place = _impl->manager->project()->defaultPlace())
+			if (const auto* place = _impl->manager->project()->defaultPlace())
 				position += place->globalPosition();
 			break;
 		case SelectionManager::Type::Models:
@@ -155,8 +154,7 @@ QList<PreviewData> PreviewManager::datas() const {
 	QList<PreviewData> datas;
 	QList<fsd::Geometry*> parsed;
 
-	const auto& sm = _impl->manager->selectionManager();
-	switch (sm->currentType()) {
+	switch (const auto& sm = _impl->manager->selectionManager(); sm->currentType()) {
 		case SelectionManager::Type::None:
 			if (auto* place = _impl->manager->project()->defaultPlace()) {
 				if (_impl->isWorldMapVisible)
@@ -195,8 +193,8 @@ QList<PreviewData> PreviewManager::datas() const {
 void PreviewManager::fullMapDatas(QList<PreviewData>& datas, QList<fsd::Geometry*>& parsed, fsd::Place* place, const QVector3D& offset) const {
 	fillDatas(datas, parsed, place, offset, true);
 	for (auto* entity : place->refs()) {
-		if (auto* linkA = qobject_cast<fsd::Link*>(entity))
-			if (auto* linkB = linkA->link())
+		if (const auto* linkA = qobject_cast<fsd::Link*>(entity))
+			if (const auto* linkB = linkA->link())
 				if (auto* placeB = linkB->place()) {
 					if (parsed.contains(placeB))
 						continue;
@@ -217,7 +215,7 @@ void PreviewManager::fillDatas(QList<PreviewData>& datas, QList<fsd::Geometry*>&
 
 	if (_impl->areOtherDatasVisible) {
 		// Add others entities if needed
-		if (auto* placement = qobject_cast<fsd::Placement*>(geometry)) {
+		if (const auto* placement = qobject_cast<fsd::Placement*>(geometry)) {
 			fillDatas(datas, parsed, placement->place(), offset);
 		}
 		if (useRefs) {
@@ -230,7 +228,7 @@ void PreviewManager::fillDatas(QList<PreviewData>& datas, QList<fsd::Geometry*>&
 
 	// Search model for the geometry
 	fsd::Model* model = nullptr;
-	if (auto* shape = qobject_cast<fsd::Shape*>(geometry)) {
+	if (const auto* shape = qobject_cast<fsd::Shape*>(geometry)) {
 		model = shape->model();
 	} else {
 		model = qobject_cast<fsd::Model*>(geometry);
@@ -248,8 +246,7 @@ void PreviewManager::updateConnections() {
 	}
 	_impl->connections.clear();
 
-	const auto& sm = _impl->manager->selectionManager();
-	switch (sm->currentType()) {
+	switch (const auto& sm = _impl->manager->selectionManager(); sm->currentType()) {
 		case SelectionManager::Type::None:
 			_impl->connections.append(QObject::connect(_impl->manager->project(), &fsd::Project::entitiesUpdated, this, &PreviewManager::previewUpdated));
 			_impl->connections.append(QObject::connect(_impl->manager->project(), &fsd::Project::defaultPlaceUpdated, this, &PreviewManager::previewUpdated));

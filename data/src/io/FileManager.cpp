@@ -16,7 +16,7 @@ namespace fsd {
 
 class FileManager::Impl : public QThread {
 public:
-	Impl(FileManager* parent)
+	explicit Impl(FileManager* parent)
 		: QThread(parent)
 		, _parent{ parent } {}
 
@@ -69,7 +69,7 @@ public:
 	}
 
 protected:
-	virtual void run() override {
+	void run() override {
 		assert(_project);
 		switch (_type) {
 			case Type::Load:
@@ -87,7 +87,7 @@ protected:
 	}
 
 private:
-	QString toPath(const QUrl& url) {
+	QString toPath(const QUrl& url) const {
 		assert(url.isValid());
 		if (url.isLocalFile())
 			return url.toLocalFile();
@@ -176,11 +176,11 @@ void FileManager::wait(QDeadlineTimer deadline) {
 	_impl->wait(std::move(deadline));
 }
 
-bool FileManager::isFinished() {
+bool FileManager::isFinished() const {
 	return _impl->isFinished();
 }
 
-bool FileManager::isRunning() {
+bool FileManager::isRunning() const {
 	return _impl->isRunning();
 }
 

@@ -13,7 +13,7 @@ LoadThread::LoadThread(FileManager* manager, fsd::Project* project)
 	_type = fsd::FileManager::Type::Load;
 }
 
-LoadThread::~LoadThread() {}
+LoadThread::~LoadThread() = default;
 
 void LoadThread::run() {
 	_fileManager->start();

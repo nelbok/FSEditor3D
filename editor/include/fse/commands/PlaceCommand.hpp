@@ -11,10 +11,10 @@ class PlaceCommand : public QObject {
 	Q_OBJECT
 
 public:
-	PlaceCommand(Commands* commands);
-	virtual ~PlaceCommand();
+	explicit PlaceCommand(Commands* commands);
+	~PlaceCommand() override;
 
-protected:
+private:
 	Commands* _c{ nullptr };
 };
 } // namespace fse

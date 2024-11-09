@@ -8,12 +8,12 @@ class PlaceModel : public EntityModel {
 
 public:
 	PlaceModel(fsd::Project* project, QObject* parent = nullptr);
-	virtual ~PlaceModel();
+	~PlaceModel() override;
 
-	virtual void initDatas() override;
+	void initDatas() override;
 
 protected:
-	virtual void updateDatas() override;
+	void updateDatas() override;
 };
 
 } // namespace fse

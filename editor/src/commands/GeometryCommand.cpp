@@ -11,7 +11,7 @@ GeometryCommand::GeometryCommand(Commands* commands)
 	assert(commands);
 }
 
-GeometryCommand::~GeometryCommand() {}
+GeometryCommand::~GeometryCommand() = default;
 
 void GeometryCommand::setLocalPosition(fsd::Geometry* g, const QVector3D& newValue) {
 	addValueCommand(_c, g, &fsd::Geometry::setLocalPosition, &fsd::Geometry::localPosition, newValue);

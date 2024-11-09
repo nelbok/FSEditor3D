@@ -11,14 +11,14 @@ class ModelCommand : public QObject {
 	Q_OBJECT
 
 public:
-	ModelCommand(Commands* commands);
-	virtual ~ModelCommand();
+	explicit ModelCommand(Commands* commands);
+	~ModelCommand() override;
 
 	Q_INVOKABLE void setSourcePath(fsd::Model* model, const QUrl& sourcePath);
 	Q_INVOKABLE void setQmlName(fsd::Model* model, const QString& qmlName);
 	Q_INVOKABLE void setModelType(fsd::Model* model, fsd::Model::ModelType type);
 
-protected:
+private:
 	Commands* _c{ nullptr };
 };
 } // namespace fse

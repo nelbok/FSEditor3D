@@ -11,12 +11,12 @@ class EntityCommand : public QObject {
 	Q_OBJECT
 
 public:
-	EntityCommand(Commands* commands);
-	virtual ~EntityCommand();
+	explicit EntityCommand(Commands* commands);
+	~EntityCommand() override;
 
 	Q_INVOKABLE void setName(fsd::Entity* entity, const QString& name);
 
-protected:
+private:
 	Commands* _c{ nullptr };
 };
 } // namespace fse

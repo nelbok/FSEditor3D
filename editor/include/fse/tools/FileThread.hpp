@@ -13,7 +13,7 @@ class FileThread : public QThread {
 
 public:
 	FileThread(FileManager* manager, fsd::Project* project);
-	virtual ~FileThread();
+	~FileThread() override;
 
 	void init();
 

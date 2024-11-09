@@ -11,12 +11,12 @@ class ShapeCommand : public QObject {
 	Q_OBJECT
 
 public:
-	ShapeCommand(Commands* commands);
-	virtual ~ShapeCommand();
+	explicit ShapeCommand(Commands* commands);
+	~ShapeCommand() override;
 
 	Q_INVOKABLE void setModel(fsd::Shape* shape, fsd::Model* model);
 
-protected:
+private:
 	Commands* _c{ nullptr };
 };
 } // namespace fse

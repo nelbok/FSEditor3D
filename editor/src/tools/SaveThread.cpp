@@ -13,7 +13,7 @@ SaveThread::SaveThread(FileManager* manager, fsd::Project* project)
 	_type = fsd::FileManager::Type::Save;
 }
 
-SaveThread::~SaveThread() {}
+SaveThread::~SaveThread() = default;
 
 void SaveThread::run() {
 	_fileManager->start();
@@ -35,10 +35,10 @@ void SaveThread::run() {
 
 	// FIXME: Could be dangerous if too much files or symbolic links
 	// Copy models
-	for (auto* model : _project->models()) {
+	for (const auto* model : _project->models()) {
 		if (isInterruptionRequested()) {
 			_result = fsd::FileManager::Result::Canceled;
-			break;
+			return;
 		}
 
 		// No source, no copy
@@ -53,11 +53,11 @@ void SaveThread::run() {
 				fs::copy(oldPath, newPath, fs::copy_options::recursive);
 			} catch (...) {
 				_result = fsd::FileManager::Result::Error;
-				break;
+				return;
 			}
 		} else {
 			_result = fsd::FileManager::Result::Error;
-			break;
+			return;
 		}
 	}
 }

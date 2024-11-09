@@ -10,7 +10,7 @@ Object::Object(Project* project)
 	: Placement(project, project)
 	, _impl{ std::make_unique<Impl>() } {}
 
-Object::~Object() {}
+Object::~Object() = default;
 
 void Object::reset() {
 	Placement::reset();

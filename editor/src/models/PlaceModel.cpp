@@ -8,7 +8,7 @@ namespace fse {
 PlaceModel::PlaceModel(fsd::Project* project, QObject* parent)
 	: EntityModel(project, parent) {}
 
-PlaceModel::~PlaceModel() {}
+PlaceModel::~PlaceModel() = default;
 
 void PlaceModel::initDatas() {
 	assert(_project);

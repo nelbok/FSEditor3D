@@ -7,7 +7,7 @@ namespace fse {
 ProxyModel::ProxyModel(QObject* parent)
 	: QSortFilterProxyModel(parent) {}
 
-ProxyModel::~ProxyModel() {}
+ProxyModel::~ProxyModel() = default;
 
 const QVariantMap& ProxyModel::filters() const {
 	return _filters;
@@ -24,8 +24,8 @@ void ProxyModel::setFilters(const QVariantMap& filters) {
 bool ProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex& sourceParent) const {
 	const auto& index = sourceModel()->index(sourceRow, 0, sourceParent);
 
-	if (auto* entityModel = qobject_cast<EntityModel*>(sourceModel()); entityModel->hasNoneOption()) {
-		if (auto* entity = index.data(getRole("entity")).value<fsd::Entity*>(); !entity) {
+	if (const auto* entityModel = qobject_cast<EntityModel*>(sourceModel()); entityModel->hasNoneOption()) {
+		if (const auto* entity = index.data(getRole("entity")).value<fsd::Entity*>(); !entity) {
 			return true;
 		}
 	}

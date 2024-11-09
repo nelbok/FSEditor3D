@@ -21,7 +21,7 @@ Model::Model(Project* project)
 	QObject::connect(project, &Project::globalScaleUpdated, this, &Model::globalScaleUpdated);
 }
 
-Model::~Model() {}
+Model::~Model() = default;
 
 void Model::reset() {
 	Geometry::reset();

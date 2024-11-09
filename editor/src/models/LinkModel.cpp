@@ -8,7 +8,7 @@ namespace fse {
 LinkModel::LinkModel(fsd::Project* project, QObject* parent)
 	: EntityModel(project, parent) {}
 
-LinkModel::~LinkModel() {}
+LinkModel::~LinkModel() = default;
 
 void LinkModel::initDatas() {
 	assert(_project);

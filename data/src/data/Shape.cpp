@@ -17,7 +17,7 @@ Shape::Shape(Project* project, QObject* parent)
 	_impl->model = makeModelPointer(project, this);
 }
 
-Shape::~Shape() {}
+Shape::~Shape() = default;
 
 void Shape::reset() {
 	Geometry::reset();
@@ -38,7 +38,7 @@ void Shape::setModel(Model* model) {
 	assert(!model || (model->modelType() == Model::ModelType::Link && type() == Type::Link) || (model->modelType() == Model::ModelType::Object && type() == Type::Object)
 				 || (model->modelType() == Model::ModelType::Place && type() == Type::Place));
 
-	auto* oldModel = this->model();
+	const auto* oldModel = this->model();
 	if (_impl->model->set(model)) {
 		if (oldModel) {
 			QObject::disconnect(oldModel, &Model::globalPositionUpdated, this, &Shape::globalPositionUpdated);
@@ -55,19 +55,19 @@ void Shape::setModel(Model* model) {
 }
 
 QVector3D Shape::globalPosition() const {
-	if (auto* model = this->model())
+	if (const auto* model = this->model())
 		return Geometry::globalPosition() + model->globalPosition();
 	return Geometry::globalPosition();
 }
 
 QVector3D Shape::globalRotation() const {
-	if (auto* model = this->model())
+	if (const auto* model = this->model())
 		return Geometry::globalRotation() + model->globalRotation();
 	return Geometry::globalRotation();
 }
 
 QVector3D Shape::globalScale() const {
-	if (auto* model = this->model())
+	if (const auto* model = this->model())
 		return Geometry::globalScale() * model->globalScale();
 	return Geometry::globalScale();
 }
@@ -75,7 +75,7 @@ QVector3D Shape::globalScale() const {
 void Shape::load(const QJsonObject& json) {
 	Geometry::load(json);
 	if (_impl->model->setUuid(Json::toUuid(Json::toValue(Format::lModel, json)))) {
-		auto* model = _impl->model->get();
+		const auto* model = _impl->model->get();
 		assert(model);
 		QObject::connect(model, &Model::globalPositionUpdated, this, &Shape::globalPositionUpdated);
 		QObject::connect(model, &Model::globalRotationUpdated, this, &Shape::globalRotationUpdated);

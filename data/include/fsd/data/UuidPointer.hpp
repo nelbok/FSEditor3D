@@ -34,7 +34,7 @@ protected slots:
 
 protected:
 	BasePointer(Project* project, void (Project::*signal)(), Entity* parent);
-	virtual ~BasePointer();
+	~BasePointer() override;
 
 	Project* _project{ nullptr };
 	Entity* _ref{ nullptr };
@@ -61,7 +61,7 @@ public:
 		assert(_getter);
 		static_assert(std::is_base_of<Entity, T>::value, "T must inherit from Entity");
 	}
-	virtual ~UuidPointer() {}
+	~UuidPointer() override = default;
 
 	T* operator->() {
 		return get();
@@ -85,7 +85,7 @@ public:
 		assert(_project);
 		bool changed = _entity != entity;
 		if (changed) {
-			_uuid = (entity) ? entity->uuid() : QUuid{};
+			_uuid = entity ? entity->uuid() : QUuid{};
 			if (_entity) {
 				_entity->removeRef(_ref);
 			}
@@ -98,7 +98,7 @@ public:
 	}
 
 protected:
-	virtual void update() override {
+	void update() override {
 		assert(_project);
 		assert(_getter);
 		if (_entity) {

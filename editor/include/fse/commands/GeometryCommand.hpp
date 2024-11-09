@@ -11,14 +11,14 @@ class GeometryCommand : public QObject {
 	Q_OBJECT
 
 public:
-	GeometryCommand(Commands* commands);
-	virtual ~GeometryCommand();
+	explicit GeometryCommand(Commands* commands);
+	~GeometryCommand() override;
 
 	Q_INVOKABLE void setLocalPosition(fsd::Geometry* geometry, const QVector3D& localPosition);
 	Q_INVOKABLE void setLocalRotation(fsd::Geometry* geometry, const QVector3D& localRotation);
 	Q_INVOKABLE void setLocalScale(fsd::Geometry* geometry, const QVector3D& localScale);
 
-protected:
+private:
 	Commands* _c{ nullptr };
 };
 } // namespace fse

@@ -19,19 +19,19 @@ public:
 		assert(_instance);
 	}
 
-	virtual ~RemoveCommand() = default;
+	~RemoveCommand() override = default;
 
-	virtual void undo() override {
+	void undo() override {
 		assert(!_instance->isAlive());
 		_instance->setIsAlive(true);
 	}
 
-	virtual void redo() override {
+	void redo() override {
 		assert(_instance->isAlive());
 		_instance->setIsAlive(false);
 	}
 
-	virtual void finalize() override {
+	void finalize() override {
 		(_project->*_remove)(_instance);
 		_instance = nullptr;
 	}

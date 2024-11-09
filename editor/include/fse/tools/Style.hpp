@@ -39,10 +39,10 @@ class Border : public Color {
 
 public:
 	Border() = default;
-	virtual ~Border() = default;
+	~Border() override = default;
 
-	virtual void load(const QJsonObject& json) override;
-	virtual void save(QJsonObject& json) const override;
+	void load(const QJsonObject& json) override;
+	void save(QJsonObject& json) const override;
 
 	int width{ 0 };
 };
@@ -57,10 +57,10 @@ class Rectangle : public Color {
 
 public:
 	Rectangle() = default;
-	virtual ~Rectangle() = default;
+	~Rectangle() override = default;
 
-	virtual void load(const QJsonObject& json) override;
-	virtual void save(QJsonObject& json) const override;
+	void load(const QJsonObject& json) override;
+	void save(QJsonObject& json) const override;
 
 	Border border{};
 	int radius{ 0 };
