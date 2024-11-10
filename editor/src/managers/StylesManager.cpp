@@ -30,8 +30,8 @@ struct StylesManager::Impl {
 		} catch (const std::exception&) {
 			style = Style{};
 			style.foreground.normal = { 0, 0, 0 };
-			style.module.border.normal = { 0, 0, 0 };
-			style.module.border.width = 1;
+			style.part.border.normal = { 0, 0, 0 };
+			style.part.border.width = 1;
 			manager->setType(ErrorsManager::Type::StyleError);
 		}
 	}

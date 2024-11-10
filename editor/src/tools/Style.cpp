@@ -117,7 +117,7 @@ constexpr auto lButton = "button";
 constexpr auto lForeground = "foreground";
 
 constexpr auto lTextfield = "textfield";
-constexpr auto lModule = "module";
+constexpr auto lPart = "part";
 constexpr auto lList = "list";
 
 // Fonts
@@ -152,7 +152,7 @@ void Style::load(const QJsonObject& json) {
 	foreground.load(Json::toObject(lForeground, json));
 
 	textfield.load(Json::toObject(lTextfield, json));
-	module.load(Json::toObject(lModule, json));
+	part.load(Json::toObject(lPart, json));
 	list.load(Json::toObject(lList, json));
 
 	// Fonts
@@ -188,7 +188,7 @@ void Style::save(QJsonObject& json) const {
 	json[lForeground] = detail::save(foreground);
 
 	json[lTextfield] = detail::save(textfield);
-	json[lModule] = detail::save(module);
+	json[lPart] = detail::save(part);
 	json[lList] = detail::save(list);
 
 	// Fonts

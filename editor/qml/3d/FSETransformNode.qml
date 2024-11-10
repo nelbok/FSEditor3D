@@ -23,7 +23,7 @@ Node {
         scale: Qt.vector3d(0.1, 0.1, 0.1)
         source: "#Sphere"
         materials: DefaultMaterial {
-            diffuseColor: MyStyles.style.module.normal
+            diffuseColor: MyStyles.style.part.normal
         }
         visible: MyPreview.areOriginsVisible
     }

@@ -97,7 +97,7 @@ class Style {
 	Q_PROPERTY(const Color& foreground MEMBER foreground)
 
 	Q_PROPERTY(const Rectangle& textfield MEMBER textfield)
-	Q_PROPERTY(const Rectangle& module MEMBER module)
+	Q_PROPERTY(const Rectangle& part MEMBER part)
 	Q_PROPERTY(const Rectangle& list MEMBER list)
 
 	// Fonts
@@ -138,7 +138,7 @@ public:
 	Color foreground;
 
 	Rectangle textfield;
-	Rectangle module;
+	Rectangle part;
 	Rectangle list;
 
 	// Fonts

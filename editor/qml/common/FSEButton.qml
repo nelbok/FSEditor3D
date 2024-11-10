@@ -11,10 +11,10 @@ FSERectangle {
     height: 40
 
     border.color: {
-        if (!enabled) return MyStyles.style.module.border.disabled
-        if (mouseArea.containsMouse) return MyStyles.style.module.border.hovered
-        if (selected) return MyStyles.style.module.border.selected;
-        return MyStyles.style.module.border.normal
+        if (!enabled) return MyStyles.style.part.border.disabled
+        if (mouseArea.containsMouse) return MyStyles.style.part.border.hovered
+        if (selected) return MyStyles.style.part.border.selected;
+        return MyStyles.style.part.border.normal
     }
     color: MyStyles.style.button.normal
 

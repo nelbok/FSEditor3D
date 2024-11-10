@@ -3,10 +3,10 @@ import QtQuick
 import editor
 
 Rectangle {
-    border.color: MyStyles.style.module.border.normal
-    border.width: MyStyles.style.module.border.width
-    color: MyStyles.style.module.normal
-    radius: MyStyles.style.module.radius
+    border.color: MyStyles.style.part.border.normal
+    border.width: MyStyles.style.part.border.width
+    color: MyStyles.style.part.normal
+    radius: MyStyles.style.part.radius
 
     MouseArea {
         anchors.fill: parent

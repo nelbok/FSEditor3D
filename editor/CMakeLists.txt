@@ -120,20 +120,20 @@ set(QML_SOURCES
 	qml/data/FSEPlacement.qml
 	qml/data/FSEShape.qml
 
-	qml/modules/settings/FSESettingsAbout.qml
-	qml/modules/settings/FSESettingsInterface.qml
+	qml/parts/settings/FSESettingsAbout.qml
+	qml/parts/settings/FSESettingsInterface.qml
 
-	qml/modules/FSELinks.qml
-	qml/modules/FSEMenu.qml
-	qml/modules/FSEMessageBox.qml
-	qml/modules/FSEModels.qml
-	qml/modules/FSEObjects.qml
-	qml/modules/FSEPlaces.qml
-	qml/modules/FSEPreviewBar.qml
-	qml/modules/FSEProgressBox.qml
-	qml/modules/FSEProject.qml
-	qml/modules/FSESettings.qml
-	qml/modules/FSEToolBar.qml
+	qml/parts/FSELinks.qml
+	qml/parts/FSEMenu.qml
+	qml/parts/FSEMessageBox.qml
+	qml/parts/FSEModels.qml
+	qml/parts/FSEObjects.qml
+	qml/parts/FSEPlaces.qml
+	qml/parts/FSEPreviewBar.qml
+	qml/parts/FSEProgressBox.qml
+	qml/parts/FSEProject.qml
+	qml/parts/FSESettings.qml
+	qml/parts/FSEToolBar.qml
 
 	qml/Main.qml
 )
