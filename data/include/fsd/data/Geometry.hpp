@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <fsd/data/FSDataExport.h>
+
 #include <QtGui/QVector3D>
 
 #include <fsd/data/Entity.hpp>
@@ -19,7 +21,7 @@ namespace fsd {
  * Global geometry represents the entity transform in relation to the type of the entity.\n
  * @sa The corresponding classes that inherit Geometry for more information about global location
  */
-class Geometry : public Entity {
+class FSDATA_EXPORT Geometry : public Entity {
 	Q_OBJECT
 	/**
 	 * @brief Local position of the entity in cm. Default value: 0.0.

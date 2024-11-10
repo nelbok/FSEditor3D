@@ -1,4 +1,7 @@
+include(GenerateExportHeader)
+
 qt_standard_project_setup(REQUIRES 6.5)
+
 set(CMAKE_DEBUG_POSTFIX _d)
 set(PROJECT_SOURCES
 	include/fsd/data/Entity.hpp
@@ -30,10 +33,16 @@ set(PROJECT_SOURCES
 	src/io/Json.cpp
 )
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" PREFIX "" FILES ${PROJECT_SOURCES})
+include_directories(${CMAKE_BINARY_DIR}/include)
 include_directories(src)
 include_directories(.)
 
-qt_add_library(${CFS_DATA} STATIC ${PROJECT_SOURCES})
+if (FS_SHARED)
+	qt_add_library(${CFS_DATA} SHARED ${PROJECT_SOURCES})
+else()
+	qt_add_library(${CFS_DATA} STATIC ${PROJECT_SOURCES})
+endif()
+generate_export_header(${CFS_DATA} EXPORT_FILE_NAME ${CMAKE_BINARY_DIR}/include/fsd/data/FSDataExport.h)
 
 target_include_directories(${CFS_DATA} PUBLIC include)
 target_link_libraries(${CFS_DATA} PRIVATE Qt6::Core Qt6::Gui)

@@ -1,6 +1,6 @@
 #include <fse/tools/About.hpp>
 
-#include "Config.hpp"
+#include <fse/Config.hpp>
 
 namespace fse {
 QString About::organization() const {

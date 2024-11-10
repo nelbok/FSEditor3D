@@ -19,8 +19,7 @@
 #include <fse/managers/TranslationsManager.hpp>
 #include <fse/models/ProxyModel.hpp>
 #include <fse/models/SelectionWrapper.hpp>
-
-#include "Config.hpp"
+#include <fse/Config.hpp>
 
 // Q_INIT_RESOURCE must be called outside a namespace
 void initResources() {

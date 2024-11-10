@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <fsd/data/FSDataExport.h>
+
 #include <fsd/data/Placement.hpp>
 
 namespace fsd {
@@ -16,7 +18,7 @@ namespace fsd {
  * By setting link property, you can indicate that a place is linked to another place.\n
  * The link is only one-way, if you want a two-way, you need to link the other link to this one.
  */
-class Link final : public Placement {
+class FSDATA_EXPORT Link final : public Placement {
 	Q_OBJECT
 	/**
 	 * @brief The connected link to this one.

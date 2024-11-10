@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <fsd/data/FSDataExport.h>
+
 #include <QtCore/QDeadlineTimer>
 #include <QtCore/QObject>
 #include <QtCore/QUrl>
@@ -21,7 +23,7 @@ class Project;
  * After initializing the manager and connecting finished() signal, call immediately start() function. \n
  * All functions can be called inside QML.
  */
-class FileManager : public QObject {
+class FSDATA_EXPORT FileManager : public QObject {
 	Q_OBJECT
 
 public:

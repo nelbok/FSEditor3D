@@ -7,13 +7,15 @@
 
 #pragma once
 
+#include <fsd/data/FSDataExport.h>
+
 #include <fsd/data/Placement.hpp>
 
 namespace fsd {
 /**
  * @brief An basic object in a Place.
  */
-class Object final : public Placement {
+class FSDATA_EXPORT Object final : public Placement {
 	Q_OBJECT
 
 public:

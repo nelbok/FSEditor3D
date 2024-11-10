@@ -19,6 +19,7 @@ enable_testing()
 qt_add_executable(tests ${PROJECT_SOURCES})
 add_test(NAME tests COMMAND Tests)
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" PREFIX "" FILES ${PROJECT_SOURCES})
+include_directories(${CMAKE_BINARY_DIR}/include)
 include_directories(.)
 
 target_link_libraries(tests PRIVATE Qt6::Core Qt6::Gui Qt6::Test ${CFS_EUI} ${CFS_DATA})
@@ -32,6 +33,7 @@ if(WIN32)
 
 	# Deploy Tests
 	add_custom_command(TARGET tests POST_BUILD COMMAND ${DEPLOYQT} "$<TARGET_FILE:tests>")
+	add_custom_command(TARGET tests POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy -t $<TARGET_FILE_DIR:tests> $<TARGET_RUNTIME_DLLS:tests> COMMAND_EXPAND_LISTS)
 endif()
 
 # Deploy Tests resources

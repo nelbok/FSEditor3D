@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <fsd/data/FSDataExport.h>
+
 #include <QtCore/QUrl>
 
 #include <fsd/data/Geometry.hpp>
@@ -18,7 +20,7 @@ namespace fsd {
  * Global geometry represents the entity transform in relation to the project transform.\n
  * With the editor, <a href="https://doc.qt.io/qt-6/qtquick3d-tool-balsam.html">Balsam Asset Import Tool</a> is used to import 3D models.
  */
-class Model final : public Geometry {
+class FSDATA_EXPORT Model final : public Geometry {
 	Q_OBJECT
 	/**
 	 * @brief The source file used with Balsam.

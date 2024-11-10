@@ -5,8 +5,7 @@
 #include <fse/managers/FileManager.hpp>
 #include <fse/managers/CommandsManager.hpp>
 #include <fse/tools/Tools.hpp>
-
-#include "Config.hpp"
+#include <fse/Config.hpp>
 
 namespace fs = std::filesystem;
 

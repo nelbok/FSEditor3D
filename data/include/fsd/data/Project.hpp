@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <fsd/data/FSDataExport.h>
+
 #include <QtCore/QList>
 
 #include <fsd/data/Geometry.hpp>
@@ -24,7 +26,7 @@ class Place;
  * Use create, remove, duplicate methods to manage Link, Model, Object, and Place.\n
  * Use save(), load() to manage the file serialization, the format file is Json.
  */
-class Project final : public Geometry {
+class FSDATA_EXPORT Project final : public Geometry {
 	Q_OBJECT
 	/**
 	 * @brief The first place the user will see when loading the project.

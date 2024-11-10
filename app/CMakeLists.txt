@@ -18,7 +18,9 @@ configure_file(resources/logo.ico resources/logo.ico COPYONLY)
 qt_add_executable(${CFS_EDITOR} ${PROJECT_SOURCES} ${OTHER_FILES})
 
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" PREFIX "" FILES ${PROJECT_SOURCES})
+include_directories(${CMAKE_BINARY_DIR}/include)
 include_directories(src)
+include_directories(.)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
@@ -50,4 +52,5 @@ if(WIN32)
 
 	# Deploy editor
 	add_custom_command(TARGET ${CFS_EDITOR} POST_BUILD COMMAND ${DEPLOYQT} --qmldir "${CMAKE_CURRENT_SOURCE_DIR}/../editor/qml" "$<TARGET_FILE:${CFS_EDITOR}>")
+	add_custom_command(TARGET ${CFS_EDITOR} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy -t $<TARGET_FILE_DIR:${CFS_EDITOR}> $<TARGET_RUNTIME_DLLS:${CFS_EDITOR}> COMMAND_EXPAND_LISTS)
 endif()

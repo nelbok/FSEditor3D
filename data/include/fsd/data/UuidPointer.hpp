@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <fsd/data/FSDataExport.h>
+
 #include <QtCore/QObject>
 #include <QtCore/QUuid>
 
@@ -53,7 +55,7 @@ protected:
  * Though, if no instance corresponding to the uuid is found, the pointer will not be valid.
  */
 template<class T>
-class UuidPointer : public BasePointer {
+class FSDATA_EXPORT UuidPointer : public BasePointer {
 public:
 	UuidPointer(Project* project, const QList<T*>& (Project::*getter)() const, void (Project::*signal)(), Entity* parent)
 		: BasePointer(project, signal, parent)

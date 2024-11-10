@@ -8,9 +8,8 @@
 #include <fse/managers/ErrorsManager.hpp>
 #include <fse/tools/LoadThread.hpp>
 #include <fse/tools/SaveThread.hpp>
+#include <fse/Config.hpp>
 #include <fse/Manager.hpp>
-
-#include "Config.hpp"
 
 namespace fse {
 

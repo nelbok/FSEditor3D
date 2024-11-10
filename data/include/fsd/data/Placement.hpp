@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <fsd/data/FSDataExport.h>
+
 #include <fsd/data/Shape.hpp>
 
 namespace fsd {
@@ -15,7 +17,7 @@ class Place;
 /**
  * @brief This class add a connection to a place.
  */
-class Placement : public Shape {
+class FSDATA_EXPORT Placement : public Shape {
 	Q_OBJECT
 	/**
 	 * @brief The connected place to this entity.

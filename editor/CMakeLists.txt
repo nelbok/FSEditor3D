@@ -1,4 +1,7 @@
+cmake_minimum_required(VERSION 3.27)
+
 qt_standard_project_setup(REQUIRES 6.5)
+
 set(CMAKE_DEBUG_POSTFIX _d)
 set(PROJECT_SOURCES
 	include/fse/commands/BaseCommand.hpp
@@ -140,8 +143,8 @@ set(TRANSLATION_FILES
 )
 
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" PREFIX "" FILES ${PROJECT_SOURCES} ${QML_SOURCES})
-configure_file(src/Config.hpp.in include/Config.hpp)
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/include)
+configure_file(src/Config.hpp.in ${CMAKE_BINARY_DIR}/include/fse/Config.hpp)
+include_directories(${CMAKE_BINARY_DIR}/include)
 include_directories(src)
 include_directories(.)
 

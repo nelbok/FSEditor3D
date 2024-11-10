@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <fsd/data/FSDataExport.h>
+
 #include <fsd/data/Geometry.hpp>
 
 namespace fsd {
@@ -15,7 +17,7 @@ class Model;
 /**
  * @brief This class adds a connection to a Model.
  */
-class Shape : public Geometry {
+class FSDATA_EXPORT Shape : public Geometry {
 	Q_OBJECT
 	/**
 	 * @brief The connected model to this entity.

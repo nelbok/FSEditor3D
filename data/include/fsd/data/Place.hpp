@@ -7,13 +7,15 @@
 
 #pragma once
 
+#include <fsd/data/FSDataExport.h>
+
 #include <fsd/data/Shape.hpp>
 
 namespace fsd {
 /**
  * @brief Place that contains Links and/or Objects.
  */
-class Place final : public Shape {
+class FSDATA_EXPORT Place final : public Shape {
 	Q_OBJECT
 
 public:

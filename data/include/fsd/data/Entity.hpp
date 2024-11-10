@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <fsd/data/FSDataExport.h>
+
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QUuid>
@@ -20,7 +22,7 @@ class Project;
 /**
  * @brief Main class of all entities with unique id and name.
  */
-class Entity : public QObject {
+class FSDATA_EXPORT Entity : public QObject {
 	Q_OBJECT
 	/**
 	 * @brief Unique id, the value is set automatically when calling reset() function, you shouldn't use the setter.
