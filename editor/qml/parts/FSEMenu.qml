@@ -90,17 +90,17 @@ FSERectangle {
                 spacing: 20
                 FSEIconButton {
                     imageHeight: 20
-                    source: "qrc:/social/" + MyStyles.style.github + ".svg"
+                    source: "qrc:/social/" + MyStyles.style.icons.github + ".svg"
                     onClicked: Qt.openUrlExternally(MyManager.about.github)
                 }
                 FSEIconButton {
                     imageHeight: 20
-                    source: "qrc:/social/" + MyStyles.style.discord + ".svg"
+                    source: "qrc:/social/" + MyStyles.style.icons.discord + ".svg"
                     onClicked: Qt.openUrlExternally(MyManager.about.discord)
                 }
                 FSEIconButton {
                     imageHeight: 20
-                    source: "qrc:/social/" + MyStyles.style.twitter + ".svg"
+                    source: "qrc:/social/" + MyStyles.style.icons.twitter + ".svg"
                     onClicked: Qt.openUrlExternally(MyManager.about.twitter)
                 }
             }

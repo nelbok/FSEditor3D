@@ -37,12 +37,16 @@ void Color::save(QJsonObject& json) const {
 	json[lDisabled] = Json::fromColor(disabled);
 }
 
-bool operator!=(const Color& l, const Color& r) {
-	return !(l == r);
-}
+bool Color::operator==(const Color& other) const {
+	bool ret = true;
 
-bool operator==(const Color& l, const Color& r) {
-	return l.normal == r.normal && l.alternative == r.alternative && l.selected == r.selected && l.hovered == r.hovered && l.disabled == r.disabled;
+	ret &= this->normal == other.normal;
+	ret &= this->alternative == other.alternative;
+	ret &= this->selected == other.selected;
+	ret &= this->hovered == other.hovered;
+	ret &= this->disabled == other.disabled;
+
+	return ret;
 }
 
 constexpr auto lWidth = "width";
@@ -57,12 +61,13 @@ void Border::save(QJsonObject& json) const {
 	json[lWidth] = width;
 }
 
-bool operator!=(const Border& l, const Border& r) {
-	return !(l == r);
-}
+bool Border::operator==(const Border& other) const {
+	bool ret = true;
 
-bool operator==(const Border& l, const Border& r) {
-	return *reinterpret_cast<const Color*>(&l) == *reinterpret_cast<const Color*>(&r) && l.width == r.width;
+	ret &= Color::operator==(other);
+	ret &= this->width == other.width;
+
+	return ret;
 }
 
 constexpr auto lBorder = "border";
@@ -80,20 +85,14 @@ void Rectangle::save(QJsonObject& json) const {
 	json[lRadius] = radius;
 }
 
-bool operator!=(const Rectangle& l, const Rectangle& r) {
-	return !(l == r);
-}
+bool Rectangle::operator==(const Rectangle& other) const {
+	bool ret = true;
 
-bool operator==(const Rectangle& l, const Rectangle& r) {
-	return *reinterpret_cast<const Color*>(&l) == *reinterpret_cast<const Color*>(&r) && l.border == r.border && l.radius == r.radius;
-}
+	ret &= Color::operator==(other);
+	ret &= this->border == other.border;
+	ret &= this->radius == other.radius;
 
-bool operator!=(const Font& l, const Font& r) {
-	return !(l == r);
-}
-
-bool operator==(const Font& l, const Font& r) {
-	return l.bold == r.bold && l.italic == r.italic && l.pointSize == r.pointSize;
+	return ret;
 }
 
 constexpr auto lBold = "bold";
@@ -112,21 +111,16 @@ void Font::save(QJsonObject& json) const {
 	json[lPointSize] = pointSize;
 }
 
-constexpr auto lWindow = "window";
-constexpr auto lButton = "button";
-constexpr auto lForeground = "foreground";
+bool Font::operator==(const Font& other) const {
+	bool ret = true;
 
-constexpr auto lTextfield = "textfield";
-constexpr auto lPart = "part";
-constexpr auto lList = "list";
+	ret &= this->bold == other.bold;
+	ret &= this->italic == other.italic;
+	ret &= this->pointSize == other.pointSize;
 
-// Fonts
-constexpr auto lTitleFont = "titleFont";
-constexpr auto lSubTitleFont = "subTitleFont";
-constexpr auto lNormalFont = "normalFont";
-constexpr auto lCopyrightFont = "copyrightFont";
+	return ret;
+}
 
-// Icons
 constexpr auto lNewFile = "newFile";
 constexpr auto lLoadFile = "loadFile";
 constexpr auto lSaveFile = "saveFile";
@@ -146,22 +140,7 @@ constexpr auto lGithub = "github";
 constexpr auto lDiscord = "discord";
 constexpr auto lTwitter = "twitter";
 
-void Style::load(const QJsonObject& json) {
-	window.load(Json::toObject(lWindow, json));
-	button.load(Json::toObject(lButton, json));
-	foreground.load(Json::toObject(lForeground, json));
-
-	textfield.load(Json::toObject(lTextfield, json));
-	part.load(Json::toObject(lPart, json));
-	list.load(Json::toObject(lList, json));
-
-	// Fonts
-	titleFont.load(Json::toObject(lTitleFont, json));
-	subTitleFont.load(Json::toObject(lSubTitleFont, json));
-	normalFont.load(Json::toObject(lNormalFont, json));
-	copyrightFont.load(Json::toObject(lCopyrightFont, json));
-
-	// Icons
+void Icons::load(const QJsonObject& json) {
 	newFile = Json::toString(lNewFile, json);
 	loadFile = Json::toString(lLoadFile, json);
 	saveFile = Json::toString(lSaveFile, json);
@@ -182,22 +161,7 @@ void Style::load(const QJsonObject& json) {
 	twitter = Json::toString(lTwitter, json);
 }
 
-void Style::save(QJsonObject& json) const {
-	json[lWindow] = detail::save(window);
-	json[lButton] = detail::save(button);
-	json[lForeground] = detail::save(foreground);
-
-	json[lTextfield] = detail::save(textfield);
-	json[lPart] = detail::save(part);
-	json[lList] = detail::save(list);
-
-	// Fonts
-	json[lTitleFont] = detail::save(titleFont);
-	json[lSubTitleFont] = detail::save(subTitleFont);
-	json[lNormalFont] = detail::save(normalFont);
-	json[lCopyrightFont] = detail::save(copyrightFont);
-
-	// Icons
+void Icons::save(QJsonObject& json) const {
 	json[lNewFile] = newFile;
 	json[lLoadFile] = loadFile;
 	json[lSaveFile] = saveFile;
@@ -216,5 +180,106 @@ void Style::save(QJsonObject& json) const {
 	json[lGithub] = github;
 	json[lDiscord] = discord;
 	json[lTwitter] = twitter;
+}
+
+bool Icons::operator==(const Icons& other) const {
+	bool ret = true;
+
+	ret &= this->newFile == other.newFile;
+	ret &= this->loadFile == other.loadFile;
+	ret &= this->saveFile == other.saveFile;
+	ret &= this->undo == other.undo;
+	ret &= this->redo == other.redo;
+	ret &= this->settings == other.settings;
+
+	ret &= this->centerOn == other.centerOn;
+	ret &= this->originOff == other.originOff;
+	ret &= this->originOn == other.originOn;
+	ret &= this->othersOff == other.othersOff;
+	ret &= this->othersOn == other.othersOn;
+	ret &= this->worldMapOff == other.worldMapOff;
+	ret &= this->worldMapOn == other.worldMapOn;
+
+	ret &= this->github == other.github;
+	ret &= this->discord == other.discord;
+	ret &= this->twitter == other.twitter;
+
+	return ret;
+}
+
+constexpr auto lWindow = "window";
+constexpr auto lButton = "button";
+constexpr auto lForeground = "foreground";
+
+constexpr auto lTextfield = "textfield";
+constexpr auto lPart = "part";
+constexpr auto lList = "list";
+
+// Fonts
+constexpr auto lTitleFont = "titleFont";
+constexpr auto lSubTitleFont = "subTitleFont";
+constexpr auto lNormalFont = "normalFont";
+constexpr auto lCopyrightFont = "copyrightFont";
+
+// Icons
+constexpr auto lIcons = "icons";
+
+void Style::load(const QJsonObject& json) {
+	window.load(Json::toObject(lWindow, json));
+	button.load(Json::toObject(lButton, json));
+	foreground.load(Json::toObject(lForeground, json));
+
+	textfield.load(Json::toObject(lTextfield, json));
+	part.load(Json::toObject(lPart, json));
+	list.load(Json::toObject(lList, json));
+
+	// Fonts
+	titleFont.load(Json::toObject(lTitleFont, json));
+	subTitleFont.load(Json::toObject(lSubTitleFont, json));
+	normalFont.load(Json::toObject(lNormalFont, json));
+	copyrightFont.load(Json::toObject(lCopyrightFont, json));
+
+	// Icons
+	icons.load(Json::toObject(lIcons, json));
+}
+
+void Style::save(QJsonObject& json) const {
+	json[lWindow] = detail::save(window);
+	json[lButton] = detail::save(button);
+	json[lForeground] = detail::save(foreground);
+
+	json[lTextfield] = detail::save(textfield);
+	json[lPart] = detail::save(part);
+	json[lList] = detail::save(list);
+
+	// Fonts
+	json[lTitleFont] = detail::save(titleFont);
+	json[lSubTitleFont] = detail::save(subTitleFont);
+	json[lNormalFont] = detail::save(normalFont);
+	json[lCopyrightFont] = detail::save(copyrightFont);
+
+	// Icons
+	json[lIcons] = detail::save(icons);
+}
+
+bool Style::operator==(const Style& other) const {
+	bool ret = true;
+
+	ret &= this->window == other.window;
+	ret &= this->button == other.button;
+	ret &= this->foreground == other.foreground;
+
+	ret &= this->textfield == other.textfield;
+	ret &= this->part == other.part;
+	ret &= this->list == other.list;
+
+	ret &= this->titleFont == other.titleFont;
+	ret &= this->subTitleFont == other.subTitleFont;
+	ret &= this->normalFont == other.normalFont;
+	ret &= this->copyrightFont == other.copyrightFont;
+
+	ret &= this->icons == other.icons;
+
+	return ret;
 }
 } // namespace fse

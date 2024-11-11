@@ -13,6 +13,7 @@ struct TestTranslations {
 		QCOMPARE(manager.errorsManager()->type(), fse::ErrorsManager::Type::NoError);
 
 		// English
+		manager.translationsManager()->setCurrent("en");
 		QCOMPARE(manager.translationsManager()->current(), "en");
 		QCOMPARE(QCoreApplication::translate("EntityModel", "None"), "None");
 

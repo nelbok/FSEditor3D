@@ -22,6 +22,7 @@ public:
 
 	virtual void load(const QJsonObject& json);
 	virtual void save(QJsonObject& json) const;
+	bool operator==(const Color& other) const;
 
 	QColor normal{ 90, 7, 90 };
 	QColor alternative{ 90, 7, 90 };
@@ -29,9 +30,6 @@ public:
 	QColor hovered{ 90, 7, 90 };
 	QColor disabled{ 90, 7, 90 };
 };
-
-bool operator!=(const Color& l, const Color& r);
-bool operator==(const Color& l, const Color& r);
 
 class Border : public Color {
 	Q_GADGET
@@ -43,12 +41,10 @@ public:
 
 	void load(const QJsonObject& json) override;
 	void save(QJsonObject& json) const override;
+	bool operator==(const Border& other) const;
 
 	int width{ 0 };
 };
-
-bool operator!=(const Border& l, const Border& r);
-bool operator==(const Border& l, const Border& r);
 
 class Rectangle : public Color {
 	Q_GADGET
@@ -61,13 +57,11 @@ public:
 
 	void load(const QJsonObject& json) override;
 	void save(QJsonObject& json) const override;
+	bool operator==(const Rectangle& other) const;
 
 	Border border{};
 	int radius{ 0 };
 };
-
-bool operator!=(const Rectangle& l, const Rectangle& r);
-bool operator==(const Rectangle& l, const Rectangle& r);
 
 class Font {
 	Q_GADGET
@@ -81,32 +75,15 @@ public:
 
 	virtual void load(const QJsonObject& json);
 	virtual void save(QJsonObject& json) const;
+	bool operator==(const Font& other) const;
 
 	bool bold{ false };
 	bool italic{ false };
 	int pointSize{ 10 };
 };
 
-bool operator!=(const Font& l, const Font& r);
-bool operator==(const Font& l, const Font& r);
-
-class Style {
+class Icons {
 	Q_GADGET
-	Q_PROPERTY(const Color& window MEMBER window)
-	Q_PROPERTY(const Color& button MEMBER button)
-	Q_PROPERTY(const Color& foreground MEMBER foreground)
-
-	Q_PROPERTY(const Rectangle& textfield MEMBER textfield)
-	Q_PROPERTY(const Rectangle& part MEMBER part)
-	Q_PROPERTY(const Rectangle& list MEMBER list)
-
-	// Fonts
-	Q_PROPERTY(const Font& titleFont MEMBER titleFont)
-	Q_PROPERTY(const Font& subTitleFont MEMBER subTitleFont)
-	Q_PROPERTY(const Font& normalFont MEMBER normalFont)
-	Q_PROPERTY(const Font& copyrightFont MEMBER copyrightFont)
-
-	// Icons
 	Q_PROPERTY(QString newFile MEMBER newFile)
 	Q_PROPERTY(QString loadFile MEMBER loadFile)
 	Q_PROPERTY(QString saveFile MEMBER saveFile)
@@ -127,27 +104,13 @@ class Style {
 	Q_PROPERTY(QString twitter MEMBER twitter)
 
 public:
-	Style() = default;
-	virtual ~Style() = default;
+	Icons() = default;
+	virtual ~Icons() = default;
 
 	virtual void load(const QJsonObject& json);
 	virtual void save(QJsonObject& json) const;
+	bool operator==(const Icons& other) const;
 
-	Color window;
-	Color button;
-	Color foreground;
-
-	Rectangle textfield;
-	Rectangle part;
-	Rectangle list;
-
-	// Fonts
-	Font titleFont;
-	Font subTitleFont;
-	Font normalFont;
-	Font copyrightFont;
-
-	// Icons
 	QString newFile;
 	QString loadFile;
 	QString saveFile;
@@ -166,5 +129,50 @@ public:
 	QString github;
 	QString discord;
 	QString twitter;
+};
+
+class Style {
+	Q_GADGET
+	Q_PROPERTY(const Color& window MEMBER window)
+	Q_PROPERTY(const Color& button MEMBER button)
+	Q_PROPERTY(const Color& foreground MEMBER foreground)
+
+	Q_PROPERTY(const Rectangle& textfield MEMBER textfield)
+	Q_PROPERTY(const Rectangle& part MEMBER part)
+	Q_PROPERTY(const Rectangle& list MEMBER list)
+
+	// Fonts
+	Q_PROPERTY(const Font& titleFont MEMBER titleFont)
+	Q_PROPERTY(const Font& subTitleFont MEMBER subTitleFont)
+	Q_PROPERTY(const Font& normalFont MEMBER normalFont)
+	Q_PROPERTY(const Font& copyrightFont MEMBER copyrightFont)
+
+	// Icons
+	Q_PROPERTY(const Icons& icons MEMBER icons)
+
+public:
+	Style() = default;
+	virtual ~Style() = default;
+
+	virtual void load(const QJsonObject& json);
+	virtual void save(QJsonObject& json) const;
+	bool operator==(const Style& other) const;
+
+	Color window;
+	Color button;
+	Color foreground;
+
+	Rectangle textfield;
+	Rectangle part;
+	Rectangle list;
+
+	// Fonts
+	Font titleFont;
+	Font subTitleFont;
+	Font normalFont;
+	Font copyrightFont;
+
+	// Icons
+	Icons icons;
 };
 } // namespace fse

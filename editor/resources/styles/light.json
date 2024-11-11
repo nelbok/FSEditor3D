@@ -13,6 +13,24 @@
 		"normal": "#ff000000",
 		"selected": "#ff5a075a"
 	},
+	"icons": {
+		"newFile": "newFile",
+		"loadFile": "loadFile",
+		"saveFile": "saveFile",
+		"undo": "undo",
+		"redo": "redo",
+		"settings": "settings",
+		"centerOn": "centerOn",
+		"originOff": "originOff",
+		"originOn": "originOn",
+		"othersOff": "othersOff",
+		"othersOn": "othersOn",
+		"worldMapOff": "worldMapOff",
+		"worldMapOn": "worldMapOn",
+		"github": "github",
+		"discord": "discord",
+		"twitter": "twitter"
+	},
 	"list": {
 		"alternative": "#ff5a075a",
 		"border": {
@@ -87,21 +105,5 @@
 		"bold": true,
 		"italic": false,
 		"pointSize": 23
-	},
-	"newFile": "newFile",
-	"loadFile": "loadFile",
-	"saveFile": "saveFile",
-	"undo": "undo",
-	"redo": "redo",
-	"settings": "settings",
-	"centerOn": "centerOn",
-	"originOff": "originOff",
-	"originOn": "originOn",
-	"othersOff": "othersOff",
-	"othersOn": "othersOn",
-	"worldMapOff": "worldMapOff",
-	"worldMapOn": "worldMapOn",
-	"github": "github",
-	"discord": "discord",
-	"twitter": "twitter"
+	}
 }

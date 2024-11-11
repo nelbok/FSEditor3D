@@ -14,11 +14,11 @@ struct TestStyles {
 		QCOMPARE(manager.stylesManager()->current(), "basic");
 
 		const auto& style = manager.stylesManager()->style();
-		QVERIFY(style.newFile != "");
-		QVERIFY(style.loadFile != "");
-		QVERIFY(style.saveFile != "");
-		QVERIFY(style.undo != "");
-		QVERIFY(style.redo != "");
-		QVERIFY(style.settings != "");
+		QVERIFY(style.icons.newFile != "");
+		QVERIFY(style.icons.loadFile != "");
+		QVERIFY(style.icons.saveFile != "");
+		QVERIFY(style.icons.undo != "");
+		QVERIFY(style.icons.redo != "");
+		QVERIFY(style.icons.settings != "");
 	}
 };

@@ -14,17 +14,17 @@ FSERectangle {
         spacing: 5
 
         FSEToolButton {
-            source: "qrc:/tools/" + MyStyles.style.newFile + ".svg"
+            source: "qrc:/tools/" + MyStyles.style.icons.newFile + ".svg"
             onClicked: MyManager.reset()
         }
 
         FSEToolButton {
-            source: "qrc:/tools/" + MyStyles.style.loadFile + ".svg"
+            source: "qrc:/tools/" + MyStyles.style.icons.loadFile + ".svg"
             onClicked: openDialog(FileDialog.OpenFile)
         }
 
         FSEToolButton {
-            source: "qrc:/tools/" + MyStyles.style.saveFile + ".svg"
+            source: "qrc:/tools/" + MyStyles.style.icons.saveFile + ".svg"
             onClicked: openDialog(FileDialog.SaveFile)
 
             FSERectangle {
@@ -38,19 +38,19 @@ FSERectangle {
         }
 
         FSEToolButton {
-            source: "qrc:/tools/" + MyStyles.style.undo + ".svg"
+            source: "qrc:/tools/" + MyStyles.style.icons.undo + ".svg"
             enabled: MyCommands.canUndo
             onClicked: MyCommands.undo()
         }
 
         FSEToolButton {
-            source: "qrc:/tools/" + MyStyles.style.redo + ".svg"
+            source: "qrc:/tools/" + MyStyles.style.icons.redo + ".svg"
             enabled: MyCommands.canRedo
             onClicked: MyCommands.redo()
         }
 
         FSEToolButton {
-            source: "qrc:/tools/" + MyStyles.style.settings + ".svg"
+            source: "qrc:/tools/" + MyStyles.style.icons.settings + ".svg"
             onClicked: {
                 MySelection.currentType = (MySelection.currentType === MySelection.Type.Settings) ? MySelection.Type.None : MySelection.Type.Settings
             }
