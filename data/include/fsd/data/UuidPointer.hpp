@@ -35,7 +35,9 @@ protected slots:
 	virtual void update() = 0;
 
 protected:
-	BasePointer(Project* project, void (Project::*signal)(), Entity* parent);
+	using SignalFunc = void (Project::*)();
+
+	BasePointer(Project* project, SignalFunc signal, Entity* parent);
 	~BasePointer() override;
 
 	Project* _project{ nullptr };
@@ -57,7 +59,9 @@ protected:
 template<class T>
 class FSDATA_EXPORT UuidPointer : public BasePointer {
 public:
-	UuidPointer(Project* project, const QList<T*>& (Project::*getter)() const, void (Project::*signal)(), Entity* parent)
+	using GetterFunc = const QList<T*>& (Project::*) () const;
+
+	UuidPointer(Project* project, GetterFunc getter, SignalFunc signal, Entity* parent)
 		: BasePointer(project, signal, parent)
 		, _getter{ getter } {
 		assert(_getter);
@@ -118,7 +122,7 @@ protected:
 
 private:
 	T* _entity{ nullptr };
-	const QList<T*>& (Project::*_getter)() const { nullptr };
+	GetterFunc _getter{ nullptr };
 };
 
 UuidPointer<class Link>* makeLinkPointer(Project* project, Entity* parent);

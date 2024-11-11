@@ -51,7 +51,7 @@ void SaveThread::run() {
 		if (fs::exists(oldPath)) {
 			try {
 				fs::copy(oldPath, newPath, fs::copy_options::recursive);
-			} catch (...) {
+			} catch (const std::filesystem::filesystem_error&) {
 				_result = fsd::FileManager::Result::Error;
 				return;
 			}

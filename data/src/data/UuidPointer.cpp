@@ -7,7 +7,7 @@
 #include <fsd/data/Project.hpp>
 
 namespace fsd {
-BasePointer::BasePointer(Project* project, void (Project::*signal)(), Entity* parent)
+BasePointer::BasePointer(Project* project, SignalFunc signal, Entity* parent)
 	: QObject(parent)
 	, _project{ project }
 	, _ref{ parent } {

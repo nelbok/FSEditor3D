@@ -2,11 +2,22 @@
 
 #include <QtTest/QtTest>
 
+#include <fsd/io/Json.hpp>
+#include <fsd/io/JsonException.hpp>
+
 #include "Dummy.hpp"
 #include "TestCompare.hpp"
 
 struct TestIO {
 	void run() {
+		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toValue({}, {}));
+		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toObject({}, {}));
+		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toArray({}, {}));
+		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toString({}, {}));
+		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toInt({}, {}));
+		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toDouble({}, {}));
+		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toBool({}, {}));
+
 		Dummy::build(_p1);
 		reset();
 		Dummy::build(_p1);

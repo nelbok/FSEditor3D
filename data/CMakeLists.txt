@@ -17,6 +17,7 @@ set(PROJECT_SOURCES
 	include/fsd/io/FileManager.hpp
 	include/fsd/io/Format.hpp
 	include/fsd/io/Json.hpp
+	include/fsd/io/JsonException.hpp
 
 	src/common/Accessors.hpp
 	src/data/Entity.cpp
@@ -31,6 +32,7 @@ set(PROJECT_SOURCES
 	src/data/UuidPointer.cpp
 	src/io/FileManager.cpp
 	src/io/Json.cpp
+	src/io/JsonException.cpp
 )
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" PREFIX "" FILES ${PROJECT_SOURCES})
 include_directories(${CMAKE_BINARY_DIR}/include)
@@ -38,8 +40,10 @@ include_directories(src)
 include_directories(.)
 
 if (FS_SHARED)
+	message("FSData is compiled as a shared library.")
 	qt_add_library(${CFS_DATA} SHARED ${PROJECT_SOURCES})
 else()
+	message("FSData is compiled as a static library.")
 	qt_add_library(${CFS_DATA} STATIC ${PROJECT_SOURCES})
 endif()
 generate_export_header(${CFS_DATA} EXPORT_FILE_NAME ${CMAKE_BINARY_DIR}/include/fsd/data/FSDataExport.h)

@@ -5,6 +5,8 @@
 #include <QtCore/QSaveFile>
 #include <QtCore/QFile>
 
+#include <fsd/io/JsonException.hpp>
+
 #include <fse/managers/ErrorsManager.hpp>
 
 #include "tools/DefaultSettings.hpp"
@@ -25,9 +27,11 @@ struct StylesManager::Impl {
 
 		try {
 			const auto& document = QJsonDocument::fromJson(file.readAll());
-			assert(!document.isNull());
+			if (document.isNull()) {
+				throw fsd::JsonException(fsd::JsonException::Error::InvalidDocument);
+			}
 			style.load(document.object());
-		} catch (const std::exception&) {
+		} catch (const fsd::JsonException&) {
 			style = Style{};
 			style.foreground.normal = { 0, 0, 0 };
 			style.part.border.normal = { 0, 0, 0 };

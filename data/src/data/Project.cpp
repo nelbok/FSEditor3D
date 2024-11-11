@@ -1,7 +1,5 @@
 #include <fsd/data/Project.hpp>
 
-#include <stdexcept>
-
 #include <QtCore/QCoreApplication>
 #include <QtCore/QThread>
 
@@ -12,6 +10,7 @@
 #include <fsd/data/UuidPointer.hpp>
 #include <fsd/io/Format.hpp>
 #include <fsd/io/Json.hpp>
+#include <fsd/io/JsonException.hpp>
 
 #include "common/Accessors.hpp"
 
@@ -40,7 +39,7 @@ struct Project::Impl {
 		const auto& jsonArray = Json::toArray(key, json);
 		for (const auto& jsonEntity : jsonArray) {
 			if (!jsonEntity.isObject()) {
-				throw std::runtime_error("JSON isn't an object");
+				throw JsonException(JsonException::Error::InvalidObject);
 			}
 			auto* entity = new TClass(project);
 			entity->load(jsonEntity.toObject());

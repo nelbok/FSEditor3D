@@ -1,7 +1,5 @@
 #include <fsd/io/FileManager.hpp>
 
-#include <stdexcept>
-
 #include <QtCore/QCoreApplication>
 #include <QtCore/QFile>
 #include <QtCore/QJsonDocument>
@@ -11,6 +9,7 @@
 #include <QtCore/QUrl>
 
 #include <fsd/data/Project.hpp>
+#include <fsd/io/JsonException.hpp>
 
 namespace fsd {
 
@@ -135,10 +134,10 @@ private:
 		try {
 			const auto& document = QJsonDocument::fromJson(file.readAll());
 			if (document.isNull()) {
-				throw std::runtime_error("Invalid document");
+				throw JsonException(JsonException::Error::InvalidDocument);
 			}
 			_project->load(document.object());
-		} catch (...) {
+		} catch (const JsonException&) {
 			_project->reset();
 			_result = Result::Error;
 		}

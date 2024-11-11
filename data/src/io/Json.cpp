@@ -1,54 +1,54 @@
 #include <fsd/io/Json.hpp>
 
-#include <stdexcept>
+#include <fsd/io/JsonException.hpp>
 
 namespace fsd::Json {
 // Common
 QJsonValue toValue(const QString& key, const QJsonObject& json) {
 	if (!json.contains(key)) {
-		throw std::runtime_error("JSON doesn't contain the key");
+		throw JsonException(JsonException::Error::UnknownKey);
 	}
 	return json[key];
 }
 
 QJsonObject toObject(const QString& key, const QJsonObject& json) {
 	if (!json.contains(key) || !json[key].isObject()) {
-		throw std::runtime_error("JSON doesn't contain the key or the value isn't an object");
+		throw JsonException(JsonException::Error::InvalidObject);
 	}
 	return json[key].toObject();
 }
 
 QJsonArray toArray(const QString& key, const QJsonObject& json) {
 	if (!json.contains(key) || !json[key].isArray()) {
-		throw std::runtime_error("JSON doesn't contain the key or the value isn't an array");
+		throw JsonException(JsonException::Error::InvalidArray);
 	}
 	return json[key].toArray();
 }
 
 QString toString(const QString& key, const QJsonObject& json) {
 	if (!json.contains(key) || !json[key].isString()) {
-		throw std::runtime_error("JSON doesn't contain the key or the value isn't a string");
+		throw JsonException(JsonException::Error::InvalidString);
 	}
 	return json[key].toString();
 }
 
 int toInt(const QString& key, const QJsonObject& json) {
 	if (!json.contains(key) || !json[key].isDouble()) {
-		throw std::runtime_error("JSON doesn't contain the key or the value isn't an integer");
+		throw JsonException(JsonException::Error::InvalidInteger);
 	}
 	return json[key].toInt();
 }
 
 double toDouble(const QString& key, const QJsonObject& json) {
 	if (!json.contains(key) || !json[key].isDouble()) {
-		throw std::runtime_error("JSON doesn't contain the key or the value isn't a double");
+		throw JsonException(JsonException::Error::InvalidDouble);
 	}
 	return json[key].toDouble();
 }
 
 bool toBool(const QString& key, const QJsonObject& json) {
 	if (!json.contains(key) || !json[key].isBool()) {
-		throw std::runtime_error("JSON doesn't contain the key or the value isn't a bool");
+		throw JsonException(JsonException::Error::InvalidBoolean);
 	}
 	return json[key].toBool();
 }
@@ -56,7 +56,7 @@ bool toBool(const QString& key, const QJsonObject& json) {
 // Qt classes
 QUrl toUrl(const QJsonValue& json) {
 	if (!json.toVariant().isValid()) {
-		throw std::runtime_error("JSON isn't a valid url");
+		throw JsonException(JsonException::Error::InvalidUrl);
 	}
 	return json.toVariant().toUrl();
 }
@@ -67,7 +67,7 @@ QJsonValue fromUrl(const QUrl& value) {
 
 QUuid toUuid(const QJsonValue& json) {
 	if (!json.toVariant().isValid()) {
-		throw std::runtime_error("JSON isn't a valid uuid");
+		throw JsonException(JsonException::Error::InvalidUuid);
 	}
 	return json.toVariant().toUuid();
 }
@@ -78,7 +78,7 @@ QJsonValue fromUuid(const QUuid& value) {
 
 QColor toColor(const QJsonValue& json) {
 	if (!json.isString()) {
-		throw std::runtime_error("JSON isn't a valid color");
+		throw JsonException(JsonException::Error::InvalidColor);
 	}
 	return { json.toString() };
 }

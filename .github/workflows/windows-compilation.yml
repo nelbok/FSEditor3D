@@ -24,7 +24,7 @@ jobs:
           version: '6.8.*'
           arch: 'win64_msvc2022_64'
           modules: 'qtquick3d qtquick3dphysics qtshadertools qtquicktimeline'
-      - run: cmake -B build
+      - run: cmake -B build -D FS_SHARED=ON
       - run: cmake --build build --config Release
       - run: ./build/tests/Release/tests.exe -o log.txt
       - run: cat log.txt
