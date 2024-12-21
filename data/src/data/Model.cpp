@@ -1,5 +1,6 @@
 #include <fsd/data/Model.hpp>
 
+#include <fsd/data/DataException.hpp>
 #include <fsd/data/Project.hpp>
 #include <fsd/io/Format.hpp>
 #include <fsd/io/Json.hpp>
@@ -57,8 +58,9 @@ Model::ModelType Model::modelType() const {
 }
 
 void Model::setModelType(ModelType modelType) {
-	// FIXME: Make it an exception
-	assert(this->modelType() == modelType || !hasRef());
+	if (this->modelType() != modelType && hasRef())
+		throw DataException(DataException::Error::ModelTypeError);
+
 	TOOLS_SETTER(Model, modelType);
 }
 

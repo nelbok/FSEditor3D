@@ -1,5 +1,6 @@
 #include <fsd/data/Shape.hpp>
 
+#include <fsd/data/DataException.hpp>
 #include <fsd/data/Model.hpp>
 #include <fsd/data/Project.hpp>
 #include <fsd/data/UuidPointer.hpp>
@@ -34,9 +35,10 @@ Model* Shape::model() const {
 }
 
 void Shape::setModel(Model* model) {
-	// FIXME: Make it an exception
-	assert(!model || (model->modelType() == Model::ModelType::Link && type() == Type::Link) || (model->modelType() == Model::ModelType::Object && type() == Type::Object)
-				 || (model->modelType() == Model::ModelType::Place && type() == Type::Place));
+	if (model
+			&& !((model->modelType() == Model::ModelType::Link && type() == Type::Link) || (model->modelType() == Model::ModelType::Object && type() == Type::Object)
+					 || (model->modelType() == Model::ModelType::Place && type() == Type::Place)))
+		throw DataException(DataException::Error::ShapeModelError);
 
 	const auto* oldModel = this->model();
 	if (_impl->model->set(model)) {

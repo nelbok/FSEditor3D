@@ -4,6 +4,7 @@ qt_standard_project_setup(REQUIRES 6.5)
 
 set(CMAKE_DEBUG_POSTFIX _d)
 set(PROJECT_SOURCES
+	include/fsd/data/DataException.hpp
 	include/fsd/data/Entity.hpp
 	include/fsd/data/Geometry.hpp
 	include/fsd/data/Link.hpp
@@ -20,6 +21,7 @@ set(PROJECT_SOURCES
 	include/fsd/io/JsonException.hpp
 
 	src/common/Accessors.hpp
+	src/data/DataException.cpp
 	src/data/Entity.cpp
 	src/data/Geometry.cpp
 	src/data/Link.cpp
