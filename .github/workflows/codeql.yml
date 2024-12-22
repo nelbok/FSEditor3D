@@ -60,7 +60,7 @@ jobs:
 
     - uses: jurplel/install-qt-action@v3
       with:
-        version: '6.6.*'
+        version: '6.8.*'
         arch: 'linux_gcc_64'
         modules: 'qtquick3d qtquick3dphysics qtshadertools qtquicktimeline'
 
