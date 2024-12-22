@@ -7,7 +7,7 @@ namespace fse {
 
 PlaceCommand::PlaceCommand(Commands* commands)
 	: QObject(commands)
-	, _c{ commands } {
+	, _cmd{ commands } {
 	assert(commands);
 }
 

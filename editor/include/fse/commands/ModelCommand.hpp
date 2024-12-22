@@ -19,6 +19,6 @@ public:
 	Q_INVOKABLE void setModelType(fsd::Model* model, fsd::Model::ModelType type);
 
 private:
-	Commands* _c{ nullptr };
+	Commands* _cmd{ nullptr };
 };
 } // namespace fse

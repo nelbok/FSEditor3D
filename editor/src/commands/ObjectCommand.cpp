@@ -7,7 +7,7 @@ namespace fse {
 
 ObjectCommand::ObjectCommand(Commands* commands)
 	: QObject(commands)
-	, _c{ commands } {
+	, _cmd{ commands } {
 	assert(commands);
 }
 

@@ -12,7 +12,7 @@ class ProjectCommand : public QObject {
 	Q_OBJECT
 
 public:
-	explicit ProjectCommand(fsd::Project* project, CommandsManager* mng, Commands* commands);
+	explicit ProjectCommand(fsd::Project* project, CommandsManager* manager, Commands* commands);
 	~ProjectCommand() override;
 
 	Q_INVOKABLE void setDefaultPlace(fsd::Place* defaultPlace);
@@ -35,7 +35,7 @@ public:
 
 private:
 	fsd::Project* _p{ nullptr };
-	CommandsManager* _cm{ nullptr };
-	Commands* _c{ nullptr };
+	CommandsManager* _mng{ nullptr };
+	Commands* _cmd{ nullptr };
 };
 } // namespace fse

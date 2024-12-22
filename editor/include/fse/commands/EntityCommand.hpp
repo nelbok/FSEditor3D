@@ -17,6 +17,6 @@ public:
 	Q_INVOKABLE void setName(fsd::Entity* entity, const QString& name);
 
 private:
-	Commands* _c{ nullptr };
+	Commands* _cmd{ nullptr };
 };
 } // namespace fse

@@ -3,16 +3,16 @@
 ## About
 
 Create a project with multiple places and a starting place.
-- Using Balsam to convert 3D models into QML file
-- One model can be used for one of more places, objects or links
+- Using Balsam to convert 3D models into QML files
+- Using JSON as the file format
+- One model can be used as many as places, objects or links
 - Links are used to have a connection between places
-- Objects can be anything put in a place
-- JSON is the file format
+- Objects are used inside places
 
 ## Requirements
 
 - CMake 3.27+
-- C++ 17
+- C++ 20
 - Qt6 Quick 
 
 ## Compilation

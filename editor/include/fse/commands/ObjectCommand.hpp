@@ -15,6 +15,6 @@ public:
 	~ObjectCommand() override;
 
 private:
-	Commands* _c{ nullptr };
+	Commands* _cmd{ nullptr };
 };
 } // namespace fse

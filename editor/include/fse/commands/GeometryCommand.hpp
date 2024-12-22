@@ -19,6 +19,6 @@ public:
 	Q_INVOKABLE void setLocalScale(fsd::Geometry* geometry, const QVector3D& localScale);
 
 private:
-	Commands* _c{ nullptr };
+	Commands* _cmd{ nullptr };
 };
 } // namespace fse

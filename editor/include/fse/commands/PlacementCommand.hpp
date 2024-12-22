@@ -17,6 +17,6 @@ public:
 	Q_INVOKABLE void setPlace(fsd::Placement* placement, fsd::Place* place);
 
 private:
-	Commands* _c{ nullptr };
+	Commands* _cmd{ nullptr };
 };
 } // namespace fse

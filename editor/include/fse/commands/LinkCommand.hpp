@@ -17,6 +17,6 @@ public:
 	Q_INVOKABLE void setLink(fsd::Link* link, fsd::Link* otherlink);
 
 private:
-	Commands* _c{ nullptr };
+	Commands* _cmd{ nullptr };
 };
 } // namespace fse
