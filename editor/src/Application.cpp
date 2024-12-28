@@ -12,6 +12,7 @@
 #include <fse/managers/CommandsManager.hpp>
 #include <fse/managers/ErrorsManager.hpp>
 #include <fse/managers/FileManager.hpp>
+#include <fse/managers/KeyBindingsManager.hpp>
 #include <fse/managers/ModelsManager.hpp>
 #include <fse/managers/PreviewManager.hpp>
 #include <fse/managers/SelectionManager.hpp>
@@ -78,6 +79,7 @@ void initRegister(Manager& manager) {
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyCommands", manager.commandsManager());
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyErrors", manager.errorsManager());
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyFile", manager.fileManager());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyKeyBindings", manager.keyboardsManager());
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyModels", manager.modelsManager());
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyPreview", manager.previewManager());
 	qmlRegisterSingletonInstance("editor", 1, 0, "MySelection", manager.selectionManager());

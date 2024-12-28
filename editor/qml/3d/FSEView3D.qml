@@ -38,7 +38,7 @@ View3D {
         eulerRotation: MyPreview.cameraRotation
         onEulerRotationChanged: { MyPreview.cameraRotation = eulerRotation }
     }
-    WasdController {
+    FSEController3D {
         controlledObject: camera
     }
 

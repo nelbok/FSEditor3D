@@ -6,6 +6,7 @@ import editor
 FSERectangle {
     enum SettingsType {
         Interface,
+        KeyBindings,
         About
     }
     property int selected: FSESettings.SettingsType.Interface
@@ -22,7 +23,6 @@ FSERectangle {
         anchors.leftMargin: 10
 
         id: intefaceBtn
-
         text: qsTr("Interface")
         selected: root.selected === FSESettings.SettingsType.Interface
         onClicked: root.selected = FSESettings.SettingsType.Interface
@@ -32,6 +32,17 @@ FSERectangle {
         anchors.top: parent.top
         anchors.topMargin: 10
         anchors.left: intefaceBtn.right
+
+        id: keyboardBtn
+        text: qsTr("Key Bindings")
+        selected: root.selected === FSESettings.SettingsType.KeyBindings
+        onClicked: root.selected = FSESettings.SettingsType.KeyBindings
+    }
+
+    FSEButton {
+        anchors.top: parent.top
+        anchors.topMargin: 10
+        anchors.left: keyboardBtn.right
 
         id: aboutBtn
         text: qsTr("About")
@@ -53,6 +64,11 @@ FSERectangle {
         FSESettingsInterface {
             anchors.centerIn: content
             visible: root.selected === FSESettings.SettingsType.Interface
+        }
+
+        FSESettingsKeyBindings {
+            anchors.centerIn: content
+            visible: root.selected === FSESettings.SettingsType.KeyBindings
         }
 
         FSESettingsAbout {

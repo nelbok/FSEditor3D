@@ -14,7 +14,7 @@ ColumnLayout {
     }
 
     Item {
-        height: 10
+        Layout.preferredHeight: 10
     }
 
     FSEText {
@@ -22,7 +22,7 @@ ColumnLayout {
     }
 
     Item {
-        height: 20
+        Layout.preferredHeight: 20
     }
 
     FSEText {
@@ -34,7 +34,7 @@ ColumnLayout {
     }
 
     Item {
-        height: 20
+        Layout.preferredHeight: 20
     }
 
     FSEText {
@@ -50,7 +50,7 @@ ColumnLayout {
     }
 
     Item {
-        height: 20
+        Layout.preferredHeight: 20
     }
 
     FSEText {

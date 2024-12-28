@@ -1,11 +1,12 @@
 #include <fse/Manager.hpp>
 
-#include <QtGui/QGuiApplication>
 #include <QtGui/QClipboard>
+#include <QtGui/QGuiApplication>
 
 #include <fse/managers/CommandsManager.hpp>
 #include <fse/managers/ErrorsManager.hpp>
 #include <fse/managers/FileManager.hpp>
+#include <fse/managers/KeyBindingsManager.hpp>
 #include <fse/managers/ModelsManager.hpp>
 #include <fse/managers/PreviewManager.hpp>
 #include <fse/managers/SelectionManager.hpp>
@@ -23,6 +24,7 @@ struct Manager::Impl {
 	CommandsManager* commandsManager{ nullptr };
 	ErrorsManager* errorsManager{ nullptr };
 	FileManager* fileManager{ nullptr };
+	KeyBindingsManager* keyboardsManager{ nullptr };
 	ModelsManager* modelsManager{ nullptr };
 	PreviewManager* previewManager{ nullptr };
 	SelectionManager* selectionManager{ nullptr };
@@ -47,6 +49,7 @@ void Manager::init() {
 	_impl->commandsManager = new CommandsManager(this);
 	_impl->errorsManager = new ErrorsManager(this);
 	_impl->fileManager = new FileManager(this);
+	_impl->keyboardsManager = new KeyBindingsManager(this);
 	_impl->modelsManager = new ModelsManager(this);
 	_impl->previewManager = new PreviewManager(this);
 	_impl->selectionManager = new SelectionManager(this);
@@ -57,6 +60,7 @@ void Manager::init() {
 
 	_impl->commandsManager->init(_impl->project);
 	_impl->fileManager->init(this);
+	_impl->keyboardsManager->init();
 	_impl->modelsManager->init(_impl->project);
 	_impl->previewManager->init(this);
 	_impl->stylesManager->init(_impl->errorsManager);
@@ -115,6 +119,11 @@ ErrorsManager* Manager::errorsManager() const {
 FileManager* Manager::fileManager() const {
 	assert(_impl->fileManager);
 	return _impl->fileManager;
+}
+
+KeyBindingsManager* Manager::keyboardsManager() const {
+	assert(_impl->keyboardsManager);
+	return _impl->keyboardsManager;
 }
 
 ModelsManager* Manager::modelsManager() const {

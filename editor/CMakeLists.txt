@@ -23,6 +23,7 @@ set(PROJECT_SOURCES
 	include/fse/managers/CommandsManager.hpp
 	include/fse/managers/ErrorsManager.hpp
 	include/fse/managers/FileManager.hpp
+	include/fse/managers/KeyBindingsManager.hpp
 	include/fse/managers/ModelsManager.hpp
 	include/fse/managers/PreviewManager.hpp
 	include/fse/managers/SelectionManager.hpp
@@ -40,6 +41,7 @@ set(PROJECT_SOURCES
 	include/fse/tools/About.hpp
 	include/fse/tools/Balsam.hpp
 	include/fse/tools/FileThread.hpp
+	include/fse/tools/KeyBindings.hpp
 	include/fse/tools/LoadThread.hpp
 	include/fse/tools/SaveThread.hpp
 	include/fse/tools/Settings.hpp
@@ -64,6 +66,7 @@ set(PROJECT_SOURCES
 	src/managers/CommandsManager.cpp
 	src/managers/ErrorsManager.cpp
 	src/managers/FileManager.cpp
+	src/managers/KeyBindingsManager.cpp
 	src/managers/ModelsManager.cpp
 	src/managers/PreviewManager.cpp
 	src/managers/SelectionManager.cpp
@@ -82,6 +85,7 @@ set(PROJECT_SOURCES
 	src/tools/Balsam.cpp
 	src/tools/DefaultSettings.hpp
 	src/tools/FileThread.cpp
+	src/tools/KeyBindings.cpp
 	src/tools/LoadThread.cpp
 	src/tools/SaveThread.cpp
 	src/tools/Settings.cpp
@@ -96,6 +100,7 @@ set(PROJECT_SOURCES
 	resources/resources.qrc
 )
 set(QML_SOURCES
+	qml/3d/FSEController3D.qml
 	qml/3d/FSETransformNode.qml
 	qml/3d/FSEView3D.qml
 	qml/3d/ModelLoader.js
@@ -105,6 +110,7 @@ set(QML_SOURCES
 	qml/common/FSEComboBox.qml
 	qml/common/FSEField.qml
 	qml/common/FSEIconButton.qml
+	qml/common/FSEKeyButton.qml
 	qml/common/FSEList.qml
 	qml/common/FSEMenuButton.qml
 	qml/common/FSEModule.qml
@@ -122,6 +128,7 @@ set(QML_SOURCES
 
 	qml/parts/settings/FSESettingsAbout.qml
 	qml/parts/settings/FSESettingsInterface.qml
+	qml/parts/settings/FSESettingsKeyBindings.qml
 
 	qml/parts/FSELinks.qml
 	qml/parts/FSEMenu.qml

@@ -13,6 +13,7 @@ namespace fse {
 class CommandsManager;
 class ErrorsManager;
 class FileManager;
+class KeyBindingsManager;
 class ModelsManager;
 class PreviewManager;
 class SelectionManager;
@@ -43,6 +44,7 @@ public:
 	CommandsManager* commandsManager() const;
 	ErrorsManager* errorsManager() const;
 	FileManager* fileManager() const;
+	KeyBindingsManager* keyboardsManager() const;
 	ModelsManager* modelsManager() const;
 	PreviewManager* previewManager() const;
 	SelectionManager* selectionManager() const;
