@@ -80,6 +80,7 @@ void Settings::load() {
 	_manager->keyboardsManager()->keyBindings()->down1 = settings.value(DefaultSettings::keyBindingsDown1Key, DefaultSettings::keyBindingsDown1Value).value<Qt::Key>();
 	_manager->keyboardsManager()->keyBindings()->down2 = settings.value(DefaultSettings::keyBindingsDown2Key, DefaultSettings::keyBindingsDown2Value).value<Qt::Key>();
 	_manager->keyboardsManager()->keyBindings()->sprint = settings.value(DefaultSettings::keyBindingsSprintKey, DefaultSettings::keyBindingsSprintValue).value<Qt::Key>();
+	_manager->keyboardsManager()->updateCurrent();
 	settings.endGroup();
 }
 

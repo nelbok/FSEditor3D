@@ -30,6 +30,9 @@ public:
 
 	Q_INVOKABLE QString toString(Qt::Key key) const;
 
+public slots:
+	void updateCurrent();
+
 private:
 	struct Impl;
 	std::unique_ptr<Impl> _impl;

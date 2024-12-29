@@ -8,9 +8,25 @@ GridLayout {
     columnSpacing: 5
     rowSpacing: 5
 
+    FSEComboBox {
+        Layout.alignment: Qt.AlignHCenter
+        Layout.columnSpan: 3
+
+        name: qsTr("Default settings")
+        model: ListModel {
+            ListElement { value: MyKeyBindings.KeyBindingsType.Custom; name: qsTr("Custom") }
+            ListElement { value: MyKeyBindings.KeyBindingsType.Qwerty; name: qsTr("QWERTY") }
+            ListElement { value: MyKeyBindings.KeyBindingsType.Azerty; name: qsTr("AZERTY") }
+        }
+
+        currentIndex: MyKeyBindings.current
+        onActivated: MyKeyBindings.current = currentIndex
+    }
+
     FSEText {
-        text: qsTr("Forward")
         Layout.alignment: Qt.AlignRight
+
+        text: qsTr("Forward")
     }
     FSEKeyButton {
         text: MyKeyBindings.toString(MyKeyBindings.keyBindings.forward1)
@@ -22,8 +38,9 @@ GridLayout {
     }
 
     FSEText {
-        text: qsTr("Backward")
         Layout.alignment: Qt.AlignRight
+
+        text: qsTr("Backward")
     }
     FSEKeyButton {
         text: MyKeyBindings.toString(MyKeyBindings.keyBindings.backward1)
@@ -35,8 +52,9 @@ GridLayout {
     }
 
     FSEText {
-        text: qsTr("Left")
         Layout.alignment: Qt.AlignRight
+
+        text: qsTr("Left")
     }
     FSEKeyButton {
         text: MyKeyBindings.toString(MyKeyBindings.keyBindings.left1)
@@ -48,8 +66,9 @@ GridLayout {
     }
 
     FSEText {
-        text: qsTr("Right")
         Layout.alignment: Qt.AlignRight
+
+        text: qsTr("Right")
     }
     FSEKeyButton {
         text: MyKeyBindings.toString(MyKeyBindings.keyBindings.right1)
@@ -61,8 +80,9 @@ GridLayout {
     }
 
     FSEText {
-        text: qsTr("Up")
         Layout.alignment: Qt.AlignRight
+
+        text: qsTr("Up")
     }
     FSEKeyButton {
         text: MyKeyBindings.toString(MyKeyBindings.keyBindings.up1)
@@ -74,8 +94,9 @@ GridLayout {
     }
 
     FSEText {
-        text: qsTr("Down")
         Layout.alignment: Qt.AlignRight
+
+        text: qsTr("Down")
     }
     FSEKeyButton {
         text: MyKeyBindings.toString(MyKeyBindings.keyBindings.down1)
@@ -85,4 +106,15 @@ GridLayout {
         text: MyKeyBindings.toString(MyKeyBindings.keyBindings.down2)
         onKeyPressed: (key)=> { MyKeyBindings.keyBindings.down2 = key }
     }
+
+    FSEText {
+        Layout.alignment: Qt.AlignRight
+
+        text: qsTr("Sprint")
+    }
+    FSEKeyButton {
+        text: MyKeyBindings.toString(MyKeyBindings.keyBindings.sprint)
+        onKeyPressed: (key)=> { MyKeyBindings.keyBindings.sprint = key }
+    }
+    Item { }
 }

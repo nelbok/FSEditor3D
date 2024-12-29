@@ -24,6 +24,7 @@ public:
 	explicit KeyBindings(QObject* parent = nullptr);
 	~KeyBindings() override;
 
+	KeyBindings& operator=(const KeyBindings& other);
 	bool operator==(const KeyBindings& other) const;
 
 	Qt::Key forward1{ Qt::Key_unknown };
