@@ -101,6 +101,7 @@ set(PROJECT_SOURCES
 )
 set(QML_SOURCES
 	qml/3d/FSEController3D.qml
+	qml/3d/FSEMeshShape.qml
 	qml/3d/FSETransformNode.qml
 	qml/3d/FSEView3D.qml
 	qml/3d/ModelLoader.js

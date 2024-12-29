@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick3D
 import QtQuick3D.Helpers
+import QtQuick3D.Physics
 
 import "ModelLoader.js" as MyLoader
 
@@ -10,6 +11,12 @@ import editor
 // Qt Quick 3D Unit: cm Angle: degree
 View3D {
     id: view3D
+    PhysicsWorld {
+        id: physicsWorld
+        running: true
+        scene: view3D.scene
+        forceDebugDraw: true // DEBUG
+    }
 
     environment: SceneEnvironment {
         clearColor: "skyblue"

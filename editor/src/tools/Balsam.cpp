@@ -67,6 +67,12 @@ QUrl Balsam::balsamPath() const {
 	return QUrl::fromLocalFile(fse::Config::balsam);
 }
 
+QUrl Balsam::qmlDir(const fsd::Model* model) const {
+	assert(model);
+	auto tmp = Tools::modelPath(detail::path(_manager), model);
+	return QUrl::fromLocalFile(QString::fromStdString(tmp.string()));
+}
+
 QUrl Balsam::qmlPath(const fsd::Model* model) const {
 	assert(model);
 	assert(model->qmlName() != "");

@@ -21,6 +21,7 @@ public:
 
 	QUrl balsamPath() const;
 
+	Q_INVOKABLE QUrl qmlDir(const fsd::Model* model) const;
 	Q_INVOKABLE QUrl qmlPath(const fsd::Model* model) const;
 	Q_INVOKABLE void generate(fsd::Model* model, const QUrl& url, QStringList args = {});
 

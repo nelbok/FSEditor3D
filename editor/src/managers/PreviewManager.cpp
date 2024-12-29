@@ -236,7 +236,12 @@ void PreviewManager::fillDatas(QList<PreviewData>& datas, QList<fsd::Geometry*>&
 
 	// Add only if there is a valid model
 	if (model && model->qmlName() != "") {
-		datas.append({ geometry, _impl->manager->balsam()->qmlPath(model), offset });
+		datas.append({
+			geometry,
+			_impl->manager->balsam()->qmlDir(model),
+			_impl->manager->balsam()->qmlPath(model),
+			offset,
+		});
 	}
 }
 

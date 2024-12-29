@@ -1,9 +1,10 @@
 import QtQuick
 import QtQuick3D
+import QtQuick3D.Physics
 
 import editor
 
-Node {
+StaticRigidBody {
     property MyGeometry geometry: null
     property vector3d offset: Qt.vector3d(0, 0, 0)
     property alias innerNode: innerNode
@@ -18,6 +19,8 @@ Node {
         eulerRotation: (node.geometry) ? node.geometry.globalRotation : Qt.vector3d(0, 0, 0)
         scale: (node.geometry) ? node.geometry.globalScale : Qt.vector3d(1, 1, 1)
     }
+
+    // Center indicator
     Model {
         position: (node.geometry) ? node.geometry.globalPosition : Qt.vector3d(0, 0, 0)
         scale: Qt.vector3d(0.1, 0.1, 0.1)

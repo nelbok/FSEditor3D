@@ -1,8 +1,10 @@
 .pragma library
 .import QtQuick as QtQ
+.import QtQuick3D as QtQ3D
 
 // Global
 var _cptTransform = Qt.createComponent("FSETransformNode.qml")
+var _cptMeshShape = Qt.createComponent("FSEMeshShape.qml")
 var _cptModel = null
 var _transforms = []
 var _scene = null
@@ -59,11 +61,15 @@ function beginLoading() {
 
 function finishLoading() {
     if (_cptModel.status === QtQ.Component.Ready) {
+        // Create FSETransformNode instance
         var transform = _cptTransform.createObject(_scene)
         transform.geometry = _current.geometry
         transform.offset = _current.offset
-        _cptModel.createObject(transform.innerNode)
         _transforms.push(transform)
+
+        // Create model instance
+        var model = _cptModel.createObject(transform.innerNode)
+        findModels(model, transform)
     } else if (cpt.status === QtQ.Component.Error) {
         console.log("Error while loading:" + _cptModel.errorString())
     } else {
@@ -72,4 +78,17 @@ function finishLoading() {
     _cptModel.destroy()
     _cptModel = null
     next()
+}
+
+function findModels(node, transform) {
+    if (node instanceof QtQ3D.Model) {
+        var meshShape = _cptMeshShape.createObject(transform)
+        meshShape.geometry = _current.geometry
+        meshShape.offset = _current.offset
+        meshShape.source = _current.basePath + "/" + node.source
+        transform.collisionShapes.push(meshShape)
+    }
+    for (var i in node.children) {
+        findModels(node.children[i], transform)
+    }
 }

@@ -13,10 +13,12 @@ class Manager;
 struct PreviewData {
 	Q_GADGET
 	Q_PROPERTY(fsd::Geometry* geometry MEMBER geometry CONSTANT)
+	Q_PROPERTY(QUrl basePath MEMBER basePath CONSTANT)
 	Q_PROPERTY(QUrl model MEMBER model CONSTANT)
 	Q_PROPERTY(QVector3D offset MEMBER offset CONSTANT)
 public:
 	fsd::Geometry* geometry;
+	QUrl basePath;
 	QUrl model;
 	QVector3D offset{ 0, 0, 0 };
 };
