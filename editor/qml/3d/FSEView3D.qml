@@ -36,26 +36,34 @@ View3D {
     }
 
     // Camera with its controller to make it easy to move around the scene
-    PerspectiveCamera {
-        id: camera
+    CharacterController {
+        id: character
 
-        position: MyPreview.cameraPosition
+        collisionShapes: CapsuleShape {
+            diameter: 50
+            height: 50
+        }
+
+        //gravity: physicsWorld.gravity
+
+        movement: controller.movement
         onPositionChanged: { MyPreview.cameraPosition = position }
+        eulerRotation.y: controller.rotation.y
 
-        eulerRotation: MyPreview.cameraRotation
-        onEulerRotationChanged: { MyPreview.cameraRotation = eulerRotation }
+        PerspectiveCamera {
+            eulerRotation.x: controller.rotation.x
+        }
     }
     FSEController3D {
-        controlledObject: camera
+        id: controller
+        rotation: MyPreview.cameraRotation
+        onRotationChanged: { MyPreview.cameraRotation = rotation }
     }
 
     Connections {
         target: MyPreview
         function onCameraPositionUpdated() {
-            camera.position = MyPreview.cameraPosition
-        }
-        function onCameraRotationUpdated() {
-            camera.eulerRotation = MyPreview.cameraRotation
+            character.teleport(MyPreview.cameraPosition)
         }
         function onPreviewUpdated() {
             MyLoader.load(MyPreview.datas)
@@ -64,5 +72,6 @@ View3D {
 
     Component.onCompleted: {
         MyLoader.setScene(view3D.scene)
+        character.position = MyPreview.cameraPosition
     }
 }
