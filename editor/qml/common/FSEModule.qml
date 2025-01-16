@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Layouts
 
 import editor
 
@@ -11,13 +10,33 @@ FSERectangle {
     property alias partA: partA.children
     property alias partB: partB.children
 
+    id: root
+
     anchors.topMargin: (enabled) ? 10 : -400
     Behavior on anchors.topMargin {
         NumberAnimation { duration: 300 }
     }
 
-    width: 1100
     height: 270
+
+    QtObject {
+        id: data
+
+        property int defaultMargin: 10
+        property int maxSpacing: 120
+        property int margin: {
+            if (data.spacing < data.maxSpacing)
+                return data.defaultMargin
+            return (root.width - data.spacing * 3 - entity.width - selection.width - partA.width - partB.width) / 2
+        }
+
+        property int spacing: {
+            var spacing = (root.width - data.defaultMargin * 2 - entity.width - selection.width - partA.width - partB.width) / 3
+            if (spacing > data.maxSpacing)
+                return data.maxSpacing
+            return spacing
+        }
+    }
 
     MouseArea {
         anchors.fill: parent
@@ -36,7 +55,7 @@ FSERectangle {
         id: title
 
         anchors.left: parent.left
-        anchors.leftMargin: 10
+        anchors.leftMargin: data.margin
         anchors.top: parent.top
         anchors.topMargin: 10
 
@@ -52,40 +71,51 @@ FSERectangle {
         font.pointSize: MyStyles.style.subTitleFont.pointSize
     }
 
-    RowLayout {
+    Item {
+        id: selection
+
+        anchors.left: parent.left
+        anchors.leftMargin: data.margin
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 10
 
-        spacing: 40
+        width: 180
+        height: 220
+    }
 
-        anchors.horizontalCenter: parent.horizontalCenter
+    Item {
+        id: entity
 
-        Item {
-            id: selection
+        anchors.left: selection.right
+        anchors.leftMargin: data.spacing
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 10
 
-            width: 180
-            height: 220
-        }
+        width: 260
+        height: 220
+    }
 
-        Item {
-            id: entity
+    Item {
+        id: partA
 
-            width: 260
-            height: 220
-        }
+        anchors.left: entity.right
+        anchors.leftMargin: data.spacing
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 10
 
-        Item {
-            id: partA
+        width: 260
+        height: 220
+    }
 
-            width: 260
-            height: 220
-        }
+    Item {
+        id: partB
 
-        Item {
-            id: partB
+        anchors.left: partA.right
+        anchors.leftMargin: data.spacing
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 10
 
-            width: 260
-            height: 220
-        }
+        width: 260
+        height: 220
     }
 }

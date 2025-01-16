@@ -16,35 +16,40 @@ Window {
 
     FSEProject {
         anchors.top: menu.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: menu.left
+        anchors.right: menu.right
 
         enabled: (MySelection.currentType === MySelection.Type.Project) && !(progress.visible || message.visible)
     }
 
     FSEModels {
         anchors.top: menu.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: menu.left
+        anchors.right: menu.right
 
         enabled: (MySelection.currentType === MySelection.Type.Models) && !(progress.visible || message.visible)
     }
 
     FSEPlaces {
         anchors.top: menu.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: menu.left
+        anchors.right: menu.right
 
         enabled: (MySelection.currentType === MySelection.Type.Places) && !(progress.visible || message.visible)
     }
 
     FSEObjects {
         anchors.top: menu.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: menu.left
+        anchors.right: menu.right
 
         enabled: (MySelection.currentType === MySelection.Type.Objects) && !(progress.visible || message.visible)
     }
 
     FSELinks {
         anchors.top: menu.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: menu.left
+        anchors.right: menu.right
 
         enabled: (MySelection.currentType === MySelection.Type.Links) && !(progress.visible || message.visible)
     }
@@ -60,25 +65,32 @@ Window {
 
         anchors.top: parent.top
         anchors.topMargin: 10
-        anchors.horizontalCenter: parent.horizontalCenter
-
-        enabled: !(progress.visible || message.visible)
-    }
-
-    FSEToolBar {
-        anchors.top: parent.top
-        anchors.topMargin: 10
-        anchors.right: menu.left
+        anchors.left: toolBar.right
+        anchors.leftMargin: 10
+        anchors.right: previewBar.left
         anchors.rightMargin: 10
 
         enabled: !(progress.visible || message.visible)
     }
 
-    FSEPreviewBar {
+    FSEToolBar {
+        id: toolBar
+
         anchors.top: parent.top
         anchors.topMargin: 10
-        anchors.left: menu.right
+        anchors.left: parent.left
         anchors.leftMargin: 10
+
+        enabled: !(progress.visible || message.visible)
+    }
+
+    FSEPreviewBar {
+        id: previewBar
+
+        anchors.top: parent.top
+        anchors.topMargin: 10
+        anchors.right: parent.right
+        anchors.rightMargin: 10
 
         enabled: !(progress.visible || message.visible)
     }

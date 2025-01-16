@@ -4,7 +4,6 @@ import QtQuick.Layouts
 import editor
 
 FSERectangle {
-    width: 1100
     height: 50
 
     MouseArea {
@@ -17,7 +16,9 @@ FSERectangle {
     }
 
     RowLayout {
-        anchors.centerIn: parent
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 40
         spacing: 20
 
         FSEButton {
@@ -49,10 +50,17 @@ FSERectangle {
             selected: MySelection.currentType === MySelection.Type.Links
             onClicked: MySelection.currentType = MySelection.Type.Links
         }
+    }
+
+    RowLayout {
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.right: parent.right
+        anchors.rightMargin: 40
+        spacing: 20
 
         ColumnLayout {
             spacing: 0
-            width: 140
+            implicitWidth: 140
             Text {
                 Layout.fillWidth: true
 
@@ -80,8 +88,8 @@ FSERectangle {
         }
 
         Item {
-            width: 140
-            height: 20
+            implicitWidth: 140
+            implicitHeight: 20
 
             RowLayout {
                 anchors.horizontalCenter: parent.horizontalCenter
