@@ -4,32 +4,60 @@ import QtQuick.Layouts
 import editor
 
 FSERectangle {
-    width: 50
-    height: 185
+    width: 130
+    height: 365
 
     ColumnLayout {
         anchors.fill: parent
         anchors.margins: 5
         spacing: 5
 
-        FSEToolButton {
-            source: "qrc:/preview/" + MyStyles.style.icons.centerOn + ".svg"
+        FSEButton {
+            text: qsTr("Center on")
+            enabled: !MyPreview.isGravityEnabled
             onClicked: MyPreview.centerOnCurrent()
         }
 
-        FSEToolButton {
-            source: "qrc:/preview/" + (MyPreview.areOtherDatasVisible ? MyStyles.style.icons.othersOn : MyStyles.style.icons.othersOff) + ".svg"
+        FSEButton {
+            text: qsTr("Show objects")
+            selected: MyPreview.areOtherDatasVisible
             onClicked: MyPreview.switchOtherDatasVisible()
         }
 
-        FSEToolButton {
-            source: "qrc:/preview/" + (MyPreview.areOriginsVisible ? MyStyles.style.icons.originOn : MyStyles.style.icons.originOff) + ".svg"
+        FSEButton {
+            text: qsTr("Show links")
+            selected: MyPreview.areOtherDatasVisible
+            onClicked: MyPreview.switchOtherDatasVisible()
+        }
+
+        FSEButton {
+            text: qsTr("Show origins")
+            selected: MyPreview.areOriginsVisible
             onClicked: MyPreview.switchOriginsVisible()
         }
 
-        FSEToolButton {
-            source: "qrc:/preview/" + (MyPreview.isWorldMapVisible ? MyStyles.style.icons.worldMapOn : MyStyles.style.icons.worldMapOff) + ".svg"
-            onClicked: MyPreview.switchWorldMapVisible()
+        FSEButton {
+            text: qsTr("World mode")
+            selected: MyPreview.isWorldMode
+            onClicked: MyPreview.switchWorldMode()
+        }
+
+        FSEButton {
+            text: qsTr("Debug mode")
+            selected: MyPreview.isDebugMode
+            onClicked: MyPreview.switchDebugMode()
+        }
+
+        FSEButton {
+            text: qsTr("Design mode")
+            selected: MyPreview.viewMode === MyPreview.ViewMode.Design
+            onClicked: MyPreview.switchViewMode()
+        }
+
+        FSEButton {
+            text: qsTr("Gravity")
+            selected: MyPreview.isGravityEnabled
+            onClicked: MyPreview.switchGravity()
         }
     }
 }

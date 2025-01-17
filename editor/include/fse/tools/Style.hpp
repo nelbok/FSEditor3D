@@ -91,14 +91,6 @@ class Icons {
 	Q_PROPERTY(QString redo MEMBER redo)
 	Q_PROPERTY(QString settings MEMBER settings)
 
-	Q_PROPERTY(QString centerOn MEMBER centerOn)
-	Q_PROPERTY(QString originOff MEMBER originOff)
-	Q_PROPERTY(QString originOn MEMBER originOn)
-	Q_PROPERTY(QString othersOff MEMBER othersOff)
-	Q_PROPERTY(QString othersOn MEMBER othersOn)
-	Q_PROPERTY(QString worldMapOff MEMBER worldMapOff)
-	Q_PROPERTY(QString worldMapOn MEMBER worldMapOn)
-
 	Q_PROPERTY(QString github MEMBER github)
 	Q_PROPERTY(QString discord MEMBER discord)
 	Q_PROPERTY(QString twitter MEMBER twitter)
@@ -117,14 +109,6 @@ public:
 	QString undo;
 	QString redo;
 	QString settings;
-
-	QString centerOn;
-	QString originOff;
-	QString originOn;
-	QString othersOff;
-	QString othersOn;
-	QString worldMapOff;
-	QString worldMapOn;
 
 	QString github;
 	QString discord;

@@ -6,11 +6,9 @@ import "ModelLoader.js" as MyLoader
 import editor
 
 Item {
-    property bool isCollisateur: false
-
     FSECollideView3D {
         anchors.fill: parent
-        visible: parent.isCollisateur
+        visible: MyPreview.viewMode === MyPreview.ViewMode.Collide
 
         Node {
             id: fseScene
@@ -30,7 +28,7 @@ Item {
 
     FSEDesignView3D {
         anchors.fill: parent
-        visible: !parent.isCollisateur
+        visible: MyPreview.viewMode === MyPreview.ViewMode.Design
 
         importScene: fseScene
     }

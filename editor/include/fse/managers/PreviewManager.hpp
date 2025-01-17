@@ -30,11 +30,20 @@ class PreviewManager : public QObject {
 
 	Q_PROPERTY(bool areOtherDatasVisible READ areOtherDatasVisible WRITE setAreOtherDatasVisible NOTIFY areOtherDatasVisibleUpdated)
 	Q_PROPERTY(bool areOriginsVisible READ areOriginsVisible WRITE setAreOriginsVisible NOTIFY areOriginsVisibleUpdated)
-	Q_PROPERTY(bool isWorldMapVisible READ isWorldMapVisible WRITE setIsWorldMapVisible NOTIFY isWorldMapVisibleUpdated)
+	Q_PROPERTY(bool isWorldMode READ isWorldMode WRITE setWorldMode NOTIFY isWorldModeUpdated)
+	Q_PROPERTY(bool isDebugMode READ isDebugMode WRITE setDebugMode NOTIFY isDebugModeUpdated)
+	Q_PROPERTY(ViewMode viewMode READ viewMode WRITE setViewMode NOTIFY viewModeUpdated)
+	Q_PROPERTY(bool isGravityEnabled READ isGravityEnabled WRITE setGravityEnabled NOTIFY gravityEnabledUpdated)
 
 	Q_PROPERTY(QList<PreviewData> datas READ datas NOTIFY previewUpdated)
 
 public:
+	enum class ViewMode {
+		Design,
+		Collide,
+	};
+	Q_ENUM(ViewMode)
+
 	explicit PreviewManager(QObject* parent = nullptr);
 	~PreviewManager() override;
 
@@ -53,13 +62,25 @@ public:
 	bool areOriginsVisible() const;
 	void setAreOriginsVisible(bool visible);
 
-	bool isWorldMapVisible() const;
-	void setIsWorldMapVisible(bool visible);
+	bool isWorldMode() const;
+	void setWorldMode(bool enabled);
+
+	bool isDebugMode() const;
+	void setDebugMode(bool enabled);
+
+	ViewMode viewMode() const;
+	void setViewMode(ViewMode viewMode);
+
+	bool isGravityEnabled() const;
+	void setGravityEnabled(bool enabled);
 
 	Q_INVOKABLE void centerOnCurrent();
 	Q_INVOKABLE void switchOtherDatasVisible();
 	Q_INVOKABLE void switchOriginsVisible();
-	Q_INVOKABLE void switchWorldMapVisible();
+	Q_INVOKABLE void switchWorldMode();
+	Q_INVOKABLE void switchDebugMode();
+	Q_INVOKABLE void switchViewMode();
+	Q_INVOKABLE void switchGravity();
 
 	QList<PreviewData> datas() const;
 
@@ -82,6 +103,9 @@ signals:
 
 	void areOtherDatasVisibleUpdated();
 	void areOriginsVisibleUpdated();
-	void isWorldMapVisibleUpdated();
+	void isWorldModeUpdated();
+	void isDebugModeUpdated();
+	void viewModeUpdated();
+	void gravityEnabledUpdated();
 };
 } // namespace fse

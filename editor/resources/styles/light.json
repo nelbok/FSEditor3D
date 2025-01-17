@@ -20,13 +20,6 @@
 		"undo": "undo",
 		"redo": "redo",
 		"settings": "settings",
-		"centerOn": "centerOn",
-		"originOff": "originOff",
-		"originOn": "originOn",
-		"othersOff": "othersOff",
-		"othersOn": "othersOn",
-		"worldMapOff": "worldMapOff",
-		"worldMapOn": "worldMapOn",
 		"github": "github",
 		"discord": "discord",
 		"twitter": "twitter"

@@ -128,14 +128,6 @@ constexpr auto lUndo = "undo";
 constexpr auto lRedo = "redo";
 constexpr auto lSettings = "settings";
 
-constexpr auto lCenterOn = "centerOn";
-constexpr auto lOriginOff = "originOff";
-constexpr auto lOriginOn = "originOn";
-constexpr auto lOthersOff = "othersOff";
-constexpr auto lOthersOn = "othersOn";
-constexpr auto lWorldMapOff = "worldMapOff";
-constexpr auto lWorldMapOn = "worldMapOn";
-
 constexpr auto lGithub = "github";
 constexpr auto lDiscord = "discord";
 constexpr auto lTwitter = "twitter";
@@ -147,14 +139,6 @@ void Icons::load(const QJsonObject& json) {
 	undo = Json::toString(lUndo, json);
 	redo = Json::toString(lRedo, json);
 	settings = Json::toString(lSettings, json);
-
-	centerOn = Json::toString(lCenterOn, json);
-	originOff = Json::toString(lOriginOff, json);
-	originOn = Json::toString(lOriginOn, json);
-	othersOff = Json::toString(lOthersOff, json);
-	othersOn = Json::toString(lOthersOn, json);
-	worldMapOff = Json::toString(lWorldMapOff, json);
-	worldMapOn = Json::toString(lWorldMapOn, json);
 
 	github = Json::toString(lGithub, json);
 	discord = Json::toString(lDiscord, json);
@@ -168,14 +152,6 @@ void Icons::save(QJsonObject& json) const {
 	json[lUndo] = undo;
 	json[lRedo] = redo;
 	json[lSettings] = settings;
-
-	json[lCenterOn] = centerOn;
-	json[lOriginOff] = originOff;
-	json[lOriginOn] = originOn;
-	json[lOthersOff] = othersOff;
-	json[lOthersOn] = othersOn;
-	json[lWorldMapOff] = worldMapOff;
-	json[lWorldMapOn] = worldMapOn;
 
 	json[lGithub] = github;
 	json[lDiscord] = discord;
@@ -191,14 +167,6 @@ bool Icons::operator==(const Icons& other) const {
 	ret &= this->undo == other.undo;
 	ret &= this->redo == other.redo;
 	ret &= this->settings == other.settings;
-
-	ret &= this->centerOn == other.centerOn;
-	ret &= this->originOff == other.originOff;
-	ret &= this->originOn == other.originOn;
-	ret &= this->othersOff == other.othersOff;
-	ret &= this->othersOn == other.othersOn;
-	ret &= this->worldMapOff == other.worldMapOff;
-	ret &= this->worldMapOn == other.worldMapOn;
 
 	ret &= this->github == other.github;
 	ret &= this->discord == other.discord;

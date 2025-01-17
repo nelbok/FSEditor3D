@@ -11,9 +11,9 @@ View3D {
     id: view3D
     PhysicsWorld {
         id: physicsWorld
-        running: true
+        running: MySelection.currentType !== MySelection.Type.Settings
         scene: view3D.scene
-        forceDebugDraw: true // DEBUG
+        forceDebugDraw: MyPreview.isDebugMode
     }
 
     environment: SceneEnvironment {
@@ -42,12 +42,11 @@ View3D {
             height: 50
         }
 
-        //gravity: physicsWorld.gravity
-
+        gravity: (view3D.visible && MyPreview.isGravityEnabled ) ? physicsWorld.gravity : Qt.vector3d(0,0,0)
         movement: controller.movement
+
         onPositionChanged: { MyPreview.cameraPosition = position }
         eulerRotation.y: controller.rotation.y
-
         PerspectiveCamera {
             eulerRotation.x: controller.rotation.x
         }
@@ -61,7 +60,8 @@ View3D {
     Connections {
         target: MyPreview
         function onCameraPositionUpdated() {
-            character.teleport(MyPreview.cameraPosition)
+            if (!MyPreview.isGravityEnabled)
+                character.teleport(MyPreview.cameraPosition)
         }
     }
 

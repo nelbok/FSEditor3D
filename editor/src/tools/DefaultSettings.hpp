@@ -14,8 +14,14 @@ constexpr auto previewAreOtherDatasVisibleKey = "areOtherDatasVisible";
 constexpr auto previewAreOtherDatasVisibleValue = true;
 constexpr auto previewAreOriginsVisibleKey = "areOriginsVisible";
 constexpr auto previewAreOriginsVisibleValue = false;
-constexpr auto previewIsWorldMapVisibleKey = "isWorldMapVisible";
-constexpr auto previewIsWorldMapVisibleValue = false;
+constexpr auto previewIsWorldModeKey = "isWorldMode";
+constexpr auto previewIsWorldModeValue = false;
+constexpr auto previewIsDebugModeKey = "isDebugMode";
+constexpr auto previewIsDebugModeValue = false;
+constexpr auto previewViewModeKey = "viewMode";
+constexpr auto previewViewModeValue = 0; // Design mode
+constexpr auto previewIsGravityEnabledKey = "isGravityEnabled";
+constexpr auto previewIsGravityEnabledValue = false;
 
 // KeyBinding
 constexpr auto keyBindingsKey = "keybindings";

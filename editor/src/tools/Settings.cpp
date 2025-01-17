@@ -30,7 +30,10 @@ void Settings::save() const {
 	settings.beginGroup(DefaultSettings::previewKey);
 	settings.setValue(DefaultSettings::previewAreOtherDatasVisibleKey, _manager->previewManager()->areOtherDatasVisible());
 	settings.setValue(DefaultSettings::previewAreOriginsVisibleKey, _manager->previewManager()->areOriginsVisible());
-	settings.setValue(DefaultSettings::previewIsWorldMapVisibleKey, _manager->previewManager()->isWorldMapVisible());
+	settings.setValue(DefaultSettings::previewIsWorldModeKey, _manager->previewManager()->isWorldMode());
+	settings.setValue(DefaultSettings::previewIsDebugModeKey, _manager->previewManager()->isDebugMode());
+	settings.setValue(DefaultSettings::previewViewModeKey, static_cast<int>(_manager->previewManager()->viewMode()));
+	settings.setValue(DefaultSettings::previewIsGravityEnabledKey, _manager->previewManager()->isGravityEnabled());
 	settings.endGroup();
 
 	settings.beginGroup(DefaultSettings::keyBindingsKey);
@@ -63,7 +66,10 @@ void Settings::load() {
 	settings.beginGroup(DefaultSettings::previewKey);
 	_manager->previewManager()->setAreOtherDatasVisible(settings.value(DefaultSettings::previewAreOtherDatasVisibleKey, DefaultSettings::previewAreOtherDatasVisibleValue).toBool());
 	_manager->previewManager()->setAreOriginsVisible(settings.value(DefaultSettings::previewAreOriginsVisibleKey, DefaultSettings::previewAreOriginsVisibleValue).toBool());
-	_manager->previewManager()->setIsWorldMapVisible(settings.value(DefaultSettings::previewIsWorldMapVisibleKey, DefaultSettings::previewIsWorldMapVisibleValue).toBool());
+	_manager->previewManager()->setWorldMode(settings.value(DefaultSettings::previewIsWorldModeKey, DefaultSettings::previewIsWorldModeValue).toBool());
+	_manager->previewManager()->setDebugMode(settings.value(DefaultSettings::previewIsDebugModeKey, DefaultSettings::previewIsDebugModeValue).toBool());
+	_manager->previewManager()->setViewMode(static_cast<PreviewManager::ViewMode>(settings.value(DefaultSettings::previewViewModeKey, DefaultSettings::previewViewModeValue).toInt()));
+	_manager->previewManager()->setGravityEnabled(settings.value(DefaultSettings::previewIsGravityEnabledKey, DefaultSettings::previewIsGravityEnabledValue).toBool());
 	settings.endGroup();
 
 	settings.beginGroup(DefaultSettings::keyBindingsKey);

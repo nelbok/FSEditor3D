@@ -20,7 +20,10 @@ struct PreviewManager::Impl {
 	QVector3D cameraRotation{};
 	bool areOtherDatasVisible{ fse::DefaultSettings::previewAreOtherDatasVisibleValue };
 	bool areOriginsVisible{ fse::DefaultSettings::previewAreOriginsVisibleValue };
-	bool isWorldMapVisible{ fse::DefaultSettings::previewIsWorldMapVisibleValue };
+	bool isWorldMode{ fse::DefaultSettings::previewIsWorldModeValue };
+	bool isDebugMode{ fse::DefaultSettings::previewIsDebugModeValue };
+	ViewMode viewMode{ static_cast<ViewMode>(fse::DefaultSettings::previewViewModeValue) };
+	bool isGravityEnabled{ fse::DefaultSettings::previewIsGravityEnabledValue };
 };
 
 PreviewManager::PreviewManager(QObject* parent)
@@ -75,9 +78,8 @@ bool PreviewManager::areOtherDatasVisible() const {
 }
 
 void PreviewManager::setAreOtherDatasVisible(bool visible) {
-	if (_impl->areOtherDatasVisible != visible) {
+	if (_impl->areOtherDatasVisible != visible)
 		switchOtherDatasVisible();
-	}
 }
 
 bool PreviewManager::areOriginsVisible() const {
@@ -85,19 +87,44 @@ bool PreviewManager::areOriginsVisible() const {
 }
 
 void PreviewManager::setAreOriginsVisible(bool visible) {
-	if (_impl->areOriginsVisible != visible) {
+	if (_impl->areOriginsVisible != visible)
 		switchOriginsVisible();
-	}
 }
 
-void PreviewManager::setIsWorldMapVisible(bool visible) {
-	if (_impl->isWorldMapVisible != visible) {
-		switchWorldMapVisible();
-	}
+bool PreviewManager::isWorldMode() const {
+	return _impl->isWorldMode;
 }
 
-bool PreviewManager::isWorldMapVisible() const {
-	return _impl->isWorldMapVisible;
+void PreviewManager::setWorldMode(bool enabled) {
+	if (_impl->isWorldMode != enabled)
+		switchWorldMode();
+}
+
+bool PreviewManager::isDebugMode() const {
+	return _impl->isDebugMode;
+}
+
+void PreviewManager::setDebugMode(bool enabled) {
+	if (_impl->isDebugMode != enabled)
+		switchDebugMode();
+}
+
+PreviewManager::ViewMode PreviewManager::viewMode() const {
+	return _impl->viewMode;
+}
+
+void PreviewManager::setViewMode(ViewMode viewMode) {
+	if (_impl->viewMode != viewMode)
+		switchViewMode();
+}
+
+bool PreviewManager::isGravityEnabled() const {
+	return _impl->isGravityEnabled;
+}
+
+void PreviewManager::setGravityEnabled(bool enabled) {
+	if (_impl->isGravityEnabled != enabled)
+		switchGravity();
 }
 
 void PreviewManager::centerOnCurrent() {
@@ -144,10 +171,32 @@ void PreviewManager::switchOriginsVisible() {
 	emit areOriginsVisibleUpdated();
 }
 
-void PreviewManager::switchWorldMapVisible() {
-	_impl->isWorldMapVisible = !_impl->isWorldMapVisible;
-	emit isWorldMapVisibleUpdated();
+void PreviewManager::switchWorldMode() {
+	_impl->isWorldMode = !_impl->isWorldMode;
+	emit isWorldModeUpdated();
 	emit previewUpdated();
+}
+
+void PreviewManager::switchDebugMode() {
+	_impl->isDebugMode = !_impl->isDebugMode;
+	emit isDebugModeUpdated();
+}
+
+void PreviewManager::switchViewMode() {
+	switch (_impl->viewMode) {
+		case ViewMode::Design:
+			_impl->viewMode = ViewMode::Collide;
+			break;
+		case ViewMode::Collide:
+			_impl->viewMode = ViewMode::Design;
+			break;
+	}
+	emit viewModeUpdated();
+}
+
+void PreviewManager::switchGravity() {
+	_impl->isGravityEnabled = !_impl->isGravityEnabled;
+	emit gravityEnabledUpdated();
 }
 
 QList<PreviewData> PreviewManager::datas() const {
@@ -157,7 +206,7 @@ QList<PreviewData> PreviewManager::datas() const {
 	switch (const auto& sm = _impl->manager->selectionManager(); sm->currentType()) {
 		case SelectionManager::Type::None:
 			if (auto* place = _impl->manager->project()->defaultPlace()) {
-				if (_impl->isWorldMapVisible)
+				if (_impl->isWorldMode)
 					fullMapDatas(datas, parsed, place);
 				else
 					fillDatas(datas, parsed, place, true);
