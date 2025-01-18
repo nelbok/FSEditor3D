@@ -72,6 +72,7 @@ struct TestCompare {
 		testGeometry(left, right);
 
 		testUuidPointer(left->defaultPlace(), right->defaultPlace());
+		QCOMPARE(left->height(), right->height());
 
 		testProjectList<fsd::Object>(left->objects(), right->objects(), &TestCompare::testObject);
 		testProjectList<fsd::Link>(left->links(), right->links(), &TestCompare::testLink);

@@ -114,6 +114,7 @@ private:
 		auto* place = _project.places().at(0);
 		project->setDefaultPlace(place);
 		QCOMPARE(project->defaultPlace(), place);
+		QCOMPARE(project->height(), 42);
 
 		QCOMPARE(project->links().count(), 2);
 		QCOMPARE(project->models().count(), 3);
@@ -125,7 +126,7 @@ private:
 		QCOMPARE(project->globalRotation(), QVector3D(10, 10, 10));
 		QCOMPARE(project->globalScale(), QVector3D(10, 10, 10));
 
-		QCOMPARE(metaObject->propertyCount(), 18);
+		QCOMPARE(metaObject->propertyCount(), 19);
 		QCOMPARE(metaObject->propertyOffset(), 12);
 	}
 

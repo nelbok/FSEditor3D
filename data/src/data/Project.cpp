@@ -18,6 +18,7 @@ namespace fsd {
 
 struct Project::Impl {
 	UuidPointer<Place>* defaultPlace{ nullptr };
+	unsigned short height{ 0 };
 	QUrl path{};
 	bool isTemp{ true };
 	QList<Entity*> entities{};
@@ -82,6 +83,7 @@ void Project::reset() {
 
 	// Reset datas
 	setDefaultPlace(nullptr);
+	setHeight(160);
 	cleanLinks();
 	cleanModels();
 	cleanObjects();
@@ -95,6 +97,17 @@ Place* Project::defaultPlace() const {
 void Project::setDefaultPlace(Place* defaultPlace) {
 	if (_impl->defaultPlace->set(defaultPlace)) {
 		emit defaultPlaceUpdated();
+	}
+}
+
+unsigned short Project::height() const {
+	return _impl->height;
+}
+
+void Project::setHeight(unsigned short height) {
+	if (_impl->height != height) {
+		_impl->height = height;
+		emit heightUpdated();
 	}
 }
 
@@ -243,6 +256,7 @@ void Project::load(const QJsonObject& json) {
 	rebuildEntities();
 
 	_impl->defaultPlace->setUuid(Json::toUuid(Json::toValue(Format::lDefaultPlaces, json)));
+	_impl->height = static_cast<unsigned short>(Json::toInt(Format::lHeight, json));
 	emit defaultPlaceUpdated();
 }
 
@@ -253,6 +267,7 @@ void Project::save(QJsonObject& json) const {
 	_impl->saveList(this, _impl->links, Format::lLinks, json);
 	_impl->saveList(this, _impl->objects, Format::lObjects, json);
 	json[Format::lDefaultPlaces] = Json::fromUuid(_impl->defaultPlace->uuid());
+	json[Format::lHeight] = _impl->height;
 }
 
 void Project::addEntity(Entity* entity) {

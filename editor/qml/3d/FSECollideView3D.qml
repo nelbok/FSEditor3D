@@ -39,7 +39,7 @@ View3D {
 
         collisionShapes: CapsuleShape {
             diameter: 50
-            height: 50
+            height: MyProject.height - diameter
         }
 
         gravity: (view3D.visible && MyPreview.isGravityEnabled ) ? physicsWorld.gravity : Qt.vector3d(0,0,0)
@@ -48,6 +48,7 @@ View3D {
         onPositionChanged: { MyPreview.cameraPosition = position }
         eulerRotation.y: controller.rotation.y
         PerspectiveCamera {
+            y: MyProject.height / 2 - 10
             eulerRotation.x: controller.rotation.x
         }
     }

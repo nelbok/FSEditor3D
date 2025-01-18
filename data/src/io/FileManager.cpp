@@ -33,7 +33,7 @@ public:
 		QObject::connect(this, &QThread::finished, QCoreApplication::instance(), [this, parent]() {
 			_project->setParent(parent);
 			if (_type == Type::Load) {
-				assert(_project->metaObject()->propertyCount() == 18);
+				assert(_project->metaObject()->propertyCount() == 19);
 
 				// Entity
 				emit _project->uuidUpdated();
@@ -51,6 +51,7 @@ public:
 
 				// Project
 				emit _project->defaultPlaceUpdated();
+				emit _project->heightUpdated();
 				emit _project->linksUpdated();
 				emit _project->modelsUpdated();
 				emit _project->objectsUpdated();

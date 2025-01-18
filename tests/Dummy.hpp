@@ -28,6 +28,7 @@ struct Dummy {
 		project.setLocalRotation({ 10, 10, 10 });
 		project.setLocalScale({ 10, 10, 10 });
 		project.setDefaultPlace(p1);
+		project.setHeight(42);
 	}
 
 private:

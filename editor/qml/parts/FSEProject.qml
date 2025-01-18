@@ -16,6 +16,7 @@ FSEModule {
 
     partB: ColumnLayout{
         spacing: 5
+
         FSEComboBox {
             name: qsTr("Default place")
 
@@ -32,6 +33,14 @@ FSEModule {
             model: mng.model
             currentIndex: mng.currentIndex
             onActivated: mng.currentIndex = currentIndex
+        }
+
+        FSESpinBox {
+            name: qsTr("Person height")
+            from: 110
+            to: 300
+            value: MyProject.height
+            onValueModified: () => { MyProject.height = value }
         }
     }
 }
