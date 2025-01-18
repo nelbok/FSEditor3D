@@ -28,4 +28,8 @@ fsd::FileManager::Result FileThread::result() const {
 	return _result;
 }
 
+QString FileThread::errorMessage() const {
+	return _errorMessage;
+}
+
 } // namespace fse

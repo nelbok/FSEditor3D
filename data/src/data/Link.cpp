@@ -13,6 +13,7 @@ struct Link::Impl {
 Link::Link(Project* project)
 	: Placement(project, project)
 	, _impl{ std::make_unique<Impl>() } {
+	setObjectName("Link");
 	_impl->link = makeLinkPointer(project, this);
 }
 
@@ -44,7 +45,7 @@ Link::Type Link::type() const {
 
 void Link::load(const QJsonObject& json) {
 	Placement::load(json);
-	_impl->link->setUuid(Json::toUuid(Json::toValue(Format::lLink, json)));
+	_impl->link->setUuid(Json::toUuid(objectName(), Format::lLink, json));
 	emit linkUpdated();
 }
 

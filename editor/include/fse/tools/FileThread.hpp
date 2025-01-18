@@ -18,11 +18,13 @@ public:
 	void init();
 
 	fsd::FileManager::Result result() const;
+	QString errorMessage() const;
 
 protected:
 	fsd::Project* _project{ nullptr };
 	fsd::FileManager* _fileManager{ nullptr };
 	fsd::FileManager::Result _result{ fsd::FileManager::Result::NoResult };
+	QString _errorMessage{ "" };
 	fsd::FileManager::Type _type{ fsd::FileManager::Type::NoType };
 
 	FileManager* _manager{ nullptr };

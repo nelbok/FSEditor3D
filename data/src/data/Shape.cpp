@@ -15,6 +15,7 @@ struct Shape::Impl {
 Shape::Shape(Project* project, QObject* parent)
 	: Geometry(project, parent)
 	, _impl{ std::make_unique<Impl>() } {
+	setObjectName("Shape");
 	_impl->model = makeModelPointer(project, this);
 }
 
@@ -38,7 +39,7 @@ void Shape::setModel(Model* model) {
 	if (model
 			&& !((model->modelType() == Model::ModelType::Link && type() == Type::Link) || (model->modelType() == Model::ModelType::Object && type() == Type::Object)
 					 || (model->modelType() == Model::ModelType::Place && type() == Type::Place)))
-		throw DataException(DataException::Error::ShapeModelError);
+		throw DataException(objectName(), DataException::Error::ShapeModelError);
 
 	const auto* oldModel = this->model();
 	if (_impl->model->set(model)) {
@@ -76,7 +77,7 @@ QVector3D Shape::globalScale() const {
 
 void Shape::load(const QJsonObject& json) {
 	Geometry::load(json);
-	if (_impl->model->setUuid(Json::toUuid(Json::toValue(Format::lModel, json)))) {
+	if (_impl->model->setUuid(Json::toUuid(objectName(), Format::lModel, json))) {
 		const auto* model = _impl->model->get();
 		assert(model);
 		QObject::connect(model, &Model::globalPositionUpdated, this, &Shape::globalPositionUpdated);

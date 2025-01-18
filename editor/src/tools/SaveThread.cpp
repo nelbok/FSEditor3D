@@ -25,6 +25,7 @@ void SaveThread::run() {
 	}
 
 	_result = _fileManager->result();
+	_errorMessage = _fileManager->errorMessage();
 	if (_result != fsd::FileManager::Result::Success) {
 		return;
 	}

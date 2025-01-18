@@ -19,6 +19,7 @@ struct FileManager::Impl {
 	QUrl path{};
 	fse::FileThread* fileThread{ nullptr };
 	fsd::FileManager::Result result{ fsd::FileManager::Result::NoResult };
+	QString errorMessage{ "" };
 	FileManager::Status status{ FileManager::Status ::None };
 	Manager* manager{ nullptr };
 
@@ -33,7 +34,7 @@ struct FileManager::Impl {
 		emit mng->beginTransaction();
 		setStatus(mng, FileManager::Status::Processing);
 		mng->connect(fileThread, &T::finished, mng, [this, mng]() {
-			setResult(mng, fileThread->result());
+			setResult(mng, fileThread->result(), fileThread->errorMessage());
 			setStatus(mng, FileManager::Status::EndTransaction);
 			emit mng->endTransaction();
 			fileThread->deleteLater();
@@ -43,11 +44,12 @@ struct FileManager::Impl {
 		fileThread->start();
 	}
 
-	void setResult(FileManager* mng, fsd::FileManager::Result r) {
+	void setResult(FileManager* mng, fsd::FileManager::Result r, const QString& e = "") {
 		if (result != r) {
 			result = r;
+			errorMessage = e;
 			if (this->result == fsd::FileManager::Result::Error) {
-				manager->errorsManager()->setType(ErrorsManager::Type::FileError);
+				manager->errorsManager()->setType(ErrorsManager::Type::FileError, errorMessage);
 			}
 			emit mng->resultUpdated();
 		}
@@ -122,6 +124,10 @@ void FileManager::setPath(const QUrl& path) {
 
 fsd::FileManager::Result FileManager::result() const {
 	return _impl->result;
+}
+
+QString FileManager::errorMessage() const {
+	return _impl->errorMessage;
 }
 
 FileManager::Status FileManager::status() const {

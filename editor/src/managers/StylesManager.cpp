@@ -28,7 +28,7 @@ struct StylesManager::Impl {
 		try {
 			const auto& document = QJsonDocument::fromJson(file.readAll());
 			if (document.isNull()) {
-				throw fsd::JsonException(fsd::JsonException::Error::InvalidDocument);
+				throw fsd::JsonException("StylesManager", "load", fsd::JsonException::Error::InvalidDocument);
 			}
 			style.load(document.object());
 		} catch (const fsd::JsonException&) {

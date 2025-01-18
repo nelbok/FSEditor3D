@@ -7,6 +7,8 @@ using namespace fsd;
 namespace fse {
 
 namespace detail {
+constexpr auto objectName = "Style";
+
 template<class T>
 QJsonObject save(const T& object) {
 	QJsonObject json;
@@ -22,11 +24,11 @@ constexpr auto lHovered = "hovered";
 constexpr auto lDisabled = "disabled";
 
 void Color::load(const QJsonObject& json) {
-	normal = Json::toColor(Json::toValue(lNormal, json));
-	alternative = Json::toColor(Json::toValue(lAlternative, json));
-	selected = Json::toColor(Json::toValue(lSelected, json));
-	hovered = Json::toColor(Json::toValue(lHovered, json));
-	disabled = Json::toColor(Json::toValue(lDisabled, json));
+	normal = Json::toColor(detail::objectName, lNormal, json);
+	alternative = Json::toColor(detail::objectName, lAlternative, json);
+	selected = Json::toColor(detail::objectName, lSelected, json);
+	hovered = Json::toColor(detail::objectName, lHovered, json);
+	disabled = Json::toColor(detail::objectName, lDisabled, json);
 }
 
 void Color::save(QJsonObject& json) const {
@@ -53,7 +55,7 @@ constexpr auto lWidth = "width";
 
 void Border::load(const QJsonObject& json) {
 	Color::load(json);
-	width = Json::toInt(lWidth, json);
+	width = Json::toInt(detail::objectName, lWidth, json);
 }
 
 void Border::save(QJsonObject& json) const {
@@ -75,8 +77,8 @@ constexpr auto lRadius = "radius";
 
 void Rectangle::load(const QJsonObject& json) {
 	Color::load(json);
-	border.load(Json::toObject(lBorder, json));
-	radius = Json::toInt(lRadius, json);
+	border.load(Json::toObject(detail::objectName, lBorder, json));
+	radius = Json::toInt(detail::objectName, lRadius, json);
 }
 
 void Rectangle::save(QJsonObject& json) const {
@@ -100,9 +102,9 @@ constexpr auto lItalic = "italic";
 constexpr auto lPointSize = "pointSize";
 
 void Font::load(const QJsonObject& json) {
-	bold = Json::toBool(lBold, json);
-	italic = Json::toBool(lItalic, json);
-	pointSize = Json::toInt(lPointSize, json);
+	bold = Json::toBool(detail::objectName, lBold, json);
+	italic = Json::toBool(detail::objectName, lItalic, json);
+	pointSize = Json::toInt(detail::objectName, lPointSize, json);
 }
 
 void Font::save(QJsonObject& json) const {
@@ -133,16 +135,16 @@ constexpr auto lDiscord = "discord";
 constexpr auto lTwitter = "twitter";
 
 void Icons::load(const QJsonObject& json) {
-	newFile = Json::toString(lNewFile, json);
-	loadFile = Json::toString(lLoadFile, json);
-	saveFile = Json::toString(lSaveFile, json);
-	undo = Json::toString(lUndo, json);
-	redo = Json::toString(lRedo, json);
-	settings = Json::toString(lSettings, json);
+	newFile = Json::toString(detail::objectName, lNewFile, json);
+	loadFile = Json::toString(detail::objectName, lLoadFile, json);
+	saveFile = Json::toString(detail::objectName, lSaveFile, json);
+	undo = Json::toString(detail::objectName, lUndo, json);
+	redo = Json::toString(detail::objectName, lRedo, json);
+	settings = Json::toString(detail::objectName, lSettings, json);
 
-	github = Json::toString(lGithub, json);
-	discord = Json::toString(lDiscord, json);
-	twitter = Json::toString(lTwitter, json);
+	github = Json::toString(detail::objectName, lGithub, json);
+	discord = Json::toString(detail::objectName, lDiscord, json);
+	twitter = Json::toString(detail::objectName, lTwitter, json);
 }
 
 void Icons::save(QJsonObject& json) const {
@@ -193,22 +195,22 @@ constexpr auto lCopyrightFont = "copyrightFont";
 constexpr auto lIcons = "icons";
 
 void Style::load(const QJsonObject& json) {
-	window.load(Json::toObject(lWindow, json));
-	button.load(Json::toObject(lButton, json));
-	foreground.load(Json::toObject(lForeground, json));
+	window.load(Json::toObject(detail::objectName, lWindow, json));
+	button.load(Json::toObject(detail::objectName, lButton, json));
+	foreground.load(Json::toObject(detail::objectName, lForeground, json));
 
-	textfield.load(Json::toObject(lTextfield, json));
-	part.load(Json::toObject(lPart, json));
-	list.load(Json::toObject(lList, json));
+	textfield.load(Json::toObject(detail::objectName, lTextfield, json));
+	part.load(Json::toObject(detail::objectName, lPart, json));
+	list.load(Json::toObject(detail::objectName, lList, json));
 
 	// Fonts
-	titleFont.load(Json::toObject(lTitleFont, json));
-	subTitleFont.load(Json::toObject(lSubTitleFont, json));
-	normalFont.load(Json::toObject(lNormalFont, json));
-	copyrightFont.load(Json::toObject(lCopyrightFont, json));
+	titleFont.load(Json::toObject(detail::objectName, lTitleFont, json));
+	subTitleFont.load(Json::toObject(detail::objectName, lSubTitleFont, json));
+	normalFont.load(Json::toObject(detail::objectName, lNormalFont, json));
+	copyrightFont.load(Json::toObject(detail::objectName, lCopyrightFont, json));
 
 	// Icons
-	icons.load(Json::toObject(lIcons, json));
+	icons.load(Json::toObject(detail::objectName, lIcons, json));
 }
 
 void Style::save(QJsonObject& json) const {

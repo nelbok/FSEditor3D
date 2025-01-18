@@ -38,6 +38,7 @@ public:
 	void setPath(const QUrl& path);
 
 	fsd::FileManager::Result result() const;
+	QString errorMessage() const;
 	Status status() const;
 
 private:

@@ -8,8 +8,8 @@ FSERectangle {
 
     id: root
 
-    height: 130
-    width: 220
+    height: 150
+    width: 480
 
     FSEText {
         id: content

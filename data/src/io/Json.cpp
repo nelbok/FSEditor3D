@@ -4,93 +4,98 @@
 
 namespace fsd::Json {
 // Common
-QJsonValue toValue(const QString& key, const QJsonObject& json) {
+QJsonValue toValue(const QString& objectName, const QString& key, const QJsonObject& json) {
 	if (!json.contains(key)) {
-		throw JsonException(JsonException::Error::UnknownKey);
+		throw JsonException(objectName, key, JsonException::Error::UnknownKey);
 	}
 	return json[key];
 }
 
-QJsonObject toObject(const QString& key, const QJsonObject& json) {
+QJsonObject toObject(const QString& objectName, const QString& key, const QJsonObject& json) {
 	if (!json.contains(key) || !json[key].isObject()) {
-		throw JsonException(JsonException::Error::InvalidObject);
+		throw JsonException(objectName, key, JsonException::Error::InvalidObject);
 	}
 	return json[key].toObject();
 }
 
-QJsonArray toArray(const QString& key, const QJsonObject& json) {
+QJsonArray toArray(const QString& objectName, const QString& key, const QJsonObject& json) {
 	if (!json.contains(key) || !json[key].isArray()) {
-		throw JsonException(JsonException::Error::InvalidArray);
+		throw JsonException(objectName, key, JsonException::Error::InvalidArray);
 	}
 	return json[key].toArray();
 }
 
-QString toString(const QString& key, const QJsonObject& json) {
+QString toString(const QString& objectName, const QString& key, const QJsonObject& json) {
 	if (!json.contains(key) || !json[key].isString()) {
-		throw JsonException(JsonException::Error::InvalidString);
+		throw JsonException(objectName, key, JsonException::Error::InvalidString);
 	}
 	return json[key].toString();
 }
 
-int toInt(const QString& key, const QJsonObject& json) {
+int toInt(const QString& objectName, const QString& key, const QJsonObject& json) {
 	if (!json.contains(key) || !json[key].isDouble()) {
-		throw JsonException(JsonException::Error::InvalidInteger);
+		throw JsonException(objectName, key, JsonException::Error::InvalidInteger);
 	}
 	return json[key].toInt();
 }
 
-double toDouble(const QString& key, const QJsonObject& json) {
+double toDouble(const QString& objectName, const QString& key, const QJsonObject& json) {
 	if (!json.contains(key) || !json[key].isDouble()) {
-		throw JsonException(JsonException::Error::InvalidDouble);
+		throw JsonException(objectName, key, JsonException::Error::InvalidDouble);
 	}
 	return json[key].toDouble();
 }
 
-bool toBool(const QString& key, const QJsonObject& json) {
+bool toBool(const QString& objectName, const QString& key, const QJsonObject& json) {
 	if (!json.contains(key) || !json[key].isBool()) {
-		throw JsonException(JsonException::Error::InvalidBoolean);
+		throw JsonException(objectName, key, JsonException::Error::InvalidBoolean);
 	}
 	return json[key].toBool();
 }
 
 // Qt classes
-QUrl toUrl(const QJsonValue& json) {
-	if (!json.toVariant().isValid()) {
-		throw JsonException(JsonException::Error::InvalidUrl);
+QUrl toUrl(const QString& objectName, const QString& key, const QJsonObject& json) {
+	const auto& value = toValue(objectName, key, json);
+	if (!value.toVariant().isValid()) {
+		throw JsonException(objectName, key, JsonException::Error::InvalidUrl);
 	}
-	return json.toVariant().toUrl();
+	return value.toVariant().toUrl();
 }
 
 QJsonValue fromUrl(const QUrl& value) {
 	return QJsonValue::fromVariant(value);
 }
 
-QUuid toUuid(const QJsonValue& json) {
-	if (!json.toVariant().isValid()) {
-		throw JsonException(JsonException::Error::InvalidUuid);
+QUuid toUuid(const QString& objectName, const QString& key, const QJsonObject& json) {
+	const auto& value = toValue(objectName, key, json);
+	if (!value.toVariant().isValid()) {
+		throw JsonException(objectName, key, JsonException::Error::InvalidUuid);
 	}
-	return json.toVariant().toUuid();
+	return value.toVariant().toUuid();
 }
 
 QJsonValue fromUuid(const QUuid& value) {
 	return QJsonValue::fromVariant(value);
 }
 
-QColor toColor(const QJsonValue& json) {
-	if (!json.isString()) {
-		throw JsonException(JsonException::Error::InvalidColor);
+QColor toColor(const QString& objectName, const QString& key, const QJsonObject& json) {
+	const auto& value = toValue(objectName, key, json);
+	if (!value.isString()) {
+		throw JsonException(objectName, key, JsonException::Error::InvalidColor);
 	}
-	return { json.toString() };
+	return { value.toString() };
 }
 
 QJsonValue fromColor(const QColor& value) {
 	return { value.name(QColor::HexArgb) };
 }
 
-QVector2D toVector2D(const QJsonObject& json) {
+QVector2D toVector2D(const QString& objectName, const QString& key, const QJsonObject& json) {
+	const auto& object = toObject(objectName, key, json);
+	const auto& name = objectName + ": " + key;
 	return {
-		static_cast<float>(toDouble("x", json)),
-		static_cast<float>(toDouble("y", json)),
+		static_cast<float>(toDouble(name, "x", object)),
+		static_cast<float>(toDouble(name, "y", object)),
 	};
 }
 
@@ -101,11 +106,13 @@ QJsonObject fromVector2D(const QVector2D& value) {
 	return json;
 }
 
-QVector3D toVector3D(const QJsonObject& json) {
+QVector3D toVector3D(const QString& objectName, const QString& key, const QJsonObject& json) {
+	const auto& object = toObject(objectName, key, json);
+	const auto& name = objectName + ": " + key;
 	return {
-		static_cast<float>(toDouble("x", json)),
-		static_cast<float>(toDouble("y", json)),
-		static_cast<float>(toDouble("z", json)),
+		static_cast<float>(toDouble(name, "x", object)),
+		static_cast<float>(toDouble(name, "y", object)),
+		static_cast<float>(toDouble(name, "z", object)),
 	};
 }
 

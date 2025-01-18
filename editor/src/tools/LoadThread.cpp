@@ -25,6 +25,7 @@ void LoadThread::run() {
 	}
 
 	_result = _fileManager->result();
+	_errorMessage = _fileManager->errorMessage();
 
 	// TODO: Verify that the models are correct
 }

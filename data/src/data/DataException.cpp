@@ -4,7 +4,7 @@
 
 namespace fsd {
 
-std::string convert(DataException::Error error) {
+QString convert(DataException::Error error) {
 	switch (error) {
 		case DataException::Error::ModelTypeError:
 			return "Incorrect attempt to modify model type";
@@ -15,7 +15,7 @@ std::string convert(DataException::Error error) {
 	}
 }
 
-DataException::DataException(DataException::Error error)
-	: std::runtime_error(convert(error)) {}
+DataException::DataException(const QString& objectName, DataException::Error error)
+	: std::runtime_error((objectName + ": " + convert(error)).toStdString()) {}
 
 } // namespace fsd

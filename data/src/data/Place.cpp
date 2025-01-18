@@ -7,7 +7,9 @@ struct Place::Impl {};
 
 Place::Place(Project* project)
 	: Shape(project, project)
-	, _impl{ std::make_unique<Impl>() } {}
+	, _impl{ std::make_unique<Impl>() } {
+	setObjectName("Place");
+}
 
 Place::~Place() = default;
 

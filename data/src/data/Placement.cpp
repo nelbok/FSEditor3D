@@ -16,6 +16,7 @@ struct Placement::Impl {
 Placement::Placement(Project* project, QObject* parent)
 	: Shape(project, parent)
 	, _impl{ std::make_unique<Impl>() } {
+	setObjectName("Placement");
 	_impl->place = makePlacePointer(project, this);
 }
 
@@ -43,7 +44,7 @@ void Placement::setPlace(Place* place) {
 
 void Placement::load(const QJsonObject& json) {
 	Shape::load(json);
-	_impl->place->setUuid(Json::toUuid(Json::toValue(Format::lPlace, json)));
+	_impl->place->setUuid(Json::toUuid(objectName(), Format::lPlace, json));
 	emit placeUpdated();
 }
 

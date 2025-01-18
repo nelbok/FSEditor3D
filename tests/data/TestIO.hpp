@@ -10,13 +10,18 @@
 
 struct TestIO {
 	void run() {
-		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toValue({}, {}));
-		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toObject({}, {}));
-		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toArray({}, {}));
-		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toString({}, {}));
-		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toInt({}, {}));
-		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toDouble({}, {}));
-		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toBool({}, {}));
+		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toValue({}, {}, {}));
+		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toObject({}, {}, {}));
+		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toArray({}, {}, {}));
+		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toString({}, {}, {}));
+		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toInt({}, {}, {}));
+		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toDouble({}, {}, {}));
+		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toBool({}, {}, {}));
+		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toUrl({}, {}, {}));
+		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toUuid({}, {}, {}));
+		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toColor({}, {}, {}));
+		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toVector2D({}, {}, {}));
+		QVERIFY_THROWS_EXCEPTION(fsd::JsonException, fsd::Json::toVector3D({}, {}, {}));
 
 		Dummy::build(_p1);
 		reset();

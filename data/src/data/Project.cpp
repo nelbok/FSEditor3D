@@ -37,10 +37,10 @@ struct Project::Impl {
 	template<class TClass>
 	void loadList(Project* project, QList<TClass*>& list, const QString& key, const QJsonObject& json, void (Project::*signal)()) const {
 		list.clear();
-		const auto& jsonArray = Json::toArray(key, json);
+		const auto& jsonArray = Json::toArray(project->objectName(), key, json);
 		for (const auto& jsonEntity : jsonArray) {
 			if (!jsonEntity.isObject()) {
-				throw JsonException(JsonException::Error::InvalidObject);
+				throw JsonException(project->objectName(), key, JsonException::Error::InvalidObject);
 			}
 			auto* entity = new TClass(project);
 			entity->load(jsonEntity.toObject());
@@ -74,6 +74,7 @@ Project::Project(QObject* parent)
 	: Geometry(this, parent)
 	, _impl{ std::make_unique<Impl>() } {
 	_impl->defaultPlace = makePlacePointer(this, this);
+	setObjectName("Project");
 }
 
 Project::~Project() = default;
@@ -255,8 +256,8 @@ void Project::load(const QJsonObject& json) {
 
 	rebuildEntities();
 
-	_impl->defaultPlace->setUuid(Json::toUuid(Json::toValue(Format::lDefaultPlaces, json)));
-	_impl->height = static_cast<unsigned short>(Json::toInt(Format::lHeight, json));
+	_impl->defaultPlace->setUuid(Json::toUuid(objectName(), Format::lDefaultPlaces, json));
+	_impl->height = static_cast<unsigned short>(Json::toInt(objectName(), Format::lHeight, json));
 	emit defaultPlaceUpdated();
 }
 

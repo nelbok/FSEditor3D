@@ -11,6 +11,8 @@
 
 #include <stdexcept>
 
+#include <QtCore/QString>
+
 namespace fsd {
 
 class FSDATA_EXPORT JsonException : public std::runtime_error {
@@ -29,7 +31,7 @@ public:
 		InvalidColor,
 	};
 
-	explicit JsonException(JsonException::Error error);
+	explicit JsonException(const QString& objectName, const QString& key, JsonException::Error error);
 	~JsonException() override = default;
 };
 

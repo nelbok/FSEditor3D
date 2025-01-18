@@ -8,7 +8,9 @@ struct Object::Impl {};
 
 Object::Object(Project* project)
 	: Placement(project, project)
-	, _impl{ std::make_unique<Impl>() } {}
+	, _impl{ std::make_unique<Impl>() } {
+	setObjectName("Object");
+}
 
 Object::~Object() = default;
 

@@ -18,6 +18,7 @@ Entity::Entity(Project* project, QObject* parent)
 	: QObject(parent)
 	, _impl{ std::make_unique<Impl>() } {
 	assert(project);
+	setObjectName("Entity");
 	_impl->project = project;
 }
 
@@ -84,8 +85,8 @@ bool Entity::hasRef() const {
 }
 
 void Entity::load(const QJsonObject& json) {
-	setUuid(Json::toUuid(Json::toValue(Format::lUuid, json)));
-	setName(Json::toString(Format::lName, json));
+	setUuid(Json::toUuid(objectName(), Format::lUuid, json));
+	setName(Json::toString(objectName(), Format::lName, json));
 }
 
 void Entity::save(QJsonObject& json) const {

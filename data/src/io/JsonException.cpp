@@ -4,7 +4,7 @@
 
 namespace fsd {
 
-std::string convert(JsonException::Error error) {
+QString convert(JsonException::Error error) {
 	switch (error) {
 		case JsonException::Error::UnknownKey:
 			return "Unknown JSON key";
@@ -33,7 +33,7 @@ std::string convert(JsonException::Error error) {
 	}
 }
 
-JsonException::JsonException(JsonException::Error error)
-	: std::runtime_error(convert(error)) {}
+JsonException::JsonException(const QString& objectName, const QString& key, JsonException::Error error)
+	: std::runtime_error((objectName + ": " + key + ": " + convert(error)).toStdString()) {}
 
 } // namespace fsd

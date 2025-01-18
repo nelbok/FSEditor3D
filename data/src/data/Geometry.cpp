@@ -15,6 +15,7 @@ struct Geometry::Impl {
 Geometry::Geometry(fsd::Project* project, QObject* parent)
 	: Entity(project, parent)
 	, _impl{ std::make_unique<Impl>() } {
+	setObjectName("Geometry");
 	QObject::connect(this, &Geometry::localPositionUpdated, this, &Geometry::globalPositionUpdated);
 	QObject::connect(this, &Geometry::localRotationUpdated, this, &Geometry::globalRotationUpdated);
 	QObject::connect(this, &Geometry::localScaleUpdated, this, &Geometry::globalScaleUpdated);
@@ -74,9 +75,9 @@ QVector3D Geometry::globalScale() const {
 
 void Geometry::load(const QJsonObject& json) {
 	Entity::load(json);
-	setLocalPosition(Json::toVector3D(Json::toObject(Format::lPosition, json)));
-	setLocalRotation(Json::toVector3D(Json::toObject(Format::lRotation, json)));
-	setLocalScale(Json::toVector3D(Json::toObject(Format::lScale, json)));
+	setLocalPosition(Json::toVector3D(objectName(), Format::lPosition, json));
+	setLocalRotation(Json::toVector3D(objectName(), Format::lRotation, json));
+	setLocalScale(Json::toVector3D(objectName(), Format::lScale, json));
 }
 
 void Geometry::save(QJsonObject& json) const {

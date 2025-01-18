@@ -11,6 +11,8 @@
 
 #include <stdexcept>
 
+#include <QtCore/QString>
+
 namespace fsd {
 
 class FSDATA_EXPORT DataException : public std::runtime_error {
@@ -20,7 +22,7 @@ public:
 		ShapeModelError,
 	};
 
-	explicit DataException(DataException::Error error);
+	explicit DataException(const QString& objectName, DataException::Error error);
 	~DataException() override = default;
 };
 

@@ -34,31 +34,31 @@ namespace Json {
 /**
  * @brief Extract a QJsonValue from the QJsonObject with the corresponding key.
  */
-FSDATA_EXPORT QJsonValue toValue(const QString& key, const QJsonObject& json);
+FSDATA_EXPORT QJsonValue toValue(const QString& objectName, const QString& key, const QJsonObject& json);
 /**
  * @brief Extract a QJsonObject from the QJsonObject with the corresponding key.
  */
-FSDATA_EXPORT QJsonObject toObject(const QString& key, const QJsonObject& json);
+FSDATA_EXPORT QJsonObject toObject(const QString& objectName, const QString& key, const QJsonObject& json);
 /**
  * @brief Extract a QJsonArray from the QJsonObject with the corresponding key.
  */
-FSDATA_EXPORT QJsonArray toArray(const QString& key, const QJsonObject& json);
+FSDATA_EXPORT QJsonArray toArray(const QString& objectName, const QString& key, const QJsonObject& json);
 /**
  * @brief Extract a QString from the QJsonObject with the corresponding key.
  */
-FSDATA_EXPORT QString toString(const QString& key, const QJsonObject& json);
+FSDATA_EXPORT QString toString(const QString& objectName, const QString& key, const QJsonObject& json);
 /**
  * @brief Extract an int from the QJsonObject with the corresponding key.
  */
-FSDATA_EXPORT int toInt(const QString& key, const QJsonObject& json);
+FSDATA_EXPORT int toInt(const QString& objectName, const QString& key, const QJsonObject& json);
 /**
  * @brief Extract a double from the QJsonObject with the corresponding key.
  */
-FSDATA_EXPORT double toDouble(const QString& key, const QJsonObject& json);
+FSDATA_EXPORT double toDouble(const QString& objectName, const QString& key, const QJsonObject& json);
 /**
  * @brief Extract a bool from the QJsonObject with the corresponding key.
  */
-FSDATA_EXPORT bool toBool(const QString& key, const QJsonObject& json);
+FSDATA_EXPORT bool toBool(const QString& objectName, const QString& key, const QJsonObject& json);
 /** @} */
 
 /** @name Qt classes conversion
@@ -66,45 +66,45 @@ FSDATA_EXPORT bool toBool(const QString& key, const QJsonObject& json);
  */
 
 /**
- * @brief Convert a QJsonValue into QUrl.
+ * @brief Extract a QUrl from the QJsonObject with the corresponding key.
  */
-FSDATA_EXPORT QUrl toUrl(const QJsonValue& json);
+FSDATA_EXPORT QUrl toUrl(const QString& objectName, const QString& key, const QJsonObject& json);
 /**
  * @brief Convert a QUrl into QJsonValue.
  */
 FSDATA_EXPORT QJsonValue fromUrl(const QUrl& value);
 
 /**
- * @brief Convert a QJsonValue into QUuid.
+ * @brief Extract a QUuid from the QJsonObject with the corresponding key.
  */
-FSDATA_EXPORT QUuid toUuid(const QJsonValue& json);
+FSDATA_EXPORT QUuid toUuid(const QString& objectName, const QString& key, const QJsonObject& json);
 /**
  * @brief Convert a QUuid into QJsonValue.
  */
 FSDATA_EXPORT QJsonValue fromUuid(const QUuid& value);
 
 /**
- * @brief Convert a QJsonValue into QColor.
+ * @brief Extract a QColor from the QJsonObject with the corresponding key.
  */
-FSDATA_EXPORT QColor toColor(const QJsonValue& json);
+FSDATA_EXPORT QColor toColor(const QString& objectName, const QString& key, const QJsonObject& json);
 /**
  * @brief Convert a QColor into QJsonValue.
  */
 FSDATA_EXPORT QJsonValue fromColor(const QColor& value);
 
 /**
- * @brief Convert a QJsonObject into QVector2D.
+ * @brief Extract a QVector2D from the QJsonObject with the corresponding key.
  */
-FSDATA_EXPORT QVector2D toVector2D(const QJsonObject& json);
+FSDATA_EXPORT QVector2D toVector2D(const QString& objectName, const QString& key, const QJsonObject& json);
 /**
  * @brief Convert a QVector2D into QJsonObject.
  */
 FSDATA_EXPORT QJsonObject fromVector2D(const QVector2D& value);
 
 /**
- * @brief Convert a QJsonObject into QVector3D.
+ * @brief Extract a QVector3D from the QJsonObject with the corresponding key.
  */
-FSDATA_EXPORT QVector3D toVector3D(const QJsonObject& json);
+FSDATA_EXPORT QVector3D toVector3D(const QString& objectName, const QString& key, const QJsonObject& json);
 /**
  * @brief Convert a QVector3D into QJsonObject.
  */

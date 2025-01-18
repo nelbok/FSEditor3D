@@ -23,10 +23,11 @@ public:
 	QString message() const;
 
 	Type type() const;
-	void setType(Type type);
+	void setType(Type type, const QString& message = "");
 
 private:
 	Type _type{ Type::NoError };
+	QString _message{ "" };
 
 signals:
 	void typeUpdated();

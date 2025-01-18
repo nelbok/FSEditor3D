@@ -90,6 +90,10 @@ public:
 	 */
 	Q_INVOKABLE Result result() const;
 	/**
+	 * @brief Returns the error message if the transaction failed.
+	 */
+	Q_INVOKABLE QString errorMessage() const;
+	/**
 	 * @brief Request the interruption of the thread. See **QThread::requestInterruption()**.
 	 */
 	Q_INVOKABLE void requestInterruption();

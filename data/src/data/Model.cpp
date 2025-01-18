@@ -17,6 +17,7 @@ struct Model::Impl {
 Model::Model(Project* project)
 	: Geometry(project, project)
 	, _impl{ std::make_unique<Impl>() } {
+	setObjectName("Model");
 	QObject::connect(project, &Project::globalPositionUpdated, this, &Model::globalPositionUpdated);
 	QObject::connect(project, &Project::globalRotationUpdated, this, &Model::globalRotationUpdated);
 	QObject::connect(project, &Project::globalScaleUpdated, this, &Model::globalScaleUpdated);
@@ -59,7 +60,7 @@ Model::ModelType Model::modelType() const {
 
 void Model::setModelType(ModelType modelType) {
 	if (this->modelType() != modelType && hasRef())
-		throw DataException(DataException::Error::ModelTypeError);
+		throw DataException(objectName(), DataException::Error::ModelTypeError);
 
 	TOOLS_SETTER(Model, modelType);
 }
@@ -82,9 +83,9 @@ QVector3D Model::globalScale() const {
 
 void Model::load(const QJsonObject& json) {
 	Geometry::load(json);
-	setSourcePath(Json::toUrl(Json::toValue(Format::lSourcePath, json)));
-	setQmlName(Json::toString(Format::lQmlName, json));
-	setModelType(static_cast<Model::ModelType>(Json::toInt(Format::lModelType, json)));
+	setSourcePath(Json::toUrl(objectName(), Format::lSourcePath, json));
+	setQmlName(Json::toString(objectName(), Format::lQmlName, json));
+	setModelType(static_cast<Model::ModelType>(Json::toInt(objectName(), Format::lModelType, json)));
 }
 
 void Model::save(QJsonObject& json) const {

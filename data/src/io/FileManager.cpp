@@ -24,6 +24,7 @@ public:
 		_project = project;
 		_type = type;
 		_url = url;
+		_errorMessage = "";
 
 		auto* parent = _project->parent();
 		// Not thread safe!!!
@@ -66,6 +67,10 @@ public:
 
 	Result result() const {
 		return _result;
+	}
+
+	QString errorMessage() const {
+		return _errorMessage;
 	}
 
 protected:
@@ -135,12 +140,13 @@ private:
 		try {
 			const auto& document = QJsonDocument::fromJson(file.readAll());
 			if (document.isNull()) {
-				throw JsonException(JsonException::Error::InvalidDocument);
+				throw JsonException("FileManager", "load", JsonException::Error::InvalidDocument);
 			}
 			_project->load(document.object());
-		} catch (const JsonException&) {
+		} catch (const JsonException& e) {
 			_project->reset();
 			_result = Result::Error;
+			_errorMessage = e.what();
 		}
 		file.close();
 
@@ -158,6 +164,7 @@ private:
 	QUrl _url{};
 	Type _type{ Type::NoType };
 	Result _result{ Result::NoResult };
+	QString _errorMessage{ "" };
 };
 
 FileManager::FileManager(QObject* parent)
@@ -186,6 +193,10 @@ bool FileManager::isRunning() const {
 
 FileManager::Result FileManager::result() const {
 	return _impl->result();
+}
+
+QString FileManager::errorMessage() const {
+	return _impl->errorMessage();
 }
 
 void FileManager::requestInterruption() {
