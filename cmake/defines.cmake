@@ -4,7 +4,7 @@ string(TIMESTAMP FS_YEAR %Y)
 set(FS_DESCRIPTION "Game editor 3D / Visual tour 3D")
 set(FS_COPYRIGHT "Copyright (C) 2011-${FS_YEAR} ${FS_ORGANIZATION}")
 
-set(FS_VERSION "0.5.2")
+set(FS_VERSION "0.5.3")
 string(REPLACE "." "," FS_VERSION_RC ${FS_VERSION})
 set(CFS_DATA "fsdata")
 set(CFS_EUI "fseui")
