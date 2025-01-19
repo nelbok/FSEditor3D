@@ -18,6 +18,7 @@
 #include <fse/managers/SelectionManager.hpp>
 #include <fse/managers/StylesManager.hpp>
 #include <fse/managers/TranslationsManager.hpp>
+#include <fse/managers/UpdateManager.hpp>
 #include <fse/models/ProxyModel.hpp>
 #include <fse/models/SelectionWrapper.hpp>
 #include <fse/Config.hpp>
@@ -85,6 +86,7 @@ void initRegister(Manager& manager) {
 	qmlRegisterSingletonInstance("editor", 1, 0, "MySelection", manager.selectionManager());
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyStyles", manager.stylesManager());
 	qmlRegisterSingletonInstance("editor", 1, 0, "MyTranslations", manager.translationsManager());
+	qmlRegisterSingletonInstance("editor", 1, 0, "MyUpdate", manager.updateManager());
 	qmlRegisterType<fse::ProxyModel>("editor", 1, 0, "MyProxyModel");
 	qmlRegisterType<fse::SelectionWrapper>("editor", 1, 0, "MySelectionWrapper");
 }

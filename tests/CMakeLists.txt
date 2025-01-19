@@ -10,6 +10,7 @@ set(PROJECT_SOURCES
 	editor/TestBalsam.hpp
 	editor/TestStyles.hpp
 	editor/TestTranslations.hpp
+	editor/TestUpdate.hpp
 
 	Dummy.hpp
 	Tests.cpp

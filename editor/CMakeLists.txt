@@ -29,6 +29,7 @@ set(PROJECT_SOURCES
 	include/fse/managers/SelectionManager.hpp
 	include/fse/managers/StylesManager.hpp
 	include/fse/managers/TranslationsManager.hpp
+	include/fse/managers/UpdateManager.hpp
 
 	include/fse/models/EntityModel.hpp
 	include/fse/models/LinkModel.hpp
@@ -72,6 +73,7 @@ set(PROJECT_SOURCES
 	src/managers/SelectionManager.cpp
 	src/managers/StylesManager.cpp
 	src/managers/TranslationsManager.cpp
+	src/managers/UpdateManager.cpp
 
 	src/models/EntityModel.cpp
 	src/models/LinkModel.cpp
@@ -164,4 +166,4 @@ qt_add_qml_module(${CFS_EUI} URI editor VERSION 1.0 QML_FILES ${QML_SOURCES})
 qt_add_translations(${CFS_EUI} TS_FILES ${TRANSLATION_FILES} RESOURCE_PREFIX "/translations")
 
 target_include_directories(${CFS_EUI} PUBLIC include)
-target_link_libraries(${CFS_EUI} PRIVATE Qt6::Quick Qt6::Quick3D Qt6::Quick3DPhysics ${CFS_DATA})
+target_link_libraries(${CFS_EUI} PRIVATE Qt6::Network Qt6::Quick Qt6::Quick3D Qt6::Quick3DPhysics ${CFS_DATA})

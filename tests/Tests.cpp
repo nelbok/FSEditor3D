@@ -10,6 +10,7 @@
 #include "editor/TestBalsam.hpp"
 #include "editor/TestStyles.hpp"
 #include "editor/TestTranslations.hpp"
+#include "editor/TestUpdate.hpp"
 
 class Tests : public QObject {
 	Q_OBJECT
@@ -58,6 +59,10 @@ private slots:
 
 	void testTranslations() const {
 		TestTranslations().run();
+	}
+
+	void testUpdate() const {
+		TestUpdate().run();
 	}
 
 	void cleanup() const {

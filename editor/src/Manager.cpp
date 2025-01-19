@@ -12,6 +12,7 @@
 #include <fse/managers/SelectionManager.hpp>
 #include <fse/managers/StylesManager.hpp>
 #include <fse/managers/TranslationsManager.hpp>
+#include <fse/managers/UpdateManager.hpp>
 
 namespace fse {
 
@@ -30,6 +31,7 @@ struct Manager::Impl {
 	SelectionManager* selectionManager{ nullptr };
 	StylesManager* stylesManager{ nullptr };
 	TranslationsManager* translationsManager{ nullptr };
+	UpdateManager* updateManager{ nullptr };
 };
 
 Manager::Manager(QObject* parent)
@@ -55,6 +57,7 @@ void Manager::init() {
 	_impl->selectionManager = new SelectionManager(this);
 	_impl->stylesManager = new StylesManager(this);
 	_impl->translationsManager = new TranslationsManager(this);
+	_impl->updateManager = new UpdateManager(this);
 
 	_impl->balsam->init(_impl->fileManager, _impl->commandsManager);
 
@@ -149,5 +152,10 @@ StylesManager* Manager::stylesManager() const {
 TranslationsManager* Manager::translationsManager() const {
 	assert(_impl->translationsManager);
 	return _impl->translationsManager;
+}
+
+UpdateManager* Manager::updateManager() const {
+	assert(_impl->updateManager);
+	return _impl->updateManager;
 }
 } // namespace fse

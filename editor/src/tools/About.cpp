@@ -1,10 +1,12 @@
 #include <fse/tools/About.hpp>
 
+#include <QtCore/QCoreApplication>
+
 #include <fse/Config.hpp>
 
 namespace fse {
 QString About::organization() const {
-	return fse::Config::organization;
+	return QCoreApplication::organizationName();
 }
 
 QString About::copyright() const {
@@ -20,11 +22,11 @@ QString About::description() const {
 }
 
 QString About::name() const {
-	return fse::Config::name;
+	return QCoreApplication::applicationName();
 }
 
 QString About::version() const {
-	return fse::Config::version;
+	return QCoreApplication::applicationVersion();
 }
 
 QString About::qtVersion() const {

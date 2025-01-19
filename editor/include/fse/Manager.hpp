@@ -19,6 +19,7 @@ class PreviewManager;
 class SelectionManager;
 class StylesManager;
 class TranslationsManager;
+class UpdateManager;
 
 class Manager : public QObject {
 	Q_OBJECT
@@ -50,6 +51,7 @@ public:
 	SelectionManager* selectionManager() const;
 	StylesManager* stylesManager() const;
 	TranslationsManager* translationsManager() const;
+	UpdateManager* updateManager() const;
 
 private:
 	struct Impl;

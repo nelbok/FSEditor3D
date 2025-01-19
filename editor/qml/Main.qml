@@ -102,11 +102,30 @@ Window {
         onClicked: MyFile.requestFileTransactionInterruption()
     }
 
+    Connections {
+        target: MyErrors
+        function onTypeUpdated() {
+            message.text = MyErrors.message;
+            message.visible = MyErrors.type !== MyErrors.Type.NoError
+        }
+    }
+
+    Connections {
+        target: MyUpdate
+        function onNewVersionAvailable() {
+            message.text = qsTr("A new version is available:\n Version ") + MyUpdate.version
+            message.visible = true
+        }
+    }
+
     FSEMessageBox {
         id: message
         anchors.centerIn: parent
-        text: MyErrors.message
-        visible: MyErrors.type !== MyErrors.Type.NoError
-        onClicked: { MyErrors.type = MyErrors.Type.NoError }
+        visible: false
+        onClicked: { message.visible = false }
+    }
+
+    Component.onCompleted: {
+        MyUpdate.checkForUpdates()
     }
 }
