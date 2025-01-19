@@ -32,9 +32,9 @@ public:
 	Q_INVOKABLE void save(const QUrl& url);
 	Q_INVOKABLE void requestFileTransactionInterruption();
 
-	const QUrl& tmpPath() const;
-	const QUrl& oldPath() const;
-	const QUrl& path() const;
+	QUrl tmpPath() const;
+	QUrl oldPath() const;
+	QUrl path() const;
 	void setPath(const QUrl& path);
 
 	fsd::FileManager::Result result() const;

@@ -112,11 +112,11 @@ void Project::setHeight(unsigned short height) {
 	}
 }
 
-const QList<Entity*>& Project::entities() const {
+QList<Entity*> Project::entities() const {
 	return _impl->entities;
 }
 
-const QList<Link*>& Project::links() const {
+QList<Link*> Project::links() const {
 	return _impl->links;
 }
 
@@ -147,7 +147,7 @@ void Project::cleanLinks() {
 	rebuildEntities();
 }
 
-const QList<Model*>& Project::models() const {
+QList<Model*> Project::models() const {
 	return _impl->models;
 }
 
@@ -178,7 +178,7 @@ void Project::cleanModels() {
 	rebuildEntities();
 }
 
-const QList<Object*>& Project::objects() const {
+QList<Object*> Project::objects() const {
 	return _impl->objects;
 }
 
@@ -209,7 +209,7 @@ void Project::cleanObjects() {
 	rebuildEntities();
 }
 
-const QList<Place*>& Project::places() const {
+QList<Place*> Project::places() const {
 	return _impl->places;
 }
 

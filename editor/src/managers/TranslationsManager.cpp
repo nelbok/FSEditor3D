@@ -37,7 +37,7 @@ void TranslationsManager::init(ErrorsManager* manager) {
 	_impl->installTranslator();
 }
 
-const QString& TranslationsManager::current() const {
+QString TranslationsManager::current() const {
 	return _impl->current;
 }
 

@@ -59,7 +59,7 @@ protected:
 template<class T>
 class FSDATA_EXPORT UuidPointer : public BasePointer {
 public:
-	using GetterFunc = const QList<T*>& (Project::*) () const;
+	using GetterFunc = QList<T*> (Project::*)() const;
 
 	UuidPointer(Project* project, GetterFunc getter, SignalFunc signal, Entity* parent)
 		: BasePointer(project, signal, parent)

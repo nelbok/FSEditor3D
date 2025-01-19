@@ -54,7 +54,7 @@ void Entity::setIsAlive(bool isAlive) {
 	TOOLS_SETTER(Entity, isAlive);
 }
 
-const QString& Entity::name() const {
+QString Entity::name() const {
 	return _impl->name;
 }
 
@@ -62,7 +62,7 @@ void Entity::setName(const QString& name) {
 	TOOLS_SETTER(Entity, name);
 }
 
-const QList<Entity*>& Entity::refs() const {
+QList<Entity*> Entity::refs() const {
 	return _impl->refs;
 }
 

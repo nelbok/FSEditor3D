@@ -69,10 +69,10 @@ public:
 	bool isAlive() const;
 	void setIsAlive(bool isAlive);
 
-	const QString& name() const;
+	QString name() const;
 	void setName(const QString& name);
 
-	const QList<Entity*>& refs() const;
+	QList<Entity*> refs() const;
 	void addRef(Entity* ref);
 	void removeRef(Entity* ref);
 	bool hasRef() const;

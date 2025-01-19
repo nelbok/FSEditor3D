@@ -69,10 +69,10 @@ public:
 	unsigned short height() const;
 	void setHeight(unsigned short height);
 
-	const QList<Entity*>& entities() const;
+	QList<Entity*> entities() const;
 
 	// Links
-	const QList<Link*>& links() const;
+	QList<Link*> links() const;
 	void setLinks(const QList<Link*>& link);
 	Link* createLink();
 	void removeLink(Link* link);
@@ -80,7 +80,7 @@ public:
 	void cleanLinks();
 
 	// Models
-	const QList<Model*>& models() const;
+	QList<Model*> models() const;
 	void setModels(const QList<Model*>& models);
 	Model* createModel();
 	void removeModel(Model* model);
@@ -88,7 +88,7 @@ public:
 	void cleanModels();
 
 	// Objects
-	const QList<Object*>& objects() const;
+	QList<Object*> objects() const;
 	void setObjects(const QList<Object*>& object);
 	Object* createObject();
 	void removeObject(Object* object);
@@ -96,7 +96,7 @@ public:
 	void cleanObjects();
 
 	// Places
-	const QList<Place*>& places() const;
+	QList<Place*> places() const;
 	void setPlaces(const QList<Place*>& places);
 	Place* createPlace();
 	void removePlace(Place* place);

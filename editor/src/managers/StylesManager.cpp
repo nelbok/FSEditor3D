@@ -65,7 +65,7 @@ void StylesManager::createJson() const {
 	file.commit();
 }
 
-const QString& StylesManager::current() const {
+QString StylesManager::current() const {
 	return _impl->current;
 }
 

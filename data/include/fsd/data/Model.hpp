@@ -52,10 +52,10 @@ public:
 	void reset() override;
 	void copy(const Model& model);
 
-	const QUrl& sourcePath() const;
+	QUrl sourcePath() const;
 	void setSourcePath(const QUrl& path);
 
-	const QString& qmlName() const;
+	QString qmlName() const;
 	void setQmlName(const QString& path);
 
 	ModelType modelType() const;

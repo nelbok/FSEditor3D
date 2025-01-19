@@ -38,7 +38,7 @@ void Model::copy(const Model& model) {
 	setModelType(model.modelType());
 }
 
-const QUrl& Model::sourcePath() const {
+QUrl Model::sourcePath() const {
 	return _impl->sourcePath;
 }
 
@@ -46,7 +46,7 @@ void Model::setSourcePath(const QUrl& sourcePath) {
 	TOOLS_SETTER(Model, sourcePath);
 }
 
-const QString& Model::qmlName() const {
+QString Model::qmlName() const {
 	return _impl->qmlName;
 }
 

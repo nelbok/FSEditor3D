@@ -100,15 +100,15 @@ void FileManager::requestFileTransactionInterruption() {
 	_impl->fileThread->requestInterruption();
 }
 
-const QUrl& FileManager::tmpPath() const {
+QUrl FileManager::tmpPath() const {
 	return _impl->tmpPath;
 }
 
-const QUrl& FileManager::oldPath() const {
+QUrl FileManager::oldPath() const {
 	return _impl->oldPath;
 }
 
-const QUrl& FileManager::path() const {
+QUrl FileManager::path() const {
 	return _impl->path;
 }
 

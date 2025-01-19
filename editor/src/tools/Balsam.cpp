@@ -11,7 +11,7 @@ namespace fs = std::filesystem;
 
 namespace fse {
 namespace detail {
-const QUrl& path(const fse::FileManager* manager) {
+QUrl path(const fse::FileManager* manager) {
 	if (manager->path().isValid())
 		return manager->path();
 	if (manager->oldPath().isValid())

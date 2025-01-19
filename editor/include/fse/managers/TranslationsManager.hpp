@@ -6,7 +6,7 @@ namespace fse {
 class ErrorsManager;
 class TranslationsManager : public QObject {
 	Q_OBJECT
-	Q_PROPERTY(const QString& current READ current WRITE setCurrent NOTIFY currentUpdated)
+	Q_PROPERTY(QString current READ current WRITE setCurrent NOTIFY currentUpdated)
 
 public:
 	explicit TranslationsManager(QObject* parent = nullptr);
@@ -14,7 +14,7 @@ public:
 
 	void init(ErrorsManager* manager);
 
-	const QString& current() const;
+	QString current() const;
 	void setCurrent(const QString& current);
 
 private:
