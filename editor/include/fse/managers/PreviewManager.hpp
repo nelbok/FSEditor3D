@@ -17,7 +17,7 @@ struct PreviewData {
 	Q_PROPERTY(QUrl model MEMBER model CONSTANT)
 	Q_PROPERTY(QVector3D offset MEMBER offset CONSTANT)
 public:
-	fsd::Geometry* geometry;
+	fsd::Geometry* geometry{ nullptr };
 	QUrl basePath;
 	QUrl model;
 	QVector3D offset{ 0, 0, 0 };

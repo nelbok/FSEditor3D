@@ -45,7 +45,7 @@ FSEModule {
         }
 
         RowLayout {
-            height: 40
+            implicitHeight: 40
 
             spacing: 5
 
@@ -68,11 +68,6 @@ FSEModule {
         }
     }
 
-    Connections {
-        target: MyManager.balsam
-        function onErrorOccurred() { message.open() }
-    }
-
     FileDialog {
         id: dialog
         fileMode: FileDialog.OpenFile
@@ -85,11 +80,5 @@ FSEModule {
             "GLTF2 (*.gltf *.glb)",
         ]
         onAccepted: MyManager.balsam.generate(MySelection.currentModel, selectedFile)
-    }
-
-    MessageDialog {
-        id: message
-        buttons: MessageDialog.Ok
-        text: qsTr("An error occurred while parsing the file.")
     }
 }

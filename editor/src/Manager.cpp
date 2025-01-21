@@ -59,7 +59,7 @@ void Manager::init() {
 	_impl->translationsManager = new TranslationsManager(this);
 	_impl->updateManager = new UpdateManager(this);
 
-	_impl->balsam->init(_impl->fileManager, _impl->commandsManager);
+	_impl->balsam->init(this);
 
 	_impl->commandsManager->init(_impl->project);
 	_impl->fileManager->init(this);

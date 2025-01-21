@@ -11,6 +11,7 @@ class ErrorsManager : public QObject {
 public:
 	enum class Type {
 		NoError,
+		BalsamError,
 		FileError,
 		StyleError,
 		TranslatorError,

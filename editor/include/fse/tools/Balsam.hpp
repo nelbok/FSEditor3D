@@ -7,8 +7,7 @@
 #include <fsd/data/Model.hpp>
 
 namespace fse {
-class CommandsManager;
-class FileManager;
+class Manager;
 
 class Balsam : public QObject {
 	Q_OBJECT
@@ -17,7 +16,7 @@ public:
 	explicit Balsam(QObject* parent = nullptr);
 	~Balsam() override;
 
-	void init(FileManager* manager, CommandsManager* commands);
+	void init(Manager* manager);
 
 	QUrl balsamPath() const;
 
@@ -32,11 +31,8 @@ private slots:
 	void finalize();
 
 private:
-	FileManager* _manager{ nullptr };
-	CommandsManager* _commands{ nullptr };
-	fsd::Model* _current{ nullptr };
-	QProcess* _process{ nullptr };
-	QUrl _sourcePath{};
+	struct Impl;
+	std::unique_ptr<Impl> _impl;
 
 signals:
 	void errorOccurred();

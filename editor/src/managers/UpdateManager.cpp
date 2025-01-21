@@ -58,7 +58,7 @@ struct UpdateManager::Impl {
 
 UpdateManager::UpdateManager(QObject* parent)
 	: QObject(parent)
-	, _impl(std::make_unique<Impl>()) {
+	, _impl{ std::make_unique<Impl>() } {
 	_impl->networkManager = new QNetworkAccessManager(this);
 }
 

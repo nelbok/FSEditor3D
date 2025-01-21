@@ -10,6 +10,8 @@ ErrorsManager::~ErrorsManager() = default;
 
 QString ErrorsManager::message() const {
 	switch (_type) {
+		case Type::BalsamError:
+			return QCoreApplication::translate("ErrorsManager", "An error occured while parsing the model.");
 		case Type::FileError:
 			return QCoreApplication::translate("ErrorsManager", "An error occured while loading or saving a file:\n") + _message;
 		case Type::StyleError:
@@ -26,11 +28,8 @@ ErrorsManager::Type ErrorsManager::type() const {
 }
 
 void ErrorsManager::setType(Type type, const QString& message) {
-	if (_type != type) {
-		_type = type;
-		_message = message;
-		emit typeUpdated();
-	}
+	_type = type;
+	_message = message;
+	emit typeUpdated();
 }
-
 } // namespace fse
