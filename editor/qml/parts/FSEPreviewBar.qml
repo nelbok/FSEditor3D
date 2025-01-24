@@ -20,14 +20,14 @@ FSERectangle {
 
         FSEButton {
             text: qsTr("Show objects")
-            selected: MyPreview.areOtherDatasVisible
-            onClicked: MyPreview.switchOtherDatasVisible()
+            selected: MyPreview.areObjectsVisible
+            onClicked: MyPreview.switchObjectsVisible()
         }
 
         FSEButton {
             text: qsTr("Show links")
-            selected: MyPreview.areOtherDatasVisible
-            onClicked: MyPreview.switchOtherDatasVisible()
+            selected: MyPreview.areLinksVisible
+            onClicked: MyPreview.switchLinksVisible()
         }
 
         FSEButton {

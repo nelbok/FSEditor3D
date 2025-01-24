@@ -28,7 +28,8 @@ class PreviewManager : public QObject {
 	Q_PROPERTY(QVector3D cameraPosition READ cameraPosition WRITE setCameraPosition NOTIFY cameraPositionUpdated)
 	Q_PROPERTY(QVector3D cameraRotation READ cameraRotation WRITE setCameraRotation NOTIFY cameraRotationUpdated)
 
-	Q_PROPERTY(bool areOtherDatasVisible READ areOtherDatasVisible WRITE setAreOtherDatasVisible NOTIFY areOtherDatasVisibleUpdated)
+	Q_PROPERTY(bool areLinksVisible READ areLinksVisible WRITE setAreLinksVisible NOTIFY areLinksVisibleUpdated)
+	Q_PROPERTY(bool areObjectsVisible READ areObjectsVisible WRITE setAreObjectsVisible NOTIFY areObjectsVisibleUpdated)
 	Q_PROPERTY(bool areOriginsVisible READ areOriginsVisible WRITE setAreOriginsVisible NOTIFY areOriginsVisibleUpdated)
 	Q_PROPERTY(bool isWorldMode READ isWorldMode WRITE setWorldMode NOTIFY isWorldModeUpdated)
 	Q_PROPERTY(bool isDebugMode READ isDebugMode WRITE setDebugMode NOTIFY isDebugModeUpdated)
@@ -56,8 +57,11 @@ public:
 	const QVector3D& cameraRotation() const;
 	void setCameraRotation(const QVector3D& cameraRotation);
 
-	bool areOtherDatasVisible() const;
-	void setAreOtherDatasVisible(bool visible);
+	bool areLinksVisible() const;
+	void setAreLinksVisible(bool visible);
+
+	bool areObjectsVisible() const;
+	void setAreObjectsVisible(bool visible);
 
 	bool areOriginsVisible() const;
 	void setAreOriginsVisible(bool visible);
@@ -75,7 +79,8 @@ public:
 	void setGravityEnabled(bool enabled);
 
 	Q_INVOKABLE void centerOnCurrent();
-	Q_INVOKABLE void switchOtherDatasVisible();
+	Q_INVOKABLE void switchLinksVisible();
+	Q_INVOKABLE void switchObjectsVisible();
 	Q_INVOKABLE void switchOriginsVisible();
 	Q_INVOKABLE void switchWorldMode();
 	Q_INVOKABLE void switchDebugMode();
@@ -85,15 +90,16 @@ public:
 	QList<PreviewData> datas() const;
 
 private:
-	void fullMapDatas(QList<PreviewData>& datas, QList<fsd::Geometry*>& parsed, fsd::Place* place, const QVector3D& offset = { 0, 0, 0 }) const;
+	void fullMapDatas(QList<fsd::Geometry*>& parsed, fsd::Place* place, const QVector3D& offset = { 0, 0, 0 }) const;
 
-	void fillDatas(QList<PreviewData>& datas, QList<fsd::Geometry*>& parsed, fsd::Geometry* geometry, bool useRefs) const;
-	void fillDatas(QList<PreviewData>& datas, QList<fsd::Geometry*>& parsed, fsd::Geometry* geometry, const QVector3D& offset = { 0, 0, 0 }, bool useRefs = false) const;
+	void fillDatas(QList<fsd::Geometry*>& parsed, fsd::Geometry* geometry, bool useRefs) const;
+	void fillDatas(QList<fsd::Geometry*>& parsed, fsd::Geometry* geometry, const QVector3D& offset = { 0, 0, 0 }, bool useRefs = false) const;
 
 	struct Impl;
 	std::unique_ptr<Impl> _impl;
 
 private slots:
+	void updateDatas();
 	void updateConnections();
 
 signals:
@@ -101,7 +107,8 @@ signals:
 	void cameraRotationUpdated();
 	void previewUpdated();
 
-	void areOtherDatasVisibleUpdated();
+	void areLinksVisibleUpdated();
+	void areObjectsVisibleUpdated();
 	void areOriginsVisibleUpdated();
 	void isWorldModeUpdated();
 	void isDebugModeUpdated();

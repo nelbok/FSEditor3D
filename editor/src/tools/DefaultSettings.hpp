@@ -10,8 +10,10 @@ constexpr auto uiTranslationValue = "en";
 
 // Preview
 constexpr auto previewKey = "preview";
-constexpr auto previewAreOtherDatasVisibleKey = "areOtherDatasVisible";
-constexpr auto previewAreOtherDatasVisibleValue = true;
+constexpr auto previewAreLinksVisibleKey = "areLinksVisible";
+constexpr auto previewAreLinksVisibleValue = true;
+constexpr auto previewAreObjectsVisibleKey = "areObjectsVisible";
+constexpr auto previewAreObjectsVisibleValue = true;
 constexpr auto previewAreOriginsVisibleKey = "areOriginsVisible";
 constexpr auto previewAreOriginsVisibleValue = false;
 constexpr auto previewIsWorldModeKey = "isWorldMode";

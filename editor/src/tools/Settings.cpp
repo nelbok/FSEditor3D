@@ -28,7 +28,8 @@ void Settings::save() const {
 	settings.endGroup();
 
 	settings.beginGroup(DefaultSettings::previewKey);
-	settings.setValue(DefaultSettings::previewAreOtherDatasVisibleKey, _manager->previewManager()->areOtherDatasVisible());
+	settings.setValue(DefaultSettings::previewAreLinksVisibleKey, _manager->previewManager()->areLinksVisible());
+	settings.setValue(DefaultSettings::previewAreObjectsVisibleKey, _manager->previewManager()->areObjectsVisible());
 	settings.setValue(DefaultSettings::previewAreOriginsVisibleKey, _manager->previewManager()->areOriginsVisible());
 	settings.setValue(DefaultSettings::previewIsWorldModeKey, _manager->previewManager()->isWorldMode());
 	settings.setValue(DefaultSettings::previewIsDebugModeKey, _manager->previewManager()->isDebugMode());
@@ -64,7 +65,8 @@ void Settings::load() {
 	settings.endGroup();
 
 	settings.beginGroup(DefaultSettings::previewKey);
-	_manager->previewManager()->setAreOtherDatasVisible(settings.value(DefaultSettings::previewAreOtherDatasVisibleKey, DefaultSettings::previewAreOtherDatasVisibleValue).toBool());
+	_manager->previewManager()->setAreLinksVisible(settings.value(DefaultSettings::previewAreLinksVisibleKey, DefaultSettings::previewAreLinksVisibleValue).toBool());
+	_manager->previewManager()->setAreObjectsVisible(settings.value(DefaultSettings::previewAreObjectsVisibleKey, DefaultSettings::previewAreObjectsVisibleValue).toBool());
 	_manager->previewManager()->setAreOriginsVisible(settings.value(DefaultSettings::previewAreOriginsVisibleKey, DefaultSettings::previewAreOriginsVisibleValue).toBool());
 	_manager->previewManager()->setWorldMode(settings.value(DefaultSettings::previewIsWorldModeKey, DefaultSettings::previewIsWorldModeValue).toBool());
 	_manager->previewManager()->setDebugMode(settings.value(DefaultSettings::previewIsDebugModeKey, DefaultSettings::previewIsDebugModeValue).toBool());
