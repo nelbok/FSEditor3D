@@ -34,7 +34,7 @@ FSERectangle {
         anchors.left: intefaceBtn.right
 
         id: keyboardBtn
-        text: qsTr("Key Bindings")
+        text: qsTr("Key bindings")
         selected: root.selected === FSESettings.SettingsType.KeyBindings
         onClicked: root.selected = FSESettings.SettingsType.KeyBindings
     }

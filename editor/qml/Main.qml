@@ -113,7 +113,7 @@ Window {
     Connections {
         target: MyUpdate
         function onNewVersionAvailable() {
-            message.text = qsTr("A new version is available:\n Version ") + MyUpdate.version
+            message.text = qsTr("A new version is available:\nVersion ") + MyUpdate.version
             message.visible = true
         }
     }

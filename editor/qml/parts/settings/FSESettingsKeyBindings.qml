@@ -15,8 +15,8 @@ GridLayout {
         name: qsTr("Default settings")
         model: ListModel {
             ListElement { value: MyKeyBindings.KeyBindingsType.Custom; name: qsTr("Custom") }
-            ListElement { value: MyKeyBindings.KeyBindingsType.Qwerty; name: qsTr("QWERTY") }
-            ListElement { value: MyKeyBindings.KeyBindingsType.Azerty; name: qsTr("AZERTY") }
+            ListElement { value: MyKeyBindings.KeyBindingsType.Qwerty; name: "QWERTY" }
+            ListElement { value: MyKeyBindings.KeyBindingsType.Azerty; name: "AZERTY" }
         }
 
         currentIndex: MyKeyBindings.current
