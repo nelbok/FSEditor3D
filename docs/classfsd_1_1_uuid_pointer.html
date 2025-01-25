@@ -26,7 +26,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Foxxy Soft Editor 3D<span id="projectnumber">&#160;0.4.4</span>
+   <div id="projectname">Foxxy Soft Editor 3D<span id="projectnumber">&#160;0.6.0</span>
    </div>
    <div id="projectbrief">Game editor 3D / Visual tour 3D</div>
   </td>
@@ -91,6 +91,7 @@ $(function(){ initResizable(false); });
 <div id="doc-content">
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classfsd_1_1_uuid_pointer-members.html">List of all members</a>  </div>
@@ -112,11 +113,17 @@ Inheritance diagram for fsd::UuidPointer&lt; T &gt;:</div>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:aa29e4f6f5ba9f88c0bb0c7a3894a260a" id="r_aa29e4f6f5ba9f88c0bb0c7a3894a260a"><td class="memItemLeft" align="right" valign="top"><a id="aa29e4f6f5ba9f88c0bb0c7a3894a260a" name="aa29e4f6f5ba9f88c0bb0c7a3894a260a"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>GetterFunc</b> = QList&lt;T*&gt; (Project::*)() const</td></tr>
+<tr class="separator:aa29e4f6f5ba9f88c0bb0c7a3894a260a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab492f34fea52a4626f315e736ceaf7ab" id="r_ab492f34fea52a4626f315e736ceaf7ab"><td class="memItemLeft" align="right" valign="top"><a id="ab492f34fea52a4626f315e736ceaf7ab" name="ab492f34fea52a4626f315e736ceaf7ab"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>UuidPointer</b> (<a class="el" href="classfsd_1_1_project.html">Project</a> *project, const QList&lt; T * &gt; &amp;(Project::*getter)() const, void(Project::*signal)(), <a class="el" href="classfsd_1_1_entity.html">Entity</a> *parent)</td></tr>
-<tr class="separator:ab492f34fea52a4626f315e736ceaf7ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2736ef63c70dab965975313739581856" id="r_a2736ef63c70dab965975313739581856"><td class="memItemLeft" align="right" valign="top"><a id="a2736ef63c70dab965975313739581856" name="a2736ef63c70dab965975313739581856"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>UuidPointer</b> (<a class="el" href="classfsd_1_1_project.html">Project</a> *project, GetterFunc getter, SignalFunc signal, <a class="el" href="classfsd_1_1_entity.html">Entity</a> *parent)</td></tr>
+<tr class="separator:a2736ef63c70dab965975313739581856"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08b251009188453748fad1e4d8c8c51f" id="r_a08b251009188453748fad1e4d8c8c51f"><td class="memItemLeft" align="right" valign="top"><a id="a08b251009188453748fad1e4d8c8c51f" name="a08b251009188453748fad1e4d8c8c51f"></a>
 T *&#160;</td><td class="memItemRight" valign="bottom"><b>operator-&gt;</b> ()</td></tr>
 <tr class="separator:a08b251009188453748fad1e4d8c8c51f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -144,15 +151,19 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isNull</b> () const</
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a4c111a7374df9ad6b803cb6a9bf22cf7" id="r_a4c111a7374df9ad6b803cb6a9bf22cf7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4c111a7374df9ad6b803cb6a9bf22cf7">update</a> () override</td></tr>
-<tr class="separator:a4c111a7374df9ad6b803cb6a9bf22cf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6146009ead482220e7338750268291e3" id="r_a6146009ead482220e7338750268291e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6146009ead482220e7338750268291e3">update</a> () override</td></tr>
+<tr class="separator:a6146009ead482220e7338750268291e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classfsd_1_1_base_pointer"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classfsd_1_1_base_pointer')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classfsd_1_1_base_pointer.html">fsd::BasePointer</a></td></tr>
-<tr class="memitem:a02edbae683c4615834cdf2ce87a3e5f9 inherit pro_methods_classfsd_1_1_base_pointer" id="r_a02edbae683c4615834cdf2ce87a3e5f9"><td class="memItemLeft" align="right" valign="top">
-&#160;</td><td class="memItemRight" valign="bottom"><b>BasePointer</b> (<a class="el" href="classfsd_1_1_project.html">Project</a> *project, void(Project::*signal)(), <a class="el" href="classfsd_1_1_entity.html">Entity</a> *parent)</td></tr>
-<tr class="separator:a02edbae683c4615834cdf2ce87a3e5f9 inherit pro_methods_classfsd_1_1_base_pointer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab63fda3330079af814fb1189f0a2f281 inherit pro_methods_classfsd_1_1_base_pointer" id="r_ab63fda3330079af814fb1189f0a2f281"><td class="memItemLeft" align="right" valign="top">
+&#160;</td><td class="memItemRight" valign="bottom"><b>BasePointer</b> (<a class="el" href="classfsd_1_1_project.html">Project</a> *project, SignalFunc signal, <a class="el" href="classfsd_1_1_entity.html">Entity</a> *parent)</td></tr>
+<tr class="separator:ab63fda3330079af814fb1189f0a2f281 inherit pro_methods_classfsd_1_1_base_pointer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_types_classfsd_1_1_base_pointer"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_types_classfsd_1_1_base_pointer')"><img src="closed.png" alt="-"/>&#160;Protected Types inherited from <a class="el" href="classfsd_1_1_base_pointer.html">fsd::BasePointer</a></td></tr>
+<tr class="memitem:ab724ecbeaf594cec0498fd7c6f7389f4 inherit pro_types_classfsd_1_1_base_pointer" id="r_ab724ecbeaf594cec0498fd7c6f7389f4"><td class="memItemLeft" align="right" valign="top">
+using&#160;</td><td class="memItemRight" valign="bottom"><b>SignalFunc</b> = void (Project::*)()</td></tr>
+<tr class="separator:ab724ecbeaf594cec0498fd7c6f7389f4 inherit pro_types_classfsd_1_1_base_pointer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_slots_classfsd_1_1_base_pointer"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_slots_classfsd_1_1_base_pointer')"><img src="closed.png" alt="-"/>&#160;Protected Slots inherited from <a class="el" href="classfsd_1_1_base_pointer.html">fsd::BasePointer</a></td></tr>
 <tr class="inherit_header pro_attribs_classfsd_1_1_base_pointer"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classfsd_1_1_base_pointer')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classfsd_1_1_base_pointer.html">fsd::BasePointer</a></td></tr>
 <tr class="memitem:ab8ccc5a2d3ef56d318b47c82015c2c3f inherit pro_attribs_classfsd_1_1_base_pointer" id="r_ab8ccc5a2d3ef56d318b47c82015c2c3f"><td class="memItemLeft" align="right" valign="top">
@@ -180,8 +191,8 @@ Use uuid() to get the uuid.</p>
 <p>Even if the instance is not known at the loading, the pointer will not be destroyed and the uuid will not be updated.<br  />
 Though, if no instance corresponding to the uuid is found, the pointer will not be valid. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a4c111a7374df9ad6b803cb6a9bf22cf7" name="a4c111a7374df9ad6b803cb6a9bf22cf7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c111a7374df9ad6b803cb6a9bf22cf7">&#9670;&#160;</a></span>update()</h2>
+<a id="a6146009ead482220e7338750268291e3" name="a6146009ead482220e7338750268291e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6146009ead482220e7338750268291e3">&#9670;&#160;</a></span>update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -192,7 +203,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="classfsd_1_1_uuid_pointer.html">fsd::UuidPointer</a>&lt; T &gt;::update </td>
+          <td class="memname">void <a class="el" href="classfsd_1_1_uuid_pointer.html">fsd::UuidPointer</a>&lt; T &gt;::update </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>

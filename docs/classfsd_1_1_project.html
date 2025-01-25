@@ -26,7 +26,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Foxxy Soft Editor 3D<span id="projectnumber">&#160;0.4.4</span>
+   <div id="projectname">Foxxy Soft Editor 3D<span id="projectnumber">&#160;0.6.0</span>
    </div>
    <div id="projectbrief">Game editor 3D / Visual tour 3D</div>
   </td>
@@ -119,6 +119,9 @@ Signals</h2></td></tr>
 <tr class="memitem:a97f486295563ba17eb7bd50de4d6f0c1" id="r_a97f486295563ba17eb7bd50de4d6f0c1"><td class="memItemLeft" align="right" valign="top"><a id="a97f486295563ba17eb7bd50de4d6f0c1" name="a97f486295563ba17eb7bd50de4d6f0c1"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>defaultPlaceUpdated</b> ()</td></tr>
 <tr class="separator:a97f486295563ba17eb7bd50de4d6f0c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab102438c24d5eea61384aae124529132" id="r_ab102438c24d5eea61384aae124529132"><td class="memItemLeft" align="right" valign="top"><a id="ab102438c24d5eea61384aae124529132" name="ab102438c24d5eea61384aae124529132"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>heightUpdated</b> ()</td></tr>
+<tr class="separator:ab102438c24d5eea61384aae124529132"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0bde1b0bb8cacc4bfd2160262f531663" id="r_a0bde1b0bb8cacc4bfd2160262f531663"><td class="memItemLeft" align="right" valign="top"><a id="a0bde1b0bb8cacc4bfd2160262f531663" name="a0bde1b0bb8cacc4bfd2160262f531663"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>entitiesUpdated</b> ()</td></tr>
 <tr class="separator:a0bde1b0bb8cacc4bfd2160262f531663"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,20 +175,26 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:accb76e236f4f2db4f03425d19bf23feb" id="r_accb76e236f4f2db4f03425d19bf23feb"><td class="memItemLeft" align="right" valign="top"><a id="accb76e236f4f2db4f03425d19bf23feb" name="accb76e236f4f2db4f03425d19bf23feb"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Project</b> (QObject *parent=nullptr)</td></tr>
 <tr class="separator:accb76e236f4f2db4f03425d19bf23feb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a602b13121a530e3d372886bb1b81b3f9" id="r_a602b13121a530e3d372886bb1b81b3f9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a602b13121a530e3d372886bb1b81b3f9">reset</a> () override</td></tr>
-<tr class="separator:a602b13121a530e3d372886bb1b81b3f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7de345dfba2e80a5ed0b6d6b02fbe888" id="r_a7de345dfba2e80a5ed0b6d6b02fbe888"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7de345dfba2e80a5ed0b6d6b02fbe888">reset</a> () override</td></tr>
+<tr class="separator:a7de345dfba2e80a5ed0b6d6b02fbe888"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c779c163114bc36401ccf926cdce924" id="r_a4c779c163114bc36401ccf926cdce924"><td class="memItemLeft" align="right" valign="top"><a id="a4c779c163114bc36401ccf926cdce924" name="a4c779c163114bc36401ccf926cdce924"></a>
 <a class="el" href="classfsd_1_1_place.html">Place</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>defaultPlace</b> () const</td></tr>
 <tr class="separator:a4c779c163114bc36401ccf926cdce924"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75b37f4bfbd7f8e05b8b3427dbc9ce8b" id="r_a75b37f4bfbd7f8e05b8b3427dbc9ce8b"><td class="memItemLeft" align="right" valign="top"><a id="a75b37f4bfbd7f8e05b8b3427dbc9ce8b" name="a75b37f4bfbd7f8e05b8b3427dbc9ce8b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setDefaultPlace</b> (<a class="el" href="classfsd_1_1_place.html">Place</a> *<a class="el" href="#a160d245e234be01ba89c0f1cf14a0175">defaultPlace</a>)</td></tr>
 <tr class="separator:a75b37f4bfbd7f8e05b8b3427dbc9ce8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37a419be36b59116eab29d9f1dab4b1e" id="r_a37a419be36b59116eab29d9f1dab4b1e"><td class="memItemLeft" align="right" valign="top"><a id="a37a419be36b59116eab29d9f1dab4b1e" name="a37a419be36b59116eab29d9f1dab4b1e"></a>
-const QList&lt; <a class="el" href="classfsd_1_1_entity.html">Entity</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>entities</b> () const</td></tr>
-<tr class="separator:a37a419be36b59116eab29d9f1dab4b1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71f5eddf73b1112ec75e29e8c554efa4" id="r_a71f5eddf73b1112ec75e29e8c554efa4"><td class="memItemLeft" align="right" valign="top"><a id="a71f5eddf73b1112ec75e29e8c554efa4" name="a71f5eddf73b1112ec75e29e8c554efa4"></a>
-const QList&lt; <a class="el" href="classfsd_1_1_link.html">Link</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>links</b> () const</td></tr>
-<tr class="separator:a71f5eddf73b1112ec75e29e8c554efa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a269009f33ae2d9ab9a0174c0edc3fb43" id="r_a269009f33ae2d9ab9a0174c0edc3fb43"><td class="memItemLeft" align="right" valign="top"><a id="a269009f33ae2d9ab9a0174c0edc3fb43" name="a269009f33ae2d9ab9a0174c0edc3fb43"></a>
+unsigned short&#160;</td><td class="memItemRight" valign="bottom"><b>height</b> () const</td></tr>
+<tr class="separator:a269009f33ae2d9ab9a0174c0edc3fb43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af10b972c2ef400a67966ea4e2ed2a931" id="r_af10b972c2ef400a67966ea4e2ed2a931"><td class="memItemLeft" align="right" valign="top"><a id="af10b972c2ef400a67966ea4e2ed2a931" name="af10b972c2ef400a67966ea4e2ed2a931"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setHeight</b> (unsigned short <a class="el" href="#a795286f184740c897537462e0219d055">height</a>)</td></tr>
+<tr class="separator:af10b972c2ef400a67966ea4e2ed2a931"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ddd3c1a5a27dd3d31b4f7cc1da00d6c" id="r_a2ddd3c1a5a27dd3d31b4f7cc1da00d6c"><td class="memItemLeft" align="right" valign="top"><a id="a2ddd3c1a5a27dd3d31b4f7cc1da00d6c" name="a2ddd3c1a5a27dd3d31b4f7cc1da00d6c"></a>
+QList&lt; <a class="el" href="classfsd_1_1_entity.html">Entity</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>entities</b> () const</td></tr>
+<tr class="separator:a2ddd3c1a5a27dd3d31b4f7cc1da00d6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a613264538f4c62d45a8c258560004434" id="r_a613264538f4c62d45a8c258560004434"><td class="memItemLeft" align="right" valign="top"><a id="a613264538f4c62d45a8c258560004434" name="a613264538f4c62d45a8c258560004434"></a>
+QList&lt; <a class="el" href="classfsd_1_1_link.html">Link</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>links</b> () const</td></tr>
+<tr class="separator:a613264538f4c62d45a8c258560004434"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89bb3d56a48e97e794fee1978297442b" id="r_a89bb3d56a48e97e794fee1978297442b"><td class="memItemLeft" align="right" valign="top"><a id="a89bb3d56a48e97e794fee1978297442b" name="a89bb3d56a48e97e794fee1978297442b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setLinks</b> (const QList&lt; <a class="el" href="classfsd_1_1_link.html">Link</a> * &gt; &amp;link)</td></tr>
 <tr class="separator:a89bb3d56a48e97e794fee1978297442b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -201,9 +210,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>removeLink</b> (<a cl
 <tr class="memitem:ae0d44c0727f525a4b13be33677ed514a" id="r_ae0d44c0727f525a4b13be33677ed514a"><td class="memItemLeft" align="right" valign="top"><a id="ae0d44c0727f525a4b13be33677ed514a" name="ae0d44c0727f525a4b13be33677ed514a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>cleanLinks</b> ()</td></tr>
 <tr class="separator:ae0d44c0727f525a4b13be33677ed514a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02b1dabf38132fce9e1800376b71637e" id="r_a02b1dabf38132fce9e1800376b71637e"><td class="memItemLeft" align="right" valign="top"><a id="a02b1dabf38132fce9e1800376b71637e" name="a02b1dabf38132fce9e1800376b71637e"></a>
-const QList&lt; <a class="el" href="classfsd_1_1_model.html">Model</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>models</b> () const</td></tr>
-<tr class="separator:a02b1dabf38132fce9e1800376b71637e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07869141547d616e090f23ea16ae1b0f" id="r_a07869141547d616e090f23ea16ae1b0f"><td class="memItemLeft" align="right" valign="top"><a id="a07869141547d616e090f23ea16ae1b0f" name="a07869141547d616e090f23ea16ae1b0f"></a>
+QList&lt; <a class="el" href="classfsd_1_1_model.html">Model</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>models</b> () const</td></tr>
+<tr class="separator:a07869141547d616e090f23ea16ae1b0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c7b2104542f246c8bdfed749ac1e019" id="r_a5c7b2104542f246c8bdfed749ac1e019"><td class="memItemLeft" align="right" valign="top"><a id="a5c7b2104542f246c8bdfed749ac1e019" name="a5c7b2104542f246c8bdfed749ac1e019"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setModels</b> (const QList&lt; <a class="el" href="classfsd_1_1_model.html">Model</a> * &gt; &amp;<a class="el" href="#a393da53f3b3a51c0c9275f5ae17538fa">models</a>)</td></tr>
 <tr class="separator:a5c7b2104542f246c8bdfed749ac1e019"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -219,9 +228,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>removeModel</b> (<a c
 <tr class="memitem:adbcb6388ea688443b7f65f769e7fb8e9" id="r_adbcb6388ea688443b7f65f769e7fb8e9"><td class="memItemLeft" align="right" valign="top"><a id="adbcb6388ea688443b7f65f769e7fb8e9" name="adbcb6388ea688443b7f65f769e7fb8e9"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>cleanModels</b> ()</td></tr>
 <tr class="separator:adbcb6388ea688443b7f65f769e7fb8e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a417d25796e2481fa672d4b526df61a58" id="r_a417d25796e2481fa672d4b526df61a58"><td class="memItemLeft" align="right" valign="top"><a id="a417d25796e2481fa672d4b526df61a58" name="a417d25796e2481fa672d4b526df61a58"></a>
-const QList&lt; <a class="el" href="classfsd_1_1_object.html">Object</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>objects</b> () const</td></tr>
-<tr class="separator:a417d25796e2481fa672d4b526df61a58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49330157ed72e91f577cdbe1e06ae125" id="r_a49330157ed72e91f577cdbe1e06ae125"><td class="memItemLeft" align="right" valign="top"><a id="a49330157ed72e91f577cdbe1e06ae125" name="a49330157ed72e91f577cdbe1e06ae125"></a>
+QList&lt; <a class="el" href="classfsd_1_1_object.html">Object</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>objects</b> () const</td></tr>
+<tr class="separator:a49330157ed72e91f577cdbe1e06ae125"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebc0b0d74ba08831a1da4cb6ce4212bd" id="r_aebc0b0d74ba08831a1da4cb6ce4212bd"><td class="memItemLeft" align="right" valign="top"><a id="aebc0b0d74ba08831a1da4cb6ce4212bd" name="aebc0b0d74ba08831a1da4cb6ce4212bd"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setObjects</b> (const QList&lt; <a class="el" href="classfsd_1_1_object.html">Object</a> * &gt; &amp;object)</td></tr>
 <tr class="separator:aebc0b0d74ba08831a1da4cb6ce4212bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -237,9 +246,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>removeObject</b> (<a 
 <tr class="memitem:a09d006b5832c5241c052abf3b0c9862b" id="r_a09d006b5832c5241c052abf3b0c9862b"><td class="memItemLeft" align="right" valign="top"><a id="a09d006b5832c5241c052abf3b0c9862b" name="a09d006b5832c5241c052abf3b0c9862b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>cleanObjects</b> ()</td></tr>
 <tr class="separator:a09d006b5832c5241c052abf3b0c9862b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa73e6926aa5b9c0aec962e32f1d834cf" id="r_aa73e6926aa5b9c0aec962e32f1d834cf"><td class="memItemLeft" align="right" valign="top"><a id="aa73e6926aa5b9c0aec962e32f1d834cf" name="aa73e6926aa5b9c0aec962e32f1d834cf"></a>
-const QList&lt; <a class="el" href="classfsd_1_1_place.html">Place</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>places</b> () const</td></tr>
-<tr class="separator:aa73e6926aa5b9c0aec962e32f1d834cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aade365286b8804fe476f6c771e4bed1f" id="r_aade365286b8804fe476f6c771e4bed1f"><td class="memItemLeft" align="right" valign="top"><a id="aade365286b8804fe476f6c771e4bed1f" name="aade365286b8804fe476f6c771e4bed1f"></a>
+QList&lt; <a class="el" href="classfsd_1_1_place.html">Place</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>places</b> () const</td></tr>
+<tr class="separator:aade365286b8804fe476f6c771e4bed1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e7e9ef522480869cd14db602ac8dc05" id="r_a1e7e9ef522480869cd14db602ac8dc05"><td class="memItemLeft" align="right" valign="top"><a id="a1e7e9ef522480869cd14db602ac8dc05" name="a1e7e9ef522480869cd14db602ac8dc05"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setPlaces</b> (const QList&lt; <a class="el" href="classfsd_1_1_place.html">Place</a> * &gt; &amp;<a class="el" href="#ab9ed6a804dec46be44b6eca7794c42fa">places</a>)</td></tr>
 <tr class="separator:a1e7e9ef522480869cd14db602ac8dc05"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -255,12 +264,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>removePlace</b> (<a c
 <tr class="memitem:a2a258267589325bf40e097811ac67970" id="r_a2a258267589325bf40e097811ac67970"><td class="memItemLeft" align="right" valign="top"><a id="a2a258267589325bf40e097811ac67970" name="a2a258267589325bf40e097811ac67970"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>cleanPlaces</b> ()</td></tr>
 <tr class="separator:a2a258267589325bf40e097811ac67970"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc21e34efa8673b1974c7ccef67bb7ce" id="r_afc21e34efa8673b1974c7ccef67bb7ce"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classfsd_1_1_entity.html#a889608f37d643da3328e9ce3494ba469">Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afc21e34efa8673b1974c7ccef67bb7ce">type</a> () const override</td></tr>
-<tr class="separator:afc21e34efa8673b1974c7ccef67bb7ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03702d2450bab06f5ee23aaa3d8ca3cf" id="r_a03702d2450bab06f5ee23aaa3d8ca3cf"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a03702d2450bab06f5ee23aaa3d8ca3cf">load</a> (const QJsonObject &amp;json) override</td></tr>
-<tr class="separator:a03702d2450bab06f5ee23aaa3d8ca3cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac218b7ebaadd040c59f0a787d54022e3" id="r_ac218b7ebaadd040c59f0a787d54022e3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac218b7ebaadd040c59f0a787d54022e3">save</a> (QJsonObject &amp;json) const override</td></tr>
-<tr class="separator:ac218b7ebaadd040c59f0a787d54022e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5feeda8e1744e164fb697bdd0040c2c2" id="r_a5feeda8e1744e164fb697bdd0040c2c2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfsd_1_1_entity.html#a889608f37d643da3328e9ce3494ba469">Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5feeda8e1744e164fb697bdd0040c2c2">type</a> () const override</td></tr>
+<tr class="separator:a5feeda8e1744e164fb697bdd0040c2c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa858a042942818ffacc3253f3e77fef1" id="r_aa858a042942818ffacc3253f3e77fef1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa858a042942818ffacc3253f3e77fef1">load</a> (const QJsonObject &amp;json) override</td></tr>
+<tr class="separator:aa858a042942818ffacc3253f3e77fef1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdadc2a9f19b81ba51d15fdaa8e86b91" id="r_acdadc2a9f19b81ba51d15fdaa8e86b91"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acdadc2a9f19b81ba51d15fdaa8e86b91">save</a> (QJsonObject &amp;json) const override</td></tr>
+<tr class="separator:acdadc2a9f19b81ba51d15fdaa8e86b91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classfsd_1_1_geometry"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classfsd_1_1_geometry')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classfsd_1_1_geometry.html">fsd::Geometry</a></td></tr>
 <tr class="memitem:a5956a34573bf1f0d4d982038ffce6d99 inherit pub_methods_classfsd_1_1_geometry" id="r_a5956a34573bf1f0d4d982038ffce6d99"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>copy</b> (const <a class="el" href="classfsd_1_1_geometry.html">Geometry</a> &amp;geometry)</td></tr>
@@ -311,24 +320,24 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isAlive</b> () const<
 <tr class="memitem:acb4d7f3061172932ecb62720db79a308 inherit pub_methods_classfsd_1_1_entity" id="r_acb4d7f3061172932ecb62720db79a308"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setIsAlive</b> (bool <a class="el" href="classfsd_1_1_entity.html#a44af9385f0ce8b593338a9f54215b1b6">isAlive</a>)</td></tr>
 <tr class="separator:acb4d7f3061172932ecb62720db79a308 inherit pub_methods_classfsd_1_1_entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae370aef8b708643d5e4afdd0d44dadfe inherit pub_methods_classfsd_1_1_entity" id="r_ae370aef8b708643d5e4afdd0d44dadfe"><td class="memItemLeft" align="right" valign="top">
-const QString &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>name</b> () const</td></tr>
-<tr class="separator:ae370aef8b708643d5e4afdd0d44dadfe inherit pub_methods_classfsd_1_1_entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c8d6f2fb031e237b28df3667e28825b inherit pub_methods_classfsd_1_1_entity" id="r_a8c8d6f2fb031e237b28df3667e28825b"><td class="memItemLeft" align="right" valign="top">
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>name</b> () const</td></tr>
+<tr class="separator:a8c8d6f2fb031e237b28df3667e28825b inherit pub_methods_classfsd_1_1_entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a430e2186b5ae9eafad0566bd38e8b3e0 inherit pub_methods_classfsd_1_1_entity" id="r_a430e2186b5ae9eafad0566bd38e8b3e0"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setName</b> (const QString &amp;<a class="el" href="classfsd_1_1_entity.html#a70c381b2f21d333045cd67ff283b3c8a">name</a>)</td></tr>
 <tr class="separator:a430e2186b5ae9eafad0566bd38e8b3e0 inherit pub_methods_classfsd_1_1_entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e95d645ceb2f5f22556aad8831d5f8d inherit pub_methods_classfsd_1_1_entity" id="r_a3e95d645ceb2f5f22556aad8831d5f8d"><td class="memItemLeft" align="right" valign="top">
-const QList&lt; <a class="el" href="classfsd_1_1_entity.html">Entity</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>refs</b> () const</td></tr>
-<tr class="separator:a3e95d645ceb2f5f22556aad8831d5f8d inherit pub_methods_classfsd_1_1_entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3417fbbba208fd188e3ce389ef30ea4d inherit pub_methods_classfsd_1_1_entity" id="r_a3417fbbba208fd188e3ce389ef30ea4d"><td class="memItemLeft" align="right" valign="top">
+QList&lt; <a class="el" href="classfsd_1_1_entity.html">Entity</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>refs</b> () const</td></tr>
+<tr class="separator:a3417fbbba208fd188e3ce389ef30ea4d inherit pub_methods_classfsd_1_1_entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdf4b0543cb75e4b9e5d490766dbfa89 inherit pub_methods_classfsd_1_1_entity" id="r_abdf4b0543cb75e4b9e5d490766dbfa89"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>addRef</b> (<a class="el" href="classfsd_1_1_entity.html">Entity</a> *ref)</td></tr>
 <tr class="separator:abdf4b0543cb75e4b9e5d490766dbfa89 inherit pub_methods_classfsd_1_1_entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8a16846476a42f37f570fd5354b3b84 inherit pub_methods_classfsd_1_1_entity" id="r_ac8a16846476a42f37f570fd5354b3b84"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>removeRef</b> (<a class="el" href="classfsd_1_1_entity.html">Entity</a> *ref)</td></tr>
 <tr class="separator:ac8a16846476a42f37f570fd5354b3b84 inherit pub_methods_classfsd_1_1_entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c31d5855dd9b1575272b56d1013e2a0 inherit pub_methods_classfsd_1_1_entity" id="r_a1c31d5855dd9b1575272b56d1013e2a0"><td class="memItemLeft" align="right" valign="top">
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>hasRef</b> ()</td></tr>
-<tr class="separator:a1c31d5855dd9b1575272b56d1013e2a0 inherit pub_methods_classfsd_1_1_entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b1d73afab88f50dc6bff99ca189b813 inherit pub_methods_classfsd_1_1_entity" id="r_a7b1d73afab88f50dc6bff99ca189b813"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>hasRef</b> () const</td></tr>
+<tr class="separator:a7b1d73afab88f50dc6bff99ca189b813 inherit pub_methods_classfsd_1_1_entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
@@ -336,6 +345,10 @@ Properties</h2></td></tr>
 <a class="el" href="classfsd_1_1_place.html">Place</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>defaultPlace</b></td></tr>
 <tr class="memdesc:a160d245e234be01ba89c0f1cf14a0175"><td class="mdescLeft">&#160;</td><td class="mdescRight">The first place the user will see when loading the project. <br /></td></tr>
 <tr class="separator:a160d245e234be01ba89c0f1cf14a0175"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a795286f184740c897537462e0219d055" id="r_a795286f184740c897537462e0219d055"><td class="memItemLeft" align="right" valign="top"><a id="a795286f184740c897537462e0219d055" name="a795286f184740c897537462e0219d055"></a>
+unsigned short&#160;</td><td class="memItemRight" valign="bottom"><b>height</b></td></tr>
+<tr class="memdesc:a795286f184740c897537462e0219d055"><td class="mdescLeft">&#160;</td><td class="mdescRight">The height of the character. <br /></td></tr>
+<tr class="separator:a795286f184740c897537462e0219d055"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ab2917f0c8ba53073c90e56a7a7d562" id="r_a2ab2917f0c8ba53073c90e56a7a7d562"><td class="memItemLeft" align="right" valign="top"><a id="a2ab2917f0c8ba53073c90e56a7a7d562" name="a2ab2917f0c8ba53073c90e56a7a7d562"></a>
 QList&lt; <a class="el" href="classfsd_1_1_entity.html">Entity</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>entities</b></td></tr>
 <tr class="memdesc:a2ab2917f0c8ba53073c90e56a7a7d562"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of all entities. <a class="el" href="classfsd_1_1_link.html" title="An entity to link two places together.">Link</a>, <a class="el" href="classfsd_1_1_model.html" title="An entity to store a 3D model.">Model</a>, <a class="el" href="classfsd_1_1_object.html" title="An basic object in a Place.">Object</a>, and <a class="el" href="classfsd_1_1_place.html" title="Place that contains Links and/or Objects.">Place</a>. <br /></td></tr>
@@ -421,6 +434,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:acf981df96b74fb2946f10d0da698a659 inherit pro_methods_classfsd_1_1_geometry" id="r_acf981df96b74fb2946f10d0da698a659"><td class="memItemLeft" align="right" valign="top">
 &#160;</td><td class="memItemRight" valign="bottom"><b>Geometry</b> (<a class="el" href="classfsd_1_1_project.html">Project</a> *project, QObject *parent=nullptr)</td></tr>
 <tr class="separator:acf981df96b74fb2946f10d0da698a659 inherit pro_methods_classfsd_1_1_geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4df788d678c67a50b40884b5ae71b17a inherit pro_methods_classfsd_1_1_geometry" id="r_a4df788d678c67a50b40884b5ae71b17a"><td class="memItemLeft" align="right" valign="top">
+void&#160;</td><td class="memItemRight" valign="bottom"><b>copy</b> (const <a class="el" href="classfsd_1_1_entity.html">Entity</a> &amp;entity)</td></tr>
+<tr class="separator:a4df788d678c67a50b40884b5ae71b17a inherit pro_methods_classfsd_1_1_geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classfsd_1_1_entity"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classfsd_1_1_entity')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classfsd_1_1_entity.html">fsd::Entity</a></td></tr>
 <tr class="memitem:ae8bab69af5402a3d8f20a3eccc94d0ce inherit pro_methods_classfsd_1_1_entity" id="r_ae8bab69af5402a3d8f20a3eccc94d0ce"><td class="memItemLeft" align="right" valign="top">
 &#160;</td><td class="memItemRight" valign="bottom"><b>Entity</b> (<a class="el" href="classfsd_1_1_project.html">Project</a> *project, QObject *parent=nullptr)</td></tr>
@@ -432,8 +448,8 @@ Additional Inherited Members</h2></td></tr>
 Use create, remove, duplicate methods to manage <a class="el" href="classfsd_1_1_link.html" title="An entity to link two places together.">Link</a>, <a class="el" href="classfsd_1_1_model.html" title="An entity to store a 3D model.">Model</a>, <a class="el" href="classfsd_1_1_object.html" title="An basic object in a Place.">Object</a>, and <a class="el" href="classfsd_1_1_place.html" title="Place that contains Links and/or Objects.">Place</a>.<br  />
 Use save(), load() to manage the file serialization, the format file is <a class="el" href="namespacefsd_1_1_json.html" title="Tools to transform data into JSon object and vice versa.">Json</a>. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a03702d2450bab06f5ee23aaa3d8ca3cf" name="a03702d2450bab06f5ee23aaa3d8ca3cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a03702d2450bab06f5ee23aaa3d8ca3cf">&#9670;&#160;</a></span>load()</h2>
+<a id="aa858a042942818ffacc3253f3e77fef1" name="aa858a042942818ffacc3253f3e77fef1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa858a042942818ffacc3253f3e77fef1">&#9670;&#160;</a></span>load()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -442,7 +458,7 @@ Use save(), load() to manage the file serialization, the format file is <a class
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void fsd::Project::load </td>
+          <td class="memname">void fsd::Project::load </td>
           <td>(</td>
           <td class="paramtype">const QJsonObject &amp;</td>          <td class="paramname"><span class="paramname"><em>json</em></span></td><td>)</td>
           <td></td>
@@ -459,8 +475,8 @@ Use save(), load() to manage the file serialization, the format file is <a class
 
 </div>
 </div>
-<a id="a602b13121a530e3d372886bb1b81b3f9" name="a602b13121a530e3d372886bb1b81b3f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a602b13121a530e3d372886bb1b81b3f9">&#9670;&#160;</a></span>reset()</h2>
+<a id="a7de345dfba2e80a5ed0b6d6b02fbe888" name="a7de345dfba2e80a5ed0b6d6b02fbe888"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7de345dfba2e80a5ed0b6d6b02fbe888">&#9670;&#160;</a></span>reset()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -469,7 +485,7 @@ Use save(), load() to manage the file serialization, the format file is <a class
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void fsd::Project::reset </td>
+          <td class="memname">void fsd::Project::reset </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -486,8 +502,8 @@ Use save(), load() to manage the file serialization, the format file is <a class
 
 </div>
 </div>
-<a id="ac218b7ebaadd040c59f0a787d54022e3" name="ac218b7ebaadd040c59f0a787d54022e3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac218b7ebaadd040c59f0a787d54022e3">&#9670;&#160;</a></span>save()</h2>
+<a id="acdadc2a9f19b81ba51d15fdaa8e86b91" name="acdadc2a9f19b81ba51d15fdaa8e86b91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdadc2a9f19b81ba51d15fdaa8e86b91">&#9670;&#160;</a></span>save()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -496,7 +512,7 @@ Use save(), load() to manage the file serialization, the format file is <a class
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void fsd::Project::save </td>
+          <td class="memname">void fsd::Project::save </td>
           <td>(</td>
           <td class="paramtype">QJsonObject &amp;</td>          <td class="paramname"><span class="paramname"><em>json</em></span></td><td>)</td>
           <td> const</td>
@@ -513,8 +529,8 @@ Use save(), load() to manage the file serialization, the format file is <a class
 
 </div>
 </div>
-<a id="afc21e34efa8673b1974c7ccef67bb7ce" name="afc21e34efa8673b1974c7ccef67bb7ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc21e34efa8673b1974c7ccef67bb7ce">&#9670;&#160;</a></span>type()</h2>
+<a id="a5feeda8e1744e164fb697bdd0040c2c2" name="a5feeda8e1744e164fb697bdd0040c2c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5feeda8e1744e164fb697bdd0040c2c2">&#9670;&#160;</a></span>type()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -523,7 +539,7 @@ Use save(), load() to manage the file serialization, the format file is <a class
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="classfsd_1_1_entity.html#a889608f37d643da3328e9ce3494ba469">Type</a> fsd::Project::type </td>
+          <td class="memname"><a class="el" href="classfsd_1_1_entity.html#a889608f37d643da3328e9ce3494ba469">Type</a> fsd::Project::type </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>

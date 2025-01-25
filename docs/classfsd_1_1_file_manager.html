@@ -26,7 +26,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Foxxy Soft Editor 3D<span id="projectnumber">&#160;0.4.4</span>
+   <div id="projectname">Foxxy Soft Editor 3D<span id="projectnumber">&#160;0.6.0</span>
    </div>
    <div id="projectbrief">Game editor 3D / Visual tour 3D</div>
   </td>
@@ -150,18 +150,22 @@ Q_INVOKABLE void&#160;</td><td class="memItemRight" valign="bottom"><b>start</b>
 Q_INVOKABLE void&#160;</td><td class="memItemRight" valign="bottom"><b>wait</b> (QDeadlineTimer deadline=QDeadlineTimer(QDeadlineTimer::Forever))</td></tr>
 <tr class="memdesc:a691d5db8e683514ceb3a8bab45518cce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blocks the thread until conditions are met. See <b>QThread::wait()</b>. <br /></td></tr>
 <tr class="separator:a691d5db8e683514ceb3a8bab45518cce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab04b038e98c3932c67547093c958455a" id="r_ab04b038e98c3932c67547093c958455a"><td class="memItemLeft" align="right" valign="top"><a id="ab04b038e98c3932c67547093c958455a" name="ab04b038e98c3932c67547093c958455a"></a>
-Q_INVOKABLE bool&#160;</td><td class="memItemRight" valign="bottom"><b>isFinished</b> ()</td></tr>
-<tr class="memdesc:ab04b038e98c3932c67547093c958455a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the thread is finished; otherwise returns false. See <b>QThread::isFinished()</b>. <br /></td></tr>
-<tr class="separator:ab04b038e98c3932c67547093c958455a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a74224491dc388c35ea2ba5e96f759e" id="r_a5a74224491dc388c35ea2ba5e96f759e"><td class="memItemLeft" align="right" valign="top"><a id="a5a74224491dc388c35ea2ba5e96f759e" name="a5a74224491dc388c35ea2ba5e96f759e"></a>
-Q_INVOKABLE bool&#160;</td><td class="memItemRight" valign="bottom"><b>isRunning</b> ()</td></tr>
-<tr class="memdesc:a5a74224491dc388c35ea2ba5e96f759e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the thread is running; otherwise returns false. See <b>QThread::isRunning()</b>. <br /></td></tr>
-<tr class="separator:a5a74224491dc388c35ea2ba5e96f759e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42d83333957e7cb6740768387f4d6aca" id="r_a42d83333957e7cb6740768387f4d6aca"><td class="memItemLeft" align="right" valign="top"><a id="a42d83333957e7cb6740768387f4d6aca" name="a42d83333957e7cb6740768387f4d6aca"></a>
+Q_INVOKABLE bool&#160;</td><td class="memItemRight" valign="bottom"><b>isFinished</b> () const</td></tr>
+<tr class="memdesc:a42d83333957e7cb6740768387f4d6aca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the thread is finished; otherwise returns false. See <b>QThread::isFinished()</b>. <br /></td></tr>
+<tr class="separator:a42d83333957e7cb6740768387f4d6aca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40812db29bd45c9b584a125c31879462" id="r_a40812db29bd45c9b584a125c31879462"><td class="memItemLeft" align="right" valign="top"><a id="a40812db29bd45c9b584a125c31879462" name="a40812db29bd45c9b584a125c31879462"></a>
+Q_INVOKABLE bool&#160;</td><td class="memItemRight" valign="bottom"><b>isRunning</b> () const</td></tr>
+<tr class="memdesc:a40812db29bd45c9b584a125c31879462"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the thread is running; otherwise returns false. See <b>QThread::isRunning()</b>. <br /></td></tr>
+<tr class="separator:a40812db29bd45c9b584a125c31879462"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bfcf0d9b0ffa44d252205944ca4c988" id="r_a5bfcf0d9b0ffa44d252205944ca4c988"><td class="memItemLeft" align="right" valign="top"><a id="a5bfcf0d9b0ffa44d252205944ca4c988" name="a5bfcf0d9b0ffa44d252205944ca4c988"></a>
 Q_INVOKABLE <a class="el" href="#a0cdd613992f82214b61008d259c9a057">Result</a>&#160;</td><td class="memItemRight" valign="bottom"><b>result</b> () const</td></tr>
 <tr class="memdesc:a5bfcf0d9b0ffa44d252205944ca4c988"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the result of the transaction after <a class="el" href="#a2e200205524abec1c4f0229c423cc83d" title="This signal is emitted from the associated thread right before it finishes executing....">finished()</a> signal has been emitted. <br /></td></tr>
 <tr class="separator:a5bfcf0d9b0ffa44d252205944ca4c988"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae17086f808da802279f8f9fd7f5634dd" id="r_ae17086f808da802279f8f9fd7f5634dd"><td class="memItemLeft" align="right" valign="top"><a id="ae17086f808da802279f8f9fd7f5634dd" name="ae17086f808da802279f8f9fd7f5634dd"></a>
+Q_INVOKABLE QString&#160;</td><td class="memItemRight" valign="bottom"><b>errorMessage</b> () const</td></tr>
+<tr class="memdesc:ae17086f808da802279f8f9fd7f5634dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the error message if the transaction failed. <br /></td></tr>
+<tr class="separator:ae17086f808da802279f8f9fd7f5634dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ba1aa3108ebedcc419cef93d6728699" id="r_a2ba1aa3108ebedcc419cef93d6728699"><td class="memItemLeft" align="right" valign="top"><a id="a2ba1aa3108ebedcc419cef93d6728699" name="a2ba1aa3108ebedcc419cef93d6728699"></a>
 Q_INVOKABLE void&#160;</td><td class="memItemRight" valign="bottom"><b>requestInterruption</b> ()</td></tr>
 <tr class="memdesc:a2ba1aa3108ebedcc419cef93d6728699"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the interruption of the thread. See <b>QThread::requestInterruption()</b>. <br /></td></tr>

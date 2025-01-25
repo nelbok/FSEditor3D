@@ -26,7 +26,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Foxxy Soft Editor 3D<span id="projectnumber">&#160;0.4.4</span>
+   <div id="projectname">Foxxy Soft Editor 3D<span id="projectnumber">&#160;0.6.0</span>
    </div>
    <div id="projectbrief">Game editor 3D / Visual tour 3D</div>
   </td>
@@ -102,80 +102,69 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;QtCore/QDeadlineTimer&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;QtCore/QObject&gt;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;QtCore/QUrl&gt;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacefsd.html">fsd</a> {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">class </span>Project;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="foldopen" id="foldopen00024" data-start="{" data-end="};">
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html">   24</a></span><span class="keyword">class </span><a class="code hl_class" href="classfsd_1_1_file_manager.html">FileManager</a> : <span class="keyword">public</span> QObject {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    Q_OBJECT</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">public</span>:</div>
-<div class="foldopen" id="foldopen00031" data-start="{" data-end="};">
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#ac348ea94a903edb6390c10ad2d7bd34c">   31</a></span>    <span class="keyword">enum class</span> <a class="code hl_enumeration" href="classfsd_1_1_file_manager.html#ac348ea94a903edb6390c10ad2d7bd34c">Type</a> {</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <a class="code hl_enumvalue" href="classfsd_1_1_file_manager.html#ac348ea94a903edb6390c10ad2d7bd34cac9cc8cce247e49bae79f15173ce97354">Save</a>,</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <a class="code hl_enumvalue" href="classfsd_1_1_file_manager.html#ac348ea94a903edb6390c10ad2d7bd34caf19dbf2edb3a0bd74b0524d960ff21eb">Load</a>,</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <a class="code hl_enumvalue" href="classfsd_1_1_file_manager.html#ac348ea94a903edb6390c10ad2d7bd34ca9080fd7a5f0af44b585bb21b62d8b283">NoType</a>,</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    };</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;fsd/data/FSDataExport.h&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;QtCore/QDeadlineTimer&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;QtCore/QObject&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;QtCore/QUrl&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacefsd.html">fsd</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">class </span>Project;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="foldopen" id="foldopen00026" data-start="{" data-end="};">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html">   26</a></span><span class="keyword">class </span>FSDATA_EXPORT <a class="code hl_class" href="classfsd_1_1_file_manager.html">FileManager</a> : <span class="keyword">public</span> QObject {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    Q_OBJECT</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="};">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#ac348ea94a903edb6390c10ad2d7bd34c">   33</a></span>    <span class="keyword">enum class</span> <a class="code hl_enumeration" href="classfsd_1_1_file_manager.html#ac348ea94a903edb6390c10ad2d7bd34c">Type</a> {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        Save,</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        Load,</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        NoType,</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    };</div>
 </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    Q_ENUM(<a class="code hl_enumeration" href="classfsd_1_1_file_manager.html#ac348ea94a903edb6390c10ad2d7bd34c">Type</a>)</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    </div>
-<div class="foldopen" id="foldopen00044" data-start="{" data-end="};">
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#a0cdd613992f82214b61008d259c9a057">   44</a></span>    enum class <a class="code hl_enumeration" href="classfsd_1_1_file_manager.html#a0cdd613992f82214b61008d259c9a057">Result</a> {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <a class="code hl_enumvalue" href="classfsd_1_1_file_manager.html#a0cdd613992f82214b61008d259c9a057a505a83f220c02df2f85c3810cd9ceb38">Success</a>,</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <a class="code hl_enumvalue" href="classfsd_1_1_file_manager.html#a0cdd613992f82214b61008d259c9a057a0e22fe7d45f8e5632a4abf369b24e29c">Canceled</a>,</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <a class="code hl_enumvalue" href="classfsd_1_1_file_manager.html#a0cdd613992f82214b61008d259c9a057a902b0d55fddef6f8d651fe1035b7d4bd">Error</a>,</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <a class="code hl_enumvalue" href="classfsd_1_1_file_manager.html#a0cdd613992f82214b61008d259c9a057a53a0d7ee3a4bdf48d21a636189695cf4">NoResult</a>,</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    };</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    Q_ENUM(Type)</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    </div>
+<div class="foldopen" id="foldopen00046" data-start="{" data-end="};">
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#a0cdd613992f82214b61008d259c9a057">   46</a></span>    enum class <a class="code hl_enumeration" href="classfsd_1_1_file_manager.html#a0cdd613992f82214b61008d259c9a057">Result</a> {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        Success,</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        Canceled,</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        Error,</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        NoResult,</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    };</div>
 </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    Q_ENUM(<a class="code hl_enumeration" href="classfsd_1_1_file_manager.html#a0cdd613992f82214b61008d259c9a057">Result</a>)</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#a6957311dffcd8ab09fb4edec2bf9cea5">   60</a></span>    <a class="code hl_class" href="classfsd_1_1_file_manager.html">FileManager</a>(QObject* parent = <span class="keywordtype">nullptr</span>);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    virtual ~<a class="code hl_class" href="classfsd_1_1_file_manager.html">FileManager</a>() = default;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#a22f03e35b99dfa78017a35ce92e91c53">   69</a></span>    Q_INVOKABLE <span class="keywordtype">void</span> <a class="code hl_function" href="classfsd_1_1_file_manager.html#a22f03e35b99dfa78017a35ce92e91c53">init</a>(<a class="code hl_class" href="classfsd_1_1_project.html">Project</a>* project, <a class="code hl_enumeration" href="classfsd_1_1_file_manager.html#ac348ea94a903edb6390c10ad2d7bd34c">Type</a> type, const QUrl&amp; url);</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#adb7ff96ab1eb51a28c6aa9ff9258d832">   73</a></span>    Q_INVOKABLE <span class="keywordtype">void</span> <a class="code hl_function" href="classfsd_1_1_file_manager.html#adb7ff96ab1eb51a28c6aa9ff9258d832">start</a>();</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#a691d5db8e683514ceb3a8bab45518cce">   77</a></span>    Q_INVOKABLE <span class="keywordtype">void</span> <a class="code hl_function" href="classfsd_1_1_file_manager.html#a691d5db8e683514ceb3a8bab45518cce">wait</a>(QDeadlineTimer deadline = QDeadlineTimer(QDeadlineTimer::Forever));</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#ab04b038e98c3932c67547093c958455a">   81</a></span>    Q_INVOKABLE <span class="keywordtype">bool</span> <a class="code hl_function" href="classfsd_1_1_file_manager.html#ab04b038e98c3932c67547093c958455a">isFinished</a>();</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#a5a74224491dc388c35ea2ba5e96f759e">   85</a></span>    Q_INVOKABLE <span class="keywordtype">bool</span> <a class="code hl_function" href="classfsd_1_1_file_manager.html#a5a74224491dc388c35ea2ba5e96f759e">isRunning</a>();</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#a5bfcf0d9b0ffa44d252205944ca4c988">   89</a></span>    Q_INVOKABLE <a class="code hl_enumeration" href="classfsd_1_1_file_manager.html#a0cdd613992f82214b61008d259c9a057">Result</a> <a class="code hl_function" href="classfsd_1_1_file_manager.html#a5bfcf0d9b0ffa44d252205944ca4c988">result</a>() const;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#a2ba1aa3108ebedcc419cef93d6728699">   93</a></span>    Q_INVOKABLE <span class="keywordtype">void</span> <a class="code hl_function" href="classfsd_1_1_file_manager.html#a2ba1aa3108ebedcc419cef93d6728699">requestInterruption</a>();</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>private:</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    class Impl;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    Impl* _impl{ <span class="keyword">nullptr</span> };</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>signals:</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#a2e200205524abec1c4f0229c423cc83d">  103</a></span>    <span class="keywordtype">void</span> <a class="code hl_signal" href="classfsd_1_1_file_manager.html#a2e200205524abec1c4f0229c423cc83d">finished</a>();</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>};</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    Q_ENUM(Result)</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#a6957311dffcd8ab09fb4edec2bf9cea5">   62</a></span>    explicit <a class="code hl_class" href="classfsd_1_1_file_manager.html">FileManager</a>(QObject* parent = <span class="keywordtype">nullptr</span>);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    ~<a class="code hl_class" href="classfsd_1_1_file_manager.html">FileManager</a>() override = default;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#a22f03e35b99dfa78017a35ce92e91c53">   71</a></span>    Q_INVOKABLE <span class="keywordtype">void</span> init(<a class="code hl_class" href="classfsd_1_1_project.html">Project</a>* project, <a class="code hl_enumeration" href="classfsd_1_1_file_manager.html#ac348ea94a903edb6390c10ad2d7bd34c">Type</a> type, const QUrl&amp; url);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#adb7ff96ab1eb51a28c6aa9ff9258d832">   75</a></span>    Q_INVOKABLE <span class="keywordtype">void</span> start();</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#a691d5db8e683514ceb3a8bab45518cce">   79</a></span>    Q_INVOKABLE <span class="keywordtype">void</span> wait(QDeadlineTimer deadline = QDeadlineTimer(QDeadlineTimer::Forever));</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#a42d83333957e7cb6740768387f4d6aca">   83</a></span>    Q_INVOKABLE <span class="keywordtype">bool</span> isFinished() const;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#a40812db29bd45c9b584a125c31879462">   87</a></span>    Q_INVOKABLE <span class="keywordtype">bool</span> isRunning() const;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#a5bfcf0d9b0ffa44d252205944ca4c988">   91</a></span>    Q_INVOKABLE <a class="code hl_enumeration" href="classfsd_1_1_file_manager.html#a0cdd613992f82214b61008d259c9a057">Result</a> result() const;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#ae17086f808da802279f8f9fd7f5634dd">   95</a></span>    Q_INVOKABLE QString errorMessage() const;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#a2ba1aa3108ebedcc419cef93d6728699">   99</a></span>    Q_INVOKABLE <span class="keywordtype">void</span> requestInterruption();</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>private:</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    class Impl;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    Impl* _impl{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>signals:</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="classfsd_1_1_file_manager.html#a2e200205524abec1c4f0229c423cc83d">  109</a></span>    <span class="keywordtype">void</span> <a class="code hl_signal" href="classfsd_1_1_file_manager.html#a2e200205524abec1c4f0229c423cc83d">finished</a>();</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>};</div>
 </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>} <span class="comment">// namespace fsd</span></div>
-<div class="ttc" id="aclassfsd_1_1_file_manager_html"><div class="ttname"><a href="classfsd_1_1_file_manager.html">fsd::FileManager</a></div><div class="ttdoc">Manager for loading or saving a project asynchronously.</div><div class="ttdef"><b>Definition</b> FileManager.hpp:24</div></div>
-<div class="ttc" id="aclassfsd_1_1_file_manager_html_a0cdd613992f82214b61008d259c9a057"><div class="ttname"><a href="classfsd_1_1_file_manager.html#a0cdd613992f82214b61008d259c9a057">fsd::FileManager::Result</a></div><div class="ttdeci">Result</div><div class="ttdoc">Transaction result.</div><div class="ttdef"><b>Definition</b> FileManager.hpp:44</div></div>
-<div class="ttc" id="aclassfsd_1_1_file_manager_html_a0cdd613992f82214b61008d259c9a057a0e22fe7d45f8e5632a4abf369b24e29c"><div class="ttname"><a href="classfsd_1_1_file_manager.html#a0cdd613992f82214b61008d259c9a057a0e22fe7d45f8e5632a4abf369b24e29c">fsd::FileManager::Result::Canceled</a></div><div class="ttdeci">@ Canceled</div></div>
-<div class="ttc" id="aclassfsd_1_1_file_manager_html_a0cdd613992f82214b61008d259c9a057a505a83f220c02df2f85c3810cd9ceb38"><div class="ttname"><a href="classfsd_1_1_file_manager.html#a0cdd613992f82214b61008d259c9a057a505a83f220c02df2f85c3810cd9ceb38">fsd::FileManager::Result::Success</a></div><div class="ttdeci">@ Success</div></div>
-<div class="ttc" id="aclassfsd_1_1_file_manager_html_a0cdd613992f82214b61008d259c9a057a53a0d7ee3a4bdf48d21a636189695cf4"><div class="ttname"><a href="classfsd_1_1_file_manager.html#a0cdd613992f82214b61008d259c9a057a53a0d7ee3a4bdf48d21a636189695cf4">fsd::FileManager::Result::NoResult</a></div><div class="ttdeci">@ NoResult</div></div>
-<div class="ttc" id="aclassfsd_1_1_file_manager_html_a0cdd613992f82214b61008d259c9a057a902b0d55fddef6f8d651fe1035b7d4bd"><div class="ttname"><a href="classfsd_1_1_file_manager.html#a0cdd613992f82214b61008d259c9a057a902b0d55fddef6f8d651fe1035b7d4bd">fsd::FileManager::Result::Error</a></div><div class="ttdeci">@ Error</div></div>
-<div class="ttc" id="aclassfsd_1_1_file_manager_html_a22f03e35b99dfa78017a35ce92e91c53"><div class="ttname"><a href="classfsd_1_1_file_manager.html#a22f03e35b99dfa78017a35ce92e91c53">fsd::FileManager::init</a></div><div class="ttdeci">Q_INVOKABLE void init(Project *project, Type type, const QUrl &amp;url)</div><div class="ttdoc">Init the manager.</div></div>
-<div class="ttc" id="aclassfsd_1_1_file_manager_html_a2ba1aa3108ebedcc419cef93d6728699"><div class="ttname"><a href="classfsd_1_1_file_manager.html#a2ba1aa3108ebedcc419cef93d6728699">fsd::FileManager::requestInterruption</a></div><div class="ttdeci">Q_INVOKABLE void requestInterruption()</div><div class="ttdoc">Request the interruption of the thread. See QThread::requestInterruption().</div></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>} <span class="comment">// namespace fsd</span></div>
+<div class="ttc" id="aclassfsd_1_1_file_manager_html"><div class="ttname"><a href="classfsd_1_1_file_manager.html">fsd::FileManager</a></div><div class="ttdoc">Manager for loading or saving a project asynchronously.</div><div class="ttdef"><b>Definition</b> FileManager.hpp:26</div></div>
+<div class="ttc" id="aclassfsd_1_1_file_manager_html_a0cdd613992f82214b61008d259c9a057"><div class="ttname"><a href="classfsd_1_1_file_manager.html#a0cdd613992f82214b61008d259c9a057">fsd::FileManager::Result</a></div><div class="ttdeci">Result</div><div class="ttdoc">Transaction result.</div><div class="ttdef"><b>Definition</b> FileManager.hpp:46</div></div>
 <div class="ttc" id="aclassfsd_1_1_file_manager_html_a2e200205524abec1c4f0229c423cc83d"><div class="ttname"><a href="classfsd_1_1_file_manager.html#a2e200205524abec1c4f0229c423cc83d">fsd::FileManager::finished</a></div><div class="ttdeci">void finished()</div><div class="ttdoc">This signal is emitted from the associated thread right before it finishes executing....</div></div>
-<div class="ttc" id="aclassfsd_1_1_file_manager_html_a5a74224491dc388c35ea2ba5e96f759e"><div class="ttname"><a href="classfsd_1_1_file_manager.html#a5a74224491dc388c35ea2ba5e96f759e">fsd::FileManager::isRunning</a></div><div class="ttdeci">Q_INVOKABLE bool isRunning()</div><div class="ttdoc">Returns true if the thread is running; otherwise returns false. See QThread::isRunning().</div></div>
-<div class="ttc" id="aclassfsd_1_1_file_manager_html_a5bfcf0d9b0ffa44d252205944ca4c988"><div class="ttname"><a href="classfsd_1_1_file_manager.html#a5bfcf0d9b0ffa44d252205944ca4c988">fsd::FileManager::result</a></div><div class="ttdeci">Q_INVOKABLE Result result() const</div><div class="ttdoc">Returns the result of the transaction after finished() signal has been emitted.</div></div>
-<div class="ttc" id="aclassfsd_1_1_file_manager_html_a691d5db8e683514ceb3a8bab45518cce"><div class="ttname"><a href="classfsd_1_1_file_manager.html#a691d5db8e683514ceb3a8bab45518cce">fsd::FileManager::wait</a></div><div class="ttdeci">Q_INVOKABLE void wait(QDeadlineTimer deadline=QDeadlineTimer(QDeadlineTimer::Forever))</div><div class="ttdoc">Blocks the thread until conditions are met. See QThread::wait().</div></div>
-<div class="ttc" id="aclassfsd_1_1_file_manager_html_ab04b038e98c3932c67547093c958455a"><div class="ttname"><a href="classfsd_1_1_file_manager.html#ab04b038e98c3932c67547093c958455a">fsd::FileManager::isFinished</a></div><div class="ttdeci">Q_INVOKABLE bool isFinished()</div><div class="ttdoc">Returns true if the thread is finished; otherwise returns false. See QThread::isFinished().</div></div>
-<div class="ttc" id="aclassfsd_1_1_file_manager_html_ac348ea94a903edb6390c10ad2d7bd34c"><div class="ttname"><a href="classfsd_1_1_file_manager.html#ac348ea94a903edb6390c10ad2d7bd34c">fsd::FileManager::Type</a></div><div class="ttdeci">Type</div><div class="ttdoc">Transaction type.</div><div class="ttdef"><b>Definition</b> FileManager.hpp:31</div></div>
-<div class="ttc" id="aclassfsd_1_1_file_manager_html_ac348ea94a903edb6390c10ad2d7bd34ca9080fd7a5f0af44b585bb21b62d8b283"><div class="ttname"><a href="classfsd_1_1_file_manager.html#ac348ea94a903edb6390c10ad2d7bd34ca9080fd7a5f0af44b585bb21b62d8b283">fsd::FileManager::Type::NoType</a></div><div class="ttdeci">@ NoType</div></div>
-<div class="ttc" id="aclassfsd_1_1_file_manager_html_ac348ea94a903edb6390c10ad2d7bd34cac9cc8cce247e49bae79f15173ce97354"><div class="ttname"><a href="classfsd_1_1_file_manager.html#ac348ea94a903edb6390c10ad2d7bd34cac9cc8cce247e49bae79f15173ce97354">fsd::FileManager::Type::Save</a></div><div class="ttdeci">@ Save</div></div>
-<div class="ttc" id="aclassfsd_1_1_file_manager_html_ac348ea94a903edb6390c10ad2d7bd34caf19dbf2edb3a0bd74b0524d960ff21eb"><div class="ttname"><a href="classfsd_1_1_file_manager.html#ac348ea94a903edb6390c10ad2d7bd34caf19dbf2edb3a0bd74b0524d960ff21eb">fsd::FileManager::Type::Load</a></div><div class="ttdeci">@ Load</div></div>
-<div class="ttc" id="aclassfsd_1_1_file_manager_html_adb7ff96ab1eb51a28c6aa9ff9258d832"><div class="ttname"><a href="classfsd_1_1_file_manager.html#adb7ff96ab1eb51a28c6aa9ff9258d832">fsd::FileManager::start</a></div><div class="ttdeci">Q_INVOKABLE void start()</div><div class="ttdoc">Begins execution of the thread by calling run(). See QThread::start().</div></div>
-<div class="ttc" id="aclassfsd_1_1_project_html"><div class="ttname"><a href="classfsd_1_1_project.html">fsd::Project</a></div><div class="ttdoc">Start class for a project.</div><div class="ttdef"><b>Definition</b> Project.hpp:27</div></div>
-<div class="ttc" id="anamespacefsd_html"><div class="ttname"><a href="namespacefsd.html">fsd</a></div><div class="ttdoc">Main namespace for Foxxy Soft Data.</div><div class="ttdef"><b>Definition</b> Entity.hpp:17</div></div>
+<div class="ttc" id="aclassfsd_1_1_file_manager_html_ac348ea94a903edb6390c10ad2d7bd34c"><div class="ttname"><a href="classfsd_1_1_file_manager.html#ac348ea94a903edb6390c10ad2d7bd34c">fsd::FileManager::Type</a></div><div class="ttdeci">Type</div><div class="ttdoc">Transaction type.</div><div class="ttdef"><b>Definition</b> FileManager.hpp:33</div></div>
+<div class="ttc" id="aclassfsd_1_1_project_html"><div class="ttname"><a href="classfsd_1_1_project.html">fsd::Project</a></div><div class="ttdoc">Start class for a project.</div><div class="ttdef"><b>Definition</b> Project.hpp:29</div></div>
+<div class="ttc" id="anamespacefsd_html"><div class="ttname"><a href="namespacefsd.html">fsd</a></div><div class="ttdoc">Main namespace for Foxxy Soft Data.</div><div class="ttdef"><b>Definition</b> DataException.hpp:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

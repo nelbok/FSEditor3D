@@ -26,7 +26,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Foxxy Soft Editor 3D<span id="projectnumber">&#160;0.4.4</span>
+   <div id="projectname">Foxxy Soft Editor 3D<span id="projectnumber">&#160;0.6.0</span>
    </div>
    <div id="projectbrief">Game editor 3D / Visual tour 3D</div>
   </td>
@@ -102,110 +102,111 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;QtCore/QList&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;fsd/data/FSDataExport.h&gt;</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;fsd/data/Geometry.hpp&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;QtCore/QList&gt;</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacefsd.html">fsd</a> {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">class </span>Link;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">class </span>Model;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">class </span>Object;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">class </span>Place;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="foldopen" id="foldopen00027" data-start="{" data-end="};">
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classfsd_1_1_project.html">   27</a></span><span class="keyword">class </span><a class="code hl_class" href="classfsd_1_1_project.html">Project</a> final : <span class="keyword">public</span> <a class="code hl_class" href="classfsd_1_1_geometry.html">Geometry</a> {</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    Q_OBJECT</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classfsd_1_1_project.html#a160d245e234be01ba89c0f1cf14a0175">   32</a></span>    Q_PROPERTY(<a class="code hl_class" href="classfsd_1_1_place.html">Place</a>* <a class="code hl_property" href="classfsd_1_1_project.html#a160d245e234be01ba89c0f1cf14a0175">defaultPlace</a> READ <a class="code hl_property" href="classfsd_1_1_project.html#a160d245e234be01ba89c0f1cf14a0175">defaultPlace</a> WRITE setDefaultPlace NOTIFY defaultPlaceUpdated)</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classfsd_1_1_project.html#a2ab2917f0c8ba53073c90e56a7a7d562">   36</a></span>    Q_PROPERTY(QList&lt;<a class="code hl_class" href="classfsd_1_1_entity.html">Entity</a>*&gt; <a class="code hl_property" href="classfsd_1_1_project.html#a2ab2917f0c8ba53073c90e56a7a7d562">entities</a> READ <a class="code hl_property" href="classfsd_1_1_project.html#a2ab2917f0c8ba53073c90e56a7a7d562">entities</a> NOTIFY entitiesUpdated)</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classfsd_1_1_project.html#a678db0ca3e50b2966d594c93be941c59">   40</a></span>    Q_PROPERTY(QList&lt;<a class="code hl_class" href="classfsd_1_1_link.html">Link</a>*&gt; <a class="code hl_property" href="classfsd_1_1_project.html#a678db0ca3e50b2966d594c93be941c59">links</a> READ <a class="code hl_property" href="classfsd_1_1_project.html#a678db0ca3e50b2966d594c93be941c59">links</a> WRITE setLinks NOTIFY linksUpdated)</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classfsd_1_1_project.html#a393da53f3b3a51c0c9275f5ae17538fa">   44</a></span>    Q_PROPERTY(QList&lt;<a class="code hl_class" href="classfsd_1_1_model.html">Model</a>*&gt; <a class="code hl_property" href="classfsd_1_1_project.html#a393da53f3b3a51c0c9275f5ae17538fa">models</a> READ <a class="code hl_property" href="classfsd_1_1_project.html#a393da53f3b3a51c0c9275f5ae17538fa">models</a> WRITE setModels NOTIFY modelsUpdated)</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classfsd_1_1_project.html#a81d637033a9e36eed2ac03dc5f6abaf1">   48</a></span>    Q_PROPERTY(QList&lt;<a class="code hl_class" href="classfsd_1_1_object.html">Object</a>*&gt; <a class="code hl_property" href="classfsd_1_1_project.html#a81d637033a9e36eed2ac03dc5f6abaf1">objects</a> READ <a class="code hl_property" href="classfsd_1_1_project.html#a81d637033a9e36eed2ac03dc5f6abaf1">objects</a> WRITE setObjects NOTIFY objectsUpdated)</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classfsd_1_1_project.html#ab9ed6a804dec46be44b6eca7794c42fa">   52</a></span>    Q_PROPERTY(QList&lt;<a class="code hl_class" href="classfsd_1_1_place.html">Place</a>*&gt; <a class="code hl_property" href="classfsd_1_1_project.html#ab9ed6a804dec46be44b6eca7794c42fa">places</a> READ <a class="code hl_property" href="classfsd_1_1_project.html#ab9ed6a804dec46be44b6eca7794c42fa">places</a> WRITE setPlaces NOTIFY placesUpdated)</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>public:</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <a class="code hl_class" href="classfsd_1_1_project.html">Project</a>(QObject* parent = <span class="keywordtype">nullptr</span>);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    virtual ~<a class="code hl_class" href="classfsd_1_1_project.html">Project</a>();</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    virtual <span class="keywordtype">void</span> reset() override;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;fsd/data/Geometry.hpp&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacefsd.html">fsd</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">class </span>Link;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">class </span>Model;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">class </span>Object;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">class </span>Place;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="foldopen" id="foldopen00029" data-start="{" data-end="};">
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classfsd_1_1_project.html">   29</a></span><span class="keyword">class </span>FSDATA_EXPORT <a class="code hl_class" href="classfsd_1_1_project.html">Project</a> final : <span class="keyword">public</span> <a class="code hl_class" href="classfsd_1_1_geometry.html">Geometry</a> {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    Q_OBJECT</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classfsd_1_1_project.html#a160d245e234be01ba89c0f1cf14a0175">   34</a></span>    Q_PROPERTY(<a class="code hl_class" href="classfsd_1_1_place.html">Place</a>* defaultPlace READ defaultPlace WRITE setDefaultPlace NOTIFY defaultPlaceUpdated)</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classfsd_1_1_project.html#a795286f184740c897537462e0219d055">   38</a></span>    Q_PROPERTY(<span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> height READ height WRITE setHeight NOTIFY heightUpdated)</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classfsd_1_1_project.html#a2ab2917f0c8ba53073c90e56a7a7d562">   42</a></span>    Q_PROPERTY(QList&lt;<a class="code hl_class" href="classfsd_1_1_entity.html">Entity</a>*&gt; entities READ entities NOTIFY entitiesUpdated)</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classfsd_1_1_project.html#a678db0ca3e50b2966d594c93be941c59">   46</a></span>    Q_PROPERTY(QList&lt;<a class="code hl_class" href="classfsd_1_1_link.html">Link</a>*&gt; links READ links WRITE setLinks NOTIFY linksUpdated)</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classfsd_1_1_project.html#a393da53f3b3a51c0c9275f5ae17538fa">   50</a></span>    Q_PROPERTY(QList&lt;<a class="code hl_class" href="classfsd_1_1_model.html">Model</a>*&gt; models READ models WRITE setModels NOTIFY modelsUpdated)</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classfsd_1_1_project.html#a81d637033a9e36eed2ac03dc5f6abaf1">   54</a></span>    Q_PROPERTY(QList&lt;<a class="code hl_class" href="classfsd_1_1_object.html">Object</a>*&gt; objects READ objects WRITE setObjects NOTIFY objectsUpdated)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classfsd_1_1_project.html#ab9ed6a804dec46be44b6eca7794c42fa">   58</a></span>    Q_PROPERTY(QList&lt;<a class="code hl_class" href="classfsd_1_1_place.html">Place</a>*&gt; places READ places WRITE setPlaces NOTIFY placesUpdated)</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <a class="code hl_class" href="classfsd_1_1_place.html">Place</a>* <a class="code hl_property" href="classfsd_1_1_project.html#a160d245e234be01ba89c0f1cf14a0175">defaultPlace</a>() const;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">void</span> setDefaultPlace(<a class="code hl_class" href="classfsd_1_1_place.html">Place</a>* <a class="code hl_property" href="classfsd_1_1_project.html#a160d245e234be01ba89c0f1cf14a0175">defaultPlace</a>);</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    const QList&lt;<a class="code hl_class" href="classfsd_1_1_entity.html">Entity</a>*&gt;&amp; <a class="code hl_property" href="classfsd_1_1_project.html#a2ab2917f0c8ba53073c90e56a7a7d562">entities</a>() const;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="comment">// Links</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    const QList&lt;<a class="code hl_class" href="classfsd_1_1_link.html">Link</a>*&gt;&amp; <a class="code hl_property" href="classfsd_1_1_project.html#a678db0ca3e50b2966d594c93be941c59">links</a>() const;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">void</span> setLinks(const QList&lt;<a class="code hl_class" href="classfsd_1_1_link.html">Link</a>*&gt;&amp; link);</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <a class="code hl_class" href="classfsd_1_1_link.html">Link</a>* createLink();</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordtype">void</span> removeLink(<a class="code hl_class" href="classfsd_1_1_link.html">Link</a>* link);</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <a class="code hl_class" href="classfsd_1_1_link.html">Link</a>* duplicateLink(<a class="code hl_class" href="classfsd_1_1_link.html">Link</a>* link);</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordtype">void</span> cleanLinks();</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="comment">// Models</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    const QList&lt;<a class="code hl_class" href="classfsd_1_1_model.html">Model</a>*&gt;&amp; <a class="code hl_property" href="classfsd_1_1_project.html#a393da53f3b3a51c0c9275f5ae17538fa">models</a>() const;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordtype">void</span> setModels(const QList&lt;<a class="code hl_class" href="classfsd_1_1_model.html">Model</a>*&gt;&amp; <a class="code hl_property" href="classfsd_1_1_project.html#a393da53f3b3a51c0c9275f5ae17538fa">models</a>);</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <a class="code hl_class" href="classfsd_1_1_model.html">Model</a>* createModel();</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordtype">void</span> removeModel(<a class="code hl_class" href="classfsd_1_1_model.html">Model</a>* model);</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <a class="code hl_class" href="classfsd_1_1_model.html">Model</a>* duplicateModel(<a class="code hl_class" href="classfsd_1_1_model.html">Model</a>* model);</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordtype">void</span> cleanModels();</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="comment">// Objects</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    const QList&lt;<a class="code hl_class" href="classfsd_1_1_object.html">Object</a>*&gt;&amp; <a class="code hl_property" href="classfsd_1_1_project.html#a81d637033a9e36eed2ac03dc5f6abaf1">objects</a>() const;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordtype">void</span> setObjects(const QList&lt;<a class="code hl_class" href="classfsd_1_1_object.html">Object</a>*&gt;&amp; <span class="keywordtype">object</span>);</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <a class="code hl_class" href="classfsd_1_1_object.html">Object</a>* createObject();</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordtype">void</span> removeObject(<a class="code hl_class" href="classfsd_1_1_object.html">Object</a>* <span class="keywordtype">object</span>);</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <a class="code hl_class" href="classfsd_1_1_object.html">Object</a>* duplicateObject(<a class="code hl_class" href="classfsd_1_1_object.html">Object</a>* <span class="keywordtype">object</span>);</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordtype">void</span> cleanObjects();</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="comment">// Places</span></div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    const QList&lt;<a class="code hl_class" href="classfsd_1_1_place.html">Place</a>*&gt;&amp; <a class="code hl_property" href="classfsd_1_1_project.html#ab9ed6a804dec46be44b6eca7794c42fa">places</a>() const;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordtype">void</span> setPlaces(const QList&lt;<a class="code hl_class" href="classfsd_1_1_place.html">Place</a>*&gt;&amp; <a class="code hl_property" href="classfsd_1_1_project.html#ab9ed6a804dec46be44b6eca7794c42fa">places</a>);</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <a class="code hl_class" href="classfsd_1_1_place.html">Place</a>* createPlace();</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordtype">void</span> removePlace(<a class="code hl_class" href="classfsd_1_1_place.html">Place</a>* place);</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <a class="code hl_class" href="classfsd_1_1_place.html">Place</a>* duplicatePlace(<a class="code hl_class" href="classfsd_1_1_place.html">Place</a>* place);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordtype">void</span> cleanPlaces();</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    virtual <a class="code hl_enumeration" href="classfsd_1_1_entity.html#a889608f37d643da3328e9ce3494ba469">Type</a> type() const override;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    virtual <span class="keywordtype">void</span> load(const QJsonObject&amp; json) override;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    virtual <span class="keywordtype">void</span> save(QJsonObject&amp; json) const override;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>private:</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    using <a class="code hl_class" href="classfsd_1_1_entity.html">Entity</a>::copy;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keywordtype">void</span> addEntity(<a class="code hl_class" href="classfsd_1_1_entity.html">Entity</a>* entity);</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordtype">void</span> removeEntity(<a class="code hl_class" href="classfsd_1_1_entity.html">Entity</a>* entity);</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordtype">void</span> rebuildEntities();</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>private:</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    struct Impl;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    std::unique_ptr&lt;Impl&gt; _impl;</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>signals:</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keywordtype">void</span> defaultPlaceUpdated();</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordtype">void</span> entitiesUpdated();</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordtype">void</span> linksUpdated();</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordtype">void</span> modelsUpdated();</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordtype">void</span> objectsUpdated();</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordtype">void</span> placesUpdated();</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>};</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>public:</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    explicit <a class="code hl_class" href="classfsd_1_1_project.html">Project</a>(QObject* parent = <span class="keywordtype">nullptr</span>);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    ~<a class="code hl_class" href="classfsd_1_1_project.html">Project</a>() override;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordtype">void</span> reset() override;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <a class="code hl_class" href="classfsd_1_1_place.html">Place</a>* defaultPlace() const;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">void</span> setDefaultPlace(<a class="code hl_class" href="classfsd_1_1_place.html">Place</a>* defaultPlace);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> height() const;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordtype">void</span> setHeight(<span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> height);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    QList&lt;<a class="code hl_class" href="classfsd_1_1_entity.html">Entity</a>*&gt; entities() const;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="comment">// Links</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    QList&lt;<a class="code hl_class" href="classfsd_1_1_link.html">Link</a>*&gt; links() const;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordtype">void</span> setLinks(const QList&lt;<a class="code hl_class" href="classfsd_1_1_link.html">Link</a>*&gt;&amp; link);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <a class="code hl_class" href="classfsd_1_1_link.html">Link</a>* createLink();</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordtype">void</span> removeLink(<a class="code hl_class" href="classfsd_1_1_link.html">Link</a>* link);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <a class="code hl_class" href="classfsd_1_1_link.html">Link</a>* duplicateLink(<a class="code hl_class" href="classfsd_1_1_link.html">Link</a>* link);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordtype">void</span> cleanLinks();</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="comment">// Models</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    QList&lt;<a class="code hl_class" href="classfsd_1_1_model.html">Model</a>*&gt; models() const;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordtype">void</span> setModels(const QList&lt;<a class="code hl_class" href="classfsd_1_1_model.html">Model</a>*&gt;&amp; models);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <a class="code hl_class" href="classfsd_1_1_model.html">Model</a>* createModel();</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordtype">void</span> removeModel(<a class="code hl_class" href="classfsd_1_1_model.html">Model</a>* model);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <a class="code hl_class" href="classfsd_1_1_model.html">Model</a>* duplicateModel(<a class="code hl_class" href="classfsd_1_1_model.html">Model</a>* model);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordtype">void</span> cleanModels();</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="comment">// Objects</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    QList&lt;<a class="code hl_class" href="classfsd_1_1_object.html">Object</a>*&gt; objects() const;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keywordtype">void</span> setObjects(const QList&lt;<a class="code hl_class" href="classfsd_1_1_object.html">Object</a>*&gt;&amp; <span class="keywordtype">object</span>);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <a class="code hl_class" href="classfsd_1_1_object.html">Object</a>* createObject();</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keywordtype">void</span> removeObject(<a class="code hl_class" href="classfsd_1_1_object.html">Object</a>* <span class="keywordtype">object</span>);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <a class="code hl_class" href="classfsd_1_1_object.html">Object</a>* duplicateObject(<a class="code hl_class" href="classfsd_1_1_object.html">Object</a>* <span class="keywordtype">object</span>);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordtype">void</span> cleanObjects();</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="comment">// Places</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    QList&lt;<a class="code hl_class" href="classfsd_1_1_place.html">Place</a>*&gt; places() const;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordtype">void</span> setPlaces(const QList&lt;<a class="code hl_class" href="classfsd_1_1_place.html">Place</a>*&gt;&amp; places);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <a class="code hl_class" href="classfsd_1_1_place.html">Place</a>* createPlace();</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordtype">void</span> removePlace(<a class="code hl_class" href="classfsd_1_1_place.html">Place</a>* place);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <a class="code hl_class" href="classfsd_1_1_place.html">Place</a>* duplicatePlace(<a class="code hl_class" href="classfsd_1_1_place.html">Place</a>* place);</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordtype">void</span> cleanPlaces();</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <a class="code hl_enumeration" href="classfsd_1_1_entity.html#a889608f37d643da3328e9ce3494ba469">Type</a> type() const override;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordtype">void</span> load(const QJsonObject&amp; json) override;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordtype">void</span> save(QJsonObject&amp; json) const override;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>private:</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    using <a class="code hl_class" href="classfsd_1_1_entity.html">Entity</a>::copy;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keywordtype">void</span> addEntity(<a class="code hl_class" href="classfsd_1_1_entity.html">Entity</a>* entity);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordtype">void</span> removeEntity(<a class="code hl_class" href="classfsd_1_1_entity.html">Entity</a>* entity);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordtype">void</span> rebuildEntities();</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>private:</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    struct Impl;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    std::unique_ptr&lt;Impl&gt; _impl;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>signals:</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keywordtype">void</span> defaultPlaceUpdated();</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keywordtype">void</span> heightUpdated();</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="keywordtype">void</span> entitiesUpdated();</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordtype">void</span> linksUpdated();</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keywordtype">void</span> modelsUpdated();</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordtype">void</span> objectsUpdated();</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keywordtype">void</span> placesUpdated();</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>};</div>
 </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>} <span class="comment">// namespace fsd</span></div>
-<div class="ttc" id="aclassfsd_1_1_entity_html"><div class="ttname"><a href="classfsd_1_1_entity.html">fsd::Entity</a></div><div class="ttdoc">Main class of all entities with unique id and name.</div><div class="ttdef"><b>Definition</b> Entity.hpp:23</div></div>
-<div class="ttc" id="aclassfsd_1_1_entity_html_a889608f37d643da3328e9ce3494ba469"><div class="ttname"><a href="classfsd_1_1_entity.html#a889608f37d643da3328e9ce3494ba469">fsd::Entity::Type</a></div><div class="ttdeci">Type</div><div class="ttdoc">Type of the class that inherits Entity.</div><div class="ttdef"><b>Definition</b> Entity.hpp:50</div></div>
-<div class="ttc" id="aclassfsd_1_1_geometry_html"><div class="ttname"><a href="classfsd_1_1_geometry.html">fsd::Geometry</a></div><div class="ttdoc">This class adds the Y-Up location of an entity in 3D.</div><div class="ttdef"><b>Definition</b> Geometry.hpp:22</div></div>
-<div class="ttc" id="aclassfsd_1_1_link_html"><div class="ttname"><a href="classfsd_1_1_link.html">fsd::Link</a></div><div class="ttdoc">An entity to link two places together.</div><div class="ttdef"><b>Definition</b> Link.hpp:19</div></div>
-<div class="ttc" id="aclassfsd_1_1_model_html"><div class="ttname"><a href="classfsd_1_1_model.html">fsd::Model</a></div><div class="ttdoc">An entity to store a 3D model.</div><div class="ttdef"><b>Definition</b> Model.hpp:21</div></div>
-<div class="ttc" id="aclassfsd_1_1_object_html"><div class="ttname"><a href="classfsd_1_1_object.html">fsd::Object</a></div><div class="ttdoc">An basic object in a Place.</div><div class="ttdef"><b>Definition</b> Object.hpp:16</div></div>
-<div class="ttc" id="aclassfsd_1_1_place_html"><div class="ttname"><a href="classfsd_1_1_place.html">fsd::Place</a></div><div class="ttdoc">Place that contains Links and/or Objects.</div><div class="ttdef"><b>Definition</b> Place.hpp:16</div></div>
-<div class="ttc" id="aclassfsd_1_1_project_html"><div class="ttname"><a href="classfsd_1_1_project.html">fsd::Project</a></div><div class="ttdoc">Start class for a project.</div><div class="ttdef"><b>Definition</b> Project.hpp:27</div></div>
-<div class="ttc" id="aclassfsd_1_1_project_html_a160d245e234be01ba89c0f1cf14a0175"><div class="ttname"><a href="classfsd_1_1_project.html#a160d245e234be01ba89c0f1cf14a0175">fsd::Project::defaultPlace</a></div><div class="ttdeci">Place * defaultPlace</div><div class="ttdoc">The first place the user will see when loading the project.</div><div class="ttdef"><b>Definition</b> Project.hpp:32</div></div>
-<div class="ttc" id="aclassfsd_1_1_project_html_a2ab2917f0c8ba53073c90e56a7a7d562"><div class="ttname"><a href="classfsd_1_1_project.html#a2ab2917f0c8ba53073c90e56a7a7d562">fsd::Project::entities</a></div><div class="ttdeci">QList&lt; Entity * &gt; entities</div><div class="ttdoc">List of all entities. Link, Model, Object, and Place.</div><div class="ttdef"><b>Definition</b> Project.hpp:36</div></div>
-<div class="ttc" id="aclassfsd_1_1_project_html_a393da53f3b3a51c0c9275f5ae17538fa"><div class="ttname"><a href="classfsd_1_1_project.html#a393da53f3b3a51c0c9275f5ae17538fa">fsd::Project::models</a></div><div class="ttdeci">QList&lt; Model * &gt; models</div><div class="ttdoc">List of all Models.</div><div class="ttdef"><b>Definition</b> Project.hpp:44</div></div>
-<div class="ttc" id="aclassfsd_1_1_project_html_a678db0ca3e50b2966d594c93be941c59"><div class="ttname"><a href="classfsd_1_1_project.html#a678db0ca3e50b2966d594c93be941c59">fsd::Project::links</a></div><div class="ttdeci">QList&lt; Link * &gt; links</div><div class="ttdoc">List of all links.</div><div class="ttdef"><b>Definition</b> Project.hpp:40</div></div>
-<div class="ttc" id="aclassfsd_1_1_project_html_a81d637033a9e36eed2ac03dc5f6abaf1"><div class="ttname"><a href="classfsd_1_1_project.html#a81d637033a9e36eed2ac03dc5f6abaf1">fsd::Project::objects</a></div><div class="ttdeci">QList&lt; Object * &gt; objects</div><div class="ttdoc">List of all Objects.</div><div class="ttdef"><b>Definition</b> Project.hpp:48</div></div>
-<div class="ttc" id="aclassfsd_1_1_project_html_ab9ed6a804dec46be44b6eca7794c42fa"><div class="ttname"><a href="classfsd_1_1_project.html#ab9ed6a804dec46be44b6eca7794c42fa">fsd::Project::places</a></div><div class="ttdeci">QList&lt; Place * &gt; places</div><div class="ttdoc">List of all Places.</div><div class="ttdef"><b>Definition</b> Project.hpp:52</div></div>
-<div class="ttc" id="anamespacefsd_html"><div class="ttname"><a href="namespacefsd.html">fsd</a></div><div class="ttdoc">Main namespace for Foxxy Soft Data.</div><div class="ttdef"><b>Definition</b> Entity.hpp:17</div></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>} <span class="comment">// namespace fsd</span></div>
+<div class="ttc" id="aclassfsd_1_1_entity_html"><div class="ttname"><a href="classfsd_1_1_entity.html">fsd::Entity</a></div><div class="ttdoc">Main class of all entities with unique id and name.</div><div class="ttdef"><b>Definition</b> Entity.hpp:25</div></div>
+<div class="ttc" id="aclassfsd_1_1_entity_html_a889608f37d643da3328e9ce3494ba469"><div class="ttname"><a href="classfsd_1_1_entity.html#a889608f37d643da3328e9ce3494ba469">fsd::Entity::Type</a></div><div class="ttdeci">Type</div><div class="ttdoc">Type of the class that inherits Entity.</div><div class="ttdef"><b>Definition</b> Entity.hpp:52</div></div>
+<div class="ttc" id="aclassfsd_1_1_geometry_html"><div class="ttname"><a href="classfsd_1_1_geometry.html">fsd::Geometry</a></div><div class="ttdoc">This class adds the Y-Up location of an entity in 3D.</div><div class="ttdef"><b>Definition</b> Geometry.hpp:24</div></div>
+<div class="ttc" id="aclassfsd_1_1_link_html"><div class="ttname"><a href="classfsd_1_1_link.html">fsd::Link</a></div><div class="ttdoc">An entity to link two places together.</div><div class="ttdef"><b>Definition</b> Link.hpp:21</div></div>
+<div class="ttc" id="aclassfsd_1_1_model_html"><div class="ttname"><a href="classfsd_1_1_model.html">fsd::Model</a></div><div class="ttdoc">An entity to store a 3D model.</div><div class="ttdef"><b>Definition</b> Model.hpp:23</div></div>
+<div class="ttc" id="aclassfsd_1_1_object_html"><div class="ttname"><a href="classfsd_1_1_object.html">fsd::Object</a></div><div class="ttdoc">An basic object in a Place.</div><div class="ttdef"><b>Definition</b> Object.hpp:18</div></div>
+<div class="ttc" id="aclassfsd_1_1_place_html"><div class="ttname"><a href="classfsd_1_1_place.html">fsd::Place</a></div><div class="ttdoc">Place that contains Links and/or Objects.</div><div class="ttdef"><b>Definition</b> Place.hpp:18</div></div>
+<div class="ttc" id="aclassfsd_1_1_project_html"><div class="ttname"><a href="classfsd_1_1_project.html">fsd::Project</a></div><div class="ttdoc">Start class for a project.</div><div class="ttdef"><b>Definition</b> Project.hpp:29</div></div>
+<div class="ttc" id="anamespacefsd_html"><div class="ttname"><a href="namespacefsd.html">fsd</a></div><div class="ttdoc">Main namespace for Foxxy Soft Data.</div><div class="ttdef"><b>Definition</b> DataException.hpp:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
