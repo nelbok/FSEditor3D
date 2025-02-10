@@ -17,21 +17,21 @@ public:
 
 	Q_INVOKABLE void setDefaultPlace(fsd::Place* defaultPlace);
 
-	Q_INVOKABLE void createLink();
+	Q_INVOKABLE fsd::Link* createLink();
 	Q_INVOKABLE void removeLink(fsd::Link* link);
-	Q_INVOKABLE void duplicateLink(fsd::Link* link);
+	Q_INVOKABLE fsd::Link* duplicateLink(fsd::Link* link);
 
-	Q_INVOKABLE void createModel();
+	Q_INVOKABLE fsd::Model* createModel();
 	Q_INVOKABLE void removeModel(fsd::Model* model);
-	Q_INVOKABLE void duplicateModel(fsd::Model* model);
+	Q_INVOKABLE fsd::Model* duplicateModel(fsd::Model* model);
 
-	Q_INVOKABLE void createObject();
+	Q_INVOKABLE fsd::Object* createObject();
 	Q_INVOKABLE void removeObject(fsd::Object* object);
-	Q_INVOKABLE void duplicateObject(fsd::Object* object);
+	Q_INVOKABLE fsd::Object* duplicateObject(fsd::Object* object);
 
-	Q_INVOKABLE void createPlace();
+	Q_INVOKABLE fsd::Place* createPlace();
 	Q_INVOKABLE void removePlace(fsd::Place* place);
-	Q_INVOKABLE void duplicatePlace(fsd::Place* place);
+	Q_INVOKABLE fsd::Place* duplicatePlace(fsd::Place* place);
 
 private:
 	fsd::Project* _p{ nullptr };

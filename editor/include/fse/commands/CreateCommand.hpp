@@ -41,6 +41,10 @@ public:
 		_instance = nullptr;
 	}
 
+	TClass* instance() const {
+		return _instance;
+	}
+
 private:
 	fsd::Project* _project{ nullptr };
 	CreateFunc _create{ nullptr };

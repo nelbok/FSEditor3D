@@ -1,7 +1,6 @@
 if (MSVC)
     # warning level 4
     add_compile_options(/W4)
-    add_compile_options("$<$<CONFIG:DEBUG>:/fsanitize=address>")
 else()
     # additional warnings
     add_compile_options(-Wall -Wextra -Wpedantic)

@@ -11,9 +11,9 @@ FSEModule {
         currentData: MySelection.currentLink
         onActivated: MySelection.currentLink = currentData
 
-        onCreateClicked: { MyCommands.projectCommand.createLink() }
+        onCreateClicked: { MySelection.currentLink = MyCommands.projectCommand.createLink() }
         onRemoveClicked: { MyCommands.projectCommand.removeLink(MySelection.currentLink) }
-        onDuplicateClicked: { MyCommands.projectCommand.duplicateLink(MySelection.currentLink) }
+        onDuplicateClicked: { MySelection.currentLink = MyCommands.projectCommand.duplicateLink(MySelection.currentLink) }
     }
 
     entity: FSEShape {

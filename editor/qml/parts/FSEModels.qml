@@ -12,9 +12,9 @@ FSEModule {
         currentData: MySelection.currentModel
         onActivated: MySelection.currentModel = currentData
 
-        onCreateClicked: { MyCommands.projectCommand.createModel() }
+        onCreateClicked: { MySelection.currentModel = MyCommands.projectCommand.createModel() }
         onRemoveClicked: { MyCommands.projectCommand.removeModel(MySelection.currentModel) }
-        onDuplicateClicked: { MyCommands.projectCommand.duplicateModel(MySelection.currentModel) }
+        onDuplicateClicked: { MySelection.currentModel = MyCommands.projectCommand.duplicateModel(MySelection.currentModel) }
     }
 
     entity: FSEEntity {

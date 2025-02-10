@@ -104,7 +104,7 @@ private:
 
 signals:
 	/**
-	 * @brief This signal is emitted from the associated thread right before it finishes executing. See **QThread::finished()**.
+	 * @brief This signal is emitted when the thread has finished the task. See **QThread::finished()**.
 	 */
 	void finished();
 };

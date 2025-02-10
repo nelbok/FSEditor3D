@@ -96,8 +96,14 @@ private:
 		assert(url.isValid());
 		if (url.isLocalFile())
 			return url.toLocalFile();
-		else
-			return url.toString();
+
+		QString path = url.toString();
+
+		// Special case for resources file
+		if (path.startsWith("qrc:/"))
+			path.remove(0, 3);
+
+		return path;
 	}
 
 	void save() {

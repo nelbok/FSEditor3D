@@ -11,9 +11,9 @@ FSEModule {
         currentData: MySelection.currentObject
         onActivated: MySelection.currentObject = currentData
 
-        onCreateClicked: { MyCommands.projectCommand.createObject() }
+        onCreateClicked: { MySelection.currentObject = MyCommands.projectCommand.createObject() }
         onRemoveClicked: { MyCommands.projectCommand.removeObject(MySelection.currentObject) }
-        onDuplicateClicked: { MyCommands.projectCommand.duplicateObject(MySelection.currentObject) }
+        onDuplicateClicked: { MySelection.currentObject = MyCommands.projectCommand.duplicateObject(MySelection.currentObject) }
     }
 
     entity: FSEShape {
