@@ -32,6 +32,6 @@ struct TestUpdate {
 		// Check the result
 		qWarning() << "Elapsed time: " << (count / 10.) << "s";
 		QCOMPARE(update->status(), fse::UpdateManager::Status::Finished);
-		QVERIFY(spy.count() == 1);
+		QCOMPARE(spy.count(), 1);
 	}
 };

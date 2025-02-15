@@ -28,7 +28,7 @@ protected slots:
 
 protected:
 	template<class T>
-	void fillDatas(const QList<T*>& datas) {
+	void fillDatas(fsd::Container<T>* datas) {
 		// Disconnect
 		for (auto* entity : _datas) {
 			if (entity)
@@ -39,7 +39,7 @@ protected:
 		// Fill the new model
 		if (_hasNoneOption)
 			_datas.append(nullptr);
-		for (auto* entity : datas) {
+		for (auto* entity : datas->get()) {
 			connectData(entity);
 			if (!entity->isAlive())
 				continue;

@@ -7,21 +7,18 @@
 #include <fsd/data/Project.hpp>
 
 namespace fsd {
-BasePointer::BasePointer(Project* project, SignalFunc signal, Entity* parent)
+BasePointer::BasePointer(BaseContainer* datas, Entity* parent)
 	: QObject(parent)
-	, _project{ project }
 	, _ref{ parent } {
-	assert(project);
-	assert(signal);
+	assert(datas);
 	assert(parent);
 
-	QObject::connect(project, signal, this, &BasePointer::update);
+	QObject::connect(datas, &BaseContainer::updated, this, &BasePointer::update);
 }
 
 BasePointer::~BasePointer() = default;
 
 bool BasePointer::setUuid(const QUuid& uuid) {
-	assert(_project);
 	bool changed = _uuid != uuid;
 	if (changed) {
 		_uuid = uuid;
@@ -31,28 +28,26 @@ bool BasePointer::setUuid(const QUuid& uuid) {
 }
 
 bool BasePointer::isNull() const {
-	assert(_project);
 	return _uuid.isNull();
 }
 
 const QUuid& BasePointer::uuid() const {
-	assert(_project);
 	return _uuid;
 }
 
 UuidPointer<Link>* makeLinkPointer(Project* project, Entity* parent) {
-	return new UuidPointer<Link>(project, &Project::links, &Project::linksUpdated, parent);
+	return new UuidPointer(project->links(), parent);
 }
 
 UuidPointer<Model>* makeModelPointer(Project* project, Entity* parent) {
-	return new UuidPointer<Model>(project, &Project::models, &Project::modelsUpdated, parent);
+	return new UuidPointer(project->models(), parent);
 }
 
 UuidPointer<Object>* makeObjectPointer(Project* project, Entity* parent) {
-	return new UuidPointer<Object>(project, &Project::objects, &Project::objectsUpdated, parent);
+	return new UuidPointer(project->objects(), parent);
 }
 
 UuidPointer<Place>* makePlacePointer(Project* project, Entity* parent) {
-	return new UuidPointer<Place>(project, &Project::places, &Project::placesUpdated, parent);
+	return new UuidPointer(project->places(), parent);
 }
 } // namespace fsd

@@ -19,6 +19,9 @@ class Model;
 class Object;
 class Place;
 
+template<class TType>
+class Container;
+
 /**
  * @brief Start class for a project.
  *
@@ -43,19 +46,19 @@ class FSDATA_EXPORT Project final : public Geometry {
 	/**
 	 * @brief List of all links.
 	 */
-	Q_PROPERTY(QList<Link*> links READ links WRITE setLinks NOTIFY linksUpdated)
+	Q_PROPERTY(Container<Link>* links READ links NOTIFY linksUpdated)
 	/**
 	 * @brief List of all Models.
 	 */
-	Q_PROPERTY(QList<Model*> models READ models WRITE setModels NOTIFY modelsUpdated)
+	Q_PROPERTY(Container<Model>* models READ models NOTIFY modelsUpdated)
 	/**
 	 * @brief List of all Objects.
 	 */
-	Q_PROPERTY(QList<Object*> objects READ objects WRITE setObjects NOTIFY objectsUpdated)
+	Q_PROPERTY(Container<Object>* objects READ objects NOTIFY objectsUpdated)
 	/**
 	 * @brief List of all Places.
 	 */
-	Q_PROPERTY(QList<Place*> places READ places WRITE setPlaces NOTIFY placesUpdated)
+	Q_PROPERTY(Container<Place>* places READ places NOTIFY placesUpdated)
 
 public:
 	explicit Project(QObject* parent = nullptr);
@@ -70,38 +73,10 @@ public:
 	void setHeight(unsigned short height);
 
 	QList<Entity*> entities() const;
-
-	// Links
-	QList<Link*> links() const;
-	void setLinks(const QList<Link*>& link);
-	Link* createLink();
-	void removeLink(Link* link);
-	Link* duplicateLink(Link* link);
-	void cleanLinks();
-
-	// Models
-	QList<Model*> models() const;
-	void setModels(const QList<Model*>& models);
-	Model* createModel();
-	void removeModel(Model* model);
-	Model* duplicateModel(Model* model);
-	void cleanModels();
-
-	// Objects
-	QList<Object*> objects() const;
-	void setObjects(const QList<Object*>& object);
-	Object* createObject();
-	void removeObject(Object* object);
-	Object* duplicateObject(Object* object);
-	void cleanObjects();
-
-	// Places
-	QList<Place*> places() const;
-	void setPlaces(const QList<Place*>& places);
-	Place* createPlace();
-	void removePlace(Place* place);
-	Place* duplicatePlace(Place* place);
-	void cleanPlaces();
+	Container<Link>* links() const;
+	Container<Model>* models() const;
+	Container<Object>* objects() const;
+	Container<Place>* places() const;
 
 	Type type() const override;
 
@@ -129,3 +104,8 @@ signals:
 	void placesUpdated();
 };
 } // namespace fsd
+
+Q_DECLARE_OPAQUE_POINTER(fsd::Container<fsd::Link>*)
+Q_DECLARE_OPAQUE_POINTER(fsd::Container<fsd::Model>*)
+Q_DECLARE_OPAQUE_POINTER(fsd::Container<fsd::Object>*)
+Q_DECLARE_OPAQUE_POINTER(fsd::Container<fsd::Place>*)

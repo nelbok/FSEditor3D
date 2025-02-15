@@ -1,6 +1,6 @@
 #pragma once
 
-#include <fsd/data/Project.hpp>
+#include <fsd/data/Container.hpp>
 
 #include <fse/commands/BaseCommand.hpp>
 
@@ -8,16 +8,9 @@ namespace fse {
 template<typename TClass>
 class CreateCommand : public BaseCommand {
 public:
-	using CreateFunc = TClass* (fsd::Project::*) ();
-	using RemoveFunc = void (fsd::Project::*)(TClass*);
-
-	CreateCommand(fsd::Project* project, CreateFunc create, RemoveFunc remove)
-		: _project{ project }
-		, _create{ create }
-		, _remove{ remove } {
-		assert(_project);
-		assert(_create);
-		assert(_remove);
+	explicit CreateCommand(fsd::Container<TClass>* datas)
+		: _datas{ datas } {
+		assert(_datas);
 	}
 
 	~CreateCommand() override = default;
@@ -32,12 +25,12 @@ public:
 			assert(!_instance->isAlive());
 			_instance->setIsAlive(true);
 		} else {
-			_instance = (_project->*_create)();
+			_instance = _datas->create();
 		}
 	}
 
 	void clean() override {
-		(_project->*_remove)(_instance);
+		_datas->remove(_instance);
 		_instance = nullptr;
 	}
 
@@ -46,9 +39,7 @@ public:
 	}
 
 private:
-	fsd::Project* _project{ nullptr };
-	CreateFunc _create{ nullptr };
-	RemoveFunc _remove{ nullptr };
+	fsd::Container<TClass>* _datas{ nullptr };
 	TClass* _instance{ nullptr };
 };
 } // namespace fse

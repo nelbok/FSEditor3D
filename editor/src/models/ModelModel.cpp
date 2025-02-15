@@ -1,5 +1,6 @@
 #include <fse/models/ModelModel.hpp>
 
+#include <fsd/data/Container.hpp>
 #include <fsd/data/Model.hpp>
 #include <fsd/data/Project.hpp>
 

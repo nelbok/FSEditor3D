@@ -29,6 +29,7 @@ struct TestIO {
 		save();
 		load();
 		compare();
+		checkSignals();
 	}
 
 private:
@@ -50,5 +51,21 @@ private:
 
 	void compare() {
 		TestCompare(true).testProject(&_p1, &_p2);
+	}
+
+	void checkSignals() {
+		QSignalSpy spyE(&_p2, &fsd::Project::entitiesUpdated);
+		QSignalSpy spyL(&_p2, &fsd::Project::linksUpdated);
+		QSignalSpy spyM(&_p2, &fsd::Project::modelsUpdated);
+		QSignalSpy spyO(&_p2, &fsd::Project::objectsUpdated);
+		QSignalSpy spyP(&_p2, &fsd::Project::placesUpdated);
+
+		_p2.load(_json);
+
+		QCOMPARE(spyE.count(), 1);
+		QCOMPARE(spyL.count(), 1);
+		QCOMPARE(spyM.count(), 1);
+		QCOMPARE(spyO.count(), 1);
+		QCOMPARE(spyP.count(), 1);
 	}
 };

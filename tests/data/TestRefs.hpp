@@ -20,11 +20,11 @@ private:
 	fsd::Link* _linkB{ nullptr };
 
 	void init() {
-		_model = _project.models().at(0);
-		_place = _project.places().at(0);
-		_object = _project.objects().at(0);
-		_linkA = _project.links().at(0);
-		_linkB = _project.links().at(1);
+		_model = _project.models()->at(0);
+		_place = _project.places()->at(0);
+		_object = _project.objects()->at(0);
+		_linkA = _project.links()->at(0);
+		_linkB = _project.links()->at(1);
 	}
 
 	void test() {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <fsd/data/Project.hpp>
+#include <fsd/data/Container.hpp>
 
 #include <fse/commands/BaseCommand.hpp>
 
@@ -8,17 +8,10 @@ namespace fse {
 template<typename TClass>
 class DuplicateCommand : public BaseCommand {
 public:
-	using DuplicateFunc = TClass* (fsd::Project::*) (TClass*);
-	using RemoveFunc = void (fsd::Project::*)(TClass*);
-
-	DuplicateCommand(fsd::Project* project, DuplicateFunc duplicate, RemoveFunc remove, TClass* pattern)
-		: _project{ project }
-		, _duplicate{ duplicate }
-		, _remove{ remove }
+	DuplicateCommand(fsd::Container<TClass>* datas, TClass* pattern)
+		: _datas{ datas }
 		, _pattern{ pattern } {
-		assert(_project);
-		assert(_duplicate);
-		assert(_remove);
+		assert(_datas);
 		assert(_pattern);
 	}
 
@@ -34,12 +27,12 @@ public:
 			assert(!_instance->isAlive());
 			_instance->setIsAlive(true);
 		} else {
-			_instance = (_project->*_duplicate)(_pattern);
+			_instance = _datas->duplicate(_pattern);
 		}
 	}
 
 	void clean() override {
-		(_project->*_remove)(_instance);
+		_datas->remove(_instance);
 		_instance = nullptr;
 	}
 
@@ -48,9 +41,7 @@ public:
 	}
 
 private:
-	fsd::Project* _project{ nullptr };
-	DuplicateFunc _duplicate{ nullptr };
-	RemoveFunc _remove{ nullptr };
+	fsd::Container<TClass>* _datas{ nullptr };
 	TClass* _pattern{ nullptr };
 	TClass* _instance{ nullptr };
 };

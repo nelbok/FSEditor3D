@@ -37,7 +37,7 @@ struct TestBalsam {
 		QCOMPARE(manager.fileManager()->result(), fsd::FileManager::Result::Success);
 		QCOMPARE(manager.fileManager()->path(), QUrl::fromLocalFile(savePath));
 
-		fsd::Model* model = project->models().at(0);
+		fsd::Model* model = project->models()->at(0);
 
 		qWarning(balsam->balsamPath().toLocalFile().toStdString().c_str());
 

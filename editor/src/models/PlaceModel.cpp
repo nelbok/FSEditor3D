@@ -1,5 +1,6 @@
 #include <fse/models/PlaceModel.hpp>
 
+#include <fsd/data/Container.hpp>
 #include <fsd/data/Place.hpp>
 #include <fsd/data/Project.hpp>
 

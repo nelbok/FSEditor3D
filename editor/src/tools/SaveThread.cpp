@@ -2,6 +2,8 @@
 
 #include <filesystem>
 
+#include <fsd/data/Container.hpp>
+
 #include <fse/managers/FileManager.hpp>
 #include <fse/tools/Tools.hpp>
 
@@ -36,7 +38,7 @@ void SaveThread::run() {
 
 	// FIXME: Could be dangerous if too much files or symbolic links
 	// Copy models
-	for (const auto* model : _project->models()) {
+	for (const auto* model : _project->models()->get()) {
 		if (isInterruptionRequested()) {
 			_result = fsd::FileManager::Result::Canceled;
 			return;

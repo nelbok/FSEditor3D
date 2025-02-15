@@ -3,6 +3,7 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QThread>
 
+#include <fsd/data/Container.hpp>
 #include <fsd/data/Link.hpp>
 #include <fsd/data/Model.hpp>
 #include <fsd/data/Object.hpp>
@@ -12,8 +13,6 @@
 #include <fsd/io/Json.hpp>
 #include <fsd/io/JsonException.hpp>
 
-#include "common/Accessors.hpp"
-
 namespace fsd {
 
 struct Project::Impl {
@@ -22,10 +21,10 @@ struct Project::Impl {
 	QUrl path{};
 	bool isTemp{ true };
 	QList<Entity*> entities{};
-	QList<Link*> links{};
-	QList<Model*> models{};
-	QList<Object*> objects{};
-	QList<Place*> places{};
+	Container<Link>* links{ nullptr };
+	Container<Model>* models{ nullptr };
+	Container<Object>* objects{ nullptr };
+	Container<Place>* places{ nullptr };
 
 	bool isInterruptionRequested(const Project* project) const {
 		if (const auto* thread = project->thread(); thread != QCoreApplication::instance()->thread()) {
@@ -35,8 +34,17 @@ struct Project::Impl {
 	}
 
 	template<class TClass>
-	void loadList(Project* project, QList<TClass*>& list, const QString& key, const QJsonObject& json, void (Project::*signal)()) const {
-		list.clear();
+	Container<TClass>* initList(Project* project, void (Project::*signal)()) const {
+		auto* data = new Container<TClass>(project);
+		connect(data, &Container<TClass>::updated, project, &Project::rebuildEntities);
+		connect(data, &Container<TClass>::updated, project, signal);
+		return data;
+	}
+
+	template<class TClass>
+	void loadList(Project* project, Container<TClass>* data, const QString& key, const QJsonObject& json) const {
+		data->clean();
+		QList<TClass*> list;
 		const auto& jsonArray = Json::toArray(project->objectName(), key, json);
 		for (const auto& jsonEntity : jsonArray) {
 			if (!jsonEntity.isObject()) {
@@ -49,7 +57,7 @@ struct Project::Impl {
 				return;
 			}
 		}
-		emit(project->*signal)();
+		data->set(list);
 	}
 
 	template<class TClass>
@@ -73,6 +81,13 @@ struct Project::Impl {
 Project::Project(QObject* parent)
 	: Geometry(this, parent)
 	, _impl{ std::make_unique<Impl>() } {
+	// Init list before everything
+	_impl->links = _impl->initList<fsd::Link>(this, & Project::linksUpdated);
+	_impl->models = _impl->initList<fsd::Model>(this, &Project::modelsUpdated);
+	_impl->objects = _impl->initList<fsd::Object>(this, &Project::objectsUpdated);
+	_impl->places = _impl->initList<fsd::Place>(this, &Project::placesUpdated);
+
+	// Other initialization
 	_impl->defaultPlace = makePlacePointer(this, this);
 	setObjectName("Project");
 }
@@ -85,10 +100,10 @@ void Project::reset() {
 	// Reset datas
 	setDefaultPlace(nullptr);
 	setHeight(160);
-	cleanLinks();
-	cleanModels();
-	cleanObjects();
-	cleanPlaces();
+	_impl->links->clean();
+	_impl->models->clean();
+	_impl->objects->clean();
+	_impl->places->clean();
 }
 
 Place* Project::defaultPlace() const {
@@ -116,128 +131,20 @@ QList<Entity*> Project::entities() const {
 	return _impl->entities;
 }
 
-QList<Link*> Project::links() const {
+Container<Link>* Project::links() const {
 	return _impl->links;
 }
 
-void Project::setLinks(const QList<Link*>& links) {
-	TOOLS_SETTER(Project, links);
-	rebuildEntities();
-}
-
-Link* Project::createLink() {
-	TOOLS_CREATE_ENTITY(Project, links);
-	addEntity(entity);
-	return entity;
-}
-
-void Project::removeLink(Link* link) {
-	TOOLS_REMOVE_ENTITY(Project, link);
-	removeEntity(link);
-}
-
-Link* Project::duplicateLink(Link* link) {
-	TOOLS_DUPLICATE_ENTITY(Project, link);
-	addEntity(entity);
-	return entity;
-}
-
-void Project::cleanLinks() {
-	TOOLS_CLEAN_ENTITIES(Project, links);
-	rebuildEntities();
-}
-
-QList<Model*> Project::models() const {
+Container<Model>* Project::models() const {
 	return _impl->models;
 }
 
-void Project::setModels(const QList<Model*>& models) {
-	TOOLS_SETTER(Project, models);
-	rebuildEntities();
-}
-
-Model* Project::createModel() {
-	TOOLS_CREATE_ENTITY(Project, models);
-	addEntity(entity);
-	return entity;
-}
-
-void Project::removeModel(Model* model) {
-	TOOLS_REMOVE_ENTITY(Project, model);
-	removeEntity(model);
-}
-
-Model* Project::duplicateModel(Model* model) {
-	TOOLS_DUPLICATE_ENTITY(Project, model);
-	addEntity(entity);
-	return entity;
-}
-
-void Project::cleanModels() {
-	TOOLS_CLEAN_ENTITIES(Project, models);
-	rebuildEntities();
-}
-
-QList<Object*> Project::objects() const {
+Container<Object>* Project::objects() const {
 	return _impl->objects;
 }
 
-void Project::setObjects(const QList<Object*>& objects) {
-	TOOLS_SETTER(Project, objects);
-	rebuildEntities();
-}
-
-Object* Project::createObject() {
-	TOOLS_CREATE_ENTITY(Project, objects);
-	addEntity(entity);
-	return entity;
-}
-
-void Project::removeObject(Object* object) {
-	TOOLS_REMOVE_ENTITY(Project, object);
-	removeEntity(object);
-}
-
-Object* Project::duplicateObject(Object* object) {
-	TOOLS_DUPLICATE_ENTITY(Project, object);
-	addEntity(entity);
-	return entity;
-}
-
-void Project::cleanObjects() {
-	TOOLS_CLEAN_ENTITIES(Project, objects);
-	rebuildEntities();
-}
-
-QList<Place*> Project::places() const {
+Container<Place>* Project::places() const {
 	return _impl->places;
-}
-
-void Project::setPlaces(const QList<Place*>& places) {
-	TOOLS_SETTER(Project, places);
-	rebuildEntities();
-}
-
-Place* Project::createPlace() {
-	TOOLS_CREATE_ENTITY(Project, places);
-	addEntity(entity);
-	return entity;
-}
-
-void Project::removePlace(Place* place) {
-	TOOLS_REMOVE_ENTITY(Project, place);
-	removeEntity(place);
-}
-
-Place* Project::duplicatePlace(Place* place) {
-	TOOLS_DUPLICATE_ENTITY(Project, place);
-	addEntity(entity);
-	return entity;
-}
-
-void Project::cleanPlaces() {
-	TOOLS_CLEAN_ENTITIES(Project, places);
-	rebuildEntities();
 }
 
 Project::Type Project::type() const {
@@ -245,15 +152,23 @@ Project::Type Project::type() const {
 }
 
 void Project::load(const QJsonObject& json) {
+	blockSignals(true);
 	reset();
+	blockSignals(false);
 	Geometry::load(json);
 
 	// Ordered to prevent crash related by UuidPointer
-	_impl->loadList(this, _impl->models, Format::lModels, json, &Project::modelsUpdated);
-	_impl->loadList(this, _impl->places, Format::lPlaces, json, &Project::placesUpdated);
-	_impl->loadList(this, _impl->links, Format::lLinks, json, &Project::linksUpdated);
-	_impl->loadList(this, _impl->objects, Format::lObjects, json, &Project::objectsUpdated);
+	blockSignals(true);
+	_impl->loadList(this, _impl->models, Format::lModels, json);
+	_impl->loadList(this, _impl->places, Format::lPlaces, json);
+	_impl->loadList(this, _impl->links, Format::lLinks, json);
+	_impl->loadList(this, _impl->objects, Format::lObjects, json);
+	blockSignals(false);
 
+	emit modelsUpdated();
+	emit placesUpdated();
+	emit linksUpdated();
+	emit objectsUpdated();
 	rebuildEntities();
 
 	_impl->defaultPlace->setUuid(Json::toUuid(objectName(), Format::lDefaultPlaces, json));
@@ -263,10 +178,10 @@ void Project::load(const QJsonObject& json) {
 
 void Project::save(QJsonObject& json) const {
 	Geometry::save(json);
-	_impl->saveList(this, _impl->models, Format::lModels, json);
-	_impl->saveList(this, _impl->places, Format::lPlaces, json);
-	_impl->saveList(this, _impl->links, Format::lLinks, json);
-	_impl->saveList(this, _impl->objects, Format::lObjects, json);
+	_impl->saveList(this, _impl->models->get(), Format::lModels, json);
+	_impl->saveList(this, _impl->places->get(), Format::lPlaces, json);
+	_impl->saveList(this, _impl->links->get(), Format::lLinks, json);
+	_impl->saveList(this, _impl->objects->get(), Format::lObjects, json);
 	json[Format::lDefaultPlaces] = Json::fromUuid(_impl->defaultPlace->uuid());
 	json[Format::lHeight] = _impl->height;
 }
@@ -287,16 +202,16 @@ void Project::removeEntity(Entity* entity) {
 
 void Project::rebuildEntities() {
 	_impl->entities.clear();
-	for (auto* link : _impl->links) {
+	for (auto* link : _impl->links->get()) {
 		_impl->entities.push_back(link);
 	}
-	for (auto* model : _impl->models) {
+	for (auto* model : _impl->models->get()) {
 		_impl->entities.push_back(model);
 	}
-	for (auto* object : _impl->objects) {
+	for (auto* object : _impl->objects->get()) {
 		_impl->entities.push_back(object);
 	}
-	for (auto* place : _impl->places) {
+	for (auto* place : _impl->places->get()) {
 		_impl->entities.push_back(place);
 	}
 	emit entitiesUpdated();

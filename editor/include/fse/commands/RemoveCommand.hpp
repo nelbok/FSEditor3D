@@ -1,6 +1,6 @@
 #pragma once
 
-#include <fsd/data/Project.hpp>
+#include <fsd/data/Container.hpp>
 
 #include <fse/commands/BaseCommand.hpp>
 
@@ -8,14 +8,10 @@ namespace fse {
 template<typename TClass>
 class RemoveCommand : public BaseCommand {
 public:
-	using RemoveFunc = void (fsd::Project::*)(TClass*);
-
-	RemoveCommand(fsd::Project* project, RemoveFunc remove, TClass* instance)
-		: _project{ project }
-		, _remove{ remove }
+	RemoveCommand(fsd::Container<TClass>* datas, TClass* instance)
+		: _datas{ datas }
 		, _instance{ instance } {
-		assert(_project);
-		assert(_remove);
+		assert(_datas);
 		assert(_instance);
 	}
 
@@ -32,13 +28,12 @@ public:
 	}
 
 	void finalize() override {
-		(_project->*_remove)(_instance);
+		_datas->remove(_instance);
 		_instance = nullptr;
 	}
 
 private:
-	fsd::Project* _project{ nullptr };
-	RemoveFunc _remove{ nullptr };
+	fsd::Container<TClass>* _datas{ nullptr };
 	TClass* _instance{ nullptr };
 };
 } // namespace fse

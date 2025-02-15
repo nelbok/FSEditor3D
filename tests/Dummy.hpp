@@ -1,5 +1,6 @@
 #pragma once
 
+#include <fsd/data/Container.hpp>
 #include <fsd/data/Link.hpp>
 #include <fsd/data/Model.hpp>
 #include <fsd/data/Object.hpp>
@@ -33,7 +34,7 @@ struct Dummy {
 
 private:
 	static fsd::Model* createModel(fsd::Project& project, const QString& name, fsd::Model::ModelType type) {
-		auto* m = project.createModel();
+		auto* m = project.models()->create();
 		m->setName(name);
 		m->setModelType(type);
 		m->setLocalPosition({ 10, 10, 10 });
@@ -43,7 +44,7 @@ private:
 	}
 
 	static fsd::Place* createPlace(fsd::Project& project, const QString& name, fsd::Model* m) {
-		auto* p = project.createPlace();
+		auto* p = project.places()->create();
 		p->setName(name);
 		p->setModel(m);
 		p->setLocalPosition({ 10, 10, 10 });
@@ -53,7 +54,7 @@ private:
 	}
 
 	static fsd::Object* createObject(fsd::Project& project, const QString& name, fsd::Model* m, fsd::Place* p) {
-		auto* o = project.createObject();
+		auto* o = project.objects()->create();
 		o->setName(name);
 		o->setModel(m);
 		o->setPlace(p);
@@ -64,7 +65,7 @@ private:
 	}
 
 	static fsd::Link* createLink(fsd::Project& project, const QString& name, fsd::Model* m, fsd::Place* p) {
-		auto* l = project.createLink();
+		auto* l = project.links()->create();
 		l->setName(name);
 		l->setModel(m);
 		l->setPlace(p);

@@ -8,10 +8,10 @@ struct TestAccessors {
 	void run() {
 		Dummy::build(_project);
 
-		auto* link = _project.links().at(0);
-		auto* model = _project.models().at(0);
-		auto* place = _project.places().at(0);
-		auto* object = _project.objects().at(0);
+		auto* link = _project.links()->at(0);
+		auto* model = _project.models()->at(0);
+		auto* place = _project.places()->at(0);
+		auto* object = _project.objects()->at(0);
 
 		// Tests
 		testLink(link, link->metaObject());
@@ -51,7 +51,7 @@ private:
 	void testLink(fsd::Link* link, const QMetaObject* metaObject) const {
 		testPlacement(link, metaObject->superClass());
 
-		auto* linkA = _project.links().at(0);
+		auto* linkA = _project.links()->at(0);
 		link->setLink(linkA);
 		QCOMPARE(link->link(), linkA);
 
@@ -100,7 +100,7 @@ private:
 	void testPlacement(fsd::Placement* placement, const QMetaObject* metaObject) const {
 		testShape(placement, metaObject->superClass());
 
-		auto* place = _project.places().at(0);
+		auto* place = _project.places()->at(0);
 		placement->setPlace(place);
 		QCOMPARE(placement->place(), place);
 
@@ -111,16 +111,16 @@ private:
 	void testProject(fsd::Project* project, const QMetaObject* metaObject) const {
 		testGeometry(project, metaObject->superClass());
 
-		auto* place = _project.places().at(0);
+		auto* place = _project.places()->at(0);
 		project->setDefaultPlace(place);
 		QCOMPARE(project->defaultPlace(), place);
 		QCOMPARE(project->height(), 42);
 
-		QCOMPARE(project->links().count(), 2);
-		QCOMPARE(project->models().count(), 3);
-		QCOMPARE(project->objects().count(), 2);
-		QCOMPARE(project->places().count(), 3);
-		QCOMPARE(project->entities().count(), 10);
+		QCOMPARE(project->links()->size(), 2);
+		QCOMPARE(project->models()->size(), 3);
+		QCOMPARE(project->objects()->size(), 2);
+		QCOMPARE(project->places()->size(), 3);
+		QCOMPARE(project->entities().size(), 10);
 
 		QCOMPARE(project->globalPosition(), QVector3D(10, 10, 10));
 		QCOMPARE(project->globalRotation(), QVector3D(10, 10, 10));

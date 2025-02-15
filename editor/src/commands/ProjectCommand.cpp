@@ -33,7 +33,7 @@ void ProjectCommand::setDefaultPlace(fsd::Place* newValue) {
 }
 
 fsd::Link* ProjectCommand::createLink() {
-	auto cmd = new CreateCommand<fsd::Link>(_p, &fsd::Project::createLink, &fsd::Project::removeLink);
+	auto cmd = new CreateCommand(_p->links());
 	_cmd->add(cmd);
 	return cmd->instance();
 }
@@ -43,18 +43,18 @@ void ProjectCommand::removeLink(fsd::Link* link) {
 	_cmd->beginList();
 	_mng->placementCommand()->setPlace(link, nullptr);
 	_mng->linkCommand()->setLink(link, nullptr);
-	_cmd->add(new RemoveCommand<fsd::Link>(_p, &fsd::Project::removeLink, link));
+	_cmd->add(new RemoveCommand(_p->links(), link));
 	_cmd->endList();
 }
 
 fsd::Link* ProjectCommand::duplicateLink(fsd::Link* link) {
-	auto* cmd = new DuplicateCommand<fsd::Link>(_p, &fsd::Project::duplicateLink, &fsd::Project::removeLink, link);
+	auto* cmd = new DuplicateCommand(_p->links(), link);
 	_cmd->add(cmd);
 	return cmd->instance();
 }
 
 fsd::Object* ProjectCommand::createObject() {
-	auto* cmd = new CreateCommand<fsd::Object>(_p, &fsd::Project::createObject, &fsd::Project::removeObject);
+	auto* cmd = new CreateCommand(_p->objects());
 	_cmd->add(cmd);
 	return cmd->instance();
 }
@@ -63,18 +63,18 @@ void ProjectCommand::removeObject(fsd::Object* object) {
 	assert(!object->hasRef());
 	_cmd->beginList();
 	_mng->placementCommand()->setPlace(object, nullptr);
-	_cmd->add(new RemoveCommand<fsd::Object>(_p, &fsd::Project::removeObject, object));
+	_cmd->add(new RemoveCommand(_p->objects(), object));
 	_cmd->endList();
 }
 
 fsd::Object* ProjectCommand::duplicateObject(fsd::Object* object) {
-	auto* cmd = new DuplicateCommand<fsd::Object>(_p, &fsd::Project::duplicateObject, &fsd::Project::removeObject, object);
+	auto* cmd = new DuplicateCommand(_p->objects(), object);
 	_cmd->add(cmd);
 	return cmd->instance();
 }
 
 fsd::Model* ProjectCommand::createModel() {
-	auto* cmd = new CreateCommand<fsd::Model>(_p, &fsd::Project::createModel, &fsd::Project::removeModel);
+	auto* cmd = new CreateCommand(_p->models());
 	_cmd->add(cmd);
 	return cmd->instance();
 }
@@ -82,18 +82,18 @@ fsd::Model* ProjectCommand::createModel() {
 void ProjectCommand::removeModel(fsd::Model* model) {
 	assert(!model->hasRef());
 	_cmd->beginList();
-	_cmd->add(new RemoveCommand<fsd::Model>(_p, &fsd::Project::removeModel, model));
+	_cmd->add(new RemoveCommand(_p->models(), model));
 	_cmd->endList();
 }
 
 fsd::Model* ProjectCommand::duplicateModel(fsd::Model* model) {
-	auto* cmd = new DuplicateCommand<fsd::Model>(_p, &fsd::Project::duplicateModel, &fsd::Project::removeModel, model);
+	auto* cmd = new DuplicateCommand(_p->models(), model);
 	_cmd->add(cmd);
 	return cmd->instance();
 }
 
 fsd::Place* ProjectCommand::createPlace() {
-	auto* cmd = new CreateCommand<fsd::Place>(_p, &fsd::Project::createPlace, &fsd::Project::removePlace);
+	auto* cmd = new CreateCommand(_p->places());
 	_cmd->add(cmd);
 	return cmd->instance();
 }
@@ -101,12 +101,12 @@ fsd::Place* ProjectCommand::createPlace() {
 void ProjectCommand::removePlace(fsd::Place* place) {
 	assert(!place->hasRef());
 	_cmd->beginList();
-	_cmd->add(new RemoveCommand<fsd::Place>(_p, &fsd::Project::removePlace, place));
+	_cmd->add(new RemoveCommand(_p->places(), place));
 	_cmd->endList();
 }
 
 fsd::Place* ProjectCommand::duplicatePlace(fsd::Place* place) {
-	auto* cmd = new DuplicateCommand<fsd::Place>(_p, &fsd::Project::duplicatePlace, &fsd::Project::removePlace, place);
+	auto* cmd = new DuplicateCommand(_p->places(), place);
 	_cmd->add(cmd);
 	return cmd->instance();
 }

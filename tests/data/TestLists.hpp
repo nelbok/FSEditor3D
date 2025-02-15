@@ -7,11 +7,23 @@
 
 struct TestLists {
 	void run() {
+		QSignalSpy spyE(&_project, &fsd::Project::entitiesUpdated);
+		QSignalSpy spyL(&_project, &fsd::Project::linksUpdated);
+		QSignalSpy spyM(&_project, &fsd::Project::modelsUpdated);
+		QSignalSpy spyO(&_project, &fsd::Project::objectsUpdated);
+		QSignalSpy spyP(&_project, &fsd::Project::placesUpdated);
+
 		Dummy::build(_project);
 		testLinks();
 		testModels();
 		testObjects();
 		testPlaces();
+
+		QCOMPARE(spyE.count(), 26);
+		QCOMPARE(spyL.count(), 6);
+		QCOMPARE(spyM.count(), 7);
+		QCOMPARE(spyO.count(), 6);
+		QCOMPARE(spyP.count(), 7);
 	}
 
 private:
@@ -20,78 +32,83 @@ private:
 
 	// LISTS
 	void testLinks() {
-		QCOMPARE(_project.links().size(), 2);
+		auto* links = _project.links();
+
+		QCOMPARE(links->size(), 2);
 		QCOMPARE(_project.entities().size(), 10);
 
-		auto* left = _project.createLink();
+		auto* left = links->create();
 		QVERIFY(left);
 
-		auto* right = _project.duplicateLink(left);
+		auto* right = links->duplicate(left);
 		_compare.testLink(left, right);
 
-		_project.removeLink(left);
-		QCOMPARE(_project.links().size(), 3);
+		links->remove(left);
+		QCOMPARE(links->size(), 3);
 		QCOMPARE(_project.entities().size(), 11);
 
-		_project.cleanLinks();
-		QCOMPARE(_project.links().size(), 0);
+		links->clean();
+		QCOMPARE(links->size(), 0);
 		QCOMPARE(_project.entities().size(), 8);
 	}
 
 	void testModels() {
-		QCOMPARE(_project.models().size(), 3);
+		auto* models = _project.models();
+		QCOMPARE(models->size(), 3);
 		QCOMPARE(_project.entities().size(), 8);
 
-		auto* left = _project.createModel();
+		auto* left = models->create();
 		QVERIFY(left);
 
-		auto* right = _project.duplicateModel(left);
+		auto* right = models->duplicate(left);
 		_compare.testModel(left, right);
 
-		_project.removeModel(left);
-		QCOMPARE(_project.models().size(), 4);
+		models->remove(left);
+		QCOMPARE(models->size(), 4);
 		QCOMPARE(_project.entities().size(), 9);
 
-		_project.cleanModels();
-		QCOMPARE(_project.models().size(), 0);
+		models->clean();
+		QCOMPARE(models->size(), 0);
 		QCOMPARE(_project.entities().size(), 5);
 	}
 
 	void testObjects() {
-		QCOMPARE(_project.objects().size(), 2);
+		auto* objects = _project.objects();
+		QCOMPARE(objects->size(), 2);
 		QCOMPARE(_project.entities().size(), 5);
 
-		auto* left = _project.createObject();
+		auto* left = objects->create();
 		QVERIFY(left);
 
-		auto* right = _project.duplicateObject(left);
+		auto* right = objects->duplicate(left);
 		_compare.testObject(left, right);
 
-		_project.removeObject(left);
-		QCOMPARE(_project.objects().size(), 3);
+		objects->remove(left);
+		QCOMPARE(objects->size(), 3);
 		QCOMPARE(_project.entities().size(), 6);
 
-		_project.cleanObjects();
-		QCOMPARE(_project.objects().size(), 0);
+		objects->clean();
+		QCOMPARE(objects->size(), 0);
 		QCOMPARE(_project.entities().size(), 3);
 	}
 
 	void testPlaces() {
-		QCOMPARE(_project.places().size(), 3);
+		auto* places = _project.places();
+		QCOMPARE(places->size(), 3);
 		QCOMPARE(_project.entities().size(), 3);
 
-		auto* left = _project.createPlace();
+		auto* left = places->create();
 		QVERIFY(left);
 
-		auto* right = _project.duplicatePlace(left);
+		auto* right = places->duplicate(left);
 		_compare.testPlace(left, right);
 
-		_project.removePlace(left);
-		QCOMPARE(_project.places().size(), 4);
+		places->remove(left);
+		QCOMPARE(places->size(), 4);
 		QCOMPARE(_project.entities().size(), 4);
 
-		_project.cleanPlaces();
-		QCOMPARE(_project.places().size(), 0);
+		places->clean();
+		QCOMPARE(places->size(), 0);
 		QCOMPARE(_project.entities().size(), 0);
 	}
 };

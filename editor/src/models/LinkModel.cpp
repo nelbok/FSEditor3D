@@ -1,5 +1,6 @@
 #include <fse/models/LinkModel.hpp>
 
+#include <fsd/data/Container.hpp>
 #include <fsd/data/Link.hpp>
 #include <fsd/data/Project.hpp>
 

@@ -74,10 +74,10 @@ struct TestCompare {
 		testUuidPointer(left->defaultPlace(), right->defaultPlace());
 		QCOMPARE(left->height(), right->height());
 
-		testProjectList<fsd::Object>(left->objects(), right->objects(), &TestCompare::testObject);
-		testProjectList<fsd::Link>(left->links(), right->links(), &TestCompare::testLink);
-		testProjectList<fsd::Model>(left->models(), right->models(), &TestCompare::testModel);
-		testProjectList<fsd::Place>(left->places(), right->places(), &TestCompare::testPlace);
+		testProjectList<fsd::Object>(left->objects()->get(), right->objects()->get(), &TestCompare::testObject);
+		testProjectList<fsd::Link>(left->links()->get(), right->links()->get(), &TestCompare::testLink);
+		testProjectList<fsd::Model>(left->models()->get(), right->models()->get(), &TestCompare::testModel);
+		testProjectList<fsd::Place>(left->places()->get(), right->places()->get(), &TestCompare::testPlace);
 		testProjectList<fsd::Entity>(left->entities(), right->entities(), &TestCompare::testEntity);
 	}
 

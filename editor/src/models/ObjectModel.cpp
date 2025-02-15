@@ -1,5 +1,6 @@
 #include <fse/models/ObjectModel.hpp>
 
+#include <fsd/data/Container.hpp>
 #include <fsd/data/Object.hpp>
 #include <fsd/data/Project.hpp>
 
