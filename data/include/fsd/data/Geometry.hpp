@@ -24,15 +24,15 @@ namespace fsd {
 class FSDATA_EXPORT Geometry : public Entity {
 	Q_OBJECT
 	/**
-	 * @brief Local position of the entity in cm. Default value: 0.0.
+	 * @brief Local position of the entity in cm.
 	 */
 	Q_PROPERTY(QVector3D localPosition READ localPosition WRITE setLocalPosition NOTIFY localPositionUpdated)
 	/**
-	 * @brief Local rotation of the entity in degree. Default value: 0.0.
+	 * @brief Local rotation of the entity in degree.
 	 */
 	Q_PROPERTY(QVector3D localRotation READ localRotation WRITE setLocalRotation NOTIFY localRotationUpdated)
 	/**
-	 * @brief Local scale of the entity in ratio. Default value: 1.0.
+	 * @brief Local scale of the entity in ratio.
 	 */
 	Q_PROPERTY(QVector3D localScale READ localScale WRITE setLocalScale NOTIFY localScaleUpdated)
 	/**

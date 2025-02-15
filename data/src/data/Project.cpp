@@ -3,6 +3,7 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QThread>
 
+#include <fsd/data/EntryPoint.hpp>
 #include <fsd/data/Container.hpp>
 #include <fsd/data/Link.hpp>
 #include <fsd/data/Model.hpp>
@@ -18,6 +19,7 @@ namespace fsd {
 struct Project::Impl {
 	UuidPointer<Place>* defaultPlace{ nullptr };
 	QList<Entity*> entities{};
+	Container<EntryPoint>* entryPoints{ nullptr };
 	Container<Link>* links{ nullptr };
 	Container<Model>* models{ nullptr };
 	Container<Object>* objects{ nullptr };
@@ -79,7 +81,8 @@ Project::Project(QObject* parent)
 	: Geometry(this, parent)
 	, _impl{ std::make_unique<Impl>() } {
 	// Init list before everything
-	_impl->links = _impl->initList<fsd::Link>(this, & Project::linksUpdated);
+	_impl->entryPoints = _impl->initList<fsd::EntryPoint>(this, &Project::entryPointsUpdated);
+	_impl->links = _impl->initList<fsd::Link>(this, &Project::linksUpdated);
 	_impl->models = _impl->initList<fsd::Model>(this, &Project::modelsUpdated);
 	_impl->objects = _impl->initList<fsd::Object>(this, &Project::objectsUpdated);
 	_impl->places = _impl->initList<fsd::Place>(this, &Project::placesUpdated);
@@ -96,6 +99,7 @@ void Project::reset() {
 
 	// Reset datas
 	setDefaultPlace(nullptr);
+	_impl->entryPoints->clean();
 	_impl->links->clean();
 	_impl->models->clean();
 	_impl->objects->clean();
@@ -114,6 +118,10 @@ void Project::setDefaultPlace(Place* defaultPlace) {
 
 QList<Entity*> Project::entities() const {
 	return _impl->entities;
+}
+
+Container<EntryPoint>* Project::entryPoints() const {
+	return _impl->entryPoints;
 }
 
 Container<Link>* Project::links() const {
@@ -148,12 +156,14 @@ void Project::load(const QJsonObject& json) {
 	_impl->loadList(this, _impl->places, Format::lPlaces, json);
 	_impl->loadList(this, _impl->links, Format::lLinks, json);
 	_impl->loadList(this, _impl->objects, Format::lObjects, json);
+	_impl->loadList(this, _impl->entryPoints, Format::lEntryPoints, json);
 	blocker.unblock();
 
 	emit modelsUpdated();
 	emit placesUpdated();
 	emit linksUpdated();
 	emit objectsUpdated();
+	emit entryPointsUpdated();
 	rebuildEntities();
 
 	_impl->defaultPlace->setUuid(Json::toUuid(objectName(), Format::lDefaultPlaces, json));
@@ -166,6 +176,7 @@ void Project::save(QJsonObject& json) const {
 	_impl->saveList(this, _impl->places->get(), Format::lPlaces, json);
 	_impl->saveList(this, _impl->links->get(), Format::lLinks, json);
 	_impl->saveList(this, _impl->objects->get(), Format::lObjects, json);
+	_impl->saveList(this, _impl->entryPoints->get(), Format::lEntryPoints, json);
 	json[Format::lDefaultPlaces] = Json::fromUuid(_impl->defaultPlace->uuid());
 }
 
@@ -185,6 +196,9 @@ void Project::removeEntity(Entity* entity) {
 
 void Project::rebuildEntities() {
 	_impl->entities.clear();
+	for (auto* entryPoint : _impl->entryPoints->get()) {
+		_impl->entities.push_back(entryPoint);
+	}
 	for (auto* link : _impl->links->get()) {
 		_impl->entities.push_back(link);
 	}

@@ -50,6 +50,7 @@ public:
 	 * @brief Type of the class that inherits Entity.
 	 */
 	enum class Type {
+		EntryPoint,
 		Link,
 		Model,
 		Object,

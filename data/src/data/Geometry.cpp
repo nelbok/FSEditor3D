@@ -25,9 +25,9 @@ Geometry::~Geometry() = default;
 
 void Geometry::reset() {
 	Entity::reset();
-	setLocalPosition({ 0, 0, 0 });
-	setLocalRotation({ 0, 0, 0 });
-	setLocalScale({ 1, 1, 1 });
+	setLocalPosition({ 0.f, 0.f, 0.f });
+	setLocalRotation({ 0.f, 0.f, 0.f });
+	setLocalScale({ 1.f, 1.f, 1.f });
 }
 
 void Geometry::copy(const Geometry& geometry) {

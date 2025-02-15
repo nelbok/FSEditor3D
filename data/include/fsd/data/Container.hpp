@@ -19,7 +19,7 @@ class Project;
 /**
  * @brief Base class for Container.
  */
-class BaseContainer : public QObject {
+class FSDATA_EXPORT BaseContainer : public QObject {
 	Q_OBJECT
 protected:
 	explicit BaseContainer(Project* project);
@@ -40,7 +40,7 @@ signals:
  * Send a signal when the list is updated.
  */
 template<class TType>
-class Container : public BaseContainer {
+class FSDATA_EXPORT Container : public BaseContainer {
 public:
 	explicit Container(Project* project)
 		: BaseContainer(project) {

@@ -7,23 +7,26 @@
 
 struct TestLists {
 	void run() {
-		QSignalSpy spyE(&_project, &fsd::Project::entitiesUpdated);
-		QSignalSpy spyL(&_project, &fsd::Project::linksUpdated);
-		QSignalSpy spyM(&_project, &fsd::Project::modelsUpdated);
-		QSignalSpy spyO(&_project, &fsd::Project::objectsUpdated);
-		QSignalSpy spyP(&_project, &fsd::Project::placesUpdated);
+		QSignalSpy spyEn(&_project, &fsd::Project::entitiesUpdated);
+		QSignalSpy spyEP(&_project, &fsd::Project::entryPointsUpdated);
+		QSignalSpy spyLi(&_project, &fsd::Project::linksUpdated);
+		QSignalSpy spyMo(&_project, &fsd::Project::modelsUpdated);
+		QSignalSpy spyOb(&_project, &fsd::Project::objectsUpdated);
+		QSignalSpy spyPl(&_project, &fsd::Project::placesUpdated);
 
 		Dummy::build(_project);
+		testEntryPoints();
 		testLinks();
 		testModels();
 		testObjects();
 		testPlaces();
 
-		QCOMPARE(spyE.count(), 26);
-		QCOMPARE(spyL.count(), 6);
-		QCOMPARE(spyM.count(), 7);
-		QCOMPARE(spyO.count(), 6);
-		QCOMPARE(spyP.count(), 7);
+		QCOMPARE(spyEn.count(), 32);
+		QCOMPARE(spyEP.count(), 6);
+		QCOMPARE(spyLi.count(), 6);
+		QCOMPARE(spyMo.count(), 7);
+		QCOMPARE(spyOb.count(), 6);
+		QCOMPARE(spyPl.count(), 7);
 	}
 
 private:
@@ -31,6 +34,27 @@ private:
 	TestCompare _compare{ false };
 
 	// LISTS
+	void testEntryPoints() {
+		auto* entryPoints = _project.entryPoints();
+
+		QCOMPARE(entryPoints->size(), 2);
+		QCOMPARE(_project.entities().size(), 12);
+
+		auto* left = entryPoints->create();
+		QVERIFY(left);
+
+		auto* right = entryPoints->duplicate(left);
+		_compare.testEntryPoint(left, right);
+
+		entryPoints->remove(left);
+		QCOMPARE(entryPoints->size(), 3);
+		QCOMPARE(_project.entities().size(), 13);
+
+		entryPoints->clean();
+		QCOMPARE(entryPoints->size(), 0);
+		QCOMPARE(_project.entities().size(), 10);
+	}
+
 	void testLinks() {
 		auto* links = _project.links();
 

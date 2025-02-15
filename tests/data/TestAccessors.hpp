@@ -8,12 +8,14 @@ struct TestAccessors {
 	void run() {
 		Dummy::build(_project);
 
+		auto* entryPoint = _project.entryPoints()->at(0);
 		auto* link = _project.links()->at(0);
 		auto* model = _project.models()->at(0);
 		auto* place = _project.places()->at(0);
 		auto* object = _project.objects()->at(0);
 
 		// Tests
+		testEntryPoint(entryPoint, entryPoint->metaObject());
 		testLink(link, link->metaObject());
 		testModel(model, model->metaObject());
 		testObject(object, object->metaObject());
@@ -35,6 +37,20 @@ private:
 
 		QCOMPARE(metaObject->propertyCount(), 6);
 		QCOMPARE(metaObject->propertyOffset(), 1);
+	}
+
+	void testEntryPoint(fsd::EntryPoint* entryPoint, const QMetaObject* metaObject) const {
+		testEntity(entryPoint, metaObject->superClass());
+
+		QCOMPARE(entryPoint->position(), QVector3D(10, 10, 10));
+		QCOMPARE(entryPoint->rotation(), 10.f);
+
+		auto* place = _project.places()->at(0);
+		entryPoint->setPlace(place);
+		QCOMPARE(entryPoint->place(), place);
+
+		QCOMPARE(metaObject->propertyCount(), 9);
+		QCOMPARE(metaObject->propertyOffset(), 6);
 	}
 
 	void testGeometry(fsd::Geometry* geometry, const QMetaObject* metaObject) const {
@@ -115,17 +131,18 @@ private:
 		project->setDefaultPlace(place);
 		QCOMPARE(project->defaultPlace(), place);
 
+		QCOMPARE(project->entryPoints()->size(), 2);
 		QCOMPARE(project->links()->size(), 2);
 		QCOMPARE(project->models()->size(), 3);
 		QCOMPARE(project->objects()->size(), 2);
 		QCOMPARE(project->places()->size(), 3);
-		QCOMPARE(project->entities().size(), 10);
+		QCOMPARE(project->entities().size(), 12);
 
 		QCOMPARE(project->globalPosition(), QVector3D(10, 10, 10));
 		QCOMPARE(project->globalRotation(), QVector3D(10, 10, 10));
 		QCOMPARE(project->globalScale(), QVector3D(10, 10, 10));
 
-		QCOMPARE(metaObject->propertyCount(), 18);
+		QCOMPARE(metaObject->propertyCount(), 19);
 		QCOMPARE(metaObject->propertyOffset(), 12);
 	}
 

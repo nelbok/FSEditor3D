@@ -14,6 +14,7 @@
 #include <fsd/data/Geometry.hpp>
 
 namespace fsd {
+class EntryPoint;
 class Link;
 class Model;
 class Object;
@@ -36,9 +37,13 @@ class FSDATA_EXPORT Project final : public Geometry {
 	 */
 	Q_PROPERTY(Place* defaultPlace READ defaultPlace WRITE setDefaultPlace NOTIFY defaultPlaceUpdated)
 	/**
-	 * @brief List of all entities. Link, Model, Object, and Place.
+	 * @brief List of all entities. EntryPoint, Link, Model, Object, and Place.
 	 */
 	Q_PROPERTY(QList<Entity*> entities READ entities NOTIFY entitiesUpdated)
+	/**
+	 * @brief List of all entry points.
+	 */
+	Q_PROPERTY(Container<EntryPoint>* entryPoints READ entryPoints NOTIFY entryPointsUpdated)
 	/**
 	 * @brief List of all links.
 	 */
@@ -66,6 +71,7 @@ public:
 	void setDefaultPlace(Place* defaultPlace);
 
 	QList<Entity*> entities() const;
+	Container<EntryPoint>* entryPoints() const;
 	Container<Link>* links() const;
 	Container<Model>* models() const;
 	Container<Object>* objects() const;
@@ -90,14 +96,10 @@ private:
 signals:
 	void defaultPlaceUpdated();
 	void entitiesUpdated();
+	void entryPointsUpdated();
 	void linksUpdated();
 	void modelsUpdated();
 	void objectsUpdated();
 	void placesUpdated();
 };
 } // namespace fsd
-
-Q_DECLARE_OPAQUE_POINTER(fsd::Container<fsd::Link>*)
-Q_DECLARE_OPAQUE_POINTER(fsd::Container<fsd::Model>*)
-Q_DECLARE_OPAQUE_POINTER(fsd::Container<fsd::Object>*)
-Q_DECLARE_OPAQUE_POINTER(fsd::Container<fsd::Place>*)

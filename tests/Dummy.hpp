@@ -1,6 +1,7 @@
 #pragma once
 
 #include <fsd/data/Container.hpp>
+#include <fsd/data/EntryPoint.hpp>
 #include <fsd/data/Link.hpp>
 #include <fsd/data/Model.hpp>
 #include <fsd/data/Object.hpp>
@@ -22,6 +23,10 @@ struct Dummy {
 
 		[[maybe_unused]] auto* l1 = createLink(project, "Link 1", m3, p2);
 		[[maybe_unused]] auto* l2 = createLink(project, "Link 2", m3, p3);
+
+		[[maybe_unused]] auto* ep1 = createEntryPoint(project, "Entry point 1", p2);
+		[[maybe_unused]] auto* ep2 = createEntryPoint(project, "Entry point 2", p3);
+
 		l1->setLink(l2);
 		l2->setLink(l1);
 
@@ -72,5 +77,14 @@ private:
 		l->setLocalRotation({ 10, 10, 10 });
 		l->setLocalScale({ 10, 10, 10 });
 		return l;
+	}
+
+	static fsd::EntryPoint* createEntryPoint(fsd::Project& project, const QString& name, fsd::Place* p) {
+		auto* ep = project.entryPoints()->create();
+		ep->setName(name);
+		ep->setPlace(p);
+		ep->setPosition({ 10, 10, 10 });
+		ep->setRotation(10.f);
+		return ep;
 	}
 };

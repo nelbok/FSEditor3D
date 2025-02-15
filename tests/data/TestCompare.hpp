@@ -2,6 +2,7 @@
 
 #include <QtTest/QtTest>
 
+#include <fsd/data/EntryPoint.hpp>
 #include <fsd/data/Link.hpp>
 #include <fsd/data/Model.hpp>
 #include <fsd/data/Object.hpp>
@@ -20,6 +21,15 @@ struct TestCompare {
 			QVERIFY(left->uuid() != right->uuid());
 			QVERIFY(left->name() + "*" == right->name());
 		}
+	}
+
+	void testEntryPoint(const fsd::EntryPoint* left, const fsd::EntryPoint* right) const {
+		testEntity(left, right);
+
+		QCOMPARE(left->position(), right->position());
+		QCOMPARE(left->rotation(), right->rotation());
+
+		testUuidPointer(left->place(), right->place());
 	}
 
 	void testGeometry(const fsd::Geometry* left, const fsd::Geometry* right) const {
@@ -73,6 +83,7 @@ struct TestCompare {
 
 		testUuidPointer(left->defaultPlace(), right->defaultPlace());
 
+		testProjectList<fsd::EntryPoint>(left->entryPoints()->get(), right->entryPoints()->get(), &TestCompare::testEntryPoint);
 		testProjectList<fsd::Object>(left->objects()->get(), right->objects()->get(), &TestCompare::testObject);
 		testProjectList<fsd::Link>(left->links()->get(), right->links()->get(), &TestCompare::testLink);
 		testProjectList<fsd::Model>(left->models()->get(), right->models()->get(), &TestCompare::testModel);

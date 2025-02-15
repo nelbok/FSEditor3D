@@ -22,7 +22,7 @@ class Project;
 /**
  * @brief Base class for UuidPointer.
  */
-class BasePointer : public QObject {
+class FSDATA_EXPORT BasePointer : public QObject {
 	Q_OBJECT
 public:
 	const QUuid& uuid() const;

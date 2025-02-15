@@ -54,18 +54,20 @@ private:
 	}
 
 	void checkSignals() {
-		QSignalSpy spyE(&_p2, &fsd::Project::entitiesUpdated);
-		QSignalSpy spyL(&_p2, &fsd::Project::linksUpdated);
-		QSignalSpy spyM(&_p2, &fsd::Project::modelsUpdated);
-		QSignalSpy spyO(&_p2, &fsd::Project::objectsUpdated);
-		QSignalSpy spyP(&_p2, &fsd::Project::placesUpdated);
+		QSignalSpy spyEn(&_p2, &fsd::Project::entitiesUpdated);
+		QSignalSpy spyEP(&_p2, &fsd::Project::entryPointsUpdated);
+		QSignalSpy spyLi(&_p2, &fsd::Project::linksUpdated);
+		QSignalSpy spyMo(&_p2, &fsd::Project::modelsUpdated);
+		QSignalSpy spyOb(&_p2, &fsd::Project::objectsUpdated);
+		QSignalSpy spyPl(&_p2, &fsd::Project::placesUpdated);
 
 		_p2.load(_json);
 
-		QCOMPARE(spyE.count(), 1);
-		QCOMPARE(spyL.count(), 1);
-		QCOMPARE(spyM.count(), 1);
-		QCOMPARE(spyO.count(), 1);
-		QCOMPARE(spyP.count(), 1);
+		QCOMPARE(spyEn.count(), 1);
+		QCOMPARE(spyEP.count(), 1);
+		QCOMPARE(spyLi.count(), 1);
+		QCOMPARE(spyMo.count(), 1);
+		QCOMPARE(spyOb.count(), 1);
+		QCOMPARE(spyPl.count(), 1);
 	}
 };
