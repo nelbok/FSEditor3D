@@ -299,6 +299,7 @@ void PreviewManager::updateDatas() {
 	QList<fsd::Geometry*> parsed;
 
 	switch (const auto& sm = _impl->manager->selectionManager(); sm->currentType()) {
+		case SelectionManager::Type::Settings:
 		case SelectionManager::Type::None:
 			if (auto* place = _impl->manager->project()->defaultPlace()) {
 				if (_impl->isWorldMode)
@@ -308,26 +309,29 @@ void PreviewManager::updateDatas() {
 			}
 			break;
 		case SelectionManager::Type::Project:
+			setGravityEnabled(false);
 			if (auto* place = _impl->manager->project()->defaultPlace())
 				fillDatas(parsed, place, true);
 			break;
 		case SelectionManager::Type::Models:
+			setGravityEnabled(false);
 			if (sm->currentModel())
 				fillDatas(parsed, sm->currentModel());
 			break;
 		case SelectionManager::Type::Places:
+			setGravityEnabled(false);
 			if (sm->currentPlace())
 				fillDatas(parsed, sm->currentPlace(), true);
 			break;
 		case SelectionManager::Type::Objects:
+			setGravityEnabled(false);
 			if (sm->currentObject())
 				fillDatas(parsed, sm->currentObject());
 			break;
 		case SelectionManager::Type::Links:
+			setGravityEnabled(false);
 			if (sm->currentLink())
 				fillDatas(parsed, sm->currentLink());
-			break;
-		default:
 			break;
 	}
 
