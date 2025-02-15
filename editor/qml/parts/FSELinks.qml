@@ -4,8 +4,6 @@ import QtQuick.Layouts
 import editor
 
 FSEModule {
-    title: qsTr("Links")
-
     selection: FSEList {
         model: MyModels.linkModel
         currentData: MySelection.currentLink

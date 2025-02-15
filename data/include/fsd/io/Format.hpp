@@ -58,7 +58,6 @@ constexpr auto lPlace = "place";
  * @{
  */
 constexpr auto lDefaultPlaces = "defaultPlace";
-constexpr auto lHeight = "height";
 constexpr auto lLinks = "links";
 constexpr auto lModels = "models";
 constexpr auto lObjects = "objects";

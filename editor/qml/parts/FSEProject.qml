@@ -4,8 +4,6 @@ import QtQuick.Layouts
 import editor
 
 FSEModule {
-    title: qsTr("Project")
-
     entity: FSEEntity {
         entity: MyProject
     }
@@ -35,12 +33,12 @@ FSEModule {
             onActivated: mng.currentIndex = currentIndex
         }
 
-        FSESpinBox {
-            name: qsTr("Person height")
-            from: 110
-            to: 300
-            value: MyProject.height
-            onValueModified: () => { MyProject.height = value }
-        }
+        // FSESpinBox {
+        //     name: qsTr("Person height")
+        //     from: 110
+        //     to: 300
+        //     value: MyProject.height
+        //     onValueModified: () => { MyProject.height = value }
+        // }
     }
 }

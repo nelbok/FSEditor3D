@@ -4,6 +4,7 @@ import editor
 
 Text {
     horizontalAlignment: Text.AlignRight
+    verticalAlignment: Text.AlignVCenter
 
     color: MyStyles.style.foreground.normal
     font.bold: MyStyles.style.normalFont.bold

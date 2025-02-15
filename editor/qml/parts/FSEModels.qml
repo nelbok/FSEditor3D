@@ -5,8 +5,6 @@ import QtQuick.Dialogs
 import editor
 
 FSEModule {
-    title: qsTr("Models")
-
     selection: FSEList {
         model: MyModels.modelModel
         currentData: MySelection.currentModel

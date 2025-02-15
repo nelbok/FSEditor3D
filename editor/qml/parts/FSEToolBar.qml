@@ -59,8 +59,6 @@ FSERectangle {
 
     function openDialog(fileMode) {
         dialog.fileMode = fileMode
-        if (!MyProject.isTemp && MyProject.path)
-            dialog.currentFolder = MyProject.path
         dialog.open()
     }
 

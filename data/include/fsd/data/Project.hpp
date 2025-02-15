@@ -36,10 +36,6 @@ class FSDATA_EXPORT Project final : public Geometry {
 	 */
 	Q_PROPERTY(Place* defaultPlace READ defaultPlace WRITE setDefaultPlace NOTIFY defaultPlaceUpdated)
 	/**
-	 * @brief The height of the character.
-	 */
-	Q_PROPERTY(unsigned short height READ height WRITE setHeight NOTIFY heightUpdated)
-	/**
 	 * @brief List of all entities. Link, Model, Object, and Place.
 	 */
 	Q_PROPERTY(QList<Entity*> entities READ entities NOTIFY entitiesUpdated)
@@ -69,9 +65,6 @@ public:
 	Place* defaultPlace() const;
 	void setDefaultPlace(Place* defaultPlace);
 
-	unsigned short height() const;
-	void setHeight(unsigned short height);
-
 	QList<Entity*> entities() const;
 	Container<Link>* links() const;
 	Container<Model>* models() const;
@@ -96,7 +89,6 @@ private:
 
 signals:
 	void defaultPlaceUpdated();
-	void heightUpdated();
 	void entitiesUpdated();
 	void linksUpdated();
 	void modelsUpdated();

@@ -25,6 +25,7 @@ public:
 
 class PreviewManager : public QObject {
 	Q_OBJECT
+	Q_PROPERTY(unsigned height READ height WRITE setHeight NOTIFY heightUpdated)
 	Q_PROPERTY(QVector3D cameraPosition READ cameraPosition WRITE setCameraPosition NOTIFY cameraPositionUpdated)
 	Q_PROPERTY(QVector3D cameraRotation READ cameraRotation WRITE setCameraRotation NOTIFY cameraRotationUpdated)
 
@@ -50,6 +51,9 @@ public:
 
 	void init(Manager* manager);
 	void reset();
+
+	unsigned height() const;
+	void setHeight(unsigned height);
 
 	const QVector3D& cameraPosition() const;
 	void setCameraPosition(const QVector3D& cameraPosition);
@@ -103,6 +107,7 @@ private slots:
 	void updateConnections();
 
 signals:
+	void heightUpdated();
 	void cameraPositionUpdated();
 	void cameraRotationUpdated();
 	void previewUpdated();

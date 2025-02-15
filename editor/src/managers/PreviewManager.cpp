@@ -17,6 +17,7 @@ struct PreviewManager::Impl {
 	Manager* manager{ nullptr };
 	QList<PreviewData> datas;
 	QList<QMetaObject::Connection> connections;
+	unsigned height{ fse::DefaultSettings::previewHeightValue };
 	QVector3D cameraPosition{};
 	QVector3D cameraRotation{};
 	bool areLinksVisible{ fse::DefaultSettings::previewAreLinksVisibleValue };
@@ -51,6 +52,17 @@ void PreviewManager::init(Manager* manager) {
 void PreviewManager::reset() {
 	setCameraPosition(lCameraPosition);
 	setCameraRotation(lCameraRotation);
+}
+
+unsigned PreviewManager::height() const {
+	return _impl->height;
+}
+
+void PreviewManager::setHeight(unsigned height) {
+	if (_impl->height != height) {
+		_impl->height = height;
+		emit heightUpdated();
+	}
 }
 
 const QVector3D& PreviewManager::cameraPosition() const {

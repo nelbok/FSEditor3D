@@ -72,7 +72,6 @@ struct TestCompare {
 		testGeometry(left, right);
 
 		testUuidPointer(left->defaultPlace(), right->defaultPlace());
-		QCOMPARE(left->height(), right->height());
 
 		testProjectList<fsd::Object>(left->objects()->get(), right->objects()->get(), &TestCompare::testObject);
 		testProjectList<fsd::Link>(left->links()->get(), right->links()->get(), &TestCompare::testLink);
@@ -85,8 +84,9 @@ struct TestCompare {
 		bool isLeftValid = left != nullptr;
 		bool isRightValid = right != nullptr;
 		QCOMPARE(isLeftValid, isRightValid);
-		if (isLeftValid && isRightValid)
-			QCOMPARE(left->uuid(), right->uuid());
+		if (!isLeftValid || !isRightValid)
+			return;
+		QCOMPARE(left->uuid(), right->uuid());
 	}
 
 private:

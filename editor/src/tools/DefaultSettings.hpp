@@ -10,6 +10,8 @@ constexpr auto uiTranslationValue = "en";
 
 // Preview
 constexpr auto previewKey = "preview";
+constexpr auto previewHeightKey = "height";
+constexpr auto previewHeightValue = 160u;
 constexpr auto previewAreLinksVisibleKey = "areLinksVisible";
 constexpr auto previewAreLinksVisibleValue = true;
 constexpr auto previewAreObjectsVisibleKey = "areObjectsVisible";

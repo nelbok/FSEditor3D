@@ -4,8 +4,6 @@ import QtQuick.Layouts
 import editor
 
 FSEModule {
-    title: qsTr("Places")
-
     selection: FSEList {
         model: MyModels.placeModel
         currentData: MySelection.currentPlace

@@ -17,9 +17,6 @@ namespace fsd {
 
 struct Project::Impl {
 	UuidPointer<Place>* defaultPlace{ nullptr };
-	unsigned short height{ 0 };
-	QUrl path{};
-	bool isTemp{ true };
 	QList<Entity*> entities{};
 	Container<Link>* links{ nullptr };
 	Container<Model>* models{ nullptr };
@@ -99,7 +96,6 @@ void Project::reset() {
 
 	// Reset datas
 	setDefaultPlace(nullptr);
-	setHeight(160);
 	_impl->links->clean();
 	_impl->models->clean();
 	_impl->objects->clean();
@@ -113,17 +109,6 @@ Place* Project::defaultPlace() const {
 void Project::setDefaultPlace(Place* defaultPlace) {
 	if (_impl->defaultPlace->set(defaultPlace)) {
 		emit defaultPlaceUpdated();
-	}
-}
-
-unsigned short Project::height() const {
-	return _impl->height;
-}
-
-void Project::setHeight(unsigned short height) {
-	if (_impl->height != height) {
-		_impl->height = height;
-		emit heightUpdated();
 	}
 }
 
@@ -152,18 +137,18 @@ Project::Type Project::type() const {
 }
 
 void Project::load(const QJsonObject& json) {
-	blockSignals(true);
+	QSignalBlocker blocker(this);
 	reset();
-	blockSignals(false);
+	blocker.unblock();
 	Geometry::load(json);
 
 	// Ordered to prevent crash related by UuidPointer
-	blockSignals(true);
+	blocker.reblock();
 	_impl->loadList(this, _impl->models, Format::lModels, json);
 	_impl->loadList(this, _impl->places, Format::lPlaces, json);
 	_impl->loadList(this, _impl->links, Format::lLinks, json);
 	_impl->loadList(this, _impl->objects, Format::lObjects, json);
-	blockSignals(false);
+	blocker.unblock();
 
 	emit modelsUpdated();
 	emit placesUpdated();
@@ -172,7 +157,6 @@ void Project::load(const QJsonObject& json) {
 	rebuildEntities();
 
 	_impl->defaultPlace->setUuid(Json::toUuid(objectName(), Format::lDefaultPlaces, json));
-	_impl->height = static_cast<unsigned short>(Json::toInt(objectName(), Format::lHeight, json));
 	emit defaultPlaceUpdated();
 }
 
@@ -183,7 +167,6 @@ void Project::save(QJsonObject& json) const {
 	_impl->saveList(this, _impl->links->get(), Format::lLinks, json);
 	_impl->saveList(this, _impl->objects->get(), Format::lObjects, json);
 	json[Format::lDefaultPlaces] = Json::fromUuid(_impl->defaultPlace->uuid());
-	json[Format::lHeight] = _impl->height;
 }
 
 void Project::addEntity(Entity* entity) {

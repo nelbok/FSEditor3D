@@ -3,8 +3,6 @@ import QtQuick
 import editor
 
 FSERectangle {
-    property alias title: title.text
-
     property alias selection: selection.children
     property alias entity: entity.children
     property alias partA: partA.children
@@ -17,7 +15,7 @@ FSERectangle {
         NumberAnimation { duration: 300 }
     }
 
-    height: 270
+    height: 240
 
     QtObject {
         id: data
@@ -51,36 +49,17 @@ FSERectangle {
         }
     }
 
-    Text {
-        id: title
-
-        anchors.left: parent.left
-        anchors.leftMargin: data.margin
-        anchors.top: parent.top
-        anchors.topMargin: 10
-
-        width: 180
-        height: 30
-
-        horizontalAlignment: Text.AlignLeft
-        verticalAlignment: Text.AlignVCenter
-
-        color: MyStyles.style.foreground.normal
-        font.bold: MyStyles.style.subTitleFont.bold
-        font.italic: MyStyles.style.subTitleFont.italic
-        font.pointSize: MyStyles.style.subTitleFont.pointSize
-    }
-
     Item {
         id: selection
 
         anchors.left: parent.left
         anchors.leftMargin: data.margin
+        anchors.top: parent.top
+        anchors.topMargin: 10
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 10
 
         width: 180
-        height: 220
     }
 
     Item {
@@ -88,11 +67,12 @@ FSERectangle {
 
         anchors.left: selection.right
         anchors.leftMargin: data.spacing
+        anchors.top: parent.top
+        anchors.topMargin: 10
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 10
 
         width: 260
-        height: 220
     }
 
     Item {
@@ -100,11 +80,12 @@ FSERectangle {
 
         anchors.left: entity.right
         anchors.leftMargin: data.spacing
+        anchors.top: parent.top
+        anchors.topMargin: 10
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 10
 
         width: 260
-        height: 220
     }
 
     Item {
@@ -112,10 +93,11 @@ FSERectangle {
 
         anchors.left: partA.right
         anchors.leftMargin: data.spacing
+        anchors.top: parent.top
+        anchors.topMargin: 10
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 10
 
         width: 260
-        height: 220
     }
 }

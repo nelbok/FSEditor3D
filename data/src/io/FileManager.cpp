@@ -34,7 +34,7 @@ public:
 		QObject::connect(this, &QThread::finished, QCoreApplication::instance(), [this, parent]() {
 			_project->setParent(parent);
 			if (_type == Type::Load) {
-				assert(_project->metaObject()->propertyCount() == 19);
+				assert(_project->metaObject()->propertyCount() == 18);
 
 				// Entity
 				emit _project->uuidUpdated();
@@ -52,7 +52,6 @@ public:
 
 				// Project
 				emit _project->defaultPlaceUpdated();
-				emit _project->heightUpdated();
 				emit _project->linksUpdated();
 				emit _project->modelsUpdated();
 				emit _project->objectsUpdated();
@@ -142,7 +141,7 @@ private:
 		}
 
 		// Read project
-		_project->blockSignals(true);
+		QSignalBlocker blocker(_project);
 		try {
 			const auto& document = QJsonDocument::fromJson(file.readAll());
 			if (document.isNull()) {
@@ -160,8 +159,6 @@ private:
 			_project->reset();
 			_result = Result::Canceled;
 		}
-
-		_project->blockSignals(false);
 	}
 
 private:

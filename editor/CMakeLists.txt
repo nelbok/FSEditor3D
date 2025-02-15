@@ -133,6 +133,7 @@ set(QML_SOURCES
 	qml/data/FSEShape.qml
 
 	qml/parts/settings/FSESettingsAbout.qml
+	qml/parts/settings/FSESettingsImmersion.qml
 	qml/parts/settings/FSESettingsInterface.qml
 	qml/parts/settings/FSESettingsKeyBindings.qml
 

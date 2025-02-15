@@ -5,11 +5,12 @@ import editor
 
 FSERectangle {
     enum SettingsType {
+        Immersion,
         Interface,
         KeyBindings,
         About
     }
-    property int selected: FSESettings.SettingsType.Interface
+    property int selected: FSESettings.SettingsType.Immersion
 
     id: root
 
@@ -18,9 +19,20 @@ FSERectangle {
 
     FSEButton {
         anchors.top: parent.top
-        anchors.left: parent.left
         anchors.topMargin: 10
+        anchors.left: parent.left
         anchors.leftMargin: 10
+
+        id: immersionBtn
+        text: qsTr("Immersion")
+        selected: root.selected === FSESettings.SettingsType.Immersion
+        onClicked: root.selected = FSESettings.SettingsType.Immersion
+    }
+
+    FSEButton {
+        anchors.top: parent.top
+        anchors.topMargin: 10
+        anchors.left: immersionBtn.right
 
         id: intefaceBtn
         text: qsTr("Interface")
@@ -60,6 +72,11 @@ FSERectangle {
         anchors.rightMargin: 10
 
         id: content
+
+        FSESettingsImmersion {
+            anchors.centerIn: content
+            visible: root.selected === FSESettings.SettingsType.Immersion
+        }
 
         FSESettingsInterface {
             anchors.centerIn: content

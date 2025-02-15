@@ -16,6 +16,7 @@ ColumnLayout {
     id: root
 
     spacing: 0
+    anchors.fill: parent
 
     MySelectionWrapper {
         id: mng
@@ -56,8 +57,8 @@ ColumnLayout {
         color: MyStyles.style.list.normal
         radius: MyStyles.style.list.radius
 
-        width: 180
-        height: 180
+        Layout.preferredWidth: 180
+        Layout.fillHeight: true
 
         ListView {
             id: list
