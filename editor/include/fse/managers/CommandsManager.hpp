@@ -5,6 +5,7 @@
 #include <fsd/data/Project.hpp>
 
 #include <fse/commands/EntityCommand.hpp>
+#include <fse/commands/EntryPointCommand.hpp>
 #include <fse/commands/GeometryCommand.hpp>
 #include <fse/commands/LinkCommand.hpp>
 #include <fse/commands/ModelCommand.hpp>
@@ -23,6 +24,7 @@ class CommandsManager : public QObject {
 	Q_PROPERTY(bool isModified READ isModified WRITE setIsModified NOTIFY updated)
 
 	Q_PROPERTY(EntityCommand* entityCommand READ entityCommand CONSTANT)
+	Q_PROPERTY(EntryPointCommand* entryPointCommand READ entryPointCommand CONSTANT)
 	Q_PROPERTY(GeometryCommand* geometryCommand READ geometryCommand CONSTANT)
 	Q_PROPERTY(LinkCommand* linkCommand READ linkCommand CONSTANT)
 	Q_PROPERTY(ModelCommand* modelCommand READ modelCommand CONSTANT)
@@ -48,6 +50,7 @@ public:
 	void setIsModified(bool isModified);
 
 	EntityCommand* entityCommand() const;
+	EntryPointCommand* entryPointCommand() const;
 	GeometryCommand* geometryCommand() const;
 	LinkCommand* linkCommand() const;
 	ModelCommand* modelCommand() const;

@@ -5,6 +5,9 @@ import editor
 
 RowLayout {
     property alias name: name.text
+    property alias xEnabled: posX.enabled
+    property alias yEnabled: posY.enabled
+    property alias zEnabled: posZ.enabled
     property vector3d value: Qt.vector3d(0, 0, 0)
     signal editingFinished(value: vector3d)
 

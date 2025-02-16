@@ -57,7 +57,7 @@ public:
 				emit _project->modelsUpdated();
 				emit _project->objectsUpdated();
 				emit _project->placesUpdated();
-				emit _project->entitiesUpdated();
+				emit _project->entryPointsUpdated();
 			}
 			QObject::disconnect(this, &QThread::finished, QCoreApplication::instance(), nullptr);
 			_project = nullptr;

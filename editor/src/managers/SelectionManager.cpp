@@ -3,6 +3,7 @@
 namespace fse {
 struct SelectionManager::Impl {
 	Type currentType{ Type::None };
+	fsd::EntryPoint* currentEntryPoint{ nullptr };
 	fsd::Link* currentLink{ nullptr };
 	fsd::Model* currentModel{ nullptr };
 	fsd::Object* currentObject{ nullptr };
@@ -17,6 +18,7 @@ SelectionManager::~SelectionManager() = default;
 
 void SelectionManager::reset() {
 	setCurrentType(Type::None);
+	setCurrentEntryPoint(nullptr);
 	setCurrentLink(nullptr);
 	setCurrentModel(nullptr);
 	setCurrentObject(nullptr);
@@ -31,6 +33,17 @@ void SelectionManager::setCurrentType(const Type current) {
 	if (_impl->currentType != current) {
 		_impl->currentType = current;
 		emit currentTypeUpdated();
+	}
+}
+
+fsd::EntryPoint* SelectionManager::currentEntryPoint() const {
+	return _impl->currentEntryPoint;
+}
+
+void SelectionManager::setCurrentEntryPoint(fsd::EntryPoint* current) {
+	if (_impl->currentEntryPoint != current) {
+		_impl->currentEntryPoint = current;
+		emit currentEntryPointUpdated();
 	}
 }
 

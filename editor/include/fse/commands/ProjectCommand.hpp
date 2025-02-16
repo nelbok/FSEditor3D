@@ -17,6 +17,10 @@ public:
 
 	Q_INVOKABLE void setDefaultPlace(fsd::Place* defaultPlace);
 
+	Q_INVOKABLE fsd::EntryPoint* createEntryPoint();
+	Q_INVOKABLE void removeEntryPoint(fsd::EntryPoint* entryPoint);
+	Q_INVOKABLE fsd::EntryPoint* duplicateEntryPoint(fsd::EntryPoint* entryPoint);
+
 	Q_INVOKABLE fsd::Link* createLink();
 	Q_INVOKABLE void removeLink(fsd::Link* link);
 	Q_INVOKABLE fsd::Link* duplicateLink(fsd::Link* link);

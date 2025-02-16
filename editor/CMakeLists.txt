@@ -9,6 +9,7 @@ set(PROJECT_SOURCES
 	include/fse/commands/CreateCommand.hpp
 	include/fse/commands/DuplicateCommand.hpp
 	include/fse/commands/EntityCommand.hpp
+	include/fse/commands/EntryPointCommand.hpp
 	include/fse/commands/GeometryCommand.hpp
 	include/fse/commands/LinkCommand.hpp
 	include/fse/commands/ModelCommand.hpp
@@ -32,6 +33,7 @@ set(PROJECT_SOURCES
 	include/fse/managers/UpdateManager.hpp
 
 	include/fse/models/EntityModel.hpp
+	include/fse/models/EntryPointModel.hpp
 	include/fse/models/LinkModel.hpp
 	include/fse/models/ModelModel.hpp
 	include/fse/models/ObjectModel.hpp
@@ -55,6 +57,7 @@ set(PROJECT_SOURCES
 	src/commands/BaseCommand.cpp
 	src/commands/Commands.cpp
 	src/commands/EntityCommand.cpp
+	src/commands/EntryPointCommand.cpp
 	src/commands/GeometryCommand.cpp
 	src/commands/LinkCommand.cpp
 	src/commands/ModelCommand.cpp
@@ -76,6 +79,7 @@ set(PROJECT_SOURCES
 	src/managers/UpdateManager.cpp
 
 	src/models/EntityModel.cpp
+	src/models/EntryPointModel.cpp
 	src/models/LinkModel.cpp
 	src/models/ModelModel.cpp
 	src/models/ObjectModel.cpp
@@ -137,6 +141,7 @@ set(QML_SOURCES
 	qml/parts/settings/FSESettingsInterface.qml
 	qml/parts/settings/FSESettingsKeyBindings.qml
 
+	qml/parts/FSEEntryPoints.qml
 	qml/parts/FSELinks.qml
 	qml/parts/FSEMenu.qml
 	qml/parts/FSEMessageBox.qml

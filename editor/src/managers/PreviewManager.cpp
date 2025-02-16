@@ -41,10 +41,11 @@ void PreviewManager::init(Manager* manager) {
 	_impl->manager = manager;
 
 	QObject::connect(manager->selectionManager(), &SelectionManager::currentTypeUpdated, this, &PreviewManager::updateConnections);
+	QObject::connect(manager->selectionManager(), &SelectionManager::currentModelUpdated, this, &PreviewManager::updateConnections);
 	QObject::connect(manager->selectionManager(), &SelectionManager::currentObjectUpdated, this, &PreviewManager::updateConnections);
 	QObject::connect(manager->selectionManager(), &SelectionManager::currentPlaceUpdated, this, &PreviewManager::updateConnections);
 	QObject::connect(manager->selectionManager(), &SelectionManager::currentLinkUpdated, this, &PreviewManager::updateConnections);
-	QObject::connect(manager->selectionManager(), &SelectionManager::currentModelUpdated, this, &PreviewManager::updateConnections);
+	QObject::connect(manager->selectionManager(), &SelectionManager::currentEntryPointUpdated, this, &PreviewManager::updateConnections);
 
 	updateConnections();
 }
@@ -174,6 +175,10 @@ void PreviewManager::centerOnCurrent() {
 		case SelectionManager::Type::Links:
 			if (sm->currentLink())
 				position += sm->currentLink()->globalPosition();
+			break;
+		case SelectionManager::Type::EntryPoints:
+			if (sm->currentEntryPoint())
+				position += sm->currentEntryPoint()->position();
 			break;
 		default:
 			break;
@@ -333,6 +338,11 @@ void PreviewManager::updateDatas() {
 			if (sm->currentLink())
 				fillDatas(parsed, sm->currentLink());
 			break;
+		case SelectionManager::Type::EntryPoints:
+			setGravityEnabled(false);
+			if (sm->currentEntryPoint() && sm->currentEntryPoint()->place())
+				fillDatas(parsed, sm->currentEntryPoint()->place());
+			break;
 	}
 
 	emit previewUpdated();
@@ -371,6 +381,10 @@ void PreviewManager::updateConnections() {
 				_impl->connections.append(QObject::connect(sm->currentLink(), &fsd::Link::modelUpdated, this, &PreviewManager::updateDatas));
 				_impl->connections.append(QObject::connect(sm->currentLink(), &fsd::Link::placeUpdated, this, &PreviewManager::updateDatas));
 			}
+			break;
+		case SelectionManager::Type::EntryPoints:
+			if (sm->currentEntryPoint())
+				_impl->connections.append(QObject::connect(sm->currentEntryPoint(), &fsd::EntryPoint::placeUpdated, this, &PreviewManager::updateDatas));
 			break;
 		default:
 			break;

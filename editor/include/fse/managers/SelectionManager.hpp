@@ -2,6 +2,7 @@
 
 #include <QtCore/QObject>
 
+#include <fsd/data/EntryPoint.hpp>
 #include <fsd/data/Link.hpp>
 #include <fsd/data/Model.hpp>
 #include <fsd/data/Object.hpp>
@@ -12,6 +13,7 @@ class SelectionManager : public QObject {
 	Q_OBJECT
 
 	Q_PROPERTY(Type currentType READ currentType WRITE setCurrentType NOTIFY currentTypeUpdated)
+	Q_PROPERTY(fsd::EntryPoint* currentEntryPoint READ currentEntryPoint WRITE setCurrentEntryPoint NOTIFY currentEntryPointUpdated)
 	Q_PROPERTY(fsd::Link* currentLink READ currentLink WRITE setCurrentLink NOTIFY currentLinkUpdated)
 	Q_PROPERTY(fsd::Model* currentModel READ currentModel WRITE setCurrentModel NOTIFY currentModelUpdated)
 	Q_PROPERTY(fsd::Object* currentObject READ currentObject WRITE setCurrentObject NOTIFY currentObjectUpdated)
@@ -24,6 +26,7 @@ public:
 		Places,
 		Objects,
 		Links,
+		EntryPoints,
 		Settings,
 		None,
 	};
@@ -36,6 +39,9 @@ public:
 
 	Type currentType() const;
 	void setCurrentType(const Type current);
+
+	fsd::EntryPoint* currentEntryPoint() const;
+	void setCurrentEntryPoint(fsd::EntryPoint* current);
 
 	fsd::Link* currentLink() const;
 	void setCurrentLink(fsd::Link* current);
@@ -55,6 +61,7 @@ private:
 
 signals:
 	void currentTypeUpdated();
+	void currentEntryPointUpdated();
 	void currentLinkUpdated();
 	void currentModelUpdated();
 	void currentObjectUpdated();

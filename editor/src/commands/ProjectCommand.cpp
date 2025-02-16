@@ -1,5 +1,6 @@
 #include <fse/commands/ProjectCommand.hpp>
 
+#include <fsd/data/EntryPoint.hpp>
 #include <fsd/data/Link.hpp>
 #include <fsd/data/Model.hpp>
 #include <fsd/data/Object.hpp>
@@ -8,8 +9,6 @@
 #include <fse/commands/CreateCommand.hpp>
 #include <fse/commands/Commands.hpp>
 #include <fse/commands/DuplicateCommand.hpp>
-#include <fse/commands/LinkCommand.hpp>
-#include <fse/commands/PlacementCommand.hpp>
 #include <fse/commands/RemoveCommand.hpp>
 #include <fse/commands/ValueCommand.hpp>
 #include <fse/managers/CommandsManager.hpp>
@@ -30,6 +29,26 @@ ProjectCommand::~ProjectCommand() = default;
 
 void ProjectCommand::setDefaultPlace(fsd::Place* newValue) {
 	addValueCommand(_cmd, _p, &fsd::Project::setDefaultPlace, &fsd::Project::defaultPlace, newValue);
+}
+
+fsd::EntryPoint* ProjectCommand::createEntryPoint() {
+	auto cmd = new CreateCommand(_p->entryPoints());
+	_cmd->add(cmd);
+	return cmd->instance();
+}
+
+void ProjectCommand::removeEntryPoint(fsd::EntryPoint* entryPoint) {
+	assert(!entryPoint->hasRef());
+	_cmd->beginList();
+	_mng->entryPointCommand()->setPlace(entryPoint, nullptr);
+	_cmd->add(new RemoveCommand(_p->entryPoints(), entryPoint));
+	_cmd->endList();
+}
+
+fsd::EntryPoint* ProjectCommand::duplicateEntryPoint(fsd::EntryPoint* entryPoint) {
+	auto* cmd = new DuplicateCommand(_p->entryPoints(), entryPoint);
+	_cmd->add(cmd);
+	return cmd->instance();
 }
 
 fsd::Link* ProjectCommand::createLink() {

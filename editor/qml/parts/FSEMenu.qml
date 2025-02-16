@@ -4,6 +4,8 @@ import QtQuick.Layouts
 import editor
 
 FSERectangle {
+    id: root
+
     height: 50
 
     MouseArea {
@@ -50,6 +52,12 @@ FSERectangle {
             selected: MySelection.currentType === MySelection.Type.Links
             onClicked: MySelection.currentType = MySelection.Type.Links
         }
+
+        FSEButton {
+            text: qsTr("Entry points")
+            selected: MySelection.currentType === MySelection.Type.EntryPoints
+            onClicked: MySelection.currentType = MySelection.Type.EntryPoints
+        }
     }
 
     RowLayout {
@@ -90,6 +98,8 @@ FSERectangle {
         Item {
             implicitWidth: 140
             implicitHeight: 20
+
+            visible: root.width >= 1280
 
             RowLayout {
                 anchors.horizontalCenter: parent.horizontalCenter

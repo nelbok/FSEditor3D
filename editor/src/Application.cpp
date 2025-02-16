@@ -3,6 +3,7 @@
 #include <QtCore/QCommandLineParser>
 #include <QtGui/QIcon>
 
+#include <fsd/data/EntryPoint.hpp>
 #include <fsd/data/Link.hpp>
 #include <fsd/data/Model.hpp>
 #include <fsd/data/Object.hpp>
@@ -68,6 +69,7 @@ void initRegister(Manager& manager) {
 	qmlRegisterUncreatableType<fsd::Placement>("editor", 1, 0, "MyPlacement", "Attempt to create a Placement");
 	qmlRegisterUncreatableType<fsd::Shape>("editor", 1, 0, "MyShape", "Attempt to create a Shape");
 
+	qmlRegisterType<fsd::EntryPoint>("editor", 1, 0, "MyEntryPoint");
 	qmlRegisterType<fsd::Link>("editor", 1, 0, "MyLink");
 	qmlRegisterType<fsd::Model>("editor", 1, 0, "MyModel");
 	qmlRegisterType<fsd::Object>("editor", 1, 0, "MyObject");

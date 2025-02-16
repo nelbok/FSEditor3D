@@ -54,6 +54,14 @@ Window {
         enabled: (MySelection.currentType === MySelection.Type.Links) && !(progress.visible || message.visible)
     }
 
+    FSEEntryPoints {
+        anchors.top: menu.bottom
+        anchors.left: menu.left
+        anchors.right: menu.right
+
+        enabled: (MySelection.currentType === MySelection.Type.EntryPoints) && !(progress.visible || message.visible)
+    }
+
     FSESettings {
         anchors.centerIn: parent
 
