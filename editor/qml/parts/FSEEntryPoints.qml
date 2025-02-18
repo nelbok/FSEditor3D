@@ -60,4 +60,24 @@ FSEModule {
             onActivated: mng.currentIndex = currentIndex
         }
     }
+
+    partB: ColumnLayout {
+        spacing: 5
+        enabled: MySelection.currentEntryPoint
+
+        RowLayout {
+            implicitHeight: 40
+
+            spacing: 5
+
+            Item {
+                Layout.preferredWidth: 80
+            }
+
+            FSEMenuButton {
+                text: qsTr("Assign camera coord.")
+                onClicked: MyCommands.entryPointCommand.assignCameraCoordinates(MySelection.currentEntryPoint, MyPreview)
+            }
+        }
+    }
 }
