@@ -13,6 +13,23 @@ Item {
         Node {
             id: fseScene
 
+            Repeater3D {
+                model: MyPreview.entryPointDatas
+                delegate: Model {
+                    position.x: modelData.offset.x + modelData.entryPoint.position.x
+                    position.y: modelData.offset.y + modelData.entryPoint.position.y
+                    position.z: modelData.offset.z + modelData.entryPoint.position.z
+                    eulerRotation.y: modelData.entryPoint.rotation
+
+                    eulerRotation.x: -90
+
+                    source: "#Cone"
+                    materials: DefaultMaterial {
+                        diffuseColor: MyStyles.style.part.normal
+                    }
+                }
+            }
+
             Connections {
                 target: MyPreview
                 function onPreviewUpdated() {

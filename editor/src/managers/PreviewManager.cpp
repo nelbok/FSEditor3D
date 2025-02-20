@@ -1,8 +1,9 @@
 #include <fse/managers/PreviewManager.hpp>
 
+#include <fsd/data/Link.hpp>
 #include <fsd/data/Model.hpp>
+#include <fsd/data/Object.hpp>
 #include <fsd/data/Project.hpp>
-#include <fsd/data/Shape.hpp>
 
 #include <fse/managers/SelectionManager.hpp>
 #include <fse/Manager.hpp>
@@ -16,6 +17,7 @@ constexpr QVector3D lCameraRotation{ -30, 0, 0 };
 struct PreviewManager::Impl {
 	Manager* manager{ nullptr };
 	QList<PreviewData> datas;
+	QList<EntryPointData> entryPointDatas;
 	QList<QMetaObject::Connection> connections;
 	unsigned height{ fse::DefaultSettings::previewHeightValue };
 	QVector3D cameraPosition{};
@@ -191,13 +193,13 @@ void PreviewManager::centerOnCurrent() {
 void PreviewManager::switchLinksVisible() {
 	_impl->areLinksVisible = !_impl->areLinksVisible;
 	emit areLinksVisibleUpdated();
-	emit updateDatas();
+	updateDatas();
 }
 
 void PreviewManager::switchObjectsVisible() {
 	_impl->areObjectsVisible = !_impl->areObjectsVisible;
 	emit areObjectsVisibleUpdated();
-	emit updateDatas();
+	updateDatas();
 }
 
 void PreviewManager::switchOriginsVisible() {
@@ -208,7 +210,7 @@ void PreviewManager::switchOriginsVisible() {
 void PreviewManager::switchWorldMode() {
 	_impl->isWorldMode = !_impl->isWorldMode;
 	emit isWorldModeUpdated();
-	emit updateDatas();
+	updateDatas();
 }
 
 void PreviewManager::switchDebugMode() {
@@ -237,8 +239,12 @@ QList<PreviewData> PreviewManager::datas() const {
 	return _impl->datas;
 }
 
+QList<EntryPointData> PreviewManager::entryPointDatas() const {
+	return _impl->entryPointDatas;
+}
+
 void PreviewManager::fullMapDatas(QList<fsd::Geometry*>& parsed, fsd::Place* place, const QVector3D& offset) const {
-	fillDatas(parsed, place, offset, true);
+	fillDatas(parsed, place, offset);
 	for (auto* entity : place->refs()) {
 		if (const auto* linkA = qobject_cast<fsd::Link*>(entity))
 			if (const auto* linkB = linkA->link())
@@ -250,11 +256,7 @@ void PreviewManager::fullMapDatas(QList<fsd::Geometry*>& parsed, fsd::Place* pla
 	}
 }
 
-void PreviewManager::fillDatas(QList<fsd::Geometry*>& parsed, fsd::Geometry* geometry, bool useRefs) const {
-	fillDatas(parsed, geometry, { 0, 0, 0 }, useRefs);
-}
-
-void PreviewManager::fillDatas(QList<fsd::Geometry*>& parsed, fsd::Geometry* geometry, const QVector3D& offset, bool useRefs) const {
+void PreviewManager::fillDatas(QList<fsd::Geometry*>& parsed, fsd::Geometry* geometry, const QVector3D& offset) const {
 	if (parsed.contains(geometry)) {
 		return;
 	}
@@ -265,8 +267,8 @@ void PreviewManager::fillDatas(QList<fsd::Geometry*>& parsed, fsd::Geometry* geo
 		fillDatas(parsed, placement->place(), offset);
 	}
 
-	// Place or project
-	if (useRefs) {
+	// Adding refs, either links or objects
+	if (qobject_cast<fsd::Place*>(geometry)) {
 		for (auto* entity : geometry->refs()) {
 			// Show links if checked
 			if (_impl->areLinksVisible)
@@ -277,6 +279,9 @@ void PreviewManager::fillDatas(QList<fsd::Geometry*>& parsed, fsd::Geometry* geo
 			if (_impl->areObjectsVisible)
 				if (auto* object = qobject_cast<fsd::Object*>(entity))
 					fillDatas(parsed, object, offset);
+
+			if (auto* entryPoint = qobject_cast<fsd::EntryPoint*>(entity))
+				_impl->entryPointDatas.append({ entryPoint, offset });
 		}
 	}
 
@@ -301,6 +306,7 @@ void PreviewManager::fillDatas(QList<fsd::Geometry*>& parsed, fsd::Geometry* geo
 
 void PreviewManager::updateDatas() {
 	_impl->datas.clear();
+	_impl->entryPointDatas.clear();
 	QList<fsd::Geometry*> parsed;
 
 	switch (const auto& sm = _impl->manager->selectionManager(); sm->currentType()) {
@@ -310,13 +316,13 @@ void PreviewManager::updateDatas() {
 				if (_impl->isWorldMode)
 					fullMapDatas(parsed, place);
 				else
-					fillDatas(parsed, place, true);
+					fillDatas(parsed, place);
 			}
 			break;
 		case SelectionManager::Type::Project:
 			setGravityEnabled(false);
 			if (auto* place = _impl->manager->project()->defaultPlace())
-				fillDatas(parsed, place, true);
+				fillDatas(parsed, place);
 			break;
 		case SelectionManager::Type::Models:
 			setGravityEnabled(false);
@@ -326,7 +332,7 @@ void PreviewManager::updateDatas() {
 		case SelectionManager::Type::Places:
 			setGravityEnabled(false);
 			if (sm->currentPlace())
-				fillDatas(parsed, sm->currentPlace(), true);
+				fillDatas(parsed, sm->currentPlace());
 			break;
 		case SelectionManager::Type::Objects:
 			setGravityEnabled(false);
@@ -390,6 +396,6 @@ void PreviewManager::updateConnections() {
 			break;
 	}
 
-	emit updateDatas();
+	updateDatas();
 }
 } // namespace fse

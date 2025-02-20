@@ -5,6 +5,7 @@
 #include <QtCore/QUrl>
 #include <QtGui/QVector3D>
 
+#include <fsd/data/EntryPoint.hpp>
 #include <fsd/data/Place.hpp>
 
 namespace fse {
@@ -23,6 +24,15 @@ public:
 	QVector3D offset{ 0, 0, 0 };
 };
 
+struct EntryPointData {
+	Q_GADGET
+	Q_PROPERTY(fsd::EntryPoint* entryPoint MEMBER entryPoint CONSTANT)
+	Q_PROPERTY(QVector3D offset MEMBER offset CONSTANT)
+public:
+	fsd::EntryPoint* entryPoint{ nullptr };
+	QVector3D offset{ 0, 0, 0 };
+};
+
 class PreviewManager : public QObject {
 	Q_OBJECT
 	Q_PROPERTY(unsigned height READ height WRITE setHeight NOTIFY heightUpdated)
@@ -38,6 +48,7 @@ class PreviewManager : public QObject {
 	Q_PROPERTY(bool isGravityEnabled READ isGravityEnabled WRITE setGravityEnabled NOTIFY gravityEnabledUpdated)
 
 	Q_PROPERTY(QList<PreviewData> datas READ datas NOTIFY previewUpdated)
+	Q_PROPERTY(QList<EntryPointData> entryPointDatas READ entryPointDatas NOTIFY previewUpdated)
 
 public:
 	enum class ViewMode {
@@ -92,12 +103,11 @@ public:
 	Q_INVOKABLE void switchGravity();
 
 	QList<PreviewData> datas() const;
+	QList<EntryPointData> entryPointDatas() const;
 
 private:
 	void fullMapDatas(QList<fsd::Geometry*>& parsed, fsd::Place* place, const QVector3D& offset = { 0, 0, 0 }) const;
-
-	void fillDatas(QList<fsd::Geometry*>& parsed, fsd::Geometry* geometry, bool useRefs) const;
-	void fillDatas(QList<fsd::Geometry*>& parsed, fsd::Geometry* geometry, const QVector3D& offset = { 0, 0, 0 }, bool useRefs = false) const;
+	void fillDatas(QList<fsd::Geometry*>& parsed, fsd::Geometry* geometry, const QVector3D& offset = { 0, 0, 0 }) const;
 
 	struct Impl;
 	std::unique_ptr<Impl> _impl;
