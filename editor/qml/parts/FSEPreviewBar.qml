@@ -19,6 +19,12 @@ FSERectangle {
         }
 
         FSEButton {
+            text: qsTr("Show entry points")
+            selected: MyPreview.areEntryPointsVisible
+            onClicked: MyPreview.switchEntryPointsVisible()
+        }
+
+        FSEButton {
             text: qsTr("Show objects")
             selected: MyPreview.areObjectsVisible
             onClicked: MyPreview.switchObjectsVisible()
@@ -28,12 +34,6 @@ FSERectangle {
             text: qsTr("Show links")
             selected: MyPreview.areLinksVisible
             onClicked: MyPreview.switchLinksVisible()
-        }
-
-        FSEButton {
-            text: qsTr("Show origins")
-            selected: MyPreview.areOriginsVisible
-            onClicked: MyPreview.switchOriginsVisible()
         }
 
         FSEButton {

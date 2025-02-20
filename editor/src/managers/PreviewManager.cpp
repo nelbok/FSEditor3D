@@ -22,9 +22,9 @@ struct PreviewManager::Impl {
 	unsigned height{ fse::DefaultSettings::previewHeightValue };
 	QVector3D cameraPosition{};
 	QVector3D cameraRotation{};
+	bool areEntryPointsVisible{ fse::DefaultSettings::previewAreEntryPointsVisibleValue };
 	bool areLinksVisible{ fse::DefaultSettings::previewAreLinksVisibleValue };
 	bool areObjectsVisible{ fse::DefaultSettings::previewAreObjectsVisibleValue };
-	bool areOriginsVisible{ fse::DefaultSettings::previewAreOriginsVisibleValue };
 	bool isWorldMode{ fse::DefaultSettings::previewIsWorldModeValue };
 	bool isDebugMode{ fse::DefaultSettings::previewIsDebugModeValue };
 	ViewMode viewMode{ static_cast<ViewMode>(fse::DefaultSettings::previewViewModeValue) };
@@ -90,6 +90,15 @@ void PreviewManager::setCameraRotation(const QVector3D& cameraRotation) {
 	}
 }
 
+bool PreviewManager::areEntryPointsVisible() const {
+	return _impl->areEntryPointsVisible;
+}
+
+void PreviewManager::setAreEntryPointsVisible(bool visible) {
+	if (_impl->areEntryPointsVisible != visible)
+		switchEntryPointsVisible();
+}
+
 bool PreviewManager::areLinksVisible() const {
 	return _impl->areLinksVisible;
 }
@@ -106,15 +115,6 @@ bool PreviewManager::areObjectsVisible() const {
 void PreviewManager::setAreObjectsVisible(bool visible) {
 	if (_impl->areObjectsVisible != visible)
 		switchObjectsVisible();
-}
-
-bool PreviewManager::areOriginsVisible() const {
-	return _impl->areOriginsVisible;
-}
-
-void PreviewManager::setAreOriginsVisible(bool visible) {
-	if (_impl->areOriginsVisible != visible)
-		switchOriginsVisible();
 }
 
 bool PreviewManager::isWorldMode() const {
@@ -190,6 +190,12 @@ void PreviewManager::centerOnCurrent() {
 	setCameraRotation(lCameraRotation);
 }
 
+void PreviewManager::switchEntryPointsVisible() {
+	_impl->areEntryPointsVisible = !_impl->areEntryPointsVisible;
+	emit areEntryPointsVisibleUpdated();
+	updateDatas();
+}
+
 void PreviewManager::switchLinksVisible() {
 	_impl->areLinksVisible = !_impl->areLinksVisible;
 	emit areLinksVisibleUpdated();
@@ -200,11 +206,6 @@ void PreviewManager::switchObjectsVisible() {
 	_impl->areObjectsVisible = !_impl->areObjectsVisible;
 	emit areObjectsVisibleUpdated();
 	updateDatas();
-}
-
-void PreviewManager::switchOriginsVisible() {
-	_impl->areOriginsVisible = !_impl->areOriginsVisible;
-	emit areOriginsVisibleUpdated();
 }
 
 void PreviewManager::switchWorldMode() {
@@ -243,60 +244,60 @@ QList<EntryPointData> PreviewManager::entryPointDatas() const {
 	return _impl->entryPointDatas;
 }
 
-void PreviewManager::fullMapDatas(QList<fsd::Geometry*>& parsed, fsd::Place* place, const QVector3D& offset) const {
+void PreviewManager::fullMapDatas(QList<fsd::Entity*>& parsed, fsd::Place* place, const QVector3D& offset) const {
 	fillDatas(parsed, place, offset);
 	for (auto* entity : place->refs()) {
-		if (const auto* linkA = qobject_cast<fsd::Link*>(entity))
-			if (const auto* linkB = linkA->link())
-				if (auto* placeB = linkB->place()) {
-					if (parsed.contains(placeB))
-						continue;
-					fullMapDatas(parsed, placeB, offset + linkA->globalPosition() - linkB->globalPosition());
-				}
+		if (entity->type() != fsd::Entity::Type::Link)
+			continue;
+
+		// search next place if any
+		const auto* link = qobject_cast<fsd::Link*>(entity);
+		if (!link->link() || !link->link()->place() || parsed.contains(link->link()->place()))
+			continue;
+
+		fullMapDatas(parsed, link->link()->place(), offset + link->globalPosition() - link->link()->globalPosition());
 	}
 }
 
-void PreviewManager::fillDatas(QList<fsd::Geometry*>& parsed, fsd::Geometry* geometry, const QVector3D& offset) const {
-	if (parsed.contains(geometry)) {
+void PreviewManager::fillDatas(QList<fsd::Entity*>& parsed, fsd::Entity* entity, const QVector3D& offset) const {
+	if (parsed.contains(entity)) {
 		return;
 	}
-	parsed.append(geometry);
+	parsed.append(entity);
 
 	// If object or link, show place
-	if (const auto* placement = qobject_cast<fsd::Placement*>(geometry)) {
+	if (const auto* placement = qobject_cast<fsd::Placement*>(entity)) {
 		fillDatas(parsed, placement->place(), offset);
 	}
 
 	// Adding refs, either links or objects
-	if (qobject_cast<fsd::Place*>(geometry)) {
-		for (auto* entity : geometry->refs()) {
+	if (entity->type() == fsd::Entity::Type::Place) {
+		for (auto* ref : entity->refs()) {
 			// Show links if checked
-			if (_impl->areLinksVisible)
-				if (auto* link = qobject_cast<fsd::Link*>(entity))
-					fillDatas(parsed, link, offset);
+			if (_impl->areLinksVisible && ref->type() == fsd::Entity::Type::Link) {
+				fillDatas(parsed, ref, offset);
+				continue;
+			}
 
 			// Show objects if checked
-			if (_impl->areObjectsVisible)
-				if (auto* object = qobject_cast<fsd::Object*>(entity))
-					fillDatas(parsed, object, offset);
+			if (_impl->areObjectsVisible && ref->type() == fsd::Entity::Type::Object) {
+				fillDatas(parsed, ref, offset);
+				continue;
+			}
 
-			if (auto* entryPoint = qobject_cast<fsd::EntryPoint*>(entity))
-				_impl->entryPointDatas.append({ entryPoint, offset });
+			// Show entry points if checked
+			if (_impl->areEntryPointsVisible && ref->type() == fsd::Entity::Type::EntryPoint)
+				_impl->entryPointDatas.append({ qobject_cast<fsd::EntryPoint*>(ref), offset });
 		}
 	}
 
 	// Search model for the geometry
-	fsd::Model* model = nullptr;
-	if (const auto* shape = qobject_cast<fsd::Shape*>(geometry)) {
-		model = shape->model();
-	} else {
-		model = qobject_cast<fsd::Model*>(geometry);
-	}
+	const fsd::Model* model = (entity->type() == fsd::Entity::Type::Model) ? qobject_cast<fsd::Model*>(entity) : qobject_cast<fsd::Shape*>(entity)->model();
 
 	// Add only if there is a valid model
 	if (model && model->qmlName() != "") {
 		_impl->datas.append({
-			geometry,
+			qobject_cast<fsd::Geometry*>(entity),
 			_impl->manager->balsam()->qmlDir(model),
 			_impl->manager->balsam()->qmlPath(model),
 			offset,
@@ -307,22 +308,18 @@ void PreviewManager::fillDatas(QList<fsd::Geometry*>& parsed, fsd::Geometry* geo
 void PreviewManager::updateDatas() {
 	_impl->datas.clear();
 	_impl->entryPointDatas.clear();
-	QList<fsd::Geometry*> parsed;
+	QList<fsd::Entity*> parsed;
 
 	switch (const auto& sm = _impl->manager->selectionManager(); sm->currentType()) {
 		case SelectionManager::Type::Settings:
 		case SelectionManager::Type::None:
+		case SelectionManager::Type::Project:
 			if (auto* place = _impl->manager->project()->defaultPlace()) {
 				if (_impl->isWorldMode)
 					fullMapDatas(parsed, place);
 				else
 					fillDatas(parsed, place);
 			}
-			break;
-		case SelectionManager::Type::Project:
-			setGravityEnabled(false);
-			if (auto* place = _impl->manager->project()->defaultPlace())
-				fillDatas(parsed, place);
 			break;
 		case SelectionManager::Type::Models:
 			setGravityEnabled(false);
@@ -346,7 +343,10 @@ void PreviewManager::updateDatas() {
 			break;
 		case SelectionManager::Type::EntryPoints:
 			setGravityEnabled(false);
-			if (sm->currentEntryPoint() && sm->currentEntryPoint()->place())
+			if (!sm->currentEntryPoint())
+				break;
+			_impl->entryPointDatas.append({ sm->currentEntryPoint(), { 0, 0, 0 } });
+			if (sm->currentEntryPoint()->place())
 				fillDatas(parsed, sm->currentEntryPoint()->place());
 			break;
 	}

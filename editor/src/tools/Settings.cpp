@@ -29,9 +29,9 @@ void Settings::save() const {
 
 	settings.beginGroup(DefaultSettings::previewKey);
 	settings.setValue(DefaultSettings::previewHeightKey, _manager->previewManager()->height());
+	settings.setValue(DefaultSettings::previewAreEntryPointsVisibleKey, _manager->previewManager()->areEntryPointsVisible());
 	settings.setValue(DefaultSettings::previewAreLinksVisibleKey, _manager->previewManager()->areLinksVisible());
 	settings.setValue(DefaultSettings::previewAreObjectsVisibleKey, _manager->previewManager()->areObjectsVisible());
-	settings.setValue(DefaultSettings::previewAreOriginsVisibleKey, _manager->previewManager()->areOriginsVisible());
 	settings.setValue(DefaultSettings::previewIsWorldModeKey, _manager->previewManager()->isWorldMode());
 	settings.setValue(DefaultSettings::previewIsDebugModeKey, _manager->previewManager()->isDebugMode());
 	settings.setValue(DefaultSettings::previewViewModeKey, static_cast<int>(_manager->previewManager()->viewMode()));
@@ -67,9 +67,9 @@ void Settings::load() {
 
 	settings.beginGroup(DefaultSettings::previewKey);
 	_manager->previewManager()->setHeight(settings.value(DefaultSettings::previewHeightKey, DefaultSettings::previewHeightValue).toUInt());
+	_manager->previewManager()->setAreEntryPointsVisible(settings.value(DefaultSettings::previewAreEntryPointsVisibleKey, DefaultSettings::previewAreEntryPointsVisibleValue).toBool());
 	_manager->previewManager()->setAreLinksVisible(settings.value(DefaultSettings::previewAreLinksVisibleKey, DefaultSettings::previewAreLinksVisibleValue).toBool());
 	_manager->previewManager()->setAreObjectsVisible(settings.value(DefaultSettings::previewAreObjectsVisibleKey, DefaultSettings::previewAreObjectsVisibleValue).toBool());
-	_manager->previewManager()->setAreOriginsVisible(settings.value(DefaultSettings::previewAreOriginsVisibleKey, DefaultSettings::previewAreOriginsVisibleValue).toBool());
 	_manager->previewManager()->setWorldMode(settings.value(DefaultSettings::previewIsWorldModeKey, DefaultSettings::previewIsWorldModeValue).toBool());
 	_manager->previewManager()->setDebugMode(settings.value(DefaultSettings::previewIsDebugModeKey, DefaultSettings::previewIsDebugModeValue).toBool());
 	_manager->previewManager()->setViewMode(static_cast<PreviewManager::ViewMode>(settings.value(DefaultSettings::previewViewModeKey, DefaultSettings::previewViewModeValue).toInt()));
