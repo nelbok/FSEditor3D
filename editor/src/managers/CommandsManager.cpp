@@ -51,6 +51,7 @@ void CommandsManager::init(fsd::Project* project) {
 void CommandsManager::reset() {
 	_impl->commands->reset();
 	_impl->lastCommandSaved = nullptr;
+	emit updated();
 }
 
 bool CommandsManager::canUndo() const {
