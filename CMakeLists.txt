@@ -17,8 +17,8 @@ include(cmake/balsam.cmake)
 include(cmake/doxygen.cmake)
 
 add_subdirectory(data)
+add_subdirectory(eui)
 add_subdirectory(editor)
-add_subdirectory(app)
 add_subdirectory(tests)
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${CFS_EDITOR})
