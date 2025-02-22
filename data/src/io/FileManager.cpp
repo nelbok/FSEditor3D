@@ -84,7 +84,7 @@ protected:
 				save();
 				break;
 			default:
-				assert(false);
+				assert(!"Illegal use of FileManager");
 				break;
 		}
 		// Not thread safe!!!

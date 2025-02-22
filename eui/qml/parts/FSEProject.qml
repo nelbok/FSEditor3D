@@ -33,12 +33,34 @@ FSEModule {
             onActivated: mng.currentIndex = currentIndex
         }
 
-        // FSESpinBox {
-        //     name: qsTr("Person height")
-        //     from: 110
-        //     to: 300
-        //     value: MyProject.height
-        //     onValueModified: () => { MyProject.height = value }
-        // }
+        Item {
+            height: 40
+        }
+
+        FSEComboBox {
+            MySelectionWrapper {
+                id: wrapEP
+                model: MyModels.entryPointModel
+            }
+            model: wrapEP.model
+            currentIndex: wrapEP.currentIndex
+            onActivated: wrapEP.currentIndex = currentIndex
+        }
+
+        RowLayout {
+            implicitHeight: 40
+
+            spacing: 5
+
+            Item {
+                Layout.preferredWidth: 80
+            }
+
+            FSEMenuButton {
+                text: qsTr("Teleport")
+                enabled: wrapEP.currentIndex !== -1
+                onClicked: MyPreview.teleportOn(wrapEP.currentData)
+            }
+        }
     }
 }

@@ -34,8 +34,6 @@ void Settings::save() const {
 	settings.setValue(DefaultSettings::previewAreObjectsVisibleKey, _manager->previewManager()->areObjectsVisible());
 	settings.setValue(DefaultSettings::previewIsWorldModeKey, _manager->previewManager()->isWorldMode());
 	settings.setValue(DefaultSettings::previewIsDebugModeKey, _manager->previewManager()->isDebugMode());
-	settings.setValue(DefaultSettings::previewViewModeKey, static_cast<int>(_manager->previewManager()->viewMode()));
-	settings.setValue(DefaultSettings::previewIsGravityEnabledKey, _manager->previewManager()->isGravityEnabled());
 	settings.endGroup();
 
 	settings.beginGroup(DefaultSettings::keyBindingsKey);
@@ -72,8 +70,6 @@ void Settings::load() {
 	_manager->previewManager()->setAreObjectsVisible(settings.value(DefaultSettings::previewAreObjectsVisibleKey, DefaultSettings::previewAreObjectsVisibleValue).toBool());
 	_manager->previewManager()->setWorldMode(settings.value(DefaultSettings::previewIsWorldModeKey, DefaultSettings::previewIsWorldModeValue).toBool());
 	_manager->previewManager()->setDebugMode(settings.value(DefaultSettings::previewIsDebugModeKey, DefaultSettings::previewIsDebugModeValue).toBool());
-	_manager->previewManager()->setViewMode(static_cast<PreviewManager::ViewMode>(settings.value(DefaultSettings::previewViewModeKey, DefaultSettings::previewViewModeValue).toInt()));
-	_manager->previewManager()->setGravityEnabled(settings.value(DefaultSettings::previewIsGravityEnabledKey, DefaultSettings::previewIsGravityEnabledValue).toBool());
 	settings.endGroup();
 
 	settings.beginGroup(DefaultSettings::keyBindingsKey);

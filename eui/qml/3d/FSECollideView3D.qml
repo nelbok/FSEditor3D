@@ -45,7 +45,14 @@ View3D {
         gravity: (view3D.visible && MyPreview.isGravityEnabled ) ? physicsWorld.gravity : Qt.vector3d(0,0,0)
         movement: controller.movement
 
-        onPositionChanged: { MyPreview.cameraPosition = position }
+        onPositionChanged: {
+            // Only update position when we are in Collide mode
+            // to avoid flickering with the camera in Design mode
+            if (MyPreview.viewMode === MyPreview.ViewMode.Design)
+                return;
+
+            MyPreview.cameraPosition = position
+        }
         eulerRotation.y: controller.rotation.y
         PerspectiveCamera {
             y: MyPreview.height / 2 - 10
@@ -61,8 +68,20 @@ View3D {
     Connections {
         target: MyPreview
         function onCameraPositionUpdated() {
-            if (!MyPreview.isGravityEnabled)
-                character.teleport(MyPreview.cameraPosition)
+            // Only update position when we are in Design mode
+            // to avoid flickering with the camera in Collide mode
+            if (MyPreview.viewMode === MyPreview.ViewMode.Collide)
+                return;
+
+            character.teleport(MyPreview.cameraPosition)
+        }
+        function onTeleported() {
+            // We don't need to update the camera when we are in Design mode
+            // as onCameraPositionUpdated already does that
+            if (MyPreview.viewMode === MyPreview.ViewMode.Design)
+                return;
+
+            character.teleport(MyPreview.cameraPosition)
         }
     }
 

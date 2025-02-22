@@ -72,7 +72,7 @@ int SelectionWrapper::getRole(const QByteArray& name) const {
 			return it.key();
 		}
 	}
-	assert(false);
+	assert(!"Unknown role");
 	return -1;
 }
 

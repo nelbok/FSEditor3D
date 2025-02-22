@@ -14,7 +14,6 @@ FSERectangle {
 
         FSEButton {
             text: qsTr("Center on")
-            enabled: !MyPreview.isGravityEnabled
             onClicked: MyPreview.centerOnCurrent()
         }
 
@@ -56,6 +55,7 @@ FSERectangle {
 
         FSEButton {
             text: qsTr("Gravity")
+            enabled: MyPreview.viewMode === MyPreview.ViewMode.Collide
             selected: MyPreview.isGravityEnabled
             onClicked: MyPreview.switchGravity()
         }

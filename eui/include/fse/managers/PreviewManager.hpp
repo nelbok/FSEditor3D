@@ -93,6 +93,7 @@ public:
 	bool isGravityEnabled() const;
 	void setGravityEnabled(bool enabled);
 
+	Q_INVOKABLE void teleportOn(const fsd::EntryPoint* entryPoint);
 	Q_INVOKABLE void centerOnCurrent();
 	Q_INVOKABLE void switchEntryPointsVisible();
 	Q_INVOKABLE void switchLinksVisible();
@@ -118,6 +119,7 @@ private slots:
 
 signals:
 	void heightUpdated();
+	void teleported();
 	void cameraPositionUpdated();
 	void cameraRotationUpdated();
 	void previewUpdated();

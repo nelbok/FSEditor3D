@@ -27,8 +27,8 @@ struct PreviewManager::Impl {
 	bool areObjectsVisible{ fse::DefaultSettings::previewAreObjectsVisibleValue };
 	bool isWorldMode{ fse::DefaultSettings::previewIsWorldModeValue };
 	bool isDebugMode{ fse::DefaultSettings::previewIsDebugModeValue };
-	ViewMode viewMode{ static_cast<ViewMode>(fse::DefaultSettings::previewViewModeValue) };
-	bool isGravityEnabled{ fse::DefaultSettings::previewIsGravityEnabledValue };
+	ViewMode viewMode{ ViewMode::Design };
+	bool isGravityEnabled{ false };
 };
 
 PreviewManager::PreviewManager(QObject* parent)
@@ -153,6 +153,20 @@ void PreviewManager::setGravityEnabled(bool enabled) {
 		switchGravity();
 }
 
+void PreviewManager::teleportOn(const fsd::EntryPoint* entryPoint) {
+	assert(entryPoint);
+	for (const auto& entryPointData : _impl->entryPointDatas) {
+		if (entryPointData.entryPoint != entryPoint)
+			continue;
+
+		setCameraPosition(entryPoint->position() + entryPointData.offset);
+		setCameraRotation({ 0.f, entryPoint->rotation(), 0.f });
+		emit teleported();
+		return;
+	}
+	assert(!"Unknown entry point");
+}
+
 void PreviewManager::centerOnCurrent() {
 	auto position = lCameraPosition;
 
@@ -188,6 +202,7 @@ void PreviewManager::centerOnCurrent() {
 
 	setCameraPosition(position);
 	setCameraRotation(lCameraRotation);
+	emit teleported();
 }
 
 void PreviewManager::switchEntryPointsVisible() {
@@ -225,6 +240,7 @@ void PreviewManager::switchViewMode() {
 			_impl->viewMode = ViewMode::Collide;
 			break;
 		case ViewMode::Collide:
+			setGravityEnabled(false);
 			_impl->viewMode = ViewMode::Design;
 			break;
 	}
@@ -232,6 +248,7 @@ void PreviewManager::switchViewMode() {
 }
 
 void PreviewManager::switchGravity() {
+	assert(_impl->viewMode == ViewMode::Collide);
 	_impl->isGravityEnabled = !_impl->isGravityEnabled;
 	emit gravityEnabledUpdated();
 }
