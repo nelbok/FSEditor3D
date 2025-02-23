@@ -5,6 +5,7 @@
 #include <fsd/data/Model.hpp>
 
 #include <fse/managers/FileManager.hpp>
+#include <fse/managers/InterfaceManager.hpp>
 #include <fse/Manager.hpp>
 
 #include "Dummy.hpp"
@@ -23,14 +24,18 @@ struct TestBalsam {
 		fse::Manager manager;
 		manager.init();
 		fse::Balsam* balsam = manager.balsam();
+		fse::InterfaceManager* interface = manager.interfaceManager();
 
 		fsd::Project* project = manager.project();
 		Dummy::build(*project);
 
 		// Dummy save
 		QDir().mkpath(saveDir);
-		manager.fileManager()->save(QUrl::fromLocalFile(savePath));
-		while (manager.fileManager()->status() != fse::FileManager::Status::Stopped) {
+		QObject::connect(interface, &fse::InterfaceManager::openSaveDialog, interface, [interface, savePath]() {
+			interface->saveFile(QUrl::fromLocalFile(savePath));
+		});
+		interface->save();
+		while (!interface->isInterfaceEnabled()) {
 			QThread::msleep(100);
 			QCoreApplication::processEvents();
 		}
