@@ -1,11 +1,11 @@
 #include <fse/Manager.hpp>
 
-#include <QtGui/QClipboard>
-#include <QtGui/QGuiApplication>
+#include <QtCore/QCoreApplication>
 
 #include <fse/managers/CommandsManager.hpp>
 #include <fse/managers/ErrorsManager.hpp>
 #include <fse/managers/FileManager.hpp>
+#include <fse/managers/InterfaceManager.hpp>
 #include <fse/managers/KeyBindingsManager.hpp>
 #include <fse/managers/ModelsManager.hpp>
 #include <fse/managers/PreviewManager.hpp>
@@ -25,6 +25,7 @@ struct Manager::Impl {
 	CommandsManager* commandsManager{ nullptr };
 	ErrorsManager* errorsManager{ nullptr };
 	FileManager* fileManager{ nullptr };
+	InterfaceManager* interfaceManager{ nullptr };
 	KeyBindingsManager* keyboardsManager{ nullptr };
 	ModelsManager* modelsManager{ nullptr };
 	PreviewManager* previewManager{ nullptr };
@@ -51,6 +52,7 @@ void Manager::init() {
 	_impl->commandsManager = new CommandsManager(this);
 	_impl->errorsManager = new ErrorsManager(this);
 	_impl->fileManager = new FileManager(this);
+	_impl->interfaceManager = new InterfaceManager(this);
 	_impl->keyboardsManager = new KeyBindingsManager(this);
 	_impl->modelsManager = new ModelsManager(this);
 	_impl->previewManager = new PreviewManager(this);
@@ -63,6 +65,7 @@ void Manager::init() {
 
 	_impl->commandsManager->init(_impl->project);
 	_impl->fileManager->init(this);
+	_impl->interfaceManager->init(this);
 	_impl->keyboardsManager->init();
 	_impl->modelsManager->init(_impl->project);
 	_impl->previewManager->init(this);
@@ -85,10 +88,6 @@ void Manager::reset() {
 	_impl->commandsManager->reset();
 	_impl->fileManager->reset();
 	_impl->previewManager->reset();
-}
-
-void Manager::setClipboardText(const QString& text) const {
-	QGuiApplication::clipboard()->setText(text);
 }
 
 const About& Manager::about() const {
@@ -122,6 +121,11 @@ ErrorsManager* Manager::errorsManager() const {
 FileManager* Manager::fileManager() const {
 	assert(_impl->fileManager);
 	return _impl->fileManager;
+}
+
+InterfaceManager* Manager::interfaceManager() const {
+	assert(_impl->interfaceManager);
+	return _impl->interfaceManager;
 }
 
 KeyBindingsManager* Manager::keyboardsManager() const {

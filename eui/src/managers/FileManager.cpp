@@ -25,7 +25,7 @@ struct FileManager::Impl {
 
 	template<class T>
 	void manageFile(FileManager* mng, fsd::Project* project, const QUrl& url) {
-		static_assert(std::is_base_of<fse::FileThread, T>::value, "T must inherit from fse::FileThread");
+		static_assert(std::is_base_of_v<fse::FileThread, T>, "T must inherit from fse::FileThread");
 		mng->setPath(url);
 		fileThread = new T(mng, project);
 		fileThread->init();
@@ -36,6 +36,8 @@ struct FileManager::Impl {
 		mng->connect(fileThread, &T::finished, mng, [this, mng]() {
 			setResult(mng, fileThread->result(), fileThread->errorMessage());
 			setStatus(mng, FileManager::Status::EndTransaction);
+			if (result == fsd::FileManager::Result::Success)
+				manager->commandsManager()->setIsModified(false);
 			emit mng->endTransaction();
 			fileThread->deleteLater();
 			fileThread = nullptr;
@@ -48,7 +50,7 @@ struct FileManager::Impl {
 		if (result != r) {
 			result = r;
 			errorMessage = e;
-			if (this->result == fsd::FileManager::Result::Error) {
+			if (result == fsd::FileManager::Result::Error) {
 				manager->errorsManager()->setType(ErrorsManager::Type::FileError, errorMessage);
 			}
 			emit mng->resultUpdated();
@@ -91,7 +93,6 @@ void FileManager::load(const QUrl& url) {
 }
 
 void FileManager::save(const QUrl& url) {
-	_impl->manager->commandsManager()->setIsModified(false);
 	_impl->manageFile<fse::SaveThread>(this, _impl->manager->project(), url);
 }
 

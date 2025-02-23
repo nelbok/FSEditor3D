@@ -18,7 +18,7 @@ ColumnLayout {
         onClicked: {
             if (root.entity && !timer.running) {
                 timer.start()
-                MyManager.setClipboardText(root.entity.uuid)
+                MyInterface.setClipboardText(root.entity.uuid)
             }
         }
 

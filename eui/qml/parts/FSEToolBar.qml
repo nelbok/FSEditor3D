@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Dialogs
 
 import eui
 
@@ -15,17 +14,17 @@ FSERectangle {
 
         FSEToolButton {
             source: "qrc:/tools/" + MyStyles.style.icons.newFile + ".svg"
-            onClicked: MyManager.reset()
+            onClicked: MyInterface.reset()
         }
 
         FSEToolButton {
             source: "qrc:/tools/" + MyStyles.style.icons.loadFile + ".svg"
-            onClicked: openDialog(FileDialog.OpenFile)
+            onClicked: MyInterface.load()
         }
 
         FSEToolButton {
             source: "qrc:/tools/" + MyStyles.style.icons.saveFile + ".svg"
-            onClicked: openDialog(FileDialog.SaveFile)
+            onClicked: MyInterface.save()
 
             FSERectangle {
                 anchors.top: parent.top
@@ -57,36 +56,14 @@ FSERectangle {
         }
     }
 
-    function openDialog(fileMode) {
-        dialog.fileMode = fileMode
-        dialog.open()
-    }
-
-    FileDialog {
-        id: dialog
-        nameFilters: ["JSON Files (*.json)"]
-        onAccepted: {
-            switch(fileMode) {
-            case FileDialog.SaveFile:
-                MyFile.save(selectedFile)
-                break;
-            case FileDialog.OpenFile:
-                MyFile.load(selectedFile)
-                break;
-            default:
-                //Nothing to do
-            }
-        }
-    }
-
     Shortcut {
         sequences: [ StandardKey.Save ]
-        onActivated: { openDialog(FileDialog.SaveFile) }
+        onActivated: { MyInterface.save() }
     }
 
     Shortcut {
         sequences: [ StandardKey.Open ]
-        onActivated: { openDialog(FileDialog.OpenFile) }
+        onActivated: { MyInterface.load() }
     }
 
     Shortcut {

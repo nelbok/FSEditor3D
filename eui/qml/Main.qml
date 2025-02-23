@@ -11,7 +11,7 @@ Window {
 
     FSEView3D {
         anchors.fill: parent
-        enabled: !(progress.visible || message.visible)
+        enabled: MyInterface.isInterfaceEnabled
     }
 
     FSEProject {
@@ -19,7 +19,7 @@ Window {
         anchors.left: menu.left
         anchors.right: menu.right
 
-        enabled: (MySelection.currentType === MySelection.Type.Project) && !(progress.visible || message.visible)
+        enabled: (MySelection.currentType === MySelection.Type.Project) && MyInterface.isInterfaceEnabled
     }
 
     FSEModels {
@@ -27,7 +27,7 @@ Window {
         anchors.left: menu.left
         anchors.right: menu.right
 
-        enabled: (MySelection.currentType === MySelection.Type.Models) && !(progress.visible || message.visible)
+        enabled: (MySelection.currentType === MySelection.Type.Models) && MyInterface.isInterfaceEnabled
     }
 
     FSEPlaces {
@@ -35,7 +35,7 @@ Window {
         anchors.left: menu.left
         anchors.right: menu.right
 
-        enabled: (MySelection.currentType === MySelection.Type.Places) && !(progress.visible || message.visible)
+        enabled: (MySelection.currentType === MySelection.Type.Places) && MyInterface.isInterfaceEnabled
     }
 
     FSEObjects {
@@ -43,7 +43,7 @@ Window {
         anchors.left: menu.left
         anchors.right: menu.right
 
-        enabled: (MySelection.currentType === MySelection.Type.Objects) && !(progress.visible || message.visible)
+        enabled: (MySelection.currentType === MySelection.Type.Objects) && MyInterface.isInterfaceEnabled
     }
 
     FSELinks {
@@ -51,7 +51,7 @@ Window {
         anchors.left: menu.left
         anchors.right: menu.right
 
-        enabled: (MySelection.currentType === MySelection.Type.Links) && !(progress.visible || message.visible)
+        enabled: (MySelection.currentType === MySelection.Type.Links) && MyInterface.isInterfaceEnabled
     }
 
     FSEEntryPoints {
@@ -59,13 +59,13 @@ Window {
         anchors.left: menu.left
         anchors.right: menu.right
 
-        enabled: (MySelection.currentType === MySelection.Type.EntryPoints) && !(progress.visible || message.visible)
+        enabled: (MySelection.currentType === MySelection.Type.EntryPoints) && MyInterface.isInterfaceEnabled
     }
 
     FSESettings {
         anchors.centerIn: parent
 
-        visible: (MySelection.currentType === MySelection.Type.Settings) && !(progress.visible || message.visible)
+        visible: (MySelection.currentType === MySelection.Type.Settings) && MyInterface.isInterfaceEnabled
     }
 
     FSEMenu {
@@ -78,7 +78,7 @@ Window {
         anchors.right: previewBar.left
         anchors.rightMargin: 10
 
-        enabled: !(progress.visible || message.visible)
+        enabled: MyInterface.isInterfaceEnabled
     }
 
     FSEToolBar {
@@ -89,7 +89,7 @@ Window {
         anchors.left: parent.left
         anchors.leftMargin: 10
 
-        enabled: !(progress.visible || message.visible)
+        enabled: MyInterface.isInterfaceEnabled
     }
 
     FSEPreviewBar {
@@ -100,40 +100,15 @@ Window {
         anchors.right: parent.right
         anchors.rightMargin: 10
 
-        enabled: !(progress.visible || message.visible)
+        enabled: MyInterface.isInterfaceEnabled
     }
 
-    FSEProgressBox {
-        id: progress
-        anchors.centerIn: parent
-        visible: (MyFile.status !== MyFile.Status.None && MyFile.status !== MyFile.Status.Stopped)
-        onClicked: MyFile.requestFileTransactionInterruption()
+    FSEIManager {
+        anchors.fill: parent
     }
 
-    Connections {
-        target: MyErrors
-        function onTypeUpdated() {
-            message.text = MyErrors.message;
-            message.visible = MyErrors.type !== MyErrors.Type.NoError
-        }
-    }
-
-    Connections {
-        target: MyUpdate
-        function onNewVersionAvailable() {
-            message.text = qsTr("A new version is available:\nVersion ") + MyUpdate.version
-            message.visible = true
-        }
-    }
-
-    FSEMessageBox {
-        id: message
-        anchors.centerIn: parent
-        visible: false
-        onClicked: { message.visible = false }
-    }
-
-    Component.onCompleted: {
-        MyUpdate.checkForUpdates()
-    }
+    onClosing: (close) => {
+                   close.accepted = false
+                   MyInterface.quit()
+               }
 }

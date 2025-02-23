@@ -13,6 +13,7 @@ namespace fse {
 class CommandsManager;
 class ErrorsManager;
 class FileManager;
+class InterfaceManager;
 class KeyBindingsManager;
 class ModelsManager;
 class PreviewManager;
@@ -33,9 +34,7 @@ public:
 	~Manager() override;
 
 	void init();
-
-	Q_INVOKABLE void reset();
-	Q_INVOKABLE void setClipboardText(const QString& text) const;
+	void reset();
 
 	const About& about() const;
 	Balsam* balsam() const;
@@ -45,6 +44,7 @@ public:
 	CommandsManager* commandsManager() const;
 	ErrorsManager* errorsManager() const;
 	FileManager* fileManager() const;
+	InterfaceManager* interfaceManager() const;
 	KeyBindingsManager* keyboardsManager() const;
 	ModelsManager* modelsManager() const;
 	PreviewManager* previewManager() const;

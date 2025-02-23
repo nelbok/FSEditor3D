@@ -149,6 +149,7 @@ private:
 				throw JsonException("FileManager", "load", JsonException::Error::InvalidDocument);
 			}
 			_project->load(document.object());
+			_result = Result::Success;
 		} catch (const JsonException& e) {
 			_project->reset();
 			_result = Result::Error;

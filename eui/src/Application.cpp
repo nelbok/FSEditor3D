@@ -11,15 +11,13 @@
 #include <fsd/data/Project.hpp>
 
 #include <fse/managers/CommandsManager.hpp>
-#include <fse/managers/ErrorsManager.hpp>
-#include <fse/managers/FileManager.hpp>
+#include <fse/managers/InterfaceManager.hpp>
 #include <fse/managers/KeyBindingsManager.hpp>
 #include <fse/managers/ModelsManager.hpp>
 #include <fse/managers/PreviewManager.hpp>
 #include <fse/managers/SelectionManager.hpp>
 #include <fse/managers/StylesManager.hpp>
 #include <fse/managers/TranslationsManager.hpp>
-#include <fse/managers/UpdateManager.hpp>
 #include <fse/models/ProxyModel.hpp>
 #include <fse/models/SelectionWrapper.hpp>
 #include <fse/Config.hpp>
@@ -75,20 +73,16 @@ void initRegister(Manager& manager) {
 	qmlRegisterType<fsd::Object>("eui", 1, 0, "MyObject");
 	qmlRegisterType<fsd::Place>("eui", 1, 0, "MyPlace");
 
-	qmlRegisterType<fsd::FileManager>("eui", 1, 0, "MyFileManager");
-
 	// FSEditor
 	qmlRegisterSingletonInstance("eui", 1, 0, "MyManager", &manager);
 	qmlRegisterSingletonInstance("eui", 1, 0, "MyCommands", manager.commandsManager());
-	qmlRegisterSingletonInstance("eui", 1, 0, "MyErrors", manager.errorsManager());
-	qmlRegisterSingletonInstance("eui", 1, 0, "MyFile", manager.fileManager());
+	qmlRegisterSingletonInstance("eui", 1, 0, "MyInterface", manager.interfaceManager());
 	qmlRegisterSingletonInstance("eui", 1, 0, "MyKeyBindings", manager.keyboardsManager());
 	qmlRegisterSingletonInstance("eui", 1, 0, "MyModels", manager.modelsManager());
 	qmlRegisterSingletonInstance("eui", 1, 0, "MyPreview", manager.previewManager());
 	qmlRegisterSingletonInstance("eui", 1, 0, "MySelection", manager.selectionManager());
 	qmlRegisterSingletonInstance("eui", 1, 0, "MyStyles", manager.stylesManager());
 	qmlRegisterSingletonInstance("eui", 1, 0, "MyTranslations", manager.translationsManager());
-	qmlRegisterSingletonInstance("eui", 1, 0, "MyUpdate", manager.updateManager());
 	qmlRegisterType<fse::ProxyModel>("eui", 1, 0, "MyProxyModel");
 	qmlRegisterType<fse::SelectionWrapper>("eui", 1, 0, "MySelectionWrapper");
 }

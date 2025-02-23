@@ -24,6 +24,7 @@ set(PROJECT_SOURCES
 	include/fse/managers/CommandsManager.hpp
 	include/fse/managers/ErrorsManager.hpp
 	include/fse/managers/FileManager.hpp
+	include/fse/managers/InterfaceManager.hpp
 	include/fse/managers/KeyBindingsManager.hpp
 	include/fse/managers/ModelsManager.hpp
 	include/fse/managers/PreviewManager.hpp
@@ -70,6 +71,7 @@ set(PROJECT_SOURCES
 	src/managers/CommandsManager.cpp
 	src/managers/ErrorsManager.cpp
 	src/managers/FileManager.cpp
+	src/managers/InterfaceManager.cpp
 	src/managers/KeyBindingsManager.cpp
 	src/managers/ModelsManager.cpp
 	src/managers/PreviewManager.cpp
@@ -136,20 +138,23 @@ set(QML_SOURCES
 	qml/data/FSEPlacement.qml
 	qml/data/FSEShape.qml
 
+	qml/dialogs/FSEAskSaveDialog.qml
+	qml/dialogs/FSEMessageDialog.qml
+	qml/dialogs/FSEProgressDialog.qml
+
 	qml/parts/settings/FSESettingsAbout.qml
 	qml/parts/settings/FSESettingsImmersion.qml
 	qml/parts/settings/FSESettingsInterface.qml
 	qml/parts/settings/FSESettingsKeyBindings.qml
 
 	qml/parts/FSEEntryPoints.qml
+	qml/parts/FSEIManager.qml
 	qml/parts/FSELinks.qml
 	qml/parts/FSEMenu.qml
-	qml/parts/FSEMessageBox.qml
 	qml/parts/FSEModels.qml
 	qml/parts/FSEObjects.qml
 	qml/parts/FSEPlaces.qml
 	qml/parts/FSEPreviewBar.qml
-	qml/parts/FSEProgressBox.qml
 	qml/parts/FSEProject.qml
 	qml/parts/FSESettings.qml
 	qml/parts/FSEToolBar.qml
