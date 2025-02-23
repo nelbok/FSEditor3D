@@ -2,10 +2,6 @@
 
 #include <fsd/data/DataException.hpp>
 #include <fsd/data/Project.hpp>
-#include <fsd/io/Format.hpp>
-#include <fsd/io/Json.hpp>
-
-#include "common/Accessors.hpp"
 
 namespace fsd {
 struct Model::Impl {

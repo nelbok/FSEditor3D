@@ -1,10 +1,5 @@
 #include <fsd/data/Geometry.hpp>
 
-#include <fsd/io/Format.hpp>
-#include <fsd/io/Json.hpp>
-
-#include "common/Accessors.hpp"
-
 namespace fsd {
 struct Geometry::Impl {
 	QVector3D localPosition{};

@@ -22,7 +22,6 @@ set(PROJECT_SOURCES
 	include/fsd/io/Json.hpp
 	include/fsd/io/JsonException.hpp
 
-	src/common/Accessors.hpp
 	src/data/Container.cpp
 	src/data/DataException.cpp
 	src/data/Entity.cpp

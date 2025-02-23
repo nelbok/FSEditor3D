@@ -3,10 +3,6 @@
 #include <fsd/data/Place.hpp>
 #include <fsd/data/Project.hpp>
 #include <fsd/data/UuidPointer.hpp>
-#include <fsd/io/Format.hpp>
-#include <fsd/io/Json.hpp>
-
-#include "common/Accessors.hpp"
 
 namespace fsd {
 struct EntryPoint::Impl {

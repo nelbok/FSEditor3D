@@ -1,7 +1,5 @@
 #include <fsd/io/JsonException.hpp>
 
-#include <string>
-
 namespace fsd {
 
 QString convert(JsonException::Error error) {

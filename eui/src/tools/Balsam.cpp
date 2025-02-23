@@ -1,7 +1,5 @@
 #include <fse/tools/Balsam.hpp>
 
-#include <QDebug>
-
 #include <filesystem>
 
 #include <fse/managers/CommandsManager.hpp>

@@ -1,8 +1,25 @@
 #pragma once
 
+#include <string>
+
 #include <QtCore/QObject>
 
+#include <fsd/io/Format.hpp>
+#include <fsd/io/Json.hpp>
+
+#define TOOLS_SETTER(CLASSNAME, MEMBER) fsd::Tools::setter<CLASSNAME>(this, _impl->MEMBER, MEMBER, &CLASSNAME::MEMBER##Updated)
+
 namespace fsd {
+namespace Tools {
+template<class TInstance, class TType>
+void setter(TInstance* instance, TType& member, const TType& value, std::function<void(TInstance*)> signalFunc) {
+	if (member != value) {
+		member = value;
+		emit signalFunc(instance);
+	}
+}
+} // namespace Tools
+
 class EntryPoint;
 class Link;
 class Model;

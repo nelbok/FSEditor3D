@@ -1,7 +1,5 @@
 #include <fsd/data/DataException.hpp>
 
-#include <string>
-
 namespace fsd {
 
 QString convert(DataException::Error error) {
