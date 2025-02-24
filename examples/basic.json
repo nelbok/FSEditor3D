@@ -1,37 +1,39 @@
 {
-    "defaultPlace": "9042bf72-b5ae-4d38-913e-ea34f11ed8a8",
-    "links": [
+    "defaultPlace": "32f28320-b8f4-421b-a0a5-f0d288e0eb7f",
+    "entryPoints": [
         {
-            "link": "2be77406-c07f-4601-9b3d-17776d569d1a",
-            "model": "da9a64ae-a9df-4712-a9a8-5ab7f8795483",
-            "name": "Portal A",
-            "place": "9042bf72-b5ae-4d38-913e-ea34f11ed8a8",
+            "name": "A",
+            "place": "32f28320-b8f4-421b-a0a5-f0d288e0eb7f",
             "position": {
-                "x": 0,
-                "y": 0,
-                "z": 0
+                "x": -225,
+                "y": 225,
+                "z": -225
             },
-            "rotation": {
-                "x": 0,
-                "y": 0,
-                "z": 0
-            },
-            "scale": {
-                "x": 1,
-                "y": 1,
-                "z": 1
-            },
-            "uuid": "91beda3c-d55a-4796-93fb-d3104a8fe0cd"
+            "rotation": -108,
+            "uuid": "5dfddf1f-1070-46b1-87fe-adf51f488ba9"
         },
         {
-            "link": "91beda3c-d55a-4796-93fb-d3104a8fe0cd",
-            "model": "da9a64ae-a9df-4712-a9a8-5ab7f8795483",
-            "name": "Portal B",
-            "place": "8399ddbc-d0f4-448e-824c-71a21888e51e",
+            "name": "B",
+            "place": "e6a10ab7-82a5-4854-85fb-78039054ff4d",
             "position": {
-                "x": 0,
-                "y": 0,
-                "z": 0
+                "x": 125,
+                "y": 225,
+                "z": -225
+            },
+            "rotation": -244,
+            "uuid": "42d402c5-cea2-4009-bc68-681d5d37e317"
+        }
+    ],
+    "links": [
+        {
+            "link": "060ffa1c-c279-4bb8-8352-1db7ad99f5e8",
+            "model": "3acd09ab-80a7-4092-91a6-b3b80fd5ee74",
+            "name": "A",
+            "place": "32f28320-b8f4-421b-a0a5-f0d288e0eb7f",
+            "position": {
+                "x": 250,
+                "y": 100,
+                "z": 50
             },
             "rotation": {
                 "x": 0,
@@ -43,19 +45,41 @@
                 "y": 1,
                 "z": 1
             },
-            "uuid": "2be77406-c07f-4601-9b3d-17776d569d1a"
+            "uuid": "6c230c9a-2570-43b9-8cfd-d23216912655"
+        },
+        {
+            "link": "6c230c9a-2570-43b9-8cfd-d23216912655",
+            "model": "3acd09ab-80a7-4092-91a6-b3b80fd5ee74",
+            "name": "B",
+            "place": "e6a10ab7-82a5-4854-85fb-78039054ff4d",
+            "position": {
+                "x": -350,
+                "y": 100,
+                "z": 50
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            },
+            "uuid": "060ffa1c-c279-4bb8-8352-1db7ad99f5e8"
         }
     ],
     "models": [
         {
             "modelType": 2,
-            "name": "Place Model 1",
+            "name": "A",
             "position": {
                 "x": 0,
                 "y": 0,
                 "z": 0
             },
-            "qmlName": "",
+            "qmlName": "A.qml",
             "rotation": {
                 "x": 0,
                 "y": 0,
@@ -66,18 +90,18 @@
                 "y": 1,
                 "z": 1
             },
-            "sourcePath": "",
-            "uuid": "439dc25b-122a-4e96-81ec-8a024511dc3c"
+            "sourcePath": "file:///D:/FoxxySoft/FSEditor3D/examples/obj/A.obj",
+            "uuid": "834a0754-765d-41e6-8762-996f8c78288f"
         },
         {
             "modelType": 2,
-            "name": "Place Model 2",
+            "name": "B",
             "position": {
                 "x": 0,
                 "y": 0,
                 "z": 0
             },
-            "qmlName": "",
+            "qmlName": "B.qml",
             "rotation": {
                 "x": 0,
                 "y": 0,
@@ -88,40 +112,18 @@
                 "y": 1,
                 "z": 1
             },
-            "sourcePath": "",
-            "uuid": "9087460b-766a-4fed-af5c-51bb2e3023d3"
-        },
-        {
-            "modelType": 1,
-            "name": "Basic Character",
-            "position": {
-                "x": 0,
-                "y": 0,
-                "z": 0
-            },
-            "qmlName": "",
-            "rotation": {
-                "x": 0,
-                "y": 0,
-                "z": 0
-            },
-            "scale": {
-                "x": 1,
-                "y": 1,
-                "z": 1
-            },
-            "sourcePath": "",
-            "uuid": "b95cf6d6-6a59-4524-8379-9d5cb047ad40"
+            "sourcePath": "file:///D:/FoxxySoft/FSEditor3D/examples/obj/B.obj",
+            "uuid": "9345799d-fbd8-4f9e-990f-a831ee740f90"
         },
         {
             "modelType": 0,
-            "name": "Portal",
+            "name": "Link",
             "position": {
                 "x": 0,
                 "y": 0,
                 "z": 0
             },
-            "qmlName": "",
+            "qmlName": "Link.qml",
             "rotation": {
                 "x": 0,
                 "y": 0,
@@ -132,59 +134,17 @@
                 "y": 1,
                 "z": 1
             },
-            "sourcePath": "",
-            "uuid": "da9a64ae-a9df-4712-a9a8-5ab7f8795483"
+            "sourcePath": "file:///D:/FoxxySoft/FSEditor3D/examples/obj/Link.obj",
+            "uuid": "3acd09ab-80a7-4092-91a6-b3b80fd5ee74"
         }
     ],
-    "name": "Basic",
+    "name": "Sample",
     "objects": [
-        {
-            "model": "b95cf6d6-6a59-4524-8379-9d5cb047ad40",
-            "name": "Character A",
-            "place": "9042bf72-b5ae-4d38-913e-ea34f11ed8a8",
-            "position": {
-                "x": 0,
-                "y": 0,
-                "z": 0
-            },
-            "rotation": {
-                "x": 0,
-                "y": 0,
-                "z": 0
-            },
-            "scale": {
-                "x": 0,
-                "y": 0,
-                "z": 0
-            },
-            "uuid": "0c07dee1-70f8-408b-8aa3-8f951abb114f"
-        },
-        {
-            "model": "b95cf6d6-6a59-4524-8379-9d5cb047ad40",
-            "name": "Character B",
-            "place": "9042bf72-b5ae-4d38-913e-ea34f11ed8a8",
-            "position": {
-                "x": 0,
-                "y": 0,
-                "z": 0
-            },
-            "rotation": {
-                "x": 0,
-                "y": 0,
-                "z": 0
-            },
-            "scale": {
-                "x": 0,
-                "y": 0,
-                "z": 0
-            },
-            "uuid": "5f1c1d25-dc63-4ac6-a776-5311b996bf7d"
-        }
     ],
     "places": [
         {
-            "model": "439dc25b-122a-4e96-81ec-8a024511dc3c",
-            "name": "Place 1",
+            "model": "834a0754-765d-41e6-8762-996f8c78288f",
+            "name": "A",
             "position": {
                 "x": 0,
                 "y": 0,
@@ -200,11 +160,11 @@
                 "y": 1,
                 "z": 1
             },
-            "uuid": "9042bf72-b5ae-4d38-913e-ea34f11ed8a8"
+            "uuid": "32f28320-b8f4-421b-a0a5-f0d288e0eb7f"
         },
         {
-            "model": "9087460b-766a-4fed-af5c-51bb2e3023d3",
-            "name": "Place 2",
+            "model": "9345799d-fbd8-4f9e-990f-a831ee740f90",
+            "name": "B",
             "position": {
                 "x": 0,
                 "y": 0,
@@ -220,7 +180,7 @@
                 "y": 1,
                 "z": 1
             },
-            "uuid": "8399ddbc-d0f4-448e-824c-71a21888e51e"
+            "uuid": "e6a10ab7-82a5-4854-85fb-78039054ff4d"
         }
     ],
     "position": {
@@ -234,9 +194,9 @@
         "z": 0
     },
     "scale": {
-        "x": 1,
-        "y": 1,
-        "z": 1
+        "x": 100,
+        "y": 100,
+        "z": 100
     },
-    "uuid": "a0b346f4-8bb4-4c7f-8ca7-404857e62810"
+    "uuid": "7d2ab6d6-09ae-4a2d-a0e6-7eea112b3ed1"
 }

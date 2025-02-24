@@ -283,7 +283,7 @@ void PreviewManager::fillDatas(QList<fsd::Entity*>& parsed, fsd::Entity* entity,
 	parsed.append(entity);
 
 	// If object or link, show place
-	if (const auto* placement = qobject_cast<fsd::Placement*>(entity)) {
+	if (const auto* placement = qobject_cast<fsd::Placement*>(entity); placement && placement->place()) {
 		fillDatas(parsed, placement->place(), offset);
 	}
 

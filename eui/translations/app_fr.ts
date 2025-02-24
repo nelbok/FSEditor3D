@@ -37,6 +37,29 @@
     </message>
 </context>
 <context>
+    <name>FSEAskSaveDialog</name>
+    <message>
+        <location filename="../qml/dialogs/FSEAskSaveDialog.qml" line="24"/>
+        <source>Do you want to save your project?</source>
+        <translation>Voulez-vous sauvegarder votre projet ?</translation>
+    </message>
+    <message>
+        <location filename="../qml/dialogs/FSEAskSaveDialog.qml" line="36"/>
+        <source>Save</source>
+        <translation>Sauvegarder</translation>
+    </message>
+    <message>
+        <location filename="../qml/dialogs/FSEAskSaveDialog.qml" line="47"/>
+        <source>Discard</source>
+        <translation>Abandonner</translation>
+    </message>
+    <message>
+        <location filename="../qml/dialogs/FSEAskSaveDialog.qml" line="59"/>
+        <source>Cancel</source>
+        <translation>Annuler</translation>
+    </message>
+</context>
+<context>
     <name>FSEEntity</name>
     <message>
         <location filename="../qml/data/FSEEntity.qml" line="17"/>
@@ -52,6 +75,29 @@
         <location filename="../qml/data/FSEEntity.qml" line="34"/>
         <source>Enter something...</source>
         <translation>Entrer quelque chose...</translation>
+    </message>
+</context>
+<context>
+    <name>FSEEntryPoints</name>
+    <message>
+        <location filename="../qml/parts/FSEEntryPoints.qml" line="26"/>
+        <source>Position</source>
+        <translation>Position</translation>
+    </message>
+    <message>
+        <location filename="../qml/parts/FSEEntryPoints.qml" line="35"/>
+        <source>Rotation</source>
+        <translation>Rotation</translation>
+    </message>
+    <message>
+        <location filename="../qml/parts/FSEEntryPoints.qml" line="46"/>
+        <source>Place</source>
+        <translation>Lieu</translation>
+    </message>
+    <message>
+        <location filename="../qml/parts/FSEEntryPoints.qml" line="78"/>
+        <source>Assign camera coord.</source>
+        <translation>Assigner coord. cam.</translation>
     </message>
 </context>
 <context>
@@ -75,12 +121,7 @@
 <context>
     <name>FSELinks</name>
     <message>
-        <location filename="../qml/parts/FSELinks.qml" line="7"/>
-        <source>Links</source>
-        <translation>Liens</translation>
-    </message>
-    <message>
-        <location filename="../qml/parts/FSELinks.qml" line="34"/>
+        <location filename="../qml/parts/FSELinks.qml" line="32"/>
         <source>Link</source>
         <translation>Lien</translation>
     </message>
@@ -88,17 +129,17 @@
 <context>
     <name>FSEList</name>
     <message>
-        <location filename="../qml/common/FSEList.qml" line="31"/>
+        <location filename="../qml/common/FSEList.qml" line="32"/>
         <source>Add</source>
         <translation>Ajout</translation>
     </message>
     <message>
-        <location filename="../qml/common/FSEList.qml" line="37"/>
+        <location filename="../qml/common/FSEList.qml" line="38"/>
         <source>Del</source>
         <translation>Supp</translation>
     </message>
     <message>
-        <location filename="../qml/common/FSEList.qml" line="45"/>
+        <location filename="../qml/common/FSEList.qml" line="46"/>
         <source>Dup</source>
         <translation>Dupp</translation>
     </message>
@@ -106,35 +147,40 @@
 <context>
     <name>FSEMenu</name>
     <message>
-        <location filename="../qml/parts/FSEMenu.qml" line="25"/>
+        <location filename="../qml/parts/FSEMenu.qml" line="27"/>
         <source>Project</source>
         <translation>Projet</translation>
     </message>
     <message>
-        <location filename="../qml/parts/FSEMenu.qml" line="31"/>
+        <location filename="../qml/parts/FSEMenu.qml" line="33"/>
         <source>Models</source>
         <translation>Modèles</translation>
     </message>
     <message>
-        <location filename="../qml/parts/FSEMenu.qml" line="37"/>
+        <location filename="../qml/parts/FSEMenu.qml" line="39"/>
         <source>Places</source>
         <translation>Lieux</translation>
     </message>
     <message>
-        <location filename="../qml/parts/FSEMenu.qml" line="43"/>
+        <location filename="../qml/parts/FSEMenu.qml" line="45"/>
         <source>Objects</source>
         <translation>Objets</translation>
     </message>
     <message>
-        <location filename="../qml/parts/FSEMenu.qml" line="49"/>
+        <location filename="../qml/parts/FSEMenu.qml" line="51"/>
         <source>Links</source>
         <translation>Link</translation>
     </message>
+    <message>
+        <location filename="../qml/parts/FSEMenu.qml" line="57"/>
+        <source>Entry points</source>
+        <translation>Points d&apos;entrée</translation>
+    </message>
 </context>
 <context>
-    <name>FSEMessageBox</name>
+    <name>FSEMessageDialog</name>
     <message>
-        <location filename="../qml/parts/FSEMessageBox.qml" line="34"/>
+        <location filename="../qml/dialogs/FSEMessageDialog.qml" line="34"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
@@ -142,52 +188,39 @@
 <context>
     <name>FSEModels</name>
     <message>
-        <location filename="../qml/parts/FSEModels.qml" line="8"/>
-        <source>Models</source>
-        <translation>Modèles</translation>
-    </message>
-    <message>
-        <location filename="../qml/parts/FSEModels.qml" line="33"/>
+        <location filename="../qml/parts/FSEModels.qml" line="31"/>
         <source>Type</source>
         <translation>Type</translation>
     </message>
     <message>
-        <location filename="../qml/parts/FSEModels.qml" line="36"/>
+        <location filename="../qml/parts/FSEModels.qml" line="34"/>
         <source>Object</source>
         <translation>Objet</translation>
     </message>
     <message>
-        <location filename="../qml/parts/FSEModels.qml" line="37"/>
+        <location filename="../qml/parts/FSEModels.qml" line="35"/>
         <source>Link</source>
         <translation>Lien</translation>
     </message>
     <message>
-        <location filename="../qml/parts/FSEModels.qml" line="38"/>
+        <location filename="../qml/parts/FSEModels.qml" line="36"/>
         <source>Place</source>
         <translation>Lieu</translation>
     </message>
     <message>
-        <location filename="../qml/parts/FSEModels.qml" line="53"/>
+        <location filename="../qml/parts/FSEModels.qml" line="51"/>
         <source>Source</source>
         <translation>Source</translation>
     </message>
     <message>
-        <location filename="../qml/parts/FSEModels.qml" line="59"/>
+        <location filename="../qml/parts/FSEModels.qml" line="57"/>
         <source>Choose...</source>
         <translation>Choisir...</translation>
     </message>
     <message>
-        <location filename="../qml/parts/FSEModels.qml" line="65"/>
+        <location filename="../qml/parts/FSEModels.qml" line="63"/>
         <source>QML name</source>
         <translation>Nom QML</translation>
-    </message>
-</context>
-<context>
-    <name>FSEObjects</name>
-    <message>
-        <location filename="../qml/parts/FSEObjects.qml" line="7"/>
-        <source>Objects</source>
-        <translation>Objects</translation>
     </message>
 </context>
 <context>
@@ -199,14 +232,6 @@
     </message>
 </context>
 <context>
-    <name>FSEPlaces</name>
-    <message>
-        <location filename="../qml/parts/FSEPlaces.qml" line="7"/>
-        <source>Places</source>
-        <translation>Lieux</translation>
-    </message>
-</context>
-<context>
     <name>FSEPreviewBar</name>
     <message>
         <location filename="../qml/parts/FSEPreviewBar.qml" line="16"/>
@@ -214,45 +239,45 @@
         <translation>Centrer sur</translation>
     </message>
     <message>
-        <location filename="../qml/parts/FSEPreviewBar.qml" line="22"/>
+        <location filename="../qml/parts/FSEPreviewBar.qml" line="21"/>
+        <source>Show entry points</source>
+        <translation>Points d&apos;entrée</translation>
+    </message>
+    <message>
+        <location filename="../qml/parts/FSEPreviewBar.qml" line="27"/>
         <source>Show objects</source>
         <translation>Objets</translation>
     </message>
     <message>
-        <location filename="../qml/parts/FSEPreviewBar.qml" line="28"/>
+        <location filename="../qml/parts/FSEPreviewBar.qml" line="33"/>
         <source>Show links</source>
         <translation>Liens</translation>
     </message>
     <message>
-        <location filename="../qml/parts/FSEPreviewBar.qml" line="34"/>
-        <source>Show origins</source>
-        <translation>Origines</translation>
-    </message>
-    <message>
-        <location filename="../qml/parts/FSEPreviewBar.qml" line="40"/>
+        <location filename="../qml/parts/FSEPreviewBar.qml" line="39"/>
         <source>World mode</source>
         <translation>Mode monde</translation>
     </message>
     <message>
-        <location filename="../qml/parts/FSEPreviewBar.qml" line="46"/>
+        <location filename="../qml/parts/FSEPreviewBar.qml" line="45"/>
         <source>Debug mode</source>
         <translation>Mode debug</translation>
     </message>
     <message>
-        <location filename="../qml/parts/FSEPreviewBar.qml" line="52"/>
+        <location filename="../qml/parts/FSEPreviewBar.qml" line="51"/>
         <source>Design mode</source>
         <translation>Mode design</translation>
     </message>
     <message>
-        <location filename="../qml/parts/FSEPreviewBar.qml" line="58"/>
+        <location filename="../qml/parts/FSEPreviewBar.qml" line="57"/>
         <source>Gravity</source>
         <translation>Gravité</translation>
     </message>
 </context>
 <context>
-    <name>FSEProgressBox</name>
+    <name>FSEProgressDialog</name>
     <message>
-        <location filename="../qml/parts/FSEProgressBox.qml" line="51"/>
+        <location filename="../qml/dialogs/FSEProgressDialog.qml" line="51"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
@@ -260,35 +285,35 @@
 <context>
     <name>FSEProject</name>
     <message>
-        <location filename="../qml/parts/FSEProject.qml" line="7"/>
-        <source>Project</source>
-        <translation>Projet</translation>
-    </message>
-    <message>
-        <location filename="../qml/parts/FSEProject.qml" line="21"/>
+        <location filename="../qml/parts/FSEProject.qml" line="19"/>
         <source>Default place</source>
         <translation>Lieu par défaut</translation>
     </message>
     <message>
-        <location filename="../qml/parts/FSEProject.qml" line="39"/>
-        <source>Person height</source>
-        <translation>Taille personne</translation>
+        <location filename="../qml/parts/FSEProject.qml" line="60"/>
+        <source>Teleport</source>
+        <translation>Téléporter</translation>
     </message>
 </context>
 <context>
     <name>FSESettings</name>
     <message>
-        <location filename="../qml/parts/FSESettings.qml" line="26"/>
+        <location filename="../qml/parts/FSESettings.qml" line="27"/>
+        <source>Immersion</source>
+        <translation>Immersion</translation>
+    </message>
+    <message>
+        <location filename="../qml/parts/FSESettings.qml" line="38"/>
         <source>Interface</source>
         <translation>Interface</translation>
     </message>
     <message>
-        <location filename="../qml/parts/FSESettings.qml" line="37"/>
+        <location filename="../qml/parts/FSESettings.qml" line="49"/>
         <source>Key bindings</source>
         <translation>Raccour. clavier</translation>
     </message>
     <message>
-        <location filename="../qml/parts/FSESettings.qml" line="48"/>
+        <location filename="../qml/parts/FSESettings.qml" line="60"/>
         <source>About</source>
         <translation>A propos</translation>
     </message>
@@ -319,6 +344,14 @@
         <location filename="../qml/parts/settings/FSESettingsAbout.qml" line="49"/>
         <source>Twitter:</source>
         <translation>Twitter :</translation>
+    </message>
+</context>
+<context>
+    <name>FSESettingsImmersion</name>
+    <message>
+        <location filename="../qml/parts/settings/FSESettingsImmersion.qml" line="15"/>
+        <source>Person height</source>
+        <translation>Taille personne</translation>
     </message>
 </context>
 <context>
@@ -436,13 +469,13 @@
     </message>
 </context>
 <context>
-    <name>Main</name>
+    <name>QObject</name>
     <message>
-        <location filename="../qml/Main.qml" line="116"/>
+        <location filename="../src/managers/InterfaceManager.cpp" line="60"/>
         <source>A new version is available:
-Version </source>
+Version %1</source>
         <translation>Une nouvelle version est disponible
-Version </translation>
+Version %1</translation>
     </message>
 </context>
 </TS>

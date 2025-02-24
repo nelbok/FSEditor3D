@@ -21,3 +21,4 @@ Create a project with multiple places and a starting place.
 - cmake --build build
 
 If you need to specify Qt location, add this to the first call of CMake: -D "CMAKE_PREFIX_PATH=Path to Qt"
+If you need to compile FSData as shared library, add this to the first call of CMake: -D FS_SHARED=ON
