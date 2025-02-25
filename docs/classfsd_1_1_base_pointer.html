@@ -26,7 +26,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Foxxy Soft Editor 3D<span id="projectnumber">&#160;0.6.0</span>
+   <div id="projectname">Foxxy Soft Editor 3D<span id="projectnumber">&#160;0.6.1</span>
    </div>
    <div id="projectbrief">Game editor 3D / Visual tour 3D</div>
   </td>
@@ -92,7 +92,6 @@ $(function(){ initResizable(false); });
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-types">Protected Types</a> &#124;
 <a href="#pro-slots">Protected Slots</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
@@ -111,7 +110,7 @@ Inheritance diagram for fsd::BasePointer:</div>
  <div class="center">
   <img src="classfsd_1_1_base_pointer.png" usemap="#fsd::BasePointer_map" alt=""/>
   <map id="fsd::BasePointer_map" name="fsd::BasePointer_map">
-<area href="classfsd_1_1_uuid_pointer.html" title="Pointer to value with Uuid as ID." alt="fsd::UuidPointer&lt; T &gt;" shape="rect" coords="0,112,131,136"/>
+<area href="classfsd_1_1_uuid_pointer.html" title="Pointer to value with Uuid as ID." alt="fsd::UuidPointer&lt; TType &gt;" shape="rect" coords="0,112,159,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -128,12 +127,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isNull</b> () const</
 <tr class="memdesc:a128eb92348284e3fd0d8a15b91b5ae53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if uuid is null. <br /></td></tr>
 <tr class="separator:a128eb92348284e3fd0d8a15b91b5ae53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-types" name="pro-types"></a>
-Protected Types</h2></td></tr>
-<tr class="memitem:ab724ecbeaf594cec0498fd7c6f7389f4" id="r_ab724ecbeaf594cec0498fd7c6f7389f4"><td class="memItemLeft" align="right" valign="top"><a id="ab724ecbeaf594cec0498fd7c6f7389f4" name="ab724ecbeaf594cec0498fd7c6f7389f4"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>SignalFunc</b> = void (Project::*)()</td></tr>
-<tr class="separator:ab724ecbeaf594cec0498fd7c6f7389f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-slots" name="pro-slots"></a>
 Protected Slots</h2></td></tr>
 <tr class="memitem:a05c5ab21dc52022299208cf8a33c532b" id="r_a05c5ab21dc52022299208cf8a33c532b"><td class="memItemLeft" align="right" valign="top"><a id="a05c5ab21dc52022299208cf8a33c532b" name="a05c5ab21dc52022299208cf8a33c532b"></a>
@@ -142,15 +135,12 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> ()
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ab63fda3330079af814fb1189f0a2f281" id="r_ab63fda3330079af814fb1189f0a2f281"><td class="memItemLeft" align="right" valign="top"><a id="ab63fda3330079af814fb1189f0a2f281" name="ab63fda3330079af814fb1189f0a2f281"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BasePointer</b> (<a class="el" href="classfsd_1_1_project.html">Project</a> *project, SignalFunc signal, <a class="el" href="classfsd_1_1_entity.html">Entity</a> *parent)</td></tr>
-<tr class="separator:ab63fda3330079af814fb1189f0a2f281"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ec5070c175ef2c845b359a8d0b7207f" id="r_a3ec5070c175ef2c845b359a8d0b7207f"><td class="memItemLeft" align="right" valign="top"><a id="a3ec5070c175ef2c845b359a8d0b7207f" name="a3ec5070c175ef2c845b359a8d0b7207f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>BasePointer</b> (<a class="el" href="classfsd_1_1_base_container.html">BaseContainer</a> *datas, <a class="el" href="classfsd_1_1_entity.html">Entity</a> *parent)</td></tr>
+<tr class="separator:a3ec5070c175ef2c845b359a8d0b7207f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:ab8ccc5a2d3ef56d318b47c82015c2c3f" id="r_ab8ccc5a2d3ef56d318b47c82015c2c3f"><td class="memItemLeft" align="right" valign="top"><a id="ab8ccc5a2d3ef56d318b47c82015c2c3f" name="ab8ccc5a2d3ef56d318b47c82015c2c3f"></a>
-<a class="el" href="classfsd_1_1_project.html">Project</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_project</b> { nullptr }</td></tr>
-<tr class="separator:ab8ccc5a2d3ef56d318b47c82015c2c3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebd03236db51cd6a4f7e0d2a760e0aaf" id="r_aebd03236db51cd6a4f7e0d2a760e0aaf"><td class="memItemLeft" align="right" valign="top"><a id="aebd03236db51cd6a4f7e0d2a760e0aaf" name="aebd03236db51cd6a4f7e0d2a760e0aaf"></a>
 <a class="el" href="classfsd_1_1_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_ref</b> { nullptr }</td></tr>
 <tr class="separator:aebd03236db51cd6a4f7e0d2a760e0aaf"><td class="memSeparator" colspan="2">&#160;</td></tr>

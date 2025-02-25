@@ -26,7 +26,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Foxxy Soft Editor 3D<span id="projectnumber">&#160;0.6.0</span>
+   <div id="projectname">Foxxy Soft Editor 3D<span id="projectnumber">&#160;0.6.1</span>
    </div>
    <div id="projectbrief">Game editor 3D / Visual tour 3D</div>
   </td>
@@ -125,12 +125,13 @@ Public Types</h2></td></tr>
 <tr class="separator:abf0eb6465ec733bae6426e14cb7f3e68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_types_classfsd_1_1_entity"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_classfsd_1_1_entity')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classfsd_1_1_entity.html">fsd::Entity</a></td></tr>
 <tr class="memitem:a889608f37d643da3328e9ce3494ba469 inherit pub_types_classfsd_1_1_entity" id="r_a889608f37d643da3328e9ce3494ba469"><td class="memItemLeft" align="right" valign="top"><a id="a889608f37d643da3328e9ce3494ba469" name="a889608f37d643da3328e9ce3494ba469"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfsd_1_1_entity.html#a889608f37d643da3328e9ce3494ba469">Type</a> { <br />
-&#160;&#160;<b>Link</b>
+&#160;&#160;<b>EntryPoint</b>
+, <b>Link</b>
 , <b>Model</b>
 , <b>Object</b>
-, <b>Place</b>
 , <br />
-&#160;&#160;<b>Project</b>
+&#160;&#160;<b>Place</b>
+, <b>Project</b>
 <br />
  }</td></tr>
 <tr class="memdesc:a889608f37d643da3328e9ce3494ba469"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of the class that inherits <a class="el" href="classfsd_1_1_entity.html" title="Main class of all entities with unique id and name.">Entity</a>. <br /></td></tr>
@@ -297,15 +298,15 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>qmlName</b></td></
 <tr class="inherit_header properties_classfsd_1_1_geometry"><td colspan="2" onclick="javascript:dynsection.toggleInherit('properties_classfsd_1_1_geometry')"><img src="closed.png" alt="-"/>&#160;Properties inherited from <a class="el" href="classfsd_1_1_geometry.html">fsd::Geometry</a></td></tr>
 <tr class="memitem:af961dc6ecd0e70cb44b5c85903b072a5 inherit properties_classfsd_1_1_geometry" id="r_af961dc6ecd0e70cb44b5c85903b072a5"><td class="memItemLeft" align="right" valign="top">
 QVector3D&#160;</td><td class="memItemRight" valign="bottom"><b>localPosition</b></td></tr>
-<tr class="memdesc:af961dc6ecd0e70cb44b5c85903b072a5 inherit properties_classfsd_1_1_geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local position of the entity in cm. Default value: 0.0. <br /></td></tr>
+<tr class="memdesc:af961dc6ecd0e70cb44b5c85903b072a5 inherit properties_classfsd_1_1_geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local position of the entity in cm. <br /></td></tr>
 <tr class="separator:af961dc6ecd0e70cb44b5c85903b072a5 inherit properties_classfsd_1_1_geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e529798511e8cad39448ab12593b189 inherit properties_classfsd_1_1_geometry" id="r_a3e529798511e8cad39448ab12593b189"><td class="memItemLeft" align="right" valign="top">
 QVector3D&#160;</td><td class="memItemRight" valign="bottom"><b>localRotation</b></td></tr>
-<tr class="memdesc:a3e529798511e8cad39448ab12593b189 inherit properties_classfsd_1_1_geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local rotation of the entity in degree. Default value: 0.0. <br /></td></tr>
+<tr class="memdesc:a3e529798511e8cad39448ab12593b189 inherit properties_classfsd_1_1_geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local rotation of the entity in degree. <br /></td></tr>
 <tr class="separator:a3e529798511e8cad39448ab12593b189 inherit properties_classfsd_1_1_geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5fda0b4b99bffe6a8666e4f3f15cab98 inherit properties_classfsd_1_1_geometry" id="r_a5fda0b4b99bffe6a8666e4f3f15cab98"><td class="memItemLeft" align="right" valign="top">
 QVector3D&#160;</td><td class="memItemRight" valign="bottom"><b>localScale</b></td></tr>
-<tr class="memdesc:a5fda0b4b99bffe6a8666e4f3f15cab98 inherit properties_classfsd_1_1_geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local scale of the entity in ratio. Default value: 1.0. <br /></td></tr>
+<tr class="memdesc:a5fda0b4b99bffe6a8666e4f3f15cab98 inherit properties_classfsd_1_1_geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local scale of the entity in ratio. <br /></td></tr>
 <tr class="separator:a5fda0b4b99bffe6a8666e4f3f15cab98 inherit properties_classfsd_1_1_geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4587855d95ac1b457907999d1201d880 inherit properties_classfsd_1_1_geometry" id="r_a4587855d95ac1b457907999d1201d880"><td class="memItemLeft" align="right" valign="top">
 QVector3D&#160;</td><td class="memItemRight" valign="bottom"><b>globalPosition</b></td></tr>

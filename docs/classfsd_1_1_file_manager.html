@@ -26,7 +26,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Foxxy Soft Editor 3D<span id="projectnumber">&#160;0.6.0</span>
+   <div id="projectname">Foxxy Soft Editor 3D<span id="projectnumber">&#160;0.6.1</span>
    </div>
    <div id="projectbrief">Game editor 3D / Visual tour 3D</div>
   </td>
@@ -130,7 +130,7 @@ Public Types</h2></td></tr>
 Signals</h2></td></tr>
 <tr class="memitem:a2e200205524abec1c4f0229c423cc83d" id="r_a2e200205524abec1c4f0229c423cc83d"><td class="memItemLeft" align="right" valign="top"><a id="a2e200205524abec1c4f0229c423cc83d" name="a2e200205524abec1c4f0229c423cc83d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>finished</b> ()</td></tr>
-<tr class="memdesc:a2e200205524abec1c4f0229c423cc83d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This signal is emitted from the associated thread right before it finishes executing. See <b>QThread::finished()</b>. <br /></td></tr>
+<tr class="memdesc:a2e200205524abec1c4f0229c423cc83d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This signal is emitted when the thread has finished the task. See <b>QThread::finished()</b>. <br /></td></tr>
 <tr class="separator:a2e200205524abec1c4f0229c423cc83d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -160,7 +160,7 @@ Q_INVOKABLE bool&#160;</td><td class="memItemRight" valign="bottom"><b>isRunning
 <tr class="separator:a40812db29bd45c9b584a125c31879462"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bfcf0d9b0ffa44d252205944ca4c988" id="r_a5bfcf0d9b0ffa44d252205944ca4c988"><td class="memItemLeft" align="right" valign="top"><a id="a5bfcf0d9b0ffa44d252205944ca4c988" name="a5bfcf0d9b0ffa44d252205944ca4c988"></a>
 Q_INVOKABLE <a class="el" href="#a0cdd613992f82214b61008d259c9a057">Result</a>&#160;</td><td class="memItemRight" valign="bottom"><b>result</b> () const</td></tr>
-<tr class="memdesc:a5bfcf0d9b0ffa44d252205944ca4c988"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the result of the transaction after <a class="el" href="#a2e200205524abec1c4f0229c423cc83d" title="This signal is emitted from the associated thread right before it finishes executing....">finished()</a> signal has been emitted. <br /></td></tr>
+<tr class="memdesc:a5bfcf0d9b0ffa44d252205944ca4c988"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the result of the transaction after <a class="el" href="#a2e200205524abec1c4f0229c423cc83d" title="This signal is emitted when the thread has finished the task. See QThread::finished().">finished()</a> signal has been emitted. <br /></td></tr>
 <tr class="separator:a5bfcf0d9b0ffa44d252205944ca4c988"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae17086f808da802279f8f9fd7f5634dd" id="r_ae17086f808da802279f8f9fd7f5634dd"><td class="memItemLeft" align="right" valign="top"><a id="ae17086f808da802279f8f9fd7f5634dd" name="ae17086f808da802279f8f9fd7f5634dd"></a>
 Q_INVOKABLE QString&#160;</td><td class="memItemRight" valign="bottom"><b>errorMessage</b> () const</td></tr>
@@ -174,7 +174,7 @@ Q_INVOKABLE void&#160;</td><td class="memItemRight" valign="bottom"><b>requestIn
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Manager for loading or saving a project asynchronously. </p>
 <p>The manager uses JSON for the type file.<br  />
-After initializing the manager and connecting <a class="el" href="#a2e200205524abec1c4f0229c423cc83d" title="This signal is emitted from the associated thread right before it finishes executing....">finished()</a> signal, call immediately <a class="el" href="#adb7ff96ab1eb51a28c6aa9ff9258d832" title="Begins execution of the thread by calling run(). See QThread::start().">start()</a> function. <br  />
+After initializing the manager and connecting <a class="el" href="#a2e200205524abec1c4f0229c423cc83d" title="This signal is emitted when the thread has finished the task. See QThread::finished().">finished()</a> signal, call immediately <a class="el" href="#adb7ff96ab1eb51a28c6aa9ff9258d832" title="Begins execution of the thread by calling run(). See QThread::start().">start()</a> function. <br  />
 All functions can be called inside QML. </p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="a0cdd613992f82214b61008d259c9a057" name="a0cdd613992f82214b61008d259c9a057"></a>
